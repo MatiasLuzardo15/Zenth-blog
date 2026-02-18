@@ -1,0 +1,131 @@
+import React, { useEffect, useState } from 'react';
+import Navbar from './components/Navbar';
+import Hero from './components/Hero';
+import Features from './components/Features';
+import InstallGuide from './components/InstallGuide';
+import Testimonials from './components/Testimonials';
+import BlogList from './components/BlogList'; // Mantenemos el componente para la Home (teaser)
+import BlogPage from './components/BlogPage'; // Nueva página completa
+import BlogPostDetail from './components/BlogPostDetail';
+import Support from './components/Support';
+import Footer from './components/Footer';
+import { BLOG_POSTS } from './constants';
+
+function App() {
+  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [currentView, setCurrentView] = useState<'home' | 'blog'>('home');
+  const [selectedPost, setSelectedPost] = useState<string | null>(null);
+
+  useEffect(() => {
+    // Check local storage or system preference
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      setIsDarkMode(true);
+      document.documentElement.classList.add('dark');
+    } else {
+      setIsDarkMode(false);
+      document.documentElement.classList.remove('dark');
+    }
+  }, []);
+
+  const toggleTheme = () => {
+    if (isDarkMode) {
+      document.documentElement.classList.remove('dark');
+      localStorage.setItem('theme', 'light');
+      setIsDarkMode(false);
+    } else {
+      document.documentElement.classList.add('dark');
+      localStorage.setItem('theme', 'dark');
+      setIsDarkMode(true);
+    }
+  };
+
+  // Manejador centralizado de navegación y scroll
+  const handleNavigate = (page: 'home' | 'blog', sectionId?: string) => {
+    // Si cambiamos de página
+    setSelectedPost(null); // Reset post selection on navigation
+    if (page !== currentView) {
+      setCurrentView(page);
+
+      // Si vamos a home con un sectionId, esperamos a que renderice para scrollear
+      if (page === 'home' && sectionId) {
+        setTimeout(() => {
+          const element = document.getElementById(sectionId);
+          if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+          } else if (sectionId === 'hero') {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }
+        }, 100);
+      } else {
+        // Si vamos al blog o a home sin ID, scroll al top
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    } else {
+      // Si ya estamos en la página
+      if (sectionId) {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        } else if (sectionId === 'hero') {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
+  };
+
+  return (
+    <div className="min-h-screen font-sans selection:bg-zenth-200 selection:text-zenth-900">
+      <Navbar
+        isDarkMode={isDarkMode}
+        toggleTheme={toggleTheme}
+        currentPage={currentView}
+        onNavigate={handleNavigate}
+      />
+
+      <main>
+        {currentView === 'home' ? (
+          <>
+            <div id="hero"><Hero /></div>
+            <Features />
+            <Testimonials />
+            <InstallGuide />
+            {/* Usamos BlogList como teaser en la Home */}
+            <div className="relative pb-24">
+              <BlogList onSelectPost={(id) => { setSelectedPost(id); setCurrentView('blog'); }} limit={3} />
+              <div className="absolute bottom-20 left-0 w-full flex justify-center z-10">
+                <button
+                  onClick={() => handleNavigate('blog')}
+                  className="px-10 py-4 bg-zenth-markerBlue text-black font-marker text-2xl border-2 border-black rounded-xl shadow-sketch-lg hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all transform -rotate-1"
+                >
+                  Ver Blog Completo ➔
+                </button>
+              </div>
+              {/* Fade out effect para el teaser */}
+              <div className="absolute bottom-0 left-0 w-full h-40 bg-gradient-to-t from-zenth-bg dark:from-zenth-darkBg to-transparent pointer-events-none"></div>
+            </div>
+            <Support />
+          </>
+        ) : (
+          selectedPost ? (
+            <BlogPostDetail
+              post={BLOG_POSTS.find(p => p.id === selectedPost) || BLOG_POSTS[0]}
+              onBack={() => setSelectedPost(null)}
+            />
+          ) : (
+            <BlogPage
+              onBack={() => handleNavigate('home')}
+              onSelectPost={setSelectedPost}
+            />
+          )
+        )}
+      </main>
+
+      <Footer />
+    </div>
+  );
+}
+
+export default App;
