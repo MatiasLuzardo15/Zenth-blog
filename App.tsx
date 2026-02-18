@@ -27,6 +27,21 @@ function App() {
       setIsDarkMode(false);
       document.documentElement.classList.remove('dark');
     }
+
+    // Check query params on load
+    const params = new URLSearchParams(window.location.search);
+    const postId = params.get('post');
+    if (postId) {
+      // Verify if post exists to avoid showing undefined
+      const postExists = BLOG_POSTS.some(p => p.id === postId);
+      if (postExists) {
+        setSelectedPost(postId);
+        setCurrentView('blog');
+      } else {
+        // Clean URL if invalid
+        window.history.replaceState({}, '', window.location.pathname);
+      }
+    }
   }, []);
 
   const toggleTheme = () => {
@@ -42,8 +57,15 @@ function App() {
   };
 
   // Manejador centralizado de navegación y scroll
-  // Manejador centralizado de navegación y scroll
   const handleNavigate = (page: 'home' | 'blog', targetId?: string) => {
+    // Actualizar URL
+    if (page === 'blog' && targetId) {
+      const newUrl = `${window.location.pathname}?post=${targetId}`;
+      window.history.pushState({}, '', newUrl);
+    } else {
+      window.history.pushState({}, '', window.location.pathname);
+    }
+
     // Si vamos al blog con un ID específico, lo seleccionamos
     if (page === 'blog' && targetId) {
       setSelectedPost(targetId);
@@ -108,7 +130,7 @@ function App() {
             <InstallGuide />
             {/* Usamos BlogList como teaser en la Home */}
             <div className="relative pb-24">
-              <BlogList onSelectPost={(id) => { setSelectedPost(id); setCurrentView('blog'); }} limit={3} />
+              <BlogList onSelectPost={(id) => handleNavigate('blog', id)} limit={3} />
               <div className="absolute bottom-20 left-0 w-full flex justify-center z-10">
                 <button
                   onClick={() => handleNavigate('blog')}
@@ -126,12 +148,12 @@ function App() {
           selectedPost ? (
             <BlogPostDetail
               post={BLOG_POSTS.find(p => p.id === selectedPost) || BLOG_POSTS[0]}
-              onBack={() => setSelectedPost(null)}
+              onBack={() => handleNavigate('blog')}
             />
           ) : (
             <BlogPage
               onBack={() => handleNavigate('home')}
-              onSelectPost={setSelectedPost}
+              onSelectPost={(id) => handleNavigate('blog', id)}
             />
           )
         )}

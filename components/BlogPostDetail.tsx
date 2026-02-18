@@ -1,6 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { BlogPost } from '../types';
-import { ArrowLeft, Calendar, User, Clock, Share2, Bookmark } from 'lucide-react';
+import { ArrowLeft, Calendar, User, Clock, Share2 } from 'lucide-react';
 
 interface BlogPostDetailProps {
     post: BlogPost;
@@ -8,9 +9,34 @@ interface BlogPostDetailProps {
 }
 
 const BlogPostDetail: React.FC<BlogPostDetailProps> = ({ post, onBack }) => {
+    const [showToast, setShowToast] = useState(false);
+
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
+
+    const handleShare = async () => {
+        if (navigator.share) {
+            try {
+                await navigator.share({
+                    title: post.title,
+                    text: post.excerpt,
+                    url: window.location.href,
+                });
+            } catch (error) {
+                console.log('Error sharing:', error);
+            }
+        } else {
+            navigator.clipboard.writeText(window.location.href);
+            setShowToast(true);
+            setTimeout(() => setShowToast(false), 3000);
+        }
+    };
+
+    // Construct absolute URL for OG Image
+    const ogImageUrl = post.imageUrl
+        ? (post.imageUrl.startsWith('http') ? post.imageUrl : `${window.location.origin}${post.imageUrl}`)
+        : `${window.location.origin}/blog/appview.png`;
 
     // Función para renderizar el contenido de forma "sketchy"
     const renderContent = (content: string) => {
@@ -111,7 +137,27 @@ const BlogPostDetail: React.FC<BlogPostDetailProps> = ({ post, onBack }) => {
     };
 
     return (
-        <div className="pt-24 pb-20 bg-zenth-bg dark:bg-zenth-darkBg min-h-screen">
+        <div className="pt-24 pb-20 bg-zenth-bg dark:bg-zenth-darkBg min-h-screen relative">
+            <Helmet>
+                <title>{post.title} | Zenth Blog</title>
+                <meta property="og:title" content={post.title} />
+                <meta property="og:description" content={post.excerpt} />
+                <meta property="og:image" content={ogImageUrl} />
+                <meta property="og:url" content={window.location.href} />
+
+                <meta name="twitter:title" content={post.title} />
+                <meta name="twitter:description" content={post.excerpt} />
+                <meta name="twitter:image" content={ogImageUrl} />
+            </Helmet>
+
+            {/* Toast Notification */}
+            {showToast && (
+                <div className="fixed top-24 right-4 z-50 bg-zenth-markerYellow text-black px-6 py-3 rounded-lg border-2 border-black shadow-sketch animate-fade-in-down flex items-center gap-2">
+                    <Share2 className="w-5 h-5" />
+                    <span className="font-bold font-sans">¡Enlace copiado!</span>
+                </div>
+            )}
+
             <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
 
                 {/* Navigation / Actions */}
@@ -124,16 +170,16 @@ const BlogPostDetail: React.FC<BlogPostDetailProps> = ({ post, onBack }) => {
                         Volver al blog
                     </button>
                     <div className="flex space-x-4">
-                        <button className="p-2 rounded-full border-2 border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
-                            <Share2 className="w-5 h-5 text-slate-600 dark:text-slate-400" />
-                        </button>
-                        <button className="p-2 rounded-full border-2 border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
-                            <Bookmark className="w-5 h-5 text-slate-600 dark:text-slate-400" />
+                        <button
+                            onClick={handleShare}
+                            className="p-2 rounded-full border-2 border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors group relative"
+                            title="Compartir artículo"
+                        >
+                            <Share2 className="w-5 h-5 text-slate-600 dark:text-slate-400 group-hover:text-zenth-markerBlue transition-colors" />
                         </button>
                     </div>
                 </div>
 
-                {/* Hero Image */}
                 {/* Hero Image */}
                 {post.imageUrl && (
                     <div className="relative mb-12 group">
