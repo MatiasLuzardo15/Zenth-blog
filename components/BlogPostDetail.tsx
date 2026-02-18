@@ -134,19 +134,22 @@ const BlogPostDetail: React.FC<BlogPostDetailProps> = ({ post, onBack }) => {
                 </div>
 
                 {/* Hero Image */}
-                <div className="relative mb-12 group">
-                    <div className="absolute inset-0 bg-black dark:bg-white rounded-lg translate-x-2 translate-y-2 group-hover:translate-x-3 group-hover:translate-y-3 transition-transform duration-300 opacity-20"></div>
-                    <div className="relative aspect-video overflow-hidden border-2 border-black dark:border-white rounded-lg bg-gray-100">
-                        <img
-                            src={post.imageUrl}
-                            alt={post.title}
-                            className="w-full h-full object-cover"
-                        />
-                        <div className="absolute top-4 right-4 bg-zenth-markerYellow text-black px-4 py-1 font-bold transform rotate-2 border-2 border-black">
-                            {post.category}
+                {/* Hero Image */}
+                {post.imageUrl && (
+                    <div className="relative mb-12 group">
+                        <div className="absolute inset-0 bg-black dark:bg-white rounded-lg translate-x-2 translate-y-2 group-hover:translate-x-3 group-hover:translate-y-3 transition-transform duration-300 opacity-20"></div>
+                        <div className="relative aspect-video overflow-hidden border-2 border-black dark:border-white rounded-lg bg-gray-100">
+                            <img
+                                src={post.imageUrl}
+                                alt={post.title}
+                                className="w-full h-full object-cover"
+                            />
+                            <div className="absolute top-4 right-4 bg-zenth-markerYellow text-black px-4 py-1 font-bold transform rotate-2 border-2 border-black">
+                                {post.category}
+                            </div>
                         </div>
                     </div>
-                </div>
+                )}
 
                 {/* Article Info */}
                 <div className="mb-12 border-b-2 border-dashed border-slate-200 dark:border-slate-800 pb-8">

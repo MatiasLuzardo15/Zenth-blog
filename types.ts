@@ -7,7 +7,7 @@ export interface BlogPost {
   content: string; // Full content for AI summarization
   author: string;
   date: string;
-  imageUrl: string;
+  imageUrl?: string;
   category: string;
 }
 

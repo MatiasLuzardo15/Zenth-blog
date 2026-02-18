@@ -226,7 +226,7 @@ El éxito no es terminar cien tareas en un estado de agotamiento absoluto. El é
 `,
     author: 'Matías Zenth',
     date: '17 Feb, 2026',
-    imageUrl: 'https://images.unsplash.com/photo-1499209974431-9dac3adaf471?auto=format&fit=crop&q=80&w=800',
+    imageUrl: '/blog/productivity.jpg',
     category: 'Filosofía'
   },
   {
@@ -386,7 +386,7 @@ Tu cerebro no está roto; simplemente tiene un sistema operativo diferente. Las 
 `,
     author: 'Dra. Ana Mind',
     date: '18 Feb, 2026',
-    imageUrl: 'https://images.unsplash.com/photo-1555601568-c916f186360b?auto=format&fit=crop&q=80&w=800',
+    imageUrl: '/blog/brain.jpg',
     category: 'Neurociencia'
   }
 ];

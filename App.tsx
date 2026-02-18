@@ -12,6 +12,7 @@ import Footer from './components/Footer';
 import { BLOG_POSTS } from './constants';
 
 function App() {
+  // Main App Component
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [currentView, setCurrentView] = useState<'home' | 'blog'>('home');
   const [selectedPost, setSelectedPost] = useState<string | null>(null);

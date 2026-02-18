@@ -18,11 +18,18 @@ const ArticleCard: React.FC<ArticleCardProps> = ({ post, onClick }) => {
       <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 w-24 h-6 bg-zenth-markerYellow/60 rotate-2 z-10"></div>
 
       <div className="relative h-56 overflow-hidden border-2 border-black dark:border-white bg-gray-100 dark:bg-slate-800 mb-4">
-        <img
-          src={post.imageUrl}
-          alt={post.title}
-          className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
-        />
+        {post.imageUrl ? (
+          <img
+            src={post.imageUrl}
+            alt={post.title}
+            className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+          />
+        ) : (
+          <div className="w-full h-full bg-zenth-100 dark:bg-slate-700 flex items-center justify-center relative overflow-hidden">
+            <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'radial-gradient(#000 1px, transparent 1px)', backgroundSize: '16px 16px' }}></div>
+            <span className="font-marker text-4xl text-black/20 dark:text-white/20 transform -rotate-12 select-none">Zenth Blog</span>
+          </div>
+        )}
 
         <div className="absolute bottom-2 right-2 bg-black dark:bg-white text-white dark:text-black px-3 py-1 text-xs font-bold uppercase tracking-wide border border-white dark:border-black transform -rotate-2">
           {post.category}
