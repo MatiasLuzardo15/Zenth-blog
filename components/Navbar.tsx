@@ -53,7 +53,7 @@ const Navbar: React.FC<NavbarProps> = ({ isDarkMode, toggleTheme, currentPage, o
           >
             <div className="relative">
               <div className="absolute inset-0 bg-zenth-markerYellow rounded-full blur-sm transform group-hover:scale-125 transition-transform"></div>
-              <img src="/blog/favicon2.png" alt="Zenth Logo" className="h-8 w-8 relative z-10 transform -rotate-12 object-contain" />
+              <img src="/blog/favicon2.png" alt="Zenth Logo" className="h-8 w-8 relative z-10 transform -rotate-12 object-contain rounded-lg" />
             </div>
             <span className="text-3xl font-serif font-black text-black dark:text-white tracking-tighter decoration-wavy underline decoration-zenth-400">enth</span>
           </div>

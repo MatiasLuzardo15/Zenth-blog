@@ -9,6 +9,7 @@ export interface BlogPost {
   date: string;
   imageUrl?: string;
   category: string;
+  readTime?: string;
 }
 
 export interface Feature {

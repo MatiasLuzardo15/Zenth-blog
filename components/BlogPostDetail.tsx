@@ -164,7 +164,7 @@ const BlogPostDetail: React.FC<BlogPostDetailProps> = ({ post, onBack }) => {
                         </div>
                         <div className="flex items-center">
                             <Clock className="w-4 h-4 mr-2" />
-                            <span>7 min lectura</span>
+                            <span>{post.readTime || '5 min lectura'}</span>
                         </div>
                     </div>
                     <h1 className="text-4xl md:text-6xl font-serif font-black text-slate-900 dark:text-white leading-tight mb-6">

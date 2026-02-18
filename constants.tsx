@@ -54,10 +54,11 @@ Olvídate de las interfaces frías y corporativas. Zenth utiliza un estilo "Sket
 
 **[Inicia sesión en Zenth ahora](https://www.zenth.space/#/auth) y vive la productividad consciente. ✨**
 `,
-    author: 'El Creador',
+    author: 'Matías Zenth',
     date: 'Hoy',
     imageUrl: 'https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&q=80&w=800',
-    category: 'Lanzamiento'
+    category: 'Lanzamiento',
+    readTime: '6 min lectura'
   },
   {
     id: '2',
@@ -119,7 +120,8 @@ El sistema de niveles de Zenth no busca que compitas con otros, sino que superes
     author: 'Matías Zenth',
     date: '15 Feb, 2026',
     imageUrl: 'https://images.unsplash.com/photo-1564349683136-77e08dba1ef7?auto=format&fit=crop&q=80&w=800',
-    category: 'Gamificación'
+    category: 'Gamificación',
+    readTime: '8 min lectura'
   },
   {
     id: '3',
@@ -175,10 +177,11 @@ El calendario de estados de ánimo es tu espejo emocional en Zenth. Es una invit
 
 **¿Ya elegiste tu color de hoy? [Inicia sesión en Zenth](https://www.zenth.space/#/auth) y deja tu marca. ✨**
 `,
-    author: 'Sofia Design',
+    author: 'Matías Zenth',
     date: '10 Feb, 2026',
     imageUrl: 'https://images.unsplash.com/photo-1506784983877-45594efa4cbe?auto=format&fit=crop&q=80&w=800',
-    category: 'Bienestar'
+    category: 'Bienestar',
+    readTime: '5 min lectura'
   },
   {
     id: '4',
@@ -227,7 +230,8 @@ El éxito no es terminar cien tareas en un estado de agotamiento absoluto. El é
     author: 'Matías Zenth',
     date: '17 Feb, 2026',
     imageUrl: '/blog/productivity.jpg',
-    category: 'Filosofía'
+    category: 'Filosofía',
+    readTime: '7 min lectura'
   },
   {
     id: '5',
@@ -287,7 +291,8 @@ Zenth no se trata de hacer más cosas en menos tiempo; se trata de hacer las cos
     author: 'Matías Zenth',
     date: '17 Feb, 2026',
     imageUrl: 'https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?auto=format&fit=crop&q=80&w=800',
-    category: 'Productividad'
+    category: 'Productividad',
+    readTime: '9 min lectura'
   },
   {
     id: '6',
@@ -338,7 +343,8 @@ Construir hábitos no debería sentirse como una guerra contra ti mismo. Con Zen
     author: 'Matías Zenth',
     date: '17 Feb, 2026',
     imageUrl: 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=800',
-    category: 'Hábitos'
+    category: 'Hábitos',
+    readTime: '6 min lectura'
   },
   {
     id: '7',
@@ -384,10 +390,184 @@ Tu cerebro no está roto; simplemente tiene un sistema operativo diferente. Las 
 
 **Deja de luchar contra tu propia mente. [Inicia sesión en Zenth](https://www.zenth.space/#/auth) y dale a tu cerebro las herramientas que necesita para brillar. ✨**
 `,
-    author: 'Dra. Ana Mind',
+    author: 'Matías Zenth',
     date: '18 Feb, 2026',
     imageUrl: '/blog/brain.jpg',
-    category: 'Neurociencia'
+    category: 'Neurociencia',
+    readTime: '10 min lectura'
+  },
+  {
+    id: '8',
+    title: 'La Trampa de la Multitarea: Lo que la Neurociencia dice sobre tu Atención',
+    excerpt: '¿Crees que eres bueno haciendo varias cosas a la vez? La ciencia dice lo contrario. Descubre cómo el "Context Switching" reduce tu CI y cómo Zenth te ayuda a recuperar tu capacidad cognitiva.',
+    content: `
+El cerebro humano no está diseñado para la multitarea. A pesar de lo que nos gusta creer, cuando intentamos hacer dos cosas a la vez, en realidad estamos haciendo "switch-tasking": cambiando rápidamente el foco de atención de una cosa a otra. Y este proceso tiene un costo metabólico y cognitivo altísimo.
+
+Como neuropsicóloga, a menudo veo pacientes que se sienten "quemados" no por la cantidad de trabajo, sino por la fragmentación de su atención.
+
+## El Costo del "Context Switching"
+
+Cada vez que interrumpes una tarea para mirar una notificación o cambiar de pestaña, tu cerebro necesita un tiempo de "re-calibración" para volver al nivel de profundidad anterior. Estudios de la Universidad de California sugieren que podemos tardar hasta **23 minutos** en recuperar el foco total tras una interrupción.
+
+Imagina esto repetido 50 veces al día. El resultado es un cerebro agotado, incapaz de procesar información compleja y propenso a errores.
+
+---
+
+## Cómo Zenth protege tu Reserva Cognitiva
+
+He analizado Zenth desde una perspectiva clínica y he encontrado herramientas que funcionan como verdaderos "protectores" de la atención:
+
+### 1. Protección contra el Ruido Visual
+La mayoría de las apps de productividad son árboles de navidad de botones y alertas. Zenth utiliza un diseño de **baja carga cognitiva**. Su estética de papel y trazos simples no compite por tu atención; descansa la vista y permite que el lóbulo frontal se centre en la tarea, no en la interfaz.
+
+### 2. El Temporizador como Ancla (Focus Mode)
+En terapia, utilizamos técnicas de "anclaje" para tratar la ansiedad. El Focus Mode de Zenth actúa de manera similar: al iniciar el temporizador, creas un compromiso contractual con tu yo presente. "Durante estos 25 minutos, solo existe esta tarea". Esto reduce la ansiedad por lo que "tienes que hacer después".
+
+### 3. Externalización de la Memoria de Trabajo
+Al volcar tus pendientes y organizarlos por bloques de energía (Mañana/Tarde/Noche), liberas tu memoria de trabajo. Tu cerebro deja de gastar energía en *recordar* qué hacer y empieza a usarla en *hacerlo*.
+
+## Conclusión Clínica
+
+La productividad sostenible no nace de forzar la máquina, sino de respetar su biología. Herramientas como Zenth no solo organizan tu trabajo; cuidan la salud de tu órgano más importante: tu cerebro.
+
+**Dra. Elena Vital**
+*Neuropsicóloga Clínica y Especialista en Alto Rendimiento*
+
+**[Prueba Zenth y dale un respiro a tus neuronas.](https://www.zenth.space/#/auth)**
+`,
+    author: 'Matías Zenth',
+    date: '20 Feb, 2026',
+    imageUrl: 'https://images.unsplash.com/photo-1518655048521-f130df041f66?auto=format&fit=crop&q=80&w=800',
+    category: 'Salud Mental',
+    readTime: '7 min lectura'
+  },
+  {
+    id: '9',
+    title: 'Minimalismo Digital: La Ciencia de por qué menos interfaz significa más enfoque',
+    excerpt: 'La Teoría de la Carga Cognitiva explica por qué las interfaces saturadas agotan tu cerebro. Descubre por qué Zenth optó por un diseño de "baja fricción".',
+    content: `
+Vivimos en una economía de atención. El psicólogo **Daniel Levitin**, autor de *The Organized Mind*, explica que cada píxel y notificación en tu pantalla compite por tus recursos neuronales. El desorden visual no es solo "feo"; aumenta los niveles de cortisol y reduce tu capacidad de resolución de problemas.
+
+## La Teoría de la Carga Cognitiva
+
+Nuestro cerebro tiene un ancho de banda limitado, conocido como memoria de trabajo. Si gastas el 20% de tu energía procesando menús complejos y alertas rojas, solo te queda un 80% para tu trabajo real.
+
+Zenth aplica principios de **Ludic Minimalism**:
+
+### 1. La Calidez de lo Analógico
+Estudios en la Universidad de Tokio sugieren que escribir a mano o interactuar con texturas "papel" mejora la retención de memoria más que las interfaces digitales frías. Zenth imita esta estética para evocar esa calma cognitiva.
+
+### 2. Jerarquía Visual Clara
+En lugar de mostrarte todo a la vez, Zenth utiliza una divulgación progresiva. Solo ves lo que necesitas ver. Si es de noche, la app prioriza las tareas nocturnas, ocultando el ruido del resto del día.
+
+### 3. El Color como Señal
+El uso de colores pastel en el "Mood Tracker" es intencional. La psicología del color indica que los tonos suaves reducen la ansiedad visual, a diferencia de los colores saturados que activan la señal de alerta en la amígdala.
+
+## Conclusión
+
+El diseño no es solo cómo se ve, es cómo funciona. Zenth está diseñado para ser "invisible": lo suficientemente bonito para motivar, pero lo suficientemente simple para no distraer.
+
+**[Experimenta el diseño calmado de Zenth.](https://www.zenth.space/#/auth)**
+`,
+    author: 'Daniel Levitin (Ref.)',
+    date: '21 Feb, 2026',
+    imageUrl: 'https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&q=80&w=800',
+    category: 'Diseño',
+    readTime: '6 min lectura'
+  },
+  {
+    id: '10',
+    title: 'Nombrar para Domar: La ciencia detrás del "Mood Tracking"',
+    excerpt: '¿Por qué Zenth te pregunta cómo estás? La neurociencia demuestra que etiquetar tus emociones reduce la actividad de la amígdala y previene el burnout.',
+    content: `
+Muchas personas ignoran el hábito de registrar sus emociones porque sienten que es una pérdida de tiempo. Sin embargo, la ciencia nos dice lo contrario.
+
+## "Name it to Tame it" (Decirlo para domarlo)
+
+El psiquiatra **Dr. Dan Siegel** acuñó esta frase para explicar un mecanismo cerebral fascinante: el simple acto de ponerle una etiqueta verbal a una emoción ("Me siento ansioso", "Estoy neutral") disminuye la actividad eléctrica en la amígdala —el centro del miedo en el cerebro— y aumenta la actividad en la corteza prefrontal derecha, responsable de la regulación emocional.
+
+Cuando Zenth te pregunta "¿Cómo estás?" y tú seleccionas un color, estás realizando una micro-intervención terapéutica.
+
+---
+
+## Beneficios Cognitivos del Registro
+
+### 1. Autoconciencia (Metacognición)
+Estudios en la *University of Rochester* encontraron que la autoconciencia es un predictor clave del éxito profesional. Al ver tu mes en píxeles, pasas de "ser" tus emociones a "observarlas".
+
+### 2. Detección de Patrones
+Registrar tus datos te permite correlacionar: "Mis días más productivos suelen ser los 'Neutrales', no los 'Excelentes'". Esto te ayuda a planificar mejor tu carga de trabajo basándote en datos reales, no en suposiciones.
+
+### 3. Cierre Cognitivo
+Hacer el registro al final del día actúa como un ritual de cierre, ayudando a tu cerebro a desconectar del modo trabajo y pasar al modo descanso.
+
+**[Empieza tu diario emocional en Zenth hoy.](https://www.zenth.space/#/auth)**
+`,
+    author: 'Dr. Dan Siegel (Ref.)',
+    date: '22 Feb, 2026',
+    imageUrl: 'https://images.unsplash.com/photo-1517842645767-c639042777db?auto=format&fit=crop&q=80&w=800',
+    category: 'Psicología',
+    readTime: '5 min lectura'
+  },
+  {
+    id: '11',
+    title: 'El Estado de Flujo: Cómo hackear tu cerebro para la productividad extrema',
+    excerpt: 'El "Flow" no es magia, es neuroquímica. Descubre cómo Zenth utiliza los desencadenantes del flujo para ayudarte a entrar en la zona.',
+    content: `
+¿Alguna vez has estado tan inmerso en una tarea que el tiempo pareció desaparecer? Ese es el **Estado de Flujo**, un término popularizado por el psicólogo Mihaly Csikszentmihalyi. Según un estudio de McKinsey, los ejecutivos en estado de flujo son hasta un **500% más productivos**.
+
+## La Neuroquímica del Flujo
+
+Durante el flujo, el cerebro libera un cóctel de neuroquímicos de rendimiento: dopamina, norepinefrina y anandamida. Además, ocurre algo llamado **"Hipofrontalidad Transitoria"**: la parte de tu cerebro que duda y se critica a sí misma se apaga temporalmente.
+
+## Cómo Zenth activa el Flujo
+
+### 1. Reto vs. Habilidad
+El flujo ocurre cuando el desafío de la tarea iguala tu nivel de habilidad. Zenth te permite dividir tareas grandes ("Big Goals") en pasos manejables, manteniendo ese equilibrio perfecto.
+
+### 2. Eliminación de Distracciones (Focus Mode)
+Para entrar en flujo, necesitas de 15 a 20 minutos de concentración ininterrumpida. El **Focus Mode** de Zenth protege ese tiempo sagrado, actuando como un portero para tu atención.
+
+### 3. Feedback Inmediato
+El cerebro necesita saber que está progresando. Las barras de XP y el sonido al completar tareas en Zenth proporcionan ese feedback instantáneo necesario para mantener el ciclo de dopamina activo.
+
+**[Entra en la zona con Zenth.](https://www.zenth.space/#/auth)**
+`,
+    author: 'Mihaly Csikszentmihalyi (Ref.)',
+    date: '23 Feb, 2026',
+    imageUrl: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&q=80&w=800',
+    category: 'Productividad',
+    readTime: '8 min lectura'
+  },
+  {
+    id: '12',
+    title: 'Neuroplasticidad y Hábitos: Reprogramando tu mente con Zenth',
+    excerpt: 'Tu cerebro puede cambiar físicamente. Aprende cómo la repetición y la recompensa en Zenth fortalecen nuevas conexiones neuronales.',
+    content: `
+La vieja idea de que el cerebro adulto no cambia es falsa. La **Neuroplasticidad** es la capacidad del cerebro para formar nuevas conexiones neuronales a lo largo de la vida. Como dice el principio de Hebb: *"Las neuronas que disparan juntas, permanecen juntas"*.
+
+## El Bucle del Hábito en Zenth
+
+Para formar un hábito, necesitas tres elementos (según *The Power of Habit* de Charles Duhigg): Señal, Rutina y Recompensa.
+
+### 1. La Señal (Trigger)
+Las notificaciones suaves de Zenth o simplemente abrir la app por la mañana actúan como el disparador para tu sesión de planificación.
+
+### 2. La Rutina
+Es la acción en sí: organizar tu día en bloques de Mañana/Tarde/Noche. Al hacerlo repetidamente en la misma interfaz, fortaleces esa vía neuronal.
+
+### 3. La Recompensa (Dopamina)
+Aquí es donde brilla Zenth. Ganar **XP**, ver subir tu nivel y mantener tu racha (Streak) libera dopamina. Esta recompensa química le dice a tu cerebro: *"Esto se sintió bien, hazlo de nuevo mañana"*.
+
+Con el tiempo, la "fuerza de voluntad" deja de ser necesaria porque el comportamiento se ha automatizado en los ganglios basales del cerebro.
+
+**[Empieza a recablear tu cerebro hoy.](https://www.zenth.space/#/auth)**
+`,
+    author: 'Charles Duhigg (Ref.)',
+    date: '24 Feb, 2026',
+    imageUrl: 'https://images.unsplash.com/photo-1559757175-5700dde675bc?auto=format&fit=crop&q=80&w=800',
+    category: 'Neurociencia',
+    readTime: '7 min lectura'
   }
 ];
 

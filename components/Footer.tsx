@@ -7,7 +7,7 @@ const Footer: React.FC = () => {
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
 
         <div className="flex justify-center items-center text-white mb-6">
-          <img src="/blog/favicon2.png" alt="Zenth Logo" className="h-8 w-8 object-contain" />
+          <img src="/blog/favicon2.png" alt="Zenth Logo" className="h-8 w-8 object-contain rounded-lg" />
           <span className="text-3xl font-serif font-bold tracking-tight">enth</span>
         </div>
 
