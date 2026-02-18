@@ -296,54 +296,38 @@ Zenth no se trata de hacer más cosas en menos tiempo; se trata de hacer las cos
   },
   {
     id: '6',
-    title: 'El Efecto Cascada: Construcción de Hábitos sin Esfuerzo en Zenth',
-    excerpt: '¿Tus propósitos mueren en febrero? Descubre cómo el Efecto Cascada de Zenth usa la psicología para crear hábitos inquebrantables.',
+    title: 'La Fatiga de Decisión: Por qué Steve Jobs vestía siempre igual',
+    excerpt: '¿Te sientes agotado antes de empezar a trabajar? Descubre cómo la "Fatiga de Decisión" drena tu voluntad y cómo Zenth simplifica tu vida.',
     content: `
-La mayoría de los propósitos de año nuevo mueren en febrero. ¿Por qué? Porque confiamos demasiado en la fuerza de voluntad, un recurso que es limitado y traicionero. En Zenth, hemos diseñado una arquitectura que no depende de tu voluntad, sino de tu psicología natural.
+¿Por qué Barack Obama solo usa trajes azules o grises? ¿Por qué Steve Jobs siempre llevaba el mismo cuello de tortuga negro? La respuesta no es falta de estilo, es **economía cognitiva**.
 
-Bienvenidos al **Efecto Cascada**.
+Los psicólogos lo llaman **Fatiga de Decisión**.
 
-## La Fricción: El Enemigo de tus Nuevos Hábitos
+## Tu Voluntad es una Batería Limitada
 
-El cerebro humano ama lo familiar y teme el esfuerzo. Empezar a meditar, estudiar un nuevo idioma o simplemente organizar el día requiere "energía de activación". Si esa energía es muy alta, simplemente no lo haces.
+Cada decisión que tomas a lo largo del día, desde "¿qué desayuno?" hasta "¿qué tarea hago primero?", consume una cantidad finita de glucosa y neurotransmisores en tu corteza prefrontal.
 
-Zenth reduce la fricción inicial mediante tres mecanismos psicológicos:
+Al llegar a la tarde, si has tomado cientos de micro-decisiones irrelevantes, tu cerebro entra en modo "ahorro de energía". Esto se manifiesta como procrastinación o impulsividad (comer mal, no ir al gimnasio).
 
----
+## Cómo Zenth elimina la Fatiga de Decisión
 
-### 1. El Poder de la Racha (Streaks)
-No hay nada más doloroso para un cerebro humano que romper una cadena que ha costado construir. 
-- **Feedback Inmediato:** Cada vez que registras actividad, Zenth te premia con un mensaje de ánimo y un incremento en tu racha.
-- **La Barrera del Abandono:** Cuando llevas una racha de 10 o 20 días, la pereza de hoy se enfrenta al "miedo" de perder lo logrado. La racha de Zenth es tu guardaespaldas contra la procrastinación.
+Zenth está diseñado para reducir el número de decisiones triviales que debes tomar para ser productivo:
 
-### 2. Gamificación: De la Obligación al Juego
-Al convertir la productividad en un sistema de niveles (XP), Zenth cambia el "tengo que trabajar" por el "quiero subir de nivel".
-- **Reconocimiento Constante:** Pasar de ser una "Piedra en el Camino" a un "Bambú Flexible" te da un sentido de progreso que las listas de tareas tradicionales no ofrecen.
-- **Micro-Victorias:** Cada +10 XP por tarea completada es una pequeña dosis de dopamina saludable que refuerza el hábito positivamente.
+### 1. Bloques de Energía Predefinidos
+En lugar de preguntarte "¿a qué hora exacta hago esto?", Zenth te ofrece tres cubos simples: **Mañana, Tarde, Noche**. Clasificar es más rápido que agendar. Tu cerebro descansa.
 
-### 3. El Efecto Cascada
-Cuando logras mantener una racha y subir un par de niveles, ocurre algo mágico: el hábito ya no requiere esfuerzo. Se vuelve parte de tu identidad. "Yo soy una persona organizada" es mucho más potente que "Estoy intentando ser organizado".
+### 2. La Pregunta Única
+Al abrir la app, Zenth no te muestra todo tu backlog de 100 tareas. Te muestra "Hoy". Y dentro de Hoy, te anima a elegir solo **1-3 Grandes Metas**. Simplificamos el menú para que puedas elegir el plato principal sin agobio.
 
----
+### 3. Rutinas Automatizadas
+Las tareas recurrentes en Zenth funcionan como el cuello de tortuga de Jobs: una decisión tomada una vez que se repite automáticamente. "Pagar facturas" aparece solo cuando debe aparecer, sin que tengas que recordarlo.
 
-## Estrategias para no romper la cadena
-
-¿Quieres construir un hábito inquebrantable? Sigue la regla de oro de Zenth:
-
-- **La Tarea Mínima Vial:** En los días en los que no tengas ganas de nada, completa al menos una tarea diminuta (ej. "Beber un vaso de agua") y regístrala. Esto mantiene tu racha viva y tu identidad intacta.
-- **Visualiza tu Progreso:** Entra en tu perfil y mira cuánto te falta para el siguiente nivel. Ese pequeño empujón visual suele ser suficiente para activar el Focus Mode por 25 minutos.
-- **Celebra el Ascenso:** Cuando subas de nivel, tómate un momento para reconocer tu esfuerzo. Te lo has ganado.
-
-## Conclusión
-
-Construir hábitos no debería sentirse como una guerra contra ti mismo. Con Zenth, la disciplina se convierte en un flujo natural. Aprovecha el **Efecto Cascada**: deja que las pequeñas victorias de hoy se conviertan en la inercia del mañana.
-
-**¿Estás listo para empezar tu cadena hoy? [Entra en Zenth](https://www.zenth.space/#/auth) y haz que este sea el primer día de tu nueva racha. ✨**
+**[Simplifica tu vida con Zenth.](https://www.zenth.space/#/auth)**
 `,
-    author: 'Matías Zenth',
+    author: 'Roy F. Baumeister (Ref.)',
     date: '17 Feb, 2026',
-    imageUrl: 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=800',
-    category: 'Hábitos',
+    imageUrl: 'https://images.unsplash.com/photo-1494178270175-e96de2971df9?auto=format&fit=crop&q=80&w=800',
+    category: 'Psicología',
     readTime: '6 min lectura'
   },
   {
