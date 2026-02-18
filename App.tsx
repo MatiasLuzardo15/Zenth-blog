@@ -42,35 +42,48 @@ function App() {
   };
 
   // Manejador centralizado de navegación y scroll
-  const handleNavigate = (page: 'home' | 'blog', sectionId?: string) => {
-    // Si cambiamos de página
-    setSelectedPost(null); // Reset post selection on navigation
+  // Manejador centralizado de navegación y scroll
+  const handleNavigate = (page: 'home' | 'blog', targetId?: string) => {
+    // Si vamos al blog con un ID específico, lo seleccionamos
+    if (page === 'blog' && targetId) {
+      setSelectedPost(targetId);
+      setCurrentView('blog');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+
+    // Si cambiamos de página sin ID específico (o a home)
     if (page !== currentView) {
+      if (page === 'home') setSelectedPost(null); // Solo reset si vamos a home
       setCurrentView(page);
 
-      // Si vamos a home con un sectionId, esperamos a que renderice para scrollear
-      if (page === 'home' && sectionId) {
+      // Si vamos a home con un sectionId (targetId), esperamos a que renderice para scrollear
+      if (page === 'home' && targetId) {
         setTimeout(() => {
-          const element = document.getElementById(sectionId);
+          const element = document.getElementById(targetId);
           if (element) {
             element.scrollIntoView({ behavior: 'smooth' });
-          } else if (sectionId === 'hero') {
+          } else if (targetId === 'hero') {
             window.scrollTo({ top: 0, behavior: 'smooth' });
           }
         }, 100);
       } else {
-        // Si vamos al blog o a home sin ID, scroll al top
+        // Si vamos al blog (general) o a home sin ID, scroll al top
         window.scrollTo({ top: 0, behavior: 'smooth' });
       }
     } else {
       // Si ya estamos en la página
-      if (sectionId) {
-        const element = document.getElementById(sectionId);
+      if (page === 'home' && targetId) {
+        const element = document.getElementById(targetId);
         if (element) {
           element.scrollIntoView({ behavior: 'smooth' });
-        } else if (sectionId === 'hero') {
+        } else if (targetId === 'hero') {
           window.scrollTo({ top: 0, behavior: 'smooth' });
         }
+      } else if (page === 'blog' && !targetId) {
+        // Si estamos en blog y navegamos a "blog" sin ID, volver al listado
+        setSelectedPost(null);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
       } else {
         window.scrollTo({ top: 0, behavior: 'smooth' });
       }
@@ -90,7 +103,7 @@ function App() {
         {currentView === 'home' ? (
           <>
             <div id="hero"><Hero /></div>
-            <Features />
+            <Features onNavigate={handleNavigate} />
             <Testimonials />
             <InstallGuide />
             {/* Usamos BlogList como teaser en la Home */}

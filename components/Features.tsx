@@ -8,9 +8,14 @@ interface FeatureDetail {
   fullDesc: React.ReactNode; // Para el modal (permite HTML/JSX)
   icon: React.ReactNode;
   colorClass: string; // Para el icono o fondo
+  relatedPostId?: string; // ID del artículo del blog relacionado
 }
 
-const Features: React.FC = () => {
+interface FeaturesProps {
+  onNavigate: (page: 'home' | 'blog', targetId?: string) => void;
+}
+
+const Features: React.FC<FeaturesProps> = ({ onNavigate }) => {
   const [selectedFeature, setSelectedFeature] = useState<FeatureDetail | null>(null);
 
   // Cerrar modal con tecla Escape
@@ -34,9 +39,9 @@ const Features: React.FC = () => {
             Convertimos la productividad en un juego para que no se sienta como un trabajo.
           </p>
           <ul className="list-disc pl-5 space-y-2 mb-4">
-             <li><strong>Misiones Diarias:</strong> Gana +10 XP por tareas estándar.</li>
-             <li><strong>Big Goals:</strong> ¡Conquista un objetivo grande y recibe +50 XP!</li>
-             <li><strong>Rachas Imparables:</strong> Mantén tu consistencia diaria y mira cómo crece tu racha.</li>
+            <li><strong>Misiones Diarias:</strong> Gana +10 XP por tareas estándar.</li>
+            <li><strong>Big Goals:</strong> ¡Conquista un objetivo grande y recibe +50 XP!</li>
+            <li><strong>Rachas Imparables:</strong> Mantén tu consistencia diaria y mira cómo crece tu racha.</li>
           </ul>
           <p>
             Cada tarea completada te acerca a ser un "Guerrero Zen". No es solo una lista, es tu progreso visual.
@@ -44,7 +49,8 @@ const Features: React.FC = () => {
         </>
       ),
       icon: <Trophy className="w-8 h-8 text-black" />,
-      colorClass: 'bg-zenth-markerYellow'
+      colorClass: 'bg-zenth-markerYellow',
+      relatedPostId: '2'
     },
     energy: {
       id: 'energy',
@@ -64,7 +70,8 @@ const Features: React.FC = () => {
         </>
       ),
       icon: <Sun className="w-8 h-8 text-black" />,
-      colorClass: 'bg-zenth-markerBlue'
+      colorClass: 'bg-zenth-markerBlue',
+      relatedPostId: '1'
     },
     pixel: {
       id: 'pixel',
@@ -84,7 +91,8 @@ const Features: React.FC = () => {
         </>
       ),
       icon: <LayoutGrid className="w-7 h-7 text-black" />,
-      colorClass: 'bg-white'
+      colorClass: 'bg-white',
+      relatedPostId: '3'
     },
     focus: {
       id: 'focus',
@@ -104,7 +112,8 @@ const Features: React.FC = () => {
         </>
       ),
       icon: <Activity className="w-7 h-7 text-black" />,
-      colorClass: 'bg-white'
+      colorClass: 'bg-white',
+      relatedPostId: '5'
     }
   };
 
@@ -125,18 +134,18 @@ const Features: React.FC = () => {
 
         {/* Bento Grid Layout - Hand Drawn Style */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 auto-rows-[minmax(300px,auto)]">
-          
+
           {/* Feature 1: Large Card (Gamification/XP) */}
-          <div 
+          <div
             onClick={() => setSelectedFeature(featuresData.gamification)}
             className="md:col-span-2 bg-white dark:bg-slate-900 border-2 border-black dark:border-white shadow-sketch-lg dark:shadow-sketch-lg-white rounded-2xl p-8 sm:p-12 relative overflow-hidden group hover:-translate-y-1 hover:shadow-sketch-xl dark:hover:shadow-sketch-xl-white transition-all cursor-pointer"
           >
-             <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
-                <MousePointerClick className="w-6 h-6 text-slate-400" />
-             </div>
-             <div className="absolute top-0 right-0 p-4 opacity-10 pointer-events-none">
-                <Trophy className="w-48 h-48 text-black dark:text-white transform rotate-12" />
-             </div>
+            <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
+              <MousePointerClick className="w-6 h-6 text-slate-400" />
+            </div>
+            <div className="absolute top-0 right-0 p-4 opacity-10 pointer-events-none">
+              <Trophy className="w-48 h-48 text-black dark:text-white transform rotate-12" />
+            </div>
             <div className="relative z-10 max-w-lg pointer-events-none">
               <div className="bg-zenth-markerYellow border-2 border-black dark:border-white w-16 h-16 rounded-full flex items-center justify-center mb-6 shadow-sketch dark:shadow-sketch-white transform -rotate-6">
                 <Trophy className="w-8 h-8 text-black" />
@@ -145,88 +154,87 @@ const Features: React.FC = () => {
                 {featuresData.gamification.title}
               </h3>
               <p className="text-xl text-black dark:text-slate-200 leading-relaxed">
-                {featuresData.gamification.shortDesc} <br/>
+                {featuresData.gamification.shortDesc} <br />
                 <span className="bg-zenth-100 text-black px-1 mt-2 inline-block font-bold">¡+50 XP por Big Goals!</span>
               </p>
             </div>
           </div>
 
           {/* Feature 2: Tall Card (Pixel View/Mood) */}
-          <div 
+          <div
             onClick={() => setSelectedFeature(featuresData.pixel)}
             className="md:row-span-2 bg-zenth-paper dark:bg-slate-900 border-2 border-black dark:border-white shadow-sketch-lg dark:shadow-sketch-lg-white rounded-2xl p-8 sm:p-12 flex flex-col justify-between relative overflow-hidden group hover:rotate-1 transition-all cursor-pointer"
           >
-             <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
-                <MousePointerClick className="w-6 h-6 text-slate-400" />
-             </div>
-             {/* Tape */}
-             <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 w-32 h-8 bg-zenth-markerPink/80 rotate-1 z-20 pointer-events-none"></div>
-             
-             <div className="pointer-events-none">
-                <div className="bg-zenth-markerBlue border-2 border-black dark:border-white w-16 h-16 rounded-lg flex items-center justify-center mb-6 shadow-sketch dark:shadow-sketch-white transform rotate-3">
-                  <LayoutGrid className="w-8 h-8 text-black" />
-                </div>
-                <h3 className="text-4xl font-serif font-bold text-black dark:text-white mb-4 underline decoration-dashed decoration-transparent group-hover:decoration-black dark:group-hover:decoration-white underline-offset-4 transition-all">
-                    {featuresData.pixel.title}
-                </h3>
-                <p className="text-xl text-black dark:text-slate-200 leading-relaxed">
-                  ¿Cómo fue tu año? Un lienzo de colores basado en tu bienestar.
-                </p>
-             </div>
-             
-             {/* Pixel Grid Sketch */}
-             <div className="mt-8 flex justify-center pointer-events-none">
-                <div className="grid grid-cols-7 gap-1 opacity-80">
-                    {[...Array(28)].map((_, i) => (
-                        <div key={i} className={`w-6 h-6 border border-black dark:border-white rounded-sm ${
-                            [1, 5, 12, 15, 20].includes(i) ? 'bg-zenth-markerPink' : 
-                            [2, 3, 8, 9, 18].includes(i) ? 'bg-zenth-markerBlue' : 
-                            [0, 6, 13, 21].includes(i) ? 'bg-zenth-markerYellow' : 'bg-white dark:bg-slate-700'
-                        }`}></div>
-                    ))}
-                </div>
-             </div>
+            <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
+              <MousePointerClick className="w-6 h-6 text-slate-400" />
+            </div>
+            {/* Tape */}
+            <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 w-32 h-8 bg-zenth-markerPink/80 rotate-1 z-20 pointer-events-none"></div>
+
+            <div className="pointer-events-none">
+              <div className="bg-zenth-markerBlue border-2 border-black dark:border-white w-16 h-16 rounded-lg flex items-center justify-center mb-6 shadow-sketch dark:shadow-sketch-white transform rotate-3">
+                <LayoutGrid className="w-8 h-8 text-black" />
+              </div>
+              <h3 className="text-4xl font-serif font-bold text-black dark:text-white mb-4 underline decoration-dashed decoration-transparent group-hover:decoration-black dark:group-hover:decoration-white underline-offset-4 transition-all">
+                {featuresData.pixel.title}
+              </h3>
+              <p className="text-xl text-black dark:text-slate-200 leading-relaxed">
+                ¿Cómo fue tu año? Un lienzo de colores basado en tu bienestar.
+              </p>
+            </div>
+
+            {/* Pixel Grid Sketch */}
+            <div className="mt-8 flex justify-center pointer-events-none">
+              <div className="grid grid-cols-7 gap-1 opacity-80">
+                {[...Array(28)].map((_, i) => (
+                  <div key={i} className={`w-6 h-6 border border-black dark:border-white rounded-sm ${[1, 5, 12, 15, 20].includes(i) ? 'bg-zenth-markerPink' :
+                      [2, 3, 8, 9, 18].includes(i) ? 'bg-zenth-markerBlue' :
+                        [0, 6, 13, 21].includes(i) ? 'bg-zenth-markerYellow' : 'bg-white dark:bg-slate-700'
+                    }`}></div>
+                ))}
+              </div>
+            </div>
           </div>
 
           {/* Feature 3: Standard Card (Energy/Harmony) */}
-          <div 
+          <div
             onClick={() => setSelectedFeature(featuresData.energy)}
             className="bg-zenth-markerYellow border-2 border-black dark:border-white shadow-sketch-lg dark:shadow-sketch-lg-white rounded-2xl p-8 sm:p-10 relative group hover:-rotate-1 transition-all cursor-pointer"
           >
             <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
-                <MousePointerClick className="w-6 h-6 text-black/50" />
-             </div>
+              <MousePointerClick className="w-6 h-6 text-black/50" />
+            </div>
             <div className="relative z-10 pointer-events-none">
-                <div className="bg-white border-2 border-black w-14 h-14 rounded-full flex items-center justify-center mb-6 shadow-sketch">
-                  <Sun className="w-7 h-7 text-black" />
-                </div>
-                <h3 className="text-3xl font-serif font-bold text-black mb-3 underline decoration-dashed decoration-transparent group-hover:decoration-black underline-offset-4 transition-all">
-                    {featuresData.energy.title}
-                </h3>
-                <p className="text-black text-lg font-bold">
-                  Organiza: Mañana, Tarde y Noche. <br/>Sigue tu ritmo natural.
-                </p>
+              <div className="bg-white border-2 border-black w-14 h-14 rounded-full flex items-center justify-center mb-6 shadow-sketch">
+                <Sun className="w-7 h-7 text-black" />
+              </div>
+              <h3 className="text-3xl font-serif font-bold text-black mb-3 underline decoration-dashed decoration-transparent group-hover:decoration-black underline-offset-4 transition-all">
+                {featuresData.energy.title}
+              </h3>
+              <p className="text-black text-lg font-bold">
+                Organiza: Mañana, Tarde y Noche. <br />Sigue tu ritmo natural.
+              </p>
             </div>
           </div>
 
           {/* Feature 4: Standard Card (Deep Work) */}
-          <div 
+          <div
             onClick={() => setSelectedFeature(featuresData.focus)}
             className="bg-zenth-200 border-2 border-black dark:border-white shadow-sketch-lg dark:shadow-sketch-lg-white rounded-2xl p-8 sm:p-10 relative group hover:rotate-1 transition-all cursor-pointer"
           >
-             <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
-                <MousePointerClick className="w-6 h-6 text-black/50" />
-             </div>
+            <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
+              <MousePointerClick className="w-6 h-6 text-black/50" />
+            </div>
             <div className="relative z-10 pointer-events-none">
-                <div className="bg-white border-2 border-black w-14 h-14 rounded-none flex items-center justify-center mb-6 shadow-sketch transform rotate-45">
-                  <Activity className="w-7 h-7 text-black transform -rotate-45" />
-                </div>
-                <h3 className="text-3xl font-serif font-bold text-black mb-3 underline decoration-dashed decoration-transparent group-hover:decoration-black underline-offset-4 transition-all">
-                    {featuresData.focus.title}
-                </h3>
-                <p className="text-black text-lg font-bold">
-                  Cuenta minutos de enfoque, no solo tareas. Deep Work real.
-                </p>
+              <div className="bg-white border-2 border-black w-14 h-14 rounded-none flex items-center justify-center mb-6 shadow-sketch transform rotate-45">
+                <Activity className="w-7 h-7 text-black transform -rotate-45" />
+              </div>
+              <h3 className="text-3xl font-serif font-bold text-black mb-3 underline decoration-dashed decoration-transparent group-hover:decoration-black underline-offset-4 transition-all">
+                {featuresData.focus.title}
+              </h3>
+              <p className="text-black text-lg font-bold">
+                Cuenta minutos de enfoque, no solo tareas. Deep Work real.
+              </p>
             </div>
           </div>
 
@@ -236,48 +244,59 @@ const Features: React.FC = () => {
       {/* MODAL OVERLAY */}
       {selectedFeature && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-            {/* Backdrop Blur */}
-            <div 
-                className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm transition-opacity"
-                onClick={() => setSelectedFeature(null)}
-            ></div>
+          {/* Backdrop Blur */}
+          <div
+            className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm transition-opacity"
+            onClick={() => setSelectedFeature(null)}
+          ></div>
 
-            {/* Modal Content */}
-            <div className="bg-white dark:bg-slate-800 w-full max-w-lg border-2 border-black dark:border-white shadow-sketch-xl dark:shadow-sketch-xl-white p-8 relative z-10 rounded-lg transform rotate-1 animate-in fade-in zoom-in duration-200">
-                
-                {/* Close Button */}
-                <button 
-                    onClick={() => setSelectedFeature(null)}
-                    className="absolute top-4 right-4 p-2 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-full transition-colors border-2 border-transparent hover:border-black dark:hover:border-white"
-                >
-                    <X className="w-6 h-6 text-black dark:text-white" />
-                </button>
+          {/* Modal Content */}
+          <div className="bg-white dark:bg-slate-800 w-full max-w-lg border-2 border-black dark:border-white shadow-sketch-xl dark:shadow-sketch-xl-white p-8 relative z-10 rounded-lg transform rotate-1 animate-in fade-in zoom-in duration-200">
 
-                {/* Header with Icon */}
-                <div className="flex items-center gap-4 mb-6">
-                    <div className={`${selectedFeature.colorClass} border-2 border-black dark:border-white w-16 h-16 rounded-lg flex items-center justify-center shadow-sketch dark:shadow-sketch-white`}>
-                        {selectedFeature.icon}
-                    </div>
-                    <h3 className="text-3xl font-serif font-bold text-black dark:text-white leading-none">
-                        {selectedFeature.title}
-                    </h3>
-                </div>
+            {/* Close Button */}
+            <button
+              onClick={() => setSelectedFeature(null)}
+              className="absolute top-4 right-4 p-2 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-full transition-colors border-2 border-transparent hover:border-black dark:hover:border-white"
+            >
+              <X className="w-6 h-6 text-black dark:text-white" />
+            </button>
 
-                {/* Content */}
-                <div className="text-lg text-slate-700 dark:text-slate-300 font-sans leading-relaxed space-y-4">
-                    {selectedFeature.fullDesc}
-                </div>
-
-                {/* Footer Action */}
-                <div className="mt-8 pt-6 border-t-2 border-dashed border-slate-200 dark:border-slate-700 flex justify-end">
-                    <button 
-                        onClick={() => setSelectedFeature(null)}
-                        className="font-bold text-black dark:text-white hover:underline decoration-zenth-markerPink decoration-4 underline-offset-2"
-                    >
-                        Entendido, cerrar
-                    </button>
-                </div>
+            {/* Header with Icon */}
+            <div className="flex items-center gap-4 mb-6">
+              <div className={`${selectedFeature.colorClass} border-2 border-black dark:border-white w-16 h-16 rounded-lg flex items-center justify-center shadow-sketch dark:shadow-sketch-white`}>
+                {selectedFeature.icon}
+              </div>
+              <h3 className="text-3xl font-serif font-bold text-black dark:text-white leading-none">
+                {selectedFeature.title}
+              </h3>
             </div>
+
+            {/* Content */}
+            <div className="text-lg text-slate-700 dark:text-slate-300 font-sans leading-relaxed space-y-4">
+              {selectedFeature.fullDesc}
+            </div>
+
+            {/* Footer Action */}
+            <div className="mt-8 pt-6 border-t-2 border-dashed border-slate-200 dark:border-slate-700 flex justify-between items-center">
+              {selectedFeature.relatedPostId && (
+                <button
+                  onClick={() => {
+                    setSelectedFeature(null);
+                    onNavigate('blog', selectedFeature.relatedPostId);
+                  }}
+                  className="bg-black dark:bg-white text-white dark:text-black px-4 py-2 rounded-lg font-bold font-marker shadow-sketch hover:scale-105 transition-transform text-sm sm:text-base border border-transparent hover:border-white dark:hover:border-black"
+                >
+                  Leer artículo completo ➔
+                </button>
+              )}
+              <button
+                onClick={() => setSelectedFeature(null)}
+                className="font-bold text-slate-500 hover:text-black dark:hover:text-white hover:underline transition-colors text-sm"
+              >
+                Cerrar
+              </button>
+            </div>
+          </div>
         </div>
       )}
     </section>
