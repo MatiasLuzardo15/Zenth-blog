@@ -9,12 +9,13 @@ import BlogPage from './components/BlogPage'; // Nueva página completa
 import BlogPostDetail from './components/BlogPostDetail';
 import Support from './components/Support';
 import Footer from './components/Footer';
+import PrivacyPolicy from './components/PrivacyPolicy';
 import { BLOG_POSTS } from './constants';
 
 function App() {
   // Main App Component
   const [isDarkMode, setIsDarkMode] = useState(false);
-  const [currentView, setCurrentView] = useState<'home' | 'blog'>('home');
+  const [currentView, setCurrentView] = useState<'home' | 'blog' | 'privacy'>('home');
   const [selectedPost, setSelectedPost] = useState<string | null>(null);
 
   useEffect(() => {
@@ -57,7 +58,7 @@ function App() {
   };
 
   // Manejador centralizado de navegación y scroll
-  const handleNavigate = (page: 'home' | 'blog', targetId?: string) => {
+  const handleNavigate = (page: 'home' | 'blog' | 'privacy', targetId?: string) => {
     // Actualizar URL
     if (page === 'blog' && targetId) {
       const newUrl = `${window.location.pathname}?post=${targetId}`;
@@ -74,7 +75,7 @@ function App() {
       return;
     }
 
-    // Si cambiamos de página sin ID específico (o a home)
+    // Manejo de navegación estándar
     if (page !== currentView) {
       if (page === 'home') setSelectedPost(null); // Solo reset si vamos a home
       setCurrentView(page);
@@ -90,7 +91,7 @@ function App() {
           }
         }, 100);
       } else {
-        // Si vamos al blog (general) o a home sin ID, scroll al top
+        // Scroll al top
         window.scrollTo({ top: 0, behavior: 'smooth' });
       }
     } else {
@@ -117,8 +118,8 @@ function App() {
       <Navbar
         isDarkMode={isDarkMode}
         toggleTheme={toggleTheme}
-        currentPage={currentView}
-        onNavigate={handleNavigate}
+        currentPage={currentView === 'privacy' ? 'home' : currentView} // Navbar highlights home when in privacy if needed, or we can adjust
+        onNavigate={(page, id) => handleNavigate(page as any, id)}
       />
 
       <main>
@@ -144,7 +145,7 @@ function App() {
             </div>
             <Support />
           </>
-        ) : (
+        ) : currentView === 'blog' ? (
           selectedPost ? (
             <BlogPostDetail
               post={BLOG_POSTS.find(p => p.id === selectedPost) || BLOG_POSTS[0]}
@@ -156,10 +157,12 @@ function App() {
               onSelectPost={(id) => handleNavigate('blog', id)}
             />
           )
+        ) : (
+          <PrivacyPolicy onBack={() => handleNavigate('home')} />
         )}
       </main>
 
-      <Footer />
+      <Footer onNavigate={handleNavigate} />
     </div>
   );
 }
