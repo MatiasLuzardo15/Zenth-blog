@@ -41,7 +41,7 @@ const Hero: React.FC = () => {
                 onClick={goToApp}
                 className="bg-black dark:bg-white text-white dark:text-black px-8 py-4 rounded-lg font-bold text-xl border-2 border-transparent hover:bg-zenth-500 transition-all shadow-sketch-lg dark:shadow-sketch-lg-white hover:translate-x-1 hover:translate-y-1 hover:shadow-sketch dark:hover:shadow-sketch-white flex items-center justify-center group"
               >
-                Empezar mi ritual
+                Comenzar ahora ✨
                 <ArrowRight className="ml-2 w-6 h-6 group-hover:translate-x-1 transition-transform" />
               </button>
 
@@ -74,7 +74,7 @@ const Hero: React.FC = () => {
 
               {/* Decorative Element */}
               <div className="absolute -top-6 -right-6 bg-zenth-markerBlue text-black px-4 py-2 rounded-lg shadow-sketch font-hand text-lg transform rotate-6 hidden lg:block">
-                ¡Tu nuevo ritual! ✨
+                ¡Tu nuevo ritual! ⚡
               </div>
             </div>
           </div>
