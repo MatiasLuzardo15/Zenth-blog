@@ -6,6 +6,7 @@ import BlogPage from './components/BlogPage';
 import BlogPostDetail from './components/BlogPostDetail';
 import PrivacyPolicy from './components/PrivacyPolicy';
 import Footer from './components/Footer';
+import Doodles from './components/Doodles';
 import { BLOG_POSTS } from './constants';
 
 function App() {
@@ -78,7 +79,8 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen font-sans selection:bg-zenth-200 selection:text-zenth-900">
+    <div className="min-h-screen font-sans selection:bg-zenth-200 selection:text-zenth-900 border-x-0 relative">
+      <Doodles />
       <Navbar
         isDarkMode={isDarkMode}
         toggleTheme={toggleTheme}

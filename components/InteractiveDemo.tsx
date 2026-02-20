@@ -24,13 +24,20 @@ const InteractiveDemo: React.FC = () => {
                         <p className="text-xl text-slate-600 dark:text-slate-400 font-sans max-w-lg mx-auto lg:mx-0 leading-relaxed mb-8">
                             Zenth no es solo una lista de tareas. Es una experiencia táctil y visual diseñada para darte dopamina positiva con cada pequeño logro.
                         </p>
-                        <div className="flex items-center justify-center lg:justify-start gap-4">
-                            <div className="flex items-center gap-2 px-4 py-2 bg-white dark:bg-slate-800 border-2 border-black rounded-lg shadow-sketch">
+                        <div className="flex items-center justify-center lg:justify-start gap-4 relaltive">
+                            <div className="flex items-center gap-2 px-4 py-2 bg-white dark:bg-slate-800 border-2 border-black rounded-lg shadow-sketch relative">
+                                {/* Círculo dibujado a mano alrededor del tag */}
+                                <svg className="absolute -inset-2 w-[calc(100%+16px)] h-[calc(100%+16px)] text-zenth-markerBlue opacity-40 pointer-events-none" viewBox="0 0 100 40" preserveAspectRatio="none">
+                                    <path d="M5 20c0-10 40-15 90-5s0 20-45 20-45-5-45-15" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                                </svg>
                                 <span className="w-3 h-3 bg-zenth-markerYellow rounded-full"></span>
-                                <span className="font-bold">Interactivo</span>
+                                <span className="font-bold text-black dark:text-white">Interactivo</span>
                             </div>
-                            <div className="font-hand text-xl text-slate-500 animate-bounce">
-                                ¡Pruébalo aquí mismo! ➔
+                            <div className="font-hand text-xl text-slate-500 animate-bounce flex items-center gap-2">
+                                ¡Pruébalo aquí mismo!
+                                <svg width="30" height="20" viewBox="0 0 30 20" fill="none" stroke="currentColor" className="text-slate-400">
+                                    <path d="M2 10h25M20 3l7 7-7 7" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                                </svg>
                             </div>
                         </div>
                     </div>
