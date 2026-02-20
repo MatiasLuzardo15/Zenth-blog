@@ -1,5 +1,6 @@
 import React from 'react';
 import Hero from '../components/Hero';
+import InteractiveDemo from '../components/InteractiveDemo';
 import Features from '../components/Features';
 import Testimonials from '../components/Testimonials';
 import InstallGuide from '../components/InstallGuide';
@@ -27,6 +28,7 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
     return (
         <>
             <div id="hero"><Hero /></div>
+            <InteractiveDemo />
             <Features onNavigate={onNavigate} />
             <Testimonials />
             <InstallGuide />

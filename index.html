@@ -1,104 +1,119 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Zenth - Bullet Journal Digital</title>
-    
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://zenth.space/" />
-    <meta property="og:title" content="Zenth - Transforma tu Caos en Calma" />
-    <meta property="og:description" content="Descubre el Bullet Journal Digital que te ayuda a organizar tu vida, mejorar tu productividad y encontrar tu paz mental." />
-    <meta property="og:image" content="https://zenth.space/blog/appview.png" />
 
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content="https://zenth.space/" />
-    <meta property="twitter:title" content="Zenth - Transforma tu Caos en Calma" />
-    <meta property="twitter:description" content="Descubre el Bullet Journal Digital que te ayuda a organizar tu vida, mejorar tu productividad y encontrar tu paz mental." />
-    <meta property="twitter:image" content="https://zenth.space/blog/appview.png" />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zenth - Bullet Journal Digital</title>
 
-    <link rel="icon" type="image/png" href="/blog/favicon2.png" />
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300&family=Patrick+Hand&family=Indie+Flower&family=Permanent+Marker&display=swap" rel="stylesheet">
-    <script>
-      tailwind.config = {
-        darkMode: 'class',
-        theme: {
-          extend: {
-            fontFamily: {
-              sans: ['"Patrick Hand"', 'cursive'], // Fuente principal estilo marcador fino
-              serif: ['"Indie Flower"', 'cursive'], // Fuente secundaria estilo bolígrafo
-              marker: ['"Permanent Marker"', 'cursive'], // Para títulos gruesos
-              body: ['"Patrick Hand"', 'sans-serif'],
-            },
-            colors: {
-              zenth: {
-                bg: '#fffdf5', // Warm paper color
-                darkBg: '#0f172a', // Slate 900
-                100: '#f0f4c3', // Highlighter Lime
-                200: '#b2dfdb', // Highlighter Blueish
-                300: '#ffccbc', // Highlighter Orangeish
-                400: '#ff8a80', // Marker Red
-                500: '#263238', // Ink Blue/Black
-                paper: '#ffffff',
-                markerYellow: '#ffff8d',
-                markerPink: '#ff80ab',
-                markerBlue: '#80d8ff',
-              }
-            },
-            boxShadow: {
-              'sketch': '2px 2px 0px 0px rgba(0,0,0,1)',
-              'sketch-white': '2px 2px 0px 0px rgba(255,255,255,0.9)',
-              'sketch-lg': '5px 5px 0px 0px rgba(0,0,0,1)',
-              'sketch-lg-white': '5px 5px 0px 0px rgba(255,255,255,0.9)',
-              'sketch-xl': '8px 8px 0px 0px rgba(0,0,0,1)',
-              'sketch-xl-white': '8px 8px 0px 0px rgba(255,255,255,0.9)',
-            },
-            backgroundImage: {
-              'paper-pattern': "radial-gradient(#e5e7eb 1px, transparent 1px)",
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://zenth.space/" />
+  <meta property="og:title" content="Zenth - Transforma tu Caos en Calma" />
+  <meta property="og:description"
+    content="Descubre el Bullet Journal Digital que te ayuda a organizar tu vida, mejorar tu productividad y encontrar tu paz mental." />
+  <meta property="og:image" content="https://zenth.space/blog/appview.png" />
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content="https://zenth.space/" />
+  <meta property="twitter:title" content="Zenth - Transforma tu Caos en Calma" />
+  <meta property="twitter:description"
+    content="Descubre el Bullet Journal Digital que te ayuda a organizar tu vida, mejorar tu productividad y encontrar tu paz mental." />
+  <meta property="twitter:image" content="https://zenth.space/blog/appview.png" />
+
+  <link rel="icon" type="image/png" href="/blog/favicon2.png" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300&family=Patrick+Hand&family=Indie+Flower&family=Permanent+Marker&display=swap"
+    rel="stylesheet">
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Patrick Hand"', 'cursive'], // Fuente principal estilo marcador fino
+            serif: ['"Indie Flower"', 'cursive'], // Fuente secundaria estilo bolígrafo
+            marker: ['"Permanent Marker"', 'cursive'], // Para títulos gruesos
+            body: ['"Patrick Hand"', 'sans-serif'],
+          },
+          colors: {
+            zenth: {
+              bg: '#fffdf5', // Warm paper color
+              darkBg: '#0f172a', // Slate 900
+              100: '#f0f4c3', // Highlighter Lime
+              200: '#b2dfdb', // Highlighter Blueish
+              300: '#ffccbc', // Highlighter Orangeish
+              400: '#ff8a80', // Marker Red
+              500: '#263238', // Ink Blue/Black
+              paper: '#ffffff',
+              markerYellow: '#ffff8d',
+              markerPink: '#ff80ab',
+              markerBlue: '#80d8ff',
             }
+          },
+          boxShadow: {
+            'sketch': '2px 2px 0px 0px rgba(0,0,0,1)',
+            'sketch-white': '2px 2px 0px 0px rgba(255,255,255,0.9)',
+            'sketch-lg': '5px 5px 0px 0px rgba(0,0,0,1)',
+            'sketch-lg-white': '5px 5px 0px 0px rgba(255,255,255,0.9)',
+            'sketch-xl': '8px 8px 0px 0px rgba(0,0,0,1)',
+            'sketch-xl-white': '8px 8px 0px 0px rgba(255,255,255,0.9)',
+          },
+          backgroundImage: {
+            'paper-pattern': "radial-gradient(#e5e7eb 1px, transparent 1px)",
+          },
+          keyframes: {
+            float: {
+              '0%, 100%': { transform: 'translateY(0)' },
+              '50%': { transform: 'translateY(-20px)' },
+            }
+          },
+          animation: {
+            float: 'float 6s ease-in-out infinite',
           }
         }
       }
-    </script>
-    <style>
-      body {
-        scroll-behavior: smooth;
-        background-color: #fffdf5;
-        background-image: radial-gradient(#d1d5db 1px, transparent 1px); /* Dot grid pattern */
-        background-size: 24px 24px;
-        color: #1a202c;
-        transition: background-color 0.3s ease, color 0.3s ease;
-      }
-      
-      .dark body {
-        background-color: #0f172a;
-        background-image: radial-gradient(#334155 1px, transparent 1px);
-        color: #f1f5f9;
-      }
-      
-      /* Efecto de subrayado de marcador */
-      .highlight-marker {
-        background: linear-gradient(120deg, rgba(255, 255, 141, 0) 0%, rgba(255, 255, 141, 1) 100%);
-        background-repeat: no-repeat;
-        background-size: 100% 40%;
-        background-position: 0 88%;
-      }
-      
-      .highlight-pink {
-        background: linear-gradient(120deg, rgba(255, 128, 171, 0) 0%, rgba(255, 128, 171, 0.6) 100%);
-        background-repeat: no-repeat;
-        background-size: 100% 35%;
-        background-position: 0 90%;
-      }
+    }
+  </script>
+  <style>
+    body {
+      scroll-behavior: smooth;
+      background-color: #fffdf5;
+      background-image: radial-gradient(#d1d5db 1px, transparent 1px);
+      /* Dot grid pattern */
+      background-size: 24px 24px;
+      color: #1a202c;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
 
-      /* Bordes irregulares para simular dibujo a mano */
-      .border-drawn {
-        border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;
-      }
-    </style>
+    .dark body {
+      background-color: #0f172a;
+      background-image: radial-gradient(#334155 1px, transparent 1px);
+      color: #f1f5f9;
+    }
+
+    /* Efecto de subrayado de marcador */
+    .highlight-marker {
+      background: linear-gradient(120deg, rgba(255, 255, 141, 0) 0%, rgba(255, 255, 141, 1) 100%);
+      background-repeat: no-repeat;
+      background-size: 100% 40%;
+      background-position: 0 88%;
+    }
+
+    .highlight-pink {
+      background: linear-gradient(120deg, rgba(255, 128, 171, 0) 0%, rgba(255, 128, 171, 0.6) 100%);
+      background-repeat: no-repeat;
+      background-size: 100% 35%;
+      background-position: 0 90%;
+    }
+
+    /* Bordes irregulares para simular dibujo a mano */
+    .border-drawn {
+      border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;
+    }
+  </style>
   <script type="importmap">
 {
   "imports": {
@@ -110,10 +125,13 @@
   }
 }
 </script>
-<link rel="stylesheet" href="/index.css">
+  <link rel="stylesheet" href="/index.css">
 </head>
-  <body class="bg-zenth-bg dark:bg-zenth-darkBg text-slate-900 dark:text-slate-100 antialiased selection:bg-zenth-markerYellow selection:text-black">
-    <div id="root"></div>
+
+<body
+  class="bg-zenth-bg dark:bg-zenth-darkBg text-slate-900 dark:text-slate-100 antialiased selection:bg-zenth-markerYellow selection:text-black">
+  <div id="root"></div>
   <script type="module" src="/index.tsx"></script>
 </body>
+
 </html>

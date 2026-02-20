@@ -1,17 +1,7 @@
-import React, { useState } from 'react';
-import { ArrowRight, Sparkles, Pencil, Rocket, Check, PlayCircle, Flame } from 'lucide-react';
+import React from 'react';
+import { ArrowRight, Rocket, Check } from 'lucide-react';
 
 const Hero: React.FC = () => {
-  const [demoChecked, setDemoChecked] = useState(false);
-
-  const handleDemoClick = () => {
-    if (!demoChecked) {
-      // Simular sonido o satisfacción visual
-      setDemoChecked(true);
-      setTimeout(() => setDemoChecked(false), 3000); // Reset para jugar de nuevo
-    }
-  };
-
   const goToApp = () => {
     // CAMBIAR ESTO: La URL real de tu aplicación donde los usuarios se registran
     const APP_URL = 'https://www.zenth.space/#/auth';
@@ -83,56 +73,21 @@ const Hero: React.FC = () => {
             </div>
           </div>
 
-          {/* Interactive Demo - Sticky Note Style */}
+          {/* Main App Showcase Image Section (Simplified) */}
           <div className="flex-1 relative w-full flex justify-center lg:justify-end mt-10 lg:mt-0">
-            <div className="relative w-full max-w-[400px] cursor-pointer group" onClick={handleDemoClick}>
+            <div className="relative w-full max-w-[600px] animate-float">
 
-              {/* Post-it Background */}
-              <div className="bg-[#fff9c4] dark:bg-[#fdd835] w-full aspect-square shadow-sketch-xl dark:shadow-sketch-xl-white transform rotate-2 transition-transform group-hover:rotate-0 relative z-10 p-8 flex flex-col justify-between">
+              {/* The App Screenshot */}
+              <img
+                src="/blog/mainpage.png"
+                alt="Zenth App Showcase"
+                className="w-full h-auto drop-shadow-[0_20px_50px_rgba(0,0,0,0.2)] dark:drop-shadow-[0_20px_50px_rgba(255,255,255,0.05)] rounded-lg"
+              />
 
-                {/* Tape */}
-                <div className="absolute -top-4 left-1/2 w-32 h-10 bg-zenth-200/80 transform -translate-x-1/2 -rotate-2 shadow-sm"></div>
-
-                <div>
-                  <div className="flex justify-between items-start mb-6">
-                    <h3 className="font-marker text-3xl text-slate-800 opacity-90">Mi Meta de Hoy:</h3>
-                    <div className="bg-white/50 px-2 py-1 rounded font-mono text-xs text-slate-800 font-bold transform rotate-3 flex items-center gap-1">
-                      <Flame className="w-3 h-3 text-orange-500 fill-current" /> Racha: 12
-                    </div>
-                  </div>
-
-                  {/* Interactive Task */}
-                  <div className="flex items-center space-x-4 mb-4 group/item">
-                    <div className={`w-8 h-8 border-2 border-slate-800 rounded flex items-center justify-center transition-colors ${demoChecked ? 'bg-zenth-400 border-zenth-400' : 'bg-white'}`}>
-                      {demoChecked && <Check className="w-6 h-6 text-white" />}
-                    </div>
-                    <span className={`font-hand text-2xl font-bold text-slate-800 transition-all ${demoChecked ? 'line-through opacity-50 decoration-2 decoration-slate-800' : ''}`}>
-                      Lanzar mi proyecto personal
-                    </span>
-                  </div>
-
-                  <div className="flex items-center space-x-4 opacity-50">
-                    <div className="w-8 h-8 border-2 border-slate-800 rounded bg-white"></div>
-                    <span className="font-hand text-2xl font-bold text-slate-800">
-                      Sesión de Enfoque (45 min)
-                    </span>
-                  </div>
-                </div>
-
-                <div className="mt-4 border-t-2 border-dashed border-slate-800/20 pt-4 flex justify-between items-end">
-                  <div className="text-slate-700 font-hand text-lg">
-                    Energía: <span className="text-purple-600 font-bold">Mañana ☀️</span>
-                  </div>
-                  {demoChecked && (
-                    <div className="animate-bounce font-marker text-zenth-400 text-2xl transform -rotate-12">
-                      +50 XP
-                    </div>
-                  )}
-                </div>
+              {/* Decorative Element */}
+              <div className="absolute -top-6 -right-6 bg-zenth-markerBlue text-black px-4 py-2 rounded-lg shadow-sketch font-hand text-lg transform rotate-6 hidden lg:block">
+                ¡Tu nuevo ritual! ✨
               </div>
-
-              {/* Background elements */}
-              <div className="absolute top-10 -right-4 w-full h-full bg-white dark:bg-slate-700 border-2 border-black dark:border-white rounded-lg -z-10 transform rotate-6"></div>
             </div>
           </div>
 
