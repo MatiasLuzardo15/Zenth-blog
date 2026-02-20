@@ -69,7 +69,7 @@ const Hero: React.FC = () => {
               <img
                 src="/blog/mainpage.png"
                 alt="Zenth App Showcase"
-                className="w-full h-auto drop-shadow-[0_20px_50px_rgba(0,0,0,0.2)] dark:drop-shadow-[0_20px_50px_rgba(255,255,255,0.05)] rounded-lg"
+                className="w-full h-auto drop-shadow-xl lg:drop-shadow-[0_20px_50px_rgba(0,0,0,0.2)] dark:drop-shadow-lg lg:dark:drop-shadow-[0_20px_50px_rgba(255,255,255,0.05)]"
               />
 
               {/* Decorative Element */}
