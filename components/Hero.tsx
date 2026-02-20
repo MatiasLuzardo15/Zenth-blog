@@ -75,7 +75,7 @@ const Hero: React.FC = () => {
 
           {/* Main App Showcase Image Section (Simplified) */}
           <div className="flex-1 relative w-full flex justify-center lg:justify-end mt-10 lg:mt-0">
-            <div className="relative w-full max-w-[600px] animate-float">
+            <div className="relative w-full max-w-[600px] lg:max-w-[800px] animate-float">
 
               {/* The App Screenshot */}
               <img
