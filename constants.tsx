@@ -552,6 +552,52 @@ Con el tiempo, la "fuerza de voluntad" deja de ser necesaria porque el comportam
     imageUrl: 'https://images.unsplash.com/photo-1559757175-5700dde675bc?auto=format&fit=crop&q=80&w=800',
     category: 'Neurociencia',
     readTime: '7 min lectura'
+  },
+  {
+    id: '13',
+    title: 'Zen: Cómo la IA de Google está Redefiniendo tu Productividad en Zenth',
+    excerpt: '¿Te imaginas tener un coach de productividad personal disponible 24/7? Conoce a Zen, el asistente inteligente que hace el trabajo pesado por ti.',
+    content: `
+La aplicación Zenth integra un asistente inteligente llamado **"Zen"**, que utiliza la IA de Google (Gemini) a través de funciones en la nube (Supabase Edge Functions) para llevar tu organización al siguiente nivel.
+
+No se trata solo de añadir tareas; se trata de delegar la carga cognitiva de la planificación a un sistema inteligente.
+
+## Funciones principales de Inteligencia Artificial ("Zen")
+
+### 1. Entrada Mágica (Magic Input) ✨
+En lugar de rellenar cada campo a mano, puedes usar el botón **"Pedir a Zen ✨"** dentro del editor de tareas.
+
+**Ejemplo:** Puedes escribir algo como: *"Cena con Ana el viernes a las 9pm con prioridad alta"*
+La IA extraerá automáticamente: el título, la fecha correcta, la hora y el nivel de prioridad, configurando la tarea por ti en un solo paso.
+
+### 2. Auto-Agendado (Smart Schedule) 📅
+Si tienes una tarea pero no sabes cuándo hacerla, Zen puede ayudarte. 
+
+Al escribir el título de una tarea, verás un chip llamado **"Auto-Agendar"**. La IA analiza el texto de la tarea (por ejemplo, si dice "mañana" o "lunes") y la fecha actual para sugerirte el mejor día y hora para realizarla de forma lógica, optimizando tu carga de trabajo diaria.
+
+### 3. Sugerencia de Micro-pasos (Task Breakdown) 📝
+Para evitar que las tareas grandes te abrumen, Zen actúa como un coach de productividad. 
+
+Al usar la opción **"Sugerir Pasos"**, la IA desglosa tu tarea principal en 3 a 5 micro-pasos inmediatos y concretos. Estos pasos se añaden como una lista de control (sub-tareas) para que sepas exactamente por dónde empezar con verbos de acción.
+
+### 4. Categorización Inteligente 🤖
+Aunque es una lógica más híbrida, el sistema sincroniza automáticamente el momento del día (**Mañana, Tarde, Noche**) según la hora de inicio que elijas o que la IA te sugiera, ayudándote a visualizar tu carga de trabajo de forma balanceada sin intervención manual.
+
+---
+
+## ¿Cómo activar estas funciones?
+
+Para usar estas funciones, solo tienes que abrir el **Editor de Tareas** (el botón +) y buscar los iconos de destellos o el botón de **"Pedir a Zen"**.
+
+Zen está aquí para que dejes de preocuparte por *cómo* organizar y empieces a enfocarte en *hacer* lo que importa.
+
+**[Prueba a Zen ahora en Zenth](https://www.zenth.space/#/auth) y experimenta la productividad aumentada. ✨**
+`,
+    author: 'Matías Zenth',
+    date: '19 Feb, 2026',
+    imageUrl: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=800',
+    category: 'IA',
+    readTime: '5 min lectura'
   }
 ];
 
@@ -578,6 +624,12 @@ export const FEATURES: Feature[] = [
     id: 'f4',
     title: 'Foco Inmediato',
     description: 'Sin configuraciones eternas. Entra en Zenth, pon el timer de 25min y entra en la zona.',
+    icon: <Zap className="w-6 h-6 text-zenth-600" />
+  },
+  {
+    id: 'f5',
+    title: 'Zen AI Assistant',
+    description: 'Usa Magic Input y Auto-Agendado inteligente con Google Gemini.',
     icon: <Zap className="w-6 h-6 text-zenth-600" />
   }
 ];
