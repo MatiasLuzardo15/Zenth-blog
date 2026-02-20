@@ -1,22 +1,17 @@
 import React, { useEffect, useState } from 'react';
+import { Routes, Route, useNavigate, useLocation, Navigate, useParams } from 'react-router-dom';
 import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import Features from './components/Features';
-import InstallGuide from './components/InstallGuide';
-import Testimonials from './components/Testimonials';
-import BlogList from './components/BlogList'; // Mantenemos el componente para la Home (teaser)
-import BlogPage from './components/BlogPage'; // Nueva página completa
+import Home from './pages/Home';
+import BlogPage from './components/BlogPage';
 import BlogPostDetail from './components/BlogPostDetail';
-import Support from './components/Support';
-import Footer from './components/Footer';
 import PrivacyPolicy from './components/PrivacyPolicy';
+import Footer from './components/Footer';
 import { BLOG_POSTS } from './constants';
 
 function App() {
-  // Main App Component
   const [isDarkMode, setIsDarkMode] = useState(false);
-  const [currentView, setCurrentView] = useState<'home' | 'blog' | 'privacy'>('home');
-  const [selectedPost, setSelectedPost] = useState<string | null>(null);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     // Check local storage or system preference
@@ -27,21 +22,6 @@ function App() {
     } else {
       setIsDarkMode(false);
       document.documentElement.classList.remove('dark');
-    }
-
-    // Check query params on load
-    const params = new URLSearchParams(window.location.search);
-    const postId = params.get('post');
-    if (postId) {
-      // Verify if post exists to avoid showing undefined
-      const postExists = BLOG_POSTS.some(p => p.id === postId);
-      if (postExists) {
-        setSelectedPost(postId);
-        setCurrentView('blog');
-      } else {
-        // Clean URL if invalid
-        window.history.replaceState({}, '', window.location.pathname);
-      }
     }
   }, []);
 
@@ -57,59 +37,43 @@ function App() {
     }
   };
 
-  // Manejador centralizado de navegación y scroll
+  // Centralized navigation handler
   const handleNavigate = (page: 'home' | 'blog' | 'privacy', targetId?: string) => {
-    // Actualizar URL
-    if (page === 'blog' && targetId) {
-      const newUrl = `${window.location.pathname}?post=${targetId}`;
-      window.history.pushState({}, '', newUrl);
-    } else {
-      window.history.pushState({}, '', window.location.pathname);
-    }
-
-    // Si vamos al blog con un ID específico, lo seleccionamos
-    if (page === 'blog' && targetId) {
-      setSelectedPost(targetId);
-      setCurrentView('blog');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-      return;
-    }
-
-    // Manejo de navegación estándar
-    if (page !== currentView) {
-      if (page === 'home') setSelectedPost(null); // Solo reset si vamos a home
-      setCurrentView(page);
-
-      // Si vamos a home con un sectionId (targetId), esperamos a que renderice para scrollear
-      if (page === 'home' && targetId) {
+    if (page === 'home') {
+      if (location.pathname !== '/') {
+        navigate('/');
+        // Wait for navigation then scroll
         setTimeout(() => {
+          if (targetId) {
+            const element = document.getElementById(targetId);
+            if (element) element.scrollIntoView({ behavior: 'smooth' });
+          } else {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }
+        }, 100);
+      } else {
+        // Already on home, just scroll
+        if (targetId) {
           const element = document.getElementById(targetId);
           if (element) {
             element.scrollIntoView({ behavior: 'smooth' });
           } else if (targetId === 'hero') {
             window.scrollTo({ top: 0, behavior: 'smooth' });
           }
-        }, 100);
-      } else {
-        // Scroll al top
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      }
-    } else {
-      // Si ya estamos en la página
-      if (page === 'home' && targetId) {
-        const element = document.getElementById(targetId);
-        if (element) {
-          element.scrollIntoView({ behavior: 'smooth' });
-        } else if (targetId === 'hero') {
+        } else {
           window.scrollTo({ top: 0, behavior: 'smooth' });
         }
-      } else if (page === 'blog' && !targetId) {
-        // Si estamos en blog y navegamos a "blog" sin ID, volver al listado
-        setSelectedPost(null);
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      } else {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
       }
+    } else if (page === 'blog') {
+      if (targetId) {
+        navigate(`/blog/${targetId}`);
+      } else {
+        navigate('/blog');
+      }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else if (page === 'privacy') {
+      navigate('/privacy');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
 
@@ -118,53 +82,50 @@ function App() {
       <Navbar
         isDarkMode={isDarkMode}
         toggleTheme={toggleTheme}
-        currentPage={currentView === 'privacy' ? 'home' : currentView} // Navbar highlights home when in privacy if needed, or we can adjust
+        currentPage={location.pathname.startsWith('/blog') ? 'blog' : 'home'}
         onNavigate={(page, id) => handleNavigate(page as any, id)}
       />
 
       <main>
-        {currentView === 'home' ? (
-          <>
-            <div id="hero"><Hero /></div>
-            <Features onNavigate={handleNavigate} />
-            <Testimonials />
-            <InstallGuide />
-            {/* Usamos BlogList como teaser en la Home */}
-            <div className="relative pb-24">
-              <BlogList onSelectPost={(id) => handleNavigate('blog', id)} limit={3} />
-              <div className="absolute bottom-20 left-0 w-full flex justify-center z-10">
-                <button
-                  onClick={() => handleNavigate('blog')}
-                  className="px-10 py-4 bg-zenth-markerBlue text-black font-marker text-2xl border-2 border-black rounded-xl shadow-sketch-lg hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all transform -rotate-1"
-                >
-                  Ver Blog Completo ➔
-                </button>
-              </div>
-              {/* Fade out effect para el teaser */}
-              <div className="absolute bottom-0 left-0 w-full h-40 bg-gradient-to-t from-zenth-bg dark:from-zenth-darkBg to-transparent pointer-events-none"></div>
-            </div>
-            <Support />
-          </>
-        ) : currentView === 'blog' ? (
-          selectedPost ? (
-            <BlogPostDetail
-              post={BLOG_POSTS.find(p => p.id === selectedPost) || BLOG_POSTS[0]}
-              onBack={() => handleNavigate('blog')}
-            />
-          ) : (
-            <BlogPage
-              onBack={() => handleNavigate('home')}
-              onSelectPost={(id) => handleNavigate('blog', id)}
-            />
-          )
-        ) : (
-          <PrivacyPolicy onBack={() => handleNavigate('home')} />
-        )}
+        <Routes>
+          <Route path="/" element={<Home onNavigate={handleNavigate} />} />
+          <Route
+            path="/blog"
+            element={
+              <BlogPage
+                onBack={() => handleNavigate('home')}
+                onSelectPost={(id) => handleNavigate('blog', id)}
+              />
+            }
+          />
+          <Route path="/blog/:id" element={<BlogPostDetailWithParams />} />
+          <Route path="/privacy" element={<PrivacyPolicy onBack={() => handleNavigate('home')} />} />
+          {/* Fallback route */}
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
       </main>
 
       <Footer onNavigate={handleNavigate} />
     </div>
   );
 }
+
+// Helper component to extract params and find post
+const BlogPostDetailWithParams = () => {
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const post = BLOG_POSTS.find(p => p.id === id);
+
+  if (!post) {
+    return <Navigate to="/blog" replace />;
+  }
+
+  return (
+    <BlogPostDetail
+      post={post}
+      onBack={() => navigate('/blog')}
+    />
+  );
+};
 
 export default App;
