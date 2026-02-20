@@ -11,13 +11,7 @@ const Hero: React.FC = () => {
   return (
     <section className="relative pt-32 pb-16 lg:pt-48 lg:pb-32 overflow-hidden">
 
-      {/* Doodles de fondo */}
-      <div className="absolute top-20 left-10 opacity-20 transform -rotate-12 pointer-events-none">
-        <svg width="100" height="100" viewBox="0 0 100 100" fill="none" stroke="currentColor" className="text-black dark:text-white">
-          <path d="M10 10 C 20 20, 40 20, 50 10" strokeWidth="3" strokeLinecap="round" />
-          <path d="M60 60 C 70 80, 90 80, 90 60" strokeWidth="3" strokeLinecap="round" />
-        </svg>
-      </div>
+
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
@@ -51,13 +45,7 @@ const Hero: React.FC = () => {
                 <ArrowRight className="ml-2 w-6 h-6 group-hover:translate-x-1 transition-transform" />
               </button>
 
-              {/* Sketch arrow pointing to button */}
-              <div className="absolute -right-24 top-4 hidden lg:block transform rotate-12 opacity-60">
-                <span className="font-hand text-lg block mb-1 transform -rotate-12">¡Es gratis!</span>
-                <svg width="60" height="40" viewBox="0 0 60 40" fill="none" stroke="currentColor" className="text-black dark:text-white">
-                  <path d="M50 0 Q 10 20 0 30" strokeWidth="2" markerEnd="url(#arrowhead)" />
-                </svg>
-              </div>
+
             </div>
 
             <div className="flex flex-col sm:flex-row justify-center lg:justify-start gap-6 items-center">
@@ -75,7 +63,7 @@ const Hero: React.FC = () => {
 
           {/* Main App Showcase Image Section (Simplified) */}
           <div className="flex-1 lg:flex-[1.5] relative w-full flex justify-center lg:justify-end mt-10 lg:mt-0 lg:scale-110 xl:scale-125 origin-right transition-transform duration-1000">
-            <div className="relative w-full max-w-[600px] lg:max-w-none animate-float">
+            <div className="relative w-full max-w-[600px] lg:max-w-none">
 
               {/* The App Screenshot */}
               <img

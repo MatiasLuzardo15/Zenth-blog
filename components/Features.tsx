@@ -126,14 +126,7 @@ const Features: React.FC<FeaturesProps> = ({ onNavigate }) => {
           <h2 className="text-xl font-bold text-black dark:text-white tracking-widest uppercase mb-2 font-marker">Filosofía Zenth</h2>
           <p className="text-4xl sm:text-5xl lg:text-6xl font-serif font-bold text-black dark:text-white leading-tight transform -rotate-1 relative inline-block">
             Productividad para humanos.
-            {/* Sparkle doodles */}
-            <svg className="absolute -top-8 -right-8 w-12 h-12 text-zenth-markerYellow hidden sm:block" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-              <path d="M12 2l2 7 7 2-7 2-2 7-2-7-7-2 7-2z" strokeWidth="2" strokeLinecap="round" />
-            </svg>
-            <svg className="absolute -bottom-4 -left-12 w-10 h-10 text-zenth-markerBlue hidden sm:block -rotate-12" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-              <path d="M3 12c0-5 9-9 9-9s9 4 9 9-9 9-9 9-9-4-9-9z" strokeWidth="1.5" strokeLinecap="round" />
-              <path d="M12 3v18M3 12h18" strokeWidth="1" strokeLinecap="round" opacity="0.3" />
-            </svg>
+
           </p>
           <p className="mt-4 text-slate-500 font-hand text-xl animate-pulse">
             (Toca una tarjeta para descubrir el secreto)

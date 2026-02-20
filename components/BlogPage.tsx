@@ -27,7 +27,6 @@ const BlogPage: React.FC<BlogPageProps> = ({ onBack, onSelectPost }) => {
         </button>
 
         <div className="text-center md:text-left relative">
-          <div className="absolute -top-10 left-0 text-6xl animate-pulse opacity-20 hidden md:block">✏️</div>
           <h1 className="text-5xl md:text-7xl font-serif font-black text-slate-900 dark:text-white mb-4">
             El Blog de <span className="underline decoration-wavy decoration-zenth-markerBlue">Zenth</span>
           </h1>
@@ -89,7 +88,7 @@ const BlogPage: React.FC<BlogPageProps> = ({ onBack, onSelectPost }) => {
         </div>
 
       </div>
-    </div>
+    </div >
   );
 };
 
