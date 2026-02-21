@@ -52,7 +52,7 @@ Olvídate de las interfaces frías y corporativas. Zenth utiliza un estilo "Sket
 
 ¿Estás listo para dejar de sobrevivir a tu lista de tareas y empezar a dominar tu día con calma?
 
-**[Inicia sesión en Zenth ahora](https://www.zenth.space/#/auth) y vive la productividad consciente. ✨**
+**[Inicia sesión en Zenth ahora](/app) y vive la productividad consciente. ✨**
 `,
     author: 'Matías Zenth',
     date: 'Hoy',
@@ -115,7 +115,7 @@ Aquí tienes los rangos que puedes alcanzar. ¿En cuál te encuentras tú hoy?
 
 El sistema de niveles de Zenth no busca que compitas con otros, sino que superes a tu versión de ayer. Cada ascenso es una prueba de que eres dueño de tu tiempo.
 
-**¿Listo para el próximo nivel? [Inicia sesión en Zenth](https://www.zenth.space/#/auth) y empieza tu sesión hoy mismo. ✨**
+**¿Listo para el próximo nivel? [Inicia sesión en Zenth](/app) y empieza tu sesión hoy mismo. ✨**
 `,
     author: 'Matías Zenth',
     date: '15 Feb, 2026',
@@ -175,7 +175,7 @@ Tus estados de ánimo se guardan de forma segura en tu cuenta. Esto significa qu
 
 El calendario de estados de ánimo es tu espejo emocional en Zenth. Es una invitación a la pausa, a la reflexión y, sobre todo, a entender que para ser productivos, primero debemos estar bien con nosotros mismos.
 
-**¿Ya elegiste tu color de hoy? [Inicia sesión en Zenth](https://www.zenth.space/#/auth) y deja tu marca. ✨**
+**¿Ya elegiste tu color de hoy? [Inicia sesión en Zenth](/app) y deja tu marca. ✨**
 `,
     author: 'Matías Zenth',
     date: '10 Feb, 2026',
@@ -225,7 +225,7 @@ Para que Zenth sea tu aliado y no tu juez, te recomendamos seguir estas tres pr�
 
 El éxito no es terminar cien tareas en un estado de agotamiento absoluto. El éxito es terminar el día con tus metas cumplidas y tu paz mental intacta. Zenth está diseñado para recordarte que **tú eres lo más importante de tu sistema de productividad.**
 
-**No esperes a estar agotado para empezar a escucharte. [Entra en Zenth](https://www.zenth.space/#/auth), marca tu estado de ánimo y trabajemos juntos, respetando tu ritmo. ✨**
+**No esperes a estar agotado para empezar a escucharte. [Entra en Zenth](/app), marca tu estado de ánimo y trabajemos juntos, respetando tu ritmo. ✨**
 `,
     author: 'Matías Zenth',
     date: '17 Feb, 2026',
@@ -286,7 +286,7 @@ Muchos de los niveles superiores en Zenth (como "Oráculo del Tiempo" o "Univers
 
 Zenth no se trata de hacer más cosas en menos tiempo; se trata de hacer las cosas correctas con toda tu atención. Al priorizar tus **Grandes Metas** y protegerlas con el **Modo Enfoque**, estás entrenando a tu cerebro para alcanzar niveles de excelencia que la mayoría de la gente nunca llega a tocar.
 
-**¿Cuál es tu Gran Meta de hoy? [Inicia sesión en Zenth](https://www.zenth.space/#/auth) y empieza tu sesión de enfoque. ✨**
+**¿Cuál es tu Gran Meta de hoy? [Inicia sesión en Zenth](/app) y empieza tu sesión de enfoque. ✨**
 `,
     author: 'Matías Zenth',
     date: '17 Feb, 2026',
@@ -322,7 +322,7 @@ Al abrir la app, Zenth no te muestra todo tu backlog de 100 tareas. Te muestra "
 ### 3. Rutinas Automatizadas
 Las tareas recurrentes en Zenth funcionan como el cuello de tortuga de Jobs: una decisión tomada una vez que se repite automáticamente. "Pagar facturas" aparece solo cuando debe aparecer, sin que tengas que recordarlo.
 
-**[Simplifica tu vida con Zenth.](https://www.zenth.space/#/auth)**
+**[Simplifica tu vida con Zenth.](/app)**
 `,
     author: 'Roy F. Baumeister (Ref.)',
     date: '17 Feb, 2026',
@@ -372,7 +372,7 @@ Tener 50 tareas pendientes en una lista larga genera **parálisis por análisis*
 
 Tu cerebro no está roto; simplemente tiene un sistema operativo diferente. Las herramientas de productividad estándar están diseñadas para cerebros lineales. Zenth es la interfaz compatible que estabas esperando: una que entiende tu necesidad de novedad, desafío y feedback inmediato.
 
-**Deja de luchar contra tu propia mente. [Inicia sesión en Zenth](https://www.zenth.space/#/auth) y dale a tu cerebro las herramientas que necesita para brillar. ✨**
+**Deja de luchar contra tu propia mente. [Inicia sesión en Zenth](/app) y dale a tu cerebro las herramientas que necesita para brillar. ✨**
 `,
     author: 'Matías Zenth',
     date: '18 Feb, 2026',
@@ -417,7 +417,7 @@ La productividad sostenible no nace de forzar la máquina, sino de respetar su b
 **Dra. Elena Vital**
 *Neuropsicóloga Clínica y Especialista en Alto Rendimiento*
 
-**[Prueba Zenth y dale un respiro a tus neuronas.](https://www.zenth.space/#/auth)**
+**[Prueba Zenth y dale un respiro a tus neuronas.](/app)**
 `,
     author: 'Matías Zenth',
     date: '20 Feb, 2026',
@@ -451,7 +451,7 @@ El uso de colores pastel en el "Mood Tracker" es intencional. La psicología del
 
 El diseño no es solo cómo se ve, es cómo funciona. Zenth está diseñado para ser "invisible": lo suficientemente bonito para motivar, pero lo suficientemente simple para no distraer.
 
-**[Experimenta el diseño calmado de Zenth.](https://www.zenth.space/#/auth)**
+**[Experimenta el diseño calmado de Zenth.](/app)**
 `,
     author: 'Daniel Levitin (Ref.)',
     date: '21 Feb, 2026',
@@ -485,7 +485,7 @@ Registrar tus datos te permite correlacionar: "Mis días más productivos suelen
 ### 3. Cierre Cognitivo
 Hacer el registro al final del día actúa como un ritual de cierre, ayudando a tu cerebro a desconectar del modo trabajo y pasar al modo descanso.
 
-**[Empieza tu diario emocional en Zenth hoy.](https://www.zenth.space/#/auth)**
+**[Empieza tu diario emocional en Zenth hoy.](/app)**
 `,
     author: 'Dr. Dan Siegel (Ref.)',
     date: '22 Feb, 2026',
@@ -515,7 +515,7 @@ Para entrar en flujo, necesitas de 15 a 20 minutos de concentración ininterrump
 ### 3. Feedback Inmediato
 El cerebro necesita saber que está progresando. Las barras de XP y el sonido al completar tareas en Zenth proporcionan ese feedback instantáneo necesario para mantener el ciclo de dopamina activo.
 
-**[Entra en la zona con Zenth.](https://www.zenth.space/#/auth)**
+**[Entra en la zona con Zenth.](/app)**
 `,
     author: 'Mihaly Csikszentmihalyi (Ref.)',
     date: '23 Feb, 2026',
@@ -545,7 +545,7 @@ Aquí es donde brilla Zenth. Ganar **XP**, ver subir tu nivel y mantener tu rach
 
 Con el tiempo, la "fuerza de voluntad" deja de ser necesaria porque el comportamiento se ha automatizado en los ganglios basales del cerebro.
 
-**[Empieza a recablear tu cerebro hoy.](https://www.zenth.space/#/auth)**
+**[Empieza a recablear tu cerebro hoy.](/app)**
 `,
     author: 'Charles Duhigg (Ref.)',
     date: '24 Feb, 2026',
@@ -591,7 +591,7 @@ Para usar estas funciones, solo tienes que abrir el **Editor de Tareas** (el bot
 
 Zen está aquí para que dejes de preocuparte por *cómo* organizar y empieces a enfocarte en *hacer* lo que importa.
 
-**[Prueba a Zen ahora en Zenth](https://www.zenth.space/#/auth) y experimenta la productividad aumentada. ✨**
+**[Prueba a Zen ahora en Zenth](/app) y experimenta la productividad aumentada. ✨**
 `,
     author: 'Matías Zenth',
     date: '19 Feb, 2026',

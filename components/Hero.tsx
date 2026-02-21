@@ -3,9 +3,8 @@ import { ArrowRight, Rocket, Check } from 'lucide-react';
 
 const Hero: React.FC = () => {
   const goToApp = () => {
-    // CAMBIAR ESTO: La URL real de tu aplicación donde los usuarios se registran
-    const APP_URL = 'https://www.zenth.space/#/auth';
-    window.location.href = APP_URL;
+    // Apunta a la subruta donde vivirá la aplicación
+    window.location.href = '/app';
   };
 
   return (

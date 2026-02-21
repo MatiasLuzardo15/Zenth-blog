@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /app/login
+Disallow: /app/settings
+
+Sitemap: https://zenth.space/sitemap.xml

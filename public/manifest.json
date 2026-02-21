@@ -1,0 +1,22 @@
+{
+    "name": "Zenth - Bullet Journal Digital",
+    "short_name": "Zenth",
+    "description": "Transforma tu caos en calma con el Bullet Journal que entiende tu energía.",
+    "start_url": "/app",
+    "scope": "/",
+    "display": "standalone",
+    "background_color": "#fffdf5",
+    "theme_color": "#0f172a",
+    "icons": [
+        {
+            "src": "/blog/favicon2.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "/blog/favicon2.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ]
+}

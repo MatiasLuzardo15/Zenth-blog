@@ -1,11 +1,11 @@
 {
     "rewrites": [
         {
-            "source": "/((?!api/|blog/|favicon|assets/|_next/|static/|.*\\..*).*)",
-            "destination": "/index.html"
+            "source": "/app/:path*",
+            "destination": "https://zenth-task-ku1h179lf-matias-luzardos-projects.vercel.app/app/:path*"
         },
         {
-            "source": "/(.*)",
+            "source": "/((?!api/|blog/|favicon|assets/|_next/|static/|.*\\..*).*)",
             "destination": "/index.html"
         }
     ]

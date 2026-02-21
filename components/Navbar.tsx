@@ -21,8 +21,8 @@ const Navbar: React.FC<NavbarProps> = ({ isDarkMode, toggleTheme, currentPage, o
   }, []);
 
   const goToLogin = () => {
-    const LOGIN_URL = 'https://www.zenth.space/#/auth';
-    window.location.href = LOGIN_URL;
+    // Apunta a la subruta donde vivirá la aplicación
+    window.location.href = '/app';
   };
 
   const handleNavClick = (e: React.MouseEvent, page: 'home' | 'blog', sectionId?: string) => {
