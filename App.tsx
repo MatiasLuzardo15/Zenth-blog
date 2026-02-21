@@ -48,8 +48,8 @@ function App() {
     let image = `${baseUrl}/blog/appview.png`;
 
     if (location.pathname === '/') {
-      title = 'Zenth: Construye tu Progreso Diario con Productividad Consciente';
-      description = 'Zenth es el gestor de tareas y hábitos que fluye con tu energía. Organiza tu día, gana XP y recupera tu paz mental con inteligencia artificial.';
+      title = 'Zenth: Planificación Visual, Gamificación y Productividad para TDAH';
+      description = 'Organiza tu vida con Zenth, el planificador visual que convierte tu productividad en un juego. Diseñado para TDAH y mentes creativas.';
     } else if (location.pathname === '/blog') {
       title = 'Blog: Productividad y Neurociencia | Zenth Space';
       description = 'Consejos sobre TDAH, gestión del tiempo y bienestar mental. Aprende a dominar tu día con planificación visual y calma.';
