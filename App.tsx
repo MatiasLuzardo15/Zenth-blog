@@ -38,6 +38,38 @@ function App() {
     }
   };
 
+  // Dynamic SEO management
+  useEffect(() => {
+    let title = 'Zenth: Planificación Visual y Productividad para Mentes Inquietas';
+    let description = 'Organiza tu vida con Zenth, el planificador visual que convierte tu productividad en un juego.';
+
+    if (location.pathname === '/') {
+      title = 'Zenth: Planificación Visual, Gamificación y Productividad para TDAH';
+      description = 'Organiza tu día, gestiona hábitos y recupera tu enfoque con Zenth. El planificador visual diseñado para mentes creativas y TDAH.';
+    } else if (location.pathname === '/blog') {
+      title = 'Blog: Productividad y Neurociencia | Zenth Space';
+      description = 'Consejos sobre TDAH, gestión del tiempo y bienestar mental. Aprende a dominar tu día con planificación visual y calma.';
+    } else if (location.pathname.startsWith('/blog/')) {
+      // Find post for specific title
+      const postId = location.pathname.split('/').pop();
+      const post = BLOG_POSTS.find(p => p.id === postId);
+      if (post) {
+        title = `${post.title} | Blog Zenth`;
+        description = post.excerpt;
+      }
+    } else if (location.pathname === '/privacy') {
+      title = 'Política de Privacidad | Zenth';
+      description = 'Cómo protegemos tus datos y tu privacidad en Zenth. Sin venta de datos, sin rastreadores invasivos.';
+    }
+
+    document.title = title;
+    // Update meta description
+    const metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc) {
+      metaDesc.setAttribute('content', description);
+    }
+  }, [location.pathname]);
+
   // Centralized navigation handler
   const handleNavigate = (page: 'home' | 'blog' | 'privacy', targetId?: string) => {
     if (page === 'home') {

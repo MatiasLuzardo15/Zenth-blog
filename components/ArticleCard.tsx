@@ -9,7 +9,7 @@ interface ArticleCardProps {
 
 const ArticleCard: React.FC<ArticleCardProps> = ({ post, onClick }) => {
   return (
-    <div
+    <article
       onClick={onClick}
       className="flex flex-col bg-white dark:bg-slate-900 p-4 pb-8 border-2 border-black dark:border-white shadow-sketch-lg dark:shadow-sketch-lg-white transform hover:-translate-y-2 hover:rotate-1 transition-all duration-300 relative cursor-pointer group"
     >
@@ -57,7 +57,7 @@ const ArticleCard: React.FC<ArticleCardProps> = ({ post, onClick }) => {
           </button>
         </div>
       </div>
-    </div>
+    </article>
   );
 };
 
