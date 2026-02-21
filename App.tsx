@@ -6,6 +6,7 @@ import BlogPage from './components/BlogPage';
 import BlogPostDetail from './components/BlogPostDetail';
 import PrivacyPolicy from './components/PrivacyPolicy';
 import Footer from './components/Footer';
+import { Helmet } from 'react-helmet-async';
 
 import { BLOG_POSTS } from './constants';
 
@@ -39,9 +40,12 @@ function App() {
   };
 
   // Dynamic SEO management
-  useEffect(() => {
+  const getSEO = () => {
+    const baseUrl = 'https://www.zenth.space';
     let title = 'Zenth: Planificación Visual y Productividad para Mentes Inquietas';
     let description = 'Organiza tu vida con Zenth, el planificador visual que convierte tu productividad en un juego.';
+    let url = `${baseUrl}${location.pathname}`;
+    let image = `${baseUrl}/blog/appview.png`;
 
     if (location.pathname === '/') {
       title = 'Zenth: Planificación Visual, Gamificación y Productividad para TDAH';
@@ -50,25 +54,24 @@ function App() {
       title = 'Blog: Productividad y Neurociencia | Zenth Space';
       description = 'Consejos sobre TDAH, gestión del tiempo y bienestar mental. Aprende a dominar tu día con planificación visual y calma.';
     } else if (location.pathname.startsWith('/blog/')) {
-      // Find post for specific title
       const postId = location.pathname.split('/').pop();
       const post = BLOG_POSTS.find(p => p.id === postId);
       if (post) {
         title = `${post.title} | Blog Zenth`;
         description = post.excerpt;
+        if (post.imageUrl) {
+          image = post.imageUrl.startsWith('http') ? post.imageUrl : `${baseUrl}${post.imageUrl}`;
+        }
       }
     } else if (location.pathname === '/privacy') {
       title = 'Política de Privacidad | Zenth';
       description = 'Cómo protegemos tus datos y tu privacidad en Zenth. Sin venta de datos, sin rastreadores invasivos.';
     }
 
-    document.title = title;
-    // Update meta description
-    const metaDesc = document.querySelector('meta[name="description"]');
-    if (metaDesc) {
-      metaDesc.setAttribute('content', description);
-    }
-  }, [location.pathname]);
+    return { title, description, url, image };
+  };
+
+  const seo = getSEO();
 
   // Centralized navigation handler
   const handleNavigate = (page: 'home' | 'blog' | 'privacy', targetId?: string) => {
@@ -112,6 +115,23 @@ function App() {
 
   return (
     <div className="min-h-screen font-sans selection:bg-zenth-200 selection:text-zenth-900 border-x-0 relative">
+      <Helmet>
+        <title>{seo.title}</title>
+        <meta name="description" content={seo.description} />
+        <link rel="canonical" href={seo.url} />
+
+        {/* Open Graph */}
+        <meta property="og:title" content={seo.title} />
+        <meta property="og:description" content={seo.description} />
+        <meta property="og:url" content={seo.url} />
+        <meta property="og:image" content={seo.image} />
+
+        {/* Twitter */}
+        <meta name="twitter:title" content={seo.title} />
+        <meta name="twitter:description" content={seo.description} />
+        <meta name="twitter:image" content={seo.image} />
+        <meta name="twitter:url" content={seo.url} />
+      </Helmet>
 
       <Navbar
         isDarkMode={isDarkMode}
