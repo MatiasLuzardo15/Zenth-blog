@@ -3,4 +3,4 @@ Allow: /
 Disallow: /app/login
 Disallow: /app/settings
 
-Sitemap: https://zenth.space/sitemap.xml
+Sitemap: https://www.zenth.space/sitemap.xml
