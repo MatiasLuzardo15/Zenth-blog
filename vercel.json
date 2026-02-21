@@ -2,7 +2,7 @@
     "rewrites": [
         {
             "source": "/app/:path*",
-            "destination": "https://zenth-task-5805fps3s-matias-luzardos-projects.vercel.app/app/:path*"
+            "destination": "https://zenth-task-5805fps3s-matias-luzardos-projects.vercel.app/:path*"
         },
         {
             "source": "/assets/:path*",
@@ -23,6 +23,10 @@
         {
             "source": "/firebase-messaging-sw.js",
             "destination": "https://zenth-task-5805fps3s-matias-luzardos-projects.vercel.app/firebase-messaging-sw.js"
+        },
+        {
+            "source": "/((?!api/|blog/|favicon|assets/|_next/|static/|.*\\..*).*)",
+            "destination": "/index.html"
         }
     ]
 }
