@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowRight, Rocket, Check } from 'lucide-react';
+import { ArrowRight, Brain, Trophy, Timer, Sparkles, Smile } from 'lucide-react';
 
 const Hero: React.FC = () => {
   const goToApp = () => {
@@ -16,22 +16,22 @@ const Hero: React.FC = () => {
         <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
 
           {/* Text Content */}
-          <div className="flex-1 text-center lg:text-left z-10">
+          <div className="flex-1 lg:flex-[1.4] text-center lg:text-left z-10">
             <div className="inline-block mb-4">
               <span className="bg-zenth-markerYellow text-black px-3 py-1 rounded-full border border-black text-sm font-bold font-marker transform -rotate-2 inline-block shadow-sketch animate-pulse">
                 ✨ Productividad consciente
               </span>
             </div>
-            <h1 className="text-6xl sm:text-7xl lg:text-8xl font-serif font-black text-black dark:text-white leading-[0.9] mb-6 relative">
-              Libérate <br />
+            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-serif font-black text-black dark:text-white leading-[1.1] mb-6 relative">
+              Construye <br />
               <span className="relative inline-block mt-2">
-                <span className="relative z-10">del caos.</span>
-                <span className="absolute bottom-2 left-0 w-full h-6 bg-zenth-markerBlue -z-0 transform -rotate-1 skew-x-12 opacity-80 mix-blend-multiply dark:mix-blend-normal dark:bg-zenth-markerBlue/80"></span>
+                <span className="relative z-10 whitespace-nowrap">tu progreso diario.</span>
+                <span className="absolute bottom-2 left-0 w-full h-4 bg-zenth-markerBlue -z-0 transform -rotate-1 skew-x-12 opacity-80 mix-blend-multiply dark:mix-blend-normal dark:bg-zenth-markerBlue/80"></span>
               </span>
             </h1>
 
-            <p className="text-2xl text-slate-700 dark:text-slate-300 mb-8 leading-relaxed font-sans max-w-lg mx-auto lg:mx-0">
-              No creemos en hacer "más", creemos en hacer lo que importa. Organiza tu día según tu energía, gana XP y recupera tu paz mental.
+            <p className="text-xl text-slate-700 dark:text-slate-300 mb-6 leading-relaxed font-sans max-w-lg mx-auto lg:mx-0">
+              Zenth es el gestor de tareas y hábitos que transforma tu esfuerzo en paz mental. Organiza tu vida según tu energía, gana XP y domina tu rutina con IA.
             </p>
 
             {/* Primary CTA Button (Launched State) */}
@@ -47,28 +47,39 @@ const Hero: React.FC = () => {
 
             </div>
 
-            <div className="flex flex-col sm:flex-row justify-center lg:justify-start gap-6 items-center">
+            <div className="flex flex-wrap justify-center lg:justify-start gap-y-3 gap-x-5 items-center">
               <div className="flex items-center space-x-2 opacity-70">
-                <Rocket className="w-5 h-5 text-slate-600 dark:text-slate-300" />
-                <span className="font-sans text-lg text-slate-600 dark:text-slate-300">Mobile First</span>
+                <Brain className="w-4 h-4 text-slate-600 dark:text-slate-300" />
+                <span className="font-sans text-base text-slate-600 dark:text-slate-300">Gestión de Energía</span>
               </div>
-              <div className="hidden sm:block text-slate-400">•</div>
               <div className="flex items-center space-x-2 opacity-70">
-                <Check className="w-5 h-5 text-slate-600 dark:text-slate-300" />
-                <span className="font-sans text-lg text-slate-600 dark:text-slate-300">Habits Tracker</span>
+                <Trophy className="w-4 h-4 text-slate-600 dark:text-slate-300" />
+                <span className="font-sans text-base text-slate-600 dark:text-slate-300">Hábitos & XP</span>
+              </div>
+              <div className="flex items-center space-x-2 opacity-70">
+                <Sparkles className="w-4 h-4 text-slate-600 dark:text-slate-300" />
+                <span className="font-sans text-base text-slate-600 dark:text-slate-300">Asistente IA "Zen"</span>
+              </div>
+              <div className="flex items-center space-x-2 opacity-70">
+                <Smile className="w-4 h-4 text-slate-600 dark:text-slate-300" />
+                <span className="font-sans text-base text-slate-600 dark:text-slate-300">Control de Ánimo</span>
+              </div>
+              <div className="flex items-center space-x-2 opacity-70">
+                <Timer className="w-4 h-4 text-slate-600 dark:text-slate-300" />
+                <span className="font-sans text-base text-slate-600 dark:text-slate-300">Modo Enfoque</span>
               </div>
             </div>
           </div>
 
           {/* Main App Showcase Image Section (Simplified) */}
-          <div className="flex-1 lg:flex-[1.5] relative w-full flex justify-center lg:justify-end mt-10 lg:mt-0 lg:scale-110 xl:scale-125 origin-right transition-transform duration-1000">
-            <div className="relative w-full max-w-[600px] lg:max-w-none">
+          <div className="flex-1 lg:flex-1 relative w-full flex justify-center lg:justify-end mt-10 lg:mt-0 lg:scale-110 origin-right transition-transform duration-1000">
+            <div className="relative w-full max-w-[560px]">
 
               {/* The App Screenshot */}
               <img
                 src="/blog/mainpage.png"
                 alt="Zenth App Showcase"
-                className="w-full h-auto drop-shadow-xl lg:drop-shadow-[0_20px_50px_rgba(0,0,0,0.2)] dark:drop-shadow-lg lg:dark:drop-shadow-[0_20px_50px_rgba(255,255,255,0.05)]"
+                className="w-full h-auto drop-shadow-xl lg:drop-shadow-[0_15px_30px_rgba(0,0,0,0.15)] dark:drop-shadow-lg lg:dark:drop-shadow-[0_15px_30px_rgba(255,255,255,0.05)]"
               />
 
               {/* Decorative Element */}

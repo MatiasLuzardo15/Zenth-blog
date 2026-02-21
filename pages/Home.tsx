@@ -28,8 +28,8 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
     return (
         <>
             <div id="hero"><Hero /></div>
-            <InteractiveDemo />
             <Features onNavigate={onNavigate} />
+            <InteractiveDemo />
             <Testimonials />
             <InstallGuide />
             {/* Usamos BlogList como teaser en la Home */}
