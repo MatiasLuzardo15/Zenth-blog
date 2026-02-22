@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 interface FAQItemProps {
     question: string;
-    answer: string;
+    answer: React.ReactNode;
     icon?: React.ReactNode;
 }
 
@@ -35,7 +35,7 @@ const FAQItem: React.FC<FAQItemProps> = ({ question, answer, icon }) => {
                         initial={{ height: 0, opacity: 0 }}
                         animate={{ height: 'auto', opacity: 1 }}
                         exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.3, ease: 'easeInOut' }}
+                        transition={{ duration: 0.2, ease: [0.04, 0.62, 0.23, 0.98] }}
                         className="overflow-hidden"
                     >
                         <div className="pb-8 pl-14 pr-4">
@@ -50,51 +50,66 @@ const FAQItem: React.FC<FAQItemProps> = ({ question, answer, icon }) => {
     );
 };
 
+const FAQS = [
+    {
+        question: "¿Qué es Zenth exactamente?",
+        answer: "Zenth es un planificador visual diseñado para mentes inquietas. Combina gestión de tareas, gamificación (XP y niveles), seguimiento emocional y un asistente de IA para ayudarte a organizar tu vida con calma y sin el agobio de las listas tradicionales.",
+        icon: <Zap className="w-6 h-6" />
+    },
+    {
+        question: "¿Es Zenth gratuito?",
+        answer: (
+            <>
+                Sí, puedes empezar a usar Zenth de forma gratuita. Ofrecemos todas las funciones principales de organización, gamificación y sincronización.
+                Si te gusta el proyecto y quieres apoyar su mantenimiento, puedes{' '}
+                <a
+                    href="https://www.paypal.com/donate/?hosted_button_id=2ZXKDRWUK3M6C"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-black dark:text-zenth-markerBlue underline decoration-zenth-markerYellow decoration-2 font-bold hover:text-zenth-600 transition-colors"
+                >
+                    donar aquí
+                </a>
+                {' '}para ayudar con los costos de los servidores.
+            </>
+        ),
+        icon: <Heart className="w-6 h-6" />
+    },
+    {
+        question: "¿Cómo puedo cambiar mi dirección de correo?",
+        answer: "Para actualizar tu correo de forma segura: ve a Perfil (Me) > Cuenta > 'Cambiar Correo'. Ingresa tu nueva dirección y recibirás un enlace de confirmación. El cambio solo se hará efectivo una vez que confirmes el enlace en tu nuevo correo.",
+        icon: <Mail className="w-6 h-6" />
+    },
+    {
+        question: "¿Por qué se dice que es ideal para personas con TDAH?",
+        answer: "Zenth ha sido diseñado considerando la neurociencia del TDAH. Usamos bloques de tiempo flexibles (Mañana, Tarde, Noche) en lugar de horarios rígidos, recompensas inmediatas de dopamina a través de XP, y una interfaz limpia que reduce la carga cognitiva.",
+        icon: <Brain className="w-6 h-6" />
+    },
+    {
+        question: "¿Para qué sirven los XP y los niveles?",
+        answer: "Los Puntos de Experiencia (XP) son una métrica de tu constancia. Al completar tareas y sesiones de enfoque, ganas XP que te permiten subir de nivel. Es una forma de gamificar tu disciplina.",
+        icon: <Trophy className="w-6 h-6" />
+    },
+    {
+        question: "¿Cómo funciona el asistente IA 'Zen'?",
+        answer: "Zen utiliza Google Gemini para simplificar tu planificación. Puede autocompletar tareas con lenguaje natural, sugerir micro-pasos y ayudarte a agendar inteligentemente tus pendientes.",
+        icon: <Sparkles className="w-6 h-6" />
+    },
+    {
+        question: "¿Puedo usarlo en mi teléfono?",
+        answer: "¡Absolutamente! Zenth es una PWA. Puedes 'Instalarla' desde el navegador y funcionará como una aplicación nativa, con iconos en tu pantalla de inicio.",
+        icon: <Smartphone className="w-6 h-6" />
+    }
+];
+
 const FAQ = ({ onBack, onGoToGuide }: { onBack: () => void, onGoToGuide: () => void }) => {
-    const faqs = [
-        {
-            question: "¿Qué es Zenth exactamente?",
-            answer: "Zenth es un planificador visual diseñado para mentes inquietas. Combina gestión de tareas, gamificación (XP y niveles), seguimiento emocional y un asistente de IA para ayudarte a organizar tu vida con calma y sin el agobio de las listas tradicionales.",
-            icon: <Zap className="w-6 h-6" />
-        },
-        {
-            question: "¿Es Zenth gratuito?",
-            answer: "Sí, puedes empezar a usar Zenth de forma gratuita. Ofrecemos todas las funciones principales de organización, gamificación y sincronización para que puedas transformar tu productividad hoy mismo.",
-            icon: <Heart className="w-6 h-6" />
-        },
-        {
-            question: "¿Cómo puedo cambiar mi dirección de correo?",
-            answer: "Para actualizar tu correo de forma segura: ve a Perfil (Me) > Cuenta > 'Cambiar Correo'. Ingresa tu nueva dirección y recibirás un enlace de confirmación. El cambio solo se hará efectivo una vez que confirmes el enlace en tu nuevo correo.",
-            icon: <Mail className="w-6 h-6" />
-        },
-        {
-            question: "¿Por qué se dice que es ideal para personas con TDAH?",
-            answer: "Zenth ha sido diseñado considerando la neurociencia del TDAH. Usamos bloques de tiempo flexibles (Mañana, Tarde, Noche) en lugar de horarios rígidos, recompensas inmediatas de dopamina a través de XP, y una interfaz limpia que reduce la carga cognitiva.",
-            icon: <Brain className="w-6 h-6" />
-        },
-        {
-            question: "¿Para qué sirven los XP y los niveles?",
-            answer: "Los Puntos de Experiencia (XP) son una métrica de tu constancia. Al completar tareas y sesiones de enfoque, ganas XP que te permiten subir de nivel. Es una forma de gamificar tu disciplina.",
-            icon: <Trophy className="w-6 h-6" />
-        },
-        {
-            question: "¿Cómo funciona el asistente IA 'Zen'?",
-            answer: "Zen utiliza Google Gemini para simplificar tu planificación. Puede autocompletar tareas con lenguaje natural, sugerir micro-pasos y ayudarte a agendar inteligentemente tus pendientes.",
-            icon: <Sparkles className="w-6 h-6" />
-        },
-        {
-            question: "¿Puedo usarlo en mi teléfono?",
-            answer: "¡Absolutamente! Zenth es una PWA. Puedes 'Instalarla' desde el navegador y funcionará como una aplicación nativa, con iconos en tu pantalla de inicio.",
-            icon: <Smartphone className="w-6 h-6" />
-        }
-    ];
 
     return (
         <div className="min-h-screen bg-zenth-bg dark:bg-zenth-darkBg pt-24 pb-20 px-4 relative overflow-hidden">
             {/* Background elements */}
             <div className="absolute top-0 left-0 w-full h-full pointer-events-none opacity-10">
-                <div className="absolute top-[10%] left-[5%] w-96 h-96 bg-zenth-markerYellow rounded-full blur-[120px]"></div>
-                <div className="absolute bottom-[10%] right-[5%] w-96 h-96 bg-zenth-markerBlue rounded-full blur-[120px]"></div>
+                <div className="absolute top-[10%] left-[5%] w-96 h-96 bg-zenth-markerYellow rounded-full blur-[80px] md:blur-[120px]"></div>
+                <div className="absolute bottom-[10%] right-[5%] w-96 h-96 bg-zenth-markerBlue rounded-full blur-[80px] md:blur-[120px]"></div>
             </div>
 
             <div className="max-w-4xl mx-auto relative z-10">
@@ -124,7 +139,7 @@ const FAQ = ({ onBack, onGoToGuide }: { onBack: () => void, onGoToGuide: () => v
                     <div className="absolute -bottom-6 right-1/4 w-32 h-10 bg-zenth-markerPink/60 rotate-2 border-x-2 border-black/10"></div>
 
                     <div className="divide-y-2 divide-black/10 dark:divide-white/10">
-                        {faqs.map((faq, index) => (
+                        {FAQS.map((faq, index) => (
                             <FAQItem key={index} {...faq} />
                         ))}
                     </div>
