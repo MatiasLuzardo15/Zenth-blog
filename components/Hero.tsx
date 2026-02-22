@@ -4,7 +4,7 @@ import { ArrowRight, Brain, Trophy, Timer, Sparkles, Smile } from 'lucide-react'
 const Hero: React.FC = () => {
   const goToApp = () => {
     // Apunta a la subruta donde vivirá la aplicación
-    window.location.href = '/app';
+    window.location.href = 'https://zenth.space/app';
   };
 
   return (

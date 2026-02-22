@@ -235,7 +235,7 @@ const BlogPostDetail: React.FC<BlogPostDetailProps> = ({ post, onBack }) => {
                             Empieza hoy mismo a subir de nivel y transforma tu caos en calma absoluta.
                         </p>
                         <a
-                            href="/app"
+                            href="https://zenth.space/app"
                             className="inline-block bg-black dark:bg-white text-white dark:text-black px-10 py-4 rounded-xl font-marker text-xl shadow-sketch-lg dark:shadow-sketch-lg-white hover:scale-105 transition-transform"
                         >
                             Empezar ahora ✨
