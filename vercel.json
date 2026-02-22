@@ -1,6 +1,10 @@
 {
     "rewrites": [
         {
+            "source": "/app",
+            "destination": "https://zenth-task.vercel.app/index.html"
+        },
+        {
             "source": "/app/:path*",
             "destination": "https://zenth-task.vercel.app/:path*"
         },
