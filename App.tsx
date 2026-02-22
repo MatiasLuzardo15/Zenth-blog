@@ -5,6 +5,8 @@ import Home from './pages/Home';
 import BlogPage from './components/BlogPage';
 import BlogPostDetail from './components/BlogPostDetail';
 import PrivacyPolicy from './components/PrivacyPolicy';
+import FAQ from './components/FAQ';
+import UserGuide from './components/UserGuide';
 import Footer from './components/Footer';
 import { Helmet } from 'react-helmet-async';
 
@@ -66,6 +68,12 @@ function App() {
     } else if (location.pathname === '/privacy') {
       title = 'Política de Privacidad | Zenth';
       description = 'Cómo protegemos tus datos y tu privacidad en Zenth. Sin venta de datos, sin rastreadores invasivos.';
+    } else if (location.pathname === '/faq') {
+      title = 'Preguntas Frecuentes | Zenth Space';
+      description = 'Todo lo que necesitas saber sobre Zenth: productividad, gamificación, TDAH y nuestra IA.';
+    } else if (location.pathname === '/guide') {
+      title = 'Manual del Usuario | Zenth: Guía de Bienestar';
+      description = 'Aprende a dominar Zenth con nuestra guía detallada: flujos de IA, gamificación, ajustes y filosofía de organización.';
     }
 
     return { title, description, url, image };
@@ -74,7 +82,7 @@ function App() {
   const seo = getSEO();
 
   // Centralized navigation handler
-  const handleNavigate = (page: 'home' | 'blog' | 'privacy', targetId?: string) => {
+  const handleNavigate = (page: 'home' | 'blog' | 'privacy' | 'faq' | 'guide', targetId?: string) => {
     if (page === 'home') {
       if (location.pathname !== '/') {
         navigate('/');
@@ -110,6 +118,12 @@ function App() {
     } else if (page === 'privacy') {
       navigate('/privacy');
       window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else if (page === 'faq') {
+      navigate('/faq');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else if (page === 'guide') {
+      navigate('/guide');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
 
@@ -136,7 +150,11 @@ function App() {
       <Navbar
         isDarkMode={isDarkMode}
         toggleTheme={toggleTheme}
-        currentPage={location.pathname.startsWith('/blog') ? 'blog' : 'home'}
+        currentPage={
+          location.pathname.startsWith('/blog') ? 'blog' :
+            location.pathname === '/faq' ? 'faq' :
+              location.pathname === '/guide' ? 'guide' : 'home'
+        }
         onNavigate={(page, id) => handleNavigate(page as any, id)}
       />
 
@@ -154,6 +172,8 @@ function App() {
           />
           <Route path="/blog/:id" element={<BlogPostDetailWithParams />} />
           <Route path="/privacy" element={<PrivacyPolicy onBack={() => handleNavigate('home')} />} />
+          <Route path="/faq" element={<FAQ onBack={() => handleNavigate('home')} onGoToGuide={() => handleNavigate('guide')} />} />
+          <Route path="/guide" element={<UserGuide onBack={() => handleNavigate('faq')} />} />
           {/* Fallback route */}
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>

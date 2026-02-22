@@ -2,7 +2,7 @@ import React from 'react';
 import { CheckCircle, Mail, Linkedin, Heart } from 'lucide-react';
 
 interface FooterProps {
-  onNavigate: (page: 'home' | 'blog' | 'privacy', targetId?: string) => void;
+  onNavigate: (page: 'home' | 'blog' | 'privacy' | 'faq' | 'guide', targetId?: string) => void;
 }
 
 const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
@@ -54,12 +54,28 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
             </span>
           </div>
 
-          <button
-            onClick={() => onNavigate('privacy')}
-            className="text-slate-600 hover:text-slate-400 hover:underline transition-colors text-xs"
-          >
-            Política de Privacidad
-          </button>
+          <div className="flex gap-4">
+            <button
+              onClick={() => onNavigate('privacy')}
+              className="text-slate-600 hover:text-slate-400 hover:underline transition-colors text-xs"
+            >
+              Política de Privacidad
+            </button>
+            <span className="text-slate-700 text-xs">•</span>
+            <button
+              onClick={() => onNavigate('faq')}
+              className="text-slate-600 hover:text-slate-400 hover:underline transition-colors text-xs"
+            >
+              Preguntas Frecuentes
+            </button>
+            <span className="text-slate-700 text-xs">•</span>
+            <button
+              onClick={() => onNavigate('guide')}
+              className="text-slate-600 hover:text-slate-400 hover:underline transition-colors text-xs"
+            >
+              Manual del Usuario
+            </button>
+          </div>
         </div>
       </div>
     </footer>

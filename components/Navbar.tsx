@@ -4,8 +4,8 @@ import { Menu, X, PenTool, Moon, Sun } from 'lucide-react';
 interface NavbarProps {
   isDarkMode: boolean;
   toggleTheme: () => void;
-  currentPage: 'home' | 'blog';
-  onNavigate: (page: 'home' | 'blog', sectionId?: string) => void;
+  currentPage: 'home' | 'blog' | 'faq' | 'guide';
+  onNavigate: (page: 'home' | 'blog' | 'faq' | 'guide', sectionId?: string) => void;
 }
 
 const Navbar: React.FC<NavbarProps> = ({ isDarkMode, toggleTheme, currentPage, onNavigate }) => {
@@ -25,7 +25,7 @@ const Navbar: React.FC<NavbarProps> = ({ isDarkMode, toggleTheme, currentPage, o
     window.location.href = 'https://zenth.space/app';
   };
 
-  const handleNavClick = (e: React.MouseEvent, page: 'home' | 'blog', sectionId?: string) => {
+  const handleNavClick = (e: React.MouseEvent, page: 'home' | 'blog' | 'faq' | 'guide', sectionId?: string) => {
     e.preventDefault();
     setIsOpen(false);
     onNavigate(page, sectionId);
@@ -33,6 +33,7 @@ const Navbar: React.FC<NavbarProps> = ({ isDarkMode, toggleTheme, currentPage, o
 
   const navLinks = [
     { name: 'Funciones', page: 'home', id: 'features' },
+    { name: 'FAQ', page: 'faq', id: '' },
     { name: 'Opiniones', page: 'home', id: 'reviews' },
     { name: 'Instalar', page: 'home', id: 'install' },
     { name: 'Blog', page: 'blog', id: '' }, // Link al Blog
@@ -64,13 +65,13 @@ const Navbar: React.FC<NavbarProps> = ({ isDarkMode, toggleTheme, currentPage, o
               <button
                 key={item.name}
                 onClick={(e) => handleNavClick(e, item.page as 'home' | 'blog', item.id)}
-                className={`px-4 py-1 text-lg font-bold transition-colors relative group ${currentPage === 'blog' && item.name === 'Blog'
+                className={`px-4 py-1 text-lg font-bold transition-colors relative group ${(currentPage === 'blog' && item.name === 'Blog') || (currentPage === 'faq' && item.name === 'FAQ') || (currentPage === 'guide' && item.name === 'Guía')
                   ? 'text-zenth-400 dark:text-zenth-300'
                   : 'text-black dark:text-white hover:text-zenth-400 dark:hover:text-zenth-300'
                   }`}
               >
                 {item.name}
-                <span className={`absolute bottom-0 left-0 w-full h-0.5 bg-black dark:bg-white transform transition-transform origin-left ${currentPage === 'blog' && item.name === 'Blog' ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
+                <span className={`absolute bottom-0 left-0 w-full h-0.5 bg-black dark:bg-white transform transition-transform origin-left ${(currentPage === 'blog' && item.name === 'Blog') || (currentPage === 'faq' && item.name === 'FAQ') || (currentPage === 'guide' && item.name === 'Guía') ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
                   }`}></span>
               </button>
             ))}
