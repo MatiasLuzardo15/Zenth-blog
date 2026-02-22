@@ -2,27 +2,27 @@
     "rewrites": [
         {
             "source": "/app/:path*",
-            "destination": "https://zenth-task-5805fps3s-matias-luzardos-projects.vercel.app/:path*"
+            "destination": "https://zenth-task.vercel.app/:path*"
         },
         {
             "source": "/assets/:path*",
-            "destination": "https://zenth-task-5805fps3s-matias-luzardos-projects.vercel.app/assets/:path*"
+            "destination": "https://zenth-task.vercel.app/assets/:path*"
         },
         {
             "source": "/pandas/:path*",
-            "destination": "https://zenth-task-5805fps3s-matias-luzardos-projects.vercel.app/pandas/:path*"
+            "destination": "https://zenth-task.vercel.app/pandas/:path*"
         },
         {
             "source": "/manifest.json",
-            "destination": "https://zenth-task-5805fps3s-matias-luzardos-projects.vercel.app/manifest.json"
+            "destination": "https://zenth-task.vercel.app/manifest.json"
         },
         {
             "source": "/sw.js",
-            "destination": "https://zenth-task-5805fps3s-matias-luzardos-projects.vercel.app/sw.js"
+            "destination": "https://zenth-task.vercel.app/sw.js"
         },
         {
             "source": "/firebase-messaging-sw.js",
-            "destination": "https://zenth-task-5805fps3s-matias-luzardos-projects.vercel.app/firebase-messaging-sw.js"
+            "destination": "https://zenth-task.vercel.app/firebase-messaging-sw.js"
         },
         {
             "source": "/((?!api/|blog/|favicon|assets/|_next/|static/|.*\\..*).*)",
