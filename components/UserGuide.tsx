@@ -1,5 +1,5 @@
 import React from 'react';
-import { ChevronDown, Zap, Smartphone, Brain, Trophy, Mail, BookOpen, Layout, Sparkles, BarChart2, Rocket, Target, ArrowDown } from 'lucide-react';
+import { ChevronDown, Zap, Smartphone, Brain, Trophy, Mail, BookOpen, Layout, Sparkles, BarChart2, Rocket, Target, ArrowDown, PenTool, Type, Image } from 'lucide-react';
 
 const GuideSection: React.FC<{
     title: string,
@@ -173,6 +173,29 @@ const UserGuide = ({ onBack }: { onBack: () => void }) => {
                     "Identifica patrones: ¿Qué hábitos o días de la semana mejoran tu humor?",
                     "Usa los filtros sociales para ver cómo tu bienestar evoluciona con tu racha.",
                     "Transforma datos subjetivos en una hoja de ruta visual para tu salud mental."
+                ]
+            }
+        },
+        {
+            title: "Entradas (Notas Zen)",
+            icon: <PenTool className="w-8 h-8 text-zenth-markerBlue" />,
+            color: "bg-[#e1f5fe]",
+            steps: [
+                "Haz clic en el icono de 'Entradas' o selecciona 'Expandir a nota' desde cualquier tarea.",
+                "Escribe sin distracciones en el editor minimalista con soporte para jerarquías (H2, H3) y formatos.",
+                "Personaliza tu nota: asigna un emoji de portada y elige entre 10 estilos tipográficos diferentes.",
+                "Añade vida a tus notas pegando imágenes directamente (Ctrl+V) o arrastrándolas al editor.",
+                "Las notas se guardan automáticamente en la nube, permitiéndote acceder a ellas desde cualquier lugar."
+            ],
+            extension: {
+                title: "Personalización y Multimedia",
+                icon: <Type className="w-8 h-8 text-zenth-markerPink" />,
+                steps: [
+                    "Toca cualquier imagen para redimensionarla entre 25% y 100% de ancho.",
+                    "Usa el menú de tipografía para cambiar el 'humor' de tu nota (Moderno, Escrito a mano, etc).",
+                    "Aprovecha el buscador global para encontrar palabras clave dentro de tus notas en milisegundos.",
+                    "El Modo Enfoque en las notas oscurece el fondo para que solo existas tú y tu escritura.",
+                    "Recuerda que una Entrada puede ser un diario, un wiki personal o la documentación de un objetivo."
                 ]
             }
         }

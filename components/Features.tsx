@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Clock, Trophy, Heart, LayoutGrid, X, MousePointerClick, Sun, Calendar, Activity, Sparkles } from 'lucide-react';
+import { Clock, Trophy, Heart, LayoutGrid, X, MousePointerClick, Sun, Calendar, Activity, Sparkles, PenTool } from 'lucide-react';
 
 interface FeatureDetail {
   id: string;
@@ -137,6 +137,30 @@ const Features: React.FC<FeaturesProps> = ({ onNavigate }) => {
       icon: <Sparkles className="w-8 h-8 text-black" />,
       colorClass: 'bg-zenth-markerPink',
       relatedPostId: '13'
+    },
+    entries: {
+      id: 'entries',
+      title: 'Entradas (Notas Zen)',
+      shortDesc: 'Un lienzo infinito para tus ideas. Editor Pro, imágenes y estilos dinámicos.',
+      fullDesc: (
+        <>
+          <p className="mb-4">
+            Las <strong>Entradas</strong> son tu espacio de reflexión profunda y creatividad sin límites.
+          </p>
+          <ul className="list-disc pl-5 space-y-2 mb-4">
+            <li><strong>Editor Pro:</strong> Jerarquía visual con títulos, citas y resaltado de texto.</li>
+            <li><strong>Personalidad Única:</strong> Asigna emojis de portada y elige entre 10 estilos tipográficos.</li>
+            <li><strong>Multimedia Fluida:</strong> Pega imágenes o arrástralas directamente al texto.</li>
+            <li><strong>Expandir a Nota:</strong> Convierte cualquier tarea en un proyecto documentado con un clic.</li>
+          </ul>
+          <p>
+            Diseñado con <strong>fricción cero</strong> para que nada se interponga entre tus pensamientos y la pantalla.
+          </p>
+        </>
+      ),
+      icon: <PenTool className="w-8 h-8 text-black" />,
+      colorClass: 'bg-zenth-markerBlue',
+      relatedPostId: '14'
     }
   };
 
@@ -157,139 +181,136 @@ const Features: React.FC<FeaturesProps> = ({ onNavigate }) => {
         </div>
 
         {/* Bento Grid Layout - Hand Drawn Style */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 auto-rows-[minmax(300px,auto)]">
+        {/* Collage Layout - Multi-rotated and compact */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-fr">
 
-          {/* Feature 1: Large Card (Gamification/XP) */}
+          {/* Feature 1: Gamification */}
           <div
             onClick={() => setSelectedFeature(featuresData.gamification)}
-            className="md:col-span-2 bg-white dark:bg-slate-900 border-2 border-black dark:border-white shadow-sketch-lg dark:shadow-sketch-lg-white rounded-2xl p-8 sm:p-12 relative overflow-hidden group hover:-translate-y-1 hover:shadow-sketch-xl dark:hover:shadow-sketch-xl-white transition-all cursor-pointer"
+            className="bg-white dark:bg-slate-900 border-2 border-black dark:border-white shadow-sketch dark:shadow-sketch-white rounded-xl p-6 relative overflow-hidden group hover:-translate-y-2 hover:rotate-1 transition-all cursor-pointer rotate-1"
           >
-            <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
-              <MousePointerClick className="w-6 h-6 text-slate-400" />
+            <div className="absolute top-0 right-0 p-2 opacity-5 pointer-events-none">
+              <Trophy className="w-32 h-32 text-black dark:text-white transform rotate-12" />
             </div>
-            <div className="absolute top-0 right-0 p-4 opacity-10 pointer-events-none">
-              <Trophy className="w-48 h-48 text-black dark:text-white transform rotate-12" />
-            </div>
-            <div className="relative z-10 max-w-lg pointer-events-none">
-              <div className="bg-zenth-markerYellow border-2 border-black dark:border-white w-16 h-16 rounded-full flex items-center justify-center mb-6 shadow-sketch dark:shadow-sketch-white transform -rotate-6">
-                <Trophy className="w-8 h-8 text-black" />
+            <div className="relative z-10 pointer-events-none">
+              <div className="bg-zenth-markerYellow border-2 border-black dark:border-white w-12 h-12 rounded-full flex items-center justify-center mb-4 shadow-sketch transform -rotate-6">
+                <Trophy className="w-6 h-6 text-black" />
               </div>
-              <h3 className="text-4xl font-serif font-bold text-black dark:text-white mb-4 underline decoration-dashed decoration-transparent group-hover:decoration-black dark:group-hover:decoration-white underline-offset-4 transition-all">
+              <h3 className="text-2xl font-serif font-bold text-black dark:text-white mb-2 underline decoration-dashed decoration-transparent group-hover:decoration-black dark:group-hover:decoration-white underline-offset-4 transition-all">
                 {featuresData.gamification.title}
               </h3>
-              <p className="text-xl text-black dark:text-slate-200 leading-relaxed">
+              <p className="text-base text-black dark:text-slate-200 leading-snug">
                 {featuresData.gamification.shortDesc} <br />
-                <span className="bg-zenth-100 text-black px-1 mt-2 inline-block font-bold">¡+50 XP por Big Goals!</span>
+                <span className="bg-zenth-100 text-black px-1 mt-1 inline-block font-bold text-sm">¡+50 XP por Big Goals!</span>
               </p>
             </div>
           </div>
 
-          {/* Feature 2: Tall Card (Pixel View/Mood) */}
+          {/* Feature 2: Pixel View */}
           <div
             onClick={() => setSelectedFeature(featuresData.pixel)}
-            className="md:row-span-2 bg-zenth-paper dark:bg-slate-900 border-2 border-black dark:border-white shadow-sketch-lg dark:shadow-sketch-lg-white rounded-2xl p-8 sm:p-12 flex flex-col justify-between relative overflow-hidden group hover:rotate-1 transition-all cursor-pointer"
+            className="bg-zenth-paper dark:bg-slate-900 border-2 border-black dark:border-white shadow-sketch dark:shadow-sketch-white rounded-xl p-6 relative overflow-hidden group hover:-translate-y-2 hover:-rotate-1 transition-all cursor-pointer -rotate-1"
           >
-            <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
-              <MousePointerClick className="w-6 h-6 text-slate-400" />
-            </div>
-            {/* Tape */}
-            <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 w-32 h-8 bg-zenth-markerPink/80 rotate-1 z-20 pointer-events-none"></div>
-
-            <div className="pointer-events-none">
-              <div className="bg-zenth-markerBlue border-2 border-black dark:border-white w-16 h-16 rounded-lg flex items-center justify-center mb-6 shadow-sketch dark:shadow-sketch-white transform rotate-3">
-                <LayoutGrid className="w-8 h-8 text-black" />
+            <div className="absolute -top-2 left-1/2 transform -translate-x-1/2 w-24 h-6 bg-zenth-markerPink/60 rotate-2 z-20 pointer-events-none"></div>
+            <div className="relative z-10 pointer-events-none">
+              <div className="bg-zenth-markerBlue border-2 border-black dark:border-white w-12 h-12 rounded-lg flex items-center justify-center mb-4 shadow-sketch transform rotate-3">
+                <LayoutGrid className="w-6 h-6 text-black" />
               </div>
-              <h3 className="text-4xl font-serif font-bold text-black dark:text-white mb-4 underline decoration-dashed decoration-transparent group-hover:decoration-black dark:group-hover:decoration-white underline-offset-4 transition-all">
+              <h3 className="text-2xl font-serif font-bold text-black dark:text-white mb-2">
                 {featuresData.pixel.title}
               </h3>
-              <p className="text-xl text-black dark:text-slate-200 leading-relaxed">
-                ¿Cómo fue tu año? Un lienzo de colores basado en tu bienestar.
+              <p className="text-base text-black dark:text-slate-200 leading-snug mb-4">
+                ¿Cómo fue tu año? Un lienzo emocional de colores.
               </p>
-            </div>
-
-            {/* Pixel Grid Sketch */}
-            <div className="mt-8 flex justify-center pointer-events-none">
-              <div className="grid grid-cols-7 gap-1 opacity-80">
-                {[...Array(28)].map((_, i) => (
-                  <div key={i} className={`w-6 h-6 border border-black dark:border-white rounded-sm ${[1, 5, 12, 15, 20].includes(i) ? 'bg-zenth-markerPink' :
-                    [2, 3, 8, 9, 18].includes(i) ? 'bg-zenth-markerBlue' :
-                      [0, 6, 13, 21].includes(i) ? 'bg-zenth-markerYellow' : 'bg-white dark:bg-slate-700'
-                    }`}></div>
+              <div className="grid grid-cols-7 gap-1 opacity-60 scale-75 origin-left">
+                {[...Array(14)].map((_, i) => (
+                  <div key={i} className={`w-4 h-4 border border-black dark:border-white rounded-sm ${i % 3 === 0 ? 'bg-zenth-markerPink' : i % 5 === 0 ? 'bg-zenth-markerBlue' : 'bg-white dark:bg-slate-700'}`}></div>
                 ))}
               </div>
             </div>
           </div>
 
-          {/* Feature 3: Standard Card (Energy/Harmony) */}
+          {/* Feature 3: Energy */}
           <div
             onClick={() => setSelectedFeature(featuresData.energy)}
-            className="bg-zenth-markerYellow border-2 border-black dark:border-white shadow-sketch-lg dark:shadow-sketch-lg-white rounded-2xl p-8 sm:p-10 relative group hover:-rotate-1 transition-all cursor-pointer"
+            className="bg-zenth-markerYellow border-2 border-black dark:border-white shadow-sketch dark:shadow-sketch-white rounded-xl p-6 relative group hover:-translate-y-2 hover:rotate-2 transition-all cursor-pointer rotate-2"
           >
-            <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
-              <MousePointerClick className="w-6 h-6 text-black/50" />
-            </div>
             <div className="relative z-10 pointer-events-none">
-              <div className="bg-white border-2 border-black w-14 h-14 rounded-full flex items-center justify-center mb-6 shadow-sketch">
-                <Sun className="w-7 h-7 text-black" />
+              <div className="bg-white border-2 border-black w-12 h-12 rounded-full flex items-center justify-center mb-4 shadow-sketch">
+                <Sun className="w-6 h-6 text-black" />
               </div>
-              <h3 className="text-3xl font-serif font-bold text-black mb-3 underline decoration-dashed decoration-transparent group-hover:decoration-black underline-offset-4 transition-all">
+              <h3 className="text-2xl font-serif font-bold text-black mb-2">
                 {featuresData.energy.title}
               </h3>
-              <p className="text-black text-lg font-bold">
-                Organiza: Mañana, Tarde y Noche. <br />Sigue tu ritmo natural.
+              <p className="text-black text-base font-bold leading-snug">
+                Mañana, Tarde y Noche. <br />Organiza según tu ritmo.
               </p>
             </div>
           </div>
 
-          {/* Feature 4: Standard Card (Deep Work) */}
+          {/* Feature 4: Focus */}
           <div
             onClick={() => setSelectedFeature(featuresData.focus)}
-            className="bg-zenth-200 border-2 border-black dark:border-white shadow-sketch-lg dark:shadow-sketch-lg-white rounded-2xl p-8 sm:p-10 relative group hover:rotate-1 transition-all cursor-pointer"
+            className="bg-zenth-200 border-2 border-black dark:border-white shadow-sketch dark:shadow-sketch-white rounded-xl p-6 relative group hover:-translate-y-2 hover:-rotate-2 transition-all cursor-pointer -rotate-2"
           >
-            <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
-              <MousePointerClick className="w-6 h-6 text-black/50" />
-            </div>
             <div className="relative z-10 pointer-events-none">
-              <div className="bg-white border-2 border-black w-14 h-14 rounded-none flex items-center justify-center mb-6 shadow-sketch transform rotate-45">
-                <Activity className="w-7 h-7 text-black transform -rotate-45" />
+              <div className="bg-white border-2 border-black w-12 h-12 rounded-none flex items-center justify-center mb-4 shadow-sketch transform rotate-45">
+                <Activity className="w-6 h-6 text-black transform -rotate-45" />
               </div>
-              <h3 className="text-3xl font-serif font-bold text-black mb-3 underline decoration-dashed decoration-transparent group-hover:decoration-black underline-offset-4 transition-all">
+              <h3 className="text-2xl font-serif font-bold text-black mb-2">
                 {featuresData.focus.title}
               </h3>
-              <p className="text-black text-lg font-bold">
-                Cuenta minutos de enfoque, no solo tareas. Deep Work real.
+              <p className="text-black text-base font-bold leading-snug">
+                Deep Work real. <br />Mide minutos de atención.
               </p>
             </div>
           </div>
 
-          {/* Feature 5: AI Assistant (Full Width) */}
+          {/* Feature 5: AI Assistant */}
           <div
             onClick={() => setSelectedFeature(featuresData.ai)}
-            className="md:col-span-3 bg-white dark:bg-slate-900 border-2 border-black dark:border-white shadow-sketch-lg dark:shadow-sketch-lg-white rounded-2xl p-8 sm:p-12 relative overflow-hidden group hover:-translate-y-1 hover:shadow-sketch-xl dark:hover:shadow-sketch-xl-white transition-all cursor-pointer"
+            className="bg-white dark:bg-slate-900 border-2 border-black dark:border-white shadow-sketch dark:shadow-sketch-white rounded-xl p-6 relative overflow-hidden group hover:-translate-y-2 hover:rotate-1 transition-all cursor-pointer rotate-1"
           >
-            <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
-              <MousePointerClick className="w-6 h-6 text-slate-400" />
+            <div className="absolute top-0 right-0 p-2 opacity-5 pointer-events-none">
+              <Sparkles className="w-32 h-32 text-black dark:text-white transform -rotate-12" />
             </div>
-            <div className="absolute top-0 right-0 p-4 opacity-10 pointer-events-none">
-              <Sparkles className="w-48 h-48 text-black dark:text-white transform -rotate-12" />
+            <div className="relative z-10 pointer-events-none">
+              <div className="bg-zenth-markerPink border-2 border-black dark:border-white w-12 h-12 rounded-full flex items-center justify-center mb-4 shadow-sketch transform rotate-12 shrink-0">
+                <Sparkles className="w-6 h-6 text-black" />
+              </div>
+              <h3 className="text-2xl font-serif font-bold text-black dark:text-white mb-2">
+                {featuresData.ai.title}
+              </h3>
+              <p className="text-base text-black dark:text-slate-200 leading-snug">
+                Tu coach inteligente. <br />
+                <span className="bg-zenth-markerYellow text-black px-1 mt-1 inline-block font-bold text-sm">Magic Input ✨ AI Magic</span>
+              </p>
             </div>
-            <div className="relative z-10 flex flex-col md:flex-row items-center gap-8 pointer-events-none">
-              <div className="bg-zenth-markerPink border-2 border-black dark:border-white w-20 h-20 rounded-full flex items-center justify-center shadow-sketch dark:shadow-sketch-white transform rotate-12 shrink-0">
-                <Sparkles className="w-10 h-10 text-black" />
+          </div>
+
+          {/* Feature 6: Entradas */}
+          <div
+            onClick={() => setSelectedFeature(featuresData.entries)}
+            className="bg-zenth-bg dark:bg-slate-900 border-2 border-black dark:border-white shadow-sketch dark:shadow-sketch-white rounded-xl p-6 relative overflow-hidden group hover:-translate-y-2 hover:-rotate-1 transition-all cursor-pointer rotate-0"
+          >
+            <div className="absolute -top-3 left-1/4 transform -translate-x-1/2 w-20 h-5 bg-zenth-markerYellow/60 rotate-2 z-20 pointer-events-none"></div>
+            <div className="relative z-10 pointer-events-none">
+              <div className="bg-zenth-markerBlue border-2 border-black dark:border-white w-12 h-12 rounded-lg flex items-center justify-center mb-4 shadow-sketch transform -rotate-3 shrink-0">
+                <PenTool className="w-6 h-6 text-black" />
               </div>
-              <div>
-                <h3 className="text-4xl font-serif font-bold text-black dark:text-white mb-4">
-                  {featuresData.ai.title}
-                </h3>
-                <p className="text-xl text-black dark:text-slate-200 leading-relaxed max-w-2xl">
-                  {featuresData.ai.shortDesc} <br />
-                  <span className="bg-zenth-markerYellow text-black px-1 mt-2 inline-block font-bold">Magic Input ✨ Auto-Agendado 📅 Micro-pasos 📝</span>
-                </p>
-              </div>
+              <h3 className="text-2xl font-serif font-bold text-black dark:text-white mb-2">
+                {featuresData.entries.title}
+              </h3>
+              <p className="text-base text-black dark:text-slate-200 leading-snug">
+                Lienzo infinito. <br />
+                <span className="bg-zenth-200 dark:bg-zenth-200/20 text-black dark:text-white px-1 mt-1 inline-block font-bold text-sm">Editor Pro ✍️ Multitipo</span>
+              </p>
             </div>
           </div>
 
         </div>
+
+
       </div>
 
       {/* MODAL OVERLAY */}

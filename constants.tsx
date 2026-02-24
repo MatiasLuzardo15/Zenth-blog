@@ -1,11 +1,62 @@
 import React from 'react';
 import { BlogPost, Feature } from './types';
-import { Timer, Trophy, Smile, Layout, Zap, Brain } from 'lucide-react';
+import { Timer, Trophy, Smile, Layout, Zap, Brain, PenTool } from 'lucide-react';
 
 // Usamos ruta absoluta para asegurar que el navegador la encuentre desde la raíz
 const heroImage = '/components/funcionalityheader.png';
 
 export const BLOG_POSTS: BlogPost[] = [
+  {
+    id: '14',
+    title: 'Más allá de las listas: Presentamos Entradas, tu nuevo lienzo de pensamientos en Zenth',
+    excerpt: 'Descubre cómo las Notas Zen transforman Zenth de una lista de tareas a un ecosistema completo para tu creatividad y reflexión profunda.',
+    content: `
+¿Alguna vez has sentido que una simple línea de texto no es suficiente para contener una gran idea? En Zenth, sabemos que la productividad no solo se trata de tachar tareas, sino de cultivar pensamientos. Por eso, presentamos **Entradas (Notas Zen)**, un espacio de lienzo infinito diseñado para que tus ideas respiren.
+
+Mientras que las Listas se enfocan en la ejecución del "hacer", las Entradas nacen para la reflexión, la creatividad y el registro profundo. Es el puente entre tu lista de pendientes y tu jardín digital de conocimiento.
+
+## 1. Zen Writing: Escritura sin fricciones
+Hemos diseñado un **Editor Rich-Text Nativo** que se siente instantáneo. Sin menús complicados que se interpongan en tu camino.
+
+- **Jerarquía Visual:** Organiza tus pensamientos con títulos (H2, H3).
+- **Estilos que Importan:** Negrita, cursiva, subrayado y tachado para dar énfasis.
+- **Citas en Bloque:** Resalta esos "Aha moments" o frases inspiradoras.
+- **Listas Inteligentes:** Porque a veces, dentro de una nota, necesitas otra lista.
+- **Highlighter:** Resalta texto como si usaras un marcador real para tus sesiones de estudio.
+
+## 2. Un Lienzo con Identidad Propia
+En Zenth, la estética es función. Queremos que cada nota se sienta como un objeto físico único.
+
+- **Cubiertas de Emojis:** Asigna un emoji a cada entrada. No solo es divertido, hace que encontrar una nota en tu cuadrícula sea una experiencia visual y rápida.
+- **Tipografía Dinámica:** ¿Estás escribiendo un diario? Usa la fuente *Escrito a mano*. ¿Notas de programación? Cambia a *Código*. Tenemos 10 estilos seleccionados para que el "mood" del texto coincida con tu contenido.
+
+## 3. Ciudadanos de Primera Clase: Las Imágenes
+Olvídate de procesos de subida tediosos. En las Notas Zen, las imágenes fluyen:
+- **Pegar y Listo:** Copia una imagen de cualquier sitio y pégala (Ctrl+V) directamente en tu nota.
+- **Drag & Drop:** Arrastra archivos desde tu escritorio.
+- **Redimensionamiento Vivo:** Haz clic en cualquier imagen para ajustar su tamaño (de 25% a 100%) y maquetar tu nota como si fuera un artículo de revista.
+
+---
+
+## 4. El Poder del Ecosistema: "Expandir a Nota"
+Esta es la función que lo cambia todo. ¿Tienes una tarea que se está volviendo compleja? Con un solo clic, puedes **Expandirla a una nota**. 
+
+Esa simple tarea de "Planificar viaje" se convierte instantáneamente en una Entrada completa donde puedes pegar mapas, itinerarios, presupuestos y reflexiones, manteniendo el vínculo con tu lista original.
+
+## 5. Seguridad y Enfoque
+Tus notas se sincronizan automáticamente con **Supabase**, asegurando que nunca pierdas una sola palabra. Además, el **Modo de Enfoque** expande el editor a pantalla completa con un elegante desenfoque de fondo, eliminando cualquier distracción del mundo exterior.
+
+## Conclusión
+Las Entradas no son solo notas; son el lugar donde el caos se convierte en estructura. Es tu **Infinite Canvas** para crecer, aprender y recordar.
+
+**[Prueba las nuevas Entradas en Zenth](/app) y empieza a escribir tu historia hoy mismo. ✨**
+`,
+    author: 'Matías Zenth',
+    date: '25 Feb, 2026',
+    imageUrl: 'https://images.unsplash.com/photo-1517842645767-c639042777db?auto=format&fit=crop&q=80&w=800',
+    category: 'Funcionalidad',
+    readTime: '7 min lectura'
+  },
   {
     id: '1',
     title: 'Libérate del Caos: Cómo Zenth Transforma tu Productividad en Paz Mental',
@@ -601,6 +652,7 @@ Zen está aquí para que dejes de preocuparte por *cómo* organizar y empieces a
   }
 ];
 
+
 export const FEATURES: Feature[] = [
   {
     id: 'f1',
@@ -631,5 +683,11 @@ export const FEATURES: Feature[] = [
     title: 'Zen AI Assistant',
     description: 'Usa Magic Input y Auto-Agendado inteligente con Google Gemini.',
     icon: <Zap className="w-6 h-6 text-zenth-600" />
+  },
+  {
+    id: 'f6',
+    title: 'Entradas (Notas Zen)',
+    description: 'Lienzo infinito con Editor Pro, imágenes y tipografía dinámica.',
+    icon: <PenTool className="w-6 h-6 text-zenth-600" />
   }
 ];
