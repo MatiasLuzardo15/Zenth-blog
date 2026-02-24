@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowRight, Brain, Trophy, Timer, Sparkles, Smile } from 'lucide-react';
+import { ArrowRight, Brain, Trophy, Timer, Sparkles, Smile, PenTool } from 'lucide-react';
 
 const Hero: React.FC = () => {
   const goToApp = () => {
@@ -67,6 +67,10 @@ const Hero: React.FC = () => {
               <div className="flex items-center space-x-2 opacity-70">
                 <Timer className="w-4 h-4 text-slate-600 dark:text-slate-300" />
                 <span className="font-sans text-base text-slate-600 dark:text-slate-300">Modo Enfoque</span>
+              </div>
+              <div className="flex items-center space-x-2 opacity-70">
+                <PenTool className="w-4 h-4 text-slate-600 dark:text-slate-300" />
+                <span className="font-sans text-base text-slate-600 dark:text-slate-300">Entradas (Notas Zen)</span>
               </div>
             </div>
           </div>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ChevronDown, ChevronUp, HelpCircle, Zap, Heart, Brain, Trophy, Sparkles, Smartphone, Mail, BookOpen } from 'lucide-react';
+import { ChevronDown, ChevronUp, HelpCircle, Zap, Heart, Brain, Trophy, Sparkles, Smartphone, Mail, BookOpen, Trash2 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 interface FAQItemProps {
@@ -94,6 +94,11 @@ const FAQS = [
         question: "¿Cómo funciona el asistente IA 'Zen'?",
         answer: "Zen utiliza Google Gemini para simplificar tu planificación. Puede autocompletar tareas con lenguaje natural, sugerir micro-pasos y ayudarte a agendar inteligentemente tus pendientes.",
         icon: <Sparkles className="w-6 h-6" />
+    },
+    {
+        question: "¿Puedo recuperar algo que borré por error?",
+        answer: "¡Sí! Con la nueva Papelera de Zenth, tus tareas y notas eliminadas se mueven a un espacio seguro. Puedes acceder a ella desde tu perfil (Me) y restaurar cualquier elemento en un clic, o borrarlos permanentemente si deseas liberar espacio.",
+        icon: <Trash2 className="w-6 h-6" />
     },
     {
         question: "¿Puedo usarlo en mi teléfono?",

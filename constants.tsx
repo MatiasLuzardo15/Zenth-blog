@@ -1,6 +1,6 @@
 import React from 'react';
 import { BlogPost, Feature } from './types';
-import { Timer, Trophy, Smile, Layout, Zap, Brain, PenTool } from 'lucide-react';
+import { Timer, Trophy, Smile, Layout, Zap, Brain, PenTool, Trash2 } from 'lucide-react';
 
 // Usamos ruta absoluta para asegurar que el navegador la encuentre desde la raíz
 const heroImage = '/components/funcionalityheader.png';
@@ -689,5 +689,11 @@ export const FEATURES: Feature[] = [
     title: 'Entradas (Notas Zen)',
     description: 'Lienzo infinito con Editor Pro, imágenes y tipografía dinámica.',
     icon: <PenTool className="w-6 h-6 text-zenth-600" />
+  },
+  {
+    id: 'f7',
+    title: 'Papelera Inteligente',
+    description: 'Recupera notas y tareas borradas por error. Soft-delete y gestión de recurrencias.',
+    icon: <Trash2 className="w-6 h-6 text-zenth-600" />
   }
 ];

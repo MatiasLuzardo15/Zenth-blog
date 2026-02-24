@@ -1,5 +1,5 @@
 import React from 'react';
-import { ChevronDown, Zap, Smartphone, Brain, Trophy, Mail, BookOpen, Layout, Sparkles, BarChart2, Rocket, Target, ArrowDown, PenTool, Type, Image } from 'lucide-react';
+import { ChevronDown, Zap, Smartphone, Brain, Trophy, Mail, BookOpen, Layout, Sparkles, BarChart2, Rocket, Target, ArrowDown, PenTool, Type, Image, Trash2 } from 'lucide-react';
 
 const GuideSection: React.FC<{
     title: string,
@@ -198,6 +198,18 @@ const UserGuide = ({ onBack }: { onBack: () => void }) => {
                     "Recuerda que una Entrada puede ser un diario, un wiki personal o la documentación de un objetivo."
                 ]
             }
+        },
+        {
+            title: "Papelera (Trash Bin)",
+            icon: <Trash2 className="w-8 h-8 text-slate-500" />,
+            color: "bg-[#f5f5f5]",
+            steps: [
+                "Accede a la Papelera desde tu perfil (Me) en la sección de cuenta.",
+                "Gestiona tus elementos eliminados en pestañas separadas para Tareas y Notas.",
+                "Restaura cualquier elemento a su lugar original con un solo clic.",
+                "Usa 'Vaciar Papelera' para borrar permanentemente y liberar espacio en tu nube.",
+                "Zenth detendrá automáticamente las recurrencias de las tareas movidas a la papelera."
+            ]
         }
     ];
 
