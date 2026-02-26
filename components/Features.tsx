@@ -172,7 +172,7 @@ const Features: React.FC<FeaturesProps> = ({ onNavigate }) => {
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-3/4 h-12 bg-zenth-markerYellow -z-10 rotate-1 rounded-sm mix-blend-multiply dark:mix-blend-normal dark:bg-zenth-markerYellow/80"></div>
           <h2 className="text-xl font-bold text-black dark:text-white tracking-widest uppercase mb-2 font-marker">Filosofía Zenth</h2>
           <p className="text-4xl sm:text-5xl lg:text-6xl font-serif font-bold text-black dark:text-white leading-tight transform -rotate-1 relative inline-block">
-            Productividad para humanos.
+            Domina tu tiempo y energía.
 
           </p>
           <p className="mt-4 text-slate-500 font-hand text-xl animate-pulse">
