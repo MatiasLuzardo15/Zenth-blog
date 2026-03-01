@@ -1,5 +1,5 @@
 import React from 'react';
-import { ChevronDown, Zap, Smartphone, Brain, Trophy, Mail, BookOpen, Layout, Sparkles, BarChart2, Rocket, Target, ArrowDown, PenTool, Type, Image, Trash2 } from 'lucide-react';
+import { ChevronDown, Zap, Smartphone, Brain, Trophy, Mail, BookOpen, Layout, Sparkles, BarChart2, Rocket, Target, ArrowDown, PenTool, Type, Image, Trash2, Keyboard, Wand2 } from 'lucide-react';
 
 const GuideSection: React.FC<{
     title: string,
@@ -198,6 +198,41 @@ const UserGuide = ({ onBack }: { onBack: () => void }) => {
                     "Recuerda que una Entrada puede ser un diario, un wiki personal o la documentación de un objetivo."
                 ]
             }
+        },
+        {
+            title: "Atajos del Editor de Notas",
+            icon: <Keyboard className="w-8 h-8 text-zenth-markerBlue" />,
+            color: "bg-[#ede7f6]",
+            steps: [
+                "Guardado: Usa Esc para guardar y cerrar al instante, o Ctrl+S para guardar el progreso sin salir.",
+                "Formato Básico: Ctrl+B (Negrita), Ctrl+I (Cursiva), Ctrl+U (Subrayado), Ctrl+Shift+X (Tachado).",
+                "Estructura: Ctrl+Alt+1 para Título Principal (H2) y Ctrl+Alt+2 para Título Secundario (H3).",
+                "Indentación y Listas: Tab inserta sangría. Ctrl+Shift+8 (Viñetas), Ctrl+Shift+7 (Numéricas).",
+                "Historial: Presiona Ctrl+Z para deshacer un error y Ctrl+Y para rehacer la última acción."
+            ],
+            extension: {
+                title: "Formato y Multimedia",
+                icon: <Image className="w-8 h-8 text-zenth-markerPink" />,
+                steps: [
+                    "Pegado Limpio (Ctrl+V): Zenth quita el formato externo al pegar, manteniendo la estructura (títulos/listas).",
+                    "Tipografías y Tamaños: Selecciona texto para cambiar entre más de 10 fuentes o ajustar el tamaño.",
+                    "Imágenes: Arrastra y suelta, o pega capturas de pantalla. Haz clic en ellas para elegir tamaño (XS a L).",
+                    "Resaltador y Separador: Añade marcador visual sobre texto clave e inserta líneas divisorias sutiles.",
+                    "Bloques Técnicos: Utiliza la opción de cita para destacar reflexiones, o código para apuntes técnicos."
+                ]
+            }
+        },
+        {
+            title: "Zen AI: Asistente de Escritura",
+            icon: <Wand2 className="w-8 h-8 text-zenth-markerYellow" />,
+            color: "bg-[#e8eaf6]",
+            steps: [
+                "Tu editor tiene IA integrada. Selecciona una porción de texto y presiona 'Zen AI' para ver la magia.",
+                "Mejorar redacción: Reescribe un párrafo confuso dándole un tono más claro, correcto y profesional.",
+                "Resumir texto: Condensa párrafos gigantescos extrayendo única y exclusivamente las ideas principales.",
+                "Expandir idea: Toma una frase corta y la IA la desarrollará de forma coherente y con mayor profundidad.",
+                "Supera cualquier bloqueo creativo al instante, logrando notas perfectas sin abandonar el editor."
+            ]
         },
         {
             title: "Papelera (Trash Bin)",
