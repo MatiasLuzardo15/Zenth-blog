@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 import { Menu, X, Moon, Sun, ArrowUpRight } from 'lucide-react';
 
 interface NavbarProps {
@@ -9,6 +10,21 @@ interface NavbarProps {
 }
 
 type NavPage = 'home' | 'blog' | 'faq' | 'guide';
+
+const mobileMenuVariants = {
+  closed: { opacity: 0, y: -12 },
+  open: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.32, ease: [0.16, 1, 0.3, 1], staggerChildren: 0.045, delayChildren: 0.05 },
+  },
+  exit: { opacity: 0, y: -8, transition: { duration: 0.2, ease: [0.4, 0, 1, 1] } },
+};
+
+const mobileMenuItemVariants = {
+  closed: { opacity: 0, y: -8 },
+  open: { opacity: 1, y: 0, transition: { duration: 0.26, ease: [0.16, 1, 0.3, 1] } },
+};
 
 const NAV_LINKS: { name: string; page: NavPage; id?: string }[] = [
   { name: 'Funciones', page: 'home', id: 'features' },
@@ -82,7 +98,7 @@ const Navbar: React.FC<NavbarProps> = ({ isDarkMode, toggleTheme, currentPage, o
           </div>
 
           {/* Acciones */}
-          <div className="flex shrink-0 items-center gap-2 lg:justify-self-end">
+          <div className="ml-auto flex shrink-0 items-center gap-2 lg:ml-0 lg:justify-self-end">
             <button
               onClick={toggleTheme}
               className="fr-btn fr-btn-icon"
@@ -109,27 +125,40 @@ const Navbar: React.FC<NavbarProps> = ({ isDarkMode, toggleTheme, currentPage, o
       </nav>
 
       {/* Overlay móvil */}
-      {isOpen && (
-        <div className="fixed inset-0 z-40 bg-canvas pt-14 md:hidden">
-          <div className="flex flex-col gap-1 px-4 py-8">
-            {NAV_LINKS.map(link => (
-              <button
-                key={link.name}
-                onClick={() => handleNavClick(link.page, link.id)}
-                className="flex items-center justify-between rounded-medium px-3 py-4 text-left text-[22px] font-display tracking-[-0.03em] text-ink transition-colors hover:bg-surface-1"
-              >
-                {link.name}
-                <ArrowUpRight className="h-5 w-5 text-ink-muted" />
-              </button>
-            ))}
+      <AnimatePresence initial={false}>
+        {isOpen && (
+          <motion.div
+            initial="closed"
+            animate="open"
+            exit="exit"
+            variants={mobileMenuVariants}
+            className="fixed inset-0 z-40 overflow-y-auto bg-canvas pt-14 md:hidden"
+          >
+            <div className="flex flex-col gap-1 px-4 py-8">
+              {NAV_LINKS.map(link => (
+                <motion.button
+                  key={link.name}
+                  variants={mobileMenuItemVariants}
+                  onClick={() => handleNavClick(link.page, link.id)}
+                  className="flex items-center justify-between rounded-medium px-3 py-4 text-left text-[22px] font-display tracking-[-0.03em] text-ink transition-colors hover:bg-surface-1"
+                >
+                  {link.name}
+                  <ArrowUpRight className="h-5 w-5 text-ink-muted" />
+                </motion.button>
+              ))}
 
-            <button onClick={goToApp} className="fr-btn fr-btn-primary fr-btn-lg mt-6 w-full">
-              Abrir Zenth
-              <ArrowUpRight className="h-4 w-4" />
-            </button>
-          </div>
-        </div>
-      )}
+              <motion.button
+                variants={mobileMenuItemVariants}
+                onClick={goToApp}
+                className="fr-btn fr-btn-primary fr-btn-lg mt-6 w-full"
+              >
+                Abrir Zenth
+                <ArrowUpRight className="h-4 w-4" />
+              </motion.button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 };

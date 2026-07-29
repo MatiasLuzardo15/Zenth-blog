@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import {
   X, ArrowUpRight, Users, PenLine, Timer, CalendarDays, Trophy, HeartPulse,
-  Sparkles, Trash2, Palette, LayoutDashboard, Sun,
+  Sparkles, Trash2, Palette, LayoutDashboard, Sun, ChevronDown,
 } from 'lucide-react';
 
 interface FeatureDetail {
@@ -171,6 +171,7 @@ const SECONDARY_ORDER = ['today', 'boards', 'focus', 'calendar', 'progress', 'mo
 
 const Features: React.FC<FeaturesProps> = ({ onNavigate }) => {
   const [selected, setSelected] = useState<FeatureDetail | null>(null);
+  const [showAllMobile, setShowAllMobile] = useState(false);
 
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => {
@@ -235,14 +236,15 @@ const Features: React.FC<FeaturesProps> = ({ onNavigate }) => {
 
         {/* Resto de funciones */}
         <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {SECONDARY_ORDER.map(key => {
+          {SECONDARY_ORDER.map((key, index) => {
             const feature = FEATURE_DETAILS[key];
             const Icon = feature.icon;
+            const isInitiallyHiddenOnMobile = index >= 3 && !showAllMobile;
             return (
               <button
                 key={feature.id}
                 onClick={() => setSelected(feature)}
-                className="fr-card group flex h-full flex-col items-start text-left transition-transform duration-300 hover:-translate-y-1"
+                className={`fr-card group h-full flex-col items-start text-left transition-transform duration-300 hover:-translate-y-1 ${isInitiallyHiddenOnMobile ? 'hidden sm:flex' : 'flex'}`}
               >
                 <Icon className="h-5 w-5 text-ink" strokeWidth={1.75} />
                 <h3 className="t-headline mt-5 text-ink">{feature.title}</h3>
@@ -255,6 +257,19 @@ const Features: React.FC<FeaturesProps> = ({ onNavigate }) => {
             );
           })}
         </div>
+
+        <button
+          type="button"
+          onClick={() => setShowAllMobile(current => !current)}
+          aria-expanded={showAllMobile}
+          className="fr-btn fr-btn-translucent mx-auto mt-5 flex sm:hidden"
+        >
+          {showAllMobile ? 'Mostrar menos' : `Ver las ${SECONDARY_ORDER.length - 3} restantes`}
+          <ChevronDown
+            className={`h-4 w-4 transition-transform ${showAllMobile ? 'rotate-180' : ''}`}
+            aria-hidden="true"
+          />
+        </button>
       </div>
 
       {/* Modal de detalle */}

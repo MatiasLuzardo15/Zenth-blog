@@ -9,9 +9,10 @@ import { BoardView } from './demo/BoardView';
 import { FocusView } from './demo/FocusView';
 import { DetailsPanel, EditPanel, FocusTaskPanel } from './demo/panels';
 import {
-    APPEARS_AT, BOARD_AT, COMPLETES_AT, CYCLE, DESIGN_H, DESIGN_W, DETAILS_AT,
-    EDIT_AT, FOCUS_ACTION_AT, FOCUS_RUNNING_AT, FOCUS_START_AT, FOCUS_VIEW_AT,
-    MIN_SCALE, PANEL_CLOSE_AT, PRESS_AT, RETURN_TODAY_AT, TASK_OPEN_AT,
+    APPEARS_AT, ARCHIVE_AT, ARCHIVE2_AT, BOARD_AT, COMPLETES_AT, CYCLE, DESIGN_H,
+    DESIGN_W, DETAILS_AT, DRAG1_AT, DRAG2_AT, DRAG3_AT, EDIT_AT, FOCUS_ACTION_AT,
+    FOCUS_RUNNING_AT, FOCUS_START_AT, FOCUS_VIEW_AT, MIN_SCALE, NEW1_OPEN,
+    PANEL_CLOSE_AT, PRESS_AT, RETURN_TODAY_AT, SWAP_AT, TASK_OPEN_AT,
     TODAY_TASK, TYPE_END, TYPE_START, typewriter,
 } from './demo/timeline';
 
@@ -22,6 +23,25 @@ const NAV = [
     { label: 'Notas', icon: BookOpen },
     { label: 'Objetivos', icon: BarChart3 },
 ];
+
+/**
+ * Punto horizontal que sigue la cámara en pantallas estrechas. Los cambios se
+ * adelantan unos milisegundos al gesto que se va a mostrar: así la cámara ya
+ * está quieta cuando aparece el panel, la tarjeta arrastrada o el checkbox.
+ */
+const boardCameraFocus = (elapsed: number) => {
+    const lead = 650;
+    if (elapsed < NEW1_OPEN) return .42;
+    // Las tres altas ocurren casi seguidas: mantener el panel a la vista evita
+    // que la cámara rebote entre la columna Inicio y el editor.
+    if (elapsed < DRAG1_AT - lead) return .84;
+    if (elapsed < DRAG2_AT - lead) return .14;
+    if (elapsed < DRAG3_AT - lead) return .55;
+    if (elapsed < SWAP_AT - lead) return .32;
+    if (elapsed < ARCHIVE_AT - lead) return .12;
+    if (elapsed < ARCHIVE2_AT - lead) return .64;
+    return .16;
+};
 
 /**
  * Demo animada del producto. El primer acto muestra la agenda de Hoy; cuando
@@ -100,11 +120,11 @@ const AppDemo: React.FC = () => {
 
     /** En móvil, la cámara sigue la zona donde está ocurriendo la acción. */
     const cropFocus = focusActive
-        ? .5
+        ? (elapsed >= FOCUS_RUNNING_AT ? .5 : .24)
         : boardActive
-            ? (elapsed < BOARD_AT + 1200 ? .48 : .7)
+            ? boardCameraFocus(elapsed)
             : returningToday
-                ? (panel === 'task' ? .72 : .98)
+                ? (panel === 'task' ? .72 : .86)
                 : (elapsed < PRESS_AT || elapsed > CYCLE - 1200 ? .02 : .98);
 
     const journeyCursor = elapsed < TASK_OPEN_AT
@@ -133,7 +153,7 @@ const AppDemo: React.FC = () => {
                         width: `${DESIGN_W}px`,
                         height: `${DESIGN_H}px`,
                         transform: `translateX(${-overflowX * cropFocus}px) scale(${scale})`,
-                        transition: reduceMotion ? undefined : 'transform 900ms cubic-bezier(0.65, 0, 0.35, 1)',
+                        transition: reduceMotion ? undefined : 'transform 720ms cubic-bezier(0.65, 0, 0.35, 1)',
                     }}
                 >
                     <div className="flex h-[72px] items-center justify-between border-b border-hairline-soft bg-canvas px-6">
