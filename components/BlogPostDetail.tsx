@@ -1,248 +1,305 @@
 import React, { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
+import { ArrowLeft, ArrowUpRight, Check, Share2 } from 'lucide-react';
 import { BlogPost } from '../types';
-import { ArrowLeft, Calendar, User, Clock, Share2 } from 'lucide-react';
 
 interface BlogPostDetailProps {
     post: BlogPost;
     onBack: () => void;
 }
 
+/**
+ * Formato en línea: **negrita**, *cursiva*, `código` y [texto](url).
+ * El enlace se procesa primero porque su texto puede contener negritas, y al
+ * revés la negrita se comería los corchetes.
+ */
+const renderInline = (text: string, keyPrefix: string): React.ReactNode[] => {
+    const nodes: React.ReactNode[] = [];
+    const pattern = /\[([^\]]+)\]\(([^)]+)\)|\*\*([^*]+)\*\*|`([^`]+)`|\*([^*]+)\*/g;
+    let lastIndex = 0;
+    let match: RegExpExecArray | null;
+    let i = 0;
+
+    while ((match = pattern.exec(text)) !== null) {
+        if (match.index > lastIndex) nodes.push(text.slice(lastIndex, match.index));
+        const key = `${keyPrefix}-i${i++}`;
+
+        if (match[1] !== undefined) {
+            const href = match[2];
+            const isExternal = /^https?:\/\//.test(href);
+            nodes.push(
+                <a
+                    key={key}
+                    href={href}
+                    className="fr-link"
+                    {...(isExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+                >
+                    {match[1]}
+                </a>
+            );
+        } else if (match[3] !== undefined) {
+            nodes.push(<strong key={key} className="font-semibold text-ink">{match[3]}</strong>);
+        } else if (match[4] !== undefined) {
+            nodes.push(
+                <code key={key} className="rounded-small bg-surface-2 px-1.5 py-0.5 text-[0.9em] text-ink">
+                    {match[4]}
+                </code>
+            );
+        } else if (match[5] !== undefined) {
+            nodes.push(<em key={key}>{match[5]}</em>);
+        }
+
+        lastIndex = pattern.lastIndex;
+    }
+
+    if (lastIndex < text.length) nodes.push(text.slice(lastIndex));
+    return nodes;
+};
+
+const isTableRow = (line: string) => line.trim().startsWith('|');
+const isListItem = (line: string) => /^\s*[-*]\s+/.test(line);
+const splitRow = (line: string) =>
+    line.trim().replace(/^\|/, '').replace(/\|$/, '').split('|').map(cell => cell.trim());
+
+/**
+ * Markdown reducido: sólo lo que el contenido usa de verdad. Agrupa las líneas
+ * en bloques antes de pintar, porque listas y tablas necesitan ver a sus
+ * vecinas para renderizarse como un elemento único.
+ */
+const renderContent = (content: string): React.ReactNode[] => {
+    const lines = content.split('\n');
+    const blocks: React.ReactNode[] = [];
+    let i = 0;
+
+    while (i < lines.length) {
+        const line = lines[i];
+        const trimmed = line.trim();
+
+        if (trimmed === '') { i++; continue; }
+
+        // Tabla
+        if (isTableRow(line)) {
+            const rows: string[][] = [];
+            while (i < lines.length && isTableRow(lines[i])) {
+                // La línea de guiones sólo separa cabecera de cuerpo.
+                if (!/^[\s|:-]+$/.test(lines[i])) rows.push(splitRow(lines[i]));
+                i++;
+            }
+            const [header, ...body] = rows;
+            blocks.push(
+                <div key={`t-${i}`} className="my-10 overflow-x-auto rounded-large border border-hairline">
+                    <table className="w-full border-collapse text-left">
+                        <thead>
+                            <tr className="bg-surface-1">
+                                {header?.map((cell, c) => (
+                                    <th key={c} className="t-caption whitespace-nowrap px-4 py-3 text-ink">
+                                        {renderInline(cell, `th-${c}`)}
+                                    </th>
+                                ))}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {body.map((row, r) => (
+                                <tr key={r} className="border-t border-hairline-soft">
+                                    {row.map((cell, c) => (
+                                        <td key={c} className="t-body-sm px-4 py-3 align-top text-ink-muted">
+                                            {renderInline(cell, `td-${r}-${c}`)}
+                                        </td>
+                                    ))}
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+            );
+            continue;
+        }
+
+        // Lista
+        if (isListItem(line)) {
+            const items: string[] = [];
+            while (i < lines.length && isListItem(lines[i])) {
+                items.push(lines[i].trim().replace(/^[-*]\s+/, ''));
+                i++;
+            }
+            blocks.push(
+                <ul key={`l-${i}`} className="my-6 space-y-3">
+                    {items.map((item, idx) => (
+                        <li key={idx} className="flex gap-3">
+                            <span className="mt-[11px] h-1 w-1 shrink-0 rounded-full bg-accent" />
+                            <span className="t-body-lg text-ink-muted">{renderInline(item, `li-${idx}`)}</span>
+                        </li>
+                    ))}
+                </ul>
+            );
+            continue;
+        }
+
+        // Imagen
+        const image = trimmed.match(/^!\[(.*?)\]\((.*?)\)$/);
+        if (image) {
+            blocks.push(
+                <figure key={`img-${i}`} className="my-12">
+                    <img
+                        src={image[2]}
+                        alt={image[1]}
+                        loading="lazy"
+                        className="w-full rounded-card border border-hairline"
+                    />
+                    {image[1] && (
+                        <figcaption className="t-micro mt-3 text-center text-ink-muted">{image[1]}</figcaption>
+                    )}
+                </figure>
+            );
+            i++;
+            continue;
+        }
+
+        if (trimmed.startsWith('### ')) {
+            blocks.push(
+                <h3 key={`h3-${i}`} className="t-headline mt-10 mb-3 text-ink">
+                    {renderInline(trimmed.slice(4), `h3-${i}`)}
+                </h3>
+            );
+            i++;
+            continue;
+        }
+
+        if (trimmed.startsWith('## ')) {
+            blocks.push(
+                <h2 key={`h2-${i}`} className="t-display-md mt-14 mb-4 text-ink">
+                    {renderInline(trimmed.slice(3), `h2-${i}`)}
+                </h2>
+            );
+            i++;
+            continue;
+        }
+
+        if (trimmed.startsWith('# ')) {
+            blocks.push(
+                <h2 key={`h1-${i}`} className="t-display-md mt-14 mb-4 text-ink">
+                    {renderInline(trimmed.slice(2), `h1-${i}`)}
+                </h2>
+            );
+            i++;
+            continue;
+        }
+
+        if (trimmed.startsWith('> ')) {
+            blocks.push(
+                <blockquote key={`q-${i}`} className="my-8 border-l-2 border-accent pl-5">
+                    <p className="t-subhead text-ink">{renderInline(trimmed.slice(2), `q-${i}`)}</p>
+                </blockquote>
+            );
+            i++;
+            continue;
+        }
+
+        if (/^-{3,}$/.test(trimmed)) {
+            blocks.push(<hr key={`hr-${i}`} className="my-14 border-hairline" />);
+            i++;
+            continue;
+        }
+
+        blocks.push(
+            <p key={`p-${i}`} className="t-body-lg my-5 text-ink-muted">
+                {renderInline(trimmed, `p-${i}`)}
+            </p>
+        );
+        i++;
+    }
+
+    return blocks;
+};
+
 const BlogPostDetail: React.FC<BlogPostDetailProps> = ({ post, onBack }) => {
-    const [showToast, setShowToast] = useState(false);
+    const [copied, setCopied] = useState(false);
 
     useEffect(() => {
         window.scrollTo(0, 0);
-    }, []);
+    }, [post.id]);
 
     const handleShare = async () => {
         if (navigator.share) {
             try {
-                await navigator.share({
-                    title: post.title,
-                    text: post.excerpt,
-                    url: window.location.href,
-                });
-            } catch (error) {
-                console.log('Error sharing:', error);
+                await navigator.share({ title: post.title, text: post.excerpt, url: window.location.href });
+                return;
+            } catch {
+                // Compartir cancelado: caemos al portapapeles.
             }
-        } else {
-            navigator.clipboard.writeText(window.location.href);
-            setShowToast(true);
-            setTimeout(() => setShowToast(false), 3000);
         }
+        await navigator.clipboard.writeText(window.location.href);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2500);
     };
 
-    // Construct absolute URL for OG Image
     const ogImageUrl = post.imageUrl
         ? (post.imageUrl.startsWith('http') ? post.imageUrl : `${window.location.origin}${post.imageUrl}`)
         : `${window.location.origin}/blog/appview.png`;
 
-    // Función para renderizar el contenido de forma "sketchy"
-    const renderContent = (content: string) => {
-        const lines = content.split('\n');
-        return lines.map((line, index) => {
-            if (line.startsWith('# ')) {
-                return (
-                    <h1 key={index} className="text-4xl md:text-6xl font-marker text-black dark:text-white mb-8 mt-12 leading-tight">
-                        <span className="relative">
-                            {line.replace('# ', '')}
-                            <svg className="absolute -bottom-2 left-0 w-full h-3 text-zenth-markerBlue/40" viewBox="0 0 100 10" preserveAspectRatio="none">
-                                <path d="M0,5 Q25,0 50,5 T100,5" fill="none" stroke="currentColor" strokeWidth="4" />
-                            </svg>
-                        </span>
-                    </h1>
-                );
-            }
-            if (line.startsWith('## ')) {
-                return (
-                    <h2 key={index} className="text-3xl md:text-4xl font-serif font-bold text-slate-800 dark:text-white mb-6 mt-12 flex items-center">
-                        <span className="bg-zenth-markerYellow dark:bg-zenth-markerYellow/20 px-2 mr-2 transform -rotate-1">
-                            {line.replace('## ', '')}
-                        </span>
-                    </h2>
-                );
-            }
-            if (line.startsWith('### ')) {
-                return (
-                    <h3 key={index} className="text-2xl md:text-3xl font-serif font-bold text-slate-800 dark:text-white mb-4 mt-8">
-                        {line.replace('### ', '')}
-                    </h3>
-                );
-            }
-            if (line.startsWith('---')) {
-                return <hr key={index} className="my-12 border-t-2 border-dashed border-slate-300 dark:border-slate-700" />;
-            }
-            if (line.startsWith('|')) {
-                // Simple table rendering logic for the levels table
-                if (line.includes('---')) return null;
-                const cells = line.split('|').filter(c => c.trim() !== '');
-                const isHeader = index === lines.findIndex(l => l.startsWith('|')) && !lines[index - 1]?.startsWith('|');
-
-                return (
-                    <div key={index} className={`grid grid-cols-4 gap-4 p-4 ${isHeader ? 'bg-slate-100 dark:bg-slate-800 font-bold border-2 border-black dark:border-white' : 'border-b border-slate-200 dark:border-slate-800'} font-sans`}>
-                        {cells.map((cell, i) => (
-                            <div key={i} className="text-sm md:text-base">{cell.trim().replace(/\*\*/g, '')}</div>
-                        ))}
-                    </div>
-                );
-            }
-            if (line.trim().startsWith('![') && line.includes('](')) {
-                // Parse markdown image: ![Alt Text](url)
-                const match = line.match(/!\[(.*?)\]\((.*?)\)/);
-                if (match) {
-                    const altText = match[1];
-                    const imageUrl = match[2];
-                    return (
-                        <div key={index} className="my-12 flex flex-col items-center">
-                            <img
-                                src={imageUrl}
-                                alt={altText}
-                                className="max-w-full h-auto object-contain hover:scale-[1.01] transition-transform duration-500 drop-shadow-2xl"
-                            />
-                            {altText && <p className="text-center text-sm text-slate-500 italic mt-4">{altText}</p>}
-                        </div>
-                    );
-                }
-            }
-            if (line.trim().startsWith('- ') || line.trim().startsWith('* ')) {
-                const isAsterisk = line.trim().startsWith('* ');
-                const listContent = line.trim().replace(/^[-*]\s+/, '');
-                return (
-                    <li key={index} className="ml-6 mb-3 list-none relative flex items-start text-lg text-slate-700 dark:text-slate-300 font-sans">
-                        <span className={`${isAsterisk ? 'text-zenth-markerPink' : 'text-zenth-markerBlue'} mr-2 text-2xl leading-none`}>
-                            {isAsterisk ? '✦' : '○'}
-                        </span>
-                        <span>{listContent}</span>
-                    </li>
-                );
-            }
-            if (line.trim() === '') return <br key={index} />;
-
-            // Procesa negritas básicas
-            const processedLine = line.split('**').map((part, i) =>
-                i % 2 === 1 ? <strong key={i} className="text-black dark:text-white font-bold bg-zenth-markerYellow/30 px-1">{part}</strong> : part
-            );
-
-            return (post.title.includes('Zenth') && line.includes('Nivel')) ? (
-                <p key={index} className="text-xl md:text-2xl text-slate-700 dark:text-slate-300 font-serif leading-relaxed mb-6 italic border-l-4 border-zenth-markerBlue pl-6">
-                    {processedLine}
-                </p>
-            ) : (
-                <p key={index} className="text-lg md:text-xl text-slate-700 dark:text-slate-300 font-sans leading-relaxed mb-6">
-                    {processedLine}
-                </p>
-            );
-        });
-    };
-
     return (
-        <div className="pt-24 pb-20 bg-zenth-bg dark:bg-zenth-darkBg min-h-screen relative">
+        <div className="min-h-screen pt-28 pb-24 lg:pt-36">
             <Helmet>
                 <title>{post.title} | Zenth Blog</title>
                 <meta property="og:title" content={post.title} />
                 <meta property="og:description" content={post.excerpt} />
                 <meta property="og:image" content={ogImageUrl} />
                 <meta property="og:url" content={window.location.href} />
-
                 <meta name="twitter:title" content={post.title} />
                 <meta name="twitter:description" content={post.excerpt} />
                 <meta name="twitter:image" content={ogImageUrl} />
             </Helmet>
 
-            {/* Toast Notification */}
-            {showToast && (
-                <div className="fixed top-24 right-4 z-50 bg-zenth-markerYellow text-black px-6 py-3 rounded-lg border-2 border-black shadow-sketch animate-fade-in-down flex items-center gap-2">
-                    <Share2 className="w-5 h-5" />
-                    <span className="font-bold font-sans">¡Enlace copiado!</span>
-                </div>
-            )}
-
-            <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-
-                {/* Navigation / Actions */}
-                <div className="flex items-center justify-between mb-12">
+            <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+                <div className="mb-10 flex items-center justify-between gap-4">
                     <button
                         onClick={onBack}
-                        className="group flex items-center text-lg font-bold text-slate-600 dark:text-slate-400 hover:text-black dark:hover:text-white transition-colors"
+                        className="t-caption group inline-flex items-center gap-2 text-ink-muted transition-colors hover:text-ink"
                     >
-                        <ArrowLeft className="w-5 h-5 mr-2 group-hover:-translate-x-1 transition-transform" />
+                        <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-0.5" />
                         Volver al blog
                     </button>
-                    <div className="flex space-x-4">
-                        <button
-                            onClick={handleShare}
-                            className="p-2 rounded-full border-2 border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors group relative"
-                            title="Compartir artículo"
-                        >
-                            <Share2 className="w-5 h-5 text-slate-600 dark:text-slate-400 group-hover:text-zenth-markerBlue transition-colors" />
-                        </button>
-                    </div>
+
+                    <button onClick={handleShare} className="fr-btn fr-btn-secondary" aria-live="polite">
+                        {copied ? <Check className="h-4 w-4" /> : <Share2 className="h-4 w-4" />}
+                        {copied ? 'Enlace copiado' : 'Compartir'}
+                    </button>
                 </div>
 
-                {/* Hero Image */}
+                <header>
+                    <div className="t-micro flex flex-wrap items-center gap-2 text-ink-muted">
+                        <span>{post.category}</span>
+                        <span aria-hidden="true">·</span>
+                        <span>{post.date}</span>
+                        <span aria-hidden="true">·</span>
+                        <span>{post.readTime || '5 min lectura'}</span>
+                        <span aria-hidden="true">·</span>
+                        <span>{post.author}</span>
+                    </div>
+
+                    <h1 className="t-display-lg mt-5 text-ink">{post.title}</h1>
+                    <p className="t-subhead mt-6 text-ink-muted">{post.excerpt}</p>
+                </header>
+
                 {post.imageUrl && (
-                    <div className="relative mb-12 group">
-                        <div className="absolute inset-0 bg-black dark:bg-white rounded-lg translate-x-2 translate-y-2 group-hover:translate-x-3 group-hover:translate-y-3 transition-transform duration-300 opacity-20"></div>
-                        <div className="relative aspect-video overflow-hidden border-2 border-black dark:border-white rounded-lg bg-gray-100">
-                            <img
-                                src={post.imageUrl}
-                                alt={post.title}
-                                className="w-full h-full object-cover"
-                            />
-                            <div className="absolute top-4 right-4 bg-zenth-markerYellow text-black px-4 py-1 font-bold transform rotate-2 border-2 border-black">
-                                {post.category}
-                            </div>
-                        </div>
+                    <div className="my-12 overflow-hidden rounded-card border border-hairline">
+                        <img src={post.imageUrl} alt="" className="aspect-[16/9] w-full object-cover" />
                     </div>
                 )}
 
-                {/* Article Info */}
-                <div className="mb-12 border-b-2 border-dashed border-slate-200 dark:border-slate-800 pb-8">
-                    <div className="flex flex-wrap items-center gap-6 text-slate-500 dark:text-slate-400 font-bold mb-6">
-                        <div className="flex items-center">
-                            <User className="w-4 h-4 mr-2" />
-                            <span>{post.author}</span>
-                        </div>
-                        <div className="flex items-center">
-                            <Calendar className="w-4 h-4 mr-2" />
-                            <span>{post.date}</span>
-                        </div>
-                        <div className="flex items-center">
-                            <Clock className="w-4 h-4 mr-2" />
-                            <span>{post.readTime || '5 min lectura'}</span>
-                        </div>
-                    </div>
-                    <h1 className="text-4xl md:text-6xl font-serif font-black text-slate-900 dark:text-white leading-tight mb-6">
-                        {post.title}
-                    </h1>
-                    <p className="text-xl md:text-2xl text-slate-600 dark:text-slate-300 font-sans italic leading-relaxed">
-                        {post.excerpt}
+                <article>{renderContent(post.content)}</article>
+
+                <div className="fr-card-featured mt-20 text-center">
+                    <h2 className="t-display-md text-ink">¿Lo probamos?</h2>
+                    <p className="t-body-lg mx-auto mt-3 max-w-md text-ink-muted">
+                        Zenth es gratis y se instala desde el navegador. Diez minutos bastan para saber
+                        si encaja contigo.
                     </p>
+                    <a href="https://zenth.space/app" className="fr-btn fr-btn-primary fr-btn-lg mt-8">
+                        Empezar gratis
+                        <ArrowUpRight className="h-[18px] w-[18px]" />
+                    </a>
                 </div>
-
-                {/* Content Area */}
-                <article className="prose prose-slate dark:prose-invert max-w-none">
-                    {renderContent(post.content)}
-                </article>
-
-                {/* Call to Action */}
-                <div className="mt-20 bg-zenth-markerBlue/10 dark:bg-zenth-markerBlue/5 border-2 border-zenth-markerBlue rounded-2xl p-8 md:p-12 relative overflow-hidden">
-                    <div className="absolute -top-10 -right-10 w-40 h-40 bg-zenth-markerBlue opacity-10 rounded-full blur-3xl"></div>
-                    <div className="relative z-10 text-center">
-                        <h3 className="text-3xl font-marker mb-4 text-slate-900 dark:text-white">¿Quieres vivir la experiencia Zenth?</h3>
-                        <p className="text-xl font-sans text-slate-600 dark:text-slate-300 mb-8 max-w-lg mx-auto">
-                            Empieza hoy mismo a subir de nivel y transforma tu caos en calma absoluta.
-                        </p>
-                        <a
-                            href="https://zenth.space/app"
-                            className="inline-block bg-black dark:bg-white text-white dark:text-black px-10 py-4 rounded-xl font-marker text-xl shadow-sketch-lg dark:shadow-sketch-lg-white hover:scale-105 transition-transform"
-                        >
-                            Empezar ahora ✨
-                        </a>
-                    </div>
-                </div>
-
             </div>
         </div>
     );

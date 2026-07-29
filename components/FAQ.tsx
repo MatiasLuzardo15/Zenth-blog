@@ -1,48 +1,132 @@
 import React, { useState } from 'react';
-import { ChevronDown, ChevronUp, HelpCircle, Zap, Heart, Brain, Trophy, Sparkles, Smartphone, Mail, BookOpen, Trash2 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { ArrowLeft, ArrowUpRight, Plus, Mail, BookOpen } from 'lucide-react';
 
-interface FAQItemProps {
+interface FAQEntry {
     question: string;
     answer: React.ReactNode;
-    icon?: React.ReactNode;
 }
 
-const FAQItem: React.FC<FAQItemProps> = ({ question, answer, icon }) => {
+const FAQS: FAQEntry[] = [
+    {
+        question: '¿Qué es Zenth exactamente?',
+        answer:
+            'Un planificador visual que reúne cuatro cosas en una sola aplicación: la agenda del día organizada por bloques de energía, pizarras tipo tablero que puedes compartir con otras personas, un espacio de entradas para notas, tablas, archivos y notas de voz, y un modo enfoque que mide tu atención real. Encima de todo eso hay una capa ligera de progreso —XP, niveles y rachas— y un registro de ánimo.',
+    },
+    {
+        question: '¿Es gratuito?',
+        answer: (
+            <>
+                Sí. Todas las funciones —incluidas las pizarras compartidas y la sincronización— están
+                disponibles sin pagar. No hay plan de pago ni funciones bloqueadas. Si quieres ayudar
+                con el coste de los servidores, puedes{' '}
+                <a
+                    href="https://www.paypal.com/donate/?hosted_button_id=2ZXKDRWUK3M6C"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="fr-link"
+                >
+                    donar aquí
+                </a>
+                , pero es completamente opcional.
+            </>
+        ),
+    },
+    {
+        question: '¿Puedo compartir una pizarra con otras personas?',
+        answer:
+            'Sí. Cada pizarra nace privada y se convierte en un espacio compartido en cuanto invitas a alguien, por correo electrónico o generando un enlace de invitación. A partir de ahí sus tarjetas son de todos los miembros y los cambios aparecen en tiempo real, sin recargar la página.',
+    },
+    {
+        question: '¿Qué puede hacer cada rol?',
+        answer:
+            'Hay tres. El Administrador gestiona todo: invita, expulsa, cambia roles, renombra la pizarra y edita el contenido. El Miembro crea, edita, mueve, completa y borra tarjetas, y gestiona las listas, pero no administra la pizarra. El Observador solo lee. Aparte está el propietario, que es quien la creó: siempre es administrador, es el único que puede eliminarla y puede transferir la propiedad a otro administrador. Una pizarra nunca puede quedarse sin administradores.',
+    },
+    {
+        question: '¿Qué significa la visibilidad «con enlace»?',
+        answer:
+            'Es el segundo eje, independiente de los miembros. Una pizarra privada solo la ven sus miembros. Si la cambias a «con enlace», Zenth genera una dirección pública de solo lectura: quien la tenga puede mirar el tablero sin cuenta y sin poder tocar nada. Puedes volver a privada cuando quieras.',
+    },
+    {
+        question: '¿Puedo conectar mi Google Calendar?',
+        answer:
+            'Sí, con permiso de solo lectura. Eliges qué calendarios quieres ver y sus eventos aparecen en Hoy junto a tus tareas. La sincronización se actualiza sola cada cinco minutos y puedes pausarla en cualquier momento. Los eventos no entran en ninguna pizarra por su cuenta: si quieres llevarlos a una, hay que hacerlo explícitamente desde «Llevar eventos a Todo».',
+    },
+    {
+        question: '¿Qué puedo guardar en Entradas?',
+        answer:
+            'Notas de texto enriquecido, tablas con fórmulas y formato de celda, archivos que subas (PDF, imágenes, documentos) y notas de voz grabadas desde el micrófono. Todo se organiza en carpetas y etiquetas, con un buscador global. Cualquier tarea puede expandirse a una nota si se te queda pequeña.',
+    },
+    {
+        question: '¿Cómo funciona el modo enfoque?',
+        answer:
+            'Eliges una duración —15, 25, 45 o 60 minutos, o la que escribas— y opcionalmente la asocias a una tarea concreta. Al terminar, los minutos se guardan como sesión de enfoque. Esa métrica no es decorativa: los niveles altos exigen decenas de horas acumuladas, así que no se puede falsear.',
+    },
+    {
+        question: '¿Para qué sirven los XP y los niveles?',
+        answer:
+            'Cada tarea completada suma 10 XP y las grandes metas 50. Hay diez niveles, de Punto de Partida a Zenth, y cada uno pide una combinación de XP, racha, tareas completadas y minutos de enfoque: no basta con acumular puntos. Los niveles son permanentes, así que romper una racha no te hace bajar de nivel.',
+    },
+    {
+        question: '¿Por qué se dice que es ideal para personas con TDAH?',
+        answer:
+            'Porque está diseñado alrededor de tres cosas que suelen fallar con las apps convencionales: bloques flexibles (Mañana, Tarde, Noche) en lugar de horarios rígidos que se rompen a la primera; recompensa inmediata y visible al completar algo; y una interfaz de baja carga visual, sin alertas rojas ni listas infinitas a la vista.',
+    },
+    {
+        question: "¿Cómo funciona el asistente 'Zen'?",
+        answer:
+            'Zen usa la IA de Google (Gemini) en los puntos donde ahorra trabajo de verdad. En el editor de tareas: escribes «Cena con Ana el viernes a las 21 h» y rellena los campos por ti, sugiere el mejor momento con Auto-Agendar y parte una tarea grande en micro-pasos. En el editor de notas: selecciona un texto y Zen AI lo mejora, lo resume o lo expande.',
+    },
+    {
+        question: '¿Puedo recuperar algo que borré por error?',
+        answer:
+            'Sí. Las tareas y las entradas eliminadas van a la papelera, no desaparecen. Puedes abrirla desde Ajustes o desde /trash, restaurar cualquier elemento a su sitio original con un clic, o vaciarla para liberar espacio. Al mandar una tarea recurrente a la papelera, Zenth detiene sus repeticiones automáticamente.',
+    },
+    {
+        question: '¿Puedo cambiar el aspecto de la aplicación?',
+        answer:
+            'Hay tres temas: Claro, Oscuro y Zen, este último con un fondo cálido más suave por la noche. Además puedes elegir el color de acento, activar el modo compacto para ver más tareas de una vez, cambiar el ancho del contenido en escritorio y usar formato de hora de 12 o 24 horas.',
+    },
+    {
+        question: '¿Cómo puedo cambiar mi dirección de correo?',
+        answer:
+            'Desde Ajustes → Cuenta → Cambiar correo. Escribe la nueva dirección y recibirás un enlace de confirmación: el cambio no se aplica hasta que lo confirmas desde el correo nuevo.',
+    },
+    {
+        question: '¿Puedo usarlo en el teléfono?',
+        answer:
+            'Sí. Zenth es una aplicación web progresiva: se instala desde el navegador y funciona como una app nativa, con su icono en la pantalla de inicio. En iOS los recordatorios push solo llegan si la instalas —Safari a secas no los soporta—; en Android y escritorio funcionan también desde el navegador.',
+    },
+];
+
+const FAQItem: React.FC<FAQEntry> = ({ question, answer }) => {
     const [isOpen, setIsOpen] = useState(false);
 
     return (
-        <div className="border-b-2 border-black dark:border-white/20 last:border-0">
+        <div className="border-b border-hairline-soft">
             <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="w-full py-6 flex items-start justify-between text-left focus:outline-none group"
+                aria-expanded={isOpen}
+                className="group flex w-full items-start justify-between gap-6 py-6 text-left"
             >
-                <div className="flex gap-4">
-                    <div className="mt-1 text-black dark:text-zenth-markerBlue group-hover:scale-110 transition-transform">
-                        {icon || <HelpCircle className="w-6 h-6" />}
-                    </div>
-                    <h3 className="text-xl font-bold text-black dark:text-white group-hover:text-zenth-400 dark:group-hover:text-zenth-markerYellow transition-colors">
-                        {question}
-                    </h3>
-                </div>
-                <div className="mt-1 ml-4 text-black dark:text-white">
-                    {isOpen ? <ChevronUp className="w-6 h-6" /> : <ChevronDown className="w-6 h-6" />}
-                </div>
+                <h3 className="t-headline text-ink">{question}</h3>
+                <Plus
+                    className={`mt-1 h-5 w-5 shrink-0 text-ink-muted transition-transform duration-300 ${isOpen ? 'rotate-45' : ''
+                        }`}
+                    strokeWidth={1.75}
+                />
             </button>
-            <AnimatePresence>
+
+            <AnimatePresence initial={false}>
                 {isOpen && (
                     <motion.div
                         initial={{ height: 0, opacity: 0 }}
                         animate={{ height: 'auto', opacity: 1 }}
                         exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.2, ease: [0.04, 0.62, 0.23, 0.98] }}
+                        transition={{ duration: 0.25, ease: [0.04, 0.62, 0.23, 0.98] }}
                         className="overflow-hidden"
                     >
-                        <div className="pb-8 pl-14 pr-4">
-                            <p className="text-lg font-medium text-slate-700 dark:text-slate-300 leading-relaxed bg-zenth-markerYellow/20 dark:bg-white/5 p-4 rounded-xl border-2 border-dashed border-black/10 dark:border-white/10">
-                                {answer}
-                            </p>
-                        </div>
+                        <p className="t-body-lg max-w-2xl pb-8 pr-10 text-ink-muted">{answer}</p>
                     </motion.div>
                 )}
             </AnimatePresence>
@@ -50,142 +134,60 @@ const FAQItem: React.FC<FAQItemProps> = ({ question, answer, icon }) => {
     );
 };
 
-const FAQS = [
-    {
-        question: "¿Qué es Zenth exactamente?",
-        answer: "Zenth es un planificador visual diseñado para mentes inquietas. Combina gestión de tareas, gamificación (XP y niveles), seguimiento emocional y un asistente de IA para ayudarte a organizar tu vida con calma y sin el agobio de las listas tradicionales.",
-        icon: <Zap className="w-6 h-6" />
-    },
-    {
-        question: "¿Es Zenth gratuito?",
-        answer: (
-            <>
-                Sí, puedes empezar a usar Zenth de forma gratuita. Ofrecemos todas las funciones principales de organización, gamificación y sincronización.
-                Si te gusta el proyecto y quieres apoyar su mantenimiento, puedes{' '}
-                <a
-                    href="https://www.paypal.com/donate/?hosted_button_id=2ZXKDRWUK3M6C"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-black dark:text-zenth-markerBlue underline decoration-zenth-markerYellow decoration-2 font-bold hover:text-zenth-600 transition-colors"
-                >
-                    donar aquí
-                </a>
-                {' '}para ayudar con los costos de los servidores.
-            </>
-        ),
-        icon: <Heart className="w-6 h-6" />
-    },
-    {
-        question: "¿Cómo puedo cambiar mi dirección de correo?",
-        answer: "Para actualizar tu correo de forma segura: ve a Perfil (Me) > Cuenta > 'Cambiar Correo'. Ingresa tu nueva dirección y recibirás un enlace de confirmación. El cambio solo se hará efectivo una vez que confirmes el enlace en tu nuevo correo.",
-        icon: <Mail className="w-6 h-6" />
-    },
-    {
-        question: "¿Por qué se dice que es ideal para personas con TDAH?",
-        answer: "Zenth ha sido diseñado considerando la neurociencia del TDAH. Usamos bloques de tiempo flexibles (Mañana, Tarde, Noche) en lugar de horarios rígidos, recompensas inmediatas de dopamina a través de XP, y una interfaz limpia que reduce la carga cognitiva.",
-        icon: <Brain className="w-6 h-6" />
-    },
-    {
-        question: "¿Para qué sirven los XP y los niveles?",
-        answer: "Los Puntos de Experiencia (XP) son una métrica de tu constancia. Al completar tareas y sesiones de enfoque, ganas XP que te permiten subir de nivel. Es una forma de gamificar tu disciplina.",
-        icon: <Trophy className="w-6 h-6" />
-    },
-    {
-        question: "¿Cómo funciona el asistente IA 'Zen'?",
-        answer: "Zen utiliza Google Gemini para simplificar tu planificación. Puede autocompletar tareas con lenguaje natural, sugerir micro-pasos y ayudarte a agendar inteligentemente tus pendientes.",
-        icon: <Sparkles className="w-6 h-6" />
-    },
-    {
-        question: "¿Puedo recuperar algo que borré por error?",
-        answer: "¡Sí! Con la nueva Papelera de Zenth, tus tareas y notas eliminadas se mueven a un espacio seguro. Puedes acceder a ella desde tu perfil (Me) y restaurar cualquier elemento en un clic, o borrarlos permanentemente si deseas liberar espacio.",
-        icon: <Trash2 className="w-6 h-6" />
-    },
-    {
-        question: "¿Puedo usarlo en mi teléfono?",
-        answer: "¡Absolutamente! Zenth es una PWA. Puedes 'Instalarla' desde el navegador y funcionará como una aplicación nativa, con iconos en tu pantalla de inicio.",
-        icon: <Smartphone className="w-6 h-6" />
-    }
-];
-
-const FAQ = ({ onBack, onGoToGuide }: { onBack: () => void, onGoToGuide: () => void }) => {
-
+const FAQ = ({ onBack, onGoToGuide }: { onBack: () => void; onGoToGuide: () => void }) => {
     return (
-        <div className="min-h-screen bg-zenth-bg dark:bg-zenth-darkBg pt-24 pb-20 px-4 relative overflow-hidden">
-            {/* Background elements */}
-            <div className="absolute top-0 left-0 w-full h-full pointer-events-none opacity-10">
-                <div className="absolute top-[10%] left-[5%] w-96 h-96 bg-zenth-markerYellow rounded-full blur-[80px] md:blur-[120px]"></div>
-                <div className="absolute bottom-[10%] right-[5%] w-96 h-96 bg-zenth-markerBlue rounded-full blur-[80px] md:blur-[120px]"></div>
-            </div>
-
-            <div className="max-w-4xl mx-auto relative z-10">
+        <div className="min-h-screen pt-28 pb-24 lg:pt-36">
+            <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
                 <button
                     onClick={onBack}
-                    className="mb-8 flex items-center gap-2 text-black dark:text-white font-bold hover:translate-x-[-4px] transition-transform group"
+                    className="t-caption group mb-10 inline-flex items-center gap-2 text-ink-muted transition-colors hover:text-ink"
                 >
-                    <div className="p-2 border-2 border-black dark:border-white bg-white dark:bg-slate-800 shadow-sketch dark:shadow-sketch-white">
-                        <ChevronDown className="w-5 h-5 rotate-90" />
-                    </div>
-                    <span className="underline decoration-zenth-markerYellow decoration-4 text-2xl">Volver al Inicio</span>
+                    <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-0.5" />
+                    Volver al inicio
                 </button>
 
-                <div className="text-center mb-16">
-                    <h1 className="text-5xl md:text-7xl font-marker text-black dark:text-white mb-6 transform -rotate-1">
-                        Preguntas Frecuentes
-                    </h1>
-                    <p className="text-2xl font-bold text-slate-700 dark:text-slate-300 max-w-2xl mx-auto leading-tight italic">
-                        Todo lo que necesitas saber para dominar tu productividad y paz mental.
-                    </p>
+                <p className="t-eyebrow">Soporte</p>
+                <h1 className="t-display-xl mt-4 text-ink">Preguntas frecuentes.</h1>
+                <p className="t-body-lg mt-6 max-w-xl text-ink-muted">
+                    Lo que más me preguntan por correo, respondido sin rodeos.
+                </p>
+
+                <div className="mt-16 border-t border-hairline-soft">
+                    {FAQS.map(faq => (
+                        <FAQItem key={faq.question} {...faq} />
+                    ))}
                 </div>
 
-                {/* FAQ Section */}
-                <div className="bg-white dark:bg-slate-900 border-4 border-black dark:border-white rounded-lg p-6 md:p-10 shadow-sketch-xl dark:shadow-sketch-xl-white mb-16 transform rotate-1 relative">
-                    {/* Tape decorations */}
-                    <div className="absolute -top-6 left-1/4 w-32 h-10 bg-zenth-markerYellow/60 -rotate-2 border-x-2 border-black/10"></div>
-                    <div className="absolute -bottom-6 right-1/4 w-32 h-10 bg-zenth-markerPink/60 rotate-2 border-x-2 border-black/10"></div>
-
-                    <div className="divide-y-2 divide-black/10 dark:divide-white/10">
-                        {FAQS.map((faq, index) => (
-                            <FAQItem key={index} {...faq} />
-                        ))}
-                    </div>
-                </div>
-
-                {/* CTA to Full Guide */}
-                <div className="text-center mb-16">
-                    <div className="inline-block p-1 bg-black dark:bg-white rounded-xl shadow-sketch-lg dark:shadow-sketch-lg-white">
-                        <button
-                            onClick={onGoToGuide}
-                            className="bg-zenth-markerYellow text-black px-10 py-5 rounded-lg border-2 border-black font-black text-2xl flex items-center gap-4 hover:bg-white transition-all transform hover:-translate-y-1"
-                        >
-                            <BookOpen className="w-8 h-8" />
-                            Ver Manual del Usuario y Guía Completa
-                        </button>
-                    </div>
-                    <p className="mt-4 text-slate-600 dark:text-slate-400 font-bold italic">
-                        Aprende a usar Zenth como un experto paso a paso
-                    </p>
-                </div>
-
-                {/* Contact Section */}
-                <div className="mt-20 relative px-4 md:px-0">
-                    <div className="bg-black dark:bg-white text-white dark:text-black p-10 rounded-lg shadow-sketch-lg dark:shadow-sketch-lg-white border-2 border-white dark:border-black text-center transform -rotate-1">
-                        <h2 className="text-4xl font-marker mb-4">¿Aún tienes dudas?</h2>
-                        <p className="text-xl font-bold mb-8 opacity-90">
-                            Escríbenos y estaremos encantados de ayudarte a entrar en tu estado Zen.
+                <div className="fr-card mt-16 flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
+                    <div>
+                        <h2 className="t-headline text-ink">¿Buscabas el paso a paso?</h2>
+                        <p className="t-body mt-2 text-ink-muted">
+                            El manual del usuario recorre cada sección de la aplicación en detalle.
                         </p>
-                        <div className="flex flex-col sm:flex-row justify-center gap-6">
-                            <a
-                                href="https://mail.google.com/mail/?view=cm&fs=1&to=matiasluzardevv@gmail.com"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="inline-flex items-center justify-center gap-3 bg-zenth-markerYellow text-black px-10 py-4 rounded-md font-black text-xl border-2 border-black shadow-sketch hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] transition-all"
-                            >
-                                <Mail className="w-6 h-6" />
-                                Contactar Soporte
-                            </a>
-                        </div>
                     </div>
-                    <div className="absolute -inset-2 bg-zenth-markerPink -z-10 rounded-lg transform rotate-1 opacity-50"></div>
+                    <button onClick={onGoToGuide} className="fr-btn fr-btn-primary shrink-0">
+                        <BookOpen className="h-4 w-4" />
+                        Ver el manual
+                    </button>
+                </div>
+
+                <div className="fr-card-featured mt-4 flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
+                    <div>
+                        <h2 className="t-headline text-ink">¿Sigues con dudas?</h2>
+                        <p className="t-body mt-2 text-ink-muted">
+                            Escríbeme directamente. Contesto yo, no un formulario.
+                        </p>
+                    </div>
+                    <a
+                        href="https://mail.google.com/mail/?view=cm&fs=1&to=matiasluzardevv@gmail.com"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="fr-btn fr-btn-secondary shrink-0"
+                    >
+                        <Mail className="h-4 w-4" />
+                        Contactar
+                        <ArrowUpRight className="h-4 w-4" />
+                    </a>
                 </div>
             </div>
         </div>

@@ -1,94 +1,110 @@
-import React from 'react';
+import React, { useMemo, useState } from 'react';
+import { ArrowLeft, ArrowUpRight } from 'lucide-react';
 import { BLOG_POSTS } from '../constants';
 import ArticleCard from './ArticleCard';
-import { ArrowLeft, Sparkles } from 'lucide-react';
 
 interface BlogPageProps {
   onBack: () => void;
   onSelectPost: (id: string) => void;
 }
 
+const ALL = 'Todo';
+
 const BlogPage: React.FC<BlogPageProps> = ({ onBack, onSelectPost }) => {
-  // Destacamos el primer post
-  const featuredPost = BLOG_POSTS[0];
-  const otherPosts = BLOG_POSTS.slice(1);
+  const [category, setCategory] = useState(ALL);
+
+  const categories = useMemo(
+    () => [ALL, ...Array.from(new Set(BLOG_POSTS.map(p => p.category)))],
+    []
+  );
+
+  const posts = useMemo(
+    () => (category === ALL ? BLOG_POSTS : BLOG_POSTS.filter(p => p.category === category)),
+    [category]
+  );
+
+  // El destacado sólo tiene sentido en la vista sin filtrar: dentro de una
+  // categoría el orden ya es la jerarquía.
+  const showFeatured = category === ALL;
+  const featured = showFeatured ? posts[0] : null;
+  const rest = showFeatured ? posts.slice(1) : posts;
 
   return (
-    <div className="pt-24 pb-20 min-h-screen bg-zenth-bg dark:bg-zenth-darkBg">
-
-      {/* Header del Blog */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
+    <div className="min-h-screen pt-28 pb-24 lg:pt-36">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <button
           onClick={onBack}
-          className="group flex items-center text-lg font-bold text-slate-600 dark:text-slate-400 hover:text-black dark:hover:text-white mb-8 transition-colors"
+          className="t-caption group mb-10 inline-flex items-center gap-2 text-ink-muted transition-colors hover:text-ink"
         >
-          <ArrowLeft className="w-5 h-5 mr-2 group-hover:-translate-x-1 transition-transform" />
+          <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-0.5" />
           Volver al inicio
         </button>
 
-        <div className="text-center md:text-left relative">
-          <h1 className="text-5xl md:text-7xl font-serif font-black text-slate-900 dark:text-white mb-4">
-            El Blog de <span className="underline decoration-wavy decoration-zenth-markerBlue">Zenth</span>
-          </h1>
-          <p className="text-xl text-slate-600 dark:text-slate-300 font-sans max-w-2xl">
-            Reflexiones sobre productividad consciente, actualizaciones de la app y consejos para sobrevivir al caos moderno.
-          </p>
-        </div>
-      </div>
+        <p className="t-eyebrow">Blog</p>
+        <h1 className="t-display-xl mt-4 text-ink">Productividad sin ruido.</h1>
+        <p className="t-body-lg mt-6 max-w-xl text-ink-muted">
+          Novedades de la aplicación y lo que dice la neurociencia sobre atención, hábitos y
+          descanso. Sin trucos de rendimiento extremo.
+        </p>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-
-        {/* Featured Post */}
-        <div className="mb-16">
-          <h2 className="text-2xl font-marker text-black dark:text-white mb-6 flex items-center">
-            <Sparkles className="w-5 h-5 mr-2 text-zenth-markerYellow fill-current" /> Destacado
-          </h2>
-          <div
-            onClick={() => onSelectPost(featuredPost.id)}
-            className="grid md:grid-cols-2 gap-8 bg-white dark:bg-slate-900 border-2 border-black dark:border-white p-6 rounded-lg shadow-sketch-xl dark:shadow-sketch-xl-white transform hover:-translate-y-1 transition-transform cursor-pointer group"
-          >
-            <div className="h-64 md:h-auto overflow-hidden border-2 border-black dark:border-white rounded bg-gray-100">
-              <img
-                src={featuredPost.imageUrl}
-                alt={featuredPost.title}
-                className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
-              />
-            </div>
-            <div className="flex flex-col justify-center">
-              <span className="text-zenth-400 font-bold tracking-widest uppercase text-sm mb-2">{featuredPost.category}</span>
-              <h3 className="text-3xl md:text-4xl font-serif font-bold text-black dark:text-white mb-4 leading-tight">
-                {featuredPost.title}
-              </h3>
-              <p className="text-lg text-slate-600 dark:text-slate-300 font-sans mb-6">
-                {featuredPost.excerpt}
-              </p>
-              <div className="mt-auto pt-6 border-t-2 border-dashed border-slate-200 dark:border-slate-700 flex items-center justify-between">
-                <span className="font-bold text-sm text-slate-500">{featuredPost.date} • Por {featuredPost.author}</span>
-                <button
-                  onClick={(e) => { e.stopPropagation(); onSelectPost(featuredPost.id); }}
-                  className="bg-black dark:bg-white text-white dark:text-black px-4 py-2 rounded font-bold hover:bg-zenth-markerYellow hover:text-black dark:hover:bg-zenth-markerYellow dark:hover:text-black border-2 border-transparent hover:border-black transition-all"
-                >
-                  Leer artículo
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Post Grid */}
-        <h2 className="text-2xl font-marker text-black dark:text-white mb-6">Últimas entradas</h2>
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {otherPosts.map((post) => (
-            <ArticleCard
-              key={post.id}
-              post={post}
-              onClick={() => onSelectPost(post.id)}
-            />
+        {/* Filtro por categoría */}
+        <div className="-mx-1 mt-10 flex gap-1 overflow-x-auto pb-2">
+          {categories.map(cat => (
+            <button
+              key={cat}
+              onClick={() => setCategory(cat)}
+              aria-selected={category === cat}
+              role="tab"
+              className="fr-tab shrink-0"
+            >
+              {cat}
+            </button>
           ))}
         </div>
 
+        {/* Destacado */}
+        {featured && (
+          <button
+            onClick={() => onSelectPost(featured.id)}
+            className="fr-card-featured group mt-10 grid w-full gap-8 p-4 text-left transition-transform duration-300 hover:-translate-y-1 md:grid-cols-2 md:p-5"
+          >
+            <div className="aspect-[16/10] overflow-hidden rounded-large bg-canvas md:aspect-auto md:h-full">
+              <img
+                src={featured.imageUrl}
+                alt=""
+                className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+              />
+            </div>
+            <div className="flex flex-col justify-center p-2 md:p-6">
+              <div className="t-micro flex items-center gap-2 text-ink-muted">
+                <span>{featured.category}</span>
+                <span aria-hidden="true">·</span>
+                <span>{featured.date}</span>
+              </div>
+              <h2 className="t-display-md mt-4 text-ink">{featured.title}</h2>
+              <p className="t-body-lg mt-4 text-ink-muted">{featured.excerpt}</p>
+              <span className="t-caption mt-8 inline-flex items-center gap-1.5 text-ink">
+                Leer artículo
+                <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              </span>
+            </div>
+          </button>
+        )}
+
+        {/* Rejilla */}
+        <div className="mt-4 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {rest.map(post => (
+            <ArticleCard key={post.id} post={post} onClick={() => onSelectPost(post.id)} />
+          ))}
+        </div>
+
+        {posts.length === 0 && (
+          <p className="t-body mt-16 text-center text-ink-muted">
+            Todavía no hay artículos en esta categoría.
+          </p>
+        )}
       </div>
-    </div >
+    </div>
   );
 };
 

@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import Hero from '../components/Hero';
 import InteractiveDemo from '../components/InteractiveDemo';
 import Features from '../components/Features';
@@ -6,7 +7,6 @@ import Testimonials from '../components/Testimonials';
 import InstallGuide from '../components/InstallGuide';
 import BlogList from '../components/BlogList';
 import Support from '../components/Support';
-import { useNavigate } from 'react-router-dom';
 
 interface HomeProps {
     onNavigate: (page: 'home' | 'blog' | 'privacy', targetId?: string) => void;
@@ -32,20 +32,7 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
             <InteractiveDemo />
             <Testimonials />
             <InstallGuide />
-            {/* Usamos BlogList como teaser en la Home */}
-            <div className="relative pb-24">
-                <BlogList onSelectPost={handlePostSelect} limit={3} />
-                <div className="absolute bottom-20 left-0 w-full flex justify-center z-10">
-                    <button
-                        onClick={handleBlogClick}
-                        className="px-10 py-4 bg-zenth-markerBlue text-black font-marker text-2xl border-2 border-black rounded-xl shadow-sketch-lg hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all transform -rotate-1"
-                    >
-                        Ver Blog Completo ➔
-                    </button>
-                </div>
-                {/* Fade out effect para el teaser */}
-                <div className="absolute bottom-0 left-0 w-full h-40 bg-gradient-to-t from-zenth-bg dark:from-zenth-darkBg to-transparent pointer-events-none"></div>
-            </div>
+            <BlogList onSelectPost={handlePostSelect} onSeeAll={handleBlogClick} limit={3} />
             <Support />
         </>
     );

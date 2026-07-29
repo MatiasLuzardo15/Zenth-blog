@@ -1,373 +1,312 @@
 import React, { useState, useEffect } from 'react';
-import { Clock, Trophy, Heart, LayoutGrid, X, MousePointerClick, Sun, Calendar, Activity, Sparkles, PenTool } from 'lucide-react';
+import {
+  X, ArrowUpRight, Users, PenLine, Timer, CalendarDays, Trophy, HeartPulse,
+  Sparkles, Trash2, Palette, LayoutDashboard, Sun,
+} from 'lucide-react';
 
 interface FeatureDetail {
   id: string;
   title: string;
-  shortDesc: string; // Para la tarjeta
-  fullDesc: React.ReactNode; // Para el modal (permite HTML/JSX)
-  icon: React.ReactNode;
-  colorClass: string; // Para el icono o fondo
-  relatedPostId?: string; // ID del artículo del blog relacionado
+  shortDesc: string;
+  bullets: string[];
+  icon: React.ComponentType<{ className?: string; strokeWidth?: number }>;
+  /** Id del artículo del blog relacionado, si lo hay. */
+  relatedPostId?: string;
 }
 
 interface FeaturesProps {
   onNavigate: (page: 'home' | 'blog', targetId?: string) => void;
 }
 
-const Features: React.FC<FeaturesProps> = ({ onNavigate }) => {
-  const [selectedFeature, setSelectedFeature] = useState<FeatureDetail | null>(null);
+/**
+ * El detalle de cada función. Vive en un solo objeto para que la tarjeta y el
+ * modal no puedan contar cosas distintas de la misma función.
+ */
+const FEATURE_DETAILS: Record<string, FeatureDetail> = {
+  collaboration: {
+    id: 'collaboration',
+    title: 'Pizarras compartidas',
+    shortDesc: 'Invita a quien quieras y trabajad sobre el mismo tablero, en vivo.',
+    bullets: [
+      'Tres roles claros: Administrador gestiona la pizarra y a sus miembros, Miembro crea y edita tarjetas, Observador solo mira.',
+      'Invita por correo electrónico o genera un enlace de invitación que caduca cuando tú decidas.',
+      'Visibilidad configurable: una pizarra nace privada y puedes abrirla con un enlace público de solo lectura.',
+      'Los cambios de tus compañeros aparecen en tiempo real, sin recargar.',
+      'El propietario puede transferir la pizarra, y una pizarra nunca puede quedarse sin administradores.',
+    ],
+    icon: Users,
+    relatedPostId: '15',
+  },
+  entries: {
+    id: 'entries',
+    title: 'Entradas: notas, tablas y archivos',
+    shortDesc: 'Un espacio de trabajo completo, no solo un bloc de notas.',
+    bullets: [
+      'Notas con editor de texto enriquecido: títulos, listas, citas, código, resaltador e imágenes que se pegan y se redimensionan.',
+      'Tablas con fórmulas, formato de celda, orden y exportación a CSV.',
+      'Sube archivos —PDF, imágenes, documentos— y consúltalos desde la propia app.',
+      'Graba notas de voz directamente desde el micrófono.',
+      'Organízalo todo en carpetas y etiquetas, con buscador global.',
+    ],
+    icon: PenLine,
+    relatedPostId: '16',
+  },
+  today: {
+    id: 'today',
+    title: 'Hoy, a tu ritmo',
+    shortDesc: 'Mañana, tarde y noche. Y cuando lo necesites, hora exacta.',
+    bullets: [
+      'Tres bloques de energía en lugar de una agenda rígida: Mañana, Tarde y Noche.',
+      'Cambia entre vista de día, semana y mes según lo lejos que quieras mirar.',
+      'Tareas recurrentes, prioridades, grandes metas y etiquetas de color.',
+      'Define a qué hora empieza tu mañana y Zenth reordena los bloques por ti.',
+      'El historial de completadas guarda lo que ya hiciste, por si necesitas mirar atrás.',
+    ],
+    icon: Sun,
+  },
+  boards: {
+    id: 'boards',
+    title: 'Listas estilo tablero',
+    shortDesc: 'Varias pizarras, cada una con sus propias columnas.',
+    bullets: [
+      'Crea todas las pizarras que necesites, cada una con su nombre e icono.',
+      'Columnas personalizables: renómbralas, cámbiales el color y reordénalas.',
+      'Arrastra y suelta tarjetas entre columnas, o entre la bandeja de entrada rápida y el tablero.',
+      'Dos diseños de tablero: horizontal estilo Trello o ajustado al espacio en varias filas.',
+    ],
+    icon: LayoutDashboard,
+  },
+  focus: {
+    id: 'focus',
+    title: 'Modo enfoque',
+    shortDesc: 'Un temporizador que mide atención real, no buenas intenciones.',
+    bullets: [
+      'Cuatro duraciones rápidas —15, 25, 45 y 60 minutos— o la que tú escribas.',
+      'Asocia la sesión a una tarea concreta para saber cuánto le dedicaste de verdad.',
+      'Cada sesión suma minutos de enfoque, la métrica que gobierna los niveles altos.',
+      'Al terminar, ves las sesiones del día y tu constancia de la semana.',
+    ],
+    icon: Timer,
+    relatedPostId: '5',
+  },
+  calendar: {
+    id: 'calendar',
+    title: 'Google Calendar',
+    shortDesc: 'Tus eventos, junto a tus tareas, sin copiar nada a mano.',
+    bullets: [
+      'Conecta tu cuenta con permiso de solo lectura y elige qué calendarios quieres ver.',
+      'Los eventos aparecen en Hoy junto a tus tareas, no en una pestaña aparte.',
+      'La sincronización se actualiza sola cada cinco minutos, y puedes pausarla cuando quieras.',
+      'Si te interesa, lleva calendarios concretos a una pizarra con la acción de exportar.',
+    ],
+    icon: CalendarDays,
+    relatedPostId: '17',
+  },
+  progress: {
+    id: 'progress',
+    title: 'Niveles y rachas',
+    shortDesc: 'Diez niveles que miden constancia, no velocidad.',
+    bullets: [
+      'Cada tarea completada suma 10 XP; las grandes metas, 50.',
+      'Diez niveles, de Punto de Partida a Zenth, con requisitos de XP, racha, tareas y minutos de enfoque.',
+      'Los niveles son permanentes: si pierdes la racha, no pierdes el nivel.',
+      'La ruta de progreso te enseña qué te falta exactamente para el siguiente.',
+    ],
+    icon: Trophy,
+    relatedPostId: '2',
+  },
+  mood: {
+    id: 'mood',
+    title: 'Registro de ánimo',
+    shortDesc: 'Tu año en píxeles de color, y lo que te cuenta.',
+    bullets: [
+      'Registra cómo te sientes con un toque: excelente, bien, neutral, bajo o mal.',
+      'El calendario mensual y el año en píxeles convierten meses de datos en un patrón visible.',
+      'El balance del mes te dice qué estado predominó y cuántos días registraste.',
+      'Sirve para lo que importa: notar a tiempo que llevas dos semanas en rojo.',
+    ],
+    icon: HeartPulse,
+    relatedPostId: '3',
+  },
+  ai: {
+    id: 'ai',
+    title: 'Zen, el asistente',
+    shortDesc: 'IA de Google donde ahorra trabajo, y en ningún otro sitio.',
+    bullets: [
+      'Escribe «Cena con Ana el viernes a las 21 h» y Zen rellena título, fecha, hora y prioridad.',
+      'Auto-agendar propone el mejor momento para una tarea a partir de su texto.',
+      'Sugerir pasos parte una tarea grande en tres a cinco micro-pasos accionables.',
+      'Dentro del editor de notas, Zen AI mejora la redacción, resume o expande el texto seleccionado.',
+    ],
+    icon: Sparkles,
+    relatedPostId: '13',
+  },
+  trash: {
+    id: 'trash',
+    title: 'Papelera',
+    shortDesc: 'Borrar deja de dar miedo.',
+    bullets: [
+      'Las tareas y las entradas eliminadas van a la papelera, no al vacío.',
+      'Restaura cualquier elemento a su sitio original con un clic.',
+      'Vacíala cuando quieras para liberar espacio de verdad.',
+      'Al mandar una tarea recurrente a la papelera, Zenth detiene sus repeticiones.',
+    ],
+    icon: Trash2,
+  },
+  appearance: {
+    id: 'appearance',
+    title: 'Se adapta a ti',
+    shortDesc: 'Tres temas, tu color y la densidad que prefieras.',
+    bullets: [
+      'Temas Claro, Oscuro y Zen —este último con un fondo cálido, más suave de noche.',
+      'Elige el color de acento que se usa en acciones y estados activos.',
+      'Modo compacto para ver más tareas de una vez, y ancho de contenido fluido o contenido.',
+      'Formato de hora de 12 o 24 h, efectos de sonido y recordatorios push opcionales.',
+    ],
+    icon: Palette,
+  },
+};
 
-  // Cerrar modal con tecla Escape
+const SECONDARY_ORDER = ['today', 'boards', 'focus', 'calendar', 'progress', 'mood', 'ai', 'trash', 'appearance'];
+
+const Features: React.FC<FeaturesProps> = ({ onNavigate }) => {
+  const [selected, setSelected] = useState<FeatureDetail | null>(null);
+
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setSelectedFeature(null);
+      if (e.key === 'Escape') setSelected(null);
     };
     window.addEventListener('keydown', handleEsc);
     return () => window.removeEventListener('keydown', handleEsc);
   }, []);
 
-  // Datos de las funcionalidades
-  const featuresData: Record<string, FeatureDetail> = {
-    gamification: {
-      id: 'gamification',
-      title: 'Tu Historial de Victorias',
-      shortDesc: 'Convierte el "deber" en un juego. XP, Rachas y Big Goals.',
-      fullDesc: (
-        <>
-          <p className="mb-4">
-            Convertimos la productividad en un juego para que no se sienta como un trabajo.
-          </p>
-          <ul className="list-disc pl-5 space-y-2 mb-4">
-            <li><strong>Misiones Diarias:</strong> Gana +10 XP por tareas estándar.</li>
-            <li><strong>Big Goals:</strong> ¡Conquista un objetivo grande y recibe +50 XP!</li>
-            <li><strong>Rachas Imparables:</strong> Mantén tu consistencia diaria y mira cómo crece tu racha.</li>
-          </ul>
-          <p>
-            Cada tarea completada te acerca a ser un "Guerrero Zen". No es solo una lista, es tu progreso visual.
-          </p>
-        </>
-      ),
-      icon: <Trophy className="w-8 h-8 text-black" />,
-      colorClass: 'bg-zenth-markerYellow',
-      relatedPostId: '2'
-    },
-    energy: {
-      id: 'energy',
-      title: 'Tu día en Armonía',
-      shortDesc: 'Organización por Energía: Mañana, Tarde y Noche.',
-      fullDesc: (
-        <>
-          <p className="mb-4">
-            Tu energía no es la misma a las 8 AM que a las 8 PM. Zenth divide tu jornada en tres bloques: <strong>Mañana, Tarde y Noche</strong>.
-          </p>
-          <p className="mb-4">
-            Esto te ayuda a decidir qué batallas pelear en cada momento, reduciendo la fatiga de decisión. Deja las tareas creativas para cuando tienes energía y las mecánicas para cuando estás cansado.
-          </p>
-          <p>
-            Disfruta de tu tiempo libre sin culpas sabiendo que lo importante ya está hecho.
-          </p>
-        </>
-      ),
-      icon: <Sun className="w-8 h-8 text-black" />,
-      colorClass: 'bg-zenth-markerBlue',
-      relatedPostId: '1'
-    },
-    pixel: {
-      id: 'pixel',
-      title: 'Pixel View & Mood',
-      shortDesc: 'Vista panorámica de tu vida. Productividad + Salud Mental.',
-      fullDesc: (
-        <>
-          <p className="mb-4">
-            ¿Cómo fue tu año? Con nuestra vista de <strong>Pixel View</strong>, cada día es un punto de color en tu lienzo anual basado en tu bienestar emocional.
-          </p>
-          <p className="mb-4">
-            Identifica patrones (¿los lunes son siempre grises?), celebra meses de alta energía y planifica tu futuro con una perspectiva que las listas tradicionales no pueden ofrecer.
-          </p>
-          <p>
-            <strong>Productividad sin salud mental es agotamiento.</strong> Sé más compasivo contigo mismo en los días difíciles.
-          </p>
-        </>
-      ),
-      icon: <LayoutGrid className="w-7 h-7 text-black" />,
-      colorClass: 'bg-white',
-      relatedPostId: '3'
-    },
-    focus: {
-      id: 'focus',
-      title: 'Minutos de Enfoque',
-      shortDesc: 'Calidad sobre cantidad. Mide tu Deep Work.',
-      fullDesc: (
-        <>
-          <p className="mb-4">
-            No se trata de cuántos checks haces, sino de la calidad de tu atención.
-          </p>
-          <p>
-            Zenth rastrea tus <strong>Minutos de Enfoque</strong> reales. Utiliza el temporizador integrado para entrar en "Zona" y al final del día obtendrás una métrica real de tu capacidad de profundidad (Deep Work).
-          </p>
-          <p className="font-bold">
-            ¿Cuánto tiempo le dedicaste hoy a lo que de verdad mueve la aguja?
-          </p>
-        </>
-      ),
-      icon: <Activity className="w-7 h-7 text-black" />,
-      colorClass: 'bg-white',
-      relatedPostId: '5'
-    },
-    ai: {
-      id: 'ai',
-      title: 'Zen AI Assistant',
-      shortDesc: 'Tu coach de productividad inteligente con Google Gemini.',
-      fullDesc: (
-        <>
-          <p className="mb-4">
-            Zenth integra a <strong>Zen</strong>, un asistente que utiliza la IA de Google para eliminar la carga cognitiva de organizarte.
-          </p>
-          <ul className="list-disc pl-5 space-y-2 mb-4">
-            <li><strong>Entrada Mágica:</strong> "Cena con Ana viernes 9pm" y Zen configura el título, fecha y hora por ti.</li>
-            <li><strong>Auto-Agendado:</strong> Zen sugiere el mejor momento para tus tareas basándose en el contexto.</li>
-            <li><strong>Micro-pasos:</strong> Desglosa objetivos grandes en 3-5 sub-tareas accionables automáticamente.</li>
-          </ul>
-          <p>
-            Busca los iconos de destellos ✨ dentro del editor para activar el poder de la IA.
-          </p>
-        </>
-      ),
-      icon: <Sparkles className="w-8 h-8 text-black" />,
-      colorClass: 'bg-zenth-markerPink',
-      relatedPostId: '13'
-    },
-    entries: {
-      id: 'entries',
-      title: 'Entradas (Notas Zen)',
-      shortDesc: 'Un lienzo infinito para tus ideas. Editor Pro, imágenes y estilos dinámicos.',
-      fullDesc: (
-        <>
-          <p className="mb-4">
-            Las <strong>Entradas</strong> son tu espacio de reflexión profunda y creatividad sin límites.
-          </p>
-          <ul className="list-disc pl-5 space-y-2 mb-4">
-            <li><strong>Editor Pro:</strong> Jerarquía visual con títulos, citas y resaltado de texto.</li>
-            <li><strong>Personalidad Única:</strong> Asigna emojis de portada y elige entre 10 estilos tipográficos.</li>
-            <li><strong>Multimedia Fluida:</strong> Pega imágenes o arrástralas directamente al texto.</li>
-            <li><strong>Expandir a Nota:</strong> Convierte cualquier tarea en un proyecto documentado con un clic.</li>
-          </ul>
-          <p>
-            Diseñado con <strong>fricción cero</strong> para que nada se interponga entre tus pensamientos y la pantalla.
-          </p>
-        </>
-      ),
-      icon: <PenTool className="w-8 h-8 text-black" />,
-      colorClass: 'bg-zenth-markerBlue',
-      relatedPostId: '14'
-    }
-  };
+  useEffect(() => {
+    document.body.style.overflow = selected ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [selected]);
+
+  const collaboration = FEATURE_DETAILS.collaboration;
+  const entries = FEATURE_DETAILS.entries;
 
   return (
-    <section id="features" className="py-24 relative z-20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16 max-w-3xl mx-auto relative">
-          {/* Fondo subrayado */}
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-3/4 h-12 bg-zenth-markerYellow -z-10 rotate-1 rounded-sm mix-blend-multiply dark:mix-blend-normal dark:bg-zenth-markerYellow/80"></div>
-          <h2 className="text-xl font-bold text-black dark:text-white tracking-widest uppercase mb-2 font-marker">Filosofía Zenth</h2>
-          <p className="text-4xl sm:text-5xl lg:text-6xl font-serif font-bold text-black dark:text-white leading-tight transform -rotate-1 relative inline-block">
-            Domina tu tiempo y energía.
-
-          </p>
-          <p className="mt-4 text-slate-500 font-hand text-xl animate-pulse">
-            (Toca una tarjeta para descubrir el secreto)
+    <section id="features" className="scroll-mt-20 py-24 lg:py-32">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <div className="max-w-3xl">
+          <p className="t-eyebrow">Qué incluye</p>
+          <h2 className="t-display-lg mt-4 text-ink">
+            Once herramientas
+            <br />
+            que se hablan entre sí.
+          </h2>
+          <p className="t-body-lg mt-6 max-w-xl text-ink-muted">
+            Nada de módulos sueltos: una tarea puede convertirse en nota, una nota vivir en una
+            carpeta y una pizarra tener miembros. Toca cualquier tarjeta para ver el detalle.
           </p>
         </div>
 
-        {/* Bento Grid Layout - Hand Drawn Style */}
-        {/* Collage Layout - Multi-rotated and compact */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-fr">
-
-          {/* Feature 1: Gamification */}
-          <div
-            onClick={() => setSelectedFeature(featuresData.gamification)}
-            className="bg-white dark:bg-slate-900 border-2 border-black dark:border-white shadow-sketch dark:shadow-sketch-white rounded-xl p-6 relative overflow-hidden group hover:-translate-y-2 hover:rotate-1 transition-all cursor-pointer rotate-1"
+        {/* Fila destacada: las dos funciones que definen esta versión. */}
+        <div className="mt-14 grid gap-4 lg:grid-cols-2">
+          <button
+            onClick={() => setSelected(collaboration)}
+            className="fr-spotlight fr-spotlight--violet group text-left transition-transform duration-300 hover:-translate-y-1"
           >
-            <div className="absolute top-0 right-0 p-2 opacity-5 pointer-events-none">
-              <Trophy className="w-32 h-32 text-black dark:text-white transform rotate-12" />
-            </div>
-            <div className="relative z-10 pointer-events-none">
-              <div className="bg-zenth-markerYellow border-2 border-black dark:border-white w-12 h-12 rounded-full flex items-center justify-center mb-4 shadow-sketch transform -rotate-6">
-                <Trophy className="w-6 h-6 text-black" />
-              </div>
-              <h3 className="text-2xl font-serif font-bold text-black dark:text-white mb-2 underline decoration-dashed decoration-transparent group-hover:decoration-black dark:group-hover:decoration-white underline-offset-4 transition-all">
-                {featuresData.gamification.title}
-              </h3>
-              <p className="text-base text-black dark:text-slate-200 leading-snug">
-                {featuresData.gamification.shortDesc} <br />
-                <span className="bg-zenth-100 text-black px-1 mt-1 inline-block font-bold text-sm">¡+50 XP por Big Goals!</span>
-              </p>
-            </div>
-          </div>
+            <Users className="h-7 w-7" strokeWidth={1.5} />
+            <h3 className="t-display-md mt-6">{collaboration.title}</h3>
+            <p className="t-body-lg mt-3 max-w-md text-white/80">{collaboration.shortDesc}</p>
+            <span className="t-caption mt-8 inline-flex items-center gap-1.5">
+              Ver el detalle
+              <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            </span>
+          </button>
 
-          {/* Feature 2: Pixel View */}
-          <div
-            onClick={() => setSelectedFeature(featuresData.pixel)}
-            className="bg-zenth-paper dark:bg-slate-900 border-2 border-black dark:border-white shadow-sketch dark:shadow-sketch-white rounded-xl p-6 relative overflow-hidden group hover:-translate-y-2 hover:-rotate-1 transition-all cursor-pointer -rotate-1"
+          <button
+            onClick={() => setSelected(entries)}
+            className="fr-card-featured group flex flex-col items-start p-8 text-left transition-transform duration-300 hover:-translate-y-1"
           >
-            <div className="absolute -top-2 left-1/2 transform -translate-x-1/2 w-24 h-6 bg-zenth-markerPink/60 rotate-2 z-20 pointer-events-none"></div>
-            <div className="relative z-10 pointer-events-none">
-              <div className="bg-zenth-markerBlue border-2 border-black dark:border-white w-12 h-12 rounded-lg flex items-center justify-center mb-4 shadow-sketch transform rotate-3">
-                <LayoutGrid className="w-6 h-6 text-black" />
-              </div>
-              <h3 className="text-2xl font-serif font-bold text-black dark:text-white mb-2">
-                {featuresData.pixel.title}
-              </h3>
-              <p className="text-base text-black dark:text-slate-200 leading-snug mb-4">
-                ¿Cómo fue tu año? Un lienzo emocional de colores.
-              </p>
-              <div className="grid grid-cols-7 gap-1 opacity-60 scale-75 origin-left">
-                {[...Array(14)].map((_, i) => (
-                  <div key={i} className={`w-4 h-4 border border-black dark:border-white rounded-sm ${i % 3 === 0 ? 'bg-zenth-markerPink' : i % 5 === 0 ? 'bg-zenth-markerBlue' : 'bg-white dark:bg-slate-700'}`}></div>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* Feature 3: Energy */}
-          <div
-            onClick={() => setSelectedFeature(featuresData.energy)}
-            className="bg-zenth-markerYellow border-2 border-black dark:border-white shadow-sketch dark:shadow-sketch-white rounded-xl p-6 relative group hover:-translate-y-2 hover:rotate-2 transition-all cursor-pointer rotate-2"
-          >
-            <div className="relative z-10 pointer-events-none">
-              <div className="bg-white border-2 border-black w-12 h-12 rounded-full flex items-center justify-center mb-4 shadow-sketch">
-                <Sun className="w-6 h-6 text-black" />
-              </div>
-              <h3 className="text-2xl font-serif font-bold text-black mb-2">
-                {featuresData.energy.title}
-              </h3>
-              <p className="text-black text-base font-bold leading-snug">
-                Mañana, Tarde y Noche. <br />Organiza según tu ritmo.
-              </p>
-            </div>
-          </div>
-
-          {/* Feature 4: Focus */}
-          <div
-            onClick={() => setSelectedFeature(featuresData.focus)}
-            className="bg-zenth-200 border-2 border-black dark:border-white shadow-sketch dark:shadow-sketch-white rounded-xl p-6 relative group hover:-translate-y-2 hover:-rotate-2 transition-all cursor-pointer -rotate-2"
-          >
-            <div className="relative z-10 pointer-events-none">
-              <div className="bg-white border-2 border-black w-12 h-12 rounded-none flex items-center justify-center mb-4 shadow-sketch transform rotate-45">
-                <Activity className="w-6 h-6 text-black transform -rotate-45" />
-              </div>
-              <h3 className="text-2xl font-serif font-bold text-black mb-2">
-                {featuresData.focus.title}
-              </h3>
-              <p className="text-black text-base font-bold leading-snug">
-                Deep Work real. <br />Mide minutos de atención.
-              </p>
-            </div>
-          </div>
-
-          {/* Feature 5: AI Assistant */}
-          <div
-            onClick={() => setSelectedFeature(featuresData.ai)}
-            className="bg-white dark:bg-slate-900 border-2 border-black dark:border-white shadow-sketch dark:shadow-sketch-white rounded-xl p-6 relative overflow-hidden group hover:-translate-y-2 hover:rotate-1 transition-all cursor-pointer rotate-1"
-          >
-            <div className="absolute top-0 right-0 p-2 opacity-5 pointer-events-none">
-              <Sparkles className="w-32 h-32 text-black dark:text-white transform -rotate-12" />
-            </div>
-            <div className="relative z-10 pointer-events-none">
-              <div className="bg-zenth-markerPink border-2 border-black dark:border-white w-12 h-12 rounded-full flex items-center justify-center mb-4 shadow-sketch transform rotate-12 shrink-0">
-                <Sparkles className="w-6 h-6 text-black" />
-              </div>
-              <h3 className="text-2xl font-serif font-bold text-black dark:text-white mb-2">
-                {featuresData.ai.title}
-              </h3>
-              <p className="text-base text-black dark:text-slate-200 leading-snug">
-                Tu coach inteligente. <br />
-                <span className="bg-zenth-markerYellow text-black px-1 mt-1 inline-block font-bold text-sm">Magic Input ✨ AI Magic</span>
-              </p>
-            </div>
-          </div>
-
-          {/* Feature 6: Entradas */}
-          <div
-            onClick={() => setSelectedFeature(featuresData.entries)}
-            className="bg-zenth-bg dark:bg-slate-900 border-2 border-black dark:border-white shadow-sketch dark:shadow-sketch-white rounded-xl p-6 relative overflow-hidden group hover:-translate-y-2 hover:-rotate-1 transition-all cursor-pointer rotate-0"
-          >
-            <div className="absolute -top-3 left-1/4 transform -translate-x-1/2 w-20 h-5 bg-zenth-markerYellow/60 rotate-2 z-20 pointer-events-none"></div>
-            <div className="relative z-10 pointer-events-none">
-              <div className="bg-zenth-markerBlue border-2 border-black dark:border-white w-12 h-12 rounded-lg flex items-center justify-center mb-4 shadow-sketch transform -rotate-3 shrink-0">
-                <PenTool className="w-6 h-6 text-black" />
-              </div>
-              <h3 className="text-2xl font-serif font-bold text-black dark:text-white mb-2">
-                {featuresData.entries.title}
-              </h3>
-              <p className="text-base text-black dark:text-slate-200 leading-snug">
-                Lienzo infinito. <br />
-                <span className="bg-zenth-200 dark:bg-zenth-200/20 text-black dark:text-white px-1 mt-1 inline-block font-bold text-sm">Editor Pro ✍️ Multitipo</span>
-              </p>
-            </div>
-          </div>
-
+            <PenLine className="h-7 w-7 text-ink" strokeWidth={1.5} />
+            <h3 className="t-display-md mt-6 text-ink">{entries.title}</h3>
+            <p className="t-body-lg mt-3 max-w-md text-ink-muted">{entries.shortDesc}</p>
+            <span className="t-caption mt-8 inline-flex items-center gap-1.5 text-ink">
+              Ver el detalle
+              <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            </span>
+          </button>
         </div>
 
-
+        {/* Resto de funciones */}
+        <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {SECONDARY_ORDER.map(key => {
+            const feature = FEATURE_DETAILS[key];
+            const Icon = feature.icon;
+            return (
+              <button
+                key={feature.id}
+                onClick={() => setSelected(feature)}
+                className="fr-card group flex h-full flex-col items-start text-left transition-transform duration-300 hover:-translate-y-1"
+              >
+                <Icon className="h-5 w-5 text-ink" strokeWidth={1.75} />
+                <h3 className="t-headline mt-5 text-ink">{feature.title}</h3>
+                <p className="t-body mt-2 text-ink-muted">{feature.shortDesc}</p>
+                <span className="t-caption mt-6 inline-flex items-center gap-1.5 text-ink-muted transition-colors group-hover:text-ink">
+                  Detalle
+                  <ArrowUpRight className="h-3.5 w-3.5" />
+                </span>
+              </button>
+            );
+          })}
+        </div>
       </div>
 
-      {/* MODAL OVERLAY */}
-      {selectedFeature && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-          {/* Backdrop Blur */}
+      {/* Modal de detalle */}
+      {selected && (
+        <div
+          className="fixed inset-0 z-50 flex items-end justify-center p-0 sm:items-center sm:p-4"
+          role="dialog"
+          aria-modal="true"
+          aria-label={selected.title}
+        >
           <div
-            className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm transition-opacity"
-            onClick={() => setSelectedFeature(null)}
-          ></div>
+            className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+            onClick={() => setSelected(null)}
+          />
 
-          {/* Modal Content */}
-          <div className="bg-white dark:bg-slate-800 w-full max-w-lg border-2 border-black dark:border-white shadow-sketch-xl dark:shadow-sketch-xl-white p-8 relative z-10 rounded-lg transform rotate-1 animate-in fade-in zoom-in duration-200">
-
-            {/* Close Button */}
-            <button
-              onClick={() => setSelectedFeature(null)}
-              className="absolute top-4 right-4 p-2 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-full transition-colors border-2 border-transparent hover:border-black dark:hover:border-white"
-            >
-              <X className="w-6 h-6 text-black dark:text-white" />
-            </button>
-
-            {/* Header with Icon */}
-            <div className="flex items-center gap-4 mb-6">
-              <div className={`${selectedFeature.colorClass} border-2 border-black dark:border-white w-16 h-16 rounded-lg flex items-center justify-center shadow-sketch dark:shadow-sketch-white`}>
-                {selectedFeature.icon}
+          <div className="fr-elevated relative z-10 max-h-[85vh] w-full max-w-lg overflow-y-auto rounded-t-atmos bg-surface-1 p-7 sm:rounded-atmos">
+            <div className="flex items-start justify-between gap-4">
+              <div className="flex items-center gap-3">
+                <selected.icon className="h-6 w-6 text-ink" strokeWidth={1.5} />
+                <h3 className="t-display-md text-ink">{selected.title}</h3>
               </div>
-              <h3 className="text-3xl font-serif font-bold text-black dark:text-white leading-none">
-                {selectedFeature.title}
-              </h3>
-            </div>
-
-            {/* Content */}
-            <div className="text-lg text-slate-700 dark:text-slate-300 font-sans leading-relaxed space-y-4">
-              {selectedFeature.fullDesc}
-            </div>
-
-            {/* Footer Action */}
-            <div className="mt-8 pt-6 border-t-2 border-dashed border-slate-200 dark:border-slate-700 flex justify-between items-center">
-              {selectedFeature.relatedPostId && (
-                <button
-                  onClick={() => {
-                    setSelectedFeature(null);
-                    onNavigate('blog', selectedFeature.relatedPostId);
-                  }}
-                  className="bg-black dark:bg-white text-white dark:text-black px-4 py-2 rounded-lg font-bold font-marker shadow-sketch hover:scale-105 transition-transform text-sm sm:text-base border border-transparent hover:border-white dark:hover:border-black"
-                >
-                  Leer artículo completo ➔
-                </button>
-              )}
               <button
-                onClick={() => setSelectedFeature(null)}
-                className="font-bold text-slate-500 hover:text-black dark:hover:text-white hover:underline transition-colors text-sm"
+                onClick={() => setSelected(null)}
+                className="fr-btn fr-btn-icon shrink-0"
+                aria-label="Cerrar"
               >
-                Cerrar
+                <X className="h-[18px] w-[18px]" />
               </button>
             </div>
+
+            <ul className="mt-7 space-y-4">
+              {selected.bullets.map((bullet, i) => (
+                <li key={i} className="flex gap-3">
+                  <span className="mt-[9px] h-1 w-1 shrink-0 rounded-full bg-accent" />
+                  <span className="t-body text-ink-muted">{bullet}</span>
+                </li>
+              ))}
+            </ul>
+
+            {selected.relatedPostId && (
+              <button
+                onClick={() => {
+                  const postId = selected.relatedPostId!;
+                  setSelected(null);
+                  onNavigate('blog', postId);
+                }}
+                className="fr-btn fr-btn-primary mt-8 w-full"
+              >
+                Leer el artículo completo
+                <ArrowUpRight className="h-4 w-4" />
+              </button>
+            )}
           </div>
         </div>
       )}

@@ -13,19 +13,20 @@ import { Helmet } from 'react-helmet-async';
 import { BLOG_POSTS } from './constants';
 
 function App() {
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(true);
   const navigate = useNavigate();
   const location = useLocation();
 
   useEffect(() => {
-    // Check local storage or system preference
+    // El oscuro es la identidad de la marca: sin preferencia guardada se
+    // arranca en oscuro, y sólo el claro explícito lo desactiva.
     const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-      setIsDarkMode(true);
-      document.documentElement.classList.add('dark');
-    } else {
+    if (savedTheme === 'light') {
       setIsDarkMode(false);
       document.documentElement.classList.remove('dark');
+    } else {
+      setIsDarkMode(true);
+      document.documentElement.classList.add('dark');
     }
   }, []);
 
@@ -45,13 +46,13 @@ function App() {
   const getSEO = () => {
     const baseUrl = 'https://www.zenth.space';
     let title = 'Zenth: Planificación Visual y Productividad para Mentes Inquietas';
-    let description = 'Organiza tu vida con Zenth, el planificador visual que convierte tu productividad en un juego.';
+    let description = 'Organiza tu día, comparte pizarras y protege tu enfoque con Zenth, el planificador visual para mentes inquietas.';
     let url = `${baseUrl}${location.pathname}`;
     let image = `${baseUrl}/blog/appview.png`;
 
     if (location.pathname === '/') {
-      title = 'Zenth: Planificación Visual, Gamificación y Productividad para TDAH';
-      description = 'Organiza tu vida con Zenth, el planificador visual que convierte tu productividad en un juego. Diseñado para TDAH y mentes creativas.';
+      title = 'Zenth: Planificación Visual, Colaboración y Enfoque para TDAH';
+      description = 'Tu día, tus pizarras compartidas, tus notas y tu enfoque en una sola aplicación. Diseñada para TDAH y mentes creativas.';
     } else if (location.pathname === '/blog') {
       title = 'Blog: Productividad y Neurociencia | Zenth Space';
       description = 'Consejos sobre TDAH, gestión del tiempo y bienestar mental. Aprende a dominar tu día con planificación visual y calma.';
@@ -70,10 +71,10 @@ function App() {
       description = 'Cómo protegemos tus datos y tu privacidad en Zenth. Sin venta de datos, sin rastreadores invasivos.';
     } else if (location.pathname === '/faq') {
       title = 'Preguntas Frecuentes | Zenth Space';
-      description = 'Todo lo que necesitas saber sobre Zenth: productividad, gamificación, TDAH y nuestra IA.';
+      description = 'Todo lo que necesitas saber sobre Zenth: pizarras compartidas, notas, enfoque, Google Calendar, niveles y privacidad.';
     } else if (location.pathname === '/guide') {
-      title = 'Manual del Usuario | Zenth: Guía de Bienestar';
-      description = 'Aprende a dominar Zenth con nuestra guía detallada: flujos de IA, gamificación, ajustes y filosofía de organización.';
+      title = 'Manual del Usuario | Zenth: Guía Completa';
+      description = 'Aprende a dominar Zenth paso a paso: Hoy, pizarras y colaboración, Entradas, modo enfoque, ajustes e integraciones.';
     }
 
     return { title, description, url, image };
@@ -128,7 +129,7 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen font-sans selection:bg-zenth-200 selection:text-zenth-900 border-x-0 relative">
+    <div className="relative min-h-screen bg-canvas font-sans text-ink">
       <Helmet>
         <title>{seo.title}</title>
         <meta name="description" content={seo.description} />

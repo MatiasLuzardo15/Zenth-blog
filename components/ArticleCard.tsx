@@ -1,6 +1,6 @@
 import React from 'react';
+import { ArrowUpRight } from 'lucide-react';
 import { BlogPost } from '../types';
-import { ArrowRight } from 'lucide-react';
 
 interface ArticleCardProps {
   post: BlogPost;
@@ -11,51 +11,53 @@ const ArticleCard: React.FC<ArticleCardProps> = ({ post, onClick }) => {
   return (
     <article
       onClick={onClick}
-      className="flex flex-col bg-white dark:bg-slate-900 p-4 pb-8 border-2 border-black dark:border-white shadow-sketch-lg dark:shadow-sketch-lg-white transform hover:-translate-y-2 hover:rotate-1 transition-all duration-300 relative cursor-pointer group"
+      onKeyDown={e => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          onClick?.();
+        }
+      }}
+      role="link"
+      tabIndex={0}
+      className="fr-card group flex h-full cursor-pointer flex-col p-3 transition-transform duration-300 hover:-translate-y-1"
     >
-
-      {/* Tape effect at the top */}
-      <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 w-24 h-6 bg-zenth-markerYellow/60 rotate-2 z-10"></div>
-
-      <div className="relative h-56 overflow-hidden border-2 border-black dark:border-white bg-gray-100 dark:bg-slate-800 mb-4">
+      <div className="relative aspect-[16/10] overflow-hidden rounded-large bg-canvas">
         {post.imageUrl ? (
           <img
             src={post.imageUrl}
-            alt={post.title}
-            className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+            alt=""
+            loading="lazy"
+            className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
           />
         ) : (
-          <div className="w-full h-full bg-zenth-100 dark:bg-slate-700 flex items-center justify-center relative overflow-hidden">
-            <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'radial-gradient(#000 1px, transparent 1px)', backgroundSize: '16px 16px' }}></div>
-            <span className="font-marker text-4xl text-black/20 dark:text-white/20 transform -rotate-12 select-none">Zenth Blog</span>
+          <div className="bg-dot-grid flex h-full w-full items-center justify-center">
+            <span className="font-display text-[22px] text-ink-muted">Zenth</span>
           </div>
         )}
-
-        <div className="absolute bottom-2 right-2 bg-black dark:bg-white text-white dark:text-black px-3 py-1 text-xs font-bold uppercase tracking-wide border border-white dark:border-black transform -rotate-2">
+        <span className="fr-btn fr-btn-translucent pointer-events-none absolute left-3 top-3 t-micro bg-black/55 text-white backdrop-blur-md">
           {post.category}
-        </div>
+        </span>
       </div>
 
-      <div className="flex-1 flex flex-col px-2">
-        <div className="mb-2">
-          <span className="text-slate-500 dark:text-slate-400 text-sm font-bold font-sans">{post.date}</span>
-          <h3 className="text-2xl font-serif font-bold text-black dark:text-white leading-tight mt-1 mb-2 decoration-zenth-400 hover:underline decoration-2 underline-offset-2">
-            {post.title}
-          </h3>
+      <div className="flex flex-1 flex-col p-4 pt-5">
+        <div className="t-micro flex items-center gap-2 text-ink-muted">
+          <span>{post.date}</span>
+          {post.readTime && (
+            <>
+              <span aria-hidden="true">·</span>
+              <span>{post.readTime}</span>
+            </>
+          )}
         </div>
 
-        <p className="text-slate-800 dark:text-slate-300 font-sans text-lg mb-4 flex-1 line-clamp-3">
-          {post.excerpt}
-        </p>
+        <h3 className="t-headline mt-3 text-ink">{post.title}</h3>
 
-        <div className="flex items-center justify-between mt-auto pt-4 border-t-2 border-dashed border-gray-300 dark:border-slate-700">
-          <div className="flex items-center">
-            <span className="text-sm font-bold text-slate-500 dark:text-slate-400 font-marker">Por {post.author}</span>
-          </div>
-          <button className="w-10 h-10 flex items-center justify-center border-2 border-black dark:border-white rounded-full text-black dark:text-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors">
-            <ArrowRight className="w-5 h-5" />
-          </button>
-        </div>
+        <p className="t-body mt-3 line-clamp-3 flex-1 text-ink-muted">{post.excerpt}</p>
+
+        <span className="t-caption mt-6 inline-flex items-center gap-1.5 text-ink-muted transition-colors group-hover:text-ink">
+          Leer artículo
+          <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+        </span>
       </div>
     </article>
   );

@@ -1,314 +1,255 @@
 import React from 'react';
-import { ChevronDown, Zap, Smartphone, Brain, Trophy, Mail, BookOpen, Layout, Sparkles, BarChart2, Rocket, Target, ArrowDown, PenTool, Type, Image, Trash2, Keyboard, Wand2 } from 'lucide-react';
+import {
+    ArrowLeft, ArrowUpRight, Mail, Sun, LayoutDashboard, Users, PenLine, Keyboard,
+    Timer, Trophy, HeartPulse, SlidersHorizontal, CalendarDays, Trash2, Sparkles,
+} from 'lucide-react';
 
-const GuideSection: React.FC<{
-    title: string,
-    steps: string[],
-    icon: React.ReactNode,
-    color: string,
-    extension?: { title: string, steps: string[], icon: React.ReactNode }
-}> = ({ title, steps, icon, color, extension }) => (
-    <div className={`break-inside-avoid mb-8 p-8 border-4 border-black dark:border-white rounded-lg shadow-sketch-lg dark:shadow-sketch-lg-white ${color} h-fit transform transition-transform hover:-translate-y-1`}>
-        <div className="flex items-center gap-4 mb-6">
-            <div className="p-3 bg-white dark:bg-slate-800 border-2 border-black rounded-full shadow-sketch">
-                {icon}
-            </div>
-            <h3 className="text-3xl font-marker text-black">{title}</h3>
-        </div>
-        <div className="space-y-4">
-            {steps.map((step, idx) => (
-                <div key={idx} className="flex gap-4 items-start">
-                    <span className="flex-shrink-0 w-8 h-8 bg-black text-white rounded-full flex items-center justify-center font-bold font-mono border-2 border-white shadow-sketch">
-                        {idx + 1}
-                    </span>
-                    <p className="text-lg font-bold text-black leading-tight pt-1">
-                        {step}
-                    </p>
-                </div>
-            ))}
-        </div>
+interface GuideSection {
+    title: string;
+    intro: string;
+    icon: React.ComponentType<{ className?: string; strokeWidth?: number }>;
+    steps: string[];
+}
 
-        {extension && (
-            <div className="mt-10 pt-10 border-t-4 border-black/10 dark:border-white/10 relative">
-                <div className="absolute -top-6 left-1/2 -translate-x-1/2 bg-white dark:bg-slate-800 p-2 border-2 border-black rounded-full shadow-sketch">
-                    <ArrowDown className="w-6 h-6 text-black dark:text-white" />
-                </div>
-                <div className="flex items-center gap-4 mb-6">
-                    <div className="p-3 bg-white dark:bg-slate-800 border-2 border-black rounded-full shadow-sketch">
-                        {extension.icon}
-                    </div>
-                    <h3 className="text-2xl font-marker text-black">{extension.title}</h3>
-                </div>
-                <div className="space-y-4">
-                    {extension.steps.map((step, idx) => (
-                        <div key={idx} className="flex gap-4 items-start">
-                            <span className="flex-shrink-0 w-8 h-8 bg-black text-white rounded-full flex items-center justify-center font-bold font-mono border-2 border-white shadow-sketch">
-                                {idx + 1}
-                            </span>
-                            <p className="text-lg font-bold text-black leading-tight pt-1">
-                                {step}
-                            </p>
-                        </div>
-                    ))}
-                </div>
-            </div>
-        )}
-    </div>
-);
+const SECTIONS: GuideSection[] = [
+    {
+        title: 'Hoy',
+        icon: Sun,
+        intro: 'La pantalla de inicio. Tu día repartido en bloques de energía en lugar de una agenda que se rompe a la primera.',
+        steps: [
+            'Las tareas se agrupan en Mañana, Tarde y Noche. Si una no tiene momento definido, cae en «En cualquier momento» y se muestra junto a la mañana.',
+            'Cambia entre vista de día, semana y mes con los selectores de la cabecera, o con las teclas D, S y M.',
+            'Pulsa el botón de añadir para crear una tarea: título, emoji, momento del día, hora concreta si la necesitas, prioridad y etiquetas.',
+            'Marca como gran meta lo que de verdad importa hoy: vale 50 XP en lugar de 10 y se distingue en la lista.',
+            'Configura la repetición para las rutinas. Al editar una tarea recurrente, Zenth te pregunta si el cambio afecta solo a esa aparición o a toda la serie.',
+            'En Ajustes puedes definir a qué hora empieza tu mañana, y los bloques se reorganizan según tu horario real.',
+            'El historial de completadas guarda lo que ya terminaste, por día o por pizarra.',
+        ],
+    },
+    {
+        title: 'Listas y pizarras',
+        icon: LayoutDashboard,
+        intro: 'El tablero, para lo que no vive en un día concreto: proyectos, backlogs y trabajo en curso.',
+        steps: [
+            'Crea tantas pizarras como necesites, cada una con su nombre y su icono. Se cambia entre ellas desde el selector de la cabecera.',
+            'Cada pizarra tiene sus propias columnas: renómbralas, cámbiales el color de acento y reordénalas a tu gusto.',
+            'Arrastra las tarjetas entre columnas para mover el trabajo, y usa la bandeja de entrada rápida para soltar ideas sin decidir todavía dónde van.',
+            'Elige el diseño del tablero en Ajustes: horizontal, con desplazamiento lateral estilo Trello, o ajustado al espacio en varias filas.',
+            'La pizarra por defecto recoge las tareas antiguas que no pertenecen a ninguna otra, y por eso no se puede eliminar.',
+        ],
+    },
+    {
+        title: 'Compartir una pizarra',
+        icon: Users,
+        intro: 'Una pizarra pasa de ser «mi tablero» a ser «un espacio con miembros». Los permisos son la pizarra: no hay espacios de trabajo intermedios.',
+        steps: [
+            'Abre el panel Compartir desde el menú de la pizarra. Invita por correo electrónico o copia un enlace de invitación para mandarlo por donde quieras.',
+            'Asigna el rol al invitar: Administrador gestiona la pizarra y sus miembros, Miembro crea y edita contenido, Observador solo lee.',
+            'El panel Visibilidad controla el otro eje: hasta dónde llega la pizarra para quien no es miembro. Privada, o pública con un enlace de solo lectura.',
+            'Los administradores pueden cambiar roles y expulsar miembros. El propietario, además, puede eliminar la pizarra o transferir la propiedad a otro administrador.',
+            'Una pizarra nunca puede quedarse sin administradores: la regla se aplica en la base de datos, no solo en la interfaz.',
+            'Los cambios de tus compañeros llegan en vivo. Si entras como observador, la interfaz oculta las acciones que no puedes ejecutar en lugar de dejarte fallar.',
+        ],
+    },
+    {
+        title: 'Entradas',
+        icon: PenLine,
+        intro: 'Dejó de ser un bloc de notas. Es donde vive todo lo que no es una tarea.',
+        steps: [
+            'Desde el botón de nueva entrada eliges qué crear: nota de texto, tabla, carpeta, archivo subido o nota de voz.',
+            'Las notas usan un editor de texto enriquecido: títulos, listas, citas, código, resaltador, separadores y más de diez tipografías.',
+            'Pega imágenes con Ctrl+V o arrástralas al editor, y haz clic en cualquiera para ajustar su tamaño.',
+            'Las tablas admiten fórmulas, formato de celda, orden y exportación a CSV. Viven en la base de datos, así que no consumen tu cuota de archivos.',
+            'Sube PDF, imágenes o documentos y consúltalos desde la propia aplicación, sin descargarlos.',
+            'Graba notas de voz desde el micrófono cuando escribir sea más lento que hablar.',
+            'Organízalo todo en carpetas y etiquetas. El buscador global encuentra dentro del contenido, no solo en los títulos.',
+            'Desde cualquier tarea puedes usar «Expandir a nota» para convertirla en una entrada completa manteniendo el vínculo.',
+        ],
+    },
+    {
+        title: 'Atajos del editor de notas',
+        icon: Keyboard,
+        intro: 'Comprobados sobre la versión actual del editor. En macOS, sustituye Ctrl por Cmd.',
+        steps: [
+            'Esc guarda y cierra la nota. Ctrl+S guarda sin salir.',
+            'Ctrl+B negrita · Ctrl+I cursiva · Ctrl+U subrayado · Ctrl+Shift+X tachado.',
+            'Ctrl+Alt+1 título principal (H2) · Ctrl+Alt+2 título secundario (H3).',
+            'Ctrl+Shift+8 lista con viñetas · Ctrl+Shift+7 lista numerada · Tab inserta sangría.',
+            'Deshacer y rehacer usan los atajos nativos del navegador.',
+            'Al pegar texto de fuera, Zenth limpia el formato externo y conserva la estructura (títulos y listas).',
+        ],
+    },
+    {
+        title: 'Modo enfoque',
+        icon: Timer,
+        intro: 'Un temporizador que mide atención real. Los minutos que registres son los que cuentan para tu nivel.',
+        steps: [
+            'Elige una de las cuatro duraciones rápidas —15, 25, 45 o 60 minutos— o escribe la tuya.',
+            'Asocia la sesión a una tarea concreta para saber después cuánto tiempo le dedicaste de verdad.',
+            'Ajusta la duración sobre la marcha con los botones de más y menos minuto.',
+            'Al terminar, los minutos se guardan como sesión y se suman a tu total de enfoque.',
+            'Debajo del temporizador tienes las sesiones de hoy y tu constancia de la semana.',
+        ],
+    },
+    {
+        title: 'Progreso y niveles',
+        icon: Trophy,
+        intro: 'Diez niveles que miden constancia, no velocidad. No se pueden acelerar con una tarde intensa.',
+        steps: [
+            'Cada tarea completada suma 10 XP. Las grandes metas, 50.',
+            'Subir de nivel exige cuatro cosas a la vez: XP, racha, tareas completadas y minutos de enfoque acumulados.',
+            'La ruta de progreso, en Objetivos, muestra los diez niveles y exactamente qué te falta para el siguiente.',
+            'Los niveles son permanentes: si un día se rompe la racha, conservas el nivel alcanzado.',
+            'Para el cálculo se usa tu mejor racha histórica, no solo la actual.',
+        ],
+    },
+    {
+        title: 'Registro de ánimo',
+        icon: HeartPulse,
+        intro: 'La parte que ninguna app de tareas quiere mirar: cómo estabas mientras hacías todo eso.',
+        steps: [
+            'Registra tu estado del día con un toque: excelente, bien, neutral, bajo o mal.',
+            'El calendario de ánimo, en Objetivos, muestra el mes completo con un color por día.',
+            'El año en píxeles convierte doce meses de registros en un solo mosaico donde los patrones se ven de golpe.',
+            'El balance mensual resume qué estado predominó y cuántos días registraste.',
+            'Léelo junto a tus rachas: si llevas dos semanas en tonos bajos, la respuesta no es apretar más.',
+        ],
+    },
+    {
+        title: 'Google Calendar',
+        icon: CalendarDays,
+        intro: 'Integración de solo lectura: Zenth mira tu calendario, nunca escribe en él.',
+        steps: [
+            'Ve a Ajustes → Integraciones y pulsa Conectar Google Calendar. Solo se pide permiso de lectura.',
+            'Elige qué calendarios quieres ver: los que no marques no aparecen en ningún sitio.',
+            'Sus eventos se muestran en Hoy junto a tus tareas. La sincronización se actualiza sola cada cinco minutos.',
+            'Puedes pausar la sincronización cuando quieras, o desconectar la cuenta y borrar lo importado.',
+            'Los eventos no entran en ninguna pizarra por su cuenta. Si quieres llevarlos a una, usa «Llevar eventos a Todo» y elige listas y pizarra destino.',
+        ],
+    },
+    {
+        title: 'Zen, el asistente',
+        icon: Sparkles,
+        intro: 'IA de Google donde ahorra trabajo real, y en ningún otro sitio. Nunca actúa sin que se lo pidas.',
+        steps: [
+            'En el editor de tareas, «Pedir a Zen» convierte lenguaje natural en una tarea: «Cita médica el lunes a las 10» rellena título, fecha, hora y prioridad.',
+            'Auto-Agendar propone el mejor momento para una tarea a partir de su texto y de la fecha actual.',
+            'Sugerir Pasos parte una tarea grande en tres a cinco micro-pasos concretos, con verbos de acción.',
+            'En el editor de notas, selecciona un texto y pulsa Zen AI para mejorar la redacción, resumirlo o expandirlo.',
+        ],
+    },
+    {
+        title: 'Ajustes',
+        icon: SlidersHorizontal,
+        intro: 'Seis secciones. Todas las opciones se guardan en tu cuenta y viajan contigo entre dispositivos.',
+        steps: [
+            'General: tu nombre, el avatar y la imagen de portada de tu perfil de Objetivos.',
+            'Apariencia: tema Claro, Oscuro o Zen, color de acento, modo compacto y ancho del contenido en escritorio.',
+            'Productividad: hora de inicio de la mañana, formato de 12 o 24 horas, notificaciones Zen, recordatorios push y efectos de sonido.',
+            'Pizarras: pizarra activa, diseño del tablero y un resumen de miembros, visibilidad e invitaciones pendientes.',
+            'Integraciones: conexión con Google Calendar.',
+            'Cuenta: cambio de correo, acceso a la papelera, cierre de sesión y la zona de riesgo para borrar datos.',
+        ],
+    },
+    {
+        title: 'Papelera',
+        icon: Trash2,
+        intro: 'Borrar deja de ser una decisión definitiva.',
+        steps: [
+            'Ábrela desde Ajustes → Cuenta, o directamente en /trash.',
+            'Las tareas y las entradas eliminadas se listan en pestañas separadas.',
+            'Restaura cualquier elemento a su sitio original con un clic.',
+            'Vacía la papelera cuando quieras liberar espacio de verdad; ahí sí es permanente.',
+            'Al mandar una tarea recurrente a la papelera, Zenth detiene sus repeticiones futuras.',
+        ],
+    },
+];
 
 const UserGuide = ({ onBack }: { onBack: () => void }) => {
-    const technicalGuides = [
-        {
-            title: "Planificación por Energía",
-            icon: <Layout className="w-8 h-8 text-zenth-markerBlue" />,
-            color: "bg-[#e3f2fd]",
-            steps: [
-                "Abre el panel lateral 'Hoy' para ver tus tres cubos de energía: Mañana, Tarde y Noche.",
-                "Pulsa el botón '+' para crear una tarea: elige título, emoji, categoría y prioridad.",
-                "Selecciona el momento del día (Mañana, Tarde, Noche o Anytime) según tu energía.",
-                "Arrastra y suelta las tareas entre los bloques para equilibrar tu carga diaria.",
-                "Define tu 'Inicio Mañana' en ajustes para que Zenth organice tus tareas según tu horario real."
-            ]
-        },
-        {
-            title: "Poder de la IA 'Zen'",
-            icon: <Sparkles className="w-8 h-8 text-zenth-markerYellow" />,
-            color: "bg-[#fffde7]",
-            steps: [
-                "Usa 'Pedir a Zen ✨': escribe 'Cita médica el lunes a las 10am' y Zen agendará todo por ti.",
-                "Pide 'Sugerir Pasos' para desglosar tareas complejas (ej: 'Organizar evento') en micro-metas.",
-                "Confía en el 'Auto-Agendado' para que la IA sugiera el mejor momento basado en el nombre de la tarea.",
-                "Dile a Zen tus pendientes en lenguaje natural para ahorrar tiempo en configuración manual.",
-                "Zen aprende de tu ritmo para ayudarte a recuperar tu paz mental sin esfuerzo."
-            ]
-        },
-        {
-            title: "Filosofía: Contenedores",
-            icon: <BookOpen className="w-8 h-8 text-zenth-markerBlue" />,
-            color: "bg-[#f3e5f5]",
-            steps: [
-                "Hoy: Tu enfoque inmediato. Solo lo que planeas hacer y completar hoy.",
-                "Mañana: Planifica hoy para despertar sin estrés. Libera espacio mental para descansar.",
-                "Misiones: El lugar para lo que harás 'En cualquier momento' sin fecha fija.",
-                "Objetivos: Tu centro de mando. Revisa estadísticas, nivel de evolución y gestiona tu cuenta.",
-                "Zenth divide tu vida en estos bloques para evitar que te sientas abrumado por una lista infinita."
-            ]
-        },
-        {
-            title: "Gamificación y Progreso",
-            icon: <Trophy className="w-8 h-8 text-zenth-markerYellow" />,
-            color: "bg-[#e8f5e9]",
-            steps: [
-                "Gana XP (Experiencia) completando tareas y realizando sesiones de enfoque (Flow).",
-                "Zen Path: Sigue tu ruta desde 'Piedra en el Camino' hasta el 'Universo Expandido'.",
-                "Rachas (Streaks): Mantén la constancia diaria para no perder tu racha mensual de bienestar.",
-                "Sube de nivel para ver madurar tu brote de conciencia y fortalecer tu mente diamante.",
-                "Zenth premia tu constancia, convirtiendo la disciplina en un juego de crecimiento personal."
-            ]
-        },
-        {
-            title: "Guía de Ajustes",
-            icon: <Rocket className="w-8 h-8 text-zenth-markerPink" />,
-            color: "bg-[#fce4ec]",
-            steps: [
-                "Identidad: Personaliza el nombre con el que Zen te saludará y sube tu avatar o emoji.",
-                "Estilo: Elige tu color de acento y activa el Modo Zen para un tono crema más suave.",
-                "Preferencias: Define a qué hora empieza tu mañana y activa notificaciones motivadoras.",
-                "Accesibilidad: Usa el Modo Compacto para ver más tareas o Reducir Movimiento para mayor fluidez.",
-                "Seguridad: Gestiona tu política de privacidad, borra datos si quieres empezar de cero o cierra sesión."
-            ]
-        },
-        {
-            title: "Modo Enfoque (Flow)",
-            icon: <Zap className="w-8 h-8 text-orange-500" />,
-            color: "bg-[#fff3e0]",
-            steps: [
-                "Busca el icono de cronómetro en el panel lateral o en tus tareas activas.",
-                "Elige entre Pomodoro (25/5 min) o sesiones de Deep Work (50/10 min).",
-                "Inicia el Focus Mode: la interfaz se simplificará para que solo veas tu objetivo.",
-                "No cambies de pestaña; Zenth rastreará tus minutos reales de atención plena.",
-                "Al terminar, reclama tus XP de enfoque y mira cómo sube tu nivel de maestría."
-            ],
-            extension: {
-                title: "Configuración Zen Focus",
-                icon: <Target className="w-8 h-8 text-red-500" />,
-                steps: [
-                    "Toca cualquier tarjeta de tarea y pulsa el botón 'Configuración Zen Focus'.",
-                    "El nombre de esa tarea aparecerá como tu 'Misión' principal en el enfoque.",
-                    "El tiempo que pases concentrado se registrará específicamente para esa tarea.",
-                    "Ideal para proyectos largos donde quieres medir el esfuerzo real invertido.",
-                    "Convierte tus tareas en misiones de atención con objetivos claros y trazables."
-                ]
-            }
-        },
-        {
-            title: "Atajos y Gestos Rápidos",
-            icon: <Smartphone className="w-8 h-8 text-zenth-markerBlue" />,
-            color: "bg-[#f1f8e9]",
-            steps: [
-                "Desliza hacia la derecha en cualquier tarea para marcarla como 'Completada' al instante.",
-                "Mantén presionada una tarea para entrar en el modo de edición rápida sin abrir el modal.",
-                "Toca dos veces el icono de 'Hoy' para desplazarte rápidamente al bloque de energía actual.",
-                "Usa el gesto de 'Pull to Refresh' en la pantalla principal para sincronizar tus datos con la nube.",
-                "Zenth está diseñado para ser usado con una sola mano: casi todo está a un pulgar de distancia."
-            ]
-        },
-        {
-            title: "Seguimiento Emocional",
-            icon: <Brain className="w-8 h-8 text-zenth-markerBlue" />,
-            color: "bg-[#e0f7fa]",
-            steps: [
-                "Al terminar el día, elige el color que represente tu humor (excelente hasta bajo).",
-                "Analiza la relación entre tus rachas de tareas completadas y tus picos de felicidad.",
-                "Si detectamos muchos días en 'Bajo', la IA te sugerirá reducir tu carga mental.",
-                "Zenth te ayuda a entender que tu productividad no es solo hacer, sino sentirte bien.",
-                "Convierte tu autoconocimiento en el pilar de tu productividad sostenible."
-            ],
-            extension: {
-                title: "Tu Mural de Pixels",
-                icon: <BarChart2 className="w-8 h-8 text-zenth-markerPink" />,
-                steps: [
-                    "Descubre tu tendencia emocional a través del año en el panel 'Objetivos'.",
-                    "Cada píxel representa tu estado de paz tras completar tu jornada.",
-                    "Identifica patrones: ¿Qué hábitos o días de la semana mejoran tu humor?",
-                    "Usa los filtros sociales para ver cómo tu bienestar evoluciona con tu racha.",
-                    "Transforma datos subjetivos en una hoja de ruta visual para tu salud mental."
-                ]
-            }
-        },
-        {
-            title: "Entradas (Notas Zen)",
-            icon: <PenTool className="w-8 h-8 text-zenth-markerBlue" />,
-            color: "bg-[#e1f5fe]",
-            steps: [
-                "Haz clic en el icono de 'Entradas' o selecciona 'Expandir a nota' desde cualquier tarea.",
-                "Escribe sin distracciones en el editor minimalista con soporte para jerarquías (H2, H3) y formatos.",
-                "Personaliza tu nota: asigna un emoji de portada y elige entre 10 estilos tipográficos diferentes.",
-                "Añade vida a tus notas pegando imágenes directamente (Ctrl+V) o arrastrándolas al editor.",
-                "Las notas se guardan automáticamente en la nube, permitiéndote acceder a ellas desde cualquier lugar."
-            ],
-            extension: {
-                title: "Personalización y Multimedia",
-                icon: <Type className="w-8 h-8 text-zenth-markerPink" />,
-                steps: [
-                    "Toca cualquier imagen para redimensionarla entre 25% y 100% de ancho.",
-                    "Usa el menú de tipografía para cambiar el 'humor' de tu nota (Moderno, Escrito a mano, etc).",
-                    "Aprovecha el buscador global para encontrar palabras clave dentro de tus notas en milisegundos.",
-                    "El Modo Enfoque en las notas oscurece el fondo para que solo existas tú y tu escritura.",
-                    "Recuerda que una Entrada puede ser un diario, un wiki personal o la documentación de un objetivo."
-                ]
-            }
-        },
-        {
-            title: "Atajos del Editor de Notas",
-            icon: <Keyboard className="w-8 h-8 text-zenth-markerBlue" />,
-            color: "bg-[#ede7f6]",
-            steps: [
-                "Guardado: Usa Esc para guardar y cerrar al instante, o Ctrl+S para guardar el progreso sin salir.",
-                "Formato Básico: Ctrl+B (Negrita), Ctrl+I (Cursiva), Ctrl+U (Subrayado), Ctrl+Shift+X (Tachado).",
-                "Estructura: Ctrl+Alt+1 para Título Principal (H2) y Ctrl+Alt+2 para Título Secundario (H3).",
-                "Indentación y Listas: Tab inserta sangría. Ctrl+Shift+8 (Viñetas), Ctrl+Shift+7 (Numéricas).",
-                "Historial: Presiona Ctrl+Z para deshacer un error y Ctrl+Y para rehacer la última acción."
-            ],
-            extension: {
-                title: "Formato y Multimedia",
-                icon: <Image className="w-8 h-8 text-zenth-markerPink" />,
-                steps: [
-                    "Pegado Limpio (Ctrl+V): Zenth quita el formato externo al pegar, manteniendo la estructura (títulos/listas).",
-                    "Tipografías y Tamaños: Selecciona texto para cambiar entre más de 10 fuentes o ajustar el tamaño.",
-                    "Imágenes: Arrastra y suelta, o pega capturas de pantalla. Haz clic en ellas para elegir tamaño (XS a L).",
-                    "Resaltador y Separador: Añade marcador visual sobre texto clave e inserta líneas divisorias sutiles.",
-                    "Bloques Técnicos: Utiliza la opción de cita para destacar reflexiones, o código para apuntes técnicos."
-                ]
-            }
-        },
-        {
-            title: "Zen AI: Asistente de Escritura",
-            icon: <Wand2 className="w-8 h-8 text-zenth-markerYellow" />,
-            color: "bg-[#e8eaf6]",
-            steps: [
-                "Tu editor tiene IA integrada. Selecciona una porción de texto y presiona 'Zen AI' para ver la magia.",
-                "Mejorar redacción: Reescribe un párrafo confuso dándole un tono más claro, correcto y profesional.",
-                "Resumir texto: Condensa párrafos gigantescos extrayendo única y exclusivamente las ideas principales.",
-                "Expandir idea: Toma una frase corta y la IA la desarrollará de forma coherente y con mayor profundidad.",
-                "Supera cualquier bloqueo creativo al instante, logrando notas perfectas sin abandonar el editor."
-            ]
-        },
-        {
-            title: "Papelera (Trash Bin)",
-            icon: <Trash2 className="w-8 h-8 text-slate-500" />,
-            color: "bg-[#f5f5f5]",
-            steps: [
-                "Accede a la Papelera desde tu perfil (Me) en la sección de cuenta.",
-                "Gestiona tus elementos eliminados en pestañas separadas para Tareas y Notas.",
-                "Restaura cualquier elemento a su lugar original con un solo clic.",
-                "Usa 'Vaciar Papelera' para borrar permanentemente y liberar espacio en tu nube.",
-                "Zenth detendrá automáticamente las recurrencias de las tareas movidas a la papelera."
-            ]
-        }
-    ];
+    const goToSection = (title: string) => {
+        const id = `guia-${title.toLowerCase().replace(/\s+/g, '-')}`;
+        document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+    };
 
     return (
-        <div className="min-h-screen bg-zenth-bg dark:bg-zenth-darkBg pt-24 pb-20 px-4 relative overflow-hidden">
-            {/* Background elements */}
-            <div className="absolute top-0 left-0 w-full h-full pointer-events-none opacity-10">
-                <div className="absolute top-[10%] left-[5%] w-96 h-96 bg-zenth-markerYellow rounded-full blur-[120px]"></div>
-                <div className="absolute bottom-[10%] right-[5%] w-96 h-96 bg-zenth-markerBlue rounded-full blur-[120px]"></div>
-            </div>
-
-            <div className="max-w-6xl mx-auto relative z-10">
+        <div className="min-h-screen pt-28 pb-24 lg:pt-36">
+            <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
                 <button
                     onClick={onBack}
-                    className="mb-8 flex items-center gap-2 text-black dark:text-white font-bold hover:translate-x-[-4px] transition-transform group"
+                    className="t-caption group mb-10 inline-flex items-center gap-2 text-ink-muted transition-colors hover:text-ink"
                 >
-                    <div className="p-2 border-2 border-black dark:border-white bg-white dark:bg-slate-800 shadow-sketch dark:shadow-sketch-white">
-                        <ChevronDown className="w-5 h-5 rotate-90" />
-                    </div>
-                    <span className="underline decoration-zenth-markerYellow decoration-4 text-2xl">Volver a FAQ</span>
+                    <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-0.5" />
+                    Volver a las preguntas frecuentes
                 </button>
 
-                <div className="text-center mb-16">
-                    <h1 className="text-5xl md:text-7xl font-marker text-black dark:text-white mb-6 transform -rotate-1">
-                        Manual del Usuario y Guía de Bienestar
-                    </h1>
-                    <p className="text-2xl font-bold text-slate-700 dark:text-slate-300 max-w-2xl mx-auto leading-tight italic">
-                        Aprende a dominar cada sección, ajuste y flujo para optimizar tu experiencia y recuperar tu paz mental.
-                    </p>
-                </div>
+                <p className="t-eyebrow">Documentación</p>
+                <h1 className="t-display-xl mt-4 text-ink">Manual del usuario.</h1>
+                <p className="t-body-lg mt-6 max-w-xl text-ink-muted">
+                    Cada sección de Zenth explicada de arriba abajo: qué hace, dónde está y para qué
+                    sirve realmente.
+                </p>
 
-                <div className="columns-1 md:columns-2 gap-8 space-y-8">
-                    {technicalGuides.map((guide, idx) => (
-                        <GuideSection
-                            key={idx}
-                            title={guide.title}
-                            steps={guide.steps}
-                            icon={guide.icon}
-                            color={guide.color}
-                            extension={guide.extension}
-                        />
-                    ))}
-                </div>
-
-                {/* Contact Section */}
-                <div className="mt-20 relative px-4 md:px-0">
-                    <div className="bg-black dark:bg-white text-white dark:text-black p-10 rounded-lg shadow-sketch-lg dark:shadow-sketch-lg-white border-2 border-white dark:border-black text-center transform -rotate-1">
-                        <h2 className="text-4xl font-marker mb-4">¿Aún tienes dudas?</h2>
-                        <p className="text-xl font-bold mb-8 opacity-90">
-                            Escríbenos y estaremos encantados de ayudarte a entrar en tu estado Zen.
-                        </p>
-                        <div className="flex flex-col sm:flex-row justify-center gap-6">
-                            <a
-                                href="https://mail.google.com/mail/?view=cm&fs=1&to=matiasluzardevv@gmail.com"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="inline-flex items-center justify-center gap-3 bg-zenth-markerYellow text-black px-10 py-4 rounded-md font-black text-xl border-2 border-black shadow-sketch hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] transition-all"
+                {/* Índice */}
+                <nav className="fr-card mt-12">
+                    <p className="t-caption text-ink">En esta página</p>
+                    <div className="mt-4 flex flex-wrap gap-2">
+                        {SECTIONS.map(section => (
+                            <button
+                                key={section.title}
+                                onClick={() => goToSection(section.title)}
+                                className="fr-btn fr-btn-translucent t-micro"
                             >
-                                <Mail className="w-6 h-6" />
-                                Contactar Soporte
-                            </a>
-                        </div>
+                                {section.title}
+                            </button>
+                        ))}
                     </div>
-                    <div className="absolute -inset-2 bg-zenth-markerPink -z-10 rounded-lg transform rotate-1 opacity-50"></div>
+                </nav>
+
+                <div className="mt-16 space-y-16">
+                    {SECTIONS.map(section => {
+                        const Icon = section.icon;
+                        const id = `guia-${section.title.toLowerCase().replace(/\s+/g, '-')}`;
+                        return (
+                            <section key={section.title} id={id} className="scroll-mt-24">
+                                <div className="flex items-center gap-3">
+                                    <Icon className="h-6 w-6 text-ink" strokeWidth={1.5} />
+                                    <h2 className="t-display-md text-ink">{section.title}</h2>
+                                </div>
+
+                                <p className="t-body-lg mt-4 max-w-2xl text-ink-muted">{section.intro}</p>
+
+                                <ol className="mt-8 space-y-4">
+                                    {section.steps.map((step, idx) => (
+                                        <li key={idx} className="flex gap-4">
+                                            <span className="t-micro mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-surface-1 tabular-nums text-ink-muted">
+                                                {idx + 1}
+                                            </span>
+                                            <p className="t-body text-ink-muted">{step}</p>
+                                        </li>
+                                    ))}
+                                </ol>
+                            </section>
+                        );
+                    })}
+                </div>
+
+                <div className="fr-card-featured mt-20 flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
+                    <div>
+                        <h2 className="t-headline text-ink">¿Falta algo en el manual?</h2>
+                        <p className="t-body mt-2 text-ink-muted">
+                            Dime qué no encontraste y lo añado.
+                        </p>
+                    </div>
+                    <a
+                        href="https://mail.google.com/mail/?view=cm&fs=1&to=matiasluzardevv@gmail.com"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="fr-btn fr-btn-primary shrink-0"
+                    >
+                        <Mail className="h-4 w-4" />
+                        Escribirme
+                        <ArrowUpRight className="h-4 w-4" />
+                    </a>
                 </div>
             </div>
         </div>

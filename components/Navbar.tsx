@@ -1,6 +1,5 @@
-
 import React, { useState, useEffect } from 'react';
-import { Menu, X, PenTool, Moon, Sun } from 'lucide-react';
+import { Menu, X, Moon, Sun, ArrowUpRight } from 'lucide-react';
 
 interface NavbarProps {
   isDarkMode: boolean;
@@ -9,140 +8,129 @@ interface NavbarProps {
   onNavigate: (page: 'home' | 'blog' | 'faq' | 'guide', sectionId?: string) => void;
 }
 
+type NavPage = 'home' | 'blog' | 'faq' | 'guide';
+
+const NAV_LINKS: { name: string; page: NavPage; id?: string }[] = [
+  { name: 'Funciones', page: 'home', id: 'features' },
+  { name: 'Instalar', page: 'home', id: 'install' },
+  { name: 'Blog', page: 'blog' },
+  { name: 'FAQ', page: 'faq' },
+  { name: 'Guía', page: 'guide' },
+];
+
 const Navbar: React.FC<NavbarProps> = ({ isDarkMode, toggleTheme, currentPage, onNavigate }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
-    };
-    window.addEventListener('scroll', handleScroll);
+    const handleScroll = () => setScrolled(window.scrollY > 12);
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const goToLogin = () => {
-    // Apunta a la subruta donde vivirá la aplicación
+  // El menú desplegado bloquea el scroll de fondo: si no, el overlay flota
+  // sobre una página que se sigue moviendo debajo.
+  useEffect(() => {
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [isOpen]);
+
+  const goToApp = () => {
     window.location.href = 'https://zenth.space/app';
   };
 
-  const handleNavClick = (e: React.MouseEvent, page: 'home' | 'blog' | 'faq' | 'guide', sectionId?: string) => {
-    e.preventDefault();
+  const handleNavClick = (page: NavPage, sectionId?: string) => {
     setIsOpen(false);
     onNavigate(page, sectionId);
   };
 
-  const navLinks = [
-    { name: 'Funciones', page: 'home', id: 'features' },
-    { name: 'FAQ', page: 'faq', id: '' },
-    { name: 'Opiniones', page: 'home', id: 'reviews' },
-    { name: 'Instalar', page: 'home', id: 'install' },
-    { name: 'Blog', page: 'blog', id: '' }, // Link al Blog
-    { name: 'Colaborar', page: 'home', id: 'colaborar' }
-  ];
+  // Sólo las páginas propias marcan estado activo. Los anclajes de la home
+  // cambian con el scroll y encenderlos aquí sería mentir.
+  const isActive = (link: { page: NavPage; id?: string }) =>
+    !link.id && link.page === currentPage;
 
   return (
-    <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'pt-2 px-2' : 'pt-4 px-4'}`}>
-      <div className={`max-w-6xl mx-auto transition-all duration-300 ${scrolled
-        ? 'bg-white dark:bg-slate-900 border-2 border-black dark:border-white shadow-sketch dark:shadow-sketch-white rounded-lg py-2 px-4'
-        : 'bg-transparent py-4 px-2'
-        }`}>
-        <div className="flex justify-between items-center">
-          {/* Logo */}
-          <div
-            className="flex-shrink-0 flex items-center cursor-pointer group"
-            onClick={(e) => handleNavClick(e, 'home', 'hero')}
+    <>
+      <nav
+        className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${scrolled ? 'bg-canvas-blur border-b border-hairline backdrop-blur-xl' : 'border-b border-transparent'
+          }`}
+      >
+        <div className="mx-auto flex h-14 max-w-6xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
+          {/* Marca */}
+          <button
+            onClick={() => handleNavClick('home', 'hero')}
+            className="flex shrink-0 items-center gap-2"
+            aria-label="Ir al inicio"
           >
-            <div className="relative">
-              <div className="absolute inset-0 bg-zenth-markerYellow rounded-full blur-sm transform group-hover:scale-125 transition-transform"></div>
-              <img src="/blog/favicon2.png" alt="Zenth Logo" className="h-8 w-8 relative z-10 transform -rotate-12 object-contain rounded-lg" />
-            </div>
-            <span className="text-3xl font-serif font-black text-black dark:text-white tracking-tighter decoration-wavy underline decoration-zenth-400">enth</span>
-          </div>
+            <img src="/blog/favicon2.png" alt="" className="h-7 w-7 rounded-small object-contain" />
+            <span className="font-display text-[19px] text-ink">Zenth</span>
+          </button>
 
-          {/* Desktop Menu */}
-          <div className="hidden md:flex items-center space-x-4">
-            {navLinks.map((item) => (
+          {/* Enlaces de escritorio */}
+          <div className="hidden items-center gap-1 md:flex">
+            {NAV_LINKS.map(link => (
               <button
-                key={item.name}
-                onClick={(e) => handleNavClick(e, item.page as 'home' | 'blog', item.id)}
-                className={`px-4 py-1 text-lg font-bold transition-colors relative group ${(currentPage === 'blog' && item.name === 'Blog') || (currentPage === 'faq' && item.name === 'FAQ') || (currentPage === 'guide' && item.name === 'Guía')
-                  ? 'text-zenth-400 dark:text-zenth-300'
-                  : 'text-black dark:text-white hover:text-zenth-400 dark:hover:text-zenth-300'
-                  }`}
+                key={link.name}
+                onClick={() => handleNavClick(link.page, link.id)}
+                aria-current={isActive(link) ? 'page' : undefined}
+                className={`fr-tab ${isActive(link) ? 'is-selected' : ''}`}
               >
-                {item.name}
-                <span className={`absolute bottom-0 left-0 w-full h-0.5 bg-black dark:bg-white transform transition-transform origin-left ${(currentPage === 'blog' && item.name === 'Blog') || (currentPage === 'faq' && item.name === 'FAQ') || (currentPage === 'guide' && item.name === 'Guía') ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
-                  }`}></span>
+                {link.name}
               </button>
             ))}
-
-            {/* Dark Mode Toggle */}
-            <button
-              onClick={toggleTheme}
-              className="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors text-black dark:text-white border-2 border-transparent hover:border-black dark:hover:border-white"
-            >
-              {isDarkMode ? <Sun className="w-6 h-6" /> : <Moon className="w-6 h-6" />}
-            </button>
           </div>
 
-          {/* CTA Button */}
-          <div className="hidden md:flex ml-2">
-            <button
-              className="bg-black dark:bg-white text-white dark:text-black px-6 py-2 rounded-md font-bold text-lg border-2 border-transparent hover:bg-white hover:text-black hover:border-black dark:hover:bg-slate-900 dark:hover:text-white dark:hover:border-white transition-all shadow-sketch dark:shadow-sketch-white hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px]"
-              onClick={goToLogin}
-            >
-              Iniciar Sesión
-            </button>
-          </div>
-
-          {/* Mobile menu button */}
-          <div className="md:hidden flex items-center space-x-4">
+          {/* Acciones */}
+          <div className="flex shrink-0 items-center gap-2">
             <button
               onClick={toggleTheme}
-              className="p-2 rounded-full text-black dark:text-white border-2 border-black dark:border-white bg-white dark:bg-slate-800 shadow-sketch dark:shadow-sketch-white active:shadow-none active:translate-x-[2px] active:translate-y-[2px]"
+              className="fr-btn fr-btn-icon"
+              aria-label={isDarkMode ? 'Activar modo claro' : 'Activar modo oscuro'}
             >
-              {isDarkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+              {isDarkMode ? <Sun className="h-[18px] w-[18px]" /> : <Moon className="h-[18px] w-[18px]" />}
             </button>
 
-            <button onClick={() => setIsOpen(!isOpen)} className="text-black dark:text-white focus:outline-none p-2 border-2 border-black dark:border-white bg-white dark:bg-slate-900 rounded-md shadow-sketch dark:shadow-sketch-white active:shadow-none active:translate-x-[2px] active:translate-y-[2px]">
-              {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            <button onClick={goToApp} className="fr-btn fr-btn-primary hidden sm:inline-flex">
+              Abrir Zenth
+              <ArrowUpRight className="h-4 w-4" />
+            </button>
+
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="fr-btn fr-btn-icon md:hidden"
+              aria-label={isOpen ? 'Cerrar menú' : 'Abrir menú'}
+              aria-expanded={isOpen}
+            >
+              {isOpen ? <X className="h-[18px] w-[18px]" /> : <Menu className="h-[18px] w-[18px]" />}
             </button>
           </div>
         </div>
-      </div>
+      </nav>
 
-      {/* Mobile Menu Overlay */}
+      {/* Overlay móvil */}
       {isOpen && (
-        <div className="absolute top-24 left-4 right-4 bg-white dark:bg-slate-900 border-2 border-black dark:border-white rounded-lg shadow-sketch-xl dark:shadow-sketch-xl-white p-6 md:hidden z-50 transform rotate-1">
-          {/* Tape effect */}
-          <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 w-32 h-6 bg-zenth-200/80 rotate-2"></div>
-
-          <div className="space-y-4">
-            {navLinks.map((item) => (
+        <div className="fixed inset-0 z-40 bg-canvas pt-14 md:hidden">
+          <div className="flex flex-col gap-1 px-4 py-8">
+            {NAV_LINKS.map(link => (
               <button
-                key={item.name}
-                onClick={(e) => handleNavClick(e, item.page as 'home' | 'blog', item.id)}
-                className="block w-full text-left text-2xl font-bold text-black dark:text-white hover:underline decoration-zenth-markerPink decoration-4"
+                key={link.name}
+                onClick={() => handleNavClick(link.page, link.id)}
+                className="flex items-center justify-between rounded-medium px-3 py-4 text-left text-[22px] font-display tracking-[-0.03em] text-ink transition-colors hover:bg-surface-1"
               >
-                {item.name}
+                {link.name}
+                <ArrowUpRight className="h-5 w-5 text-ink-muted" />
               </button>
             ))}
 
-            <div className="h-0.5 bg-black/10 dark:bg-white/20 my-4 border-t-2 border-dashed border-black dark:border-white"></div>
-            <button
-              className="w-full text-center block px-4 py-3 rounded-md text-xl bg-zenth-markerYellow text-black border-2 border-black font-bold shadow-sketch hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px]"
-              onClick={() => {
-                setIsOpen(false);
-                goToLogin();
-              }}
-            >
-              Iniciar Sesión
+            <button onClick={goToApp} className="fr-btn fr-btn-primary fr-btn-lg mt-6 w-full">
+              Abrir Zenth
+              <ArrowUpRight className="h-4 w-4" />
             </button>
           </div>
         </div>
       )}
-    </nav>
+    </>
   );
 };
 
