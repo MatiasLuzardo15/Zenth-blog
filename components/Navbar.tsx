@@ -56,11 +56,11 @@ const Navbar: React.FC<NavbarProps> = ({ isDarkMode, toggleTheme, currentPage, o
         className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${scrolled ? 'bg-canvas-blur border-b border-hairline backdrop-blur-xl' : 'border-b border-transparent'
           }`}
       >
-        <div className="mx-auto flex h-14 max-w-6xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto flex h-14 w-full items-center gap-4 px-4 sm:px-6 lg:grid lg:grid-cols-[1fr_auto_1fr] lg:px-8">
           {/* Marca */}
           <button
             onClick={() => handleNavClick('home', 'hero')}
-            className="flex shrink-0 items-center gap-2"
+            className="flex shrink-0 items-center gap-2 lg:justify-self-start"
             aria-label="Ir al inicio"
           >
             <img src="/blog/favicon2.png" alt="" className="h-7 w-7 rounded-small object-contain" />
@@ -68,13 +68,13 @@ const Navbar: React.FC<NavbarProps> = ({ isDarkMode, toggleTheme, currentPage, o
           </button>
 
           {/* Enlaces de escritorio */}
-          <div className="hidden items-center gap-1 md:flex">
+          <div className="hidden items-center gap-1 md:flex lg:justify-self-center">
             {NAV_LINKS.map(link => (
               <button
                 key={link.name}
                 onClick={() => handleNavClick(link.page, link.id)}
                 aria-current={isActive(link) ? 'page' : undefined}
-                className={`fr-tab ${isActive(link) ? 'is-selected' : ''}`}
+                className={`fr-tab whitespace-nowrap ${isActive(link) ? 'is-selected' : ''}`}
               >
                 {link.name}
               </button>
@@ -82,7 +82,7 @@ const Navbar: React.FC<NavbarProps> = ({ isDarkMode, toggleTheme, currentPage, o
           </div>
 
           {/* Acciones */}
-          <div className="flex shrink-0 items-center gap-2">
+          <div className="flex shrink-0 items-center gap-2 lg:justify-self-end">
             <button
               onClick={toggleTheme}
               className="fr-btn fr-btn-icon"

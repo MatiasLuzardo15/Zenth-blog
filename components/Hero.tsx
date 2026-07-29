@@ -23,7 +23,7 @@ const Hero: React.FC = () => {
   return (
     <section className="relative overflow-hidden pt-28 pb-16 lg:pt-40 lg:pb-24">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <div className="max-w-4xl">
+        <div className="mx-auto flex max-w-4xl flex-col items-center text-center">
           <span className="fr-btn fr-btn-translucent pointer-events-none mb-6">
             <span className="h-1.5 w-1.5 rounded-full bg-accent" />
             Productividad consciente
@@ -41,7 +41,7 @@ const Hero: React.FC = () => {
             que protege tu enfoque.
           </p>
 
-          <div className="mt-10 flex flex-wrap gap-3">
+          <div className="mt-10 flex flex-wrap justify-center gap-3">
             <button onClick={goToApp} className="fr-btn fr-btn-primary fr-btn-lg">
               Empezar gratis
               <ArrowUpRight className="h-[18px] w-[18px]" />
@@ -51,7 +51,7 @@ const Hero: React.FC = () => {
             </button>
           </div>
 
-          <ul className="mt-10 flex flex-wrap gap-x-6 gap-y-3">
+          <ul className="mt-10 flex max-w-3xl flex-wrap justify-center gap-x-6 gap-y-3">
             {SIGNALS.map(({ icon: Icon, label }) => (
               <li key={label} className="flex items-center gap-2 text-ink-muted">
                 <Icon className="h-4 w-4" strokeWidth={1.75} />
