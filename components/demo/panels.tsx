@@ -213,7 +213,7 @@ export const EditPanel: React.FC = () => (
                     <ChevronDown className="h-3 w-3 text-ink-muted" strokeWidth={2} />
                 </span>
                 <span className="flex-1 truncate rounded-[8px] bg-canvas px-2 py-1.5 text-[10px] text-ink">
-                    https://meet.google.com/ehg-ddnn-xqx
+                    https://meet.google.com/zen-thmq-dkv
                 </span>
             </div>
             <div className="mt-1.5 flex items-center gap-1.5 rounded-[8px] bg-canvas px-2 py-1.5">
