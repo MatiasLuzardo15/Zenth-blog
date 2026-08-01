@@ -54,12 +54,12 @@ const FEATURE_DETAILS: Record<string, FeatureDetail> = {
   voice: {
     id: 'voice',
     title: 'Sala del equipo y llamadas',
-    shortDesc: 'Voz y pantalla compartida dentro de la pizarra, sin salir de ella.',
+    shortDesc: 'Voz y pantalla compartida dentro de la propia pizarra.',
     bullets: [
       'Cada pizarra compartida tiene su sala de voz, abierta a sus integrantes desde el desplegable Equipo: entra y sal libremente.',
-      'Llama en privado a cualquiera con quien compartas pizarra, uno a uno y sin enlaces.',
+      'Llama en privado a cualquiera con quien compartas pizarra: uno a uno, directo desde el equipo.',
       'Pantalla de preparación antes de entrar: eliges micrófono y auriculares, compruebas la señal y decides si entrar callado o solo a escuchar.',
-      'Sin cámara, a propósito: hay voz y pantalla compartida, nada más.',
+      'Comparte tu pantalla para revisar juntos una tarjeta o una tabla: la sala es voz y pantalla.',
       'La conversación sigue viva mientras navegas por la app: minimiza u oculta el panel y el audio continúa.',
     ],
     icon: Mic,

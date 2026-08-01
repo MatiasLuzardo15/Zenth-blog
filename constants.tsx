@@ -4,7 +4,7 @@ export const BLOG_POSTS: BlogPost[] = [
   {
     id: '18',
     title: 'Tu pizarra ahora habla: sala del equipo y llamadas privadas',
-    excerpt: 'Cada pizarra compartida tiene ahora una sala de voz siempre abierta para sus integrantes, con pantalla compartida y llamadas privadas. Sin cámara y sin salir de Zenth.',
+    excerpt: 'Cada pizarra compartida tiene ahora una sala de voz siempre abierta para sus integrantes, con pantalla compartida y llamadas privadas. Todo sin salir de Zenth.',
     content: `
 Trabajar sobre la misma pizarra resuelve el *qué*, pero no siempre el *cómo*: hay cosas que se arreglan en dos minutos hablando y en veinte mensajes escritos. A partir de hoy, cada pizarra compartida de Zenth tiene **su sala del equipo**: una sala de voz siempre abierta para sus integrantes.
 
@@ -20,13 +20,11 @@ Y una vez dentro, la conversación no te ata a la pantalla: puedes seguir movié
 
 Nadie debería descubrir que tenía el micrófono equivocado hablando delante de tres personas. Antes de entrar verás la pantalla de **Preparar audio**: eliges micrófono y auriculares, compruebas que entra señal y decides si entrar callado o solo a escuchar. Si no das permiso al micrófono, puedes entrar igualmente como oyente.
 
-## Voz y pantalla. Sin cámara, y es a propósito
+## Voz y pantalla compartida
 
-Hay voz, selección de dispositivos y **pantalla compartida**. No hay cámara ni videollamadas, y no por omisión.
+La sala combina **voz** con **pantalla compartida**, que es la pareja que de verdad hace falta para trabajar: enseñar una tarjeta, mirar juntos una tabla, recorrer el tablero. El caso real siempre fue *"mira esto"*.
 
-¿Por qué? Porque la cámara convierte cualquier conversación en una videollamada —con su peinado, su fondo y su fatiga— y no hace falta para revisar una tarjeta o mirar una tabla juntos. Voz y pantalla cubren el caso real: *"mira esto"*.
-
-Solo una persona comparte pantalla a la vez; si lo intentas con otra en curso, la aplicación te lo dice claramente.
+Puedes elegir qué micrófono y qué auriculares usar, y cambiarlos en mitad de la llamada. Solo una persona comparte pantalla a la vez; si lo intentas con otra en curso, la aplicación te lo dice claramente.
 
 ## Los permisos de la pizarra, y ninguno más
 
@@ -57,14 +55,14 @@ Y quiero empezar por lo que **no** hemos hecho, porque define el resto: no hay e
 
 ## Dos ejes que conviene no mezclar
 
-La mayoría de las herramientas confunden estas dos preguntas, y por eso acabas compartiendo por error algo que creías privado. En Zenth están separadas a propósito:
+La mayoría de las herramientas confunden estas dos preguntas, y por eso acabas compartiendo por error algo que creías privado. Zenth las mantiene separadas:
 
 - **Miembros y roles** deciden quién puede *entrar y editar*. Se gestionan desde el panel **Compartir**.
 - **Visibilidad** decide hasta dónde llega la pizarra para quien **no** es miembro. Se gestiona desde el panel **Visibilidad**.
 
 Cambiar una nunca cambia la otra.
 
-## Tres roles, y ya
+## Tres roles
 
 | Rol | Puede |
 | :--- | :--- |
@@ -163,20 +161,16 @@ Nada de esto es un compartimento estanco. Desde cualquier tarea puedes usar **Ex
   },
   {
     id: '17',
-    title: 'Tu Google Calendar dentro de Hoy (y por qué Zenth nunca escribe en él)',
-    excerpt: 'Conecta tu calendario con permiso de solo lectura y ve tus eventos junto a tus tareas. Una decisión deliberada: Zenth mira tu agenda, no la toca.',
+    title: 'Tu Google Calendar dentro de Hoy',
+    excerpt: 'Conecta tu calendario con permiso de solo lectura y ve tus eventos junto a tus tareas. Zenth mira tu agenda, pero no la toca.',
     content: `
 Tener las reuniones en un sitio y las tareas en otro no es organización, es contabilidad doble. Pasas el día calculando mentalmente si lo que te queda por hacer cabe entre dos llamadas.
 
 Ya no hace falta: puedes conectar tu **Google Calendar** y ver tus eventos en la pantalla de Hoy, al lado de tus tareas.
 
-## Solo lectura, y es a propósito
+## Solo lectura
 
-Zenth pide **únicamente el permiso de lectura** de Google Calendar. No puede crear eventos, ni moverlos, ni borrarlos. Aunque quisiera, no tiene permiso.
-
-No es una limitación técnica pendiente de resolver, es la decisión de producto. Tu calendario suele ser compartido con otras personas: un fallo de sincronización que borre un evento no te afecta solo a ti, le afecta a todos los que estaban invitados. El coste de equivocarse escribiendo es demasiado alto para lo poco que aporta.
-
-Además, el token de acceso se mantiene **en memoria del navegador** y no se guarda en la base de datos.
+Zenth se conecta **únicamente con permiso de lectura**: puede ver tus eventos, pero no crearlos, moverlos ni borrarlos. Tu calendario queda siempre tal como lo tienes.
 
 ## Cómo se conecta
 
@@ -188,7 +182,7 @@ A partir de ahí la sincronización se mantiene sola y se actualiza cada cinco m
 
 ## Los eventos no invaden tus pizarras
 
-Este es el otro límite deliberado. Los eventos importados aparecen **solo en Hoy**. No entran en ninguna pizarra por su cuenta, porque nadie quiere que su tablero de proyecto se llene de cumpleaños y recordatorios del dentista.
+Hay otro límite claro: los eventos importados aparecen **solo en Hoy**. No entran en ninguna pizarra por su cuenta, porque nadie quiere que su tablero de proyecto se llene de cumpleaños y recordatorios del dentista.
 
 Si en algún caso concreto sí quieres llevarlos, existe la acción **Llevar eventos a Todo**: eliges los calendarios, la pizarra de destino y las listas, y confirmas. Solo a partir de ese momento esos eventos —y sus actualizaciones futuras— pertenecen a esa pizarra. Y puedes deshacerlo.
 
@@ -283,7 +277,7 @@ No se trata de cuántos checks haces, sino de la calidad de tu atención. Zenth 
 Productividad sin salud mental es agotamiento. Con nuestro Mood Tracker, puedes registrar cómo te sientes cada día. Con el tiempo, descubrirás cómo tu estado de ánimo influye en tus logros, permitiéndote ser más compasivo contigo mismo en los días difíciles.
 
 ### 5. Una interfaz que no compite por tu atención
-Zenth es deliberadamente sobrio: fondo neutro, una sola tipografía, jerarquía marcada por el tamaño y no por diez colores distintos. El color aparece donde significa algo —tus etiquetas, tu estado de ánimo, la acción activa— y en ningún otro sitio.
+Zenth es sobrio: fondo neutro, una sola tipografía, jerarquía marcada por el tamaño y no por diez colores distintos. El color aparece donde significa algo —tus etiquetas, tu estado de ánimo, la acción activa— y en ningún otro sitio.
 
 Puedes elegir entre tres temas (Claro, Oscuro y Zen, este último con un fondo cálido más suave por la noche), el color de acento que prefieras y un modo compacto si quieres ver más cosas de una vez.
 
@@ -621,7 +615,7 @@ Convertimos la productividad en un videojuego.
 Tener 50 tareas pendientes en una lista larga genera **parálisis por análisis**. Tu cerebro intenta procesarlas todas a la vez, se sobrecarga y se apaga (shutdown). Además, las interfaces desordenadas contribuyen al ruido visual que agota tu energía cognitiva.
 
 **La Solución Zenth:**
-*   **Diseño de bajo ruido:** la interfaz es deliberadamente sobria. Fondo neutro, una sola tipografía y color únicamente donde significa algo. Nada parpadea, nada se pone rojo para presionarte.
+*   **Diseño de bajo ruido:** la interfaz es sobria. Fondo neutro, una sola tipografía y color únicamente donde significa algo. Nada parpadea, nada se pone rojo para presionarte.
 *   **Divulgación progresiva:** no ves las 50 tareas a la vez. Ves el bloque del día que toca, y el resto espera fuera de la vista.
 *   **Foco en lo Esencial:** Zenth te empuja a priorizar tus "Grandes Metas". Al destacar 1 o 3 cosas importantes, silenciamos el resto del ruido para que puedas avanzar.
 
