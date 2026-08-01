@@ -2,9 +2,54 @@ import { BlogPost } from './types';
 
 export const BLOG_POSTS: BlogPost[] = [
   {
+    id: '18',
+    title: 'Tu pizarra ahora habla: sala del equipo y llamadas privadas',
+    excerpt: 'Cada pizarra compartida tiene ahora una sala de voz siempre abierta para sus integrantes, con pantalla compartida y llamadas privadas. Sin cámara y sin salir de Zenth.',
+    content: `
+Trabajar sobre la misma pizarra resuelve el *qué*, pero no siempre el *cómo*: hay cosas que se arreglan en dos minutos hablando y en veinte mensajes escritos. A partir de hoy, cada pizarra compartida de Zenth tiene **su sala del equipo**: una sala de voz siempre abierta para sus integrantes.
+
+## La sala está donde ya estabas
+
+No hay nada que crear ni que configurar. La sala se descubre desde el desplegable **Equipo** —el de los avatares— y cualquier integrante entra y sale libremente. No hay reuniones que programar, ni enlaces que caducan, ni "pásame el link". La pizarra es el sitio; la sala vive ahí.
+
+Desde ese mismo desplegable puedes **llamar en privado** a cualquiera con quien compartas pizarra. Le suena el aviso y, si acepta, ya están hablando.
+
+Y una vez dentro, la conversación no te ata a la pantalla: puedes seguir moviéndote por Zenth —Hoy, Entradas, Enfoque— y el audio continúa. Minimiza el panel o escóndelo del todo: la llamada sigue.
+
+## Antes de entrar: preparar audio
+
+Nadie debería descubrir que tenía el micrófono equivocado hablando delante de tres personas. Antes de entrar verás la pantalla de **Preparar audio**: eliges micrófono y auriculares, compruebas que entra señal y decides si entrar callado o solo a escuchar. Si no das permiso al micrófono, puedes entrar igualmente como oyente.
+
+## Voz y pantalla. Sin cámara, y es a propósito
+
+Hay voz, selección de dispositivos y **pantalla compartida**. No hay cámara ni videollamadas, y no por omisión.
+
+¿Por qué? Porque la cámara convierte cualquier conversación en una videollamada —con su peinado, su fondo y su fatiga— y no hace falta para revisar una tarjeta o mirar una tabla juntos. Voz y pantalla cubren el caso real: *"mira esto"*.
+
+Solo una persona comparte pantalla a la vez; si lo intentas con otra en curso, la aplicación te lo dice claramente.
+
+## Los permisos de la pizarra, y ninguno más
+
+¿Quién puede entrar en la sala? Los integrantes de la pizarra, ni uno más. ¿A quién puedes llamar? A quien comparte una pizarra contigo. No hay contactos que importar ni una libreta nueva que mantener: si trabajan juntos en un tablero, ya pueden hablar; si no, no.
+
+Y quien deja de ser integrante de la pizarra deja de tener acceso a su sala. Los permisos no se quedan desactualizados.
+
+## Lo que esto no es
+
+Zenth sigue siendo una aplicación de productividad. La sala del equipo es una herramienta más de colaboración, no el centro del producto: está cuando hace falta hablar y desaparece cuando no. Si trabajas solo, nada ha cambiado.
+
+**[Abre una pizarra compartida en Zenth](/app) y entra en la sala del equipo.**
+`,
+    author: 'Matías Zenth',
+    date: '1 Aug, 2026',
+    imageUrl: 'https://images.unsplash.com/photo-1478737270239-2f02b77fc618?auto=format&fit=crop&q=80&w=800',
+    category: 'Lanzamiento',
+    readTime: '6 min lectura'
+  },
+  {
     id: '15',
     title: 'Tus pizarras ahora tienen miembros: llega la colaboración a Zenth',
-    excerpt: 'Invita a quien quieras, reparte permisos con tres roles claros y trabajad sobre el mismo tablero en tiempo real. Sin espacios de trabajo, sin plan de pago.',
+    excerpt: 'Invita a quien quieras, reparte permisos con tres roles claros y trabajen sobre el mismo tablero en tiempo real. Sin espacios de trabajo, sin plan de pago.',
     content: `
 Hasta ahora, una pizarra de Zenth era **tu** pizarra. Hoy deja de serlo: pasa a ser un espacio con miembros, donde cada persona puede hacer exactamente lo que su rol permite.
 
@@ -73,7 +118,18 @@ Lo que ya conocías, intacto: editor de texto enriquecido con títulos, listas, 
 
 ## 2. Tablas
 
-Una hoja de cálculo ligera dentro de tu nota. **Fórmulas**, formato de celda —negrita, alineación, color de texto y de relleno—, formatos numéricos de moneda y porcentaje, ordenación por columna y exportación a CSV.
+Una hoja de cálculo de verdad dentro de tu entrada. Escribes \`=SUMA(A1:A10)\` —o \`=SUM(A1:A10)\`, da lo mismo: las fórmulas son **bilingües** y aceptan comas o punto y coma— y el resultado se recalcula solo. Y si BUSCARV se te resiste, el explorador de funciones tiene buscador y descripciones en español e inglés.
+
+Se comporta como esperas de una hoja de cálculo:
+
+- **Deshacer y rehacer** de verdad (Ctrl+Z / Ctrl+Y), para probar sin miedo.
+- **Insertar y eliminar filas y columnas** desde el encabezado: las fórmulas se ajustan solas.
+- **Copiar y pegar con el exterior:** lo que copias en Excel o Google Sheets se pega aquí directamente, y las copias internas conservan el formato.
+- Selección por rangos, ordenación, barra de fórmulas y guardado automático.
+- Formato de celda —negrita, cursiva, subrayado, alineación, color de texto y de relleno— y formatos numéricos de moneda, porcentaje y decimales.
+- Exportación a CSV, lista para abrir en cualquier otra herramienta.
+
+Y la tabla crece mientras escribes: la cuadrícula se dibuja hasta el borde de la ventana y las celdas solo pasan a existir cuando pones algo en ellas.
 
 Un detalle técnico que se nota en la práctica: las tablas viven enteras en la base de datos, no en el almacenamiento de archivos. Es decir, **no consumen tu cuota**. Puedes tener todas las que quieras.
 

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import {
   X, ArrowUpRight, Users, PenLine, Timer, CalendarDays, Trophy, HeartPulse,
-  Sparkles, Trash2, Palette, LayoutDashboard, Sun, ChevronDown,
+  Sparkles, Trash2, Palette, LayoutDashboard, Sun, ChevronDown, Mic,
 } from 'lucide-react';
 
 interface FeatureDetail {
@@ -26,7 +26,7 @@ const FEATURE_DETAILS: Record<string, FeatureDetail> = {
   collaboration: {
     id: 'collaboration',
     title: 'Pizarras compartidas',
-    shortDesc: 'Invita a quien quieras y trabajad sobre el mismo tablero, en vivo.',
+    shortDesc: 'Invita a quien quieras y trabajen sobre el mismo tablero, en vivo.',
     bullets: [
       'Tres roles claros: Administrador gestiona la pizarra y a sus miembros, Miembro crea y edita tarjetas, Observador solo mira.',
       'Invita por correo electrónico o genera un enlace de invitación que caduca cuando tú decidas.',
@@ -50,6 +50,20 @@ const FEATURE_DETAILS: Record<string, FeatureDetail> = {
     ],
     icon: PenLine,
     relatedPostId: '16',
+  },
+  voice: {
+    id: 'voice',
+    title: 'Sala del equipo y llamadas',
+    shortDesc: 'Voz y pantalla compartida dentro de la pizarra, sin salir de ella.',
+    bullets: [
+      'Cada pizarra compartida tiene su sala de voz, abierta a sus integrantes desde el desplegable Equipo: entra y sal libremente.',
+      'Llama en privado a cualquiera con quien compartas pizarra, uno a uno y sin enlaces.',
+      'Pantalla de preparación antes de entrar: eliges micrófono y auriculares, compruebas la señal y decides si entrar callado o solo a escuchar.',
+      'Sin cámara, a propósito: hay voz y pantalla compartida, nada más.',
+      'La conversación sigue viva mientras navegas por la app: minimiza u oculta el panel y el audio continúa.',
+    ],
+    icon: Mic,
+    relatedPostId: '18',
   },
   today: {
     id: 'today',
@@ -167,7 +181,7 @@ const FEATURE_DETAILS: Record<string, FeatureDetail> = {
   },
 };
 
-const SECONDARY_ORDER = ['today', 'boards', 'focus', 'calendar', 'progress', 'mood', 'ai', 'trash', 'appearance'];
+const SECONDARY_ORDER = ['voice', 'today', 'boards', 'focus', 'calendar', 'progress', 'mood', 'ai', 'trash', 'appearance'];
 
 const Features: React.FC<FeaturesProps> = ({ onNavigate }) => {
   const [selected, setSelected] = useState<FeatureDetail | null>(null);
@@ -195,7 +209,7 @@ const Features: React.FC<FeaturesProps> = ({ onNavigate }) => {
         <div className="max-w-3xl">
           <p className="t-eyebrow">Qué incluye</p>
           <h2 className="t-display-lg mt-4 text-ink">
-            Once herramientas
+            Doce herramientas
             <br />
             que se hablan entre sí.
           </h2>
