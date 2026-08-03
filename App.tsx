@@ -5,6 +5,7 @@ import Home from './pages/Home';
 import BlogPage from './components/BlogPage';
 import BlogPostDetail from './components/BlogPostDetail';
 import PrivacyPolicy from './components/PrivacyPolicy';
+import TermsAndConditions from './components/TermsAndConditions';
 import FAQ from './components/FAQ';
 import UserGuide from './components/UserGuide';
 import Footer from './components/Footer';
@@ -69,6 +70,9 @@ function App() {
     } else if (location.pathname === '/privacy') {
       title = 'Política de Privacidad | Zenth';
       description = 'Cómo protegemos tus datos y tu privacidad en Zenth. Sin venta de datos, sin rastreadores invasivos.';
+    } else if (location.pathname === '/terms') {
+      title = 'Términos y Condiciones de Uso | Zenth';
+      description = 'Las reglas de uso de Zenth: tu cuenta, tu contenido, la colaboración, las salas de voz y las integraciones. Claro y sin letra pequeña.';
     } else if (location.pathname === '/faq') {
       title = 'Preguntas Frecuentes | Zenth Space';
       description = 'Todo lo que necesitas saber sobre Zenth: pizarras compartidas, notas, enfoque, Google Calendar, niveles y privacidad.';
@@ -83,7 +87,7 @@ function App() {
   const seo = getSEO();
 
   // Centralized navigation handler
-  const handleNavigate = (page: 'home' | 'blog' | 'privacy' | 'faq' | 'guide', targetId?: string) => {
+  const handleNavigate = (page: 'home' | 'blog' | 'privacy' | 'terms' | 'faq' | 'guide', targetId?: string) => {
     if (page === 'home') {
       if (location.pathname !== '/') {
         navigate('/');
@@ -118,6 +122,9 @@ function App() {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } else if (page === 'privacy') {
       navigate('/privacy');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else if (page === 'terms') {
+      navigate('/terms');
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } else if (page === 'faq') {
       navigate('/faq');
@@ -173,6 +180,7 @@ function App() {
           />
           <Route path="/blog/:id" element={<BlogPostDetailWithParams />} />
           <Route path="/privacy" element={<PrivacyPolicy onBack={() => handleNavigate('home')} />} />
+          <Route path="/terms" element={<TermsAndConditions onBack={() => handleNavigate('home')} />} />
           <Route path="/faq" element={<FAQ onBack={() => handleNavigate('home')} onGoToGuide={() => handleNavigate('guide')} />} />
           <Route path="/guide" element={<UserGuide onBack={() => handleNavigate('faq')} />} />
           {/* Fallback route */}

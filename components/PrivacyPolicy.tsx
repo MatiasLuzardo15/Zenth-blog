@@ -52,7 +52,7 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = ({ onBack }) => {
 
                 <p className="t-eyebrow">Legal</p>
                 <h1 className="t-display-xl mt-4 text-ink">Política de privacidad.</h1>
-                <p className="t-micro mt-6 text-ink-muted">Última actualización: 29 de julio de 2026</p>
+                <p className="t-micro mt-6 text-ink-muted">Última actualización: 3 de agosto de 2026</p>
 
                 <div className="fr-card-featured mt-10">
                     <p className="t-caption text-ink">En una frase</p>
@@ -76,13 +76,28 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = ({ onBack }) => {
                                 imagen de portada si decides personalizar tu perfil.
                             </>,
                             <>
-                                <B>Contenido que creas.</B> Tareas, pizarras y listas, entradas —notas,
-                                tablas, archivos subidos y notas de voz—, etiquetas, registros de ánimo,
-                                sesiones de enfoque y estadísticas de progreso.
+                                <B>Contenido que creas.</B> Tareas, pizarras y listas, entradas (notas,
+                                tablas, archivos subidos y notas de voz), etiquetas, registros de ánimo,
+                                sesiones de enfoque y estadísticas de progreso. Si colaboras, también los
+                                comentarios, menciones, asignaciones, votaciones y aprobaciones de las
+                                pizarras compartidas.
+                            </>,
+                            <>
+                                <B>Eventos importados.</B> Si conectas Google Calendar, los eventos de los
+                                calendarios que elijas se guardan en tu cuenta para mostrarse en Hoy y, si
+                                lo decides, en una pizarra.
+                            </>,
+                            <>
+                                <B>Actividad de voz.</B> De las salas de voz y las llamadas solo guardamos
+                                metadatos operativos: quién entra y sale, la duración de cada participación
+                                y quién llamó a quién. Nunca el contenido: no se graba ni se almacena audio
+                                ni pantalla compartida.
                             </>,
                             <>
                                 <B>Preferencias.</B> Tema, color de acento, hora de inicio de la mañana,
-                                formato de hora, densidad y demás ajustes de la aplicación.
+                                formato de hora, densidad y demás ajustes de la aplicación. Algunas se
+                                guardan también en el almacenamiento local de tu navegador para que la app
+                                responda al instante.
                             </>,
                             <>
                                 <B>Datos técnicos mínimos.</B> Información básica del dispositivo y, si
@@ -100,9 +115,16 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = ({ onBack }) => {
                             <><B>Sincronizar:</B> que tus datos estén disponibles en todos tus dispositivos.</>,
                             <><B>Autenticar y proteger:</B> verificar tu identidad al iniciar sesión.</>,
                             <>
-                                <B>Comunicarnos contigo:</B> únicamente correos relacionados con tu cuenta
-                                —confirmación, recuperación de contraseña, invitaciones a pizarras—. Sin
-                                boletines no solicitados y sin venta de tu correo.
+                                <B>Comunicarnos contigo:</B> correos de tu cuenta (confirmación,
+                                recuperación de contraseña, invitaciones a pizarras) y, si los activas,
+                                recordatorios de tareas y eventos, alertas de vencimiento y avisos de
+                                colaboración (asignaciones, comentarios, menciones y aprobaciones). Cada
+                                categoría se puede desactivar por separado desde Ajustes. Sin boletines no
+                                solicitados y sin venta de tu correo.
+                            </>,
+                            <>
+                                <B>Operar la voz y aplicar sus límites:</B> usar los metadatos de las salas
+                                y llamadas para autorizar accesos y medir el consumo mensual del servicio.
                             </>,
                         ]}
                     />
@@ -111,18 +133,24 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = ({ onBack }) => {
                 <Section n={3} title="Pizarras compartidas y visibilidad">
                     <P>
                         Al invitar a alguien a una pizarra, ese contenido deja de ser exclusivamente tuyo:
-                        los miembros ven y —según su rol— editan las tarjetas y las listas de esa pizarra.
+                        los miembros ven y, según su rol, editan las tarjetas y las listas de esa pizarra.
                     </P>
                     <List
                         items={[
                             <>
                                 <B>Identidad visible.</B> Los demás miembros ven tu nombre, tu avatar y tu
                                 color de acento. Es la información mínima para saber quién ha hecho qué. El
-                                resto de tu cuenta —tus otras pizarras, tus notas, tu ánimo, tus
-                                estadísticas— no es visible para ellos en ningún caso.
+                                resto de tu cuenta (tus otras pizarras, tus notas, tu ánimo, tus
+                                estadísticas) no es visible para ellos en ningún caso.
                             </>,
                             <>
-                                <B>Enlaces públicos.</B> Si activas la visibilidad «con enlace», cualquiera
+                                <B>Colaboración y presencia.</B> Dentro de una pizarra compartida, los
+                                miembros ven los comentarios, asignaciones y votos de los demás, quién está
+                                en línea, quién está viendo una tarjeta y quién está en modo enfoque. Fuera
+                                de la colaboración, nada de esto es público.
+                            </>,
+                            <>
+                                <B>Enlaces públicos.</B> Si activas la visibilidad "con enlace", cualquiera
                                 con esa dirección puede ver esa pizarra en modo solo lectura, sin cuenta.
                                 Solo afecta a la pizarra donde lo actives, es reversible en cualquier momento
                                 y nunca se activa por su cuenta.
@@ -162,10 +190,23 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = ({ onBack }) => {
                             <>
                                 <B>Google Calendar.</B> Integración opcional y de <B>solo lectura</B>. Zenth
                                 no puede crear, modificar ni eliminar eventos. El token de acceso se mantiene
-                                en la memoria del navegador y no se guarda en la base de datos.
+                                en la memoria del navegador y no se guarda en la base de datos; los eventos
+                                de los calendarios que selecciones sí se importan a tu cuenta para
+                                mostrarlos.
+                            </>,
+                            <>
+                                <B>LiveKit.</B> Salas de voz y llamadas privadas. El audio y la pantalla
+                                compartida se transmiten a través de sus servidores en tiempo real y viven
+                                solo en memoria mientras dura la conversación: no se graba nada. Sin cámara
+                                ni videollamada, bloqueado por el servidor.
                             </>,
                             <>
                                 <B>Vercel.</B> Alojamiento del sitio web y de la aplicación.
+                            </>,
+                            <>
+                                <B>Google Fonts y CDN.</B> Las tipografías y algunas librerías estáticas se
+                                descargan de sus servidores; tu navegador los contacta directamente al cargar
+                                la página.
                             </>,
                         ]}
                     />
@@ -183,10 +224,11 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = ({ onBack }) => {
                                 que puedas consultar tu historial.
                             </>,
                             <>
-                                <B>Eliminación.</B> Puedes eliminar tu cuenta cuando quieras. Al hacerlo, tus
-                                datos personales y tu contenido se eliminan de forma permanente de nuestros
-                                servidores. Las pizarras que hayas compartido y de las que no seas propietario
-                                seguirán existiendo para sus demás miembros.
+                                <B>Eliminación.</B> Puedes solicitar la eliminación de tu cuenta en cualquier
+                                momento escribiendo al correo de contacto. Al procesarla, tus datos personales
+                                y tu contenido se eliminan de forma permanente de nuestros servidores. Las
+                                pizarras que hayas compartido y de las que no seas propietario seguirán
+                                existiendo para sus demás miembros.
                             </>,
                         ]}
                     />

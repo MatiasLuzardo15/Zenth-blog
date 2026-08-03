@@ -2,7 +2,7 @@ import React from 'react';
 import { Mail, Linkedin, ArrowUpRight } from 'lucide-react';
 
 interface FooterProps {
-  onNavigate: (page: 'home' | 'blog' | 'privacy' | 'faq' | 'guide', targetId?: string) => void;
+  onNavigate: (page: 'home' | 'blog' | 'privacy' | 'terms' | 'faq' | 'guide', targetId?: string) => void;
 }
 
 const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
@@ -27,6 +27,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
       title: 'Proyecto',
       links: [
         { label: 'Política de privacidad', onClick: () => onNavigate('privacy') },
+        { label: 'Términos y condiciones', onClick: () => onNavigate('terms') },
         { label: 'Apoyar el proyecto', onClick: () => onNavigate('home', 'colaborar') },
       ],
     },
