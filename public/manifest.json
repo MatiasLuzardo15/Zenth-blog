@@ -1,12 +1,12 @@
 {
-    "name": "Zenth - Bullet Journal Digital",
+    "name": "Zenth - Productividad en un mismo ritmo",
     "short_name": "Zenth",
-    "description": "Transforma tu caos en calma con el Bullet Journal que entiende tu energía.",
+    "description": "Agenda visual, pizarras, Biblioteca con Google Drive, Enfoque y Mi ritmo.",
     "start_url": "/app",
     "scope": "/",
     "display": "standalone",
-    "background_color": "#fffdf5",
-    "theme_color": "#0f172a",
+    "background_color": "#090909",
+    "theme_color": "#090909",
     "icons": [
         {
             "src": "/favicon.png",

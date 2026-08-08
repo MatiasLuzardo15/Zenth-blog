@@ -1,14 +1,14 @@
 import React from 'react';
-import { ArrowUpRight, Users, PenLine, Timer, CalendarDays, Trophy, HeartPulse } from 'lucide-react';
+import { ArrowUpRight, Users, LibraryBig, CircleDashed, CalendarDays, Orbit, HardDrive } from 'lucide-react';
 import AppDemo from './AppDemo';
 
 const SIGNALS = [
+  { icon: CalendarDays, label: 'Agenda visual' },
   { icon: Users, label: 'Pizarras compartidas' },
-  { icon: PenLine, label: 'Notas, tablas y archivos' },
-  { icon: Timer, label: 'Modo enfoque' },
-  { icon: CalendarDays, label: 'Google Calendar' },
-  { icon: Trophy, label: 'Niveles y rachas' },
-  { icon: HeartPulse, label: 'Registro de ánimo' },
+  { icon: LibraryBig, label: 'Biblioteca' },
+  { icon: HardDrive, label: 'Google Drive y Workspace' },
+  { icon: CircleDashed, label: 'Enfoque desde cualquier pantalla' },
+  { icon: Orbit, label: 'Mi ritmo' },
 ];
 
 const Hero: React.FC = () => {
@@ -30,15 +30,14 @@ const Hero: React.FC = () => {
           </span>
 
           <h1 className="t-display-xxl text-ink">
-            Tu día, tu equipo
+            Tu tiempo, tus proyectos
             <br />
-            y tu atención.
+            y tu atención, en calma.
           </h1>
 
           <p className="t-body-lg mt-8 max-w-xl text-ink-muted">
-            Zenth reúne en un solo lugar lo que hoy tienes repartido en cinco apps: la agenda del
-            día, las pizarras que compartes con otras personas, tus notas y tablas, y el temporizador
-            que protege tu enfoque.
+            Zenth reúne una agenda visual, pizarras para tus proyectos, una Biblioteca conectada con
+            Google Drive y un temporizador de enfoque que te acompaña por toda la aplicación.
           </p>
 
           <div className="mt-10 flex flex-wrap justify-center gap-3">

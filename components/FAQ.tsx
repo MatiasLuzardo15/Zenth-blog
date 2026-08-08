@@ -11,7 +11,7 @@ const FAQS: FAQEntry[] = [
     {
         question: '¿Qué es Zenth exactamente?',
         answer:
-            'Un planificador visual que reúne cuatro cosas en una sola aplicación: la agenda del día organizada por bloques de energía, pizarras tipo tablero que puedes compartir con otras personas, un espacio de entradas para notas, tablas, archivos y notas de voz, y un modo enfoque que mide tu atención real. Encima de todo eso hay una capa ligera de progreso —XP, niveles y rachas— y un registro de ánimo.',
+            'Un espacio de productividad con cuatro áreas principales: Agenda para planificar el tiempo, Pizarras para organizar proyectos y colaborar, Biblioteca para tus notas y documentos de Google Drive, y Mi ritmo para observar actividad, constancia y bienestar. Enfoque funciona como un temporizador global que puedes abrir desde cualquier pantalla.',
     },
     {
         question: '¿Es gratuito?',
@@ -33,64 +33,84 @@ const FAQS: FAQEntry[] = [
         ),
     },
     {
+        question: '¿Cuáles son las secciones actuales?',
+        answer:
+            'Agenda, Pizarras, Biblioteca y Mi ritmo. Enfoque ya no ocupa una sección de navegación: se abre desde el icono de la cabecera y sigue funcionando mientras recorres la aplicación.',
+    },
+    {
         question: '¿Puedo compartir una pizarra con otras personas?',
         answer:
-            'Sí. Cada pizarra nace privada y se convierte en un espacio compartido en cuanto invitas a alguien, por correo electrónico o generando un enlace de invitación. A partir de ahí sus tarjetas son de todos los miembros y los cambios aparecen en tiempo real, sin recargar la página.',
+            'Sí. Cada pizarra nace privada y puedes invitar por correo o mediante un enlace. Los cambios, la presencia y la actividad aparecen en tiempo real. También hay comentarios, menciones, asignaciones, votos, aprobaciones, sala del equipo y llamadas privadas.',
     },
     {
         question: '¿Qué puede hacer cada rol?',
         answer:
-            'Hay tres. El Administrador gestiona todo: invita, expulsa, cambia roles, renombra la pizarra y edita el contenido. El Miembro crea, edita, mueve, completa y borra tarjetas, y gestiona las listas, pero no administra la pizarra. El Observador solo lee. Aparte está el propietario, que es quien la creó: siempre es administrador, es el único que puede eliminarla y puede transferir la propiedad a otro administrador. Una pizarra nunca puede quedarse sin administradores.',
+            'El Administrador gestiona la pizarra, sus miembros y su contenido. El Miembro crea y edita tarjetas y listas, pero no administra personas ni permisos. El Observador solo lee. El propietario siempre es administrador, puede transferir la propiedad y es quien puede eliminar la pizarra.',
     },
     {
         question: '¿Qué significa la visibilidad «con enlace»?',
         answer:
-            'Es el segundo eje, independiente de los miembros. Una pizarra privada solo la ven sus miembros. Si la cambias a «con enlace», Zenth genera una dirección pública de solo lectura: quien la tenga puede mirar el tablero sin cuenta y sin poder tocar nada. Puedes volver a privada cuando quieras.',
+            'Es independiente de los miembros. Una pizarra privada solo la ven sus integrantes. Si activas «con enlace», cualquiera que tenga esa dirección puede verla en modo solo lectura, sin cuenta. Puedes volver a privada cuando quieras.',
+    },
+    {
+        question: '¿Qué puedo guardar en Biblioteca?',
+        answer:
+            'Notas nativas de Zenth y, al conectar Google Drive, documentos, hojas, presentaciones, formularios, carpetas, archivos subidos y grabaciones de voz. Biblioteca también muestra Mi unidad, recientes, destacados y archivos compartidos contigo.',
+    },
+    {
+        question: '¿Qué acceso necesita Google Drive?',
+        answer:
+            'Para ofrecer un explorador completo, Zenth solicita acceso a Google Drive. Eso permite mostrar y administrar archivos según tus permisos de Google: crear, leer, editar, mover, copiar, compartir o enviar a la papelera cuando tú realizas la acción. Puedes desconectarlo y revocar el permiso en cualquier momento.',
+    },
+    {
+        question: '¿Dónde se guardan los documentos y archivos de Google?',
+        answer:
+            'En tu propio Google Drive. Zenth guarda la conexión cifrada y referencias mínimas para recordar los elementos vinculados, pero no mantiene una segunda copia permanente de su contenido. Desconectar Zenth no borra los archivos que ya existen en Drive.',
+    },
+    {
+        question: '¿Puedo editar documentos de Google dentro de Zenth?',
+        answer:
+            'Sí, Zenth incluye editores integrados para documentos, hojas, presentaciones y formularios. Para funciones avanzadas de Google —como colaboración simultánea completa, comentarios o maquetación especializada— puedes usar «Abrir en Google».',
     },
     {
         question: '¿Puedo conectar mi Google Calendar?',
         answer:
-            'Sí, con permiso de solo lectura. Eliges qué calendarios quieres ver y sus eventos aparecen en Hoy junto a tus tareas. La sincronización se actualiza sola cada cinco minutos y puedes pausarla en cualquier momento. Los eventos no entran en ninguna pizarra por su cuenta: si quieres llevarlos a una, hay que hacerlo explícitamente desde «Llevar eventos a Todo».',
+            'Sí, con permiso de solo lectura. Eliges qué calendarios ver y sus eventos aparecen en Agenda. La sincronización se actualiza cada cinco minutos mientras el permiso está activo y puedes pausarla. Nada llega a una pizarra hasta que usas explícitamente «Llevar a pizarra».',
     },
     {
-        question: '¿Qué puedo guardar en Entradas?',
+        question: '¿Cómo funciona Enfoque ahora?',
         answer:
-            'Notas de texto enriquecido, tablas con fórmulas y formato de celda, archivos que subas (PDF, imágenes, documentos) y notas de voz grabadas desde el micrófono. Todo se organiza en carpetas y etiquetas, con un buscador global. Cualquier tarea puede expandirse a una nota si se te queda pequeña.',
+            'Abres el panel desde la cabecera, eliges 15, 25, 45 o 60 minutos, una duración propia o el modo sin duración, y puedes vincular una tarea. El temporizador continúa aunque cambies de pantalla. Incluye descansos, objetivo diario, historial editable, sonidos ambientales, mezclas guardadas y música.',
     },
     {
-        question: '¿Cómo funciona el modo enfoque?',
+        question: '¿Para qué sirven XP, niveles y logros?',
         answer:
-            'Eliges una duración —15, 25, 45 o 60 minutos, o la que escribas— y opcionalmente la asocias a una tarea concreta. Al terminar, los minutos se guardan como sesión de enfoque. Esa métrica no es decorativa: los niveles altos exigen decenas de horas acumuladas, así que no se puede falsear.',
-    },
-    {
-        question: '¿Para qué sirven los XP y los niveles?',
-        answer:
-            'Cada tarea completada suma 10 XP y las grandes metas 50. Hay diez niveles, de Punto de Partida a Zenth, y cada uno pide una combinación de XP, racha, tareas completadas y minutos de enfoque: no basta con acumular puntos. Los niveles son permanentes, así que romper una racha no te hace bajar de nivel.',
-    },
-    {
-        question: '¿Por qué se dice que es ideal para personas con TDAH?',
-        answer:
-            'Porque está diseñado alrededor de tres cosas que suelen fallar con las apps convencionales: bloques flexibles (Mañana, Tarde, Noche) en lugar de horarios rígidos que se rompen a la primera; recompensa inmediata y visible al completar algo; y una interfaz de baja carga visual, sin alertas rojas ni listas infinitas a la vista.',
+            'Cada tarea suma 10 XP y una gran meta, 50. Hay 20 niveles inspirados en constelaciones; cada uno exige XP, mejor racha, tareas completadas y minutos de enfoque. Además hay 24 logros de ejecución, constancia, enfoque y recorrido. Los niveles alcanzados son permanentes.',
     },
     {
         question: "¿Cómo funciona el asistente 'Zen'?",
         answer:
-            'Zen usa la IA de Google (Gemini) en los puntos donde ahorra trabajo de verdad. En el editor de tareas: escribes «Cena con Ana el viernes a las 21 h» y rellena los campos por ti, sugiere el mejor momento con Auto-Agendar y parte una tarea grande en micro-pasos. En el editor de notas: selecciona un texto y Zen AI lo mejora, lo resume o lo expande.',
+            'Zen usa Google Gemini solo cuando se lo pides. Puede interpretar una frase para completar una tarea, sugerir una fecha, dividir trabajo en micro-pasos y mejorar, resumir o expandir el texto seleccionado de una nota. No analiza silenciosamente todo tu contenido.',
     },
     {
         question: '¿Puedo recuperar algo que borré por error?',
         answer:
-            'Sí. Las tareas y las entradas eliminadas van a la papelera, no desaparecen. Puedes abrirla desde Ajustes o desde /trash, restaurar cualquier elemento a su sitio original con un clic, o vaciarla para liberar espacio. Al mandar una tarea recurrente a la papelera, Zenth detiene sus repeticiones automáticamente.',
+            'Las tareas y notas nativas van a la papelera de Zenth y pueden restaurarse. Los archivos administrados mediante Google Drive van a la papelera de Drive, por lo que su recuperación se hace desde Google. Vaciar cualquiera de las dos papeleras es una acción permanente.',
     },
     {
         question: '¿Puedo cambiar el aspecto de la aplicación?',
         answer:
-            'Hay tres temas: Claro, Oscuro y Zen, este último con un fondo cálido más suave por la noche. Además puedes elegir el color de acento, activar el modo compacto para ver más tareas de una vez, cambiar el ancho del contenido en escritorio y usar formato de hora de 12 o 24 horas.',
+            'Puedes usar el tema del sistema, Claro, Oscuro o Zen; activar el modo compacto; cambiar el ancho del contenido y elegir formato de 12 o 24 horas. El azul es el acento estable de la interfaz, mientras que etiquetas, listas y estados conservan sus propios colores.',
+    },
+    {
+        question: '¿Por qué Zenth puede resultar útil para personas con TDAH?',
+        answer:
+            'Porque ofrece estructura flexible, captura rápida, información por capas y feedback visible sin exigir una agenda rígida. No es un tratamiento médico ni sustituye apoyo profesional; es una herramienta de organización que cada persona puede adaptar a su manera de trabajar.',
     },
     {
         question: '¿Cómo puedo cambiar mi dirección de correo?',
         answer:
-            'Desde Ajustes → Cuenta → Cambiar correo. Escribe la nueva dirección y recibirás un enlace de confirmación: el cambio no se aplica hasta que lo confirmas desde el correo nuevo.',
+            'Desde Ajustes → Cuenta → Cambiar correo. Recibirás un enlace de confirmación en la dirección nueva y el cambio solo se aplicará cuando lo confirmes.',
     },
     {
         question: '¿Puedo usarlo en el teléfono?',

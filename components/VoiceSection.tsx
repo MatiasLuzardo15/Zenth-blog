@@ -38,7 +38,7 @@ const VoiceSection: React.FC<VoiceSectionProps> = ({ onSelectPost }) => {
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <div className="fr-card-featured grid gap-10 p-7 sm:p-10 lg:grid-cols-[1.1fr_1fr] lg:items-center">
           <div>
-            <p className="t-eyebrow">Nuevo</p>
+            <p className="t-eyebrow">Colaboración en vivo</p>
             <h2 className="t-display-md mt-4 text-ink">Tu pizarra ahora habla.</h2>
             <p className="t-body-lg mt-5 max-w-lg text-ink-muted">
               Cada pizarra compartida tiene su sala del equipo: una sala de voz siempre abierta

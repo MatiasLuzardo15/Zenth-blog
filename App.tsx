@@ -46,14 +46,14 @@ function App() {
   // Dynamic SEO management
   const getSEO = () => {
     const baseUrl = 'https://www.zenth.space';
-    let title = 'Zenth: Planificación Visual y Productividad para Mentes Inquietas';
-    let description = 'Organiza tu día, comparte pizarras y protege tu enfoque con Zenth, el planificador visual para mentes inquietas.';
+    let title = 'Zenth: Agenda, Pizarras, Biblioteca y Enfoque en un solo lugar';
+    let description = 'Planifica tu tiempo, organiza proyectos, trabaja con Google Drive y protege tu enfoque con Zenth.';
     let url = `${baseUrl}${location.pathname}`;
-    let image = `${baseUrl}/blog/appview.png`;
+    let image = `${baseUrl}/favicon.png`;
 
     if (location.pathname === '/') {
-      title = 'Zenth: Planificación Visual, Colaboración y Enfoque para TDAH';
-      description = 'Tu día, tus pizarras compartidas, tus notas y tu enfoque en una sola aplicación. Diseñada para TDAH y mentes creativas.';
+      title = 'Zenth: Tu agenda, tus proyectos y tu atención en un mismo ritmo';
+      description = 'Agenda visual, pizarras compartidas, Biblioteca con Google Drive, enfoque global y progreso personal en una sola aplicación.';
     } else if (location.pathname === '/blog') {
       title = 'Blog: Productividad y Neurociencia | Zenth Space';
       description = 'Consejos sobre TDAH, gestión del tiempo y bienestar mental. Aprende a dominar tu día con planificación visual y calma.';
@@ -75,10 +75,10 @@ function App() {
       description = 'Las reglas de uso de Zenth: tu cuenta, tu contenido, la colaboración, las salas de voz y las integraciones. Claro y sin letra pequeña.';
     } else if (location.pathname === '/faq') {
       title = 'Preguntas Frecuentes | Zenth Space';
-      description = 'Todo lo que necesitas saber sobre Zenth: pizarras compartidas, notas, enfoque, Google Calendar, niveles y privacidad.';
+      description = 'Todo lo que necesitas saber sobre Agenda, Pizarras, Biblioteca, Enfoque, Google Drive, Calendar y Mi ritmo.';
     } else if (location.pathname === '/guide') {
       title = 'Manual del Usuario | Zenth: Guía Completa';
-      description = 'Aprende a dominar Zenth paso a paso: Hoy, pizarras y colaboración, Entradas, modo enfoque, ajustes e integraciones.';
+      description = 'Aprende Zenth paso a paso: Agenda, Pizarras, Biblioteca, Enfoque global, Mi ritmo, ajustes e integraciones de Google.';
     }
 
     return { title, description, url, image };

@@ -164,7 +164,7 @@ export const DetailsPanel: React.FC = () => (
 
         <div className="grid grid-cols-2 gap-2">
             <Field icon={Eye} label="Visibilidad" value="Solo tú" />
-            <Field icon={Target} label="Focus" value="Listo para iniciar" />
+            <Field icon={Target} label="Enfoque" value="Listo para iniciar" />
         </div>
     </div>
 );
@@ -297,7 +297,7 @@ export const FocusTaskPanel: React.FC = () => (
 
         <div className="grid grid-cols-2 gap-2">
             <Field icon={Eye} label="Visibilidad" value="Solo tú" />
-            <Field icon={Target} label="Focus" value="Listo para iniciar" />
+            <Field icon={Target} label="Enfoque" value="Listo para iniciar" />
         </div>
 
         <div className="rounded-medium bg-surface-1 p-3">

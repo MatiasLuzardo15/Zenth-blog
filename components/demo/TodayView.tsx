@@ -21,7 +21,7 @@ interface TodayViewProps {
     focusTaskSelected?: boolean;
 }
 
-/** La pantalla de Hoy: barra lateral, calendario del día y momentos. */
+/** Agenda: calendario del día, navegación temporal y momentos flexibles. */
 export const TodayView: React.FC<TodayViewProps> = ({
     typed, isTyping, isPressing, added, completed, panelOpen,
     focusTaskVisible = false, focusTaskSelected = false,
@@ -41,7 +41,7 @@ export const TodayView: React.FC<TodayViewProps> = ({
                     <ChevronLeft className="h-3.5 w-3.5 text-ink-muted" strokeWidth={1.9} />
                     <ChevronRight className="h-3.5 w-3.5 text-ink-muted" strokeWidth={1.9} />
                     <span className="ml-auto rounded-pill bg-surface-2 px-2.5 py-1 text-[11px] font-medium text-ink">
-                        Hoy
+                        Agenda
                     </span>
                     <ChevronLeft className="h-3.5 w-3.5 text-ink-muted" strokeWidth={1.9} />
                 </div>

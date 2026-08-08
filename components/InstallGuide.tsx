@@ -33,7 +33,7 @@ const InstallGuide: React.FC = () => {
             </h2>
             <p className="t-body-lg mt-6 max-w-md text-ink-muted">
               Zenth es una aplicación web progresiva: se añade a tu pantalla de inicio desde el
-              propio navegador y a partir de ahí se comporta como cualquier app nativa.
+              navegador, abre en su propia ventana y conserva la misma cuenta en móvil y escritorio.
             </p>
 
             <ul className="mt-10 space-y-6">

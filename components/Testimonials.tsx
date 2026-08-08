@@ -20,7 +20,7 @@ const reviews = [
     name: 'Carlos M.',
     role: 'Dev Junior',
     content:
-      "Te quería comentar que el 'Modo Enfoque' es excelente. Pongo 45 minutos y me olvido del mundo, evito distraerme con las redes. Corta y efectiva. La verdad que funciona bárbaro.",
+      "Te quería comentar que Enfoque es excelente. Pongo 45 minutos y me olvido del mundo, evito distraerme con las redes. Corta y efectiva. La verdad que funciona bárbaro.",
     via: 'LinkedIn',
     icon: Linkedin,
   },

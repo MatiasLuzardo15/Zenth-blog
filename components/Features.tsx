@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import {
-  X, ArrowUpRight, Users, PenLine, Timer, CalendarDays, Trophy, HeartPulse,
-  Sparkles, Trash2, Palette, LayoutDashboard, Sun, ChevronDown, Mic,
+  X, ArrowUpRight, Users, LibraryBig, CircleDashed, CalendarDays, Orbit, HeartPulse,
+  Sparkles, Trash2, Palette, LayoutDashboard, ChevronDown, Mic,
 } from 'lucide-react';
 
 interface FeatureDetail {
@@ -31,7 +31,8 @@ const FEATURE_DETAILS: Record<string, FeatureDetail> = {
       'Tres roles claros: Administrador gestiona la pizarra y a sus miembros, Miembro crea y edita tarjetas, Observador solo mira.',
       'Invita por correo electrónico o genera un enlace de invitación que caduca cuando tú decidas.',
       'Visibilidad configurable: una pizarra nace privada y puedes abrirla con un enlace público de solo lectura.',
-      'Los cambios de tus compañeros aparecen en tiempo real, sin recargar.',
+      'Comentarios, menciones, asignaciones, votos, aprobaciones y actividad compartida viven junto al trabajo.',
+      'Los cambios y la presencia de tus compañeros aparecen en tiempo real, sin recargar.',
       'El propietario puede transferir la pizarra, y una pizarra nunca puede quedarse sin administradores.',
     ],
     icon: Users,
@@ -39,17 +40,17 @@ const FEATURE_DETAILS: Record<string, FeatureDetail> = {
   },
   entries: {
     id: 'entries',
-    title: 'Entradas: notas, tablas y archivos',
-    shortDesc: 'Un espacio de trabajo completo, no solo un bloc de notas.',
+    title: 'Biblioteca + Google Drive',
+    shortDesc: 'Tus notas Zenth y tu espacio documental de Google, en un mismo explorador.',
     bullets: [
-      'Notas con editor de texto enriquecido: títulos, listas, citas, código, resaltador e imágenes que se pegan y se redimensionan.',
-      'Tablas con fórmulas, formato de celda, orden y exportación a CSV.',
-      'Sube archivos —PDF, imágenes, documentos— y consúltalos desde la propia app.',
-      'Graba notas de voz directamente desde el micrófono.',
-      'Organízalo todo en carpetas y etiquetas, con buscador global.',
+      'Las notas nativas conservan el editor enriquecido de Zenth, sus imágenes, etiquetas y vínculo con las tareas.',
+      'Conecta Google Drive para recorrer Mi unidad, recientes, destacados y compartidos contigo desde Biblioteca.',
+      'Crea documentos, hojas, presentaciones y formularios de Google; puedes editarlos en Zenth o abrirlos en Google para usar el editor completo.',
+      'Sube archivos, elige existentes con Google Picker, crea carpetas reales y graba notas de voz directamente en tu Drive.',
+      'Busca, filtra, ordena, mueve, duplica, destaca, comparte y consulta la cuota sin salir del mismo espacio.',
     ],
-    icon: PenLine,
-    relatedPostId: '16',
+    icon: LibraryBig,
+    relatedPostId: '19',
   },
   voice: {
     id: 'voice',
@@ -67,40 +68,43 @@ const FEATURE_DETAILS: Record<string, FeatureDetail> = {
   },
   today: {
     id: 'today',
-    title: 'Hoy, a tu ritmo',
-    shortDesc: 'Mañana, tarde y noche. Y cuando lo necesites, hora exacta.',
+    title: 'Agenda visual',
+    shortDesc: 'Día, semana y mes para decidir cuándo cabe realmente cada cosa.',
     bullets: [
-      'Tres bloques de energía en lugar de una agenda rígida: Mañana, Tarde y Noche.',
-      'Cambia entre vista de día, semana y mes según lo lejos que quieras mirar.',
-      'Tareas recurrentes, prioridades, grandes metas y etiquetas de color.',
+      'Cambia entre día, semana y mes; en la vista diaria puedes mover y redimensionar los bloques directamente.',
+      'Usa Mañana, Tarde y Noche cuando no necesites una hora exacta, o define inicio y duración cuando sí.',
+      'Crea tareas, eventos y reuniones con repetición, recordatorios, etiquetas, pasos, adjuntos, ubicación y enlace de videollamada.',
+      'Elige por separado si las tareas nuevas de Agenda también pertenecen a la pizarra activa.',
       'Define a qué hora empieza tu mañana y Zenth reordena los bloques por ti.',
-      'El historial de completadas guarda lo que ya hiciste, por si necesitas mirar atrás.',
     ],
-    icon: Sun,
+    icon: CalendarDays,
   },
   boards: {
     id: 'boards',
-    title: 'Listas estilo tablero',
-    shortDesc: 'Varias pizarras, cada una con sus propias columnas.',
+    title: 'Pizarras por proyecto',
+    shortDesc: 'Cada proyecto conserva sus listas, su bandeja, sus miembros y su ritmo.',
     bullets: [
       'Crea todas las pizarras que necesites, cada una con su nombre e icono.',
       'Columnas personalizables: renómbralas, cámbiales el color y reordénalas.',
-      'Arrastra y suelta tarjetas entre columnas, o entre la bandeja de entrada rápida y el tablero.',
+      'Captura primero en la bandeja rápida y clasifica después, o crea la tarjeta directamente en una lista.',
+      'Arrastra tarjetas entre columnas y decide si cada tarea también debe aparecer en Agenda.',
       'Dos diseños de tablero: horizontal estilo Trello o ajustado al espacio en varias filas.',
     ],
     icon: LayoutDashboard,
   },
   focus: {
     id: 'focus',
-    title: 'Modo enfoque',
-    shortDesc: 'Un temporizador que mide atención real, no buenas intenciones.',
+    title: 'Enfoque global',
+    shortDesc: 'El temporizador sigue contigo mientras te mueves por Zenth.',
     bullets: [
-      'Cuatro duraciones rápidas —15, 25, 45 y 60 minutos— o la que tú escribas.',
+      'No es una sección aparte: se abre desde la cabecera y continúa aunque cambies de pantalla.',
+      'Usa 15, 25, 45 o 60 minutos, una duración propia o el modo sin duración.',
       'Asocia la sesión a una tarea concreta para saber cuánto le dedicaste de verdad.',
-      'Cada sesión suma minutos de enfoque, la métrica que gobierna los niveles altos.',
-      'Al terminar, ves las sesiones del día y tu constancia de la semana.',
+      'Mezcla lluvia, bosque, cafetería, olas, chimenea y ruidos; guarda combinaciones o reproduce música de Zenth.',
+      'Configura tu objetivo diario, descansos y avisos. Puedes revisar, corregir o borrar sesiones desde el historial.',
+      'Si lo permites, tu equipo ve hasta qué hora estás enfocado, nunca el nombre de la tarea.',
     ],
-    icon: Timer,
+    icon: CircleDashed,
     relatedPostId: '5',
   },
   calendar: {
@@ -109,24 +113,25 @@ const FEATURE_DETAILS: Record<string, FeatureDetail> = {
     shortDesc: 'Tus eventos, junto a tus tareas, sin copiar nada a mano.',
     bullets: [
       'Conecta tu cuenta con permiso de solo lectura y elige qué calendarios quieres ver.',
-      'Los eventos aparecen en Hoy junto a tus tareas, no en una pestaña aparte.',
+      'Los eventos aparecen en Agenda junto a tus tareas, no en una pestaña aparte.',
       'La sincronización se actualiza sola cada cinco minutos, y puedes pausarla cuando quieras.',
-      'Si te interesa, lleva calendarios concretos a una pizarra con la acción de exportar.',
+      'Si te interesa, lleva calendarios concretos a una pizarra con una acción explícita y reversible.',
     ],
     icon: CalendarDays,
     relatedPostId: '17',
   },
   progress: {
     id: 'progress',
-    title: 'Niveles y rachas',
-    shortDesc: 'Diez niveles que miden constancia, no velocidad.',
+    title: 'Mi ritmo',
+    shortDesc: 'Actividad, constancia y bienestar reunidos en tu perfil.',
     bullets: [
       'Cada tarea completada suma 10 XP; las grandes metas, 50.',
-      'Diez niveles, de Punto de Partida a Zenth, con requisitos de XP, racha, tareas y minutos de enfoque.',
+      'Veinte niveles inspirados en constelaciones, con requisitos de XP, mejor racha, tareas y minutos de enfoque.',
       'Los niveles son permanentes: si pierdes la racha, no pierdes el nivel.',
-      'La ruta de progreso te enseña qué te falta exactamente para el siguiente.',
+      'Veinticuatro logros recorren ejecución, constancia, enfoque y el mapa completo.',
+      'La actividad semanal y la ruta de progreso muestran qué has hecho y qué falta para el siguiente nivel.',
     ],
-    icon: Trophy,
+    icon: Orbit,
     relatedPostId: '2',
   },
   mood: {
@@ -160,10 +165,11 @@ const FEATURE_DETAILS: Record<string, FeatureDetail> = {
     title: 'Papelera',
     shortDesc: 'Borrar deja de dar miedo.',
     bullets: [
-      'Las tareas y las entradas eliminadas van a la papelera, no al vacío.',
+      'Las tareas y las notas nativas eliminadas van a la papelera de Zenth, no al vacío.',
       'Restaura cualquier elemento a su sitio original con un clic.',
       'Vacíala cuando quieras para liberar espacio de verdad.',
       'Al mandar una tarea recurrente a la papelera, Zenth detiene sus repeticiones.',
+      'Los archivos de Google se mueven a la papelera de Drive y se recuperan desde Google Drive.',
     ],
     icon: Trash2,
   },
@@ -172,8 +178,8 @@ const FEATURE_DETAILS: Record<string, FeatureDetail> = {
     title: 'Se adapta a ti',
     shortDesc: 'Tres temas, tu color y la densidad que prefieras.',
     bullets: [
-      'Temas Claro, Oscuro y Zen —este último con un fondo cálido, más suave de noche.',
-      'Elige el color de acento que se usa en acciones y estados activos.',
+      'Elige Sistema, Claro, Oscuro o Zen —este último con un fondo cálido, más suave de noche.',
+      'El acento azul es constante en toda la interfaz; los colores libres quedan para etiquetas, listas y datos.',
       'Modo compacto para ver más tareas de una vez, y ancho de contenido fluido o contenido.',
       'Formato de hora de 12 o 24 h, efectos de sonido y recordatorios push opcionales.',
     ],
@@ -181,7 +187,7 @@ const FEATURE_DETAILS: Record<string, FeatureDetail> = {
   },
 };
 
-const SECONDARY_ORDER = ['voice', 'today', 'boards', 'focus', 'calendar', 'progress', 'mood', 'ai', 'trash', 'appearance'];
+const SECONDARY_ORDER = ['today', 'boards', 'focus', 'calendar', 'progress', 'mood', 'voice', 'ai', 'trash', 'appearance'];
 
 const Features: React.FC<FeaturesProps> = ({ onNavigate }) => {
   const [selected, setSelected] = useState<FeatureDetail | null>(null);
@@ -214,8 +220,8 @@ const Features: React.FC<FeaturesProps> = ({ onNavigate }) => {
             que se hablan entre sí.
           </h2>
           <p className="t-body-lg mt-6 max-w-xl text-ink-muted">
-            Nada de módulos sueltos: una tarea puede convertirse en nota, una nota vivir en una
-            carpeta y una pizarra tener miembros. Toca cualquier tarjeta para ver el detalle.
+            Una tarea puede vivir en Agenda y en una pizarra, convertirse en nota y terminar en una
+            sesión de enfoque. Biblioteca conecta el contenido de Zenth con tu Drive sin duplicarlo.
           </p>
         </div>
 
@@ -238,7 +244,7 @@ const Features: React.FC<FeaturesProps> = ({ onNavigate }) => {
             onClick={() => setSelected(entries)}
             className="fr-card-featured group flex flex-col items-start p-8 text-left transition-transform duration-300 hover:-translate-y-1"
           >
-            <PenLine className="h-7 w-7 text-ink" strokeWidth={1.5} />
+            <LibraryBig className="h-7 w-7 text-ink" strokeWidth={1.5} />
             <h3 className="t-display-md mt-6 text-ink">{entries.title}</h3>
             <p className="t-body-lg mt-3 max-w-md text-ink-muted">{entries.shortDesc}</p>
             <span className="t-caption mt-8 inline-flex items-center gap-1.5 text-ink">

@@ -38,7 +38,7 @@ const InteractiveDemo: React.FC = () => {
 
                     <div className="fr-card fr-elevated relative">
                         <div className="flex items-center justify-between">
-                            <span className="t-caption text-ink-muted">Hoy · Mañana</span>
+                            <span className="t-caption text-ink-muted">Agenda · Mañana</span>
                             <span className="fr-btn fr-btn-translucent pointer-events-none t-micro">
                                 <Flame className="h-3.5 w-3.5" strokeWidth={2} />
                                 Racha 12
@@ -85,7 +85,7 @@ const InteractiveDemo: React.FC = () => {
                         </div>
 
                         <div className="mt-5 flex items-center justify-between border-t border-hairline-soft pt-4">
-                            <span className="t-micro text-ink-muted">Nivel 5 · Sistema Sólido</span>
+                            <span className="t-micro text-ink-muted">Nivel 5 · Cisne</span>
                             <span className="t-micro tabular-nums text-ink-muted">
                                 {checked ? '3 550' : '3 500'} XP
                             </span>

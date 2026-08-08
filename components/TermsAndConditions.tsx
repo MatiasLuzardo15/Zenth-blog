@@ -35,375 +35,230 @@ const B: React.FC<{ children: React.ReactNode }> = ({ children }) => (
 );
 
 const TermsAndConditions: React.FC<TermsAndConditionsProps> = ({ onBack }) => {
-    useEffect(() => {
-        window.scrollTo(0, 0);
-    }, []);
+    useEffect(() => { window.scrollTo(0, 0); }, []);
 
     return (
         <div className="min-h-screen pt-28 pb-24 lg:pt-36">
             <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-                <button
-                    onClick={onBack}
-                    className="t-caption group mb-10 inline-flex items-center gap-2 text-ink-muted transition-colors hover:text-ink"
-                >
+                <button onClick={onBack} className="t-caption group mb-10 inline-flex items-center gap-2 text-ink-muted transition-colors hover:text-ink">
                     <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-0.5" />
                     Volver
                 </button>
 
                 <p className="t-eyebrow">Legal</p>
                 <h1 className="t-display-xl mt-4 text-ink">Términos y condiciones.</h1>
-                <p className="t-micro mt-6 text-ink-muted">Última actualización: 3 de agosto de 2026</p>
+                <p className="t-micro mt-6 text-ink-muted">Última actualización: 8 de agosto de 2026</p>
 
                 <div className="fr-card-featured mt-10">
                     <p className="t-caption text-ink">En una frase</p>
                     <p className="t-body-lg mt-3 text-ink-muted">
-                        Zenth es gratis y tu contenido es tuyo. Úsalo con sentido común: nada ilegal,
-                        nada que perjudique a otras personas. Nosotros cuidamos el servicio; tú eres
-                        responsable de tu cuenta y de lo que decides compartir.
+                        Zenth es gratuito y tu contenido sigue siendo tuyo. Cuida tu cuenta, respeta a las
+                        personas con quienes colaboras y revisa antes de compartir o modificar archivos externos.
                     </p>
                 </div>
 
                 <div className="mt-12 border-t border-hairline-soft pt-10">
                     <P>
-                        Estos Términos regulan el acceso y el uso de la aplicación web Zenth (el
-                        "Servicio"), disponible en zenth.space y en su versión instalable como PWA. Al
-                        crear una cuenta, marcar la casilla de aceptación del registro o usar el Servicio,
-                        declaras que has leído y aceptado estos Términos junto con la{' '}
-                        <a href="/privacy" className="fr-link">Política de Privacidad</a>. Si no estás de
-                        acuerdo, por favor no uses el Servicio.
+                        Estos Términos regulan el uso de Zenth, disponible en <B>zenth.space</B> y como
+                        aplicación web progresiva. Al crear una cuenta o utilizar el Servicio aceptas estos
+                        Términos y la <a href="/privacy" className="fr-link">Política de Privacidad</a>. Si
+                        no estás de acuerdo, no utilices el Servicio.
                     </P>
                 </div>
 
-                <Section n={1} title="Qué es Zenth">
+                <Section n={1} title="Quién presta el Servicio">
                     <P>
-                        Zenth es una aplicación de productividad y bienestar hecha por una sola
-                        persona. Incluye, entre otras, estas funciones:
-                    </P>
-                    <List
-                        items={[
-                            <>
-                                <B>Gestión de tareas</B> por momentos del día (Mañana, Tarde, Noche),
-                                secciones como "Hoy" y "En cualquier momento", tareas recurrentes,
-                                etiquetas y una papelera de recuperación.
-                            </>,
-                            <>
-                                <B>Pizarras y listas</B> para organizar proyectos, con historial de lo
-                                completado.
-                            </>,
-                            <>
-                                <B>Notas y entradas</B> con editor enriquecido, archivos adjuntos y
-                                notas de voz.
-                            </>,
-                            <>
-                                <B>Modo Enfoque:</B> temporizador de trabajo profundo con registro de
-                                sesiones y minutos de enfoque.
-                            </>,
-                            <>
-                                <B>Calendario de estados de ánimo</B> y resúmenes de bienestar.
-                            </>,
-                            <>
-                                <B>Sistema de progreso:</B> experiencia (XP), niveles, rachas, logros y
-                                estadísticas.
-                            </>,
-                            <>
-                                <B>Colaboración:</B> pizarras compartidas, invitaciones por correo,
-                                enlaces públicos de solo lectura, salas de voz y llamadas privadas uno
-                                a uno.
-                            </>,
-                            <>
-                                <B>Integraciones:</B> importación de solo lectura de Google Calendar y
-                                notificaciones del navegador, push y por correo.
-                            </>,
-                        ]}
-                    />
-                    <P>
-                        Zenth es una herramienta de organización personal. <B>No es un servicio
-                        médico, psicológico ni de salud mental:</B> las funciones de registro de ánimo
-                        y bienestar son de auto-observación y en ningún caso sustituyen el consejo,
-                        diagnóstico o tratamiento profesional.
+                        Zenth es un proyecto independiente desarrollado y operado por <B>Matías Luzardo</B>,
+                        Uruguay. Puedes escribir a <a href="mailto:matiasluzardevv@gmail.com" className="fr-link">matiasluzardevv@gmail.com</a>.
                     </P>
                 </Section>
 
-                <Section n={2} title="Requisitos de la cuenta">
-                    <List
-                        items={[
-                            <>
-                                <B>Registro.</B> Necesitas una dirección de correo válida y una
-                                contraseña. Debes proporcionar información veraz.
-                            </>,
-                            <>
-                                <B>Edad.</B> Debes ser mayor de 16 años o contar con el
-                                consentimiento de tu madre, padre o tutor legal. Al registrarte
-                                declaras que cumples este requisito.
-                            </>,
-                            <>
-                                <B>Seguridad.</B> Eres responsable de tus credenciales y de la
-                                actividad que ocurra bajo tu cuenta. Si detectas un uso no autorizado,
-                                avísanos cuanto antes.
-                            </>,
-                            <>
-                                <B>Comunicaciones de cuenta.</B> La confirmación de registro, los
-                                cambios de correo o contraseña y el restablecimiento se envían a tu
-                                dirección registrada.
-                            </>,
-                        ]}
-                    />
-                </Section>
-
-                <Section n={3} title="Tu contenido">
-                    <List
-                        items={[
-                            <>
-                                <B>Es tuyo.</B> Conservas la propiedad de todo lo que creas: tareas,
-                                notas, imágenes, notas de voz, pizarras y cualquier otro material que
-                                subas.
-                            </>,
-                            <>
-                                <B>Licencia mínima.</B> Nos concedes una licencia limitada y revocable
-                                para alojar, procesar y mostrar tu contenido con el único fin de operar
-                                el Servicio: sincronizarlo entre tus dispositivos, mostrarlo a quienes
-                                decides compartirlo y enviarte recordatorios.
-                            </>,
-                            <>
-                                <B>Responsabilidad.</B> Eres el único responsable de tu contenido y de
-                                tener los derechos necesarios sobre él.
-                            </>,
-                            <>
-                                <B>Copias.</B> Te recomendamos conservar copia de la información
-                                importante. Aplicamos buenas prácticas de respaldo, pero no
-                                garantizamos la conservación perpetua de los datos.
-                            </>,
-                        ]}
-                    />
-                </Section>
-
-                <Section n={4} title="Colaboración, salas de voz y llamadas">
-                    <List
-                        items={[
-                            <>
-                                <B>Pizarras compartidas.</B> Al invitar a alguien, sus miembros ven y, según su rol,
-                                editan el contenido de esa pizarra. Invita con criterio.
-                            </>,
-                            <>
-                                <B>Enlaces públicos.</B> Si activas el enlace público de una pizarra,
-                                cualquiera que lo tenga puede verla en solo lectura, sin cuenta. No
-                                publiques ahí información sensible. Es reversible en cualquier momento.
-                            </>,
-                            <>
-                                <B>Voz y llamadas.</B> Funcionan sobre infraestructura de terceros
-                                (LiveKit), con voz y pantalla compartida. <B>No hay cámara ni
-                                videollamada</B>: el servidor lo impide técnicamente. Solo puedes
-                                llamar a personas con las que compartes una pizarra, y solo los
-                                integrantes de una pizarra entran a su sala.
-                            </>,
-                            <>
-                                <B>Nada se graba.</B> No almacenamos audio, pantalla ni ningún
-                                contenido de las conversaciones: son efímeras y viven solo en memoria
-                                mientras duran. Tampoco podemos recuperarlas después.
-                            </>,
-                            <>
-                                <B>Límites de uso.</B> Las funciones de voz tienen topes de conexiones
-                                simultáneas y minutos mensuales según la capacidad contratada. Al
-                                alcanzarse se bloquean las entradas nuevas, pero las conversaciones en
-                                curso nunca se interrumpen. Los topes pueden cambiar y su estado es
-                                visible dentro de la aplicación.
-                            </>,
-                        ]}
-                    />
-                </Section>
-
-                <Section n={5} title="Proveedores e integraciones de terceros">
+                <Section n={2} title="Qué ofrece Zenth">
+                    <List items={[
+                        <><B>Agenda:</B> tareas, eventos y reuniones en vistas de día, semana y mes.</>,
+                        <><B>Pizarras:</B> proyectos, listas, bandeja de captura, colaboración, actividad y permisos.</>,
+                        <><B>Biblioteca:</B> notas nativas y acceso opcional a Google Drive y Workspace.</>,
+                        <><B>Enfoque:</B> temporizador o cronómetro global, descansos, sonido, objetivo e historial.</>,
+                        <><B>Mi ritmo:</B> actividad, rachas, 20 niveles, 24 logros y registro de ánimo.</>,
+                        <><B>Integraciones:</B> Google Drive, Docs, Sheets, Slides, Forms, Calendar, Gemini, notificaciones, correo y voz mediante terceros.</>,
+                    ]} />
                     <P>
-                        Zenth se apoya en servicios de terceros para operar. Al usar esas funciones
-                        también aplican sus propios términos y políticas, y no somos responsables de
-                        su disponibilidad ni de sus prácticas.
-                    </P>
-                    <List
-                        items={[
-                            <>
-                                <B>Supabase.</B> Autenticación, base de datos, almacenamiento de
-                                adjuntos y sincronización en tiempo real.
-                            </>,
-                            <>
-                                <B>Resend.</B> Envío de correos transaccionales: verificación,
-                                recuperación de contraseña, invitaciones y recordatorios.
-                            </>,
-                            <>
-                                <B>Firebase Cloud Messaging.</B> Entrega de notificaciones push, solo
-                                si las activas.
-                            </>,
-                            <>
-                                <B>Google Gemini.</B> Las funciones del asistente Zen. El texto se
-                                procesa solo cuando pulsas una acción de IA, nunca de fondo.
-                            </>,
-                            <>
-                                <B>Google Calendar.</B> Integración opcional y de <B>solo lectura</B>.
-                                Zenth no puede crear, modificar ni eliminar eventos; el token de
-                                acceso se mantiene en la memoria del navegador y no se guarda en
-                                nuestros servidores. Puedes pausar o desvincular la conexión desde
-                                Ajustes en cualquier momento.
-                            </>,
-                            <>
-                                <B>LiveKit.</B> Salas de voz y llamadas privadas.
-                            </>,
-                            <>
-                                <B>Vercel.</B> Alojamiento del sitio web y de la aplicación.
-                            </>,
-                        ]}
-                    />
-                </Section>
-
-                <Section n={6} title="Notificaciones y recordatorios">
-                    <P>
-                        Los recordatorios por navegador, push y correo son configurables por ti, pero
-                        su entrega depende de tu navegador, sistema operativo, red y de los
-                        proveedores anteriores. <B>Se ofrecen como "mejor esfuerzo": no garantizamos
-                        su entrega, puntualidad ni recepción.</B> No uses Zenth como único sistema de
-                        aviso para asuntos críticos de salud, seguridad o compromisos ineludibles.
+                        Las funciones pueden evolucionar, cambiar de ubicación o recibir límites técnicos para
+                        mantener el Servicio seguro y sostenible.
                     </P>
                 </Section>
 
-                <Section n={7} title="Plan gratuito, límites y cambios del Servicio">
-                    <List
-                        items={[
-                            <>
-                                <B>Gratis.</B> Actualmente Zenth se ofrece de forma gratuita. Si en el
-                                futuro se introducen planes de pago o funciones premium, se anunciará
-                                con antelación razonable y nunca se te cobrará sin tu consentimiento
-                                expreso previo.
-                            </>,
-                            <>
-                                <B>Evolución.</B> Podemos añadir, modificar, suspender o retirar
-                                funciones en cualquier momento, procurando avisar cuando el cambio sea
-                                relevante.
-                            </>,
-                            <>
-                                <B>Suspensión.</B> Podemos suspender o cancelar cuentas que incumplan
-                                estos Términos, hagan un uso abusivo de los recursos o comprometan la
-                                seguridad o la experiencia de otras personas.
-                            </>,
-                        ]}
-                    />
+                <Section n={3} title="Cuenta y requisitos">
+                    <List items={[
+                        <>Debes proporcionar información correcta, mantener actualizado tu correo y proteger tus credenciales.</>,
+                        <>Eres responsable de la actividad de tu cuenta y de cerrar sesión en dispositivos compartidos.</>,
+                        <>Si no tienes edad o capacidad legal para aceptar estos Términos en tu país, necesitas la autorización de tu representante legal.</>,
+                        <>Avísanos sin demora si sospechas un acceso no autorizado.</>,
+                    ]} />
                 </Section>
 
-                <Section n={8} title="Usos prohibidos">
-                    <P>Te comprometes a no:</P>
-                    <List
-                        items={[
-                            <>Usar el Servicio para fines ilegales, fraudulentos o contrarios a la normativa aplicable.</>,
-                            <>
-                                Subir contenido ilícito, difamatorio, violento, que infrinja derechos
-                                de terceros (incluida la propiedad intelectual) o que vulnere la
-                                privacidad de otras personas.
-                            </>,
-                            <>Compartir pizarras o enlaces públicos con contenido de terceros sin su consentimiento.</>,
-                            <>
-                                Intentar acceder sin autorización a cuentas, pizarras, salas o
-                                sistemas ajenos, ni interferir en la infraestructura del Servicio.
-                            </>,
-                            <>
-                                Extraer datos de forma automatizada o realizar ingeniería inversa del
-                                Servicio, salvo en lo permitido por la ley.
-                            </>,
-                            <>
-                                Suplantar identidades o usar las invitaciones y la colaboración para
-                                enviar comunicaciones no solicitadas.
-                            </>,
-                            <>Usar las salas de voz para acosar, amenazar o vulnerar derechos de terceros.</>,
-                        ]}
-                    />
-                </Section>
-
-                <Section n={9} title="Propiedad intelectual">
+                <Section n={4} title="Tu contenido">
                     <P>
-                        Zenth, su nombre, marca, diseño, logotipos y elementos visuales nos pertenecen
-                        (o a sus licenciantes) y no se te concede ningún derecho sobre ellos más allá
-                        del necesario para usar el Servicio. Algunas partes del software se distribuyen
-                        bajo licencias de código abierto, que se rigen por sus propios términos. Estos
-                        Términos no te transfieren ninguna propiedad intelectual sobre el Servicio, ni
-                        a nosotros ninguna sobre tu contenido.
+                        Conservas la titularidad de las tareas, notas, archivos, comentarios y demás contenido
+                        que creas o conectas. Concedes a Zenth una licencia limitada, no exclusiva y revocable
+                        para alojar, procesar, transmitir y mostrar ese contenido únicamente en la medida
+                        necesaria para operar las funciones que solicitas.
+                    </P>
+                    <P>
+                        Debes tener derecho a usar y compartir el contenido que incorporas. No subas datos,
+                        imágenes, grabaciones o documentos de terceros sin la autorización correspondiente.
                     </P>
                 </Section>
 
-                <Section n={10} title="Disponibilidad y garantías">
+                <Section n={5} title="Pizarras, roles y enlaces">
+                    <List items={[
+                        <><B>Administrador.</B> Gestiona miembros, permisos, configuración y contenido de la pizarra.</>,
+                        <><B>Miembro.</B> Puede crear y modificar contenido, sin administrar los permisos generales.</>,
+                        <><B>Observador.</B> Accede en modo solo lectura.</>,
+                        <><B>Propietario.</B> Es el administrador responsable de la pizarra, puede transferir su propiedad y eliminarla.</>,
+                    ]} />
                     <P>
-                        El Servicio se ofrece <B>"tal cual" y "según disponibilidad"</B>, sin garantías
-                        de ningún tipo, expresas o implícitas, en la máxima medida permitida por la
-                        ley. No garantizamos que sea ininterrumpido, puntual o libre de errores, ni
-                        que los datos nunca se pierdan. Ninguna estadística, nivel o resumen generado
-                        por la app constituye consejo médico, psicológico, legal ni financiero.
+                        Quien invita a otra persona decide el acceso que concede. Los enlaces de invitación y
+                        los enlaces públicos pueden reenviarse: revócalos cuando ya no sean necesarios. Al
+                        activar «con enlace», aceptas que cualquiera que obtenga la dirección pueda ver esa
+                        pizarra sin iniciar sesión.
                     </P>
                 </Section>
 
-                <Section n={11} title="Limitación de responsabilidad">
+                <Section n={6} title="Google Drive y Workspace">
                     <P>
-                        En la máxima medida permitida por la legislación aplicable, no seremos
-                        responsables de daños indirectos, incidentales, especiales o consecuentes, ni
-                        de pérdida de beneficios, datos o uso, derivados del uso (o de la imposibilidad
-                        de uso) del Servicio. Nuestra responsabilidad total acumulada por cualquier
-                        reclamación relacionada con el Servicio no excederá de cien euros (100 €) o el
-                        importe mínimo permitido por la ley aplicable, el que sea menor. Nada de lo
-                        anterior excluye la responsabilidad que no pueda excluirse conforme a la ley.
+                        Al conectar Google Drive autorizas a Zenth a operar sobre los archivos que tu cuenta
+                        puede utilizar. Las acciones realizadas en Biblioteca afectan los elementos reales de
+                        Drive: editar, mover, copiar, compartir o enviar a la papelera no son simulaciones.
+                    </P>
+                    <List items={[
+                        <>Revisa el archivo, destino y permiso antes de confirmar una acción.</>,
+                        <>Los editores integrados de Zenth no reproducen todas las funciones de los editores nativos de Google. Usa «Abrir en Google» cuando necesites compatibilidad completa.</>,
+                        <>Desconectar Zenth revoca la integración cuando es posible, pero no elimina los archivos ya creados o subidos a tu Drive.</>,
+                        <>El uso de Google también está sujeto a los términos, cuotas, disponibilidad y decisiones de tu cuenta o administrador de Workspace.</>,
+                    ]} />
+                </Section>
+
+                <Section n={7} title="Google Calendar">
+                    <P>
+                        Calendar se conecta con permiso de solo lectura. Zenth importa eventos a Agenda y solo
+                        los lleva a una pizarra cuando tú lo eliges. La sincronización depende de una autorización
+                        temporal de Google; puede requerir que vuelvas a conectar. Desvincular la cuenta detiene
+                        futuras lecturas, pero no borra automáticamente los elementos ya importados.
                     </P>
                 </Section>
 
-                <Section n={12} title="Cancelación y eliminación de la cuenta">
-                    <List
-                        items={[
-                            <>
-                                <B>Cuando quieras.</B> Puedes dejar de usar Zenth en cualquier momento
-                                y solicitar la eliminación de tu cuenta escribiéndonos.
-                            </>,
-                            <>
-                                <B>Papelera.</B> Lo que eliminas dentro de la app pasa primero a la
-                                papelera, desde donde puedes restaurarlo antes de su borrado
-                                definitivo.
-                            </>,
-                            <>
-                                <B>Eliminación.</B> Tras eliminar la cuenta, tus datos se borran o
-                                anonimizan según lo descrito en la Política de Privacidad, salvo lo que
-                                debamos conservar por obligación legal.
-                            </>,
-                        ]}
-                    />
-                </Section>
-
-                <Section n={13} title="Cambios en estos Términos">
+                <Section n={8} title="Zen y contenido generado por IA">
                     <P>
-                        Podemos actualizar estos Términos para reflejar cambios en el Servicio o en la
-                        normativa. Si el cambio es relevante, lo anunciaremos con antelación razonable
-                        dentro de la aplicación o en este sitio, y actualizaremos la fecha de "última
-                        actualización". Seguir usando el Servicio tras la entrada en vigor de los
-                        cambios implica su aceptación; si no estás de acuerdo, puedes dejar de usarlo y
-                        eliminar tu cuenta.
+                        Zen utiliza Google Gemini para interpretar tareas o transformar texto cuando pulsas una
+                        acción. Sus resultados pueden ser incompletos, imprecisos o inadecuados. Debes revisar
+                        fechas, prioridades, redacción y cualquier decisión antes de guardar o utilizar la
+                        respuesta. Zen no presta asesoramiento médico, legal, financiero ni profesional.
                     </P>
                 </Section>
 
-                <Section n={14} title="Legislación y jurisdicción">
+                <Section n={9} title="Voz, pantalla y límites técnicos">
                     <P>
-                        Estos Términos se rigen por las leyes de la <B>República Oriental del
-                        Uruguay</B>, sin perjuicio de los derechos irrenunciables que te reconozca la
-                        legislación de tu lugar de residencia. Cualquier controversia se someterá a los
-                        tribunales de <B>Montevideo, Uruguay</B>, salvo que la normativa de protección
-                        del consumidor establezca otro fuero imperativo.
+                        Las salas y llamadas están vinculadas a los permisos de las pizarras y usan LiveKit.
+                        Zenth no graba audio ni pantalla, pero las demás personas pueden usar herramientas externas:
+                        no compartas información sensible sin confiar en quienes participan.
+                    </P>
+                    <P>
+                        La voz está sujeta a capacidad simultánea, minutos mensuales, disponibilidad del proveedor
+                        y medidas de uso razonable. Una conversación en curso puede continuar cuando se alcanza un
+                        límite, aunque nuevas conexiones podrían quedar temporalmente bloqueadas.
                     </P>
                 </Section>
 
-                <Section n={15} title="Contacto">
-                    <P>Si tienes cualquier duda sobre estos Términos o sobre el Servicio, escríbeme:</P>
+                <Section n={10} title="Uso aceptable">
+                    <P>No puedes utilizar Zenth para:</P>
+                    <List items={[
+                        <>Realizar actividades ilegales, fraudulentas, abusivas, amenazantes o que vulneren derechos de terceros.</>,
+                        <>Distribuir malware, intentar acceder a cuentas ajenas o eludir permisos y controles de seguridad.</>,
+                        <>Enviar spam, acosar a otras personas o publicar datos personales sin una base legítima.</>,
+                        <>Sobrecargar, automatizar abusivamente, revender o explotar el Servicio de manera que perjudique a otras personas o a la infraestructura.</>,
+                        <>Copiar, modificar o descompilar componentes del Servicio salvo cuando una licencia o la ley lo permita expresamente.</>,
+                    ]} />
+                </Section>
+
+                <Section n={11} title="Servicio gratuito y contribuciones">
+                    <P>
+                        Zenth se ofrece actualmente sin plan de pago ni publicidad. Las contribuciones mediante
+                        PayPal son voluntarias, no compran funciones, prioridad ni propiedad sobre el proyecto y
+                        se rigen también por las condiciones de PayPal. La gratuidad actual no obliga a mantener
+                        para siempre el mismo modelo; cualquier cambio material se comunicará antes de aplicarse.
+                    </P>
+                </Section>
+
+                <Section n={12} title="Disponibilidad y copias">
+                    <P>
+                        Trabajamos para mantener Zenth disponible, pero no garantizamos funcionamiento continuo ni
+                        ausencia total de errores. Puede haber mantenimiento, fallos de red o interrupciones de
+                        Supabase, Google, LiveKit, Vercel u otros proveedores.
+                    </P>
+                    <P>
+                        Conserva copias de la información crítica. Para contenido de Google, utiliza también las
+                        opciones de historial, exportación y recuperación de Drive. Zenth no debe ser el único
+                        lugar donde guardes información cuya pérdida podría causarte un perjuicio grave.
+                    </P>
+                </Section>
+
+                <Section n={13} title="Propiedad intelectual">
+                    <P>
+                        La marca Zenth, su diseño, código, textos y recursos propios pertenecen a su creador o a
+                        sus licenciantes. Los nombres y marcas de Google, PayPal, LiveKit, Supabase y demás
+                        terceros pertenecen a sus respectivos titulares. Estos Términos no transfieren derechos
+                        de propiedad sobre el Servicio.
+                    </P>
+                </Section>
+
+                <Section n={14} title="Suspensión y finalización">
+                    <P>
+                        Podemos limitar o suspender una cuenta cuando sea razonablemente necesario para investigar
+                        un riesgo de seguridad, cumplir la ley, proteger a otras personas o responder a un
+                        incumplimiento grave de estos Términos. Procuraremos avisar y permitir una solución cuando
+                        las circunstancias lo permitan.
+                    </P>
+                    <P>
+                        Puedes dejar de usar Zenth en cualquier momento y solicitar la eliminación de tu cuenta.
+                        Desconecta primero las integraciones que quieras revocar. Los archivos de Google seguirán
+                        en tu Drive hasta que tú los elimines allí.
+                    </P>
+                </Section>
+
+                <Section n={15} title="Responsabilidad">
+                    <P>
+                        Zenth es una herramienta de organización, no un servicio de emergencia ni un sustituto
+                        de asesoramiento profesional. En la máxima medida permitida por la ley aplicable, no somos
+                        responsables por decisiones tomadas a partir de la IA, permisos de compartición elegidos
+                        por el usuario, acciones ejecutadas en servicios externos ni interrupciones fuera de
+                        nuestro control. Nada de esta sección limita derechos irrenunciables de consumidores ni
+                        responsabilidad que legalmente no pueda excluirse.
+                    </P>
+                </Section>
+
+                <Section n={16} title="Cambios en el Servicio o en estos Términos">
+                    <P>
+                        Podemos modificar funciones y actualizar estos Términos para reflejar cambios técnicos,
+                        operativos o legales. Si el cambio es relevante, lo comunicaremos con antelación razonable
+                        por la aplicación, el sitio o correo. La fecha superior indica la versión vigente.
+                    </P>
+                </Section>
+
+                <Section n={17} title="Ley y jurisdicción">
+                    <P>
+                        Estos Términos se rigen por las leyes de la <B>República Oriental del Uruguay</B>, sin
+                        perjuicio de los derechos imperativos que te correspondan por tu lugar de residencia.
+                        Las controversias se someterán a los tribunales competentes de <B>Montevideo, Uruguay</B>,
+                        salvo que una norma de protección al consumidor establezca otro fuero obligatorio.
+                    </P>
+                </Section>
+
+                <Section n={18} title="Contacto">
                     <div className="fr-card">
-                        <p className="t-body text-ink-muted">
-                            Correo:{' '}
-                            <a href="mailto:matiasluzardevv@gmail.com" className="fr-link">
-                                matiasluzardevv@gmail.com
-                            </a>
-                        </p>
-                        <p className="t-body mt-2 text-ink-muted">
-                            Web:{' '}
-                            <a href="https://zenth.space" className="fr-link">
-                                zenth.space
-                            </a>
-                        </p>
+                        <p className="t-body text-ink-muted">Responsable: Matías Luzardo · Uruguay</p>
+                        <p className="t-body mt-2 text-ink-muted">Correo: <a href="mailto:matiasluzardevv@gmail.com" className="fr-link">matiasluzardevv@gmail.com</a></p>
+                        <p className="t-body mt-2 text-ink-muted">Web: <a href="https://zenth.space" className="fr-link">zenth.space</a></p>
                     </div>
                 </Section>
             </div>

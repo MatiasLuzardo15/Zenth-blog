@@ -1,8 +1,8 @@
 import React, { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import {
-    AlignLeft, BarChart3, BookOpen, CalendarDays, CheckSquare, ChevronUp,
-    MousePointer2, Pencil, Sun, Target, Timer, Trash2, X,
+    AlignLeft, CalendarDays, CircleDashed, ChevronUp, Flame, LayoutDashboard,
+    LibraryBig, MousePointer2, Orbit, Pencil, Target, Trash2, X,
 } from 'lucide-react';
 import { TodayView } from './demo/TodayView';
 import { BoardView } from './demo/BoardView';
@@ -17,11 +17,10 @@ import {
 } from './demo/timeline';
 
 const NAV = [
-    { label: 'Hoy', icon: CalendarDays },
-    { label: 'Lista', icon: CheckSquare },
-    { label: 'Enfoque', icon: Timer },
-    { label: 'Notas', icon: BookOpen },
-    { label: 'Objetivos', icon: BarChart3 },
+    { label: 'Agenda', icon: CalendarDays },
+    { label: 'Pizarras', icon: LayoutDashboard },
+    { label: 'Biblioteca', icon: LibraryBig },
+    { label: 'Mi ritmo', icon: Orbit },
 ];
 
 /**
@@ -44,8 +43,8 @@ const boardCameraFocus = (elapsed: number) => {
 };
 
 /**
- * Demo animada del producto. El primer acto muestra la agenda de Hoy; cuando
- * termina, el segundo entra en Lista y usa una pizarra completa. Todo deriva
+ * Demo animada del producto. El primer acto muestra Agenda; cuando termina,
+ * el segundo entra en Pizarras y usa un tablero completo. Todo deriva
  * de `elapsed`, por lo que el bucle no acumula timeouts ni se desincroniza.
  */
 const AppDemo: React.FC = () => {
@@ -139,7 +138,7 @@ const AppDemo: React.FC = () => {
             ref={wrapRef}
             className="fr-card fr-elevated relative overflow-hidden p-1.5 sm:p-2"
             role="img"
-            aria-label="Demostración de Zenth: organiza una tarea en Hoy, trabaja con una pizarra y convierte una tarea pendiente en una sesión de enfoque activa."
+            aria-label="Demostración de Zenth: organiza una tarea en Agenda, trabaja con una pizarra e inicia Enfoque sin abandonar su contexto."
         >
             <div
                 ref={frameRef}
@@ -167,7 +166,7 @@ const AppDemo: React.FC = () => {
 
                         <nav className="flex items-center gap-1 rounded-pill bg-surface-1 p-1">
                             {NAV.map(({ label, icon: Icon }, index) => {
-                                const active = focusActive ? index === 2 : boardActive ? index === 1 : index === 0;
+                                const active = boardActive ? index === 1 : index === 0;
                                 return (
                                     <motion.span
                                         layout
@@ -182,8 +181,12 @@ const AppDemo: React.FC = () => {
                             })}
                         </nav>
 
-                        <div className="flex items-center gap-2 rounded-pill bg-surface-1 px-3 py-2">
-                            <Sun className="h-4 w-4 text-ink-muted" strokeWidth={1.9} />
+                        <div className="flex items-center gap-1 rounded-pill bg-surface-1 p-1">
+                            <span className={`flex items-center gap-1.5 rounded-pill px-2.5 py-1.5 text-[11px] ${focusActive ? 'bg-canvas font-semibold text-ink shadow-card-resting' : 'text-ink-muted'}`}>
+                                <CircleDashed className="h-4 w-4" strokeWidth={1.9} />
+                                Enfoque
+                            </span>
+                            <span className="flex items-center gap-1 px-2 text-[11px] text-ink-muted"><Flame className="h-3.5 w-3.5" /> 8 días</span>
                             <span className="relative h-6 w-6 rounded-full bg-gradient-to-br from-grad-violet to-grad-magenta">
                                 <span className="absolute -right-0.5 -top-0.5 h-2 w-2 rounded-full bg-accent" />
                             </span>
@@ -265,7 +268,7 @@ const AppDemo: React.FC = () => {
                                                 transition={{ duration: .16 }}
                                                 className="flex h-11 w-[138px] items-center justify-center gap-2 rounded-medium bg-surface-2 px-3 text-[10px] font-bold uppercase tracking-[0.04em] text-ink shadow-card-resting"
                                             >
-                                                Iniciar focus <Target className="h-4 w-4" strokeWidth={2} />
+                                                Iniciar enfoque <Target className="h-4 w-4" strokeWidth={2} />
                                             </motion.span>
                                             <span className="flex h-9 w-9 items-center justify-center rounded-medium bg-semantics-error text-white"><Trash2 className="h-4 w-4" strokeWidth={1.9} /></span>
                                         </div>

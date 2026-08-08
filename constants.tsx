@@ -2,6 +2,65 @@ import { BlogPost } from './types';
 
 export const BLOG_POSTS: BlogPost[] = [
   {
+    id: '19',
+    title: 'Zenth hoy: Agenda, Pizarras, Biblioteca y un Enfoque que te acompaña',
+    excerpt: 'La aplicación cambió de estructura: cuatro espacios claros, Enfoque global, Google Drive dentro de Biblioteca y un recorrido de 20 constelaciones.',
+    content: `
+Zenth creció y su navegación anterior dejó de contar bien lo que hace. La versión actual se organiza alrededor de cuatro espacios: **Agenda, Pizarras, Biblioteca y Mi ritmo**. Enfoque sigue siendo central, pero ya no es un lugar al que tienes que ir: se abre desde la cabecera y continúa mientras trabajas en cualquier pantalla.
+
+## Agenda: planificar el tiempo de verdad
+
+Agenda combina vistas de **día, semana y mes**. Puedes usar Mañana, Tarde y Noche para planificar con flexibilidad o definir una hora y duración cuando el compromiso lo exige. En la vista diaria, mover y redimensionar un bloque reprograma la tarea directamente.
+
+Las tareas pueden convertirse en eventos o reuniones e incluir repetición, avisos, etiquetas, pasos, imágenes, ubicación y enlaces de videollamada. Si conectas Google Calendar, eliges qué calendarios quieres ver y sus eventos aparecen en esta misma vista.
+
+## Pizarras: cada proyecto conserva su contexto
+
+Pizarras ya no es una lista general. Cada proyecto tiene sus propias columnas, su bandeja de captura y una regla explícita para decidir qué tareas también aparecen en Agenda.
+
+Cuando invitas a otras personas, la pizarra suma roles, presencia, comentarios, menciones, asignaciones, votos, aprobaciones y actividad en vivo. También puede tener una sala de voz y llamadas privadas con pantalla compartida.
+
+## Enfoque: una capa global
+
+El temporizador se abre desde la cabecera, no desde una sección. Puedes vincularlo con una tarea y seguir recorriendo Zenth sin perder la sesión. Hay duraciones de 15, 25, 45 y 60 minutos, una duración propia y un modo sin límite.
+
+La experiencia incluye descansos, objetivo diario, historial editable y una capa de sonido: lluvia, bosque, cafetería, olas, chimenea, ruido blanco o marrón, mezclas guardadas y música. Si entras a una llamada, Zenth pausa el audio de enfoque y lo recupera al salir.
+
+## Biblioteca: Zenth y Google Drive en un mismo explorador
+
+Las notas nativas siguen dentro de Zenth, con editor enriquecido, imágenes, etiquetas y asistencia de Zen. A su lado, Google Drive aporta la infraestructura documental.
+
+Al conectar tu cuenta puedes recorrer **Mi unidad, Recientes, Destacados y Compartidos conmigo**. Desde Nuevo puedes:
+
+- crear un Documento de Google;
+- crear una Hoja, Presentación o Formulario;
+- crear una carpeta real de Drive;
+- subir archivos o elegirlos con Google Picker;
+- grabar una nota de voz directamente en Drive.
+
+Zenth ofrece editores integrados para trabajar sin abandonar la aplicación. Cuando necesitas colaboración simultánea completa o herramientas avanzadas de Google, **Abrir en Google** lleva al editor nativo.
+
+## Mi ritmo: más recorrido, menos presión
+
+Mi ritmo reúne actividad, tareas completadas, minutos de enfoque, rachas, bienestar y perfil. El recorrido pasó de diez rangos genéricos a **20 niveles inspirados en constelaciones**. Cada nivel exige cuatro cosas: XP, mejor racha, tareas completadas y minutos de enfoque.
+
+También hay **24 logros** repartidos entre ejecución, constancia, enfoque y recorrido. Los niveles alcanzados son permanentes: una pausa no borra lo que ya construiste.
+
+## Ajustes que reflejan cómo trabajas
+
+Los ajustes se reorganizaron en General, Apariencia, Productividad, Enfoque, Notificaciones, Pizarras, Integraciones, Cuenta y Apoyar. Incluyen búsqueda, tema del sistema, Claro, Oscuro o Zen, densidad, ancho del contenido, objetivos de enfoque y control independiente de la relación entre Agenda y Pizarras.
+
+La idea de fondo no cambió: Zenth no quiere empujarte a hacer más por inercia. Quiere darte una imagen clara de tu tiempo, tus proyectos y tu energía para que decidas mejor.
+
+**[Abre la versión actual de Zenth](/app) y recorre el nuevo espacio.**
+`,
+    author: 'Matías Zenth',
+    date: '8 Aug, 2026',
+    imageUrl: 'https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&q=80&w=1200',
+    category: 'Lanzamiento',
+    readTime: '8 min lectura'
+  },
+  {
     id: '18',
     title: 'Tu pizarra ahora habla: sala del equipo y llamadas privadas',
     excerpt: 'Cada pizarra compartida tiene ahora una sala de voz siempre abierta para sus integrantes, con pantalla compartida y llamadas privadas. Todo sin salir de Zenth.',
@@ -14,7 +73,7 @@ No hay nada que crear ni que configurar. La sala se descubre desde el desplegabl
 
 Desde ese mismo desplegable puedes **llamar en privado** a cualquiera con quien compartas pizarra. Le suena el aviso y, si acepta, ya están hablando.
 
-Y una vez dentro, la conversación no te ata a la pantalla: puedes seguir moviéndote por Zenth —Hoy, Entradas, Enfoque— y el audio continúa. Minimiza el panel o escóndelo del todo: la llamada sigue.
+Y una vez dentro, la conversación no te ata a la pantalla: puedes seguir moviéndote por Zenth —Agenda, Pizarras, Biblioteca o Mi ritmo— y el audio continúa. Minimiza el panel o escóndelo del todo: la llamada sigue.
 
 ## Antes de entrar: preparar audio
 
@@ -103,70 +162,57 @@ Nada. Si nunca invitas a nadie, tus pizarras siguen siendo privadas, con un solo
   },
   {
     id: '16',
-    title: 'Notas, tablas, archivos y voz: Entradas se convierte en tu espacio de trabajo',
-    excerpt: 'Las Entradas dejaron de ser un bloc de notas. Ahora también guardan hojas de cálculo, archivos subidos y notas de voz, todo organizado en carpetas.',
+    title: 'De Entradas a Biblioteca: notas Zenth y Google Drive en un mismo lugar',
+    excerpt: 'Biblioteca reúne tus notas nativas con Mi unidad, documentos de Workspace, carpetas, archivos y notas de voz guardadas en Google Drive.',
     content: `
-Cuando lancé las Entradas, la idea era simple: un sitio para pensar más largo de lo que cabe en una tarea. Funcionó, pero se quedó corta enseguida. La gente empezó a pedir lo obvio: *"¿y el PDF del contrato dónde lo guardo?"*, *"¿puedo llevar un pequeño presupuesto?"*, *"tengo la idea en la cabeza pero no tiempo de escribirla"*.
+Biblioteca es la evolución de Entradas. Sigue teniendo un espacio nativo para escribir, pero ahora también funciona como un explorador de Google Drive: el material de un proyecto puede vivir donde ya lo tienes, sin obligarte a mantener copias en dos sistemas.
 
-Así que Entradas dejó de ser una sección de notas y pasó a ser un espacio de trabajo. Ahora, al crear algo nuevo, eliges **qué** estás creando.
+## Notas nativas de Zenth
 
-## 1. Notas
+Las notas conservan el editor enriquecido con títulos, listas, citas, código, resaltado, separadores, tipografías e imágenes que puedes pegar o arrastrar. Zen puede mejorar, resumir o expandir el texto que selecciones, siempre bajo una acción explícita.
 
-Lo que ya conocías, intacto: editor de texto enriquecido con títulos, listas, citas, código, resaltador y separadores. Más de diez tipografías para que el aspecto del texto acompañe a su contenido, portadas con emoji e imágenes que se pegan con Ctrl+V y se redimensionan haciendo clic.
+Una tarea que necesita más contexto puede usar **Expandir a nota** y mantener el vínculo con su origen.
 
-## 2. Tablas
+## Drive dentro de Biblioteca
 
-Una hoja de cálculo de verdad dentro de tu entrada. Escribes \`=SUMA(A1:A10)\` —o \`=SUM(A1:A10)\`, da lo mismo: las fórmulas son **bilingües** y aceptan comas o punto y coma— y el resultado se recalcula solo. Y si BUSCARV se te resiste, el explorador de funciones tiene buscador y descripciones en español e inglés.
+Al conectar Google Drive aparecen **Mi unidad, Recientes, Destacados y Compartidos conmigo**. El resumen combina esos elementos con tus notas Zenth y puedes cambiar entre cuadrícula y lista, ordenar o filtrar por tipo.
 
-Se comporta como esperas de una hoja de cálculo:
+Desde el menú Nuevo puedes crear:
 
-- **Deshacer y rehacer** de verdad (Ctrl+Z / Ctrl+Y), para probar sin miedo.
-- **Insertar y eliminar filas y columnas** desde el encabezado: las fórmulas se ajustan solas.
-- **Copiar y pegar con el exterior:** lo que copias en Excel o Google Sheets se pega aquí directamente, y las copias internas conservan el formato.
-- Selección por rangos, ordenación, barra de fórmulas y guardado automático.
-- Formato de celda —negrita, cursiva, subrayado, alineación, color de texto y de relleno— y formatos numéricos de moneda, porcentaje y decimales.
-- Exportación a CSV, lista para abrir en cualquier otra herramienta.
+- un Documento de Google;
+- una Hoja de cálculo;
+- una Presentación;
+- un Formulario;
+- una carpeta real de Drive;
+- un archivo subido o elegido con Google Picker;
+- una nota de voz grabada directamente en Drive.
 
-Y la tabla crece mientras escribes: la cuadrícula se dibuja hasta el borde de la ventana y las celdas solo pasan a existir cuando pones algo en ellas.
+## Editar sin perder el contexto
 
-Un detalle técnico que se nota en la práctica: las tablas viven enteras en la base de datos, no en el almacenamiento de archivos. Es decir, **no consumen tu cuota**. Puedes tener todas las que quieras.
+Zenth incluye editores integrados para documentos, hojas, presentaciones y formularios. Sirven para el trabajo cotidiano sin abandonar Biblioteca. El botón **Abrir en Google** queda disponible cuando necesitas todas las funciones nativas, colaboración simultánea o una maquetación más avanzada.
 
-## 3. Archivos
+## Un archivo, no dos copias
 
-Sube PDF, imágenes o documentos y consúltalos desde la propia aplicación, sin descargarlos primero. El contrato, la factura, la captura del error: donde vive el resto del proyecto, no en una carpeta de descargas que nunca vuelves a abrir.
+Los elementos de Google siguen viviendo en tu Drive. Mover, duplicar, destacar, compartir o enviar a la papelera desde Zenth modifica ese archivo real. La cuota que ves también es la de tu cuenta de Google.
 
-## 4. Notas de voz
+Las notas nativas continúan bajo la privacidad y la papelera de Zenth; los documentos de Google usan sus permisos y la papelera de Drive. Esa frontera es intencional y siempre se muestra en la interfaz.
 
-Grabas desde el micrófono, con medidor de nivel para saber que está entrando audio, y la nota queda guardada junto a todo lo demás. Para cuando hablar es más rápido que escribir, que es más veces de las que reconocemos.
-
-## 5. Carpetas
-
-Y como ahora hay cuatro tipos de cosa conviviendo, hacían falta **carpetas**. Agrupa por proyecto, por cliente o por lo que tenga sentido para ti, arrastrando elementos dentro. Las etiquetas siguen funcionando en paralelo, para lo que cruza varias carpetas.
-
-El buscador global mira dentro del contenido, no solo en los títulos.
-
----
-
-## Sigue estando conectado con tus tareas
-
-Nada de esto es un compartimento estanco. Desde cualquier tarea puedes usar **Expandir a nota**: esa línea de "Planificar el viaje" se convierte en una entrada completa —con su presupuesto en una tabla, el PDF de los billetes y la nota de voz donde te acordaste de algo en el coche— sin perder el vínculo con la lista de la que salió.
-
-**[Abre Entradas en Zenth](/app) y crea la primera tabla.**
+**[Abre Biblioteca en Zenth](/app) y conecta tu espacio documental.**
 `,
     author: 'Matías Zenth',
-    date: '22 Jul, 2026',
+    date: '8 Aug, 2026',
     imageUrl: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&q=80&w=800',
     category: 'Funcionalidad',
-    readTime: '6 min lectura'
+    readTime: '7 min lectura'
   },
   {
     id: '17',
-    title: 'Tu Google Calendar dentro de Hoy',
-    excerpt: 'Conecta tu calendario con permiso de solo lectura y ve tus eventos junto a tus tareas. Zenth mira tu agenda, pero no la toca.',
+    title: 'Tu Google Calendar dentro de Agenda',
+    excerpt: 'Conecta Calendar con permiso de solo lectura, elige qué calendarios ver y decide de forma explícita cuáles llevar a una pizarra.',
     content: `
 Tener las reuniones en un sitio y las tareas en otro no es organización, es contabilidad doble. Pasas el día calculando mentalmente si lo que te queda por hacer cabe entre dos llamadas.
 
-Ya no hace falta: puedes conectar tu **Google Calendar** y ver tus eventos en la pantalla de Hoy, al lado de tus tareas.
+Ya no hace falta: puedes conectar tu **Google Calendar** y ver sus eventos en Agenda, al lado de tus tareas.
 
 ## Solo lectura
 
@@ -182,30 +228,30 @@ A partir de ahí la sincronización se mantiene sola y se actualiza cada cinco m
 
 ## Los eventos no invaden tus pizarras
 
-Hay otro límite claro: los eventos importados aparecen **solo en Hoy**. No entran en ninguna pizarra por su cuenta, porque nadie quiere que su tablero de proyecto se llene de cumpleaños y recordatorios del dentista.
+Hay otro límite claro: los eventos importados aparecen **solo en Agenda**. No entran en ninguna pizarra por su cuenta, porque nadie quiere que su tablero de proyecto se llene de cumpleaños y recordatorios del dentista.
 
-Si en algún caso concreto sí quieres llevarlos, existe la acción **Llevar eventos a Todo**: eliges los calendarios, la pizarra de destino y las listas, y confirmas. Solo a partir de ese momento esos eventos —y sus actualizaciones futuras— pertenecen a esa pizarra. Y puedes deshacerlo.
+Si en algún caso concreto sí quieres llevarlos, existe la acción **Llevar a pizarra**: eliges los calendarios y el destino, y confirmas. Solo a partir de ese momento esos eventos pertenecen también a esa pizarra. La conexión se puede retirar después.
 
-## Desconectar es limpio
+## Pausar y desconectar
 
-Si desconectas la cuenta, los eventos importados se van con ella. Ningún residuo, ninguna copia olvidada en un rincón de la base de datos.
+Puedes pausar la actualización sin perder la selección. Si desconectas la cuenta, Zenth revoca el token disponible y deja de leer cambios futuros. Los eventos que ya se importaron no se borran automáticamente, para evitar que una desconexión accidental elimine información de Agenda o de una pizarra.
 
 **[Conecta tu calendario en Zenth](/app) y deja de hacer contabilidad doble.**
 `,
     author: 'Matías Zenth',
-    date: '15 Jul, 2026',
+    date: '8 Aug, 2026',
     imageUrl: 'https://images.unsplash.com/photo-1611224923853-80b023f02d71?auto=format&fit=crop&q=80&w=800',
     category: 'Integraciones',
     readTime: '5 min lectura'
   },
   {
     id: '14',
-    title: 'Más allá de las listas: Presentamos Entradas, tu nuevo lienzo de pensamientos en Zenth',
-    excerpt: 'Descubre cómo las Notas Zen transforman Zenth de una lista de tareas a un ecosistema completo para tu creatividad y reflexión profunda.',
+    title: 'El corazón nativo de Biblioteca: notas para pensar más allá de una tarea',
+    excerpt: 'Las notas de Zenth conservan un editor enriquecido, imágenes, identidad visual, Zen AI y un vínculo directo con tus tareas.',
     content: `
-¿Alguna vez has sentido que una simple línea de texto no es suficiente para contener una gran idea? En Zenth, sabemos que la productividad no solo se trata de tachar tareas, sino de cultivar pensamientos. Por eso, presentamos **Entradas (Notas Zen)**, un espacio de lienzo infinito diseñado para que tus ideas respiren.
+¿Alguna vez has sentido que una línea de tarea no alcanza para contener una idea? Las **notas nativas de Biblioteca** existen para ese momento: pensar, documentar y desarrollar sin convertir cada párrafo en un pendiente.
 
-Mientras que las Listas se enfocan en la ejecución del "hacer", las Entradas nacen para la reflexión, la creatividad y el registro profundo. Es el puente entre tu lista de pendientes y tu jardín digital de conocimiento.
+Mientras que Agenda y Pizarras se enfocan en ejecutar, Biblioteca también guarda el contexto que hace posible ese trabajo.
 
 ## 1. Zen Writing: Escritura sin fricciones
 Hemos diseñado un **Editor Rich-Text Nativo** que se siente instantáneo. Sin menús complicados que se interpongan en tu camino.
@@ -230,20 +276,20 @@ Olvídate de procesos de subida tediosos. En las Notas Zen, las imágenes fluyen
 
 ---
 
-## 4. El Poder del Ecosistema: "Expandir a Nota"
+## 4. El vínculo con tus tareas: "Expandir a nota"
 Esta es la función que lo cambia todo. ¿Tienes una tarea que se está volviendo compleja? Con un solo clic, puedes **Expandirla a una nota**. 
 
 Esa simple tarea de "Planificar viaje" se convierte instantáneamente en una Entrada completa donde puedes pegar mapas, itinerarios, presupuestos y reflexiones, manteniendo el vínculo con tu lista original.
 
-## 5. Seguridad y Enfoque
-Tus notas se sincronizan automáticamente con **Supabase**, asegurando que nunca pierdas una sola palabra. Además, el **Modo de Enfoque** expande el editor a pantalla completa con un elegante desenfoque de fondo, eliminando cualquier distracción del mundo exterior.
+## 5. Sincronización y asistencia
+Tus notas se sincronizan con tu cuenta mediante Supabase. Si seleccionas un fragmento, **Zen AI** puede mejorarlo, resumirlo o expandirlo, pero solo cuando tú lo pides.
 
 ## Conclusión
-Las Entradas no son solo notas; son el lugar donde el caos se convierte en estructura. Es tu lienzo para crecer, aprender y recordar.
+Las notas son la parte nativa de Biblioteca: el lugar donde una tarea breve puede crecer hasta convertirse en documentación útil.
 
-> **Nota de actualización:** desde entonces, las Entradas han crecido bastante más. Ahora también admiten tablas con fórmulas, archivos subidos, notas de voz y carpetas para organizarlo todo. Lo cuento en [Notas, tablas, archivos y voz](/blog/16).
+> **Actualización:** Biblioteca ahora también integra Google Drive y Workspace. Puedes crear documentos, hojas, presentaciones, formularios, carpetas, archivos y notas de voz sin abandonar Zenth. Lo cuento en [De Entradas a Biblioteca](/blog/16).
 
-**[Prueba las Entradas en Zenth](/app) y empieza a escribir tu historia hoy mismo.**
+**[Abre Biblioteca en Zenth](/app) y empieza una nota.**
 `,
     author: 'Matías Zenth',
     date: '25 Feb, 2026',
@@ -279,20 +325,20 @@ Productividad sin salud mental es agotamiento. Con nuestro Mood Tracker, puedes 
 ### 5. Una interfaz que no compite por tu atención
 Zenth es sobrio: fondo neutro, una sola tipografía, jerarquía marcada por el tamaño y no por diez colores distintos. El color aparece donde significa algo —tus etiquetas, tu estado de ánimo, la acción activa— y en ningún otro sitio.
 
-Puedes elegir entre tres temas (Claro, Oscuro y Zen, este último con un fondo cálido más suave por la noche), el color de acento que prefieras y un modo compacto si quieres ver más cosas de una vez.
+Puedes seguir el tema del sistema o elegir Claro, Oscuro y Zen —este último con un fondo cálido—, activar el modo compacto y ajustar el ancho del área de trabajo. El azul es el acento estable de la interfaz; los colores libres quedan para etiquetas, listas y datos.
 
 ### 6. Vista Panorámica de tu Vida (Pixel View)
 ¿Cómo fue tu año? Con nuestra vista de Pixel View, cada día es un punto de color en tu lienzo anual. Identifica patrones, celebra meses de alta energía y planifica tu futuro con una perspectiva que las listas tradicionales no pueden ofrecer.
-
-![Vista de la aplicación](/blog/appview.png)
 
 ---
 
 ## Y todo lo que ha llegado después:
 
-*   **Pizarras compartidas:** invita a otras personas a un tablero, con roles de administrador, miembro y observador.
-*   **Entradas:** notas, tablas con fórmulas, archivos y notas de voz, organizados en carpetas.
-*   **Google Calendar:** tus eventos junto a tus tareas, con permiso de solo lectura.
+*   **Agenda y Pizarras:** planifica el tiempo sin mezclarlo por defecto con cada proyecto.
+*   **Biblioteca + Drive:** notas nativas, documentos de Workspace, carpetas, archivos y grabaciones en un mismo explorador.
+*   **Enfoque global:** temporizador, cronómetro, descansos, objetivo diario, historial y sonido desde cualquier pantalla.
+*   **Google Calendar:** tus eventos junto a tus tareas en Agenda, con permiso de solo lectura.
+*   **Mi ritmo:** 20 niveles de constelaciones, 24 logros, rachas, actividad y ánimo.
 *   **Sincronización total:** tus datos te acompañan en móvil y escritorio sin que hagas nada.
 *   **Rutinas automáticas:** configura tareas recurrentes y deja de recordarlas.
 
@@ -310,8 +356,8 @@ Puedes elegir entre tres temas (Claro, Oscuro y Zen, este último con un fondo c
   },
   {
     id: '2',
-    title: 'Los diez niveles de Zenth: por qué no se pueden acelerar',
-    excerpt: 'El nivel no mide cuánto has hecho hoy, mide cuánto llevas sosteniéndolo. Cuatro requisitos a la vez y ningún atajo posible.',
+    title: 'Las 20 constelaciones de Zenth: un recorrido pensado para años',
+    excerpt: 'El nivel no mide una tarde intensa: combina XP, mejor racha, tareas y enfoque a lo largo de un mapa de 20 constelaciones.',
     content: `
 Casi todos los sistemas de puntos de las apps de productividad tienen el mismo agujero: si acumulas puntos, subes. Y como los puntos vienen de completar tareas, basta con partir el trabajo en trozos ridículamente pequeños para inflar el marcador. El sistema premia a quien mejor lo engaña.
 
@@ -330,22 +376,32 @@ El cuarto es el que cierra la puerta a los atajos: los minutos de enfoque solo s
 
 ---
 
-## El mapa completo
+## El mapa completo de constelaciones
 
 | Nivel | Nombre | XP | Racha | Tareas | Enfoque |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| 1 | Punto de Partida | 0 | — | — | — |
-| 2 | Ritmo Estable | 250 | 3 días | 15 | 75 min |
-| 3 | Constancia | 750 | 7 días | 40 | 250 min |
-| 4 | Tracción | 1.750 | 14 días | 75 | 500 min |
-| 5 | Sistema Sólido | 3.500 | 30 días | 120 | 10 h |
-| 6 | Dominio | 6.000 | 50 días | 200 | 25 h |
-| 7 | Flujo Sostenido | 10.000 | 75 días | 300 | 40 h |
-| 8 | Claridad Estratégica | 15.000 | 100 días | 450 | 60 h |
-| 9 | Maestría | 22.000 | 180 días | 600 | 80 h |
-| 10 | Zenth | 30.000 | 365 días | 800 | 100 h |
+| 1 | Triángulo | 0 | — | — | — |
+| 2 | Lira | 250 | 3 días | 15 | 75 min |
+| 3 | Casiopea | 750 | 7 días | 40 | 250 min |
+| 4 | Cruz del Sur | 1.750 | 14 días | 75 | 500 min |
+| 5 | Cisne | 3.500 | 30 días | 120 | 10 h |
+| 6 | Osa Menor | 6.000 | 50 días | 200 | 25 h |
+| 7 | Osa Mayor | 10.000 | 75 días | 300 | 40 h |
+| 8 | Orión | 15.000 | 100 días | 450 | 60 h |
+| 9 | Escorpio | 22.000 | 180 días | 600 | 80 h |
+| 10 | Corona Boreal | 30.000 | 365 días | 800 | 100 h |
+| 11 | Cochero | 38.000 | 450 días | 1.000 | 125 h |
+| 12 | Boyero | 47.000 | 550 días | 1.250 | 150 h |
+| 13 | Andrómeda | 57.000 | 660 días | 1.500 | 183 h |
+| 14 | Perseo | 69.000 | 780 días | 1.800 | 216 h |
+| 15 | Géminis | 83.000 | 912 días | 2.200 | 258 h |
+| 16 | Tauro | 99.000 | 1.050 días | 2.600 | 300 h |
+| 17 | León | 117.000 | 1.200 días | 3.100 | 350 h |
+| 18 | Pegaso | 138.000 | 1.370 días | 3.700 | 408 h |
+| 19 | Hércules | 162.000 | 1.580 días | 4.400 | 475 h |
+| 20 | Centauro | 190.000 | 1.825 días | 5.200 | 550 h |
 
-Los nombres no son rangos de videojuego ni títulos honoríficos. Cada uno describe **lo que ya está pasando** cuando llegas ahí: en *Ritmo Estable* tu ritmo tiene una base sobre la que crecer; en *Sistema Sólido* tus hábitos trabajan juntos como una estructura; en *Maestría*, el rendimiento y el equilibrio empiezan a operar a la vez.
+Los primeros diez niveles construyen el primer año. Los siguientes diez estiran el recorrido hasta cinco años: no están pensados para completarse rápido, sino para que Zenth siga teniendo horizonte cuando la organización ya forma parte de tu vida.
 
 ---
 
@@ -359,7 +415,11 @@ Por eso el cálculo usa tu **mejor racha histórica**, no la actual: el sistema 
 
 ## Cómo ver qué te falta
 
-En **Objetivos** está la ruta de progreso: los diez niveles en una lista, con tu posición actual marcada y, en cada uno, los cuatro requisitos exactos. No hay barra de progreso opaca ni "sigue así": si te faltan 40 minutos de enfoque para el siguiente nivel, lo dice.
+En **Mi ritmo** está la ruta completa: las 20 constelaciones, tu posición actual y los cuatro requisitos exactos. No hay una barra opaca ni un «sigue así»: si faltan 40 minutos de enfoque para la siguiente, lo dice.
+
+## Veinticuatro logros paralelos
+
+El nivel cuenta el recorrido largo. Los **24 logros** reconocen hitos concretos de ejecución, constancia, enfoque y recorrido: desde la primera tarea o la primera sesión hasta cinco años de racha, 5.000 tareas o 500 horas de enfoque. Los que todavía no alcanzaste muestran su progreso en lugar de esconderse.
 
 ## Conclusión
 
@@ -368,10 +428,10 @@ Este sistema no está pensado para que compitas con nadie ni para que te enganch
 **[Mira tu ruta de progreso en Zenth](/app).**
 `,
     author: 'Matías Zenth',
-    date: '15 Feb, 2026',
+    date: '8 Aug, 2026',
     imageUrl: 'https://images.unsplash.com/photo-1564349683136-77e08dba1ef7?auto=format&fit=crop&q=80&w=800',
     category: 'Gamificación',
-    readTime: '8 min lectura'
+    readTime: '10 min lectura'
   },
   {
     id: '3',
@@ -383,8 +443,6 @@ En Zenth, creemos que la productividad no es solo tachar tareas, sino también e
 ## ¿Qué es el Calendario de Píxeles?
 
 Es una representación visual de tu año, donde cada día es un pequeño círculo (un "píxel") de color. Al final del año, tendrás un mosaico vibrante que cuenta la historia de tus emociones, permitiéndote identificar patrones: ¿Eres más productivo cuando estás "Bien"? ¿Hay meses del año donde tu energía tiende a ser más "Baja"?
-
-![Calendario de Emociones](/blog/emotioncalendar.png)
 
 ---
 
@@ -413,6 +471,9 @@ La pantalla principal te permite navegar por años y ver los 12 meses simultáne
 ### 3. Sincronización en la Nube
 Tus estados de ánimo se guardan de forma segura en tu cuenta. Esto significa que puedes empezar a registrar en la web y ver tu progreso en cualquier otro dispositivo donde uses Zenth.
 
+### 4. Balance mensual
+Dentro de **Mi ritmo**, el balance resume qué estado apareció con más frecuencia y cuántos días registraste. Es una lectura descriptiva, no un diagnóstico ni una puntuación de rendimiento.
+
 ---
 
 ## Cómo Sacarle el Máximo Provecho
@@ -425,7 +486,7 @@ Tus estados de ánimo se guardan de forma segura en tu cuenta. Esto significa qu
 
 El calendario de estados de ánimo es tu espejo emocional en Zenth. Es una invitación a la pausa, a la reflexión y, sobre todo, a entender que para ser productivos, primero debemos estar bien con nosotros mismos.
 
-**¿Ya elegiste tu color de hoy? [Inicia sesión en Zenth](/app) y deja tu marca. ✨**
+**¿Ya elegiste tu color de hoy? [Abre Mi ritmo en Zenth](/app) y deja tu registro.**
 `,
     author: 'Matías Zenth',
     date: '10 Feb, 2026',
@@ -450,16 +511,16 @@ La mayoría de nosotros hemos caído en la trampa: forzarnos a trabajar al 100% 
 
 ## La Solución Zenth: La Intersección de Tareas y Emociones
 
-Zenth es una de las pocas herramientas que integra tu **bienestar emocional** en el núcleo de tu flujo de trabajo. Aquí te explicamos cómo lo logramos:
+Zenth integra un registro sencillo de **bienestar emocional** junto al flujo de trabajo. No diagnostica ni interpreta tu salud: te ayuda a conservar un historial para tu propia reflexión.
 
-### 1. El Registro de Estado de Ánimo como Pausa Obligatoria
-Antes de sumergirte en tu lista de "Hoy", Zenth te invita a registrar tu estado de ánimo. No es una estadística vacía; es una forma de autoconocimiento. Al elegir un color —desde el vibrante púrpura de "Excelente" hasta el suave rojo de "Mal"— estás validando tu estado actual. 
+### 1. Un recordatorio opcional
+Zenth puede preguntarte cómo estuvo el día. Puedes ocultar ese recordatorio en Ajustes y registrar el ánimo cuando quieras desde **Mi ritmo**. Al elegir un estado —de Excelente a Mal— creas un punto de referencia para mirar más adelante.
 
 ### 2. El Espejo del Calendario de Píxeles
 Al final del mes, tu calendario de estados de ánimo te cuenta una historia que tus estadísticas de tareas no pueden. ¿Ves una mancha roja que coincide con una semana de mucho trabajo? Zenth te ayuda a ver que ese cansancio no es pereza, es una respuesta natural de tu cuerpo.
 
 ### 3. Ajuste de Carga Basado en la Energía
-Zenth soluciona el burnout a través de su organización flexible. En un día "Excelente", puedes atacar tus **Grandes Metas (Big Goals)**. En un día donde tu humor es "Bajo", Zenth te da la flexibilidad de mover tareas a "Mañana" o "En cualquier momento" sin penalizaciones agresivas.
+Zenth no puede prevenir ni tratar el burnout, pero una organización flexible puede ayudarte a ajustar expectativas. En un día de mucha energía quizá avances una gran meta; en uno bajo puedes reprogramar tareas en Agenda sin recibir castigos ni perder el nivel alcanzado.
 
 ---
 
@@ -467,15 +528,15 @@ Zenth soluciona el burnout a través de su organización flexible. En un día "E
 
 Para que Zenth sea tu aliado y no tu juez, te recomendamos seguir estas tres prácticas:
 
-*   **Escucha a tus Píxeles:** Si notas que llevas varios días en color "Bajo" o "Mal", Zenth te está dando permiso visual para descansar. Reduce tu lista de "Hoy" a lo mínimo indispensable.
+*   **Escucha el patrón:** Si notas varios días en «Bajo» o «Mal», tómalo como una señal para revisar la carga, descansar o pedir apoyo si lo necesitas.
 *   **Relaciona Esfuerzo y Ánimo:** Observa tus rachas. A veces, forzar una racha de 30 días cuando no te sientes bien es contraproducente. En Zenth, valoramos la racha honesta, no la racha forzada.
-*   **Usa el Modo Enfoque para lo esencial:** En días de baja energía, no trates de hacerlo todo. Elige una sola Gran Meta, activa el temporizador de enfoque y, cuando termines, cierra la aplicación. La calidad importa más que la cantidad.
+*   **Usa Enfoque para lo esencial:** En días de baja energía, elige una sola tarea, abre el temporizador global y decide de antemano cuándo terminar. La calidad importa más que la cantidad.
 
 ## Conclusión: Eres un Humano, No una Máquina
 
 El éxito no es terminar cien tareas en un estado de agotamiento absoluto. El éxito es terminar el día con tus metas cumplidas y tu paz mental intacta. Zenth está diseñado para recordarte que **tú eres lo más importante de tu sistema de productividad.**
 
-**No esperes a estar agotado para empezar a escucharte. [Entra en Zenth](/app), marca tu estado de ánimo y trabajemos juntos, respetando tu ritmo. ✨**
+**[Entra en Zenth](/app), abre Mi ritmo y empieza a observar tu propio patrón.**
 `,
     author: 'Matías Zenth',
     date: '17 Feb, 2026',
@@ -496,7 +557,7 @@ En Zenth, hemos diseñado un sistema para romper este ciclo: el **Método de la 
 
 Estar ocupado es fácil. Responder correos, organizar carpetas o cambiar colores de un documento son tareas que nos dan una satisfacción inmediata pero que rara vez cambian nuestra vida o carrera. La verdadera productividad requiere lo que el autor Cal Newport llama **Deep Work** (Trabajo Profundo): la capacidad de concentrarse sin distracciones en una tarea cognitivamente exigente.
 
-Zenth soluciona esto a través de dos herramientas clave: las **Big Goals** y el **Focus Mode**.
+Zenth responde con dos herramientas conectadas: las **grandes metas** y **Enfoque**.
 
 ---
 
@@ -509,34 +570,35 @@ En Zenth, no todas las tareas son iguales. Cuando creas una tarea, tienes la opc
 
 ---
 
-## Focus Mode: Blindaje contra distracciones
+## Enfoque: una capa que te acompaña
 
-Una Gran Meta sin enfoque es solo un deseo. Por eso, Zenth integra un **Temporizador de Enfoque (Focus Mode)** diseñado para proteger tu tiempo.
+Una gran meta sin tiempo protegido es solo una intención. Por eso, Zenth integra un temporizador global que se abre desde la cabecera y continúa aunque cambies de pantalla.
 
-### 1. Inmersión Total
-Al activar el modo enfoque, Zenth se convierte en un entorno minimalista que te ayuda a mantener la vista en el objetivo.
+### 1. Una sola misión
+Puedes iniciar Enfoque desde una tarea o escribir una misión libre. La sesión queda vinculada para que luego puedas revisar cuánto tiempo recibió ese trabajo.
 
 ### 2. Métricas de Valor
 No contamos cuántas veces abriste la app; contamos cuántos **Minutos de Enfoque** has acumulado. Esta es la métrica real de tu progreso personal.
 
-### 3. El Camino a la Maestría
-Muchos de los niveles superiores en Zenth (como "Oráculo del Tiempo" o "Universo Expandido") requieren que hayas acumulado decenas de horas de enfoque total. No puedes "jugar" con el sistema; tienes que dedicar el tiempo.
+### 3. Sonido, descansos e historial
+Puedes mezclar sonidos ambientales, guardar combinaciones, elegir música y terminar con descansos de 5, 10 o 15 minutos. El historial permite corregir la duración o borrar una sesión si registraste algo mal.
 
-![Focus Mode](/blog/focus.png)
+### 4. El camino de constelaciones
+Los niveles superiores exigen decenas o cientos de horas de enfoque acumulado. El recorrido llega hasta Centauro, nivel 20, con una meta de 550 horas: no se puede completar inflando una lista en una tarde.
 
 ---
 
 ## Cómo aplicar el Método de la Gran Meta hoy mismo
 
 *   **Define tu 1-3:** Al empezar el día, identifica de 1 a 3 tareas que realmente muevan la aguja. Márcalas como "Grandes Metas" en Zenth.
-*   **Usa el temporizador:** No intentes trabajar en tu Gran Meta mientras saltas a WhatsApp o redes sociales. Dale a tu Gran Meta 25 o 50 minutos de enfoque total en Zenth.
+*   **Usa el temporizador:** No intentes trabajar en tu gran meta mientras saltas entre mensajes. Dale 25, 45 o los minutos que necesite, o usa el modo sin duración.
 *   **Cierra el día:** Si terminaste tus Grandes Metas pero te quedaron 5 tareas pequeñas sin hacer, considérate victorioso. La calidad ha ganado a la cantidad.
 
 ## Conclusión
 
-Zenth no se trata de hacer más cosas en menos tiempo; se trata de hacer las cosas correctas con toda tu atención. Al priorizar tus **Grandes Metas** y protegerlas con el **Modo Enfoque**, estás entrenando a tu cerebro para alcanzar niveles de excelencia que la mayoría de la gente nunca llega a tocar.
+Zenth no se trata de hacer más cosas en menos tiempo; se trata de elegir lo importante y reservarle atención. Las grandes metas destacan la prioridad y Enfoque te ayuda a registrar el tiempo que realmente le dedicaste.
 
-**¿Cuál es tu Gran Meta de hoy? [Inicia sesión en Zenth](/app) y empieza tu sesión de enfoque. ✨**
+**¿Cuál es tu gran meta de hoy? [Inicia sesión en Zenth](/app) y abre Enfoque desde la cabecera.**
 `,
     author: 'Matías Zenth',
     date: '17 Feb, 2026',
@@ -546,31 +608,30 @@ Zenth no se trata de hacer más cosas en menos tiempo; se trata de hacer las cos
   },
   {
     id: '6',
-    title: 'La Fatiga de Decisión: Por qué Steve Jobs vestía siempre igual',
-    excerpt: '¿Te sientes agotado antes de empezar a trabajar? Descubre cómo la "Fatiga de Decisión" drena tu voluntad y cómo Zenth simplifica tu vida.',
+    title: 'Fatiga de decisión: cómo reducir elecciones pequeñas sin rigidizar tu día',
+    excerpt: 'Tomar decisiones repetidas consume atención. Zenth reduce elecciones operativas con bloques flexibles, vistas claras y rutinas configurables.',
     content: `
-¿Por qué Barack Obama solo usa trajes azules o grises? ¿Por qué Steve Jobs siempre llevaba el mismo cuello de tortuga negro? La respuesta no es falta de estilo, es **economía cognitiva**.
+Cuando cada paso exige decidir dónde anotar, cuándo hacer, qué prioridad usar y en qué herramienta continuar, una parte importante de la atención se va antes de empezar. A esa sensación acumulada se la suele llamar **fatiga de decisión**.
 
-Los psicólogos lo llaman **Fatiga de Decisión**.
+## No es una batería literal
 
-## Tu Voluntad es una Batería Limitada
-
-Cada decisión que tomas a lo largo del día, desde "¿qué desayuno?" hasta "¿qué tarea hago primero?", consume una cantidad finita de glucosa y neurotransmisores en tu corteza prefrontal.
-
-Al llegar a la tarde, si has tomado cientos de micro-decisiones irrelevantes, tu cerebro entra en modo "ahorro de energía". Esto se manifiesta como procrastinación o impulsividad (comer mal, no ir al gimnasio).
+La idea popular de que la voluntad funciona como una reserva fija de glucosa es una simplificación discutida. Lo útil en la práctica es más modesto: demasiadas elecciones, interrupciones y cambios de contexto pueden aumentar la carga mental. Diseñar valores predeterminados y rutinas reduce ese trabajo administrativo.
 
 ## Cómo Zenth elimina la Fatiga de Decisión
 
 Zenth está diseñado para reducir el número de decisiones triviales que debes tomar para ser productivo:
 
-### 1. Bloques de Energía Predefinidos
-En lugar de preguntarte "¿a qué hora exacta hago esto?", Zenth te ofrece tres cubos simples: **Mañana, Tarde, Noche**. Clasificar es más rápido que agendar. Tu cerebro descansa.
+### 1. Precisión solo cuando hace falta
+Agenda permite usar **Mañana, Tarde y Noche** sin elegir una hora exacta, pero también acepta inicio y duración cuando el compromiso sí lo necesita.
 
-### 2. La Pregunta Única
-Al abrir la app, Zenth no te muestra todo tu backlog de 100 tareas. Te muestra "Hoy". Y dentro de Hoy, te anima a elegir solo **1-3 Grandes Metas**. Simplificamos el menú para que puedas elegir el plato principal sin agobio.
+### 2. Contextos separados
+Agenda responde qué cabe en el tiempo. Pizarras conserva el backlog de cada proyecto. La bandeja permite capturar primero y clasificar después, sin obligarte a resolver todo en el momento.
 
-### 3. Rutinas Automatizadas
-Las tareas recurrentes en Zenth funcionan como el cuello de tortuga de Jobs: una decisión tomada una vez que se repite automáticamente. "Pagar facturas" aparece solo cuando debe aparecer, sin que tengas que recordarlo.
+### 3. Rutinas configurables
+Las tareas recurrentes guardan una decisión que no quieres repetir cada semana. Cuando cambias una aparición, Zenth pregunta si el ajuste afecta solo a esa fecha o a toda la serie.
+
+### 4. Zen cuando ahorra campos
+Puedes escribir una frase natural y pedir a Zen que proponga título, fecha, hora o prioridad. La sugerencia se revisa antes de guardar: automatizar no significa ceder el control.
 
 **[Simplifica tu vida con Zenth.](/app)**
 `,
@@ -583,20 +644,19 @@ Las tareas recurrentes en Zenth funcionan como el cuello de tortuga de Jobs: una
   {
     id: '7',
     title: 'El Cerebro TDAH: Por qué las listas de tareas normales no funcionan para ti',
-    excerpt: '¿Sufres de parálisis por análisis? Descubre cómo Zenth utiliza la neurociencia para hackear la dopamina y vencer la procrastinación.',
+    excerpt: 'Las listas largas y rígidas pueden aumentar la fricción. Estas son las decisiones de Zenth para ofrecer estructura flexible y feedback visible.',
     content: `
-Para una persona neurotípica, una lista de tareas es un mapa. Para una mente con TDAH (Trastorno por Déficit de Atención e Hiperactividad), a menudo es un muro de ladrillos. Miras la lista, sabes que tienes que hacer las cosas, pero existe una desconexión física entre el "saber" y el "hacer". 
+Para algunas personas con TDAH, una lista larga puede dejar de ser un mapa y convertirse en una pared: sabes qué hay que hacer, pero iniciar, priorizar o estimar el tiempo sigue siendo difícil.
 
-En Zenth, hemos diseñado nuestra app basándonos en cómo funciona realmente el cerebro neurodivergente. Aquí te explicamos por qué las herramientas tradicionales te fallan y cómo Zenth es diferente.
+Zenth no trata el TDAH ni pretende representar a todas las personas neurodivergentes. Sí adopta decisiones de diseño que pueden resultar útiles: menos ruido, estructura flexible, captura rápida y feedback visible.
 
-## 1. La Caza de Dopamina (Dopamine Hunting)
+## 1. Motivación y recompensa inmediata
 
-El cerebro TDAH tiene una deficiencia en la transmisión de dopamina, el neurotransmisor de la recompensa y la motivación. Las listas de papel o las apps corporativas grises no dan dopamina; solo dan obligaciones. El resultado es que tu cerebro busca estimulación en otro lado (redes sociales, comida, videojuegos).
+El TDAH se relaciona con diferencias complejas en atención, función ejecutiva y procesamiento de recompensas; no se resume en una simple «falta de dopamina». Aun así, un resultado visible e inmediato puede hacer que una acción abstracta se sienta más concreta.
 
 **La Solución Zenth:**
-Convertimos la productividad en un videojuego.
-*   **Feedback Inmediato:** El sonido satisfactorio al completar una tarea y la animación visual proporcionan una micro-recompensa sensorial inmediata.
-*   **XP y Niveles:** Ver subir tu barra de progreso libera esa pequeña dosis de dopamina necesaria para mantenerte enganchado a tus propias metas. Hackeamos tu sistema de recompensa para que *quieras* hacer la siguiente tarea.
+*   **Feedback inmediato:** el sonido opcional y la animación confirman que la acción terminó.
+*   **XP, niveles y logros:** convierten semanas de actividad en un recorrido visible, sin afirmar que una puntuación mida tu valor o tu salud.
 
 ---
 
@@ -606,7 +666,7 @@ Convertimos la productividad en un videojuego.
 
 **La Solución Zenth:**
 *   **Bloques Flexibles:** En lugar de horas exactas, usamos "Mañana", "Tarde" y "Noche". Esto da estructura sin la rigidez que provoca culpa.
-*   **Focus Mode Visceral:** Nuestro temporizador no es solo un reloj; es un compromiso visual. Al activarlo, te anclas al presente, combatiendo la dispersión temporal.
+*   **Enfoque visible:** el temporizador global mantiene una sola misión a la vista y puede funcionar con duración definida o como cronómetro.
 
 ---
 
@@ -617,13 +677,15 @@ Tener 50 tareas pendientes en una lista larga genera **parálisis por análisis*
 **La Solución Zenth:**
 *   **Diseño de bajo ruido:** la interfaz es sobria. Fondo neutro, una sola tipografía y color únicamente donde significa algo. Nada parpadea, nada se pone rojo para presionarte.
 *   **Divulgación progresiva:** no ves las 50 tareas a la vez. Ves el bloque del día que toca, y el resto espera fuera de la vista.
-*   **Foco en lo Esencial:** Zenth te empuja a priorizar tus "Grandes Metas". Al destacar 1 o 3 cosas importantes, silenciamos el resto del ruido para que puedas avanzar.
+*   **Foco en lo esencial:** las grandes metas permiten distinguir lo importante sin obligarte a convertir cada pendiente en una urgencia.
 
 ## Conclusión
 
-Tu cerebro no está roto; simplemente tiene un sistema operativo diferente. Las herramientas de productividad estándar están diseñadas para cerebros lineales. Zenth es la interfaz compatible que estabas esperando: una que entiende tu necesidad de novedad, desafío y feedback inmediato.
+No existe una interfaz universal para el TDAH. Zenth ofrece opciones para adaptar el día, reducir decisiones pequeñas y hacer visible el avance; cada persona decide si encajan con su forma de trabajar.
 
-**Deja de luchar contra tu propia mente. [Inicia sesión en Zenth](/app) y dale a tu cerebro las herramientas que necesita para brillar. ✨**
+> Este artículo describe decisiones de producto, no orientación médica. Si el TDAH afecta tu vida cotidiana, consulta a un profesional cualificado.
+
+**[Inicia sesión en Zenth](/app) y prueba una estructura flexible.**
 `,
     author: 'Matías Zenth',
     date: '18 Feb, 2026',
@@ -633,16 +695,16 @@ Tu cerebro no está roto; simplemente tiene un sistema operativo diferente. Las 
   },
   {
     id: '8',
-    title: 'La Trampa de la Multitarea: Lo que la Neurociencia dice sobre tu Atención',
-    excerpt: '¿Crees que eres bueno haciendo varias cosas a la vez? La ciencia dice lo contrario. Descubre cómo el "Context Switching" reduce tu CI y cómo Zenth te ayuda a recuperar tu capacidad cognitiva.',
+    title: 'La trampa de cambiar de contexto: proteger la atención sin aislarte del trabajo',
+    excerpt: 'Alternar tareas tiene un coste de reorientación. Agenda, Pizarras y el Enfoque global ayudan a conservar el contexto visible.',
     content: `
-El cerebro humano no está diseñado para la multitarea. A pesar de lo que nos gusta creer, cuando intentamos hacer dos cosas a la vez, en realidad estamos haciendo "switch-tasking": cambiando rápidamente el foco de atención de una cosa a otra. Y este proceso tiene un costo metabólico y cognitivo altísimo.
+En muchas tareas cognitivas no hacemos dos cosas complejas al mismo tiempo: alternamos la atención. Cada cambio exige recordar dónde estábamos, recuperar información y decidir qué sigue. Ese coste varía según la tarea y la persona, pero se acumula cuando el día está fragmentado.
 
 Mucha gente se siente "quemada" no por la cantidad de trabajo, sino por la fragmentación de su atención.
 
 ## El Costo del "Context Switching"
 
-Cada vez que interrumpes una tarea para mirar una notificación o cambiar de pestaña, tu cerebro necesita un tiempo de "re-calibración" para volver al nivel de profundidad anterior. Estudios de la Universidad de California sugieren que podemos tardar hasta **23 minutos** en recuperar el foco total tras una interrupción.
+La investigación de Gloria Mark sobre trabajo interrumpido muestra que volver al contexto puede llevar tiempo y aumentar el estrés. La cifra popular de 23 minutos corresponde a observaciones concretas y no es una regla universal para cada interrupción.
 
 Imagina esto repetido 50 veces al día. El resultado es un cerebro agotado, incapaz de procesar información compleja y propenso a errores.
 
@@ -655,11 +717,11 @@ Estas son las decisiones de diseño que se tomaron pensando exactamente en ese c
 ### 1. Protección contra el Ruido Visual
 La mayoría de las apps de productividad son árboles de navidad de botones y alertas. Zenth utiliza un diseño de **baja carga cognitiva**: fondo neutro, una sola tipografía, jerarquía marcada por el tamaño y color reservado para lo que significa algo. La interfaz no compite por tu atención, y eso deja el lóbulo frontal libre para la tarea.
 
-### 2. El Temporizador como Ancla (Focus Mode)
-En terapia, utilizamos técnicas de "anclaje" para tratar la ansiedad. El Focus Mode de Zenth actúa de manera similar: al iniciar el temporizador, creas un compromiso contractual con tu yo presente. "Durante estos 25 minutos, solo existe esta tarea". Esto reduce la ansiedad por lo que "tienes que hacer después".
+### 2. Enfoque como recordatorio visible
+El panel global mantiene una misión y un reloj a la vista sin obligarte a abandonar Agenda, Pizarras o Biblioteca. También puede silenciar avisos no urgentes hasta que termine la sesión.
 
 ### 3. Externalización de la Memoria de Trabajo
-Al volcar tus pendientes y organizarlos por bloques de energía (Mañana/Tarde/Noche), liberas tu memoria de trabajo. Tu cerebro deja de gastar energía en *recordar* qué hacer y empieza a usarla en *hacerlo*.
+Al volcar pendientes en Agenda o en la pizarra correspondiente reduces la necesidad de recordarlos activamente. Las dos áreas permanecen separadas hasta que decides vincular una tarea.
 
 ## Conclusión
 
@@ -711,31 +773,33 @@ El diseño no es solo cómo se ve, es cómo funciona. Zenth está diseñado para
   },
   {
     id: '10',
-    title: 'Nombrar para Domar: La ciencia detrás del "Mood Tracking"',
-    excerpt: '¿Por qué Zenth te pregunta cómo estás? La neurociencia demuestra que etiquetar tus emociones reduce la actividad de la amígdala y previene el burnout.',
+    title: 'Nombrar para observar: qué puede —y qué no puede— hacer un registro de ánimo',
+    excerpt: 'Poner una palabra al día crea un historial útil para reconocer patrones. No es un diagnóstico ni una herramienta terapéutica.',
     content: `
 Muchas personas ignoran el hábito de registrar sus emociones porque sienten que es una pérdida de tiempo. Sin embargo, la ciencia nos dice lo contrario.
 
 ## "Name it to Tame it" (Decirlo para domarlo)
 
-El psiquiatra **Dr. Dan Siegel** acuñó esta frase para explicar un mecanismo cerebral fascinante: el simple acto de ponerle una etiqueta verbal a una emoción ("Me siento ansioso", "Estoy neutral") disminuye la actividad eléctrica en la amígdala —el centro del miedo en el cerebro— y aumenta la actividad en la corteza prefrontal derecha, responsable de la regulación emocional.
+La frase popularizada por **Daniel Siegel** resume una idea sencilla: poner palabras a una experiencia puede crear distancia y facilitar la reflexión. Estudios de etiquetado afectivo han observado cambios en la respuesta cerebral bajo condiciones experimentales, pero eso no convierte un selector de color en terapia ni garantiza un efecto clínico.
 
-Cuando Zenth te pregunta "¿Cómo estás?" y tú seleccionas un color, estás realizando una micro-intervención terapéutica.
+Cuando Zenth pregunta «¿Cómo estuvo tu día?» y eliges un estado, estás creando un registro breve para tu propia observación.
 
 ---
 
 ## Beneficios Cognitivos del Registro
 
-### 1. Autoconciencia (Metacognición)
-Estudios en la *University of Rochester* encontraron que la autoconciencia es un predictor clave del éxito profesional. Al ver tu mes en píxeles, pasas de "ser" tus emociones a "observarlas".
+### 1. Una pausa breve
+Elegir entre Excelente, Bien, Neutral, Bajo o Mal obliga a detenerse unos segundos. El valor está en repetir una pregunta comparable, no en encontrar una etiqueta perfecta.
 
 ### 2. Detección de Patrones
-Registrar tus datos te permite correlacionar: "Mis días más productivos suelen ser los 'Neutrales', no los 'Excelentes'". Esto te ayuda a planificar mejor tu carga de trabajo basándote en datos reales, no en suposiciones.
+Un mes o un año de registros puede mostrar agrupaciones que no recordabas. Son pistas para hacerte mejores preguntas, no pruebas de causalidad entre ánimo y productividad.
 
 ### 3. Cierre Cognitivo
-Hacer el registro al final del día actúa como un ritual de cierre, ayudando a tu cerebro a desconectar del modo trabajo y pasar al modo descanso.
+Para algunas personas, registrar al final del día funciona como un pequeño ritual de cierre. El recordatorio es opcional y se puede ocultar desde Ajustes.
 
-**[Empieza tu diario emocional en Zenth hoy.](/app)**
+> Si observas malestar persistente o intenso, el registro no sustituye la ayuda de un profesional de salud.
+
+**[Abre Mi ritmo en Zenth y empieza tu registro.](/app)**
 `,
     author: 'Matías Zenth',
     date: '22 Feb, 2026',
@@ -745,27 +809,27 @@ Hacer el registro al final del día actúa como un ritual de cierre, ayudando a 
   },
   {
     id: '11',
-    title: 'El Estado de Flujo: Cómo hackear tu cerebro para la productividad extrema',
-    excerpt: 'El "Flow" no es magia, es neuroquímica. Descubre cómo Zenth utiliza los desencadenantes del flujo para ayudarte a entrar en la zona.',
+    title: 'Estado de flujo: preparar condiciones sin convertirlo en una obligación',
+    excerpt: 'Objetivo claro, dificultad adecuada y menos interrupciones pueden favorecer una atención profunda. Zenth ayuda a preparar el contexto.',
     content: `
-¿Alguna vez has estado tan inmerso en una tarea que el tiempo pareció desaparecer? Ese es el **Estado de Flujo**, un término popularizado por el psicólogo Mihaly Csikszentmihalyi. Según un estudio de McKinsey, los ejecutivos en estado de flujo son hasta un **500% más productivos**.
+¿Alguna vez has estado tan inmerso en una tarea que el tiempo pareció desaparecer? Ese es el **estado de flujo**, un concepto desarrollado por el psicólogo Mihaly Csikszentmihalyi. No existe un botón que lo garantice ni una cifra universal de productividad: depende de la persona, la actividad y el contexto.
 
-## La Neuroquímica del Flujo
+## Una experiencia, no un truco
 
-Durante el flujo, el cerebro libera un cóctel de neuroquímicos de rendimiento: dopamina, norepinefrina y anandamida. Además, ocurre algo llamado **"Hipofrontalidad Transitoria"**: la parte de tu cerebro que duda y se critica a sí misma se apaga temporalmente.
+El flujo se estudia como una experiencia de absorción, objetivos claros, feedback cercano y equilibrio entre reto y habilidad. Sus mecanismos son complejos y no se reducen a un único «cóctel» cerebral.
 
-## Cómo Zenth activa el Flujo
+## Cómo Zenth prepara el contexto
 
 ### 1. Reto vs. Habilidad
-El flujo ocurre cuando el desafío de la tarea iguala tu nivel de habilidad. Zenth te permite dividir tareas grandes ("Big Goals") en pasos manejables, manteniendo ese equilibrio perfecto.
+Dividir una tarea grande en pasos puede acercar el reto a un tamaño manejable. Zen puede proponer micro-pasos, pero tú decides cuáles tienen sentido.
 
-### 2. Eliminación de Distracciones (Focus Mode)
-Para entrar en flujo, necesitas de 15 a 20 minutos de concentración ininterrumpida. El **Focus Mode** de Zenth protege ese tiempo sagrado, actuando como un portero para tu atención.
+### 2. Menos interrupciones con Enfoque
+El panel global mantiene una misión visible, puede silenciar avisos no urgentes y ofrece sonido ambiental. No fuerza el flujo; reduce parte de la fricción para sostener una tarea.
 
 ### 3. Feedback Inmediato
-El cerebro necesita saber que está progresando. Las barras de XP y el sonido al completar tareas en Zenth proporcionan ese feedback instantáneo necesario para mantener el ciclo de dopamina activo.
+El reloj, los pasos de una tarea y el sonido opcional al completar ofrecen señales cercanas de avance sin convertirlas en una evaluación de tu valor personal.
 
-**[Entra en la zona con Zenth.](/app)**
+**[Prepara una sesión de Enfoque en Zenth.](/app)**
 `,
     author: 'Matías Zenth',
     date: '23 Feb, 2026',
@@ -775,27 +839,27 @@ El cerebro necesita saber que está progresando. Las barras de XP y el sonido al
   },
   {
     id: '12',
-    title: 'Neuroplasticidad y Hábitos: Reprogramando tu mente con Zenth',
-    excerpt: 'Tu cerebro puede cambiar físicamente. Aprende cómo la repetición y la recompensa en Zenth fortalecen nuevas conexiones neuronales.',
+    title: 'Hábitos visibles: diseñar una repetición que puedas sostener',
+    excerpt: 'La repetición importa, pero no ocurre por magia. Señales, pasos claros y una recompensa discreta pueden ayudar a mantener una rutina.',
     content: `
-La vieja idea de que el cerebro adulto no cambia es falsa. La **Neuroplasticidad** es la capacidad del cerebro para formar nuevas conexiones neuronales a lo largo de la vida. Como dice el principio de Hebb: *"Las neuronas que disparan juntas, permanecen juntas"*.
+El cerebro conserva capacidad de cambio durante la vida, pero hablar de «reprogramarlo» simplifica procesos biológicos y conductuales complejos. Para una herramienta de productividad, la pregunta útil es más concreta: ¿cómo hacemos que una acción sea fácil de repetir y revisar?
 
 ## El Bucle del Hábito en Zenth
 
-Para formar un hábito, necesitas tres elementos (según *The Power of Habit* de Charles Duhigg): Señal, Rutina y Recompensa.
+Un modelo popular describe señal, rutina y recompensa. No es la única explicación de los hábitos, pero funciona como una guía práctica para diseñar recordatorios y reducir fricción.
 
 ### 1. La Señal (Trigger)
-Las notificaciones suaves de Zenth o simplemente abrir la app por la mañana actúan como el disparador para tu sesión de planificación.
+Las notificaciones opcionales, una tarea recurrente o abrir Agenda por la mañana pueden funcionar como recordatorio. Tú eliges qué canales activar.
 
 ### 2. La Rutina
-Es la acción en sí: organizar tu día en bloques de Mañana/Tarde/Noche. Al hacerlo repetidamente en la misma interfaz, fortaleces esa vía neuronal.
+Es la acción concreta: revisar Agenda, vaciar la bandeja de una pizarra o iniciar una sesión breve de Enfoque. Cuanto menos ambigua sea, más fácil es repetirla.
 
 ### 3. La Recompensa (Dopamina)
-Aquí es donde brilla Zenth. Ganar **XP**, ver subir tu nivel y mantener tu racha (Streak) libera dopamina. Esta recompensa química le dice a tu cerebro: *"Esto se sintió bien, hazlo de nuevo mañana"*.
+Zenth devuelve una señal visible: **XP**, racha, logros y un mapa de 20 constelaciones. No mide tu valor ni garantiza un cambio cerebral; simplemente hace perceptible una continuidad que de otro modo sería fácil olvidar.
 
-Con el tiempo, la "fuerza de voluntad" deja de ser necesaria porque el comportamiento se ha automatizado en los ganglios basales del cerebro.
+Con el tiempo, algunas acciones pueden requerir menos deliberación, aunque los hábitos cambian con el contexto y nunca quedan garantizados para siempre.
 
-**[Empieza a recablear tu cerebro hoy.](/app)**
+**[Diseña una rutina pequeña en Zenth.](/app)**
 `,
     author: 'Matías Zenth',
     date: '24 Feb, 2026',
@@ -805,12 +869,12 @@ Con el tiempo, la "fuerza de voluntad" deja de ser necesaria porque el comportam
   },
   {
     id: '13',
-    title: 'Zen: Cómo la IA de Google está Redefiniendo tu Productividad en Zenth',
-    excerpt: '¿Te imaginas tener un coach de productividad personal disponible 24/7? Conoce a Zen, el asistente inteligente que hace el trabajo pesado por ti.',
+    title: 'Zen: IA de Google para quitar campos, no para tomar decisiones por ti',
+    excerpt: 'Zen interpreta tareas, propone fechas, divide trabajo y transforma texto solo cuando se lo pides. Tú revisas y confirmas el resultado.',
     content: `
-La aplicación Zenth integra un asistente inteligente llamado **"Zen"**, que utiliza la IA de Google (Gemini) a través de funciones en la nube (Supabase Edge Functions) para llevar tu organización al siguiente nivel.
+Zenth integra un asistente llamado **Zen**, que utiliza Google Gemini a través de funciones seguras de Supabase. Su objetivo es reducir trabajo de escritura y clasificación, no decidir por ti.
 
-No se trata solo de añadir tareas; se trata de delegar la carga cognitiva de la planificación a un sistema inteligente.
+Cada respuesta es una propuesta que conviene revisar antes de guardar, especialmente fechas, horarios, prioridades y texto sensible.
 
 ## Funciones principales de Inteligencia Artificial ("Zen")
 
@@ -833,24 +897,26 @@ Al usar la opción **"Sugerir Pasos"**, la IA desglosa tu tarea principal en 3 a
 ### 4. Categorización Inteligente 🤖
 Aunque es una lógica más híbrida, el sistema sincroniza automáticamente el momento del día (**Mañana, Tarde, Noche**) según la hora de inicio que elijas o que la IA te sugiera, ayudándote a visualizar tu carga de trabajo de forma balanceada sin intervención manual.
 
-### 5. Zen AI dentro del editor de notas ✍️
-La IA no se queda en las tareas. Dentro de una Entrada, selecciona un fragmento de texto y pulsa **Zen AI** para:
+### 5. Zen AI dentro de Biblioteca ✍️
+La IA no se queda en las tareas. Dentro de una nota nativa de Biblioteca, selecciona un fragmento y pulsa **Zen AI** para:
 
 - **Mejorar la redacción:** reescribe un párrafo confuso con un tono más claro.
 - **Resumir:** condensa un bloque largo quedándose con las ideas principales.
 - **Expandir:** toma una frase corta y la desarrolla con más profundidad.
 
-Nada de esto ocurre solo: la IA únicamente actúa sobre el texto que hayas seleccionado y cuando tú se lo pidas.
+Nada de esto ocurre solo: la IA actúa sobre el texto necesario para la opción que pulsaste. No recorre silenciosamente toda tu cuenta ni tus archivos de Google Drive.
 
 ---
 
 ## ¿Cómo activar estas funciones?
 
-Para usar estas funciones, solo tienes que abrir el **Editor de Tareas** (el botón +) y buscar los iconos de destellos o el botón de **"Pedir a Zen"**. En las notas, el botón **Zen AI** aparece en la barra del editor.
+Para usar estas funciones, abre el editor de tareas y busca **Pedir a Zen**, **Auto-Agendar** o **Sugerir pasos**. En las notas nativas, Zen AI aparece en la barra del editor.
+
+Zen puede equivocarse. No lo uses como fuente única para decisiones médicas, legales, financieras o de seguridad.
 
 Zen está aquí para que dejes de preocuparte por *cómo* organizar y empieces a enfocarte en *hacer* lo que importa.
 
-**[Prueba a Zen ahora en Zenth](/app) y experimenta la productividad aumentada. ✨**
+**[Prueba Zen en Zenth](/app), revisa su propuesta y conserva el control.**
 `,
     author: 'Matías Zenth',
     date: '19 Feb, 2026',
