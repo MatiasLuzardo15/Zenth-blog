@@ -40,7 +40,22 @@ const FAQS: FAQEntry[] = [
     {
         question: '¿Puedo compartir una pizarra con otras personas?',
         answer:
-            'Sí. Cada pizarra nace privada y puedes invitar por correo o mediante un enlace. Los cambios, la presencia y la actividad aparecen en tiempo real. También hay comentarios, menciones, asignaciones, votos, aprobaciones, sala del equipo y llamadas privadas.',
+            'Sí. Cada pizarra nace privada y puedes invitar por correo o mediante un enlace. Los cambios, la presencia y la actividad aparecen en tiempo real. También hay comentarios, menciones, responsables múltiples, adjuntos privados, checklists, automatizaciones, plantillas, votos, aprobaciones, sala del equipo y llamadas privadas.',
+    },
+    {
+        question: '¿Qué son las reuniones rápidas?',
+        answer:
+            'Son llamadas aisladas para clientes, candidatos o colaboradores que no necesitan entrar a tu espacio de trabajo. Desde Llamadas puedes crear un enlace para más tarde, iniciar una reunión al instante o programarla en Agenda. La otra persona entra con su nombre, sin registrarse.',
+    },
+    {
+        question: '¿Qué diferencia hay entre una sala de pizarra y una reunión rápida?',
+        answer:
+            'La sala de una pizarra pertenece a sus integrantes y aparece en Llamadas junto a tus demás salas. Una reunión rápida no está vinculada a ninguna pizarra: quien recibe el enlace solo obtiene acceso a esa conversación, no a tus tareas, archivos, historial ni otras salas. El enlace deja de funcionar cuando el anfitrión cierra la reunión.',
+    },
+    {
+        question: '¿Zenth tiene cámara o graba las llamadas?',
+        answer:
+            'No. Las llamadas ofrecen voz, selección de dispositivos, pantalla compartida, reacciones y mano levantada. No hay cámara personal ni grabación de audio, pantalla o vídeo.',
     },
     {
         question: '¿Qué puede hacer cada rol?',
@@ -76,6 +91,11 @@ const FAQS: FAQEntry[] = [
         question: '¿Puedo conectar mi Google Calendar?',
         answer:
             'Sí, con permiso de solo lectura. Eliges qué calendarios ver y sus eventos aparecen en Agenda. La sincronización se actualiza cada cinco minutos mientras el permiso está activo y puedes pausarla. Nada llega a una pizarra hasta que usas explícitamente «Llevar a pizarra».',
+    },
+    {
+        question: '¿Puedo añadir invitados y un enlace a una reunión desde Agenda?',
+        answer:
+            'Sí. Al editar un evento o tarea de tipo reunión puedes elegir Zenth, Google Meet, Zoom, Teams u otro enlace, y añadir direcciones de correo como invitados. Zenth conserva el estado de esas invitaciones dentro del evento.',
     },
     {
         question: '¿Cómo funciona Enfoque ahora?',

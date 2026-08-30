@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowUpRight, Users, LibraryBig, CircleDashed, CalendarDays, Orbit, HardDrive } from 'lucide-react';
+import { ArrowUpRight, Users, LibraryBig, CircleDashed, CalendarDays, Orbit, HardDrive, PhoneCall } from 'lucide-react';
 import AppDemo from './AppDemo';
 
 const SIGNALS = [
@@ -8,6 +8,7 @@ const SIGNALS = [
   { icon: LibraryBig, label: 'Biblioteca' },
   { icon: HardDrive, label: 'Google Drive y Workspace' },
   { icon: CircleDashed, label: 'Enfoque desde cualquier pantalla' },
+  { icon: PhoneCall, label: 'Llamadas y reuniones rápidas' },
   { icon: Orbit, label: 'Mi ritmo' },
 ];
 
@@ -37,7 +38,7 @@ const Hero: React.FC = () => {
 
           <p className="t-body-lg mt-8 max-w-xl text-ink-muted">
             Zenth reúne una agenda visual, pizarras para tus proyectos, una Biblioteca conectada con
-            Google Drive y un temporizador de enfoque que te acompaña por toda la aplicación.
+            Google Drive, llamadas y un temporizador de enfoque que te acompaña por toda la aplicación.
           </p>
 
           <div className="mt-10 flex flex-wrap justify-center gap-3">

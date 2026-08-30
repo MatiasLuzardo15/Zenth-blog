@@ -2,23 +2,72 @@ import { BlogPost } from './types';
 
 export const BLOG_POSTS: BlogPost[] = [
   {
+    id: '20',
+    title: 'Llamadas en Zenth: reuniones rápidas y salas sin accesos de más',
+    excerpt: 'Crea un enlace para invitar a alguien sin cuenta, entra a las salas de tus pizarras desde Llamadas y sigue trabajando mientras hablas.',
+    content: `
+Una llamada de trabajo no siempre empieza con una pizarra. A veces es un cliente que necesita conversar, una entrevista o alguien que solo tiene que entrar diez minutos. Para esos casos, Zenth incorpora **reuniones rápidas**: conversaciones con enlace, separadas del resto de tu espacio.
+
+## Un solo panel para hablar
+
+En escritorio, **Llamadas** vive en la navegación global. Desde ahí puedes ver las salas de tus pizarras, llamar en privado a alguien con quien compartes proyecto y crear una reunión rápida sin cambiar de sección.
+
+Hay tres formas de empezar:
+
+- **Crear enlace:** prepara la invitación ahora y compártela cuando llegue el momento.
+- **Iniciar ahora:** crea el enlace y entra directamente a preparar el audio.
+- **Programar en Agenda:** guarda la reunión con fecha, hora e invitados dentro del mismo lugar donde organizas tu día.
+
+## Invitados sin cuenta
+
+Quien recibe el enlace abre la reunión en el navegador, escribe su nombre y comprueba el micrófono y el audio. No necesita registrarse en Zenth. El anfitrión puede compartir el enlace, controlar la entrada de nuevos participantes y cerrar la reunión para todos.
+
+El enlace da acceso **solo a esa conversación**. Un invitado no puede abrir tus pizarras, archivos, historial ni otras salas. Cuando cierras la reunión, el enlace deja de funcionar.
+
+## Las salas de tu equipo siguen en su sitio
+
+Las salas de voz de las pizarras compartidas siguen perteneciendo a sus integrantes. Llamadas las reúne para que no tengas que recordar en qué pizarra estaba cada una. Las llamadas privadas también respetan esa relación: solo puedes llamar a alguien con quien compartes al menos una pizarra.
+
+La conversación continúa mientras navegas por Agenda, Pizarras, Biblioteca o Mi ritmo. Minimizar el panel no equivale a salir de la llamada.
+
+## Voz y pantalla, sin videoconferencia
+
+Zenth ofrece voz, selección de dispositivos, pantalla compartida, reacciones y mano levantada. **No hay cámara personal ni grabación**: la comunicación acompaña al trabajo, no pretende convertirse en otra plataforma de videoconferencias.
+
+## Reuniones dentro de Agenda
+
+Al editar una reunión en Agenda puedes elegir **Zenth, Google Meet, Zoom, Teams u otro enlace**. También puedes añadir invitados por correo y consultar el estado de sus invitaciones desde el evento. Así la convocatoria y el trabajo posterior no quedan repartidos en dos herramientas.
+
+La regla es sencilla: cada persona entra a la conversación que necesita, con el acceso justo para ese momento.
+
+**Abre Llamadas en Zenth y crea tu primer enlace.**
+`,
+    author: 'Matías Zenth',
+    date: '29 Aug, 2026',
+    imageUrl: '/blog/appview.png',
+    category: 'Lanzamiento',
+    readTime: '6 min lectura'
+  },
+  {
     id: '19',
     title: 'Zenth hoy: Agenda, Pizarras, Biblioteca y un Enfoque que te acompaña',
-    excerpt: 'La aplicación cambió de estructura: cuatro espacios claros, Enfoque global, Google Drive dentro de Biblioteca y un recorrido de 20 constelaciones.',
+    excerpt: 'La aplicación cambió de estructura: cuatro espacios claros, Llamadas globales, Google Drive dentro de Biblioteca y un recorrido de 20 constelaciones.',
     content: `
-Zenth creció y su navegación anterior dejó de contar bien lo que hace. La versión actual se organiza alrededor de cuatro espacios: **Agenda, Pizarras, Biblioteca y Mi ritmo**. Enfoque sigue siendo central, pero ya no es un lugar al que tienes que ir: se abre desde la cabecera y continúa mientras trabajas en cualquier pantalla.
+Zenth creció y su navegación anterior dejó de contar bien lo que hace. La versión actual se organiza alrededor de cuatro espacios: **Agenda, Pizarras, Biblioteca y Mi ritmo**. A eso se suma Llamadas, un panel global para las salas del equipo y las reuniones rápidas. Enfoque sigue siendo central, pero ya no es un lugar al que tienes que ir: se abre desde la cabecera y continúa mientras trabajas en cualquier pantalla.
 
 ## Agenda: planificar el tiempo de verdad
 
 Agenda combina vistas de **día, semana y mes**. Puedes usar Mañana, Tarde y Noche para planificar con flexibilidad o definir una hora y duración cuando el compromiso lo exige. En la vista diaria, mover y redimensionar un bloque reprograma la tarea directamente.
 
-Las tareas pueden convertirse en eventos o reuniones e incluir repetición, avisos, etiquetas, pasos, imágenes, ubicación y enlaces de videollamada. Si conectas Google Calendar, eliges qué calendarios quieres ver y sus eventos aparecen en esta misma vista.
+Las tareas pueden convertirse en eventos o reuniones e incluir repetición, avisos, etiquetas, pasos, imágenes, ubicación, invitados y enlaces de videollamada. En cada reunión puedes elegir Zenth, Google Meet, Zoom, Teams u otro enlace. Si conectas Google Calendar, eliges qué calendarios quieres ver y sus eventos aparecen en esta misma vista.
 
 ## Pizarras: cada proyecto conserva su contexto
 
 Pizarras ya no es una lista general. Cada proyecto tiene sus propias columnas, su bandeja de captura y una regla explícita para decidir qué tareas también aparecen en Agenda.
 
-Cuando invitas a otras personas, la pizarra suma roles, presencia, comentarios, menciones, asignaciones, votos, aprobaciones y actividad en vivo. También puede tener una sala de voz y llamadas privadas con pantalla compartida.
+Cuando invitas a otras personas, la pizarra suma roles, presencia, comentarios, menciones, asignaciones, votos, aprobaciones y actividad en vivo. También puede tener una sala de voz y llamadas privadas con pantalla compartida; Llamadas las reúne junto a tus demás conversaciones.
+
+Las tarjetas colaborativas también pueden tener varios responsables, etiquetas compartidas, adjuntos privados y checklists con fechas y progreso. Los filtros de carga, la vista Mis tarjetas, las notificaciones, las automatizaciones y las plantillas ayudan a que la pizarra siga siendo útil cuando el proyecto crece.
 
 ## Enfoque: una capa global
 
@@ -52,7 +101,7 @@ Los ajustes se reorganizaron en General, Apariencia, Productividad, Enfoque, Not
 
 La idea de fondo no cambió: Zenth no quiere empujarte a hacer más por inercia. Quiere darte una imagen clara de tu tiempo, tus proyectos y tu energía para que decidas mejor.
 
-**[Abre la versión actual de Zenth](/app) y recorre el nuevo espacio.**
+**Abre la versión actual de Zenth y recorre el nuevo espacio.**
 `,
     author: 'Matías Zenth',
     date: '8 Aug, 2026',
@@ -62,16 +111,16 @@ La idea de fondo no cambió: Zenth no quiere empujarte a hacer más por inercia.
   },
   {
     id: '18',
-    title: 'Tu pizarra ahora habla: sala del equipo y llamadas privadas',
-    excerpt: 'Cada pizarra compartida tiene ahora una sala de voz siempre abierta para sus integrantes, con pantalla compartida y llamadas privadas. Todo sin salir de Zenth.',
+    title: 'Tu pizarra ahora habla: salas, llamadas privadas y Llamadas',
+    excerpt: 'Las salas de tus pizarras, las llamadas privadas y las reuniones rápidas viven en un mismo panel. Voz y pantalla compartida, sin salir de Zenth.',
     content: `
-Trabajar sobre la misma pizarra resuelve el *qué*, pero no siempre el *cómo*: hay cosas que se arreglan en dos minutos hablando y en veinte mensajes escritos. A partir de hoy, cada pizarra compartida de Zenth tiene **su sala del equipo**: una sala de voz siempre abierta para sus integrantes.
+Trabajar sobre la misma pizarra resuelve el *qué*, pero no siempre el *cómo*: hay cosas que se arreglan en dos minutos hablando y en veinte mensajes escritos. Cada pizarra compartida de Zenth tiene **su sala del equipo**: una sala de voz siempre abierta para sus integrantes.
 
 ## La sala está donde ya estabas
 
-No hay nada que crear ni que configurar. La sala se descubre desde el desplegable **Equipo** —el de los avatares— y cualquier integrante entra y sale libremente. No hay reuniones que programar, ni enlaces que caducan, ni "pásame el link". La pizarra es el sitio; la sala vive ahí.
+En escritorio, la sala se descubre desde **Llamadas**, el panel global de la navegación. En móvil sigue estando en el desplegable **Equipo** —el de los avatares—. Cualquier integrante entra y sale libremente. No hay reuniones que programar ni enlaces que caducan para la sala de pizarra: el proyecto es el sitio; la sala vive ahí.
 
-Desde ese mismo desplegable puedes **llamar en privado** a cualquiera con quien compartas pizarra. Le suena el aviso y, si acepta, ya están hablando.
+Desde Llamadas puedes **llamar en privado** a cualquiera con quien compartas pizarra. En móvil, la acción sigue disponible desde el desplegable Equipo. Le suena el aviso y, si acepta, ya están hablando.
 
 Y una vez dentro, la conversación no te ata a la pantalla: puedes seguir moviéndote por Zenth —Agenda, Pizarras, Biblioteca o Mi ritmo— y el audio continúa. Minimiza el panel o escóndelo del todo: la llamada sigue.
 
@@ -85,6 +134,8 @@ La sala combina **voz** con **pantalla compartida**, que es la pareja que de ver
 
 Puedes elegir qué micrófono y qué auriculares usar, y cambiarlos en mitad de la llamada. Solo una persona comparte pantalla a la vez; si lo intentas con otra en curso, la aplicación te lo dice claramente.
 
+Si necesitas hablar con alguien que no pertenece a la pizarra, crea una **reunión rápida** desde Llamadas. La otra persona entra con un enlace y su nombre, sin cuenta y sin acceso lateral a tu espacio. El anuncio completo de las reuniones rápidas está en el artículo más reciente.
+
 ## Los permisos de la pizarra, y ninguno más
 
 ¿Quién puede entrar en la sala? Los integrantes de la pizarra, ni uno más. ¿A quién puedes llamar? A quien comparte una pizarra contigo. No hay contactos que importar ni una libreta nueva que mantener: si trabajan juntos en un tablero, ya pueden hablar; si no, no.
@@ -95,7 +146,7 @@ Y quien deja de ser integrante de la pizarra deja de tener acceso a su sala. Los
 
 Zenth sigue siendo una aplicación de productividad. La sala del equipo es una herramienta más de colaboración, no el centro del producto: está cuando hace falta hablar y desaparece cuando no. Si trabajas solo, nada ha cambiado.
 
-**[Abre una pizarra compartida en Zenth](/app) y entra en la sala del equipo.**
+**Abre una pizarra compartida en Zenth y entra en la sala del equipo.**
 `,
     author: 'Matías Zenth',
     date: '1 Aug, 2026',
@@ -148,11 +199,13 @@ Si activas la visibilidad **con enlace**, Zenth genera una dirección pública d
 
 Cuando alguien de tu pizarra mueve una tarjeta, la ves moverse. No hay que recargar ni pulsar un botón de sincronizar. Era la razón de ser de todo esto: si tienes que refrescar para saber en qué está tu compañero, no estás colaborando, estás turnándote.
 
+La suite de colaboración creció alrededor de esa misma tarjeta: responsables múltiples, etiquetas compartidas, comentarios, menciones, reacciones, adjuntos privados, checklists, filtros, notificaciones, automatizaciones y plantillas. No son herramientas paralelas; viven en el contexto del proyecto.
+
 ## Qué cambia si trabajas solo
 
 Nada. Si nunca invitas a nadie, tus pizarras siguen siendo privadas, con un solo miembro y sin un solo botón nuevo estorbando. La colaboración aparece cuando la necesitas y desaparece cuando no.
 
-**[Abre una pizarra en Zenth](/app) y prueba a invitar a alguien.**
+**Abre una pizarra en Zenth y prueba a invitar a alguien.**
 `,
     author: 'Matías Zenth',
     date: '29 Jul, 2026',
@@ -197,7 +250,7 @@ Los elementos de Google siguen viviendo en tu Drive. Mover, duplicar, destacar, 
 
 Las notas nativas continúan bajo la privacidad y la papelera de Zenth; los documentos de Google usan sus permisos y la papelera de Drive. Esa frontera es intencional y siempre se muestra en la interfaz.
 
-**[Abre Biblioteca en Zenth](/app) y conecta tu espacio documental.**
+**Abre Biblioteca en Zenth y conecta tu espacio documental.**
 `,
     author: 'Matías Zenth',
     date: '8 Aug, 2026',
@@ -236,7 +289,7 @@ Si en algún caso concreto sí quieres llevarlos, existe la acción **Llevar a p
 
 Puedes pausar la actualización sin perder la selección. Si desconectas la cuenta, Zenth revoca el token disponible y deja de leer cambios futuros. Los eventos que ya se importaron no se borran automáticamente, para evitar que una desconexión accidental elimine información de Agenda o de una pizarra.
 
-**[Conecta tu calendario en Zenth](/app) y deja de hacer contabilidad doble.**
+**Conecta tu calendario en Zenth y deja de hacer contabilidad doble.**
 `,
     author: 'Matías Zenth',
     date: '8 Aug, 2026',
@@ -287,9 +340,9 @@ Tus notas se sincronizan con tu cuenta mediante Supabase. Si seleccionas un frag
 ## Conclusión
 Las notas son la parte nativa de Biblioteca: el lugar donde una tarea breve puede crecer hasta convertirse en documentación útil.
 
-> **Actualización:** Biblioteca ahora también integra Google Drive y Workspace. Puedes crear documentos, hojas, presentaciones, formularios, carpetas, archivos y notas de voz sin abandonar Zenth. Lo cuento en [De Entradas a Biblioteca](/blog/16).
+> **Actualización:** Biblioteca ahora también integra Google Drive y Workspace. Puedes crear documentos, hojas, presentaciones, formularios, carpetas, archivos y notas de voz sin abandonar Zenth. Lo cuento en el artículo «De Entradas a Biblioteca».
 
-**[Abre Biblioteca en Zenth](/app) y empieza una nota.**
+**Abre Biblioteca en Zenth y empieza una nota.**
 `,
     author: 'Matías Zenth',
     date: '25 Feb, 2026',
@@ -346,7 +399,7 @@ Puedes seguir el tema del sistema o elegir Claro, Oscuro y Zen —este último c
 
 ¿Estás listo para dejar de sobrevivir a tu lista de tareas y empezar a dominar tu día con calma?
 
-**[Inicia sesión en Zenth ahora](/app) y vive la productividad consciente. ✨**
+**Inicia sesión en Zenth ahora y vive la productividad consciente. ✨**
 `,
     author: 'Matías Zenth',
     date: '13 Feb, 2026',
@@ -425,7 +478,7 @@ El nivel cuenta el recorrido largo. Los **24 logros** reconocen hitos concretos 
 
 Este sistema no está pensado para que compitas con nadie ni para que te enganches. Está pensado para responder a una sola pregunta con honestidad: *¿esto que estoy haciendo lo llevo sosteniendo el tiempo suficiente como para llamarlo un hábito?*
 
-**[Mira tu ruta de progreso en Zenth](/app).**
+**Mira tu ruta de progreso en Zenth.**
 `,
     author: 'Matías Zenth',
     date: '8 Aug, 2026',
@@ -486,7 +539,7 @@ Dentro de **Mi ritmo**, el balance resume qué estado apareció con más frecuen
 
 El calendario de estados de ánimo es tu espejo emocional en Zenth. Es una invitación a la pausa, a la reflexión y, sobre todo, a entender que para ser productivos, primero debemos estar bien con nosotros mismos.
 
-**¿Ya elegiste tu color de hoy? [Abre Mi ritmo en Zenth](/app) y deja tu registro.**
+**¿Ya elegiste tu color de hoy? Abre Mi ritmo en Zenth y deja tu registro.**
 `,
     author: 'Matías Zenth',
     date: '10 Feb, 2026',
@@ -536,7 +589,7 @@ Para que Zenth sea tu aliado y no tu juez, te recomendamos seguir estas tres pr�
 
 El éxito no es terminar cien tareas en un estado de agotamiento absoluto. El éxito es terminar el día con tus metas cumplidas y tu paz mental intacta. Zenth está diseñado para recordarte que **tú eres lo más importante de tu sistema de productividad.**
 
-**[Entra en Zenth](/app), abre Mi ritmo y empieza a observar tu propio patrón.**
+**Entra en Zenth, abre Mi ritmo y empieza a observar tu propio patrón.**
 `,
     author: 'Matías Zenth',
     date: '17 Feb, 2026',
@@ -598,7 +651,7 @@ Los niveles superiores exigen decenas o cientos de horas de enfoque acumulado. E
 
 Zenth no se trata de hacer más cosas en menos tiempo; se trata de elegir lo importante y reservarle atención. Las grandes metas destacan la prioridad y Enfoque te ayuda a registrar el tiempo que realmente le dedicaste.
 
-**¿Cuál es tu gran meta de hoy? [Inicia sesión en Zenth](/app) y abre Enfoque desde la cabecera.**
+**¿Cuál es tu gran meta de hoy? Inicia sesión en Zenth y abre Enfoque desde la cabecera.**
 `,
     author: 'Matías Zenth',
     date: '17 Feb, 2026',
@@ -633,7 +686,7 @@ Las tareas recurrentes guardan una decisión que no quieres repetir cada semana.
 ### 4. Zen cuando ahorra campos
 Puedes escribir una frase natural y pedir a Zen que proponga título, fecha, hora o prioridad. La sugerencia se revisa antes de guardar: automatizar no significa ceder el control.
 
-**[Simplifica tu vida con Zenth.](/app)**
+**Simplifica tu vida con Zenth.**
 `,
     author: 'Matías Zenth',
     date: '17 Feb, 2026',
@@ -685,7 +738,7 @@ No existe una interfaz universal para el TDAH. Zenth ofrece opciones para adapta
 
 > Este artículo describe decisiones de producto, no orientación médica. Si el TDAH afecta tu vida cotidiana, consulta a un profesional cualificado.
 
-**[Inicia sesión en Zenth](/app) y prueba una estructura flexible.**
+**Inicia sesión en Zenth y prueba una estructura flexible.**
 `,
     author: 'Matías Zenth',
     date: '18 Feb, 2026',
@@ -729,7 +782,7 @@ La productividad sostenible no nace de forzar la máquina, sino de respetar su b
 
 > Este artículo se apoya en la investigación de **Gloria Mark** (Universidad de California, Irvine) sobre interrupciones y recuperación del foco. No sustituye el criterio de un profesional de la salud.
 
-**[Prueba Zenth y dale un respiro a tus neuronas.](/app)**
+**Prueba Zenth y dale un respiro a tus neuronas.**
 `,
     author: 'Matías Zenth',
     date: '20 Feb, 2026',
@@ -763,7 +816,7 @@ El uso de colores pastel en el "Mood Tracker" es intencional. La psicología del
 
 El diseño no es solo cómo se ve, es cómo funciona. Zenth está diseñado para ser "invisible": lo suficientemente bonito para motivar, pero lo suficientemente simple para no distraer.
 
-**[Experimenta el diseño calmado de Zenth.](/app)**
+**Experimenta el diseño calmado de Zenth.**
 `,
     author: 'Matías Zenth',
     date: '21 Feb, 2026',
@@ -799,7 +852,7 @@ Para algunas personas, registrar al final del día funciona como un pequeño rit
 
 > Si observas malestar persistente o intenso, el registro no sustituye la ayuda de un profesional de salud.
 
-**[Abre Mi ritmo en Zenth y empieza tu registro.](/app)**
+**Abre Mi ritmo en Zenth y empieza tu registro.**
 `,
     author: 'Matías Zenth',
     date: '22 Feb, 2026',
@@ -829,7 +882,7 @@ El panel global mantiene una misión visible, puede silenciar avisos no urgentes
 ### 3. Feedback Inmediato
 El reloj, los pasos de una tarea y el sonido opcional al completar ofrecen señales cercanas de avance sin convertirlas en una evaluación de tu valor personal.
 
-**[Prepara una sesión de Enfoque en Zenth.](/app)**
+**Prepara una sesión de Enfoque en Zenth.**
 `,
     author: 'Matías Zenth',
     date: '23 Feb, 2026',
@@ -859,7 +912,7 @@ Zenth devuelve una señal visible: **XP**, racha, logros y un mapa de 20 constel
 
 Con el tiempo, algunas acciones pueden requerir menos deliberación, aunque los hábitos cambian con el contexto y nunca quedan garantizados para siempre.
 
-**[Diseña una rutina pequeña en Zenth.](/app)**
+**Diseña una rutina pequeña en Zenth.**
 `,
     author: 'Matías Zenth',
     date: '24 Feb, 2026',
@@ -916,7 +969,7 @@ Zen puede equivocarse. No lo uses como fuente única para decisiones médicas, l
 
 Zen está aquí para que dejes de preocuparte por *cómo* organizar y empieces a enfocarte en *hacer* lo que importa.
 
-**[Prueba Zen en Zenth](/app), revisa su propuesta y conserva el control.**
+**Prueba Zen en Zenth, revisa su propuesta y conserva el control.**
 `,
     author: 'Matías Zenth',
     date: '19 Feb, 2026',

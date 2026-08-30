@@ -1,7 +1,7 @@
 import React from 'react';
 import {
     ArrowLeft, ArrowUpRight, Mail, Sun, LayoutDashboard, Users, PenLine, Keyboard,
-    CircleDashed, Orbit, HeartPulse, SlidersHorizontal, CalendarDays, Trash2, Sparkles, HardDrive,
+    CircleDashed, Orbit, HeartPulse, SlidersHorizontal, CalendarDays, Trash2, Sparkles, HardDrive, PhoneCall,
 } from 'lucide-react';
 
 interface GuideSection {
@@ -20,7 +20,7 @@ const SECTIONS: GuideSection[] = [
             'Las tareas pueden vivir en Mañana, Tarde o Noche. Si necesitan precisión, añade una hora de inicio y una duración.',
             'Cambia entre vista de día, semana y mes con los selectores de la cabecera, o con las teclas D, S y M.',
             'En la vista diaria puedes arrastrar una tarea para reprogramarla y cambiar su duración directamente sobre el calendario.',
-            'Pulsa añadir para crear una tarea, evento o reunión con fecha, hora, repetición, avisos, etiquetas, pasos, adjuntos, ubicación o enlace de videollamada.',
+            'Pulsa añadir para crear una tarea, evento o reunión con fecha, hora, repetición, avisos, etiquetas, pasos, adjuntos, ubicación o enlace de videollamada. Para una reunión puedes elegir Zenth, Google Meet, Zoom, Teams u otro enlace y añadir invitados por correo.',
             'Abre una tarea para editarla, tomar notas, cambiar su fecha o iniciar una sesión de Enfoque vinculada.',
             'Marca como gran meta lo que de verdad importa hoy: vale 50 XP en lugar de 10 y se distingue en la lista.',
             'Configura la repetición para las rutinas. Al editar una tarea recurrente, Zenth te pregunta si el cambio afecta solo a esa aparición o a toda la serie.',
@@ -54,7 +54,9 @@ const SECTIONS: GuideSection[] = [
             'El panel Visibilidad controla el otro eje: hasta dónde llega la pizarra para quien no es miembro. Privada, o pública con un enlace de solo lectura.',
             'Los administradores pueden cambiar roles y expulsar miembros. El propietario, además, puede eliminar la pizarra o transferir la propiedad a otro administrador.',
             'Una pizarra nunca puede quedarse sin administradores: la regla se aplica en la base de datos, no solo en la interfaz.',
-            'Los cambios de tus compañeros llegan en vivo. Si entras como observador, la interfaz oculta las acciones que no puedes ejecutar en lugar de dejarte fallar.',
+            'Los cambios de tus compañeros llegan en vivo. Las tarjetas pueden tener varios responsables, etiquetas compartidas, comentarios, menciones, reacciones, adjuntos privados y checklists con progreso.',
+            'Usa filtros de persona y carga de trabajo, automatizaciones para acciones repetidas y plantillas para reutilizar pizarras, listas o tarjetas.',
+            'Si entras como observador, la interfaz oculta las acciones que no puedes ejecutar en lugar de dejarte fallar.',
         ],
     },
     {
@@ -68,6 +70,19 @@ const SECTIONS: GuideSection[] = [
             'Filtra por tipo, cambia entre cuadrícula y lista, ordena resultados y usa Recientes, Destacados o Compartidos conmigo.',
             'El buscador global encuentra tareas, notas y elementos de Drive desde cualquier sección.',
             'Desde cualquier tarea puedes usar «Expandir a nota» para convertirla en una entrada completa manteniendo el vínculo.',
+        ],
+    },
+    {
+        title: 'Llamadas y reuniones',
+        icon: PhoneCall,
+        intro: 'Reúnete con tu equipo o comparte una conversación puntual sin entregar acceso de más.',
+        steps: [
+            'En escritorio, abre Llamadas desde la navegación global. El panel reúne las salas de tus pizarras, las llamadas privadas y las reuniones rápidas sin sacarte de la sección actual.',
+            'Para una reunión rápida elige Crear enlace si quieres compartirlo más tarde, Iniciar ahora si ya vas a entrar o Programar en Agenda si necesitas fecha, hora e invitados.',
+            'La persona invitada abre el enlace, escribe su nombre y prepara el micrófono y el audio. No necesita crear una cuenta ni puede abrir tus pizarras, archivos, historial u otras salas.',
+            'Las salas de pizarra solo están disponibles para sus integrantes. Las llamadas privadas solo aparecen entre personas que comparten al menos una pizarra.',
+            'Puedes usar voz, reacciones, mano levantada y pantalla compartida. Zenth no usa cámara personal ni graba las conversaciones.',
+            'Al crear o editar una reunión en Agenda, selecciona el proveedor, copia el enlace si hace falta y agrega invitados por correo. El anfitrión puede cerrar una reunión rápida para todos.',
         ],
     },
     {
@@ -88,7 +103,7 @@ const SECTIONS: GuideSection[] = [
         icon: Keyboard,
         intro: 'Navega entre las secciones y por la agenda sin apartar las manos del teclado. En macOS, Alt se muestra como ⌥ y las combinaciones con Ctrl del editor usan Cmd.',
         steps: [
-            'Alt + 1 abre Agenda · Alt + 2 abre Pizarras · Alt + 3 abre Biblioteca · Alt + 4 abre Mi ritmo.',
+            'Alt + 1 abre Agenda · Alt + 2 abre Pizarras · Alt + 3 abre Biblioteca · Alt + 4 abre Mi ritmo · Alt + 5 abre Llamadas.',
             'Alt + M pliega o vuelve a mostrar la navegación. Alt + , abre Ajustes y Alt + T cambia entre tema claro y oscuro.',
             'D cambia a la vista de día · S abre la semana · M abre el mes.',
             'T vuelve al día de hoy desde cualquier fecha que estés consultando en Agenda.',

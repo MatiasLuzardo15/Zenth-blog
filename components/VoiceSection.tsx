@@ -1,5 +1,5 @@
 import React from 'react';
-import { Mic, Phone, ScreenShare, Headphones, ArrowUpRight } from 'lucide-react';
+import { Mic, Phone, ScreenShare, Headphones, Link2, ArrowUpRight } from 'lucide-react';
 
 interface VoiceSectionProps {
   onSelectPost: (id: string) => void;
@@ -26,6 +26,11 @@ const POINTS = [
     title: 'Preparar audio',
     text: 'Elige micrófono y auriculares y comprueba la señal antes de entrar.',
   },
+  {
+    icon: Link2,
+    title: 'Reuniones rápidas',
+    text: 'Crea un enlace para clientes o colaboradores externos: entran con su nombre, sin cuenta y sin ver tu espacio.',
+  },
 ];
 
 /**
@@ -42,8 +47,9 @@ const VoiceSection: React.FC<VoiceSectionProps> = ({ onSelectPost }) => {
             <h2 className="t-display-md mt-4 text-ink">Tu pizarra ahora habla.</h2>
             <p className="t-body-lg mt-5 max-w-lg text-ink-muted">
               Cada pizarra compartida tiene su sala del equipo: una sala de voz siempre abierta
-              para sus integrantes, con llamadas privadas y pantalla compartida, todo dentro
-              de Zenth.
+              para sus integrantes, con llamadas privadas y pantalla compartida. Y si la otra
+              persona no pertenece a tu pizarra, puedes crear una reunión rápida con un enlace
+              aislado.
             </p>
             <button onClick={() => onSelectPost('18')} className="fr-btn fr-btn-primary mt-8">
               Leer el anuncio completo

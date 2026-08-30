@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import {
   X, ArrowUpRight, Users, LibraryBig, CircleDashed, CalendarDays, Orbit, HeartPulse,
-  Sparkles, Trash2, Palette, LayoutDashboard, ChevronDown, Mic,
+  Sparkles, Trash2, Palette, LayoutDashboard, ChevronDown, Mic, PhoneCall,
 } from 'lucide-react';
 
 interface FeatureDetail {
@@ -32,6 +32,9 @@ const FEATURE_DETAILS: Record<string, FeatureDetail> = {
       'Invita por correo electrónico o genera un enlace de invitación que caduca cuando tú decidas.',
       'Visibilidad configurable: una pizarra nace privada y puedes abrirla con un enlace público de solo lectura.',
       'Comentarios, menciones, asignaciones, votos, aprobaciones y actividad compartida viven junto al trabajo.',
+      'Responsables múltiples, Tomar tarea, etiquetas compartidas, filtros de carga y la vista Mis tarjetas ayudan a repartir el trabajo.',
+      'Checklists con responsable, fecha y progreso, además de adjuntos privados y notificaciones, mantienen el contexto en la tarjeta.',
+      'Automatizaciones y plantillas reutilizables aceleran los flujos que repites.',
       'Los cambios y la presencia de tus compañeros aparecen en tiempo real, sin recargar.',
       'El propietario puede transferir la pizarra, y una pizarra nunca puede quedarse sin administradores.',
     ],
@@ -65,6 +68,20 @@ const FEATURE_DETAILS: Record<string, FeatureDetail> = {
     ],
     icon: Mic,
     relatedPostId: '18',
+  },
+  calls: {
+    id: 'calls',
+    title: 'Llamadas y reuniones rápidas',
+    shortDesc: 'Habla con tu equipo o comparte un enlace aislado con invitados externos.',
+    bullets: [
+      'Llamadas reúne en un solo panel las salas de tus pizarras, las llamadas privadas y las reuniones rápidas, sin cambiar de sección.',
+      'Crea un enlace para más tarde, inicia una reunión ahora o prográmala en Agenda con fecha, hora e invitados.',
+      'Quien recibe un enlace entra desde el navegador con su nombre, sin crear una cuenta y sin acceder a tus pizarras, archivos ni historial.',
+      'En Agenda puedes elegir Zenth, Google Meet, Zoom, Teams u otro enlace de videoconferencia para cada reunión.',
+      'Las conversaciones usan voz y pantalla compartida, además de reacciones y mano levantada. Zenth no activa cámara ni graba las llamadas.',
+    ],
+    icon: PhoneCall,
+    relatedPostId: '20',
   },
   today: {
     id: 'today',
@@ -187,7 +204,7 @@ const FEATURE_DETAILS: Record<string, FeatureDetail> = {
   },
 };
 
-const SECONDARY_ORDER = ['today', 'boards', 'focus', 'calendar', 'progress', 'mood', 'voice', 'ai', 'trash', 'appearance'];
+const SECONDARY_ORDER = ['today', 'boards', 'focus', 'calendar', 'progress', 'mood', 'voice', 'calls', 'ai', 'trash', 'appearance'];
 
 const Features: React.FC<FeaturesProps> = ({ onNavigate }) => {
   const [selected, setSelected] = useState<FeatureDetail | null>(null);
@@ -215,7 +232,7 @@ const Features: React.FC<FeaturesProps> = ({ onNavigate }) => {
         <div className="max-w-3xl">
           <p className="t-eyebrow">Qué incluye</p>
           <h2 className="t-display-lg mt-4 text-ink">
-            Doce herramientas
+            Trece herramientas
             <br />
             que se hablan entre sí.
           </h2>
