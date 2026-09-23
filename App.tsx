@@ -7,11 +7,15 @@ import BlogPostDetail from './components/BlogPostDetail';
 import PrivacyPolicy from './components/PrivacyPolicy';
 import TermsAndConditions from './components/TermsAndConditions';
 import FAQ from './components/FAQ';
-import UserGuide from './components/UserGuide';
+import DocsLayout from './components/docs/DocsLayout';
+import DocsHome from './components/docs/DocsHome';
+import DocsCategoryPage from './components/docs/DocsCategoryPage';
+import DocsArticlePage from './components/docs/DocsArticlePage';
 import Footer from './components/Footer';
 import { Helmet } from 'react-helmet-async';
 
 import { BLOG_POSTS } from './constants';
+import { getArticle, getCategory } from './content/docs';
 
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(true);
@@ -76,9 +80,20 @@ function App() {
     } else if (location.pathname === '/faq') {
       title = 'Preguntas Frecuentes | Zenth Space';
       description = 'Todo lo que necesitas saber sobre Agenda, Pizarras, Biblioteca, Llamadas, reuniones rápidas, Enfoque, Google Drive, Calendar y Mi ritmo.';
-    } else if (location.pathname === '/guide') {
-      title = 'Manual del Usuario | Zenth: Guía Completa';
-      description = 'Aprende Zenth paso a paso: Agenda, Pizarras, Biblioteca, Llamadas, reuniones rápidas, Enfoque global, Mi ritmo, ajustes e integraciones de Google.';
+    } else if (location.pathname.startsWith('/docs')) {
+      const [, , categoryId, slug] = location.pathname.split('/');
+      const article = getArticle(categoryId, slug);
+      const category = getCategory(categoryId);
+      if (article) {
+        title = `${article.title} | Documentación de Zenth`;
+        description = article.summary;
+      } else if (category) {
+        title = `${category.title} | Documentación de Zenth`;
+        description = category.description;
+      } else {
+        title = 'Documentación de Zenth: guías de uso con buscador';
+        description = 'Aprende Zenth paso a paso: Agenda, Pizarras, Biblioteca, Reuniones, Enfoque, Progreso, atajos e integraciones. Con buscador.';
+      }
     }
 
     return { title, description, url, image };
@@ -87,7 +102,7 @@ function App() {
   const seo = getSEO();
 
   // Centralized navigation handler
-  const handleNavigate = (page: 'home' | 'blog' | 'privacy' | 'terms' | 'faq' | 'guide', targetId?: string) => {
+  const handleNavigate = (page: 'home' | 'blog' | 'privacy' | 'terms' | 'faq' | 'docs', targetId?: string) => {
     if (page === 'home') {
       if (location.pathname !== '/') {
         navigate('/');
@@ -129,8 +144,8 @@ function App() {
     } else if (page === 'faq') {
       navigate('/faq');
       window.scrollTo({ top: 0, behavior: 'smooth' });
-    } else if (page === 'guide') {
-      navigate('/guide');
+    } else if (page === 'docs') {
+      navigate('/docs');
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
@@ -161,7 +176,7 @@ function App() {
         currentPage={
           location.pathname.startsWith('/blog') ? 'blog' :
             location.pathname === '/faq' ? 'faq' :
-              location.pathname === '/guide' ? 'guide' : 'home'
+              location.pathname.startsWith('/docs') ? 'docs' : 'home'
         }
         onNavigate={(page, id) => handleNavigate(page as any, id)}
       />
@@ -181,8 +196,14 @@ function App() {
           <Route path="/blog/:id" element={<BlogPostDetailWithParams />} />
           <Route path="/privacy" element={<PrivacyPolicy onBack={() => handleNavigate('home')} />} />
           <Route path="/terms" element={<TermsAndConditions onBack={() => handleNavigate('home')} />} />
-          <Route path="/faq" element={<FAQ onBack={() => handleNavigate('home')} onGoToGuide={() => handleNavigate('guide')} />} />
-          <Route path="/guide" element={<UserGuide onBack={() => handleNavigate('faq')} />} />
+          <Route path="/faq" element={<FAQ onBack={() => handleNavigate('home')} onGoToDocs={() => handleNavigate('docs')} />} />
+          <Route path="/docs" element={<DocsLayout />}>
+            <Route index element={<DocsHome />} />
+            <Route path=":category" element={<DocsCategoryPage />} />
+            <Route path=":category/:slug" element={<DocsArticlePage />} />
+          </Route>
+          {/* El manual del usuario pasó a la documentación: los enlaces viejos siguen funcionando. */}
+          <Route path="/guide" element={<Navigate to="/docs" replace />} />
           {/* Fallback route */}
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>

@@ -5,11 +5,11 @@ import { Menu, X, Moon, Sun, ArrowUpRight } from 'lucide-react';
 interface NavbarProps {
   isDarkMode: boolean;
   toggleTheme: () => void;
-  currentPage: 'home' | 'blog' | 'faq' | 'guide';
-  onNavigate: (page: 'home' | 'blog' | 'faq' | 'guide', sectionId?: string) => void;
+  currentPage: 'home' | 'blog' | 'faq' | 'docs';
+  onNavigate: (page: 'home' | 'blog' | 'faq' | 'docs', sectionId?: string) => void;
 }
 
-type NavPage = 'home' | 'blog' | 'faq' | 'guide';
+type NavPage = 'home' | 'blog' | 'faq' | 'docs';
 
 const mobileMenuVariants = {
   closed: { opacity: 0, y: -12 },
@@ -31,7 +31,7 @@ const NAV_LINKS: { name: string; page: NavPage; id?: string }[] = [
   { name: 'Instalar', page: 'home', id: 'install' },
   { name: 'Blog', page: 'blog' },
   { name: 'FAQ', page: 'faq' },
-  { name: 'Guía', page: 'guide' },
+  { name: 'Documentación', page: 'docs' },
 ];
 
 const Navbar: React.FC<NavbarProps> = ({ isDarkMode, toggleTheme, currentPage, onNavigate }) => {

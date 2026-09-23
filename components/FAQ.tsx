@@ -174,7 +174,7 @@ const FAQItem: React.FC<FAQEntry> = ({ question, answer }) => {
     );
 };
 
-const FAQ = ({ onBack, onGoToGuide }: { onBack: () => void; onGoToGuide: () => void }) => {
+const FAQ = ({ onBack, onGoToDocs }: { onBack: () => void; onGoToDocs: () => void }) => {
     return (
         <div className="min-h-screen pt-28 pb-24 lg:pt-36">
             <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
@@ -202,12 +202,12 @@ const FAQ = ({ onBack, onGoToGuide }: { onBack: () => void; onGoToGuide: () => v
                     <div>
                         <h2 className="t-headline text-ink">¿Buscabas el paso a paso?</h2>
                         <p className="t-body mt-2 text-ink-muted">
-                            El manual del usuario recorre cada sección de la aplicación en detalle.
+                            La documentación explica cada sección de la aplicación paso a paso y tiene buscador.
                         </p>
                     </div>
-                    <button onClick={onGoToGuide} className="fr-btn fr-btn-primary shrink-0">
+                    <button onClick={onGoToDocs} className="fr-btn fr-btn-primary shrink-0">
                         <BookOpen className="h-4 w-4" />
-                        Ver el manual
+                        Ver la documentación
                     </button>
                 </div>
 

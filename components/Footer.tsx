@@ -2,7 +2,7 @@ import React from 'react';
 import { Mail, Linkedin, ArrowUpRight } from 'lucide-react';
 
 interface FooterProps {
-  onNavigate: (page: 'home' | 'blog' | 'privacy' | 'terms' | 'faq' | 'guide', targetId?: string) => void;
+  onNavigate: (page: 'home' | 'blog' | 'privacy' | 'terms' | 'faq' | 'docs', targetId?: string) => void;
 }
 
 const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
@@ -20,7 +20,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
       links: [
         { label: 'Blog', onClick: () => onNavigate('blog') },
         { label: 'Preguntas frecuentes', onClick: () => onNavigate('faq') },
-        { label: 'Manual del usuario', onClick: () => onNavigate('guide') },
+        { label: 'Documentación', onClick: () => onNavigate('docs') },
       ],
     },
     {
