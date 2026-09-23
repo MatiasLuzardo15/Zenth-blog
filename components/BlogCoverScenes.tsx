@@ -805,26 +805,28 @@ const SceneBalance: React.FC = () => {
   );
 };
 
-/** 11 · Estado de flujo: ondas concéntricas detrás del selector (no el timer en marcha, ya usado en 7 y 8). */
+/** 11 · Estado de flujo: el aro de Enfoque, ampliado a pieza abstracta, con corrientes cruzando el lienzo — no el timer en marcha (ya usado en 7 y 8). */
 const SceneFlow: React.FC = () => (
   <>
-    <S x={190} y={20}>
-      <div className="relative h-[360px] w-[360px]">
-        {[360, 260, 170].map((size, i) => (
-          <span
-            key={size}
-            className="absolute left-1/2 top-1/2 rounded-full border border-accent"
-            style={{ height: size, width: size, transform: 'translate(-50%, -50%)', opacity: 0.1 + i * 0.06 }}
-          />
-        ))}
-      </div>
-    </S>
-    <S x={132} y={84} k={1.32}>
-      <div className="w-[360px] overflow-hidden" style={{ height: 180 }}>
-        <div style={{ marginTop: -258 }}>
-          <FocusView elapsed={0} />
+    <svg viewBox={`0 0 ${COVER_W} ${COVER_H}`} className="absolute inset-0 h-full w-full" aria-hidden="true">
+      <path d="M -20 138 C 150 100, 260 190, 420 138 S 620 80, 680 118" fill="none" stroke="#ffffff" strokeWidth={1.4} opacity={0.24} />
+      <path d="M -20 270 C 160 230, 280 330, 440 270 S 630 210, 680 250" fill="none" stroke="#ffffff" strokeWidth={1.4} opacity={0.22} />
+      <path d="M -20 340 C 170 315, 290 375, 450 340 S 630 300, 680 330" fill="none" stroke="#ffffff" strokeWidth={1.1} opacity={0.16} />
+    </svg>
+    <S x={214} y={76}>
+      <div
+        className="relative flex h-[228px] w-[228px] items-center justify-center rounded-full"
+        style={{ background: 'repeating-conic-gradient(#0099ff 0deg 2.6deg, transparent 2.6deg 7deg)' }}
+      >
+        <div className="flex h-[182px] w-[182px] items-center justify-center rounded-full bg-canvas">
+          <span className="h-3.5 w-3.5 rounded-full bg-accent" style={{ boxShadow: '0 0 28px 8px rgba(0,153,255,0.55)' }} />
         </div>
       </div>
+    </S>
+    <S x={188} y={324}>
+      <span className={`flex items-center gap-2 rounded-pill bg-ink px-4 py-2.5 text-[12px] font-semibold text-canvas ${SHADOW}`}>
+        Sin objetivo de tiempo. Solo empezar.
+      </span>
     </S>
   </>
 );
