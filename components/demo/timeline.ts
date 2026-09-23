@@ -29,60 +29,90 @@ export const TYPE_END = 2800;
 export const PRESS_AT = 3050;
 export const APPEARS_AT = 3300;
 export const COMPLETES_AT = 5600;
-export const DETAILS_AT = 7600;
-export const EDIT_AT = 11600;
-export const PANEL_CLOSE_AT = 16600;
 
 export const TODAY_TASK = 'Preparar la propuesta';
 
+/* ── Acto I·b · Día, Semana y Mes ────────────────────────────────────────── */
+
+export const VIEWS_START_AT = 7200;
+export const WEEK_HOVER_AT = 7800;
+export const WEEK_CLICK_AT = 8400;
+export const MONTH_HOVER_AT = 11000;
+export const MONTH_CLICK_AT = 11600;
+export const DAY_HOVER_AT = 14200;
+export const DAY_CLICK_AT = 14800;
+export const VIEWS_END_AT = 15400;
+
+export const DETAILS_AT = 15800;
+export const EDIT_AT = 19800;
+export const PANEL_CLOSE_AT = 24800;
+
 /* ── Acto II · La pizarra ────────────────────────────────────────────────── */
 
-export const BOARD_AT = 18200;
+export const BOARD_AT = 26400;
 
-export const NEW1_OPEN = 19400;
-export const NEW1_TYPE_S = 19900;
-export const NEW1_TYPE_E = 21300;
-export const NEW1_ADD = 24600;
-export const NEW1_CARD = 25000;
+export const NEW1_OPEN = 27600;
+export const NEW1_TYPE_S = 28100;
+export const NEW1_TYPE_E = 29500;
+export const NEW1_ADD = 32800;
+export const NEW1_CARD = 33200;
 
-export const NEW2_OPEN = 25800;
-export const NEW2_TYPE_S = 26300;
-export const NEW2_TYPE_E = 27700;
-export const NEW2_ADD = 31000;
-export const NEW2_CARD = 31400;
+export const NEW2_OPEN = 34000;
+export const NEW2_TYPE_S = 34500;
+export const NEW2_TYPE_E = 35900;
+export const NEW2_ADD = 39200;
+export const NEW2_CARD = 39600;
 
-export const NEW3_OPEN = 32200;
-export const NEW3_TYPE_S = 32700;
-export const NEW3_TYPE_E = 34200;
-export const NEW3_ADD = 37500;
-export const NEW3_CARD = 37900;
+export const NEW3_OPEN = 40400;
+export const NEW3_TYPE_S = 40900;
+export const NEW3_TYPE_E = 42400;
+export const NEW3_ADD = 45700;
+export const NEW3_CARD = 46100;
 
-export const DRAG1_AT = 39200;
-export const DRAG2_AT = 41200;
-export const DRAG3_AT = 43200;
-export const SWAP_AT = 45500;
-export const ARCHIVE_AT = 48000;
-export const ARCHIVE2_AT = 50300;
-export const BOARD_END = 52900;
+export const DRAG1_AT = 47400;
+export const DRAG2_AT = 49400;
+export const DRAG3_AT = 51400;
+export const SWAP_AT = 53700;
+export const ARCHIVE_AT = 56200;
+export const ARCHIVE2_AT = 58500;
+export const BOARD_END = 61100;
 
 /* ── Acto III · De una tarea a una sesión de enfoque ───────────────────── */
 
-export const RETURN_TODAY_AT = 53500;
-export const TASK_OPEN_AT = 55200;
-export const FOCUS_ACTION_AT = 58600;
-export const FOCUS_VIEW_AT = 59300;
-export const FOCUS_START_AT = 62600;
-export const FOCUS_RUNNING_AT = 63200;
-export const FOCUS_END = 68100;
+export const RETURN_TODAY_AT = 61700;
+export const TASK_OPEN_AT = 63400;
+export const FOCUS_ACTION_AT = 66800;
+export const FOCUS_VIEW_AT = 67500;
+export const FOCUS_START_AT = 70800;
+export const FOCUS_RUNNING_AT = 71400;
+export const FOCUS_END = 74400;
 
 export const FOCUS_TASK = 'Revisar la propuesta comercial';
 
-export const CYCLE = 70000;
+/* ── Acto IV · Crear una reunión, entrar y recibir a un invitado ────────── */
+
+export const MEETING_TITLE = 'Reunión de equipo';
+
+export const MEETING_OPEN_AT = 75000;
+export const MEETING_ADD_HOVER = 75600;
+export const MEETING_ADD_CLICK_AT = 76200;
+export const MEETING_MENU_CLOSE_AT = 77100;
+export const MEETING_LINK_HOVER = 77700;
+export const MEETING_LINK_CLICK_AT = 78300;
+export const MEETING_CREATED_AT = 78600;
+export const MEETING_PREPARING_AT = 80800;
+export const LOBBY_AT = 82200;
+export const LOBBY_JOIN_HOVER = 84600;
+export const LOBBY_JOIN_CLICK_AT = 85200;
+export const CALL_VIEW_AT = 85650;
+export const GUEST_JOIN_AT = 88000;
+export const CALL_END = 92400;
+
+export const CYCLE = 94200;
 
 /* ── Datos de la pizarra ─────────────────────────────────────────────────── */
 
 export const BOARD_NAME = 'Plan de lanzamiento';
-export const BOARD_DESCRIPTION = 'Una vista clara para avanzar sin perder el foco.';
 
 export interface DemoList {
     key: string;
@@ -93,22 +123,11 @@ export interface DemoList {
 }
 
 export const BOARD_LISTS: DemoList[] = [
-    { key: 'encurso', label: 'En proceso', accent: '#DCEB8A', empty: 'Suelta una tarjeta aquí' },
-    { key: 'porhacer', label: 'Inicio', accent: '#DCEB8A', empty: 'Nada por clasificar' },
-    { key: 'listo', label: 'Terminado', accent: '#E1EF91', empty: 'Objetivo cumplido' },
-    { key: 'revision', label: 'Por hacer', accent: '#FFE082', empty: 'Cuando haya tiempo' },
+    { key: 'encurso', label: 'En curso', accent: '#81D4FA', empty: 'Nada en curso' },
+    { key: 'porhacer', label: 'Baja', accent: '#FFB7CE', empty: 'Nada por clasificar' },
+    { key: 'listo', label: 'Alta', accent: '#FFAB91', empty: 'Nada urgente todavía' },
+    { key: 'revision', label: 'Media', accent: '#B39DDB', empty: 'Cuando haya tiempo' },
 ];
-
-/** Color de texto legible sobre cada acento — copiado de la aplicación. */
-const ACCENT_TEXT: Record<string, string> = {
-    '#FFB7CE': '#701B3F',
-    '#FFE082': '#5F4B1B',
-    '#81D4FA': '#01579B',
-    '#B39DDB': '#4527A0',
-    '#A5D6A7': '#1B4332',
-};
-
-export const accentTextColor = (accent: string) => ACCENT_TEXT[accent.toUpperCase()] || '#1A1A1A';
 
 export interface DemoCard {
     id: string;

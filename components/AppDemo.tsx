@@ -1,26 +1,36 @@
 import React, { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import {
-    AlignLeft, CalendarDays, CircleDashed, ChevronUp, Flame, LayoutDashboard,
-    LibraryBig, MousePointer2, Orbit, Pencil, Target, Trash2, X,
+    AlignLeft, Bell, Calendar, Check, Flame, LayoutDashboard,
+    LibraryBig, MousePointer2, Pencil, PhoneCall, Search, Target, Timer, Trash2, X,
 } from 'lucide-react';
 import { TodayView } from './demo/TodayView';
 import { BoardView } from './demo/BoardView';
 import { FocusView } from './demo/FocusView';
-import { DetailsPanel, EditPanel, FocusTaskPanel } from './demo/panels';
+import { LobbyDialog } from './demo/LobbyDialog';
+import { MeetingCallView } from './demo/MeetingCallView';
+import { MeetingHubView } from './demo/MeetingHubView';
 import {
-    APPEARS_AT, ARCHIVE_AT, ARCHIVE2_AT, BOARD_AT, COMPLETES_AT, CYCLE, DESIGN_H,
-    DESIGN_W, DETAILS_AT, DRAG1_AT, DRAG2_AT, DRAG3_AT, EDIT_AT, FOCUS_ACTION_AT,
-    FOCUS_RUNNING_AT, FOCUS_START_AT, FOCUS_VIEW_AT, MIN_SCALE, NEW1_OPEN,
-    PANEL_CLOSE_AT, PRESS_AT, RETURN_TODAY_AT, SWAP_AT, TASK_OPEN_AT,
-    TODAY_TASK, TYPE_END, TYPE_START, typewriter,
+    DetailsPanel, EditPanel, FocusTaskPanel, MeetingEditPanel, MeetingPreparingPanel,
+} from './demo/panels';
+import {
+    APPEARS_AT, ARCHIVE_AT, ARCHIVE2_AT, BOARD_AT, CALL_END, CALL_VIEW_AT,
+    COMPLETES_AT, CYCLE, DAY_CLICK_AT, DAY_HOVER_AT, DESIGN_H, DESIGN_W, DETAILS_AT,
+    DRAG1_AT, DRAG2_AT, DRAG3_AT, EDIT_AT, FOCUS_ACTION_AT, FOCUS_END,
+    FOCUS_RUNNING_AT, FOCUS_START_AT, FOCUS_VIEW_AT, GUEST_JOIN_AT, LOBBY_AT,
+    LOBBY_JOIN_CLICK_AT, MEETING_ADD_CLICK_AT, MEETING_ADD_HOVER,
+    MEETING_CREATED_AT, MEETING_LINK_CLICK_AT, MEETING_LINK_HOVER,
+    MEETING_MENU_CLOSE_AT, MEETING_OPEN_AT, MEETING_PREPARING_AT,
+    MEETING_TITLE, MIN_SCALE, MONTH_CLICK_AT, MONTH_HOVER_AT, NEW1_OPEN, PANEL_CLOSE_AT,
+    PRESS_AT, RETURN_TODAY_AT, SWAP_AT, TASK_OPEN_AT, TODAY_TASK, TYPE_END,
+    TYPE_START, VIEWS_END_AT, VIEWS_START_AT, WEEK_CLICK_AT, WEEK_HOVER_AT, typewriter,
 } from './demo/timeline';
 
 const NAV = [
-    { label: 'Agenda', icon: CalendarDays },
+    { label: 'Agenda', icon: Calendar },
     { label: 'Pizarras', icon: LayoutDashboard },
     { label: 'Biblioteca', icon: LibraryBig },
-    { label: 'Mi ritmo', icon: Orbit },
+    { label: 'Reuniones', icon: PhoneCall },
 ];
 
 /**
@@ -81,6 +91,8 @@ const AppDemo: React.FC = () => {
     }, []);
 
     useEffect(() => {
+        const DEBUG_FREEZE = Number(new URLSearchParams(window.location.search).get('freeze'));
+        if (DEBUG_FREEZE) { setElapsed(DEBUG_FREEZE); return; }
         if (reduceMotion) {
             setElapsed(COMPLETES_AT + 800);
             return;
@@ -94,8 +106,21 @@ const AppDemo: React.FC = () => {
     const { scale, width: frameWidth } = box;
     const overflowX = Math.max(0, DESIGN_W * scale - frameWidth);
     const boardActive = elapsed >= BOARD_AT && elapsed < RETURN_TODAY_AT;
-    const focusActive = elapsed >= FOCUS_VIEW_AT;
+    const focusActive = elapsed >= FOCUS_VIEW_AT && elapsed < FOCUS_END;
     const returningToday = elapsed >= RETURN_TODAY_AT && elapsed < FOCUS_VIEW_AT;
+
+    const meetingPanelActive = elapsed >= MEETING_OPEN_AT && elapsed < LOBBY_AT;
+    const meetingStage: 'collapsed' | 'picking' | 'created' = elapsed < MEETING_ADD_CLICK_AT
+        ? 'collapsed'
+        : elapsed < MEETING_CREATED_AT ? 'picking' : 'created';
+    const serviceMenuOpen = elapsed >= MEETING_ADD_CLICK_AT && elapsed < MEETING_MENU_CLOSE_AT;
+    const showLinkToast = elapsed >= MEETING_CREATED_AT && elapsed < MEETING_CREATED_AT + 2000;
+    const meetingPanelView: 'edit' | 'preparing' = elapsed < MEETING_PREPARING_AT ? 'edit' : 'preparing';
+    const lobbyActive = elapsed >= LOBBY_AT && elapsed < CALL_VIEW_AT;
+    const lobbyJoinPressed = elapsed >= LOBBY_JOIN_CLICK_AT && elapsed < LOBBY_JOIN_CLICK_AT + 280;
+    const callViewActive = elapsed >= CALL_VIEW_AT && elapsed < CALL_END;
+    const guestJoined = elapsed >= GUEST_JOIN_AT && elapsed < CALL_END;
+    const meetingsActive = elapsed >= MEETING_OPEN_AT && elapsed < CALL_END;
 
     const typed = useMemo(
         () => elapsed >= PRESS_AT ? '' : typewriter(TODAY_TASK, elapsed, TYPE_START, TYPE_END),
@@ -106,32 +131,63 @@ const AppDemo: React.FC = () => {
     const added = elapsed >= APPEARS_AT;
     const completed = elapsed >= COMPLETES_AT;
     const celebrating = completed && elapsed < COMPLETES_AT + 1600;
+    const agendaView = elapsed < WEEK_CLICK_AT || elapsed >= DAY_CLICK_AT ? 'day'
+        : elapsed < MONTH_CLICK_AT ? 'week'
+            : 'month';
+    const hoveredAgendaView = elapsed >= WEEK_HOVER_AT && elapsed < WEEK_CLICK_AT ? 'week'
+        : elapsed >= MONTH_HOVER_AT && elapsed < MONTH_CLICK_AT ? 'month'
+            : elapsed >= DAY_HOVER_AT && elapsed < DAY_CLICK_AT ? 'day'
+                : undefined;
 
-    const panel: 'none' | 'details' | 'edit' | 'task' = returningToday && elapsed >= TASK_OPEN_AT
-        ? 'task'
-        : boardActive || focusActive || elapsed >= PANEL_CLOSE_AT
-            ? 'none'
-            : elapsed >= EDIT_AT
-                ? 'edit'
-                : elapsed >= DETAILS_AT
-                    ? 'details'
-                    : 'none';
+    const panel: 'none' | 'details' | 'edit' | 'task' | 'meeting' = meetingPanelActive
+        ? 'meeting'
+        : returningToday && elapsed >= TASK_OPEN_AT
+            ? 'task'
+            : boardActive || focusActive || elapsed >= PANEL_CLOSE_AT
+                ? 'none'
+                : elapsed >= EDIT_AT
+                    ? 'edit'
+                    : elapsed >= DETAILS_AT
+                        ? 'details'
+                        : 'none';
 
     /** En móvil, la cámara sigue la zona donde está ocurriendo la acción. */
-    const cropFocus = focusActive
-        ? (elapsed >= FOCUS_RUNNING_AT ? .5 : .24)
-        : boardActive
-            ? boardCameraFocus(elapsed)
-            : returningToday
-                ? (panel === 'task' ? .72 : .86)
-                : (elapsed < PRESS_AT || elapsed > CYCLE - 1200 ? .02 : .98);
+    const cropFocus = callViewActive || lobbyActive
+        ? .5
+        : meetingPanelActive
+            ? .86
+            : focusActive
+                ? .9
+                : boardActive
+                    ? boardCameraFocus(elapsed)
+                    : returningToday
+                        ? (panel === 'task' ? .72 : .86)
+                        : (elapsed < PRESS_AT || elapsed > CYCLE - 1200 ? .02 : .98);
 
-    const journeyCursor = elapsed < TASK_OPEN_AT
-        ? { x: 1082, y: 196, click: elapsed >= TASK_OPEN_AT - 320 }
+    const journeyCursor = elapsed >= VIEWS_START_AT && elapsed < VIEWS_END_AT
+        ? elapsed < WEEK_CLICK_AT + 280
+            ? { x: 826, y: 127, click: elapsed >= WEEK_CLICK_AT }
+            : elapsed < MONTH_HOVER_AT
+                ? { x: 1126, y: 127, click: false }
+                : elapsed < DAY_HOVER_AT
+                    ? { x: 1204, y: 127, click: elapsed >= MONTH_CLICK_AT && elapsed < MONTH_CLICK_AT + 280 }
+                    : elapsed < DAY_CLICK_AT
+                        ? { x: 1048, y: 127, click: false }
+                        : { x: 748, y: 127, click: elapsed < DAY_CLICK_AT + 280 }
+        : elapsed < TASK_OPEN_AT
+            ? { x: 1082, y: 196, click: elapsed >= TASK_OPEN_AT - 320 }
         : elapsed < FOCUS_VIEW_AT
             ? { x: 755, y: 205, click: elapsed >= FOCUS_ACTION_AT && elapsed < FOCUS_ACTION_AT + 380 }
-            : { x: 420, y: 680, click: elapsed >= FOCUS_START_AT && elapsed < FOCUS_RUNNING_AT };
-    const showJourneyCursor = elapsed >= RETURN_TODAY_AT + 650 && elapsed < FOCUS_RUNNING_AT + 500;
+            : elapsed < MEETING_OPEN_AT
+                ? { x: 1076, y: 446, click: elapsed >= FOCUS_START_AT && elapsed < FOCUS_RUNNING_AT }
+                : elapsed < MEETING_LINK_HOVER
+                    ? { x: 1230, y: 420, click: elapsed >= MEETING_ADD_CLICK_AT && elapsed < MEETING_ADD_CLICK_AT + 280 }
+                    : elapsed < LOBBY_AT
+                        ? { x: 970, y: 495, click: elapsed >= MEETING_LINK_CLICK_AT && elapsed < MEETING_LINK_CLICK_AT + 280 }
+                        : { x: 640, y: 534, click: lobbyJoinPressed };
+    const showJourneyCursor = (elapsed >= WEEK_HOVER_AT - 240 && elapsed < VIEWS_END_AT)
+        || (elapsed >= RETURN_TODAY_AT + 650 && elapsed < FOCUS_RUNNING_AT + 500)
+        || (elapsed >= MEETING_ADD_HOVER - 300 && elapsed < LOBBY_JOIN_CLICK_AT + 400);
 
     return (
         <div
@@ -155,7 +211,7 @@ const AppDemo: React.FC = () => {
                         transition: reduceMotion ? undefined : 'transform 720ms cubic-bezier(0.65, 0, 0.35, 1)',
                     }}
                 >
-                    <div className="flex h-[72px] items-center justify-between border-b border-hairline-soft bg-canvas px-6">
+                    <div className="flex h-[72px] items-center justify-between bg-canvas px-6">
                         <div className="flex items-center gap-2.5">
                             <img src="/blog/favicon2.png" alt="" className="h-7 w-7 rounded-[7px] object-contain" />
                             <div className="leading-tight">
@@ -166,7 +222,7 @@ const AppDemo: React.FC = () => {
 
                         <nav className="flex items-center gap-1 rounded-pill bg-surface-1 p-1">
                             {NAV.map(({ label, icon: Icon }, index) => {
-                                const active = boardActive ? index === 1 : index === 0;
+                                const active = meetingsActive ? index === 3 : boardActive ? index === 1 : index === 0;
                                 return (
                                     <motion.span
                                         layout
@@ -181,31 +237,37 @@ const AppDemo: React.FC = () => {
                             })}
                         </nav>
 
-                        <div className="flex items-center gap-1 rounded-pill bg-surface-1 p-1">
-                            <span className={`flex items-center gap-1.5 rounded-pill px-2.5 py-1.5 text-[11px] ${focusActive ? 'bg-canvas font-semibold text-ink shadow-card-resting' : 'text-ink-muted'}`}>
-                                <CircleDashed className="h-4 w-4" strokeWidth={1.9} />
-                                Enfoque
+                        <div className="flex items-center gap-2">
+                            <span className="flex h-9 w-9 items-center justify-center rounded-pill bg-surface-1 text-ink-muted">
+                                <Search className="h-4 w-4" strokeWidth={1.9} />
                             </span>
-                            <span className="flex items-center gap-1 px-2 text-[11px] text-ink-muted"><Flame className="h-3.5 w-3.5" /> 8 días</span>
-                            <span className="relative h-6 w-6 rounded-full bg-gradient-to-br from-grad-violet to-grad-magenta">
-                                <span className="absolute -right-0.5 -top-0.5 h-2 w-2 rounded-full bg-accent" />
+                            <span className={`flex h-9 w-9 items-center justify-center rounded-pill text-ink-muted ${focusActive ? 'bg-canvas font-semibold text-accent shadow-card-resting' : 'bg-surface-1'}`}>
+                                <Timer className="h-4 w-4" strokeWidth={1.9} />
                             </span>
-                            <ChevronUp className="h-4 w-4 text-ink-muted" strokeWidth={1.9} />
+                            <span className="flex h-9 w-9 items-center justify-center rounded-pill bg-surface-1 text-ink-muted">
+                                <Bell className="h-4 w-4" strokeWidth={1.9} />
+                            </span>
+                            <span className="relative flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-grad-violet to-grad-magenta text-[12px] font-semibold text-white">
+                                M
+                                <span className="absolute -bottom-0.5 -right-0.5 flex h-3.5 w-3.5 items-center justify-center rounded-full border-2 border-canvas bg-accent">
+                                    <Flame className="h-2 w-2 text-white" fill="currentColor" strokeWidth={0} />
+                                </span>
+                            </span>
                         </div>
                     </div>
 
                     <div className="relative h-[728px] overflow-visible">
                         <AnimatePresence mode="wait" initial={false}>
-                            {focusActive ? (
+                            {callViewActive ? (
                                 <motion.div
-                                    key="focus-view"
-                                    initial={{ opacity: 0, x: 36 }}
-                                    animate={{ opacity: 1, x: 0 }}
-                                    exit={{ opacity: 0, scale: .98 }}
-                                    transition={{ duration: .58, ease: [0.16, 1, 0.3, 1] }}
+                                    key="call-view"
+                                    initial={{ opacity: 0, scale: .98 }}
+                                    animate={{ opacity: 1, scale: 1 }}
+                                    exit={{ opacity: 0 }}
+                                    transition={{ duration: .5, ease: [0.16, 1, 0.3, 1] }}
                                     className="absolute inset-0"
                                 >
-                                    <FocusView elapsed={elapsed} />
+                                    <MeetingCallView elapsed={elapsed} startedAt={CALL_VIEW_AT} guestJoined={guestJoined} />
                                 </motion.div>
                             ) : boardActive ? (
                                 <motion.div
@@ -217,6 +279,17 @@ const AppDemo: React.FC = () => {
                                     className="absolute inset-0"
                                 >
                                     <BoardView elapsed={elapsed} />
+                                </motion.div>
+                            ) : meetingsActive ? (
+                                <motion.div
+                                    key="meetings-view"
+                                    initial={{ opacity: 0, x: 24 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    exit={{ opacity: 0, x: -24 }}
+                                    transition={{ duration: .48, ease: [0.16, 1, 0.3, 1] }}
+                                    className="absolute inset-0"
+                                >
+                                    <MeetingHubView stage={elapsed < MEETING_PREPARING_AT ? 'editing' : elapsed < LOBBY_AT ? 'preparing' : 'ready'} />
                                 </motion.div>
                             ) : (
                                 <motion.div
@@ -236,10 +309,18 @@ const AppDemo: React.FC = () => {
                                         panelOpen={panel !== 'none'}
                                         focusTaskVisible={returningToday}
                                         focusTaskSelected={panel === 'task'}
+                                        viewMode={agendaView}
+                                        viewHover={hoveredAgendaView}
                                     />
                                 </motion.div>
                             )}
                         </AnimatePresence>
+
+                        {focusActive && (
+                            <div className="absolute right-6 top-4 z-[75]">
+                                <FocusView elapsed={elapsed} />
+                            </div>
+                        )}
 
                         <AnimatePresence>
                             {panel !== 'none' && (
@@ -289,11 +370,31 @@ const AppDemo: React.FC = () => {
                                     )}
 
                                     <AnimatePresence mode="wait">
-                                        <motion.div key={panel} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} transition={{ duration: .25 }} className="h-full">
-                                            {panel === 'details' ? <DetailsPanel /> : panel === 'edit' ? <EditPanel /> : <FocusTaskPanel />}
+                                        <motion.div key={panel === 'meeting' ? `meeting-${meetingPanelView}` : panel} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} transition={{ duration: .25 }} className="h-full">
+                                            {panel === 'details' ? <DetailsPanel />
+                                                : panel === 'edit' ? <EditPanel />
+                                                : panel === 'meeting' ? (
+                                                    meetingPanelView === 'edit'
+                                                        ? <MeetingEditPanel title={MEETING_TITLE} stage={meetingStage} serviceMenuOpen={serviceMenuOpen} />
+                                                        : <MeetingPreparingPanel title={MEETING_TITLE} date="1 de septiembre de 2026" time="9:00 AM" />
+                                                )
+                                                : <FocusTaskPanel />}
                                         </motion.div>
                                     </AnimatePresence>
                                 </motion.aside>
+                            )}
+                        </AnimatePresence>
+
+                        <AnimatePresence>
+                            {lobbyActive && (
+                                <motion.div
+                                    key="lobby-backdrop"
+                                    initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+                                    transition={{ duration: .25 }}
+                                    className="absolute inset-0 z-[80] flex items-start justify-center bg-black/70 pt-[170px]"
+                                >
+                                    <LobbyDialog title="Llamar a Reunión de Zenth" joinPressed={lobbyJoinPressed} />
+                                </motion.div>
                             )}
                         </AnimatePresence>
                     </div>
@@ -334,6 +435,21 @@ const AppDemo: React.FC = () => {
                         className="pointer-events-none absolute bottom-4 right-4 rounded-pill bg-accent px-3 py-1.5 text-[11px] font-semibold text-white shadow-soft-lift sm:bottom-6 sm:right-6 sm:px-4 sm:py-2 sm:text-[13px]"
                     >
                         +50 XP
+                    </motion.span>
+                )}
+            </AnimatePresence>
+
+            <AnimatePresence>
+                {showLinkToast && (
+                    <motion.span
+                        key="link-toast"
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -10 }}
+                        transition={{ duration: .3, ease: [0.16, 1, 0.3, 1] }}
+                        className="pointer-events-none absolute bottom-4 right-4 flex items-center gap-2 rounded-pill bg-ink px-3 py-1.5 text-[11px] font-semibold text-canvas shadow-soft-lift sm:bottom-6 sm:right-6 sm:px-4 sm:py-2 sm:text-[13px]"
+                    >
+                        <Check className="h-3.5 w-3.5" strokeWidth={2.4} /> Enlace de llamada creado
                     </motion.span>
                 )}
             </AnimatePresence>

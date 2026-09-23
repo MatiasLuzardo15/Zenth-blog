@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import {
     CalendarDays, Clock, Repeat2, Video, MapPin, ExternalLink, Eye, Target,
     ListChecks, Users, Zap, Tag, Star, Bell, Monitor, Sparkles, AlignLeft,
-    ChevronDown, ChevronRight, X, Check, Flag,
+    ChevronDown, ChevronRight, X, Check, Flag, Link2, Copy, Plus,
 } from 'lucide-react';
 import { WEEKDAYS } from './timeline';
 import { FOCUS_TASK } from './timeline';
@@ -12,13 +12,21 @@ import { FOCUS_TASK } from './timeline';
 
 type IconType = React.ComponentType<{ className?: string; strokeWidth?: number }>;
 
+/**
+ * Contenedor de sección: varios campos relacionados comparten una sola
+ * tarjeta redondeada (como en Drive), en vez de una caja por campo.
+ */
+export const GroupCard: React.FC<{ children: React.ReactNode; className?: string }> = ({ children, className }) => (
+    <div className={`rounded-large bg-surface-1 p-3.5 ${className ?? ''}`}>{children}</div>
+);
+
 export const Field: React.FC<{
     icon: IconType;
     label: string;
     value: string;
     muted?: boolean;
 }> = ({ icon: Icon, label, value, muted }) => (
-    <div className="rounded-medium bg-surface-1 px-3 py-2.5">
+    <div>
         <div className="flex items-center gap-1.5">
             <Icon className="h-3 w-3 text-ink-muted" strokeWidth={1.9} />
             <span className="text-[9px] font-semibold uppercase tracking-[0.14em] text-ink-muted">
@@ -43,7 +51,7 @@ export const SectionCard: React.FC<{
     hint?: string;
     children: React.ReactNode;
 }> = ({ icon: Icon, label, hint, children }) => (
-    <div className="rounded-medium bg-surface-1 p-3">
+    <GroupCard>
         <div className="flex items-start gap-2">
             <Icon className="mt-0.5 h-3.5 w-3.5 shrink-0 text-ink-muted" strokeWidth={1.9} />
             <div className="min-w-0">
@@ -52,6 +60,28 @@ export const SectionCard: React.FC<{
             </div>
         </div>
         <div className="mt-2.5">{children}</div>
+    </GroupCard>
+);
+
+/** Fila de lectura: icono + etiqueta a la izquierda, valor a la derecha. */
+export const DetailRow: React.FC<{ icon: IconType; label: string; value: string }> = ({ icon: Icon, label, value }) => (
+    <div className="flex items-center justify-between py-1.5">
+        <span className="flex items-center gap-1.5 text-[12px] text-ink-muted">
+            <Icon className="h-3.5 w-3.5" strokeWidth={1.9} />
+            {label}
+        </span>
+        <span className="text-[12px] font-semibold text-ink">{value}</span>
+    </div>
+);
+
+/** Sección de lectura: separada de la anterior por una línea fina, no por caja. */
+export const DetailSection: React.FC<{ label: string; hint?: string; children: React.ReactNode }> = ({ label, hint, children }) => (
+    <div className="border-t border-hairline-soft pt-3">
+        <div className="flex items-center justify-between">
+            <span className="text-[9px] font-semibold uppercase tracking-[0.14em] text-ink-muted">{label}</span>
+            {hint && <span className="text-[9px] text-ink-muted">{hint}</span>}
+        </div>
+        <div className="mt-1">{children}</div>
     </div>
 );
 
@@ -84,7 +114,7 @@ const EventTypePicker: React.FC<{ selected: number }> = ({ selected }) => (
 );
 
 const Toggle: React.FC<{ icon: IconType; label: string; on: boolean }> = ({ icon: Icon, label, on }) => (
-    <div className="flex items-center gap-2 rounded-medium bg-surface-1 px-3 py-2.5">
+    <div className="flex items-center gap-2">
         <Icon className="h-3.5 w-3.5 text-ink-muted" strokeWidth={1.9} />
         <span className="flex-1 text-[11px] font-semibold text-ink">{label}</span>
         <span className={`flex h-[16px] w-7 items-center rounded-pill px-0.5 ${on ? 'bg-accent' : 'bg-surface-2'}`}>
@@ -94,7 +124,7 @@ const Toggle: React.FC<{ icon: IconType; label: string; on: boolean }> = ({ icon
 );
 
 const TagsRow: React.FC<{ value?: string }> = ({ value = 'Ninguna' }) => (
-    <div className="flex items-center gap-2 rounded-medium bg-surface-1 px-3 py-2.5">
+    <GroupCard className="flex items-center gap-2">
         <Tag className="h-3.5 w-3.5 text-ink-muted" strokeWidth={1.9} />
         <span className="flex-1 text-[9px] font-semibold uppercase tracking-[0.14em] text-ink-muted">
             Etiquetas
@@ -107,12 +137,135 @@ const TagsRow: React.FC<{ value?: string }> = ({ value = 'Ninguna' }) => (
             className={`text-[10px] ${value === 'Ninguna' ? 'italic text-ink-muted' : 'rounded-pill bg-canvas px-2 py-0.5 font-semibold text-ink'}`}
         >{value}</motion.span>
         <ChevronRight className="h-3 w-3 text-ink-muted" strokeWidth={1.9} />
-    </div>
+    </GroupCard>
 );
 
 const NotesBox: React.FC<{ text?: string }> = ({ text = 'Escribe tus notas aquí…' }) => (
-    <div className="h-[62px] rounded-medium bg-surface-1 px-3 py-2.5">
+    <div className="h-[62px] rounded-large bg-surface-1 px-3 py-2.5">
         <motion.span key={text} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: .3 }} className="text-[11px] text-ink-muted">{text}</motion.span>
+    </div>
+);
+
+/**
+ * Sección "Reunión": colapsada muestra sólo "Añadir"; al elegir un
+ * servicio se expande con el desplegable de Servicio; una vez creado el
+ * enlace, la fila de "Crear enlace de llamada" se convierte en el enlace
+ * en sí, con copiar y el campo de invitados.
+ */
+export const MeetingSection: React.FC<{
+    stage: 'collapsed' | 'picking' | 'created';
+    serviceMenuOpen?: boolean;
+}> = ({ stage, serviceMenuOpen }) => (
+    <GroupCard>
+        <div className="flex items-center gap-2">
+            <Video className="h-3.5 w-3.5 shrink-0 text-ink-muted" strokeWidth={1.9} />
+            <span className="flex-1 text-[9px] font-semibold uppercase tracking-[0.14em] text-ink-muted">Reunión</span>
+            <span className="text-[11px] font-semibold text-ink">{stage === 'collapsed' ? 'Añadir' : 'Zenth'}</span>
+            <ChevronDown className="h-3 w-3 text-ink-muted" strokeWidth={1.9} />
+        </div>
+
+        {stage !== 'collapsed' && (
+            <motion.div
+                initial={{ opacity: 0, y: -4 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: .22 }}
+                className="relative mt-3 space-y-2"
+            >
+                <div className="relative flex items-center justify-between rounded-medium bg-canvas px-2.5 py-2">
+                    <span className="text-[10px] text-ink-muted">Servicio</span>
+                    <span className="flex items-center gap-1 text-[11px] font-semibold text-ink">
+                        Zenth <ChevronDown className="h-3 w-3 text-ink-muted" strokeWidth={2} />
+                    </span>
+
+                    {serviceMenuOpen && (
+                        <div className="absolute right-0 top-9 z-10 w-[150px] rounded-medium bg-canvas p-1 shadow-soft-lift">
+                            {['Zenth', 'Google Meet', 'Zoom', 'Microsoft Teams', 'Otro enlace'].map(service => (
+                                <div key={service} className="flex items-center justify-between rounded-[7px] px-2 py-1.5 text-[10px] text-ink">
+                                    {service}
+                                    {service === 'Zenth' && <Check className="h-3 w-3 text-accent" strokeWidth={2.4} />}
+                                </div>
+                            ))}
+                        </div>
+                    )}
+                </div>
+
+                {stage === 'picking' ? (
+                    <div className="flex items-center gap-1.5 rounded-medium bg-canvas px-2.5 py-2">
+                        <Link2 className="h-3 w-3 shrink-0 text-ink-muted" strokeWidth={1.9} />
+                        <span className="flex-1 text-[10px] font-semibold text-ink">Crear enlace de llamada</span>
+                    </div>
+                ) : (
+                    <div className="flex items-center gap-1.5 rounded-medium bg-canvas px-2.5 py-2">
+                        <Link2 className="h-3 w-3 shrink-0 text-ink-muted" strokeWidth={1.9} />
+                        <span className="flex-1 truncate text-[10px] text-ink">https://zenth.space/app/meeting/69a3cad3-…</span>
+                        <Copy className="h-3 w-3 shrink-0 text-ink-muted" strokeWidth={1.9} />
+                    </div>
+                )}
+
+                <div className="flex items-center gap-1.5 rounded-medium bg-canvas px-2.5 py-2">
+                    <MapPin className="h-3 w-3 shrink-0 text-ink-muted" strokeWidth={1.9} />
+                    <span className="text-[10px] text-ink-muted">Ubicación física (opcional)</span>
+                </div>
+                <div className="flex items-center gap-1.5 rounded-medium bg-canvas px-2.5 py-2">
+                    <Plus className="h-3 w-3 shrink-0 text-ink-muted" strokeWidth={2} />
+                    <span className="flex-1 truncate text-[10px] text-ink-muted">persona@correo.com</span>
+                    <span className="rounded-[6px] bg-surface-2 px-2 py-1 text-[9px] font-semibold text-ink">Agregar</span>
+                </div>
+            </motion.div>
+        )}
+    </GroupCard>
+);
+
+/** Editor de una reunión nueva: igual estructura que EditPanel, con la sección Reunión activa. */
+export const MeetingEditPanel: React.FC<{
+    title: string;
+    stage: 'collapsed' | 'picking' | 'created';
+    serviceMenuOpen?: boolean;
+}> = ({ title, stage, serviceMenuOpen }) => (
+    <div className="flex h-full flex-col gap-2.5 overflow-hidden p-5">
+        <div className="flex gap-1.5">
+            <span className="flex items-center gap-1 rounded-pill bg-surface-2 px-2 py-1 text-[9px] font-semibold uppercase tracking-[0.1em] text-ink">
+                <Sparkles className="h-2.5 w-2.5" strokeWidth={2.2} />
+                Pedir a Zen
+            </span>
+        </div>
+
+        <div className="flex items-center gap-2.5">
+            <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-grad-violet to-grad-magenta">
+                <Users className="h-4 w-4 text-white" strokeWidth={2} />
+            </span>
+            <p className="font-display text-[19px] leading-none tracking-[-0.04em] text-ink">{title}</p>
+        </div>
+
+        <EventTypePicker selected={2} />
+
+        <GroupCard>
+            <div className="grid grid-cols-2 gap-3">
+                <Field icon={CalendarDays} label="Momento" value="Mañana" />
+                <Field icon={CalendarDays} label="Fecha" value="1 sept 2026" />
+            </div>
+            <div className="mt-3">
+                <Field icon={Clock} label="Hora inicio" value="9:00 AM" />
+            </div>
+        </GroupCard>
+
+        <MeetingSection stage={stage} serviceMenuOpen={serviceMenuOpen} />
+
+        <GroupCard>
+            <div className="grid grid-cols-2 gap-3">
+                <Field icon={Clock} label="Duración" value="30m" />
+                <Field icon={Repeat2} label="Repetición" value="No repetir" />
+            </div>
+        </GroupCard>
+
+        <TagsRow value="Equipo" />
+
+        <GroupCard>
+            <div className="grid grid-cols-2 gap-3">
+                <Toggle icon={Star} label="Gran objetivo" on={false} />
+                <Toggle icon={Bell} label="Avisar" on />
+            </div>
+        </GroupCard>
     </div>
 );
 
@@ -142,30 +295,61 @@ export const DetailsPanel: React.FC = () => (
             </div>
         </div>
 
-        <div className="mt-1 flex items-center justify-between">
-            <span className="text-[9px] font-semibold uppercase tracking-[0.14em] text-ink-muted">Agenda</span>
-            <span className="text-[9px] text-ink-muted">Zona horaria local</span>
-        </div>
+        <DetailSection label="Agenda" hint="Zona horaria local">
+            <DetailRow icon={CalendarDays} label="Fecha" value="Mié, 29 de julio de 2026" />
+            <DetailRow icon={Clock} label="Hora" value="6:30 PM" />
+            <DetailRow icon={Clock} label="Duración" value="30m" />
+            <DetailRow icon={Repeat2} label="Repetición" value="Semanal · hasta 22 ago" />
+        </DetailSection>
 
-        <div className="grid grid-cols-2 gap-2">
-            <Field icon={CalendarDays} label="Fecha" value="Mié, 29 de julio de 2026" />
-            <Field icon={Clock} label="Hora" value="6:30 PM" />
-            <Field icon={Clock} label="Duración" value="30m" />
-            <Field icon={Repeat2} label="Repetición" value="Semanal · hasta 22 ago" />
-        </div>
-
-        <SectionCard icon={Video} label="Conexión">
-            <div className="flex items-center gap-2 rounded-[8px] bg-surface-2 px-3 py-2">
+        <DetailSection label="Conexión">
+            <div className="flex items-center gap-2 rounded-medium bg-surface-1 px-3 py-2">
                 <Video className="h-3.5 w-3.5 text-ink-muted" strokeWidth={1.9} />
                 <span className="flex-1 text-[12px] font-semibold text-ink">Google Meet</span>
                 <ExternalLink className="h-3.5 w-3.5 text-ink-muted" strokeWidth={1.9} />
             </div>
-        </SectionCard>
+        </DetailSection>
 
-        <div className="grid grid-cols-2 gap-2">
-            <Field icon={Eye} label="Visibilidad" value="Solo tú" />
-            <Field icon={Target} label="Enfoque" value="Listo para iniciar" />
+        <DetailSection label="Más">
+            <DetailRow icon={Eye} label="Visibilidad" value="Solo tú" />
+            <DetailRow icon={Target} label="Enfoque" value="Listo para iniciar" />
+        </DetailSection>
+    </div>
+);
+
+/** Detalle de la reunión recién creada, mientras se prepara la sala. */
+export const MeetingPreparingPanel: React.FC<{ title: string; date: string; time: string }> = ({ title, date, time }) => (
+    <div className="flex h-full flex-col gap-3 overflow-hidden p-5">
+        <div className="flex items-start gap-3">
+            <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-medium bg-gradient-to-br from-grad-violet to-grad-magenta">
+                <Target className="h-6 w-6 text-white" strokeWidth={1.9} />
+            </span>
+            <div className="min-w-0 flex-1">
+                <div className="flex gap-1.5">
+                    {['Reunión', 'Mañana'].map(p => (
+                        <span key={p} className="rounded-pill bg-surface-2 px-2 py-0.5 text-[9px] font-semibold uppercase tracking-[0.1em] text-ink-muted">{p}</span>
+                    ))}
+                </div>
+                <p className="mt-1.5 font-display text-[24px] leading-none tracking-[-0.045em] text-ink">{title}</p>
+                <p className="mt-1.5 text-[10px] text-ink-muted">Reunión creada en Zenth</p>
+            </div>
         </div>
+
+        <DetailSection label="Agenda" hint="Hora local">
+            <DetailRow icon={CalendarDays} label="Fecha" value={date} />
+            <DetailRow icon={Clock} label="Hora" value={time} />
+        </DetailSection>
+
+        <DetailSection label="Conexión">
+            <div className="flex items-center gap-2 rounded-medium bg-surface-1 px-3 py-2">
+                <span className="h-3.5 w-3.5 shrink-0 animate-spin rounded-full border-2 border-ink-muted border-t-transparent" />
+                <span className="flex-1 text-[12px] font-semibold text-accent">Preparando la reunión…</span>
+            </div>
+        </DetailSection>
+
+        <DetailSection label="Más">
+            <DetailRow icon={Eye} label="Acceso" value="Solo tú" />
+        </DetailSection>
     </div>
 );
 
@@ -216,24 +400,26 @@ export const EditPanel: React.FC = () => (
                     https://meet.google.com/zen-thmq-dkv
                 </span>
             </div>
-            <div className="mt-1.5 flex items-center gap-1.5 rounded-[8px] bg-canvas px-2 py-1.5">
-                <MapPin className="h-3 w-3 text-ink-muted" strokeWidth={1.9} />
-                <span className="text-[10px] text-ink-muted">Ubicación física (opcional)</span>
-            </div>
         </SectionCard>
 
-        <div className="grid grid-cols-2 gap-2">
-            <Field icon={CalendarDays} label="Momento" value="Tarde" />
-            <Field icon={CalendarDays} label="Fecha" value="29 jul 2026" />
-        </div>
-        <Field icon={Clock} label="Hora inicio" value="6:30 PM" />
+        <GroupCard>
+            <div className="grid grid-cols-2 gap-3">
+                <Field icon={CalendarDays} label="Momento" value="Tarde" />
+                <Field icon={CalendarDays} label="Fecha" value="29 jul 2026" />
+            </div>
+            <div className="mt-3">
+                <Field icon={Clock} label="Hora inicio" value="6:30 PM" />
+            </div>
+        </GroupCard>
 
-        <div className="grid grid-cols-2 gap-2">
-            <Field icon={Clock} label="Duración" value="30m" />
-            <Field icon={Repeat2} label="Repetición" value="Semanal" />
-        </div>
+        <GroupCard>
+            <div className="grid grid-cols-2 gap-3">
+                <Field icon={Clock} label="Duración" value="30m" />
+                <Field icon={Repeat2} label="Repetición" value="Semanal" />
+            </div>
+        </GroupCard>
 
-        <div className="flex gap-1 rounded-medium bg-surface-1 p-1.5">
+        <GroupCard className="flex gap-1">
             {WEEKDAYS.map((d, i) => (
                 <span
                     key={i}
@@ -243,7 +429,7 @@ export const EditPanel: React.FC = () => (
                     {d}
                 </span>
             ))}
-        </div>
+        </GroupCard>
 
         <div className="flex items-center justify-between">
             <span className="text-[9px] font-semibold uppercase tracking-[0.14em] text-ink-muted">
@@ -258,10 +444,12 @@ export const EditPanel: React.FC = () => (
 
         <TagsRow />
 
-        <div className="grid grid-cols-2 gap-2">
-            <Toggle icon={Star} label="Gran objetivo" on={false} />
-            <Toggle icon={Bell} label="Avisar" on />
-        </div>
+        <GroupCard>
+            <div className="grid grid-cols-2 gap-3">
+                <Toggle icon={Star} label="Gran objetivo" on={false} />
+                <Toggle icon={Bell} label="Avisar" on />
+            </div>
+        </GroupCard>
     </div>
 );
 
@@ -283,24 +471,19 @@ export const FocusTaskPanel: React.FC = () => (
             </div>
         </div>
 
-        <div className="mt-2 flex items-center justify-between">
-            <span className="text-[9px] font-semibold uppercase tracking-[0.14em] text-ink-muted">Agenda</span>
-            <span className="text-[9px] text-ink-muted">Zona horaria local</span>
-        </div>
+        <DetailSection label="Agenda" hint="Zona horaria local">
+            <DetailRow icon={CalendarDays} label="Fecha" value="Mié, 29 de julio de 2026" />
+            <DetailRow icon={Clock} label="Hora" value="3:30 PM" />
+            <DetailRow icon={Clock} label="Duración" value="25m" />
+            <DetailRow icon={Repeat2} label="Repetición" value="No repetir" />
+        </DetailSection>
 
-        <div className="grid grid-cols-2 gap-2">
-            <Field icon={CalendarDays} label="Fecha" value="Mié, 29 de julio de 2026" />
-            <Field icon={Clock} label="Hora" value="3:30 PM" />
-            <Field icon={Clock} label="Duración" value="25m" />
-            <Field icon={Repeat2} label="Repetición" value="No repetir" />
-        </div>
+        <DetailSection label="Más">
+            <DetailRow icon={Eye} label="Visibilidad" value="Solo tú" />
+            <DetailRow icon={Target} label="Enfoque" value="Listo para iniciar" />
+        </DetailSection>
 
-        <div className="grid grid-cols-2 gap-2">
-            <Field icon={Eye} label="Visibilidad" value="Solo tú" />
-            <Field icon={Target} label="Enfoque" value="Listo para iniciar" />
-        </div>
-
-        <div className="rounded-medium bg-surface-1 p-3">
+        <div className="rounded-large bg-surface-1 p-3">
             <p className="text-[9px] font-semibold uppercase tracking-[0.14em] text-ink-muted">Notas</p>
             <p className="mt-2 text-[11px] leading-relaxed text-ink-muted">Revisar los últimos cambios y dejar lista la versión para enviar.</p>
         </div>
@@ -358,23 +541,31 @@ export const CreatePanel: React.FC<{
 
         <EventTypePicker selected={0} />
 
-        <div className="grid grid-cols-2 gap-2">
-            <Field icon={Flag} label="Prioridad" value={fillProgress >= .16 ? listLabel : 'Seleccionar'} muted={fillProgress < .16} />
-            <Field icon={CalendarDays} label="Fecha" value={fillProgress >= .32 ? '29 jul 2026' : 'Elegir fecha'} muted={fillProgress < .32} />
-        </div>
-        <Field icon={Clock} label="Hora inicio" value={fillProgress >= .48 ? '9:00 AM' : 'Elegir hora'} muted={fillProgress < .48} />
+        <GroupCard>
+            <div className="grid grid-cols-2 gap-3">
+                <Field icon={Flag} label="Prioridad" value={fillProgress >= .16 ? listLabel : 'Seleccionar'} muted={fillProgress < .16} />
+                <Field icon={CalendarDays} label="Fecha" value={fillProgress >= .32 ? '29 jul 2026' : 'Elegir fecha'} muted={fillProgress < .32} />
+            </div>
+            <div className="mt-3">
+                <Field icon={Clock} label="Hora inicio" value={fillProgress >= .48 ? '9:00 AM' : 'Elegir hora'} muted={fillProgress < .48} />
+            </div>
+        </GroupCard>
 
-        <div className="grid grid-cols-2 gap-2">
-            <Field icon={Clock} label="Duración" value={fillProgress >= .6 ? '30m' : '0m'} muted={fillProgress < .6} />
-            <Field icon={Repeat2} label="Repetición" value="No repetir" />
-        </div>
+        <GroupCard>
+            <div className="grid grid-cols-2 gap-3">
+                <Field icon={Clock} label="Duración" value={fillProgress >= .6 ? '30m' : '0m'} muted={fillProgress < .6} />
+                <Field icon={Repeat2} label="Repetición" value="No repetir" />
+            </div>
+        </GroupCard>
 
         <TagsRow value={fillProgress >= .72 ? 'Trabajo' : 'Ninguna'} />
 
-        <div className="grid grid-cols-2 gap-2">
-            <Toggle icon={Star} label="Gran objetivo" on={false} />
-            <Toggle icon={Bell} label="Avisar" on={fillProgress >= .84} />
-        </div>
+        <GroupCard>
+            <div className="grid grid-cols-2 gap-3">
+                <Toggle icon={Star} label="Gran objetivo" on={false} />
+                <Toggle icon={Bell} label="Avisar" on={fillProgress >= .84} />
+            </div>
+        </GroupCard>
 
         <NotesBox text={fillProgress >= .95 ? 'Revisar avances y dejar el próximo paso claro.' : 'Escribe tus notas aquí…'} />
     </div>

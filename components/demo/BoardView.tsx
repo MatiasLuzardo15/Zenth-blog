@@ -1,15 +1,15 @@
 import React from 'react';
 import { AnimatePresence, LayoutGroup, motion } from 'framer-motion';
 import {
-    Check, ChevronRight, GripVertical, History, Inbox, MoreHorizontal,
-    MousePointer2, Plus, Sparkles, UserPlus,
+    BookOpen, Check, ChevronDown, ChevronRight, Columns3, Filter, GripVertical,
+    History, Inbox, Lock, MoreHorizontal, MousePointer2, Plus, UserPlus,
 } from 'lucide-react';
 import {
-    ARCHIVE_AT, ARCHIVE2_AT, BOARD_CARDS, BOARD_DESCRIPTION, BOARD_LISTS,
+    ARCHIVE_AT, ARCHIVE2_AT, BOARD_CARDS, BOARD_LISTS,
     BOARD_NAME, DRAG1_AT, DRAG2_AT, DRAG3_AT, NEW1_ADD, NEW1_CARD, NEW1_OPEN,
     NEW1_TYPE_E, NEW1_TYPE_S, NEW2_ADD, NEW2_CARD, NEW2_OPEN, NEW2_TYPE_E,
     NEW2_TYPE_S, NEW3_ADD, NEW3_CARD, NEW3_OPEN, NEW3_TYPE_E, NEW3_TYPE_S,
-    SWAP_AT, accentTextColor, typewriter,
+    SWAP_AT, typewriter,
 } from './timeline';
 import { CreatePanel } from './panels';
 
@@ -22,8 +22,8 @@ const COLUMN_STEP = 251;
 const ARCHIVE_CHECK_MS = 700;
 const ARCHIVE_EXIT_MS = 1350;
 
-const initialOrder = ['encurso', 'porhacer', 'listo', 'revision'];
-const swappedOrder = ['porhacer', 'encurso', 'listo', 'revision'];
+const initialOrder = ['porhacer', 'revision', 'listo', 'encurso'];
+const swappedOrder = ['revision', 'porhacer', 'listo', 'encurso'];
 
 const clamp = (value: number) => Math.max(0, Math.min(1, value));
 const between = (elapsed: number, from: number, to: number) => elapsed >= from && elapsed < to;
@@ -65,9 +65,8 @@ const TaskCard: React.FC<{
                 >
                     {checked && <Check className="h-2.5 w-2.5 text-canvas" strokeWidth={3.2} />}
                 </motion.span>
-                <span className="min-w-0 flex-1">
+                <span className="min-w-0 flex-1 self-center">
                     <span className={`block text-[12px] font-semibold leading-tight text-ink transition-opacity duration-300 ${checked ? 'line-through opacity-55' : ''}`}>{card.title}</span>
-                    <span className="mt-1 block text-[9px] tabular-nums text-ink-muted">{card.time} · 30m</span>
                 </span>
                 <MoreHorizontal className="h-3.5 w-3.5 shrink-0 text-ink-muted" strokeWidth={1.9} />
             </div>
@@ -153,7 +152,7 @@ export const BoardView: React.FC<BoardViewProps> = ({ elapsed }) => {
 
     return (
         <div className="relative flex h-full overflow-visible">
-            <aside className="flex w-[68px] shrink-0 flex-col items-center gap-4 border-r border-hairline-soft py-5">
+            <aside className="flex w-[68px] shrink-0 flex-col items-center gap-4 py-5">
                 <span className="flex h-10 w-10 items-center justify-center rounded-medium bg-surface-2 text-accent">
                     <Inbox className="h-4 w-4" strokeWidth={2} />
                 </span>
@@ -165,31 +164,28 @@ export const BoardView: React.FC<BoardViewProps> = ({ elapsed }) => {
 
             <main className="min-w-0 flex-1 p-4">
                 <div className="flex h-full flex-col overflow-hidden rounded-card border border-hairline bg-surface-1">
-                    <header className="flex h-[104px] shrink-0 items-center justify-between border-b border-hairline-soft px-5">
-                        <div className="flex min-w-0 items-center gap-3">
-                            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-medium bg-canvas text-accent shadow-card-resting">
-                                <Sparkles className="h-5 w-5" strokeWidth={1.9} />
-                            </span>
-                            <span className="min-w-0">
-                                <span className="flex items-center gap-2">
-                                    <span className="truncate font-display text-[28px] leading-none tracking-[-0.045em] text-ink">{BOARD_NAME}</span>
-                                    <span className="rounded-pill bg-canvas px-2 py-1 text-[9px] font-semibold text-ink-muted">Compartida</span>
-                                </span>
-                                <span className="mt-1.5 block text-[11px] text-ink-muted">{BOARD_DESCRIPTION}</span>
-                            </span>
+                    <header className="flex h-[104px] shrink-0 items-center justify-between px-5">
+                        <div className="flex min-w-0 items-center gap-2">
+                            <span className="truncate font-display text-[28px] leading-none tracking-[-0.045em] text-ink">{BOARD_NAME}</span>
+                            <BookOpen className="h-4 w-4 shrink-0 text-ink-muted" strokeWidth={1.9} />
+                            <ChevronDown className="h-4 w-4 shrink-0 text-ink-muted" strokeWidth={1.9} />
                         </div>
 
-                        <div className="ml-4 flex items-center gap-3">
-                            <span className="flex -space-x-2">
-                                <span className="flex h-7 w-7 items-center justify-center rounded-full border-2 border-surface-1 bg-grad-magenta text-[10px] font-bold text-white">M</span>
-                                <span className="flex h-7 w-7 items-center justify-center rounded-full border-2 border-surface-1 bg-grad-violet text-[10px] font-bold text-white">J</span>
+                        <div className="ml-4 flex items-center gap-2">
+                            <span className="flex h-9 w-9 items-center justify-center rounded-medium text-ink-muted">
+                                <Filter className="h-4 w-4" strokeWidth={1.9} />
                             </span>
-                            <span className="flex items-center gap-1.5 rounded-pill bg-canvas px-3 py-2 text-[11px] font-semibold text-ink shadow-card-resting">
+                            <span className="flex h-9 w-9 items-center justify-center rounded-medium text-ink-muted">
+                                <Columns3 className="h-4 w-4" strokeWidth={1.9} />
+                            </span>
+                            <span className="flex h-9 w-9 items-center justify-center rounded-medium text-ink-muted">
+                                <Lock className="h-4 w-4" strokeWidth={1.9} />
+                            </span>
+                            <span className="flex items-center gap-1.5 rounded-pill bg-ink px-3 py-2 text-[11px] font-semibold text-canvas">
                                 <UserPlus className="h-3.5 w-3.5" strokeWidth={2} /> Compartir
                             </span>
-                            <span className="w-[150px]">
-                                <span className="flex justify-between text-[9px] text-ink-muted"><span>{224 + archived} de 226 tareas de hoy</span><b className="text-ink">{Math.round(((224 + archived) / 226) * 100)}%</b></span>
-                                <span className="mt-1.5 block h-1 overflow-hidden rounded-pill bg-canvas"><motion.span className="block h-full rounded-pill bg-accent" animate={{ width: `${((224 + archived) / 226) * 100}%` }} transition={{ duration: .5 }} /></span>
+                            <span className="flex h-9 w-9 items-center justify-center rounded-medium text-ink-muted">
+                                <MoreHorizontal className="h-4 w-4" strokeWidth={2} />
                             </span>
                         </div>
                     </header>
@@ -206,14 +202,14 @@ export const BoardView: React.FC<BoardViewProps> = ({ elapsed }) => {
                                     transition={{ layout: { duration: .72, ease: [0.16, 1, 0.3, 1] } }}
                                     className="flex h-[238px] min-w-0 flex-col overflow-visible rounded-medium bg-canvas"
                                 >
-                                    <header
-                                        className="flex h-10 shrink-0 items-center gap-2 rounded-t-medium px-3"
-                                        style={{ backgroundColor: list.accent, color: accentTextColor(list.accent) }}
-                                    >
-                                        <GripVertical className="h-3.5 w-3.5" strokeWidth={2.1} />
-                                        <span className="text-[11px] font-semibold">{list.label}</span>
-                                        {cards.length > 0 && <span className="flex h-4 min-w-4 items-center justify-center rounded-full bg-white/45 px-1 text-[9px] font-bold">{cards.length}</span>}
-                                        <MoreHorizontal className="ml-auto h-3.5 w-3.5" strokeWidth={2} />
+                                    <header className="shrink-0 px-1 pt-1">
+                                        <div className="flex h-8 items-center gap-2 px-2 text-ink">
+                                            <GripVertical className="h-3.5 w-3.5 text-ink-muted" strokeWidth={2.1} />
+                                            <span className="text-[11px] font-semibold">{list.label}</span>
+                                            {cards.length > 0 && <span className="flex h-4 min-w-4 items-center justify-center rounded-full bg-surface-2 px-1 text-[9px] font-bold text-ink-muted">{cards.length}</span>}
+                                            <MoreHorizontal className="ml-auto h-3.5 w-3.5 text-ink-muted" strokeWidth={2} />
+                                        </div>
+                                        <span className="mt-1 block h-[3px] rounded-pill" style={{ backgroundColor: list.accent }} />
                                     </header>
 
                                     <div className="relative flex min-h-0 flex-1 flex-col gap-2 p-2">

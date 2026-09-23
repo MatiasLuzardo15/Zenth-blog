@@ -505,6 +505,33 @@
       box-shadow: inset 0 0.5px 0 rgba(255, 255, 255, 0.10), 0 10px 30px rgba(0, 0, 0, 0.25);
     }
 
+    /* Demo de Reuniones: mismos tokens oscuros y cristal que el escenario real. */
+    .demo-call-stage {
+      color: #fff;
+      --fr-ink: #ffffff;
+      --fr-ink-muted: rgba(255, 255, 255, 0.62);
+      --fr-canvas: #14141c;
+      --fr-surface-1: rgba(9, 9, 9, 0.4);
+      --fr-surface-2: rgba(255, 255, 255, 0.08);
+      --fr-hairline: rgba(255, 255, 255, 0.16);
+      --fr-primary: #ffffff;
+      --fr-on-primary: #000000;
+    }
+
+    .demo-call-glass {
+      background: color-mix(in srgb, #090909 44%, transparent);
+      -webkit-backdrop-filter: blur(16px);
+      backdrop-filter: blur(16px);
+      border-color: rgba(255, 255, 255, 0.16);
+    }
+
+    .demo-call-tile {
+      background: color-mix(in srgb, #090909 40%, transparent);
+      -webkit-backdrop-filter: blur(18px);
+      backdrop-filter: blur(18px);
+      border-color: rgba(255, 255, 255, 0.14);
+    }
+
     /* ─── Gradient spotlight cards (firma) ─────────────────────────
        Son TARJETAS, nunca fondos de sección. Una o dos por página; tres ya
        es moodboard. Radio 30px a propósito: más blando que el resto del UI. */
