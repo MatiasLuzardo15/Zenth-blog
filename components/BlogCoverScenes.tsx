@@ -5,7 +5,6 @@ import {
   Plus, Quote, Search, Smile, Sparkles, Strikethrough, Target, Timer, Underline, UserPlus,
 } from 'lucide-react';
 import { FocusView } from './demo/FocusView';
-import { CreatePanel } from './demo/panels';
 import {
   BOARD_LISTS, CARD_ASSIGNEE, FOCUS_RUNNING_AT, FOCUS_TASK, MOMENTS, NEW_CARD_NOTES,
 } from './demo/timeline';
@@ -812,19 +811,41 @@ const SceneHabits: React.FC = () => (
   </>
 );
 
-/** 13 · Zen: «Pedir a Zen» en el editor de tareas. */
+/** 13 · Zen: una frase se vuelve campos completos — la transformación, no el formulario entero. */
 const SceneZen: React.FC = () => (
-  <S x={150} y={-4} k={0.74}>
-    <div className={`h-[640px] w-[430px] overflow-hidden rounded-large border border-hairline bg-canvas ${SHADOW}`}>
-      <CreatePanel
-        typed="Cena con Ana el viernes a las 9pm"
-        isTyping={false}
-        isSubmitting={false}
-        listLabel="Baja"
-        fillProgress={1}
-      />
-    </div>
-  </S>
+  <>
+    <S x={90} y={66}>
+      <div className={`flex w-[380px] items-start gap-3 rounded-large border border-hairline bg-canvas p-4 ${SHADOW}`}>
+        <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-grad-violet to-grad-magenta text-white">
+          <Sparkles className="h-4 w-4" strokeWidth={2} />
+        </span>
+        <p className="mt-1.5 text-[13px] leading-snug text-ink">«Cena con Ana el viernes a las 9pm»</p>
+      </div>
+    </S>
+    <S x={264} y={156}>
+      <span className="flex h-8 w-8 items-center justify-center rounded-full bg-surface-1 text-ink-muted">
+        <ChevronDown className="h-4 w-4" strokeWidth={2.2} />
+      </span>
+    </S>
+    <S x={90} y={206}>
+      <div className="flex items-center gap-2.5">
+        {[
+          { icon: Calendar, label: '29 jul, 21:00' },
+          { icon: Target, label: 'Prioridad baja' },
+          { icon: Timer, label: '30 min' },
+        ].map(({ icon: Icon, label }) => (
+          <span key={label} className={`flex items-center gap-1.5 rounded-pill border border-hairline bg-canvas px-3 py-2 text-[12px] font-semibold text-ink ${SHADOW}`}>
+            <Icon className="h-3.5 w-3.5 text-ink-muted" strokeWidth={2} /> {label}
+          </span>
+        ))}
+      </div>
+    </S>
+    <S x={205} y={268}>
+      <span className={`inline-flex items-center gap-2 rounded-pill bg-ink px-4 py-2.5 text-[12px] font-semibold text-canvas ${SHADOW}`}>
+        <Check className="h-3.5 w-3.5" strokeWidth={2.4} /> Vos confirmás
+      </span>
+    </S>
+  </>
 );
 
 /* ── Catálogo ───────────────────────────────────────────────────────────── */
