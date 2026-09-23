@@ -2,7 +2,7 @@ import React from 'react';
 import {
   AlignLeft, Bold, Calendar, Check, ChevronDown, Code, FileSpreadsheet, FileText, Flame, Hand, Italic,
   LayoutDashboard, LibraryBig, Link2, LogOut, Mic, MicOff, MonitorUp, MoreHorizontal, PenTool, PhoneCall,
-  Plus, Quote, Search, Smile, Sparkles, Strikethrough, Target, Timer, Underline, UserPlus, X,
+  Plus, Quote, Search, Smile, Sparkles, Strikethrough, Target, Timer, Underline, UserPlus,
 } from 'lucide-react';
 import { TodayView } from './demo/TodayView';
 import { FocusView } from './demo/FocusView';
@@ -136,38 +136,31 @@ const moodOf = (n: number): MoodKey => MOOD_CYCLE[(n * 7 + Math.floor(n / 5)) % 
 
 /* ── Escenas ────────────────────────────────────────────────────────────── */
 
-/** 20 · Llamadas: «Tu enlace está listo». */
+/** 20 · Llamadas: una llamada rápida en marcha, con el enlace de invitados de fondo. */
 const SceneLink: React.FC = () => (
   <>
-    <S x={100} y={22}>
-      <div className={`relative w-[440px] rounded-large border border-hairline bg-canvas p-7 ${SHADOW}`}>
-        <span className="absolute right-5 top-5 flex h-8 w-8 items-center justify-center rounded-pill bg-surface-2 text-ink-muted">
-          <X className="h-4 w-4" strokeWidth={2} />
-        </span>
-        <div className="flex items-start gap-3 pr-8">
-          <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-medium bg-surface-2 text-ink">
-            <Link2 className="h-[18px] w-[18px]" strokeWidth={2.1} />
+    <S x={110} y={48}>
+      <Card className="flex w-[400px] flex-col items-center gap-4 p-8 text-center">
+        <span className={`relative flex h-[92px] w-[92px] items-center justify-center rounded-full bg-gradient-to-br text-[26px] font-semibold text-white ${TONE_M}`}>
+          ML
+          <span className="absolute -bottom-1 -right-1 flex h-7 w-7 items-center justify-center rounded-full border-2 border-canvas bg-accent text-white">
+            <Mic className="h-3.5 w-3.5" strokeWidth={2.4} />
           </span>
-          <div>
-            <h3 className="text-[17px] font-semibold text-ink">Tu enlace está listo</h3>
-            <p className="mt-1 text-[12px] leading-relaxed text-ink-muted">Cualquier persona con el enlace puede entrar como invitada, sin ver tu pizarra.</p>
-          </div>
+        </span>
+        <div>
+          <p className="text-[16px] font-semibold text-ink">Llamada rápida</p>
+          <p className="mt-1 text-[12px] text-ink-muted">Sin agendar · 2 personas</p>
         </div>
-        <p className="mt-5 text-[11px] font-semibold text-ink-muted">Enlace para invitados</p>
-        <div className="mt-1.5 flex items-center gap-2">
-          <span className="flex-1 truncate rounded-medium border border-hairline bg-surface-1 px-3 py-2.5 text-[12px] text-ink">992db-8b2b-4c13-a4a7-dabd0e751d9d</span>
-          <span className="flex shrink-0 items-center gap-1.5 rounded-medium bg-surface-2 px-3 py-2.5 text-[12px] font-semibold text-ink">Copiar</span>
+        <div className="flex items-center gap-2">
+          <span className="flex h-10 w-10 items-center justify-center rounded-pill bg-surface-1 text-ink"><Mic className="h-4 w-4" strokeWidth={2.1} /></span>
+          <span className="flex h-10 w-10 items-center justify-center rounded-pill bg-surface-1 text-ink"><MonitorUp className="h-4 w-4" strokeWidth={2.1} /></span>
+          <span className="flex h-10 items-center gap-1.5 rounded-pill bg-[#B91C1C] px-4 text-[12px] font-semibold text-white"><LogOut className="h-[14px] w-[14px]" strokeWidth={2.4} /> Salir</span>
         </div>
-        <div className="mt-3 rounded-medium bg-surface-1 p-3">
-          <p className="text-[12px] font-semibold text-ink">Acceso limitado a esta llamada</p>
-          <p className="mt-1 text-[11px] leading-relaxed text-ink-muted">Los invitados no pueden abrir pizarras, archivos, historial ni otras salas de Zenth.</p>
-        </div>
-        <span className="mt-4 flex h-11 items-center justify-center gap-2 rounded-pill bg-ink text-[13px] font-semibold text-canvas">Preparar audio y entrar →</span>
-      </div>
+      </Card>
     </S>
-    <S x={38} y={336}>
-      <span className="flex items-center gap-2 rounded-pill bg-ink px-4 py-2 text-[13px] font-semibold text-canvas shadow-soft-lift">
-        <Check className="h-3.5 w-3.5" strokeWidth={2.4} /> Enlace de llamada creado
+    <S x={140} y={332}>
+      <span className={`flex items-center gap-2 rounded-pill bg-ink px-4 py-2.5 text-[12px] font-semibold text-canvas ${SHADOW}`}>
+        <Link2 className="h-3.5 w-3.5" strokeWidth={2.2} /> Entró con tu enlace, sin cuenta
       </span>
     </S>
   </>
@@ -176,7 +169,7 @@ const SceneLink: React.FC = () => (
 /** 19 · Zenth hoy: los cuatro espacios. */
 const SceneOverview: React.FC = () => (
   <>
-    <S x={92} y={26} k={1.22}>
+    <S x={95} y={100} k={1.15}>
       <nav className="flex items-center gap-1 rounded-pill bg-surface-1 p-1">
         {[
           { label: 'Agenda', icon: Calendar, on: true },
@@ -191,8 +184,8 @@ const SceneOverview: React.FC = () => (
       </nav>
     </S>
 
-    <S x={36} y={116} k={1}>
-      <div className="grid w-[568px] grid-cols-2 gap-3">
+    <S x={30} y={180} k={1}>
+      <div className="grid w-[580px] grid-cols-3 gap-3">
         <MomentCard moment="Tarde" count={2}>
           <TaskRow title="Meet de 4Geeks" time="18:30" />
           <TaskRow title="Preparar la propuesta" time="16:00" />
@@ -214,24 +207,7 @@ const SceneOverview: React.FC = () => (
           </div>
         </Card>
 
-        <Card className="p-3.5">
-          {[
-            { icon: FileText, tone: '#FFE082', name: 'Notas de la reunión', meta: 'Nota · Zenth' },
-            { icon: FileSpreadsheet, tone: '#A5D6A7', name: 'Presupuesto 2026', meta: 'Hoja de cálculo · Google Drive' },
-          ].map(({ icon: Icon, tone, name, meta }) => (
-            <div key={name} className="flex items-center gap-3 py-1.5">
-              <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-[10px]" style={{ backgroundColor: tone }}>
-                <Icon className="h-4 w-4 text-black/70" strokeWidth={1.9} />
-              </span>
-              <span className="min-w-0 flex-1">
-                <span className="block truncate text-[12px] font-semibold text-ink">{name}</span>
-                <span className="block truncate text-[10px] text-ink-muted">{meta}</span>
-              </span>
-            </div>
-          ))}
-        </Card>
-
-        <Card className="flex items-center gap-4 p-3.5">
+        <Card className="flex flex-col items-center justify-center gap-3 p-3.5 text-center">
           <span
             className="relative flex h-[76px] w-[76px] shrink-0 items-center justify-center rounded-full"
             style={{ background: 'repeating-conic-gradient(#0099ff 0deg 2.4deg, transparent 2.4deg 6deg)' }}
@@ -252,8 +228,8 @@ const SceneOverview: React.FC = () => (
 const AURORA = 'radial-gradient(circle at 24% 16%, rgba(255,255,255,0.12), transparent 50%), linear-gradient(135deg, #1b1035 0%, #33236b 35%, #0c5a63 75%, #041018 100%)';
 const SceneRoom: React.FC = () => (
   <>
-    <S x={70} y={34}>
-      <div className={`flex h-[318px] w-[500px] flex-col overflow-hidden rounded-[18px] ${SHADOW}`} style={{ backgroundImage: AURORA }}>
+    <S x={116} y={98}>
+      <div className={`flex h-[266px] w-[460px] flex-col overflow-hidden rounded-[18px] ${SHADOW}`} style={{ backgroundImage: AURORA }}>
         <div className="flex items-start gap-3 px-4 py-3">
           <span className="min-w-0 flex-1">
             <span className="block truncate text-[15px] font-semibold text-white">Sala de Plan de lanzamiento</span>
@@ -285,7 +261,7 @@ const SceneRoom: React.FC = () => (
         </div>
       </div>
     </S>
-    <S x={28} y={292}>
+    <S x={70} y={330}>
       <div className={`flex w-[276px] items-center gap-3 rounded-medium border border-hairline bg-canvas px-3 py-2.5 ${SHADOW}`}>
         <span className="relative flex h-10 w-10 shrink-0 items-center justify-center rounded-[14px] bg-surface-2 text-ink">
           <Sparkles className="h-[18px] w-[18px]" strokeWidth={2.2} />
@@ -334,8 +310,8 @@ const BoardTask: React.FC<{ accent: string; title: string; note?: string; assign
 /** 15 · Pizarras con miembros. */
 const SceneBoard: React.FC = () => (
   <>
-    <S x={30} y={40}>
-      <Card className="w-[500px] p-5">
+    <S x={64} y={70}>
+      <Card className="w-[480px] p-5">
         <div className="flex items-center justify-between">
           <span className="font-display text-[22px] leading-none tracking-[-0.045em] text-ink">Plan de lanzamiento</span>
           <span className="flex items-center gap-1.5 rounded-pill bg-ink px-3 py-2 text-[11px] font-semibold text-canvas"><UserPlus className="h-3.5 w-3.5" strokeWidth={2} /> Compartir</span>
@@ -384,8 +360,8 @@ const SceneBoard: React.FC = () => (
 const NEW_MENU = ['Nota', 'Lienzo', 'Documento', 'Hoja de cálculo', 'Presentación', 'Formulario', 'Carpeta', 'Subir archivo', 'Desde Google Drive', 'Nota de voz'];
 const SceneLibrary: React.FC = () => (
   <>
-    <S x={34} y={38} k={1.06}>
-      <Card className="w-[510px] p-5">
+    <S x={82} y={94} k={1}>
+      <Card className="w-[490px] p-5">
         <div className="flex items-center gap-2">
           <span className="flex h-8 min-w-0 flex-1 items-center gap-2 rounded-pill bg-surface-1 px-3 text-[11px] text-ink-muted">
             <Search className="h-3.5 w-3.5 shrink-0" strokeWidth={1.9} /> Buscar archivos, notas y carpetas…
@@ -430,12 +406,12 @@ const SceneLibrary: React.FC = () => (
 /** 17 · Google Calendar dentro de Agenda. */
 const SceneCalendar: React.FC = () => (
   <>
-    <S x={26} y={34}>
-      <Crop design={[1280, 728]} x={16} y={330} scale={0.8} w={588} h={332}>
+    <S x={70} y={100}>
+      <Crop design={[1280, 728]} x={0} y={430} scale={0.8} w={540} h={290}>
         <TodayView {...TODAY_STATIC} viewMode="day" />
       </Crop>
     </S>
-    <S x={318} y={300}>
+    <S x={300} y={350}>
       <span className={`flex items-center gap-2 rounded-pill border border-hairline bg-canvas px-3.5 py-2 text-[12px] font-semibold text-ink ${SHADOW}`}>
         <span className="h-2 w-2 rounded-full" style={{ backgroundColor: '#81D4FA' }} /> Importado desde Google Calendar
       </span>
@@ -447,8 +423,8 @@ const SceneCalendar: React.FC = () => (
 const BLOCK_MENU = ['Texto', 'Título grande', 'Lista', 'Lista de tareas', 'Cita', 'Bloque de código', 'Tabla', 'Imagen'];
 const SceneNotes: React.FC = () => (
   <>
-    <S x={54} y={30}>
-      <Card className="w-[520px] p-6">
+    <S x={80} y={58}>
+      <Card className="w-[500px] p-6">
         <div className="flex items-center justify-between text-[11px] text-ink-muted">
           <span className="flex items-center gap-1.5"><span className="h-1.5 w-1.5 rounded-full bg-accent" /> Guardado</span>
           <span className="flex items-center gap-3">
@@ -465,7 +441,7 @@ const SceneNotes: React.FC = () => (
         </div>
       </Card>
     </S>
-    <S x={340} y={196}>
+    <S x={352} y={158}>
       <div className={`w-[214px] rounded-large border border-hairline bg-canvas p-1.5 ${SHADOW}`}>
         {BLOCK_MENU.map((b, i) => (
           <span key={b} className={`flex items-center rounded-medium px-2.5 py-1.5 text-[12px] text-ink ${i === 3 ? 'bg-surface-1 font-semibold' : ''}`}>{b}</span>
@@ -726,7 +702,7 @@ const SceneAdhd: React.FC = () => (
 /** 8 · Cambiar de contexto: el temporizador te sigue por la barra. */
 const SceneContext: React.FC = () => (
   <>
-    <S x={22} y={92} k={1}>
+    <S x={22} y={150} k={1}>
       <div className="w-[250px] space-y-3 opacity-60">
         <MomentCard moment="Tarde" count={2}>
           <TaskRow title="Meet de 4Geeks" time="18:30" />
@@ -734,7 +710,7 @@ const SceneContext: React.FC = () => (
         </MomentCard>
       </div>
     </S>
-    <S x={24} y={16}>
+    <S x={24} y={64}>
       <div className="flex w-[592px] items-center justify-between">
         <nav className="flex items-center gap-1 rounded-pill bg-surface-1 p-1">
           {[{ l: 'Agenda', i: Calendar, on: true }, { l: 'Pizarras', i: LayoutDashboard }, { l: 'Biblioteca', i: LibraryBig }].map(({ l, i: Icon, on }) => (
@@ -751,7 +727,7 @@ const SceneContext: React.FC = () => (
         </div>
       </div>
     </S>
-    <S x={296} y={74} k={0.86}>
+    <S x={312} y={46} k={0.72}>
       <FocusView elapsed={FOCUS_RUNNING_AT + 90000} />
     </S>
   </>
@@ -803,17 +779,21 @@ const SceneBalance: React.FC = () => {
   );
 };
 
-/** 11 · Estado de flujo: el temporizador en marcha, con su sonido. */
+/** 11 · Estado de flujo: elegir duración y sonido antes de empezar (no el timer en marcha, ya usado en 7 y 8). */
 const SceneFlow: React.FC = () => (
-  <S x={166} y={6} k={0.86}>
-    <FocusView elapsed={FOCUS_RUNNING_AT + 200000} />
+  <S x={132} y={84} k={1.32}>
+    <div className="w-[360px] overflow-hidden" style={{ height: 180 }}>
+      <div style={{ marginTop: -258 }}>
+        <FocusView elapsed={0} />
+      </div>
+    </div>
   </S>
 );
 
 /** 12 · Hábitos visibles: la repetición a la vista en la semana. */
 const SceneHabits: React.FC = () => (
-  <S x={24} y={28}>
-    <Crop design={[1280, 728]} x={272} y={40} scale={0.6} w={592} h={344}>
+  <S x={48} y={48}>
+    <Crop design={[1280, 728]} x={272} y={70} scale={0.6} w={572} h={320}>
       <TodayView {...TODAY_STATIC} viewMode="week" />
     </Crop>
   </S>
