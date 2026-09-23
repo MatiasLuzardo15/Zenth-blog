@@ -2,7 +2,7 @@ import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
     CalendarDays, ChevronLeft, ChevronRight, Clock, Sparkles, FileText,
-    Layers, CalendarRange, Repeat2, History, Plus, Check, Target,
+    Layers, CalendarRange, History, PanelRight, Plus, Check, Target,
 } from 'lucide-react';
 import {
     WEEKDAYS, MONTH_CELLS, MOMENTS, FIRST_HOUR, LAST_HOUR, HOUR_H, GUTTER_W,
@@ -113,31 +113,44 @@ const WeekGrid: React.FC = () => (
 );
 
 /** Mes: mismas celdas que el mini-calendario de la izquierda, a tamaño completo. */
+const MONTH_LEADING = MONTH_CELLS.findIndex(day => day !== null);
+const MONTH_TRAILING = MONTH_CELLS.length - 1 - MONTH_CELLS.map(day => day !== null).lastIndexOf(true);
+
+/** Cuadrícula de mes a sangre, con líneas finas entre celdas y días vecinos atenuados. */
 const MonthGrid: React.FC = () => (
-    <div className="mt-4 grid flex-1 grid-cols-7 grid-rows-[auto_repeat(5,1fr)] gap-1.5 overflow-hidden">
-        {WEEKDAYS.map(d => (
-            <span key={d} className="pb-1 text-center text-[10px] font-semibold text-ink-muted">{d}</span>
+    <div className="-mx-5 -mb-5 mt-4 grid flex-1 grid-cols-7 grid-rows-[auto_repeat(5,minmax(0,1fr))] overflow-hidden border-t border-hairline-soft">
+        {WEEKDAYS.map((d, i) => (
+            <span key={i} className="border-b border-hairline-soft py-2 text-center text-[9px] font-semibold uppercase tracking-[0.1em] text-ink-muted">{d}</span>
         ))}
-        {MONTH_CELLS.map((day, i) => (
-            <div key={i} className={`flex flex-col gap-1 overflow-hidden rounded-medium p-1.5 ${day ? 'bg-canvas' : ''}`}>
-                {day && (
-                    <>
-                        <span className={`flex h-5 w-5 items-center justify-center rounded-full text-[10px] font-semibold ${day === 29 ? 'bg-ink text-canvas' : 'text-ink'}`}>
+        {MONTH_CELLS.map((cell, i) => {
+            const outside = cell === null;
+            const day = cell ?? (i < MONTH_LEADING ? 30 - (MONTH_LEADING - 1 - i) : i - (MONTH_CELLS.length - MONTH_TRAILING) + 1);
+            const column = i % 7;
+            const workday = column < 4;
+            const today = !outside && day === 29;
+            const dim = outside ? 'opacity-45' : '';
+            return (
+                <div key={i} className={`flex min-w-0 flex-col gap-1 overflow-hidden border-b border-r border-hairline-soft p-1.5 ${column === 6 ? 'border-r-0' : ''} ${today ? 'bg-surface-1' : ''}`}>
+                    <span className="flex justify-end">
+                        <span className={`flex h-[22px] min-w-[22px] items-center justify-center rounded-full px-1 text-[11px] font-semibold tabular-nums ${today ? 'bg-ink text-canvas' : outside ? 'text-ink-muted' : 'text-ink'}`}>
                             {day}
                         </span>
-                        {day === 29 && (
-                            <span className="truncate rounded-small bg-[#FFB7CE] px-1 py-0.5 text-[8px] font-semibold text-black">{TODAY_TASK}</span>
-                        )}
-                        {day === 15 && (
-                            <span className="truncate rounded-small bg-[#81D4FA] px-1 py-0.5 text-[8px] font-semibold text-black">Meet de 4Geeks</span>
-                        )}
-                        {day === 22 && (
-                            <span className="truncate rounded-small bg-[#A5D6A7] px-1 py-0.5 text-[8px] font-semibold text-black">{MEETING_TITLE}</span>
-                        )}
-                    </>
-                )}
-            </div>
-        ))}
+                    </span>
+                    {workday && (
+                        <span className={`truncate rounded-[5px] bg-[#81D4FA] px-1.5 py-[3px] text-[9px] font-semibold text-black ${dim}`}>Tiempo de enfoque semanal</span>
+                    )}
+                    {day === 29 && !outside && (
+                        <span className="truncate rounded-[5px] bg-[#FFB7CE] px-1.5 py-[3px] text-[9px] font-semibold text-black">{TODAY_TASK}</span>
+                    )}
+                    {day === 15 && !outside && (
+                        <span className="truncate rounded-[5px] bg-[#80CBC4] px-1.5 py-[3px] text-[9px] font-semibold text-black">Meet de 4Geeks</span>
+                    )}
+                    {day === 24 && !outside && (
+                        <span className="truncate rounded-[5px] bg-[#A5D6A7] px-1.5 py-[3px] text-[9px] font-semibold text-black">{MEETING_TITLE}</span>
+                    )}
+                </div>
+            );
+        })}
     </div>
 );
 
@@ -428,10 +441,10 @@ export const TodayView: React.FC<TodayViewProps> = ({
 
             {/* Columna derecha: momentos del día (sólo en vista Día) */}
             {viewMode === 'day' && (
-            <div className="flex flex-col gap-2.5 overflow-hidden">
-                <div className="flex items-center gap-2 rounded-medium bg-surface-1 px-3 py-2.5">
-                    <ChevronRight className="h-3.5 w-3.5 text-ink-muted" strokeWidth={1.9} />
-                    <span className="text-[12px] font-semibold text-ink">Momentos del día</span>
+            <div className="flex flex-col gap-3 overflow-hidden">
+                <div className="flex items-center gap-2.5 px-2 pb-1 pt-2">
+                    <PanelRight className="h-4 w-4 text-ink-muted" strokeWidth={1.9} />
+                    <span className="text-[13px] font-semibold text-ink-muted">Momentos del día</span>
                 </div>
 
                 {MOMENTS.map(({ key, color, empty }) => {
@@ -439,15 +452,15 @@ export const TodayView: React.FC<TodayViewProps> = ({
                     const isFocusMoment = key === 'Mañana' && focusTaskVisible;
                     const count = isFocusMoment ? 1 : isTarde ? (added ? 2 : 1) : 0;
                     return (
-                        <div key={key} className="overflow-hidden rounded-medium bg-surface-1">
-                            <div className="flex items-center gap-2 px-3 py-2" style={{ backgroundColor: color }}>
-                                <span className="text-[12px] font-semibold text-black">{key}</span>
+                        <div key={key} className="overflow-hidden rounded-large border border-hairline bg-canvas">
+                            <div className="flex items-center gap-2 px-3.5 py-2.5" style={{ backgroundColor: color }}>
+                                <span className="text-[12px] font-medium text-black/80">{key}</span>
                                 {count > 0 && (
                                     <motion.span
                                         key={count}
                                         initial={{ scale: 0.7 }}
                                         animate={{ scale: 1 }}
-                                        className="flex h-4 min-w-4 items-center justify-center rounded-full bg-black/15 px-1 text-[10px] font-semibold tabular-nums text-black"
+                                        className="flex h-4 min-w-4 items-center justify-center rounded-full bg-white/70 px-1 text-[10px] font-semibold tabular-nums text-black/70"
                                     >
                                         {count}
                                     </motion.span>
@@ -455,37 +468,32 @@ export const TodayView: React.FC<TodayViewProps> = ({
                                 <span className="ml-auto text-[13px] leading-none text-black/60">···</span>
                             </div>
 
-                            <div className="space-y-1.5 p-2">
+                            <div className="space-y-2 p-2.5">
                                 {isFocusMoment ? (
                                     <motion.div
                                         animate={focusTaskSelected ? { scale: .975 } : { scale: 1 }}
                                         transition={{ duration: .22 }}
-                                        className="rounded-[8px] px-2.5 py-2"
-                                        style={{ backgroundColor: '#E1EF91' }}
+                                        className="rounded-medium bg-surface-1 px-3 py-2.5"
                                     >
-                                        <div className="flex items-center gap-2">
-                                            <span className="h-3.5 w-3.5 shrink-0 rounded-full border-[1.5px] border-black/50" />
-                                            <span className="flex-1 truncate text-[12px] font-semibold text-black">{FOCUS_TASK}</span>
+                                        <div className="flex items-center gap-2.5">
+                                            <span className="h-4 w-4 shrink-0 rounded-full border-[1.5px] border-ink-muted" />
+                                            <span className="flex-1 truncate text-[12px] font-semibold text-ink">{FOCUS_TASK}</span>
+                                            <span className="h-1.5 w-1.5 shrink-0 rounded-full" style={{ backgroundColor: color }} />
                                         </div>
-                                        <div className="mt-1 flex items-center gap-1.5 pl-5">
-                                            <Target className="h-3 w-3 text-black/60" strokeWidth={2} />
-                                            <span className="text-[9px] font-semibold text-black/65">Lista para enfoque</span>
-                                            <span className="ml-auto text-[10px] font-semibold text-black/70">25M</span>
+                                        <div className="mt-2 flex items-center gap-1.5 rounded-[8px] bg-canvas px-2.5 py-2">
+                                            <Target className="h-3 w-3 shrink-0 text-ink-muted" strokeWidth={2} />
+                                            <span className="text-[10px] italic text-ink-muted">Lista para enfoque · 25 min</span>
                                         </div>
                                     </motion.div>
                                 ) : isTarde ? (
                                     <>
-                                        <div className="rounded-[8px] px-2.5 py-2" style={{ backgroundColor: '#81D4FA' }}>
-                                            <div className="flex items-center gap-2">
-                                                <span className="h-3.5 w-3.5 shrink-0 rounded-full border-[1.5px] border-black/40" />
-                                                <span className="flex-1 truncate text-[12px] font-semibold text-black">
-                                                    Meet de 4Geeks
-                                                </span>
+                                        <div className="rounded-medium bg-surface-1 px-3 py-2.5">
+                                            <div className="flex items-center gap-2.5">
+                                                <span className="h-4 w-4 shrink-0 rounded-full border-[1.5px] border-ink-muted" />
+                                                <span className="flex-1 truncate text-[12px] font-semibold text-ink">Meet de 4Geeks</span>
+                                                <span className="h-1.5 w-1.5 shrink-0 rounded-full" style={{ backgroundColor: color }} />
                                             </div>
-                                            <div className="mt-1 flex items-center gap-1.5 pl-5">
-                                                <Repeat2 className="h-3 w-3 text-black/60" strokeWidth={2} />
-                                                <span className="ml-auto text-[10px] font-semibold text-black/70">30M</span>
-                                            </div>
+                                            <p className="mt-1 pl-[26px] text-[10px] tabular-nums text-ink-muted">18:30</p>
                                         </div>
 
                                         <AnimatePresence>
@@ -496,33 +504,30 @@ export const TodayView: React.FC<TodayViewProps> = ({
                                                     animate={{ opacity: 1, y: 0, scale: 1 }}
                                                     exit={{ opacity: 0, scale: 0.96 }}
                                                     transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                                                    className="rounded-[8px] px-2.5 py-2"
-                                                    style={{ backgroundColor: '#FFB7CE' }}
+                                                    className="rounded-medium bg-surface-1 px-3 py-2.5"
                                                 >
-                                                    <div className="flex items-center gap-2">
+                                                    <div className="flex items-center gap-2.5">
                                                         <span
-                                                            className={`flex h-3.5 w-3.5 shrink-0 items-center justify-center rounded-full border-[1.5px] transition-colors duration-300 ${completed ? 'border-black bg-black' : 'border-black/40'
+                                                            className={`flex h-4 w-4 shrink-0 items-center justify-center rounded-full border-[1.5px] transition-colors duration-300 ${completed ? 'border-ink bg-ink' : 'border-ink-muted'
                                                                 }`}
                                                         >
-                                                            {completed && <Check className="h-2 w-2 text-white" strokeWidth={4} />}
+                                                            {completed && <Check className="h-2.5 w-2.5 text-canvas" strokeWidth={4} />}
                                                         </span>
                                                         <span
-                                                            className={`flex-1 truncate text-[12px] font-semibold text-black transition-opacity duration-300 ${completed ? 'opacity-55 line-through' : ''
+                                                            className={`flex-1 truncate text-[12px] font-semibold text-ink transition-opacity duration-300 ${completed ? 'opacity-55 line-through' : ''
                                                                 }`}
                                                         >
                                                             {TODAY_TASK}
                                                         </span>
+                                                        <span className="h-1.5 w-1.5 shrink-0 rounded-full" style={{ backgroundColor: color }} />
                                                     </div>
-                                                    <div className="mt-1 flex items-center gap-1.5 pl-5">
-                                                        <span className="text-[10px] font-semibold text-black/70">Gran meta</span>
-                                                        <span className="ml-auto text-[10px] font-semibold text-black/70">1H</span>
-                                                    </div>
+                                                    <p className="mt-1 pl-[26px] text-[10px] tabular-nums text-ink-muted">16:00</p>
                                                 </motion.div>
                                             )}
                                         </AnimatePresence>
                                     </>
                                 ) : (
-                                    <p className="px-1 py-3 text-center text-[11px] italic text-ink-muted">{empty}</p>
+                                    <p className="px-1 py-5 text-center text-[11px] text-ink-muted">{empty}</p>
                                 )}
 
                                 <div className="flex items-center gap-1.5 px-1 pt-0.5">
@@ -534,10 +539,10 @@ export const TodayView: React.FC<TodayViewProps> = ({
                     );
                 })}
 
-                <div className="mt-1 flex items-center gap-2.5 rounded-medium bg-surface-1 px-3 py-2.5">
+                <div className="flex items-center gap-2.5 rounded-large border border-hairline px-3.5 py-3">
                     <History className="h-4 w-4 text-ink-muted" strokeWidth={1.9} />
                     <span className="min-w-0 flex-1">
-                        <span className="block text-[12px] font-semibold text-ink">Completado</span>
+                        <span className="block text-[12px] font-semibold text-ink">Completadas</span>
                         <span className="block text-[10px] text-ink-muted">Ver historial</span>
                     </span>
                     <motion.span

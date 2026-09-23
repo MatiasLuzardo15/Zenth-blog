@@ -75,40 +75,48 @@ export const DRAG3_AT = 51400;
 export const SWAP_AT = 53700;
 export const ARCHIVE_AT = 56200;
 export const ARCHIVE2_AT = 58500;
-export const BOARD_END = 61100;
+export const CARD_OPEN_AT = 59900;
+export const CARD_ASSIGN_HOVER = 62200;
+export const CARD_ASSIGN_CLICK_AT = 62800;
+export const CARD_CLOSE_AT = 65800;
+export const BOARD_END = 66200;
 
 /* ── Acto III · De una tarea a una sesión de enfoque ───────────────────── */
 
-export const RETURN_TODAY_AT = 61700;
-export const TASK_OPEN_AT = 63400;
-export const FOCUS_ACTION_AT = 66800;
-export const FOCUS_VIEW_AT = 67500;
-export const FOCUS_START_AT = 70800;
-export const FOCUS_RUNNING_AT = 71400;
-export const FOCUS_END = 74400;
+export const RETURN_TODAY_AT = 66800;
+export const TASK_OPEN_AT = 68500;
+export const FOCUS_ACTION_AT = 71900;
+export const FOCUS_VIEW_AT = 72600;
+export const FOCUS_START_AT = 75900;
+export const FOCUS_RUNNING_AT = 76500;
+export const FOCUS_OUTSIDE_HOVER = 78100;
+export const FOCUS_END = 79500;
 
 export const FOCUS_TASK = 'Revisar la propuesta comercial';
 
 /* ── Acto IV · Crear una reunión, entrar y recibir a un invitado ────────── */
 
+/** Tarjeta que se abre en la pizarra y persona a la que se asigna. */
+export const CARD_ASSIGNEE = 'Sofía';
+
 export const MEETING_TITLE = 'Reunión de equipo';
 
-export const MEETING_OPEN_AT = 75000;
-export const MEETING_ADD_HOVER = 75600;
-export const MEETING_ADD_CLICK_AT = 76200;
-export const MEETING_MENU_CLOSE_AT = 77100;
-export const MEETING_LINK_HOVER = 77700;
-export const MEETING_LINK_CLICK_AT = 78300;
-export const MEETING_CREATED_AT = 78600;
-export const MEETING_PREPARING_AT = 80800;
-export const LOBBY_AT = 82200;
-export const LOBBY_JOIN_HOVER = 84600;
-export const LOBBY_JOIN_CLICK_AT = 85200;
-export const CALL_VIEW_AT = 85650;
-export const GUEST_JOIN_AT = 88000;
-export const CALL_END = 92400;
+export const MEETING_OPEN_AT = 80100;
+export const MEETING_ADD_HOVER = 80700;
+export const MEETING_ADD_CLICK_AT = 81300;
+export const MEETING_MENU_CLOSE_AT = 82200;
+export const MEETING_LINK_HOVER = 82800;
+export const MEETING_LINK_CLICK_AT = 83400;
+export const MEETING_CREATED_AT = 83700;
+export const MEETING_PREPARING_AT = 85900;
+export const LOBBY_AT = 87300;
+export const LOBBY_JOIN_HOVER = 89700;
+export const LOBBY_JOIN_CLICK_AT = 90300;
+export const CALL_VIEW_AT = 90750;
+export const GUEST_JOIN_AT = 93100;
+export const CALL_END = 97500;
 
-export const CYCLE = 94200;
+export const CYCLE = 99300;
 
 /* ── Datos de la pizarra ─────────────────────────────────────────────────── */
 
@@ -124,10 +132,17 @@ export interface DemoList {
 
 export const BOARD_LISTS: DemoList[] = [
     { key: 'encurso', label: 'En curso', accent: '#81D4FA', empty: 'Nada en curso' },
-    { key: 'porhacer', label: 'Baja', accent: '#FFB7CE', empty: 'Nada por clasificar' },
+    { key: 'porhacer', label: 'Baja', accent: '#A5D6A7', empty: 'Nada por clasificar' },
     { key: 'listo', label: 'Alta', accent: '#FFAB91', empty: 'Nada urgente todavía' },
-    { key: 'revision', label: 'Media', accent: '#B39DDB', empty: 'Cuando haya tiempo' },
+    { key: 'revision', label: 'Media', accent: '#E6EE9C', empty: 'Cuando haya tiempo' },
 ];
+
+/** Notas que acompañan a algunas tarjetas nuevas (la segunda no lleva). */
+export const NEW_CARD_NOTES: Record<'n1' | 'n2' | 'n3', string | undefined> = {
+    n1: 'Alinear alcance, dueños y fechas del sprint.',
+    n2: undefined,
+    n3: 'Revisar precios y condiciones antes de enviar.',
+};
 
 export interface DemoCard {
     id: string;
@@ -142,6 +157,8 @@ export interface DemoCard {
     toList?: string;
     /** Momento en que se completa y sale del tablero. */
     archivesAt?: number;
+    /** Nota que se escribe en el panel y luego se ve en la tarjeta. */
+    description?: string;
 }
 
 export const BOARD_CARDS: DemoCard[] = [
@@ -149,6 +166,7 @@ export const BOARD_CARDS: DemoCard[] = [
     { id: 'c2', title: 'Revisar contraste', time: '12:00', list: 'revision', appearsAt: 0, archivesAt: ARCHIVE_AT },
     {
         id: 'n1', title: 'Definir prioridades del sprint', time: '09:00', list: 'porhacer',
+        description: NEW_CARD_NOTES.n1,
         appearsAt: NEW1_CARD, movesAt: DRAG1_AT, toList: 'encurso',
     },
     {
@@ -157,6 +175,7 @@ export const BOARD_CARDS: DemoCard[] = [
     },
     {
         id: 'n3', title: 'Revisar la propuesta comercial', time: '15:30', list: 'porhacer',
+        description: NEW_CARD_NOTES.n3,
         appearsAt: NEW3_CARD, movesAt: DRAG3_AT, toList: 'listo',
     },
 ];

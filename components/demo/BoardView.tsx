@@ -1,7 +1,7 @@
 import React from 'react';
 import { AnimatePresence, LayoutGroup, motion } from 'framer-motion';
 import {
-    BookOpen, Check, ChevronDown, ChevronRight, Columns3, Filter, GripVertical,
+    AlignLeft, BookOpen, Check, Pencil, Target, Trash2, X, ChevronDown, ChevronRight, Columns3, Filter, GripVertical,
     History, Inbox, Lock, MoreHorizontal, MousePointer2, Plus, UserPlus,
 } from 'lucide-react';
 import {
@@ -9,16 +9,16 @@ import {
     BOARD_NAME, DRAG1_AT, DRAG2_AT, DRAG3_AT, NEW1_ADD, NEW1_CARD, NEW1_OPEN,
     NEW1_TYPE_E, NEW1_TYPE_S, NEW2_ADD, NEW2_CARD, NEW2_OPEN, NEW2_TYPE_E,
     NEW2_TYPE_S, NEW3_ADD, NEW3_CARD, NEW3_OPEN, NEW3_TYPE_E, NEW3_TYPE_S,
-    SWAP_AT, typewriter,
+    CARD_ASSIGNEE, CARD_ASSIGN_CLICK_AT, CARD_ASSIGN_HOVER, CARD_CLOSE_AT, CARD_OPEN_AT,
+    NEW_CARD_NOTES, SWAP_AT, typewriter,
 } from './timeline';
-import { CreatePanel } from './panels';
+import { BoardCardPanel, CreatePanel } from './panels';
 
 interface BoardViewProps {
     elapsed: number;
 }
 
 const DRAG_MS = 1050;
-const COLUMN_STEP = 251;
 const ARCHIVE_CHECK_MS = 700;
 const ARCHIVE_EXIT_MS = 1350;
 
@@ -31,7 +31,8 @@ const between = (elapsed: number, from: number, to: number) => elapsed >= from &
 const TaskCard: React.FC<{
     card: (typeof BOARD_CARDS)[number];
     elapsed: number;
-}> = ({ card, elapsed }) => {
+    accent: string;
+}> = ({ card, elapsed, accent }) => {
     const dragging = Boolean(card.movesAt && between(elapsed, card.movesAt, card.movesAt + DRAG_MS));
     const checked = Boolean(card.archivesAt && elapsed >= card.archivesAt);
     const archiving = Boolean(card.archivesAt && elapsed >= card.archivesAt + ARCHIVE_CHECK_MS);
@@ -43,9 +44,9 @@ const TaskCard: React.FC<{
             initial={{ opacity: 0, y: 10, scale: 0.96 }}
             animate={{
                 opacity: archiving ? 0 : 1,
-                y: dragging ? -5 : archiving ? -8 : 0,
-                rotate: dragging ? 1.2 : 0,
-                scale: dragging ? 1.018 : archiving ? 0.94 : 1,
+                y: archiving ? -8 : 0,
+                rotate: 0,
+                scale: archiving ? 0.94 : 1,
             }}
             exit={{ opacity: 0, y: -8, scale: 0.94 }}
             transition={{
@@ -53,56 +54,102 @@ const TaskCard: React.FC<{
                 duration: dragging ? .18 : .42,
                 ease: [0.16, 1, 0.3, 1],
             }}
-            className="relative z-10 rounded-[10px] bg-canvas px-3 py-2.5 shadow-card-resting"
-            style={dragging ? { zIndex: 30, boxShadow: '0 16px 34px rgba(0,0,0,0.3)' } : undefined}
+            className="relative z-10 rounded-[10px] border border-hairline-soft bg-canvas px-3 py-2.5 dark:bg-surface-1"
+            style={dragging ? { zIndex: 30 } : undefined}
         >
             <div className="flex items-start gap-2">
                 <motion.span
                     animate={checked ? { scale: [1, .82, 1], backgroundColor: 'var(--fr-ink)' } : { scale: 1, backgroundColor: 'transparent' }}
                     transition={{ duration: .28 }}
                     className="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full border"
-                    style={{ borderColor: 'var(--fr-ink-muted)' }}
+                    style={{ borderColor: accent }}
                 >
                     {checked && <Check className="h-2.5 w-2.5 text-canvas" strokeWidth={3.2} />}
                 </motion.span>
                 <span className="min-w-0 flex-1 self-center">
                     <span className={`block text-[12px] font-semibold leading-tight text-ink transition-opacity duration-300 ${checked ? 'line-through opacity-55' : ''}`}>{card.title}</span>
                 </span>
+                {card.id === 'n1' && elapsed >= CARD_ASSIGN_CLICK_AT + 200 && (
+                    <motion.span
+                        initial={{ scale: .4, opacity: 0 }}
+                        animate={{ scale: 1, opacity: 1 }}
+                        className="flex h-[18px] w-[18px] shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#7a2c4a] to-[#c1553f] text-[9px] font-bold text-white"
+                    >
+                        {CARD_ASSIGNEE[0]}
+                    </motion.span>
+                )}
                 <MoreHorizontal className="h-3.5 w-3.5 shrink-0 text-ink-muted" strokeWidth={1.9} />
             </div>
+            {card.description && (
+                <div className="mt-2 flex items-start gap-1.5 pl-6">
+                    <AlignLeft className="mt-px h-3 w-3 shrink-0 text-ink-muted" strokeWidth={1.9} />
+                    <span className="text-[9px] italic leading-snug text-ink-muted">{card.description}</span>
+                </div>
+            )}
         </motion.div>
     );
 };
 
-const cursorState = (elapsed: number) => {
-    if (between(elapsed, NEW1_OPEN - 650, NEW1_OPEN + 300)) return { x: 405, y: 350, click: elapsed >= NEW1_OPEN - 100 };
-    if (between(elapsed, NEW1_OPEN, NEW1_CARD)) return { x: elapsed >= NEW1_ADD - 180 ? 1195 : 1010, y: elapsed >= NEW1_ADD - 180 ? -48 : 28, click: elapsed >= NEW1_ADD - 120 };
-    if (between(elapsed, NEW2_OPEN - 650, NEW2_OPEN + 300)) return { x: 405, y: 350, click: elapsed >= NEW2_OPEN - 100 };
-    if (between(elapsed, NEW2_OPEN, NEW2_CARD)) return { x: elapsed >= NEW2_ADD - 180 ? 1195 : 1010, y: elapsed >= NEW2_ADD - 180 ? -48 : 28, click: elapsed >= NEW2_ADD - 120 };
-    if (between(elapsed, NEW3_OPEN - 650, NEW3_OPEN + 300)) return { x: 405, y: 350, click: elapsed >= NEW3_OPEN - 100 };
-    if (between(elapsed, NEW3_OPEN, NEW3_CARD)) return { x: elapsed >= NEW3_ADD - 180 ? 1195 : 1010, y: elapsed >= NEW3_ADD - 180 ? -48 : 28, click: elapsed >= NEW3_ADD - 120 };
+/**
+ * Coordenadas medidas sobre el DOM real del tablero (px de diseño, origen en
+ * la esquina del contenedor): columnas en x=100/343/586/829, primera tarjeta
+ * centrada en y≈169, botón «Agregar» del panel en (1213, -36).
+ */
+const COL_X = [100, 343, 586, 829];
+const GRAB = { x: COL_X[0] + 78, y: 169 };
+const ADD_TASK = { x: 150, y: [215, 253, 315] };
+const PANEL_TITLE = { x: 1000, y: 8 };
+const PANEL_ADD = { x: 1213, y: -36 };
+const CARD_TITLE = { x: 890, y: 165 };
+const ASSIGN_PILL = { x: 1161, y: 571 };
 
-    if (between(elapsed, DRAG1_AT - 350, DRAG1_AT + DRAG_MS)) {
-        const p = clamp((elapsed - DRAG1_AT) / DRAG_MS);
-        return { x: 455 - COLUMN_STEP * p, y: 310 - 20 * Math.sin(p * Math.PI), click: elapsed >= DRAG1_AT };
+const cursorState = (elapsed: number) => {
+    const opens = [
+        [NEW1_OPEN, NEW1_ADD, NEW1_CARD],
+        [NEW2_OPEN, NEW2_ADD, NEW2_CARD],
+        [NEW3_OPEN, NEW3_ADD, NEW3_CARD],
+    ] as const;
+    for (const [i, [open, add, card]] of opens.entries()) {
+        if (between(elapsed, open - 650, open + 300)) return { x: ADD_TASK.x, y: ADD_TASK.y[i], click: elapsed >= open - 100 };
+        if (between(elapsed, open + 300, card)) {
+            const adding = elapsed >= add - 180;
+            return adding
+                ? { ...PANEL_ADD, click: elapsed >= add - 120 }
+                : { ...PANEL_TITLE, click: false };
+        }
     }
-    if (between(elapsed, DRAG2_AT - 350, DRAG2_AT + DRAG_MS)) {
-        const p = clamp((elapsed - DRAG2_AT) / DRAG_MS);
-        return { x: 455 + COLUMN_STEP * 2 * p, y: 365 - 26 * Math.sin(p * Math.PI), click: elapsed >= DRAG2_AT };
-    }
-    if (between(elapsed, DRAG3_AT - 350, DRAG3_AT + DRAG_MS)) {
-        const p = clamp((elapsed - DRAG3_AT) / DRAG_MS);
-        return { x: 455 + COLUMN_STEP * p, y: 420 - 28 * Math.sin(p * Math.PI), click: elapsed >= DRAG3_AT };
-    }
+
+    const drag = (at: number, toX: number, toY: number) => {
+        const p = clamp((elapsed - at) / DRAG_MS);
+        return {
+            x: GRAB.x + (toX - GRAB.x) * p,
+            y: GRAB.y + (toY - GRAB.y) * p - 18 * Math.sin(p * Math.PI),
+            click: elapsed >= at,
+        };
+    };
+    if (between(elapsed, DRAG1_AT - 350, DRAG1_AT + DRAG_MS)) return drag(DRAG1_AT, COL_X[3] + 78, 222);
+    if (between(elapsed, DRAG2_AT - 350, DRAG2_AT + DRAG_MS)) return drag(DRAG2_AT, COL_X[1] + 78, 222);
+    if (between(elapsed, DRAG3_AT - 350, DRAG3_AT + DRAG_MS)) return drag(DRAG3_AT, COL_X[2] + 78, 169);
     if (between(elapsed, SWAP_AT - 350, SWAP_AT + 1150)) {
         const p = clamp((elapsed - SWAP_AT) / 850);
-        return { x: 204 + COLUMN_STEP * p, y: 203, click: elapsed >= SWAP_AT };
+        return { x: COL_X[0] + 45 + (COL_X[1] - COL_X[0]) * p, y: 108, click: elapsed >= SWAP_AT };
     }
     if (between(elapsed, ARCHIVE_AT - 350, ARCHIVE_AT + ARCHIVE_EXIT_MS)) {
-        return { x: 858, y: 178, click: between(elapsed, ARCHIVE_AT, ARCHIVE_AT + 360) };
+        return { x: COL_X[0] + 20, y: 163, click: between(elapsed, ARCHIVE_AT, ARCHIVE_AT + 360) };
     }
     if (between(elapsed, ARCHIVE2_AT - 350, ARCHIVE2_AT + ARCHIVE_EXIT_MS)) {
-        return { x: 356, y: 178, click: between(elapsed, ARCHIVE2_AT, ARCHIVE2_AT + 360) };
+        return { x: COL_X[3] + 20, y: 163, click: between(elapsed, ARCHIVE2_AT, ARCHIVE2_AT + 360) };
+    }
+    if (between(elapsed, CARD_OPEN_AT - 650, CARD_OPEN_AT + 350)) {
+        return { ...CARD_TITLE, click: elapsed >= CARD_OPEN_AT - 100 };
+    }
+    if (between(elapsed, CARD_OPEN_AT + 350, CARD_CLOSE_AT - 900)) {
+        return elapsed < CARD_ASSIGN_HOVER
+            ? { x: 1100, y: 300, click: false }
+            : { ...ASSIGN_PILL, click: elapsed >= CARD_ASSIGN_CLICK_AT && elapsed < CARD_ASSIGN_CLICK_AT + 280 };
+    }
+    if (between(elapsed, CARD_CLOSE_AT - 900, CARD_CLOSE_AT + 200)) {
+        return { x: 420, y: 470, click: elapsed >= CARD_CLOSE_AT - 200 };
     }
     return { x: 600, y: 66, click: false };
 };
@@ -116,6 +163,11 @@ export const BoardView: React.FC<BoardViewProps> = ({ elapsed }) => {
     const secondPanel = between(elapsed, NEW2_OPEN, NEW2_CARD);
     const thirdPanel = between(elapsed, NEW3_OPEN, NEW3_CARD);
     const panelOpen = firstPanel || secondPanel || thirdPanel;
+    const cardOpen = between(elapsed, CARD_OPEN_AT, CARD_CLOSE_AT);
+    const cardAssigned = elapsed >= CARD_ASSIGN_CLICK_AT;
+    const cardPressed = between(elapsed, CARD_ASSIGN_CLICK_AT, CARD_ASSIGN_CLICK_AT + 280);
+    const cardPending = BOARD_CARDS.find(card => card.id === 'n1');
+    const panelDescription = firstPanel ? NEW_CARD_NOTES.n1 : secondPanel ? NEW_CARD_NOTES.n2 : NEW_CARD_NOTES.n3;
     const panelTitle = firstPanel
         ? typewriter('Definir prioridades del sprint', elapsed, NEW1_TYPE_S, NEW1_TYPE_E)
         : secondPanel
@@ -162,9 +214,9 @@ export const BoardView: React.FC<BoardViewProps> = ({ elapsed }) => {
                 </span>
             </aside>
 
-            <main className="min-w-0 flex-1 p-4">
-                <div className="flex h-full flex-col overflow-hidden rounded-card border border-hairline bg-surface-1">
-                    <header className="flex h-[104px] shrink-0 items-center justify-between px-5">
+            <main className="min-w-0 flex-1 p-3">
+                <div className="flex h-full flex-col overflow-hidden rounded-card bg-canvas">
+                    <header className="flex h-[76px] shrink-0 items-center justify-between px-5">
                         <div className="flex min-w-0 items-center gap-2">
                             <span className="truncate font-display text-[28px] leading-none tracking-[-0.045em] text-ink">{BOARD_NAME}</span>
                             <BookOpen className="h-4 w-4 shrink-0 text-ink-muted" strokeWidth={1.9} />
@@ -191,7 +243,7 @@ export const BoardView: React.FC<BoardViewProps> = ({ elapsed }) => {
                     </header>
 
                     <LayoutGroup id="zenth-demo-board">
-                     <div className="grid flex-1 grid-cols-[repeat(4,minmax(0,1fr))_176px] items-start gap-3 p-4">
+                     <div className="grid flex-1 grid-cols-[repeat(4,minmax(0,1fr))_176px] items-start gap-4 px-5 pb-4 pt-1">
                         {order.map((key) => {
                             const list = listByKey.get(key)!;
                             const cards = visibleCards.filter(card => currentList(card) === key);
@@ -200,21 +252,21 @@ export const BoardView: React.FC<BoardViewProps> = ({ elapsed }) => {
                                     layout
                                     key={key}
                                     transition={{ layout: { duration: .72, ease: [0.16, 1, 0.3, 1] } }}
-                                    className="flex h-[238px] min-w-0 flex-col overflow-visible rounded-medium bg-canvas"
+                                    className="flex min-w-0 flex-col overflow-visible"
                                 >
-                                    <header className="shrink-0 px-1 pt-1">
-                                        <div className="flex h-8 items-center gap-2 px-2 text-ink">
+                                    <header className="shrink-0">
+                                        <div className="flex h-8 items-center gap-2 text-ink">
                                             <GripVertical className="h-3.5 w-3.5 text-ink-muted" strokeWidth={2.1} />
                                             <span className="text-[11px] font-semibold">{list.label}</span>
-                                            {cards.length > 0 && <span className="flex h-4 min-w-4 items-center justify-center rounded-full bg-surface-2 px-1 text-[9px] font-bold text-ink-muted">{cards.length}</span>}
+                                            {cards.length > 0 && <span className="text-[10px] tabular-nums text-ink-muted">{cards.length}</span>}
                                             <MoreHorizontal className="ml-auto h-3.5 w-3.5 text-ink-muted" strokeWidth={2} />
                                         </div>
                                         <span className="mt-1 block h-[3px] rounded-pill" style={{ backgroundColor: list.accent }} />
                                     </header>
 
-                                    <div className="relative flex min-h-0 flex-1 flex-col gap-2 p-2">
+                                    <div className="relative flex min-h-0 flex-1 flex-col gap-2.5 pt-3">
                                         <AnimatePresence mode="popLayout">
-                                            {cards.map(card => <TaskCard key={card.id} card={card} elapsed={elapsed} />)}
+                                            {cards.map(card => <TaskCard key={card.id} card={card} elapsed={elapsed} accent={list.accent} />)}
                                         </AnimatePresence>
 
                                         {cards.length === 0 && (
@@ -223,7 +275,7 @@ export const BoardView: React.FC<BoardViewProps> = ({ elapsed }) => {
 
                                         <motion.span
                                             animate={((firstPanel || secondPanel || thirdPanel) && key === 'porhacer') ? { backgroundColor: 'var(--fr-surface-2)' } : { backgroundColor: 'transparent' }}
-                                            className="mt-auto flex items-center gap-1.5 rounded-[8px] px-2 py-2 text-[10px] text-ink-muted"
+                                            className="flex items-center gap-1.5 rounded-[8px] px-2 py-2 text-[10px] text-ink-muted"
                                         >
                                             <Plus className="h-3.5 w-3.5" strokeWidth={2.2} /> Añade una tarea
                                         </motion.span>
@@ -235,7 +287,7 @@ export const BoardView: React.FC<BoardViewProps> = ({ elapsed }) => {
                             <span className="flex h-10 items-center gap-2 rounded-medium border border-dashed border-hairline px-3 text-[10px] text-ink-muted">
                                 <Plus className="h-3.5 w-3.5" strokeWidth={2.2} /> Añade otra lista
                             </span>
-                            <div className="flex items-center gap-2 rounded-medium bg-surface-2 px-3 py-3 shadow-card-resting">
+                            <div className="flex items-center gap-2 rounded-medium border border-hairline-soft px-3 py-3">
                                 <History className="h-4 w-4 shrink-0 text-ink-muted" strokeWidth={1.9} />
                                 <span className="min-w-0 flex-1">
                                     <span className="block text-[11px] font-semibold text-ink">Completado</span>
@@ -260,7 +312,30 @@ export const BoardView: React.FC<BoardViewProps> = ({ elapsed }) => {
                             transition={{ duration: .42, ease: [0.16, 1, 0.3, 1] }}
                             className="absolute -top-[72px] right-0 z-50 h-[800px] w-[430px] border-l border-hairline bg-canvas"
                         >
-                            <CreatePanel typed={panelTitle} isTyping={panelTyping} isSubmitting={panelSubmitting} listLabel="Inicio" fillProgress={panelFillProgress} />
+                            <CreatePanel typed={panelTitle} isTyping={panelTyping} isSubmitting={panelSubmitting} listLabel="Baja" fillProgress={panelFillProgress} description={panelDescription} />
+                        </motion.aside>
+                    </>
+                )}
+            </AnimatePresence>
+
+            <AnimatePresence>
+                {cardOpen && (
+                    <>
+                        <motion.div key="card-backdrop" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="absolute -top-[72px] bottom-0 left-0 right-0 z-40 bg-black/60" />
+                        <motion.aside
+                            key="card-panel"
+                            initial={{ x: 440 }} animate={{ x: 0 }} exit={{ x: 440 }}
+                            transition={{ duration: .42, ease: [0.16, 1, 0.3, 1] }}
+                            className="absolute -top-[72px] right-0 z-50 h-[800px] w-[430px] border-l border-hairline bg-canvas"
+                        >
+                            <div className="absolute -left-[52px] top-[88px] flex flex-col gap-2">
+                                {[X, AlignLeft, Pencil, Target, Trash2].map((Icon, index) => (
+                                    <span key={index} className={`flex h-9 w-9 items-center justify-center rounded-medium ${index === 4 ? 'bg-semantics-error text-white' : 'bg-surface-2 text-ink'}`}>
+                                        <Icon className="h-4 w-4" strokeWidth={1.9} />
+                                    </span>
+                                ))}
+                            </div>
+                            <BoardCardPanel title={cardPending?.title ?? ''} note={cardPending?.description} assignee={CARD_ASSIGNEE} assigned={cardAssigned} pressed={cardPressed} />
                         </motion.aside>
                     </>
                 )}

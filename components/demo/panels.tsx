@@ -2,11 +2,10 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import {
     CalendarDays, Clock, Repeat2, Video, MapPin, ExternalLink, Eye, Target,
-    ListChecks, Users, Zap, Tag, Star, Bell, Monitor, Sparkles, AlignLeft,
-    ChevronDown, ChevronRight, X, Check, Flag, Link2, Copy, Plus,
+    ListChecks, Users, Tag, Sunrise, Timer, CalendarClock, Star, Bell, Monitor, Sparkles, AlignLeft,
+    ChevronDown, ChevronRight, ChevronUp, Check, Save, BookOpen, Bold, Italic, List, ListOrdered, Quote, Code, Flag, Link2, Copy, Plus,
 } from 'lucide-react';
-import { WEEKDAYS } from './timeline';
-import { FOCUS_TASK } from './timeline';
+import { FOCUS_TASK, typewriter } from './timeline';
 
 /* ── Piezas compartidas ──────────────────────────────────────────────────── */
 
@@ -85,34 +84,6 @@ export const DetailSection: React.FC<{ label: string; hint?: string; children: R
     </div>
 );
 
-const EVENT_TYPES = [
-    { icon: ListChecks, label: 'Tarea', hint: 'Acción concreta' },
-    { icon: CalendarDays, label: 'Evento', hint: 'Bloque en agenda' },
-    { icon: Users, label: 'Reunión', hint: 'Con otras personas' },
-    { icon: Zap, label: 'Enfoque', hint: 'Tiempo protegido' },
-];
-
-/** Selector de tipo. `selected` es el índice del tipo activo. */
-const EventTypePicker: React.FC<{ selected: number }> = ({ selected }) => (
-    <SectionCard icon={AlignLeft} label="Tipo de evento" hint="Define cómo aparece en tu calendario">
-        <div className="grid grid-cols-4 gap-1.5">
-            {EVENT_TYPES.map(({ icon: Icon, label, hint }, i) => (
-                <div
-                    key={label}
-                    className={`rounded-[8px] px-1.5 py-2 ${i === selected ? 'bg-surface-2' : 'bg-canvas'}`}
-                    // Sin `ring-ink/20`: el modificador de opacidad de Tailwind
-                    // no funciona sobre colores declarados como `var()`.
-                    style={i === selected ? { boxShadow: 'inset 0 0 0 1px var(--fr-hairline)' } : undefined}
-                >
-                    <Icon className="h-3 w-3 text-ink-muted" strokeWidth={1.9} />
-                    <p className="mt-1 truncate text-[10px] font-semibold text-ink">{label}</p>
-                    <p className="truncate text-[8px] text-ink-muted">{hint}</p>
-                </div>
-            ))}
-        </div>
-    </SectionCard>
-);
-
 const Toggle: React.FC<{ icon: IconType; label: string; on: boolean }> = ({ icon: Icon, label, on }) => (
     <div className="flex items-center gap-2">
         <Icon className="h-3.5 w-3.5 text-ink-muted" strokeWidth={1.9} />
@@ -123,45 +94,151 @@ const Toggle: React.FC<{ icon: IconType; label: string; on: boolean }> = ({ icon
     </div>
 );
 
-const TagsRow: React.FC<{ value?: string }> = ({ value = 'Ninguna' }) => (
-    <GroupCard className="flex items-center gap-2">
-        <Tag className="h-3.5 w-3.5 text-ink-muted" strokeWidth={1.9} />
-        <span className="flex-1 text-[9px] font-semibold uppercase tracking-[0.14em] text-ink-muted">
-            Etiquetas
-        </span>
+/** Fila plana de ajustes: etiqueta a la izquierda, valor y chevron a la derecha. */
+const FlatRow: React.FC<{ icon: IconType; label: string; value: string }> = ({ icon: Icon, label, value }) => (
+    <div className="flex items-center gap-3 border-b border-hairline-soft py-3.5">
+        <Icon className="h-4 w-4 shrink-0 text-ink-muted" strokeWidth={1.8} />
+        <span className="flex-1 text-[13px] text-ink-muted">{label}</span>
         <motion.span
             key={value}
-            initial={{ opacity: 0, y: 3 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: .24, ease: [0.16, 1, 0.3, 1] }}
-            className={`text-[10px] ${value === 'Ninguna' ? 'italic text-ink-muted' : 'rounded-pill bg-canvas px-2 py-0.5 font-semibold text-ink'}`}
-        >{value}</motion.span>
-        <ChevronRight className="h-3 w-3 text-ink-muted" strokeWidth={1.9} />
-    </GroupCard>
-);
-
-const NotesBox: React.FC<{ text?: string }> = ({ text = 'Escribe tus notas aquí…' }) => (
-    <div className="h-[62px] rounded-large bg-surface-1 px-3 py-2.5">
-        <motion.span key={text} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: .3 }} className="text-[11px] text-ink-muted">{text}</motion.span>
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className={`text-[12px] ${value === 'Ninguna' || value === 'Ninguno' || value === 'Añadir' ? 'text-ink-muted' : 'font-semibold text-ink'}`}
+        >
+            {value}
+        </motion.span>
+        <ChevronRight className="h-3.5 w-3.5 shrink-0 text-ink-muted" strokeWidth={1.9} />
     </div>
 );
 
+/** Celda de campo: icono a la izquierda, etiqueta en versalitas y valor en negrita. */
+const FlatCell: React.FC<{ icon: IconType; label: string; value: string; muted?: boolean }> = ({ icon: Icon, label, value, muted }) => (
+    <div className="flex items-start gap-3">
+        <Icon className="mt-1 h-4 w-4 shrink-0 text-ink-muted" strokeWidth={1.8} />
+        <div className="min-w-0">
+            <p className="text-[8px] font-semibold uppercase tracking-[0.14em] text-ink-muted">{label}</p>
+            <motion.p
+                key={value}
+                initial={{ opacity: 0, y: 3 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: .24, ease: [0.16, 1, 0.3, 1] }}
+                className={`mt-0.5 truncate text-[13px] font-semibold ${muted ? 'text-ink-muted' : 'text-ink'}`}
+            >
+                {value}
+            </motion.p>
+        </div>
+    </div>
+);
+
+/** Momento, fecha y hora en el mismo bloque, sin caja ni marco propio. */
+const WhenBlock: React.FC<{
+    moment: string; date: string; time: string;
+    momentMuted?: boolean; dateMuted?: boolean; timeMuted?: boolean;
+    momentLabel?: string; momentIcon?: IconType;
+}> = ({ moment, date, time, momentMuted, dateMuted, timeMuted, momentLabel = 'Momento', momentIcon = Sunrise }) => (
+    <div className="grid grid-cols-2 gap-x-6 gap-y-3 border-b border-hairline-soft py-4">
+        <FlatCell icon={momentIcon} label={momentLabel} value={moment} muted={momentMuted} />
+        <FlatCell icon={CalendarDays} label="Fecha" value={date} muted={dateMuted} />
+        <FlatCell icon={Clock} label="Hora" value={time} muted={timeMuted} />
+    </div>
+);
+
+const DurationBlock: React.FC<{ duration: string; repeat: string; durationMuted?: boolean }> = ({ duration, repeat, durationMuted }) => (
+    <div className="grid grid-cols-2 border-b border-hairline-soft py-4">
+        <FlatCell icon={Timer} label="Duración" value={duration} muted={durationMuted} />
+        <div className="border-l border-hairline-soft pl-5">
+            <FlatCell icon={Repeat2} label="Repetición" value={repeat} />
+        </div>
+    </div>
+);
+
+const ToggleBlock: React.FC<{ alert: boolean }> = ({ alert }) => (
+    <div className="grid grid-cols-2 py-4">
+        <div className="pr-5"><Toggle icon={Star} label="Gran objetivo" on={false} /></div>
+        <div className="border-l border-hairline-soft pl-5"><Toggle icon={Bell} label="Avisar" on={alert} /></div>
+    </div>
+);
+
+/** Cabecera común del editor: acciones arriba, título y campo de descripción. */
+const EditorHeader: React.FC<{
+    action?: React.ReactNode;
+    badge: React.ReactNode;
+    title: React.ReactNode;
+    note: React.ReactNode;
+}> = ({ action, badge, title, note }) => (
+    <>
+        <div className="flex items-center justify-between">
+            <span className="flex items-center gap-1.5 text-[12px] text-ink-muted">
+                <Sparkles className="h-3.5 w-3.5" strokeWidth={1.9} />
+                Pedir a Zen
+            </span>
+            {action}
+        </div>
+        <div className="mt-2 flex items-center gap-2.5">
+            {badge}
+            <span className="min-w-0 flex-1 truncate font-display text-[19px] leading-none tracking-[-0.04em] text-ink">{title}</span>
+        </div>
+        {note}
+        <div className="mt-4 border-t border-hairline-soft" />
+    </>
+);
+
+/** Descripción plegada: una sola línea con el texto de ayuda. */
+const NoteCollapsed: React.FC<{ text: string }> = ({ text }) => (
+    <div className="mt-3 flex items-center gap-2.5 rounded-large bg-surface-1 px-3.5 py-3">
+        <AlignLeft className="h-3.5 w-3.5 shrink-0 text-ink-muted" strokeWidth={1.9} />
+        <span className="flex-1 truncate text-[11px] text-ink-muted">{text}</span>
+        <ChevronDown className="h-3.5 w-3.5 shrink-0 text-ink-muted" strokeWidth={1.9} />
+    </div>
+);
+
+/** Descripción desplegada: editor con barra de formato y el texto escribiéndose. */
+const NoteExpanded: React.FC<{ text: string; typing: boolean }> = ({ text, typing }) => (
+    <div className="mt-3 overflow-hidden rounded-[22px] bg-surface-1">
+        <div className="flex items-center gap-1 px-4 py-2.5">
+            <span className="flex-1 text-[8px] font-semibold uppercase tracking-[0.14em] text-ink-muted">Notas</span>
+            {[Bold, Italic, List, ListOrdered, Quote, Code, Link2, ChevronUp].map((Icon, i) => (
+                <span key={i} className="flex h-6 w-6 items-center justify-center text-ink-muted">
+                    <Icon className="h-3.5 w-3.5" strokeWidth={1.9} />
+                </span>
+            ))}
+        </div>
+        <div className="min-h-[76px] border-t border-hairline-soft px-4 py-3 text-[12px] leading-relaxed text-ink">
+            {text}
+            {typing && (
+                <motion.span
+                    animate={{ opacity: [1, 0, 1] }}
+                    transition={{ duration: 0.85, repeat: Infinity }}
+                    className="ml-px inline-block h-3.5 w-px bg-accent align-middle"
+                />
+            )}
+        </div>
+    </div>
+);
+
+const TaskBadge: React.FC = () => (
+    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-surface-1">
+        <Target className="h-4 w-4 text-[#f0508c]" strokeWidth={2} />
+    </span>
+);
+
 /**
- * Sección "Reunión": colapsada muestra sólo "Añadir"; al elegir un
- * servicio se expande con el desplegable de Servicio; una vez creado el
- * enlace, la fila de "Crear enlace de llamada" se convierte en el enlace
- * en sí, con copiar y el campo de invitados.
+ * Fila "Reunión": colapsada muestra sólo "Añadir"; al elegir un servicio
+ * se expande con el desplegable de Servicio; una vez creado el enlace, la
+ * fila de "Crear enlace de llamada" se convierte en el enlace en sí.
  */
 export const MeetingSection: React.FC<{
     stage: 'collapsed' | 'picking' | 'created';
     serviceMenuOpen?: boolean;
 }> = ({ stage, serviceMenuOpen }) => (
-    <GroupCard>
-        <div className="flex items-center gap-2">
-            <Video className="h-3.5 w-3.5 shrink-0 text-ink-muted" strokeWidth={1.9} />
-            <span className="flex-1 text-[9px] font-semibold uppercase tracking-[0.14em] text-ink-muted">Reunión</span>
-            <span className="text-[11px] font-semibold text-ink">{stage === 'collapsed' ? 'Añadir' : 'Zenth'}</span>
-            <ChevronDown className="h-3 w-3 text-ink-muted" strokeWidth={1.9} />
+    <div className="border-b border-hairline-soft py-3.5">
+        <div className="flex items-center gap-3">
+            <Video className="h-4 w-4 shrink-0 text-ink-muted" strokeWidth={1.8} />
+            <span className={`flex-1 text-[13px] ${stage === 'collapsed' ? 'text-ink-muted' : 'text-ink'}`}>Reunión</span>
+            <span className={`text-[12px] ${stage === 'collapsed' ? 'text-ink-muted' : 'font-semibold text-ink'}`}>{stage === 'collapsed' ? 'Añadir' : 'Zenth'}</span>
+            {stage === 'collapsed'
+                ? <ChevronRight className="h-3.5 w-3.5 text-ink-muted" strokeWidth={1.9} />
+                : <ChevronDown className="h-3.5 w-3.5 text-ink-muted" strokeWidth={1.9} />}
         </div>
 
         {stage !== 'collapsed' && (
@@ -169,7 +246,7 @@ export const MeetingSection: React.FC<{
                 initial={{ opacity: 0, y: -4 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: .22 }}
-                className="relative mt-3 space-y-2"
+                className="relative mt-3 space-y-2 rounded-large bg-surface-1 p-2.5"
             >
                 <div className="relative flex items-center justify-between rounded-medium bg-canvas px-2.5 py-2">
                     <span className="text-[10px] text-ink-muted">Servicio</span>
@@ -213,59 +290,28 @@ export const MeetingSection: React.FC<{
                 </div>
             </motion.div>
         )}
-    </GroupCard>
+    </div>
 );
 
-/** Editor de una reunión nueva: igual estructura que EditPanel, con la sección Reunión activa. */
+/** Editor de una reunión nueva: misma estructura plana, con la fila Reunión activa. */
 export const MeetingEditPanel: React.FC<{
     title: string;
     stage: 'collapsed' | 'picking' | 'created';
     serviceMenuOpen?: boolean;
 }> = ({ title, stage, serviceMenuOpen }) => (
-    <div className="flex h-full flex-col gap-2.5 overflow-hidden p-5">
-        <div className="flex gap-1.5">
-            <span className="flex items-center gap-1 rounded-pill bg-surface-2 px-2 py-1 text-[9px] font-semibold uppercase tracking-[0.1em] text-ink">
-                <Sparkles className="h-2.5 w-2.5" strokeWidth={2.2} />
-                Pedir a Zen
-            </span>
-        </div>
-
-        <div className="flex items-center gap-2.5">
-            <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-grad-violet to-grad-magenta">
-                <Users className="h-4 w-4 text-white" strokeWidth={2} />
-            </span>
-            <p className="font-display text-[19px] leading-none tracking-[-0.04em] text-ink">{title}</p>
-        </div>
-
-        <EventTypePicker selected={2} />
-
-        <GroupCard>
-            <div className="grid grid-cols-2 gap-3">
-                <Field icon={CalendarDays} label="Momento" value="Mañana" />
-                <Field icon={CalendarDays} label="Fecha" value="1 sept 2026" />
-            </div>
-            <div className="mt-3">
-                <Field icon={Clock} label="Hora inicio" value="9:00 AM" />
-            </div>
-        </GroupCard>
-
+    <div className="flex h-full flex-col overflow-hidden p-5">
+        <EditorHeader
+            action={<span className="flex items-center gap-1.5 rounded-pill bg-surface-2 px-4 py-2 text-[11px] font-semibold text-ink-muted"><Check className="h-3.5 w-3.5" strokeWidth={2.4} />Agregar</span>}
+            badge={<span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-surface-1"><Users className="h-4 w-4 text-[#f0508c]" strokeWidth={2} /></span>}
+            title={title}
+            note={<NoteCollapsed text="Agregar una nota o descripción…" />}
+        />
+        <FlatRow icon={Link2} label="Documentos" value="Ninguno" />
+        <WhenBlock moment="Mañana" date="1 sept 2026" time="09:00" />
         <MeetingSection stage={stage} serviceMenuOpen={serviceMenuOpen} />
-
-        <GroupCard>
-            <div className="grid grid-cols-2 gap-3">
-                <Field icon={Clock} label="Duración" value="30m" />
-                <Field icon={Repeat2} label="Repetición" value="No repetir" />
-            </div>
-        </GroupCard>
-
-        <TagsRow value="Equipo" />
-
-        <GroupCard>
-            <div className="grid grid-cols-2 gap-3">
-                <Toggle icon={Star} label="Gran objetivo" on={false} />
-                <Toggle icon={Bell} label="Avisar" on />
-            </div>
-        </GroupCard>
+        <DurationBlock duration="30m" repeat="No repetir" />
+        <FlatRow icon={Tag} label="Etiquetas" value="Equipo" />
+        <ToggleBlock alert />
     </div>
 );
 
@@ -356,100 +402,139 @@ export const MeetingPreparingPanel: React.FC<{ title: string; date: string; time
 /* ── Panel de edición ────────────────────────────────────────────────────── */
 
 export const EditPanel: React.FC = () => (
-    <div className="flex h-full flex-col gap-2.5 overflow-hidden p-5">
-        <div className="flex gap-1.5">
-            <span className="flex items-center gap-1 rounded-pill bg-surface-2 px-2 py-1 text-[9px] font-semibold uppercase tracking-[0.1em] text-ink">
-                <Sparkles className="h-2.5 w-2.5" strokeWidth={2.2} />
-                Pedir a Zen
-            </span>
-            <span className="flex items-center gap-1 rounded-pill bg-surface-2 px-2 py-1 text-[9px] font-semibold uppercase tracking-[0.1em] text-ink-muted">
-                <Repeat2 className="h-2.5 w-2.5" strokeWidth={2.2} />
-                Serie
-            </span>
-        </div>
-
-        <div className="flex items-center gap-2.5">
-            <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-[8px] bg-[#81D4FA]">
-                <Monitor className="h-4 w-4 text-black" strokeWidth={1.8} />
-            </span>
-            <p className="font-display text-[19px] leading-none tracking-[-0.04em] text-ink">
-                Meet de 4Geeks
-            </p>
-        </div>
-
-        <div className="grid grid-cols-2 gap-2">
-            <span className="flex items-center justify-center gap-1.5 rounded-medium bg-surface-1 py-2 text-[10px] font-semibold uppercase tracking-[0.1em] text-ink">
-                <CalendarDays className="h-3 w-3" strokeWidth={2} />
-                Auto-agendar
-            </span>
-            <span className="flex items-center justify-center gap-1.5 rounded-medium bg-surface-1 py-2 text-[10px] font-semibold uppercase tracking-[0.1em] text-ink">
-                <ListChecks className="h-3 w-3" strokeWidth={2} />
-                Sugerir pasos
-            </span>
-        </div>
-
-        <EventTypePicker selected={1} />
-
-        <SectionCard icon={Video} label="Videoconferencia" hint="Guarda el acceso para abrirlo desde el evento">
-            <div className="flex gap-1.5">
-                <span className="flex w-[38%] items-center justify-between rounded-[8px] bg-canvas px-2 py-1.5 text-[10px] text-ink">
-                    Google Meet
-                    <ChevronDown className="h-3 w-3 text-ink-muted" strokeWidth={2} />
+    <div className="flex h-full flex-col overflow-hidden p-5">
+        <EditorHeader
+            action={
+                <span className="flex items-center gap-1">
+                    <span className="flex h-8 w-8 items-center justify-center rounded-full text-ink-muted"><CalendarClock className="h-4 w-4" strokeWidth={1.9} /></span>
+                    <span className="flex h-8 w-8 items-center justify-center rounded-full text-ink-muted"><ListChecks className="h-4 w-4" strokeWidth={1.9} /></span>
                 </span>
-                <span className="flex-1 truncate rounded-[8px] bg-canvas px-2 py-1.5 text-[10px] text-ink">
-                    https://meet.google.com/zen-thmq-dkv
-                </span>
-            </div>
-        </SectionCard>
+            }
+            badge={<span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-medium bg-[#81D4FA]"><Monitor className="h-4 w-4 text-black" strokeWidth={1.8} /></span>}
+            title="Meet de 4Geeks"
+            note={<NoteCollapsed text="Reunión semanal con el equipo de 4Geeks…" />}
+        />
+        <FlatRow icon={Link2} label="Documentos" value="Ninguno" />
+        <WhenBlock moment="Tarde" date="29 jul 2026" time="18:30" />
+        <FlatRow icon={Video} label="Reunión" value="Google Meet" />
+        <DurationBlock duration="30m" repeat="Semanal" />
+        <FlatRow icon={Tag} label="Etiquetas" value="Ninguna" />
+        <ToggleBlock alert />
+    </div>
+);
 
-        <GroupCard>
-            <div className="grid grid-cols-2 gap-3">
-                <Field icon={CalendarDays} label="Momento" value="Tarde" />
-                <Field icon={CalendarDays} label="Fecha" value="29 jul 2026" />
-            </div>
-            <div className="mt-3">
-                <Field icon={Clock} label="Hora inicio" value="6:30 PM" />
-            </div>
-        </GroupCard>
+/* ── Detalle de una tarjeta de pizarra ───────────────────────────────────── */
 
-        <GroupCard>
-            <div className="grid grid-cols-2 gap-3">
-                <Field icon={Clock} label="Duración" value="30m" />
-                <Field icon={Repeat2} label="Repetición" value="Semanal" />
-            </div>
-        </GroupCard>
+const BOARD_CHIPS = [
+    { icon: BookOpen, label: 'Plan de lanzamiento', on: true },
+    { icon: Target, label: 'Propuesta comercial', on: false },
+    { icon: Users, label: 'Equipo de producto', on: false },
+];
 
-        <GroupCard className="flex gap-1">
-            {WEEKDAYS.map((d, i) => (
-                <span
-                    key={i}
-                    className={`flex-1 rounded-[7px] py-1.5 text-center text-[10px] font-semibold ${i === 2 || i === 4 ? 'bg-surface-2 text-ink' : 'text-ink-muted'
-                        }`}
-                >
-                    {d}
-                </span>
-            ))}
-        </GroupCard>
+const Person: React.FC<{ name: string; tone: string; selected: boolean; pressed?: boolean }> = ({ name, tone, selected, pressed }) => (
+    <motion.span
+        animate={pressed ? { scale: .96 } : { scale: 1 }}
+        transition={{ duration: .14 }}
+        className={`flex items-center gap-2.5 rounded-pill px-2.5 py-2 text-[11px] font-semibold text-ink transition-colors duration-300 ${selected ? 'bg-surface-2' : 'bg-surface-1'}`}
+    >
+        <span className={`flex h-7 w-7 items-center justify-center rounded-full bg-gradient-to-br text-[10px] font-bold text-white ${tone}`}>{name[0]}</span>
+        <span className="flex-1">{name}</span>
+        {selected && <Check className="h-3.5 w-3.5 text-ink-muted" strokeWidth={2.4} />}
+    </motion.span>
+);
 
-        <div className="flex items-center justify-between">
-            <span className="text-[9px] font-semibold uppercase tracking-[0.14em] text-ink-muted">
-                Finalizar repetición
+/** Detalle de una tarjeta de pizarra: la sección Equipo permite asignar responsables. */
+export const BoardCardPanel: React.FC<{
+    title: string;
+    note?: string;
+    assignee: string;
+    assigned: boolean;
+    pressed: boolean;
+}> = ({ title, note, assignee, assigned, pressed }) => (
+    <div className="flex h-full flex-col gap-4 overflow-hidden p-6">
+        <div className="flex items-start gap-3">
+            <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-large bg-[#A5D6A7]">
+                <Target className="h-6 w-6 text-[#f0508c]" strokeWidth={2} />
             </span>
-            <span className="flex items-center gap-1.5 rounded-[8px] bg-surface-1 px-2 py-1 text-[10px] text-ink">
-                <CalendarDays className="h-3 w-3 text-ink-muted" strokeWidth={1.9} />
-                22/8/2026
-                <X className="h-2.5 w-2.5 text-ink-muted" strokeWidth={2.4} />
-            </span>
+            <div className="min-w-0 flex-1">
+                <div className="flex gap-1.5">
+                    <span className="flex items-center gap-1 rounded-pill bg-surface-2 px-2 py-0.5 text-[9px] font-semibold uppercase tracking-[0.1em] text-ink-muted"><Check className="h-2.5 w-2.5" strokeWidth={2.6} />Tarea</span>
+                    <span className="rounded-pill bg-surface-2 px-2 py-0.5 text-[9px] font-semibold uppercase tracking-[0.1em] text-ink-muted">Mañana</span>
+                </div>
+                <p className="mt-1.5 font-display text-[24px] leading-[1.05] tracking-[-0.045em] text-ink">{title}</p>
+                <p className="mt-1.5 text-[10px] text-ink-muted">Tarea creada en Zenth</p>
+            </div>
         </div>
 
-        <TagsRow />
+        <DetailSection label="Agenda">
+            <p className="py-1.5 text-[13px] text-ink-muted">Sin programar</p>
+        </DetailSection>
 
-        <GroupCard>
-            <div className="grid grid-cols-2 gap-3">
-                <Toggle icon={Star} label="Gran objetivo" on={false} />
-                <Toggle icon={Bell} label="Avisar" on />
+        <DetailSection label="Pizarra">
+            <div className="mt-1.5 flex flex-wrap gap-1.5">
+                {BOARD_CHIPS.map(({ icon: Icon, label, on }) => (
+                    <span key={label} className={`flex items-center gap-1.5 rounded-pill px-3 py-1.5 text-[10px] font-semibold text-ink ${on ? 'bg-surface-2' : 'bg-surface-1'}`}>
+                        <Icon className="h-3 w-3" strokeWidth={1.9} />
+                        {label}
+                        {on && <Check className="h-3 w-3" strokeWidth={2.4} />}
+                    </span>
+                ))}
             </div>
-        </GroupCard>
+        </DetailSection>
+
+        <DetailSection label="Notas">
+            <p className="mt-1.5 rounded-large bg-surface-1 px-4 py-3 text-[12px] text-ink">{note ?? 'Sin notas todavía'}</p>
+        </DetailSection>
+
+        <div className="rounded-[24px] border border-hairline-soft bg-surface-1 p-3">
+            <div className="flex items-center gap-3 px-1 py-1.5">
+                <span className="flex h-10 w-10 items-center justify-center rounded-medium bg-canvas text-ink-muted"><Users className="h-4 w-4" strokeWidth={1.9} /></span>
+                <span className="min-w-0 flex-1">
+                    <span className="block text-[12px] font-semibold text-ink">Equipo</span>
+                    <span className="block text-[9px] text-ink-muted">Responsables, etiquetas y seguimiento</span>
+                </span>
+                <motion.span key={assigned ? 1 : 0} initial={{ scale: .7 }} animate={{ scale: 1 }} className="flex h-5 min-w-5 items-center justify-center rounded-full bg-canvas px-1.5 text-[10px] font-semibold tabular-nums text-ink-muted">{assigned ? 1 : 0}</motion.span>
+                <ChevronDown className="h-4 w-4 text-ink-muted" strokeWidth={1.9} />
+            </div>
+
+            <div className="mt-2 rounded-large bg-canvas p-3.5">
+                <div className="flex items-start gap-2">
+                    <span className="min-w-0 flex-1">
+                        <span className="block text-[11px] font-semibold text-ink">Responsables</span>
+                        <span className="block text-[9px] text-ink-muted">Personas a cargo de completar la tarjeta</span>
+                    </span>
+                    <span className="rounded-pill bg-surface-2 px-3 py-1.5 text-[9px] font-semibold text-ink-muted">Tomar tarea</span>
+                </div>
+                <div className="mt-2.5">
+                    {assigned ? (
+                        <motion.span
+                            initial={{ opacity: 0, scale: .92 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            className="inline-flex items-center gap-2 rounded-medium bg-surface-1 px-2.5 py-2 text-[10px] font-semibold text-ink"
+                        >
+                            <span className="flex h-6 w-6 items-center justify-center rounded-full bg-gradient-to-br from-[#7a2c4a] to-[#c1553f] text-[9px] font-bold text-white">{assignee[0]}</span>
+                            {assignee}
+                        </motion.span>
+                    ) : (
+                        <span className="inline-block rounded-medium bg-surface-1 px-3 py-2 text-[9px] text-ink-muted">Sin responsables todavía</span>
+                    )}
+                </div>
+            </div>
+
+            <div className="mt-4 px-1">
+                <p className="text-[11px] font-semibold text-ink">Asignar personas</p>
+                <p className="text-[9px] text-ink-muted">Pulsa un miembro para añadirlo o quitarlo</p>
+                <div className="mt-2 grid grid-cols-2 gap-2">
+                    <Person name="Matías" tone="from-[#6a4cf5] to-[#d44df0]" selected={false} />
+                    <Person name={assignee} tone="from-[#7a2c4a] to-[#c1553f]" selected={assigned} pressed={pressed} />
+                </div>
+            </div>
+
+            <div className="mt-4 flex items-center gap-2 px-1">
+                <span className="flex items-center gap-1.5 rounded-pill bg-canvas px-3 py-2 text-[10px] font-semibold text-ink-muted"><Bell className="h-3 w-3" strokeWidth={2} />Seguir</span>
+                <span className="flex items-center gap-1.5 rounded-pill bg-ink px-3 py-2 text-[10px] font-semibold text-canvas"><Save className="h-3 w-3" strokeWidth={2} />Guardar plantilla</span>
+            </div>
+        </div>
     </div>
 );
 
@@ -502,71 +587,51 @@ export const CreatePanel: React.FC<{
     isSubmitting: boolean;
     listLabel: string;
     fillProgress: number;
-}> = ({ typed, isTyping, isSubmitting, listLabel, fillProgress }) => (
-    <div className="flex h-full flex-col gap-2.5 overflow-hidden p-5">
-        <div className="flex items-center justify-end">
-            <motion.span
-                animate={isSubmitting ? { scale: 0.93 } : { scale: 1 }}
-                transition={{ duration: 0.14 }}
-                className={`flex items-center gap-1.5 rounded-medium px-4 py-2 text-[11px] font-semibold ${isSubmitting ? 'bg-accent text-white' : 'bg-surface-2 text-ink'
-                    }`}
-            >
-                <Check className="h-3.5 w-3.5" strokeWidth={2.4} />
-                Agregar
-            </motion.span>
-        </div>
-
-        <span className="flex w-fit items-center gap-1 rounded-pill bg-surface-2 px-2 py-1 text-[9px] font-semibold uppercase tracking-[0.1em] text-ink">
-            <Sparkles className="h-2.5 w-2.5" strokeWidth={2.2} />
-            Pedir a Zen
-        </span>
-
-        <div className="flex items-center gap-2.5">
-            <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-grad-violet to-grad-magenta">
-                <Target className="h-4 w-4 text-white" strokeWidth={2} />
-            </span>
-            <span className="flex min-w-0 flex-1 items-center">
-                <span className="truncate font-display text-[19px] leading-none tracking-[-0.04em] text-ink">
+    description?: string;
+}> = ({ typed, isTyping, isSubmitting, listLabel, fillProgress, description }) => (
+    <div className="flex h-full flex-col overflow-hidden p-5">
+        <EditorHeader
+            action={
+                <motion.span
+                    animate={isSubmitting ? { scale: 0.93 } : { scale: 1 }}
+                    transition={{ duration: 0.14 }}
+                    className={`flex items-center gap-1.5 rounded-pill px-4 py-2 text-[11px] font-semibold ${isSubmitting ? 'bg-accent text-white' : 'bg-surface-2 text-ink-muted'}`}
+                >
+                    <Check className="h-3.5 w-3.5" strokeWidth={2.4} />
+                    Agregar
+                </motion.span>
+            }
+            badge={<TaskBadge />}
+            title={
+                <>
                     {typed || <span className="text-ink-muted">¿Cuál es tu próximo paso?</span>}
-                </span>
-                {isTyping && (
-                    <motion.span
-                        animate={{ opacity: [1, 0, 1] }}
-                        transition={{ duration: 0.85, repeat: Infinity }}
-                        className="ml-0.5 inline-block h-4 w-px bg-accent"
-                    />
-                )}
-            </span>
-        </div>
-
-        <EventTypePicker selected={0} />
-
-        <GroupCard>
-            <div className="grid grid-cols-2 gap-3">
-                <Field icon={Flag} label="Prioridad" value={fillProgress >= .16 ? listLabel : 'Seleccionar'} muted={fillProgress < .16} />
-                <Field icon={CalendarDays} label="Fecha" value={fillProgress >= .32 ? '29 jul 2026' : 'Elegir fecha'} muted={fillProgress < .32} />
-            </div>
-            <div className="mt-3">
-                <Field icon={Clock} label="Hora inicio" value={fillProgress >= .48 ? '9:00 AM' : 'Elegir hora'} muted={fillProgress < .48} />
-            </div>
-        </GroupCard>
-
-        <GroupCard>
-            <div className="grid grid-cols-2 gap-3">
-                <Field icon={Clock} label="Duración" value={fillProgress >= .6 ? '30m' : '0m'} muted={fillProgress < .6} />
-                <Field icon={Repeat2} label="Repetición" value="No repetir" />
-            </div>
-        </GroupCard>
-
-        <TagsRow value={fillProgress >= .72 ? 'Trabajo' : 'Ninguna'} />
-
-        <GroupCard>
-            <div className="grid grid-cols-2 gap-3">
-                <Toggle icon={Star} label="Gran objetivo" on={false} />
-                <Toggle icon={Bell} label="Avisar" on={fillProgress >= .84} />
-            </div>
-        </GroupCard>
-
-        <NotesBox text={fillProgress >= .95 ? 'Revisar avances y dejar el próximo paso claro.' : 'Escribe tus notas aquí…'} />
+                    {isTyping && (
+                        <motion.span
+                            animate={{ opacity: [1, 0, 1] }}
+                            transition={{ duration: 0.85, repeat: Infinity }}
+                            className="ml-0.5 inline-block h-4 w-px bg-accent align-middle"
+                        />
+                    )}
+                </>
+            }
+            note={description && fillProgress > 0
+                ? <NoteExpanded text={typewriter(description, fillProgress, 0.02, 0.5)} typing={fillProgress > 0.02 && fillProgress < 0.5} />
+                : <NoteCollapsed text="Agregar una nota o descripción…" />}
+        />
+        <FlatRow icon={Link2} label="Documentos" value="Ninguno" />
+        <WhenBlock
+            moment={fillProgress >= .16 ? listLabel : 'Seleccionar'}
+            momentMuted={fillProgress < .16}
+            momentLabel="Prioridad"
+            momentIcon={Flag}
+            date={fillProgress >= .32 ? '29 jul 2026' : 'Elegir fecha'}
+            dateMuted={fillProgress < .32}
+            time={fillProgress >= .48 ? '09:00' : 'Elegir hora'}
+            timeMuted={fillProgress < .48}
+        />
+        <FlatRow icon={Video} label="Reunión" value="Añadir" />
+        <DurationBlock duration={fillProgress >= .6 ? '30m' : '0m'} durationMuted={fillProgress < .6} repeat="No repetir" />
+        <FlatRow icon={Tag} label="Etiquetas" value={fillProgress >= .72 ? 'Trabajo' : 'Ninguna'} />
+        <ToggleBlock alert={fillProgress >= .84} />
     </div>
 );
