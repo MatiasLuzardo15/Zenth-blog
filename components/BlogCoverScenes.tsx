@@ -814,7 +814,7 @@ const SceneHabits: React.FC = () => (
 /** 13 · Zen: una frase se vuelve campos completos — la transformación, no el formulario entero. */
 const SceneZen: React.FC = () => (
   <>
-    <S x={90} y={66}>
+    <S x={130} y={79}>
       <div className={`flex w-[380px] items-start gap-3 rounded-large border border-hairline bg-canvas p-4 ${SHADOW}`}>
         <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-grad-violet to-grad-magenta text-white">
           <Sparkles className="h-4 w-4" strokeWidth={2} />
@@ -822,12 +822,12 @@ const SceneZen: React.FC = () => (
         <p className="mt-1.5 text-[13px] leading-snug text-ink">«Cena con Ana el viernes a las 9pm»</p>
       </div>
     </S>
-    <S x={264} y={156}>
+    <S x={304} y={169}>
       <span className="flex h-8 w-8 items-center justify-center rounded-full bg-surface-1 text-ink-muted">
         <ChevronDown className="h-4 w-4" strokeWidth={2.2} />
       </span>
     </S>
-    <S x={90} y={206}>
+    <S x={128} y={219}>
       <div className="flex items-center gap-2.5">
         {[
           { icon: Calendar, label: '29 jul, 21:00' },
@@ -840,7 +840,7 @@ const SceneZen: React.FC = () => (
         ))}
       </div>
     </S>
-    <S x={205} y={268}>
+    <S x={235} y={281}>
       <span className={`inline-flex items-center gap-2 rounded-pill bg-ink px-4 py-2.5 text-[12px] font-semibold text-canvas ${SHADOW}`}>
         <Check className="h-3.5 w-3.5" strokeWidth={2.4} /> Vos confirmás
       </span>
