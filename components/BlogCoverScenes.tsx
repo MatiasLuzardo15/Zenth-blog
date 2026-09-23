@@ -522,45 +522,65 @@ const LEVEL_ROWS = [
   { label: 'Enfoque', now: 720, need: 1500, unit: ' min' },
 ];
 const fmt = (n: number) => n.toLocaleString('es-ES');
-const SceneLevels: React.FC = () => (
-  <>
-    <S x={34} y={44} k={1.08}>
-      <Card className="w-[236px] p-5 text-center">
-        <span className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-grad-violet to-grad-magenta text-white">
-          <Sparkles className="h-7 w-7" strokeWidth={1.6} />
-        </span>
-        <p className="mt-4 font-display text-[22px] font-semibold tracking-[-0.045em] text-ink">Nivel 5 · Cisne</p>
-        <p className="mt-1 text-[12px] tabular-nums text-ink-muted">3 550 XP</p>
-        <span className="mt-4 inline-flex items-center gap-1.5 rounded-pill bg-surface-2 px-3 py-1.5 text-[11px] font-semibold text-ink">
-          <Flame className="h-3.5 w-3.5" strokeWidth={2} /> Racha 12
-        </span>
-      </Card>
-    </S>
-    <S x={314} y={38} k={1.02}>
-      <Card className="w-[300px] p-5">
-        <p className="text-[10px] font-semibold uppercase tracking-[0.14em] text-ink-muted">Ruta de progreso</p>
-        <p className="mt-1 text-[13px] font-semibold text-ink">Siguiente: Nivel 6 · Osa Menor</p>
-        <div className="mt-4 space-y-3.5">
-          {LEVEL_ROWS.map(r => (
-            <div key={r.label}>
-              <div className="flex items-baseline justify-between text-[11px]">
-                <span className="text-ink-muted">{r.label}</span>
-                <span className="tabular-nums text-ink">{fmt(r.now)} / {fmt(r.need)}{r.unit}</span>
-              </div>
-              <div className="mt-1.5 h-[5px] overflow-hidden rounded-pill bg-surface-2">
-                <div className="h-full rounded-pill bg-accent" style={{ width: `${Math.round((r.now / r.need) * 100)}%` }} />
-              </div>
-            </div>
-          ))}
+
+/** Puntos de una constelación simplificada de Cisne (Cygnus), dibujada a mano sobre el lienzo 640×400. */
+const CYGNUS_STARS = [
+  { id: 'head', x: 452, y: 62, r: 4.5, lit: true },
+  { id: 'neck', x: 410, y: 122, r: 4, lit: true },
+  { id: 'hub', x: 378, y: 184, r: 6.5, lit: true },
+  { id: 'wingL', x: 262, y: 158, r: 4, lit: true },
+  { id: 'wingR', x: 486, y: 226, r: 4, lit: false },
+  { id: 'tail', x: 320, y: 300, r: 4, lit: false },
+] as const;
+const CYGNUS_LINES: [string, string][] = [
+  ['head', 'neck'], ['neck', 'hub'], ['hub', 'wingL'], ['hub', 'wingR'], ['hub', 'tail'],
+];
+const BG_STARS = [
+  [58, 54], [118, 226], [566, 54], [598, 318], [70, 336], [498, 34], [156, 84], [548, 200],
+  [34, 176], [614, 146], [224, 36], [352, 44], [486, 344], [140, 338], [606, 258], [24, 96],
+].map(([x, y], i) => ({ x, y, r: i % 3 === 0 ? 2 : 1.2 }));
+
+/** 2 · Las 20 constelaciones: el nivel dibujado como constelación real, no como tarjeta. */
+const SceneLevels: React.FC = () => {
+  const stars = Object.fromEntries(CYGNUS_STARS.map(s => [s.id, s]));
+  return (
+    <>
+      <svg viewBox={`0 0 ${COVER_W} ${COVER_H}`} className="absolute inset-0 h-full w-full" aria-hidden="true">
+        {BG_STARS.map((s, i) => (
+          <circle key={i} cx={s.x} cy={s.y} r={s.r} fill="#ffffff" opacity={0.4} />
+        ))}
+        {CYGNUS_LINES.map(([a, b], i) => {
+          const A = stars[a], B = stars[b];
+          return <line key={i} x1={A.x} y1={A.y} x2={B.x} y2={B.y} stroke="#ffffff" strokeWidth={1.6} opacity={0.45} />;
+        })}
+        {CYGNUS_STARS.map(s => (
+          <circle
+            key={s.id} cx={s.x} cy={s.y} r={s.lit ? s.r : s.r * 0.65}
+            fill={s.lit ? '#ffffff' : 'rgba(255,255,255,0.4)'}
+            style={s.lit ? { filter: 'drop-shadow(0 0 7px rgba(255,255,255,0.95))' } : undefined}
+          />
+        ))}
+      </svg>
+      <S x={36} y={302}>
+        <div className={`flex items-center gap-3 rounded-large border border-hairline bg-canvas px-4 py-3 ${SHADOW}`}>
+          <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-grad-violet to-grad-magenta text-white">
+            <Sparkles className="h-4 w-4" strokeWidth={2} />
+          </span>
+          <div>
+            <p className="text-[13px] font-semibold text-ink">Nivel 5 · Cisne</p>
+            <p className="text-[11px] tabular-nums text-ink-muted">{fmt(LEVEL_ROWS[0].now)} XP · Racha 12</p>
+          </div>
         </div>
-        <div className="mt-4 flex items-center gap-2 border-t border-hairline-soft pt-3 text-[11px] text-ink-muted">
-          <span className="flex items-center gap-1"><Check className="h-3 w-3" strokeWidth={2.6} /> Casiopea</span>
-          <span className="flex items-center gap-1"><Check className="h-3 w-3" strokeWidth={2.6} /> Cruz del Sur</span>
+      </S>
+      <S x={430} y={302}>
+        <div className={`rounded-large border border-hairline bg-canvas px-4 py-3 text-right ${SHADOW}`}>
+          <p className="text-[10px] font-semibold uppercase tracking-[0.14em] text-ink-muted">Siguiente</p>
+          <p className="mt-1 text-[13px] font-semibold text-ink">Osa Menor</p>
         </div>
-      </Card>
-    </S>
-  </>
-);
+      </S>
+    </>
+  );
+};
 
 /** 3 · Tu vida en píxeles: calendario de ánimo y año en píxeles. */
 const SceneMoodPixels: React.FC = () => (
@@ -733,61 +753,80 @@ const SceneContext: React.FC = () => (
   </>
 );
 
-/** 9 · Minimalismo digital: menos interfaz. */
+/** 9 · Minimalismo digital: casi nada en pantalla — el espacio vacío es la idea. */
 const SceneMinimal: React.FC = () => (
-  <S x={140} y={76} k={1.16}>
-    <Card className="w-[300px] space-y-6 p-5">
-      <DayProgress />
-      <QuickCapture />
-    </Card>
+  <S x={190} y={158} k={1.3}>
+    <div className="flex w-[260px] flex-col items-center gap-5 text-center">
+      <div className="flex w-full items-center gap-2 rounded-medium bg-surface-1 p-1.5 pl-3 shadow-soft-lift">
+        <span className="flex-1 text-left text-[12px] text-ink-muted">Añadir una tarea…</span>
+        <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-[8px] bg-accent text-white"><Plus className="h-4 w-4" strokeWidth={2.6} /></span>
+      </div>
+      <p className="text-[11px] italic text-ink-muted">Una tarea a la vez. Nada más en pantalla.</p>
+    </div>
   </S>
 );
 
-/** 10 · Nombrar para observar: balance mensual. */
+/** 10 · Nombrar para observar: el balance mensual como una rueda de color, no una barra escondida en una tarjeta. */
 const SceneBalance: React.FC = () => {
   const dist: { k: MoodKey; n: number }[] = [
     { k: 'excelente', n: 3 }, { k: 'bien', n: 9 }, { k: 'neutral', n: 4 }, { k: 'bajo', n: 2 }, { k: 'mal', n: 1 },
   ];
   const total = dist.reduce((s, d) => s + d.n, 0);
+  let acc = 0;
+  const conic = dist
+    .map(d => {
+      const from = (acc / total) * 360;
+      acc += d.n;
+      const to = (acc / total) * 360;
+      return `${MOOD[d.k].color} ${from}deg ${to}deg`;
+    })
+    .join(', ');
   return (
-    <S x={110} y={52} k={1.1}>
-      <Card className="w-[400px] p-6">
-        <p className="text-[10px] font-semibold uppercase tracking-[0.14em] text-ink-muted">Balance mensual</p>
-        <div className="mt-4 flex items-center gap-4">
-          <span className="h-14 w-14 shrink-0 rounded-full" style={{ backgroundColor: MOOD.bien.color }} />
-          <span>
-            <span className="block text-[12px] text-ink-muted">Estado predominante</span>
-            <span className="block font-display text-[28px] font-semibold leading-none tracking-[-0.045em] text-ink">Bien</span>
-          </span>
-          <span className="ml-auto text-right">
-            <span className="block text-[12px] text-ink-muted">Días registrados</span>
-            <span className="block font-display text-[28px] font-semibold leading-none tabular-nums tracking-[-0.045em] text-ink">{total}</span>
-          </span>
+    <>
+      <S x={64} y={70}>
+        <div className="relative flex h-[260px] w-[260px] items-center justify-center rounded-full" style={{ backgroundImage: `conic-gradient(${conic})` }}>
+          <div className="flex h-[178px] w-[178px] flex-col items-center justify-center rounded-full bg-canvas text-center">
+            <span className="text-[11px] text-ink-muted">Predominante</span>
+            <span className="mt-1 font-display text-[24px] font-semibold leading-none tracking-[-0.045em] text-ink">Bien</span>
+            <span className="mt-2 text-[11px] tabular-nums text-ink-muted">{total} días registrados</span>
+          </div>
         </div>
-        <div className="mt-6 flex h-3 overflow-hidden rounded-pill">
-          {dist.map(d => <span key={d.k} style={{ width: `${(d.n / total) * 100}%`, backgroundColor: MOOD[d.k].color }} />)}
-        </div>
-        <div className="mt-3 flex flex-wrap gap-x-4 gap-y-1.5">
+      </S>
+      <S x={372} y={124}>
+        <div className="flex flex-col gap-2.5">
           {dist.map(d => (
-            <span key={d.k} className="flex items-center gap-1.5 text-[11px] text-ink-muted">
-              <span className="h-2 w-2 rounded-full" style={{ backgroundColor: MOOD[d.k].color }} /> {MOOD[d.k].label} <span className="tabular-nums text-ink">{d.n}</span>
+            <span key={d.k} className="flex items-center gap-2 text-[13px] font-semibold text-ink">
+              <span className="h-2.5 w-2.5 shrink-0 rounded-full" style={{ backgroundColor: MOOD[d.k].color }} /> {MOOD[d.k].label} <span className="tabular-nums text-ink-muted">{d.n}</span>
             </span>
           ))}
         </div>
-      </Card>
-    </S>
+      </S>
+    </>
   );
 };
 
-/** 11 · Estado de flujo: elegir duración y sonido antes de empezar (no el timer en marcha, ya usado en 7 y 8). */
+/** 11 · Estado de flujo: ondas concéntricas detrás del selector (no el timer en marcha, ya usado en 7 y 8). */
 const SceneFlow: React.FC = () => (
-  <S x={132} y={84} k={1.32}>
-    <div className="w-[360px] overflow-hidden" style={{ height: 180 }}>
-      <div style={{ marginTop: -258 }}>
-        <FocusView elapsed={0} />
+  <>
+    <S x={190} y={20}>
+      <div className="relative h-[360px] w-[360px]">
+        {[360, 260, 170].map((size, i) => (
+          <span
+            key={size}
+            className="absolute left-1/2 top-1/2 rounded-full border border-accent"
+            style={{ height: size, width: size, transform: 'translate(-50%, -50%)', opacity: 0.1 + i * 0.06 }}
+          />
+        ))}
       </div>
-    </div>
-  </S>
+    </S>
+    <S x={132} y={84} k={1.32}>
+      <div className="w-[360px] overflow-hidden" style={{ height: 180 }}>
+        <div style={{ marginTop: -258 }}>
+          <FocusView elapsed={0} />
+        </div>
+      </div>
+    </S>
+  </>
 );
 
 /** 12 · Hábitos visibles: la repetición a la vista en la semana. */
