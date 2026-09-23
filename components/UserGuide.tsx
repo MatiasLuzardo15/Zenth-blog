@@ -103,7 +103,7 @@ const SECTIONS: GuideSection[] = [
         icon: Keyboard,
         intro: 'Navega entre las secciones y por la agenda sin apartar las manos del teclado. En macOS, Alt se muestra como ⌥ y las combinaciones con Ctrl del editor usan Cmd.',
         steps: [
-            'Alt + 1 abre Agenda · Alt + 2 abre Pizarras · Alt + 3 abre Biblioteca · Alt + 4 abre Mi ritmo · Alt + 5 abre Llamadas.',
+            'Alt + 1 abre Agenda · Alt + 2 abre Pizarras · Alt + 3 abre Biblioteca · Alt + 4 abre Reuniones · Alt + 5 abre Progreso.',
             'Alt + M pliega o vuelve a mostrar la navegación. Alt + , abre Ajustes y Alt + T cambia entre tema claro y oscuro.',
             'D cambia a la vista de día · S abre la semana · M abre el mes.',
             'T vuelve al día de hoy desde cualquier fecha que estés consultando en Agenda.',

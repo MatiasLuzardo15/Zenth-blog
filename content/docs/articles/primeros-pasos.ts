@@ -22,9 +22,9 @@ export const primerosPasosArticles: DocArticle[] = [
         ['Agenda', 'Planificar tu tiempo con tareas, eventos y reuniones en vista de día, semana y mes.', '`Alt + 1`'],
         ['Pizarras', 'Proyectos con listas y tarjetas, para ti o para compartir con un equipo.', '`Alt + 2`'],
         ['Biblioteca', 'Notas, lienzos y archivos de Zenth, junto con tu Google Drive si lo conectas.', '`Alt + 3`'],
-        ['Reuniones', 'Salas de tus pizarras, llamadas privadas y reuniones rápidas con invitados.', '`Alt + 5`'],
+        ['Reuniones', 'Salas de tus pizarras, llamadas privadas y reuniones rápidas con invitados.', '`Alt + 4`'],
         ['Enfoque', 'Un temporizador global que sigue corriendo mientras navegas.', '`Alt + F`'],
-        ['Progreso', 'XP, niveles, logros y racha.', '`Alt + 4`'],
+        ['Progreso', 'XP, niveles, logros y racha.', '`Alt + 5`'],
         ['Actividad y ánimo', 'Tu registro de ánimo y el ritmo de tus días.', '`Alt + 6`'],
         ['Estadísticas', 'Cuánto tiempo pasas en cada parte de Zenth, y cómo evolucionan tus tareas y sesiones.', '`Alt + 7`'],
       ),
@@ -232,4 +232,3 @@ export const primerosPasosArticles: DocArticle[] = [
     ],
   },
 ];
-

@@ -13,7 +13,7 @@ export const progresoArticles: DocArticle[] = [
     updated: UPDATED,
     related: ['progreso/registro-de-animo', 'progreso/estadisticas', 'agenda/crear-tareas-eventos-y-reuniones'],
     blocks: [
-      p('**Progreso** (`Alt` + `4`, antes «Mi ritmo») reúne lo que has construido: tus puntos de experiencia, tu nivel, tu racha y tus logros. No es una carrera: es una forma de ver, sin presión, que lo pequeño se acumula.'),
+      p('**Progreso** (`Alt` + `5`, antes «Mi ritmo») reúne lo que has construido: tus puntos de experiencia, tu nivel, tu racha y tus logros. No es una carrera: es una forma de ver, sin presión, que lo pequeño se acumula.'),
 
       h2('Cómo se gana XP'),
       table(

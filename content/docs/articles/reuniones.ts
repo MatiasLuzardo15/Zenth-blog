@@ -13,7 +13,7 @@ export const reunionesArticles: DocArticle[] = [
     updated: UPDATED,
     related: ['reuniones/salas-de-pizarra-y-llamadas-privadas', 'reuniones/reuniones-rapidas-e-invitados', 'reuniones/durante-una-llamada'],
     blocks: [
-      p('**Reuniones** (`Alt` + `5`) reúne, sin cambiar de sección ni de pizarra, todas las formas de hablar dentro de Zenth. Antes se llamaba «Llamadas». Está pensada como una herramienta más de colaboración, no como una plataforma de videoconferencia: **hay voz y pantalla compartida, pero no cámara ni grabación**.'),
+      p('**Reuniones** (`Alt` + `4`) reúne, sin cambiar de sección ni de pizarra, todas las formas de hablar dentro de Zenth. Antes se llamaba «Llamadas». Está pensada como una herramienta más de colaboración, no como una plataforma de videoconferencia: **hay voz y pantalla compartida, pero no cámara ni grabación**.'),
 
       h2('Qué hay en la sección'),
       table(
