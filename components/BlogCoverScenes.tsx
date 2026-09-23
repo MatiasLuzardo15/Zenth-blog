@@ -4,7 +4,6 @@ import {
   LayoutDashboard, LibraryBig, Link2, LogOut, Mic, MicOff, MonitorUp, MoreHorizontal, PenTool, PhoneCall,
   Plus, Quote, Search, Smile, Sparkles, Strikethrough, Target, Timer, Underline, UserPlus,
 } from 'lucide-react';
-import { TodayView } from './demo/TodayView';
 import { FocusView } from './demo/FocusView';
 import { CreatePanel } from './demo/panels';
 import {
@@ -39,24 +38,6 @@ const SHADOW = 'shadow-[0_18px_50px_-18px_rgba(0,0,0,0.45)]';
 const Card: React.FC<{ className?: string; children: React.ReactNode }> = ({ className = '', children }) => (
   <div className={`rounded-[20px] border border-hairline bg-canvas ${SHADOW} ${className}`}>{children}</div>
 );
-
-/** Recorta un trozo de una pantalla compuesta a tamaño de diseño (p. ej. `TodayView`, de 1280×728) y lo escala. */
-const Crop: React.FC<{
-  design: [number, number]; x: number; y: number; scale: number; w: number; h: number; children: React.ReactNode;
-}> = ({ design, x, y, scale, w, h, children }) => (
-  <Card className="relative overflow-hidden">
-    <div style={{ width: w, height: h }} className="relative overflow-hidden rounded-[20px]">
-      <div
-        className="absolute left-0 top-0 origin-top-left"
-        style={{ width: design[0], height: design[1], transform: `translate(${-x * scale}px, ${-y * scale}px) scale(${scale})` }}
-      >
-        {children}
-      </div>
-    </div>
-  </Card>
-);
-
-const TODAY_STATIC = { typed: '', isTyping: false, isPressing: false, added: true, completed: false, panelOpen: false } as const;
 
 /** Tarea en una lista de Agenda o de una pizarra. */
 const TaskRow: React.FC<{ title: string; time?: string; color?: string; done?: boolean }> = ({ title, time, color = '#FFB7CE', done = false }) => (
@@ -166,60 +147,31 @@ const SceneLink: React.FC = () => (
   </>
 );
 
-/** 19 · Zenth hoy: los cuatro espacios. */
+/** 19 · Zenth hoy: los cuatro espacios como emblema, no como captura de la barra de navegación. */
+const OVERVIEW_SPACES = [
+  { label: 'Agenda', icon: Calendar, tone: 'from-[#0099ff] to-[#6a4cf5]' },
+  { label: 'Pizarras', icon: LayoutDashboard, tone: 'from-[#6a4cf5] to-[#d44df0]' },
+  { label: 'Biblioteca', icon: LibraryBig, tone: 'from-[#ff7a3d] to-[#ff5577]' },
+  { label: 'Reuniones', icon: PhoneCall, tone: 'from-[#22c55e] to-[#0099ff]' },
+] as const;
 const SceneOverview: React.FC = () => (
   <>
-    <S x={95} y={100} k={1.15}>
-      <nav className="flex items-center gap-1 rounded-pill bg-surface-1 p-1">
-        {[
-          { label: 'Agenda', icon: Calendar, on: true },
-          { label: 'Pizarras', icon: LayoutDashboard },
-          { label: 'Biblioteca', icon: LibraryBig },
-          { label: 'Reuniones', icon: PhoneCall },
-        ].map(({ label, icon: Icon, on }) => (
-          <span key={label} className={`flex items-center gap-2 rounded-pill px-4 py-2 text-[13px] ${on ? 'bg-canvas font-semibold text-ink shadow-card-resting' : 'text-ink-muted'}`}>
-            <Icon className="h-4 w-4" strokeWidth={1.9} /> {label}
-          </span>
+    <S x={64} y={132}>
+      <div className="flex items-end gap-6">
+        {OVERVIEW_SPACES.map(({ label, icon: Icon, tone }, i) => (
+          <div key={label} className="flex flex-col items-center gap-3" style={i % 2 === 1 ? { transform: 'translateY(-16px)' } : undefined}>
+            <span className={`flex h-[100px] w-[100px] items-center justify-center rounded-[26px] bg-gradient-to-br text-white shadow-[0_18px_40px_-14px_rgba(0,0,0,0.5)] ${tone}`}>
+              <Icon className="h-10 w-10" strokeWidth={1.6} />
+            </span>
+            <span className="text-[13px] font-semibold text-ink">{label}</span>
+          </div>
         ))}
-      </nav>
-    </S>
-
-    <S x={30} y={180} k={1}>
-      <div className="grid w-[580px] grid-cols-3 gap-3">
-        <MomentCard moment="Tarde" count={2}>
-          <TaskRow title="Meet de 4Geeks" time="18:30" />
-          <TaskRow title="Preparar la propuesta" time="16:00" />
-        </MomentCard>
-
-        <Card className="overflow-hidden p-3.5">
-          <div className="flex h-7 items-center gap-2 text-ink">
-            <span className="text-[11px] font-semibold">Alta</span>
-            <span className="text-[10px] tabular-nums text-ink-muted">1</span>
-            <MoreHorizontal className="ml-auto h-3.5 w-3.5 text-ink-muted" strokeWidth={2} />
-          </div>
-          <span className="block h-[3px] rounded-pill" style={{ backgroundColor: '#FFAB91' }} />
-          <div className="mt-3 rounded-[10px] border border-hairline-soft bg-canvas px-3 py-2.5 dark:bg-surface-1">
-            <div className="flex items-start gap-2">
-              <span className="mt-0.5 h-4 w-4 shrink-0 rounded-full border" style={{ borderColor: '#FFAB91' }} />
-              <span className="min-w-0 flex-1 self-center text-[12px] font-semibold leading-tight text-ink">Definir prioridades del sprint</span>
-              <Avatar letter={CARD_ASSIGNEE[0]} tone={TONE_S} size="h-[18px] w-[18px]" text="text-[9px]" />
-            </div>
-          </div>
-        </Card>
-
-        <Card className="flex flex-col items-center justify-center gap-3 p-3.5 text-center">
-          <span
-            className="relative flex h-[76px] w-[76px] shrink-0 items-center justify-center rounded-full"
-            style={{ background: 'repeating-conic-gradient(#0099ff 0deg 2.4deg, transparent 2.4deg 6deg)' }}
-          >
-            <span className="flex h-[64px] w-[64px] items-center justify-center rounded-full bg-canvas font-display text-[17px] font-semibold tracking-[-0.045em] text-ink">25:00</span>
-          </span>
-          <span>
-            <span className="block text-[10px] font-semibold uppercase tracking-[0.14em] text-ink-muted">Enfoque</span>
-            <span className="mt-1 block text-[12px] text-ink">Sesión de enfoque</span>
-          </span>
-        </Card>
       </div>
+    </S>
+    <S x={64} y={314}>
+      <span className={`inline-flex items-center gap-2 rounded-pill bg-ink px-4 py-2.5 text-[12px] font-semibold text-canvas ${SHADOW}`}>
+        <Sparkles className="h-3.5 w-3.5" strokeWidth={2.2} /> Cuatro espacios, un mismo lugar
+      </span>
     </S>
   </>
 );
@@ -403,17 +355,24 @@ const SceneLibrary: React.FC = () => (
   </>
 );
 
-/** 17 · Google Calendar dentro de Agenda. */
+/** 17 · Google Calendar dentro de Agenda: dos calendarios fusionándose, no una captura densa de la vista de día. */
 const SceneCalendar: React.FC = () => (
   <>
-    <S x={70} y={100}>
-      <Crop design={[1280, 728]} x={0} y={430} scale={0.8} w={540} h={290}>
-        <TodayView {...TODAY_STATIC} viewMode="day" />
-      </Crop>
+    <S x={90} y={62}>
+      <div className="relative h-[238px] w-[400px]">
+        <span className="absolute left-0 top-0 flex h-[220px] w-[220px] flex-col items-center justify-center gap-2 rounded-full text-center" style={{ backgroundColor: '#FFE082' }}>
+          <Calendar className="h-9 w-9 text-black/70" strokeWidth={1.6} />
+          <span className="text-[12px] font-semibold text-black/70">Google Calendar</span>
+        </span>
+        <span className="absolute right-0 top-[8px] flex h-[220px] w-[220px] flex-col items-center justify-center gap-2 rounded-full text-center text-white" style={{ backgroundColor: '#0099ff' }}>
+          <Calendar className="h-9 w-9" strokeWidth={1.6} />
+          <span className="text-[12px] font-semibold">Agenda de Zenth</span>
+        </span>
+      </div>
     </S>
-    <S x={300} y={350}>
-      <span className={`flex items-center gap-2 rounded-pill border border-hairline bg-canvas px-3.5 py-2 text-[12px] font-semibold text-ink ${SHADOW}`}>
-        <span className="h-2 w-2 rounded-full" style={{ backgroundColor: '#81D4FA' }} /> Importado desde Google Calendar
+    <S x={182} y={318}>
+      <span className={`flex items-center gap-2 rounded-pill bg-ink px-4 py-2.5 text-[12px] font-semibold text-canvas ${SHADOW}`}>
+        <Link2 className="h-3.5 w-3.5" strokeWidth={2.2} /> Solo lectura, vos elegís qué importar
       </span>
     </S>
   </>
@@ -719,51 +678,48 @@ const SceneAdhd: React.FC = () => (
   </>
 );
 
-/** 8 · Cambiar de contexto: el temporizador te sigue por la barra. */
+/** 8 · Cambiar de contexto: ventanas fantasma alrededor de una tarjeta nítida — lo único que importa protegido del resto. */
 const SceneContext: React.FC = () => (
-  <>
-    <S x={22} y={150} k={1}>
-      <div className="w-[250px] space-y-3 opacity-60">
-        <MomentCard moment="Tarde" count={2}>
-          <TaskRow title="Meet de 4Geeks" time="18:30" />
-          <TaskRow title="Preparar la propuesta" time="16:00" />
-        </MomentCard>
-      </div>
-    </S>
-    <S x={24} y={64}>
-      <div className="flex w-[592px] items-center justify-between">
-        <nav className="flex items-center gap-1 rounded-pill bg-surface-1 p-1">
-          {[{ l: 'Agenda', i: Calendar, on: true }, { l: 'Pizarras', i: LayoutDashboard }, { l: 'Biblioteca', i: LibraryBig }].map(({ l, i: Icon, on }) => (
-            <span key={l} className={`flex items-center gap-2 rounded-pill px-3.5 py-2 text-[12px] ${on ? 'bg-canvas font-semibold text-ink shadow-card-resting' : 'text-ink-muted'}`}>
-              <Icon className="h-3.5 w-3.5" strokeWidth={1.9} /> {l}
-            </span>
-          ))}
-        </nav>
-        <div className="flex items-center gap-1 rounded-pill bg-surface-1 p-1">
-          <span className="flex h-9 items-center justify-center gap-1.5 rounded-pill px-2.5 text-accent">
-            <Timer className="h-4 w-4" strokeWidth={2.2} /><span className="text-[13px] font-semibold tabular-nums">23:30</span>
-          </span>
-          <span className="relative flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-grad-violet to-grad-magenta text-[12px] font-semibold text-white">M</span>
-        </div>
-      </div>
-    </S>
-    <S x={312} y={46} k={0.72}>
-      <FocusView elapsed={FOCUS_RUNNING_AT + 90000} />
-    </S>
-  </>
-);
-
-/** 9 · Minimalismo digital: casi nada en pantalla — el espacio vacío es la idea. */
-const SceneMinimal: React.FC = () => (
-  <S x={190} y={158} k={1.3}>
-    <div className="flex w-[260px] flex-col items-center gap-5 text-center">
-      <div className="flex w-full items-center gap-2 rounded-medium bg-surface-1 p-1.5 pl-3 shadow-soft-lift">
-        <span className="flex-1 text-left text-[12px] text-ink-muted">Añadir una tarea…</span>
-        <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-[8px] bg-accent text-white"><Plus className="h-4 w-4" strokeWidth={2.6} /></span>
-      </div>
-      <p className="text-[11px] italic text-ink-muted">Una tarea a la vez. Nada más en pantalla.</p>
+  <S x={168} y={44}>
+    <div className="relative h-[300px] w-[360px]">
+      <span
+        className="absolute left-0 top-16 h-[170px] w-[140px] rounded-large border border-hairline"
+        style={{ backgroundColor: 'rgba(255,255,255,0.06)', transform: 'rotate(-10deg)' }}
+      />
+      <span
+        className="absolute right-0 top-0 h-[170px] w-[140px] rounded-large border border-hairline"
+        style={{ backgroundColor: 'rgba(255,255,255,0.08)', transform: 'rotate(8deg)' }}
+      />
+      <Card className="absolute left-1/2 top-1/2 flex h-[220px] w-[180px] -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center gap-3 p-5 text-center">
+        <span
+          className="flex h-[86px] w-[86px] items-center justify-center rounded-full"
+          style={{ background: 'repeating-conic-gradient(#0099ff 0deg 2.6deg, transparent 2.6deg 7deg)' }}
+        >
+          <span className="flex h-[70px] w-[70px] items-center justify-center rounded-full bg-canvas font-display text-[15px] font-semibold text-ink">23:30</span>
+        </span>
+        <span className="text-[11px] font-semibold text-ink">En enfoque</span>
+      </Card>
     </div>
   </S>
+);
+
+/** 9 · Minimalismo digital: un aro enorme y casi invisible da peso al espacio vacío, en vez de dejarlo en blanco sin más. */
+const SceneMinimal: React.FC = () => (
+  <>
+    <span
+      className="absolute left-1/2 top-1/2 h-[320px] w-[320px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-ink"
+      style={{ opacity: 0.07 }}
+    />
+    <S x={166} y={160} k={1.3}>
+      <div className="flex w-[260px] flex-col items-start gap-5 text-left">
+        <div className="flex w-full items-center gap-2 rounded-medium bg-surface-1 p-1.5 pl-3 shadow-soft-lift">
+          <span className="flex-1 text-[12px] text-ink-muted">Añadir una tarea…</span>
+          <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-[8px] bg-accent text-white"><Plus className="h-4 w-4" strokeWidth={2.6} /></span>
+        </div>
+        <p className="text-[11px] italic text-ink-muted">Una tarea a la vez. Nada más en pantalla.</p>
+      </div>
+    </S>
+  </>
 );
 
 /** 10 · Nombrar para observar: el balance mensual como una rueda de color, no una barra escondida en una tarjeta. */
@@ -831,13 +787,29 @@ const SceneFlow: React.FC = () => (
   </>
 );
 
-/** 12 · Hábitos visibles: la repetición a la vista en la semana. */
+/** 12 · Hábitos visibles: un mapa de calor de racha, la repetición vista de un vistazo — no la grilla semanal recortada. */
+const HABIT_COLS = 22;
+const HABIT_ROWS = 7;
+const HABIT_TONES = ['rgba(255,255,255,0.07)', 'rgba(0,153,255,0.32)', 'rgba(0,153,255,0.62)', '#0099ff'];
+const HABIT_PATTERN = [0, 0, 1, 0, 2, 1, 0, 3, 1, 0, 2, 0, 1, 0, 0, 2, 1, 3, 0, 1];
+const habitLevel = (col: number, row: number) => (col > HABIT_COLS - 3 ? 3 : HABIT_PATTERN[(col * 7 + row) % HABIT_PATTERN.length]);
 const SceneHabits: React.FC = () => (
-  <S x={48} y={48}>
-    <Crop design={[1280, 728]} x={272} y={70} scale={0.6} w={572} h={320}>
-      <TodayView {...TODAY_STATIC} viewMode="week" />
-    </Crop>
-  </S>
+  <>
+    <S x={54} y={96}>
+      <div className="grid gap-[5px]" style={{ gridTemplateColumns: `repeat(${HABIT_COLS}, 16px)`, gridTemplateRows: `repeat(${HABIT_ROWS}, 16px)`, gridAutoFlow: 'column' }}>
+        {Array.from({ length: HABIT_COLS * HABIT_ROWS }, (_, i) => {
+          const col = Math.floor(i / HABIT_ROWS);
+          const row = i % HABIT_ROWS;
+          return <span key={i} className="h-[16px] w-[16px] rounded-[4px]" style={{ backgroundColor: HABIT_TONES[habitLevel(col, row)] }} />;
+        })}
+      </div>
+    </S>
+    <S x={54} y={300}>
+      <span className={`flex items-center gap-2 rounded-pill bg-ink px-4 py-2.5 text-[12px] font-semibold text-canvas ${SHADOW}`}>
+        <Flame className="h-3.5 w-3.5" strokeWidth={2.2} /> Racha actual: 12 días
+      </span>
+    </S>
+  </>
 );
 
 /** 13 · Zen: «Pedir a Zen» en el editor de tareas. */
