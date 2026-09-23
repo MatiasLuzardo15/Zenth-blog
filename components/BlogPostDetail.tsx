@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { ArrowLeft, ArrowUpRight, Check, Share2 } from 'lucide-react';
 import { BlogPost } from '../types';
+import BlogCover, { hasCover } from './BlogCover';
 
 interface BlogPostDetailProps {
     post: BlogPost;
@@ -281,9 +282,9 @@ const BlogPostDetail: React.FC<BlogPostDetailProps> = ({ post, onBack }) => {
                     <p className="t-subhead mt-6 text-ink-muted">{post.excerpt}</p>
                 </header>
 
-                {post.imageUrl && (
-                    <div className="my-12 overflow-hidden rounded-card border border-hairline">
-                        <img src={post.imageUrl} alt="" className="aspect-[16/9] w-full object-cover" />
+                {hasCover(post) && (
+                    <div className="relative my-12 aspect-[16/9] overflow-hidden rounded-card border border-hairline">
+                        <BlogCover post={post} />
                     </div>
                 )}
 

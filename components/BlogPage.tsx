@@ -2,6 +2,7 @@ import React, { useMemo, useState } from 'react';
 import { ArrowLeft, ArrowUpRight } from 'lucide-react';
 import { BLOG_POSTS } from '../constants';
 import ArticleCard from './ArticleCard';
+import BlogCover from './BlogCover';
 
 interface BlogPageProps {
   onBack: () => void;
@@ -68,12 +69,8 @@ const BlogPage: React.FC<BlogPageProps> = ({ onBack, onSelectPost }) => {
             onClick={() => onSelectPost(featured.id)}
             className="fr-card-featured group mt-10 grid w-full gap-8 p-4 text-left transition-transform duration-300 hover:-translate-y-1 md:grid-cols-2 md:p-5"
           >
-            <div className="aspect-[16/10] overflow-hidden rounded-large bg-canvas md:aspect-auto md:h-full">
-              <img
-                src={featured.imageUrl}
-                alt=""
-                className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
-              />
+            <div className="relative aspect-[16/10] overflow-hidden rounded-large bg-canvas md:aspect-auto md:h-full">
+              <BlogCover post={featured} />
             </div>
             <div className="flex flex-col justify-center p-2 md:p-6">
               <div className="t-micro flex items-center gap-2 text-ink-muted">
