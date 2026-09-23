@@ -10,12 +10,12 @@ const POINTS = [
   {
     icon: Mic,
     title: 'Sala siempre abierta',
-    text: 'Cada pizarra compartida tiene la suya; entra y sal libremente desde el desplegable Equipo.',
+    text: 'Cada pizarra compartida tiene la suya; entra y sal libremente desde Reuniones.',
   },
   {
     icon: Phone,
     title: 'Llamadas privadas',
-    text: 'Llama uno a uno a cualquiera con quien compartas pizarra, directo desde el desplegable Equipo.',
+    text: 'Llama uno a uno a cualquiera con quien compartas pizarra, directo desde su cara en Reuniones.',
   },
   {
     icon: ScreenShare,
@@ -30,7 +30,7 @@ const POINTS = [
   {
     icon: Link2,
     title: 'Reuniones rápidas',
-    text: 'Crea un enlace para clientes o colaboradores externos: entran con su nombre, sin cuenta y sin ver tu espacio.',
+    text: 'Crea un enlace para clientes o colaboradores externos: entran con su nombre, sin cuenta y sin ver tu espacio. Tú decides quién pasa de la sala de espera.',
   },
 ];
 
@@ -67,7 +67,27 @@ const VoiceSection: React.FC<VoiceSectionProps> = ({ onSelectPost }) => {
           Matías entra a la sala del equipo, habla con Lucía y cuelga para llamar en privado a Sofía.
         </p>
 
-        <ul className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
+        {/* Móvil: una sola fila que avanza sola. Apilar las cinco tarjetas a ancho
+            completo ocupaba cinco pantallas de alto. La pista lleva la lista dos
+            veces (la copia va oculta a lectores de pantalla) para que el bucle no
+            tenga salto. Ver `.zenth-marquee` en index.html. */}
+        <div className="zenth-marquee -mx-4 mt-10 sm:hidden">
+          <div className="zenth-marquee-track">
+            {[0, 1].map(copy => (
+              <ul key={copy} className="flex shrink-0 gap-3 pr-3" aria-hidden={copy === 1 ? true : undefined}>
+                {POINTS.map(point => (
+                  <li key={point.title} className="fr-card w-[232px] shrink-0 !p-4">
+                    <point.icon className="h-5 w-5 text-ink" strokeWidth={1.75} />
+                    <h3 className="t-caption mt-3 text-ink">{point.title}</h3>
+                    <p className="mt-1 text-[14px] leading-[1.45] tracking-[-0.01em] text-ink-muted">{point.text}</p>
+                  </li>
+                ))}
+              </ul>
+            ))}
+          </div>
+        </div>
+
+        <ul className="mt-10 hidden gap-3 sm:grid sm:grid-cols-2 lg:grid-cols-5">
           {POINTS.map(point => (
             <li key={point.title} className="fr-card h-full">
               <point.icon className="h-5 w-5 text-ink" strokeWidth={1.75} />

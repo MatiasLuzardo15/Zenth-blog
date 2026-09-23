@@ -13,9 +13,14 @@ import {
     NEW_CARD_NOTES, SWAP_AT, typewriter,
 } from './timeline';
 import { BoardCardPanel, CreatePanel } from './panels';
+import { CURSOR_ZOOM_STYLE } from './phoneDirector';
 
 interface BoardViewProps {
     elapsed: number;
+    /** Estilo para apagar el tablero (rail y listas) sin tocar sus paneles ni el puntero. */
+    isolationStyle?: React.CSSProperties;
+    /** En móvil los diálogos no oscurecen el fondo: no hay tarjeta que lo enmarque. */
+    bare?: boolean;
 }
 
 const DRAG_MS = 1050;
@@ -155,7 +160,7 @@ const cursorState = (elapsed: number) => {
 };
 
 /** Acto II: pizarra con creación, movimiento, reordenado y archivado. */
-export const BoardView: React.FC<BoardViewProps> = ({ elapsed }) => {
+export const BoardView: React.FC<BoardViewProps> = ({ elapsed, isolationStyle, bare = false }) => {
     const order = elapsed >= SWAP_AT ? swappedOrder : initialOrder;
     const listByKey = new Map(BOARD_LISTS.map(list => [list.key, list]));
 
@@ -204,7 +209,7 @@ export const BoardView: React.FC<BoardViewProps> = ({ elapsed }) => {
 
     return (
         <div className="relative flex h-full overflow-visible">
-            <aside className="flex w-[68px] shrink-0 flex-col items-center gap-4 py-5">
+            <aside className="flex w-[68px] shrink-0 flex-col items-center gap-4 py-5" style={isolationStyle}>
                 <span className="flex h-10 w-10 items-center justify-center rounded-medium bg-surface-2 text-accent">
                     <Inbox className="h-4 w-4" strokeWidth={2} />
                 </span>
@@ -214,7 +219,7 @@ export const BoardView: React.FC<BoardViewProps> = ({ elapsed }) => {
                 </span>
             </aside>
 
-            <main className="min-w-0 flex-1 p-3">
+            <main className="min-w-0 flex-1 p-3" style={isolationStyle}>
                 <div className="flex h-full flex-col overflow-hidden rounded-card bg-canvas">
                     <header className="flex h-[76px] shrink-0 items-center justify-between px-5">
                         <div className="flex min-w-0 items-center gap-2">
@@ -305,7 +310,7 @@ export const BoardView: React.FC<BoardViewProps> = ({ elapsed }) => {
             <AnimatePresence>
                 {panelOpen && (
                     <>
-                        <motion.div key="create-backdrop" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="absolute -top-[72px] bottom-0 left-0 right-0 z-40 bg-black/70" />
+                        <motion.div key="create-backdrop" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className={`absolute -top-[72px] bottom-0 left-0 right-0 z-40 ${bare ? '' : 'bg-black/70'}`} />
                         <motion.aside
                             key={firstPanel ? 'new-one' : secondPanel ? 'new-two' : 'new-three'}
                             initial={{ x: 440 }} animate={{ x: 0 }} exit={{ x: 440 }}
@@ -321,7 +326,7 @@ export const BoardView: React.FC<BoardViewProps> = ({ elapsed }) => {
             <AnimatePresence>
                 {cardOpen && (
                     <>
-                        <motion.div key="card-backdrop" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="absolute -top-[72px] bottom-0 left-0 right-0 z-40 bg-black/60" />
+                        <motion.div key="card-backdrop" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className={`absolute -top-[72px] bottom-0 left-0 right-0 z-40 ${bare ? '' : 'bg-black/60'}`} />
                         <motion.aside
                             key="card-panel"
                             initial={{ x: 440 }} animate={{ x: 0 }} exit={{ x: 440 }}
@@ -346,7 +351,7 @@ export const BoardView: React.FC<BoardViewProps> = ({ elapsed }) => {
                 transition={{ duration: .12, ease: 'linear' }}
                 className="pointer-events-none absolute z-[70] text-white drop-shadow-[0_2px_3px_rgba(0,0,0,.75)]"
             >
-                <MousePointer2 className="h-6 w-6 fill-white text-black" strokeWidth={1.2} />
+                <MousePointer2 className="h-6 w-6 fill-white text-black" strokeWidth={1.2} style={CURSOR_ZOOM_STYLE} />
                 {cursor.click && <motion.span initial={{ opacity: .8, scale: .3 }} animate={{ opacity: 0, scale: 1.35 }} className="absolute -left-2 -top-2 h-9 w-9 rounded-full border-2 border-white/80" />}
             </motion.span>
         </div>

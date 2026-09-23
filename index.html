@@ -5,19 +5,19 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description"
-    content="Zenth reúne Agenda, Pizarras, Biblioteca con Google Drive, Llamadas, reuniones rápidas, Enfoque global y Mi ritmo en un solo espacio de productividad." />
+    content="Zenth reúne Agenda, Pizarras, Biblioteca con Google Drive, Reuniones con invitados, Enfoque global y Progreso en un solo espacio de productividad." />
   <meta name="keywords"
-    content="agenda visual, pizarras compartidas, google drive, google workspace, biblioteca digital, google calendar, llamadas, reuniones rápidas, enfoque, productividad, zenth" />
+    content="agenda visual, pizarras compartidas, google drive, google workspace, biblioteca digital, google calendar, reuniones, llamadas, reuniones rápidas, lienzos, notas compartidas, enfoque, productividad, documentación, zenth" />
   <link rel="canonical" href="https://www.zenth.space/" />
 
-  <title>Zenth: Agenda, Pizarras, Biblioteca, Llamadas y Enfoque</title>
+  <title>Zenth: Agenda, Pizarras, Biblioteca, Reuniones y Enfoque</title>
 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://www.zenth.space/" />
-  <meta property="og:title" content="Zenth: Tu tiempo, tus proyectos y tus llamadas" />
+  <meta property="og:title" content="Zenth: Tu tiempo, tus proyectos y tus reuniones" />
   <meta property="og:description"
-    content="Agenda visual, Pizarras, Biblioteca con Google Drive, Llamadas, reuniones rápidas, Enfoque global y Mi ritmo en una sola aplicación." />
+    content="Agenda visual, Pizarras, Biblioteca con Google Drive, Reuniones con invitados, Enfoque global y Progreso en una sola aplicación." />
   <meta property="og:image" content="https://www.zenth.space/favicon.png" />
   <meta property="og:locale" content="es_ES" />
   <meta property="og:site_name" content="Zenth" />
@@ -26,9 +26,9 @@
   <meta property="twitter:card" content="summary_large_image" />
   <meta property="twitter:domain" content="zenth.space" />
   <meta property="twitter:url" content="https://www.zenth.space/" />
-  <meta property="twitter:title" content="Zenth: Tu tiempo, tus proyectos y tus llamadas" />
+  <meta property="twitter:title" content="Zenth: Tu tiempo, tus proyectos y tus reuniones" />
   <meta property="twitter:description"
-    content="Agenda visual, Pizarras, Biblioteca con Google Drive, Llamadas, reuniones rápidas, Enfoque global y Mi ritmo en una sola aplicación." />
+    content="Agenda visual, Pizarras, Biblioteca con Google Drive, Reuniones con invitados, Enfoque global y Progreso en una sola aplicación." />
   <meta property="twitter:image" content="https://www.zenth.space/favicon.png" />
 
   <meta name="theme-color" content="#090909" media="(prefers-color-scheme: dark)" />
@@ -45,7 +45,7 @@
       "name": "Zenth",
       "operatingSystem": "Web, Android, iOS",
       "applicationCategory": "ProductivityApplication",
-      "description": "Espacio de productividad con Agenda, Pizarras compartidas, Biblioteca conectada con Google Drive, Llamadas, reuniones rápidas, Enfoque y seguimiento personal.",
+      "description": "Espacio de productividad con Agenda, Pizarras compartidas, Biblioteca con notas, lienzos y Google Drive, Reuniones con invitados, Enfoque y seguimiento personal.",
       "offers": {
         "@type": "Offer",
         "price": "0",
@@ -66,7 +66,7 @@
       "url": "https://www.zenth.space/",
       "potentialAction": {
         "@type": "SearchAction",
-        "target": "https://www.zenth.space/blog?q={search_term_string}",
+        "target": "https://www.zenth.space/docs?q={search_term_string}",
         "query-input": "required name=search_term_string"
       }
     }
@@ -282,6 +282,15 @@
       letter-spacing: -0.05em;
     }
 
+    /* En escritorio el titular es más pequeño para que cada oración quepa en una
+       sola línea (dos líneas en total) en vez de romperse en cuatro. */
+    @media (min-width: 1024px) {
+      .t-display-xxl {
+        font-size: clamp(3.5rem, 5vw, 4.75rem);
+        line-height: 0.95;
+      }
+    }
+
     .t-display-xl {
       font-size: clamp(2.25rem, 6vw, 5.3125rem);
       font-weight: 600;
@@ -492,6 +501,52 @@
       color: var(--fr-ink);
       border-radius: 20px;
       padding: 20px;
+    }
+
+    /* Carrusel de una sola fila que avanza solo (VoiceSection en móvil). La pista
+       lleva el contenido dos veces: al llegar a -50 % el bucle no tiene salto. Se
+       detiene al tocarlo o enfocarlo, y con «reducir movimiento» pasa a ser una
+       fila que se desliza con el dedo. */
+    .zenth-marquee {
+      overflow: hidden;
+      -webkit-mask-image: linear-gradient(to right, transparent, #000 20px, #000 calc(100% - 20px), transparent);
+      mask-image: linear-gradient(to right, transparent, #000 20px, #000 calc(100% - 20px), transparent);
+    }
+
+    .zenth-marquee-track {
+      display: flex;
+      width: max-content;
+      will-change: transform;
+      animation: zenth-marquee 40s linear infinite;
+    }
+
+    .zenth-marquee:hover .zenth-marquee-track,
+    .zenth-marquee:active .zenth-marquee-track,
+    .zenth-marquee:focus-within .zenth-marquee-track {
+      animation-play-state: paused;
+    }
+
+    @keyframes zenth-marquee {
+      to { transform: translateX(-50%); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .zenth-marquee {
+        overflow-x: auto;
+        scroll-snap-type: x proximity;
+      }
+
+      .zenth-marquee-track {
+        animation: none;
+      }
+
+      .zenth-marquee-track > [aria-hidden="true"] {
+        display: none;
+      }
+
+      .zenth-marquee li {
+        scroll-snap-align: start;
+      }
     }
 
     .fr-card-featured {

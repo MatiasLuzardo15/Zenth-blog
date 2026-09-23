@@ -7,30 +7,14 @@ import {
     PhoneCall, Search, Smile, Sparkles, Target, Timer, Video, X,
 } from 'lucide-react';
 import { DESIGN_H, DESIGN_W, MIN_SCALE } from './timeline';
+import {
+    CYCLE, EXPRESS_CLICK_AT, EXPRESS_CLOSE_AT, EXPRESS_CLOSE_HOVER, HOVER_CALL, HOVER_EXPRESS, HOVER_JOIN,
+    HOVER_LEAVE, JOIN_AT, LEAVE_AT, PRIVATE_AT, ROOM_CALL_AT, SELECT_PROPOSAL,
+} from './callsTimeline';
+import { ACTS, actIndexAt, actProgress, captionAt, headerVisibleAt, shotAt } from './callsDirector';
+import { CURSOR_ZOOM_STYLE, FRAME_FADE_STYLE, PHONE_ASPECT, PHONE_MAX_W } from './phoneCamera';
 
-/**
- * Guion de la demo de Reuniones. Igual que AppDemo: todo se deriva de
- * `elapsed` dentro de un ciclo, sin timeouts encadenados.
- *
- * Acto I · Reunión express: crea un enlace de invitado y lo cierra.
- * Acto II · se mira la sala de una pizarra y se entra.
- * Acto III · la conversación ocupa el escenario (voz, sin cámara).
- * Acto IV · se cuelga y se llama en privado a alguien del equipo.
- */
-
-const CYCLE = 27800;
-const HOVER_EXPRESS = 900;
-const EXPRESS_CLICK_AT = 1500;
-const EXPRESS_CLOSE_HOVER = 4600;
-const EXPRESS_CLOSE_AT = 5000;
-const HOVER_JOIN = 6000;
-const JOIN_AT = 6600;
-const ROOM_CALL_AT = 7000;
-const HOVER_LEAVE = 14600;
-const LEAVE_AT = 15200;
-const SELECT_PROPOSAL = 17000;
-const HOVER_CALL = 18800;
-const PRIVATE_AT = 19600;
+/** Los tiempos del guion están en `callsTimeline.ts`; los planos para móvil, en `callsDirector.ts`. */
 
 const AURORA =
     'radial-gradient(circle at 24% 16%, rgba(255,255,255,0.12), transparent 50%), linear-gradient(135deg, #1b1035 0%, #33236b 35%, #0c5a63 75%, #041018 100%)';
@@ -83,16 +67,26 @@ const CallsDemo: React.FC = () => {
     const reduceMotion = useReducedMotion();
     const wrapRef = useRef<HTMLDivElement>(null);
     const frameRef = useRef<HTMLDivElement>(null);
-    const [box, setBox] = useState({ scale: 1, width: DESIGN_W });
+    const [box, setBox] = useState({ scale: 1, width: DESIGN_W, compact: false });
     const [elapsed, setElapsed] = useState(0);
     const [inView, setInView] = useState(true);
+    const originRef = useRef(0);
+    const elapsedRef = useRef(0);
+
+    const apply = (ms: number) => {
+        elapsedRef.current = ms;
+        setElapsed(ms);
+    };
 
     useLayoutEffect(() => {
         const node = frameRef.current;
         if (!node) return;
         const apply = () => {
             const width = node.clientWidth;
-            setBox({ scale: Math.max(width / DESIGN_W, MIN_SCALE), width });
+            // El modo móvil no lleva tarjeta (ni su padding): se decide con el contenedor
+            // exterior, que no cambia al alternar, para no oscilar cerca del umbral.
+            const compact = (wrapRef.current?.clientWidth ?? width) < PHONE_MAX_W;
+            setBox({ scale: Math.max(width / DESIGN_W, MIN_SCALE), width, compact });
         };
         apply();
         if (typeof ResizeObserver === 'undefined') {
@@ -114,16 +108,32 @@ const CallsDemo: React.FC = () => {
 
     useEffect(() => {
         if (reduceMotion) {
-            setElapsed(ROOM_CALL_AT + 1800);
+            if (elapsedRef.current === 0) apply(ROOM_CALL_AT + 1800);
             return;
         }
         if (!inView) return;
-        const startedAt = performance.now();
-        const id = window.setInterval(() => setElapsed((performance.now() - startedAt) % CYCLE), 60);
+        originRef.current = performance.now() - elapsedRef.current;
+        const id = window.setInterval(() => apply((performance.now() - originRef.current) % CYCLE), 60);
         return () => window.clearInterval(id);
     }, [reduceMotion, inView]);
 
-    const { scale, width: frameWidth } = box;
+    /** Capítulos de la versión móvil: saltar al inicio de un acto (o a su fotograma fijo). */
+    const goToAct = (index: number) => {
+        const act = ACTS[index];
+        if (reduceMotion) return apply(act.poster);
+        originRef.current = performance.now() - act.from;
+        apply(act.from);
+    };
+
+    const { scale, width: frameWidth, compact } = box;
+    const shot = shotAt(elapsed);
+    const camScale = frameWidth / shot.w;
+    /** Planos sobre el diálogo: el directorio y el escenario se apagan para que no asomen cortados. */
+    const isolationStyle: React.CSSProperties | undefined = compact ? {
+        opacity: shot.isolate ? 0 : 1,
+        transition: reduceMotion ? undefined : 'opacity 300ms ease',
+    } : undefined;
+    const actIndex = actIndexAt(elapsed);
     const overflowX = Math.max(0, DESIGN_W * scale - frameWidth);
 
     const selected: 'launch' | 'proposal' = elapsed >= SELECT_PROPOSAL && elapsed < PRIVATE_AT
@@ -141,6 +151,7 @@ const CallsDemo: React.FC = () => {
     const luciaSpeaking = inRoomCall && (Math.floor(elapsed / 1800) % 2 === 0);
     const sofiaSpeaking = inPrivateCall && (Math.floor(elapsed / 1600) % 2 === 0);
 
+    /** En anchos intermedios (tabletas) la cámara sigue la zona donde está la acción; en teléfonos manda `callsDirector.ts`. */
     const cropFocus = inCall
         ? 0.72
         : between(elapsed, HOVER_JOIN, JOIN_AT + 400)
@@ -175,371 +186,412 @@ const CallsDemo: React.FC = () => {
     const stageKind = inPrivateCall ? 'Llamada de voz privada' : 'Sala de voz del equipo';
 
     return (
-        <div
-            ref={wrapRef}
-            className="fr-card fr-elevated relative overflow-hidden p-1.5 sm:p-2"
-            role="img"
-            aria-label="Demostración de Zenth: entra a la sala de una pizarra y luego llama en privado a alguien del equipo."
-        >
+        <div ref={wrapRef}>
             <div
-                ref={frameRef}
-                className="relative w-full overflow-hidden rounded-large bg-canvas"
-                style={{ height: `${DESIGN_H * scale}px` }}
-                aria-hidden="true"
+                className={compact ? 'relative' : 'fr-card fr-elevated relative overflow-hidden p-1.5 sm:p-2'}
+                role="img"
+                aria-label="Demostración de Zenth: entra a la sala de una pizarra y luego llama en privado a alguien del equipo."
             >
                 <div
-                    className="absolute left-0 top-0 origin-top-left"
+                    ref={frameRef}
+                    className={compact ? 'relative w-full overflow-hidden' : 'relative w-full overflow-hidden rounded-large bg-canvas'}
                     style={{
-                        width: `${DESIGN_W}px`,
-                        height: `${DESIGN_H}px`,
-                        transform: `translateX(${-overflowX * cropFocus}px) scale(${scale})`,
-                        transition: reduceMotion ? undefined : 'transform 720ms cubic-bezier(0.65, 0, 0.35, 1)',
+                        height: `${compact ? frameWidth * PHONE_ASPECT : DESIGN_H * scale}px`,
+                        ...(compact ? FRAME_FADE_STYLE : undefined),
                     }}
+                    aria-hidden="true"
                 >
-                    <div className="flex h-[72px] items-center justify-between bg-canvas px-6">
-                        <div className="flex items-center gap-2.5">
-                            <img src="/blog/favicon2.png" alt="" className="h-7 w-7 rounded-[7px] object-contain" />
-                            <div className="leading-tight">
-                                <p className="text-[12px] text-ink-muted">Buenas tardes,</p>
-                                <p className="text-[13px] font-semibold text-ink">Matías</p>
-                            </div>
-                        </div>
-
-                        <nav className="flex items-center gap-1 rounded-pill bg-surface-1 p-1">
-                            {NAV.map(({ label, icon: Icon }) => {
-                                const active = label === 'Reuniones';
-                                return (
-                                    <motion.span
-                                        layout
-                                        key={label}
-                                        className={`relative flex items-center gap-2 rounded-pill px-4 py-2 text-[13px] ${active ? 'font-semibold text-ink' : 'text-ink-muted'}`}
-                                    >
-                                        {active && (
-                                            <motion.span
-                                                layoutId="calls-demo-nav-active"
-                                                className="absolute inset-0 rounded-pill bg-canvas shadow-card-resting"
-                                                transition={{ duration: .45, ease: [0.16, 1, 0.3, 1] }}
-                                            />
-                                        )}
-                                        <span className="relative">
-                                            <Icon className="h-4 w-4" strokeWidth={active ? 2.4 : 1.9} />
-                                            {label === 'Reuniones' && inCall && (
-                                                <span className="absolute -right-0.5 -top-0.5 h-1.5 w-1.5 rounded-full bg-accent" />
-                                            )}
-                                        </span>
-                                        <span className="relative">{label}</span>
-                                    </motion.span>
-                                );
-                            })}
-                        </nav>
-
-                        <div className="flex items-center gap-2">
-                            <span className="flex h-9 w-9 items-center justify-center rounded-pill bg-surface-1 text-ink-muted">
-                                <Search className="h-4 w-4" strokeWidth={1.9} />
-                            </span>
-                            <span className="flex h-9 w-9 items-center justify-center rounded-pill bg-surface-1 text-ink-muted">
-                                <Timer className="h-4 w-4" strokeWidth={1.9} />
-                            </span>
-                            <span className="flex h-9 w-9 items-center justify-center rounded-pill bg-surface-1 text-ink-muted">
-                                <Bell className="h-4 w-4" strokeWidth={1.9} />
-                            </span>
-                            <span className="relative flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-grad-violet to-grad-magenta text-[12px] font-semibold text-white">
-                                M
-                                <span className="absolute -bottom-0.5 -right-0.5 flex h-3.5 w-3.5 items-center justify-center rounded-full border-2 border-canvas bg-accent">
-                                    <Flame className="h-2 w-2 text-white" fill="currentColor" strokeWidth={0} />
-                                </span>
-                            </span>
-                        </div>
-                    </div>
-
-                    <div className="flex h-[728px] bg-[#f6f7fb] dark:bg-black">
-                        <aside className="flex w-[312px] shrink-0 flex-col px-4 pb-6 pt-6">
-                            <div className="grid grid-cols-3 gap-2">
-                                {[
-                                    { icon: Link2, label: 'Crear enlace' },
-                                    { icon: Video, label: 'Reunión express' },
-                                    { icon: CalendarClock, label: 'Programar' },
-                                ].map(({ icon: Icon, label }) => (
-                                    <span
-                                        key={label}
-                                        className={`flex min-h-[104px] flex-col items-start justify-between rounded-large bg-canvas p-3 transition-transform duration-150 ${label === 'Reunión express' && expressPressed ? 'scale-[0.96]' : ''}`}
-                                    >
-                                        <span className="flex h-9 w-9 items-center justify-center rounded-[13px] bg-white text-ink shadow-card-resting dark:bg-surface-2">
-                                            <Icon className="h-4 w-4" strokeWidth={2.2} />
-                                        </span>
-                                        <span className="text-[13px] font-semibold leading-[1.2] text-ink">{label}</span>
-                                    </span>
-                                ))}
-                            </div>
-
-                            <div className="relative mt-4">
-                                <div className="h-px bg-hairline" />
-                            </div>
-
-                            <p className="mt-4 px-2.5 text-[13px] font-semibold text-ink">
-                                Salas de tus pizarras
-                                <span className="ml-2 text-[12px] font-normal tabular-nums text-ink-muted">2</span>
-                            </p>
-
-                            <ul className="mt-2 space-y-1.5">
-                                <RoomRow
-                                    selected={selected === 'launch' && !inPrivateCall}
-                                    icon={Sparkles}
-                                    name="Plan de lanzamiento"
-                                    line={inRoomCall ? 'Estás dentro' : launchLive ? '1 persona en la sala' : '3 integrantes'}
-                                    live={launchLive}
-                                    accentLine={inRoomCall || launchLive}
-                                >
-                                    <MemberRow person={MATIAS} status="Tú" />
-                                    <MemberRow person={LUCIA} status={launchLive ? 'En la sala' : 'En línea'} present={launchLive} />
-                                    <MemberRow person={DIEGO} status="En línea" />
-                                </RoomRow>
-                                <RoomRow
-                                    selected={selected === 'proposal' && !inCall}
-                                    icon={Target}
-                                    name="Propuesta comercial"
-                                    line="2 integrantes"
-                                    live={false}
-                                >
-                                    <MemberRow person={MATIAS} status="Tú" />
-                                    <MemberRow
-                                        person={SOFIA}
-                                        status="En línea"
-                                        callHighlight={between(elapsed, HOVER_CALL, PRIVATE_AT + 500)}
-                                    />
-                                </RoomRow>
-                            </ul>
-
-                            <div className="mt-5">
-                                <p className="px-2.5 text-[13px] font-semibold text-ink">Reuniones programadas</p>
-                                <p className="mt-1 px-2.5 text-[12px] leading-relaxed text-ink-muted">
-                                    Una llamada aislada, sin dar acceso a tus pizarras.
-                                </p>
-                                <div className="mt-2 flex min-h-[56px] items-center gap-3 rounded-medium px-2.5 py-2">
-                                    <span className="flex h-10 w-10 items-center justify-center rounded-[14px] bg-surface-2 text-ink">
-                                        <CalendarClock className="h-[18px] w-[18px]" strokeWidth={2.2} />
-                                    </span>
-                                    <span className="min-w-0">
-                                        <span className="block truncate text-[14px] font-semibold text-ink">Revisión con cliente</span>
-                                        <span className="mt-0.5 block text-[12px] text-ink-muted">Hoy · 16:30</span>
-                                    </span>
+                    <div
+                        className="absolute left-0 top-0 origin-top-left"
+                        style={{
+                            width: `${DESIGN_W}px`,
+                            height: `${DESIGN_H}px`,
+                            transform: compact
+                                ? `translate(${-shot.x * camScale}px, ${-shot.y * camScale}px) scale(${camScale})`
+                                : `translateX(${-overflowX * cropFocus}px) scale(${scale})`,
+                            transition: reduceMotion ? undefined : `transform ${compact ? 900 : 720}ms cubic-bezier(0.65, 0, 0.35, 1)`,
+                            '--demo-k': compact ? Math.max(1, 0.67 / camScale) : 1,
+                        } as React.CSSProperties}
+                    >
+                        <div
+                            className="flex h-[72px] items-center justify-between bg-canvas px-6"
+                            style={compact ? {
+                                opacity: headerVisibleAt(elapsed) ? 1 : 0,
+                                transition: reduceMotion ? undefined : 'opacity 600ms ease',
+                            } : undefined}
+                        >
+                            <div className="flex items-center gap-2.5">
+                                <img src="/blog/favicon2.png" alt="" className="h-7 w-7 rounded-[7px] object-contain" />
+                                <div className="leading-tight">
+                                    <p className="text-[12px] text-ink-muted">Buenas tardes,</p>
+                                    <p className="text-[13px] font-semibold text-ink">Matías</p>
                                 </div>
                             </div>
-                        </aside>
 
-                        <div className="mb-3 mr-3 mt-2 flex min-h-0 min-w-0 flex-1 overflow-hidden rounded-[16px] bg-canvas">
-                            <AnimatePresence mode="wait" initial={false}>
-                                {inCall ? (
-                                    <motion.div
-                                        key={inPrivateCall ? 'private' : 'room'}
-                                        initial={{ opacity: 0, y: 8 }}
-                                        animate={{ opacity: 1, y: 0 }}
-                                        exit={{ opacity: 0, y: -6 }}
-                                        transition={{ duration: .22, ease: [0.23, 1, 0.32, 1] }}
-                                        className="demo-call-stage flex min-h-0 flex-1 flex-col overflow-hidden bg-cover bg-no-repeat"
-                                        style={{ backgroundImage: inPrivateCall ? FOREST : AURORA }}
+                            <nav className="flex items-center gap-1 rounded-pill bg-surface-1 p-1">
+                                {NAV.map(({ label, icon: Icon }) => {
+                                    const active = label === 'Reuniones';
+                                    return (
+                                        <motion.span
+                                            layout
+                                            key={label}
+                                            className={`relative flex items-center gap-2 rounded-pill px-4 py-2 text-[13px] ${active ? 'font-semibold text-ink' : 'text-ink-muted'}`}
+                                        >
+                                            {active && (
+                                                <motion.span
+                                                    layoutId="calls-demo-nav-active"
+                                                    className="absolute inset-0 rounded-pill bg-canvas shadow-card-resting"
+                                                    transition={{ duration: .45, ease: [0.16, 1, 0.3, 1] }}
+                                                />
+                                            )}
+                                            <span className="relative">
+                                                <Icon className="h-4 w-4" strokeWidth={active ? 2.4 : 1.9} />
+                                                {label === 'Reuniones' && inCall && (
+                                                    <span className="absolute -right-0.5 -top-0.5 h-1.5 w-1.5 rounded-full bg-accent" />
+                                                )}
+                                            </span>
+                                            <span className="relative">{label}</span>
+                                        </motion.span>
+                                    );
+                                })}
+                            </nav>
+
+                            <div className="flex items-center gap-2">
+                                <span className="flex h-9 w-9 items-center justify-center rounded-pill bg-surface-1 text-ink-muted">
+                                    <Search className="h-4 w-4" strokeWidth={1.9} />
+                                </span>
+                                <span className="flex h-9 w-9 items-center justify-center rounded-pill bg-surface-1 text-ink-muted">
+                                    <Timer className="h-4 w-4" strokeWidth={1.9} />
+                                </span>
+                                <span className="flex h-9 w-9 items-center justify-center rounded-pill bg-surface-1 text-ink-muted">
+                                    <Bell className="h-4 w-4" strokeWidth={1.9} />
+                                </span>
+                                <span className="relative flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-grad-violet to-grad-magenta text-[12px] font-semibold text-white">
+                                    M
+                                    <span className="absolute -bottom-0.5 -right-0.5 flex h-3.5 w-3.5 items-center justify-center rounded-full border-2 border-canvas bg-accent">
+                                        <Flame className="h-2 w-2 text-white" fill="currentColor" strokeWidth={0} />
+                                    </span>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div
+                            className={`flex h-[728px] ${compact ? '' : 'bg-[#f6f7fb] dark:bg-black'}`}
+                            style={isolationStyle}
+                        >
+                            <aside className="flex w-[312px] shrink-0 flex-col px-4 pb-6 pt-6">
+                                <div className="grid grid-cols-3 gap-2">
+                                    {[
+                                        { icon: Link2, label: 'Crear enlace' },
+                                        { icon: Video, label: 'Reunión express' },
+                                        { icon: CalendarClock, label: 'Programar' },
+                                    ].map(({ icon: Icon, label }) => (
+                                        <span
+                                            key={label}
+                                            className={`flex min-h-[104px] flex-col items-start justify-between rounded-large bg-canvas p-3 transition-transform duration-150 ${label === 'Reunión express' && expressPressed ? 'scale-[0.96]' : ''}`}
+                                        >
+                                            <span className="flex h-9 w-9 items-center justify-center rounded-[13px] bg-white text-ink shadow-card-resting dark:bg-surface-2">
+                                                <Icon className="h-4 w-4" strokeWidth={2.2} />
+                                            </span>
+                                            <span className="text-[13px] font-semibold leading-[1.2] text-ink">{label}</span>
+                                        </span>
+                                    ))}
+                                </div>
+
+                                <div className="relative mt-4">
+                                    <div className="h-px bg-hairline" />
+                                </div>
+
+                                <p className="mt-4 px-2.5 text-[13px] font-semibold text-ink">
+                                    Salas de tus pizarras
+                                    <span className="ml-2 text-[12px] font-normal tabular-nums text-ink-muted">2</span>
+                                </p>
+
+                                <ul className="mt-2 space-y-1.5">
+                                    <RoomRow
+                                        selected={selected === 'launch' && !inPrivateCall}
+                                        icon={Sparkles}
+                                        name="Plan de lanzamiento"
+                                        line={inRoomCall ? 'Estás dentro' : launchLive ? '1 persona en la sala' : '3 integrantes'}
+                                        live={launchLive}
+                                        accentLine={inRoomCall || launchLive}
                                     >
-                                        <header className="flex items-start gap-3 px-4 py-3">
-                                            <span className="min-w-0 flex-1">
-                                                <span className="block truncate text-[15px] font-semibold text-ink">{stageTitle}</span>
-                                                <span className="block text-[12px] text-ink-muted">{stageKind} · {duration}</span>
-                                            </span>
-                                            <span className="demo-call-glass flex h-9 w-9 items-center justify-center rounded-pill border border-hairline">
-                                                <MoreVertical className="h-4 w-4" strokeWidth={2.3} />
-                                            </span>
-                                            <span className="demo-call-glass flex h-9 w-9 items-center justify-center rounded-pill border border-hairline">
-                                                <MessageCircle className="h-4 w-4" strokeWidth={2.3} />
-                                            </span>
-                                            <span className="demo-call-glass flex h-9 w-9 items-center justify-center rounded-pill border border-hairline">
-                                                <Expand className="h-4 w-4" strokeWidth={2.3} />
-                                            </span>
-                                        </header>
-
-                                        <div className="flex min-h-0 flex-1 items-stretch gap-3 p-4">
-                                            {(inPrivateCall ? [MATIAS, SOFIA] : [MATIAS, LUCIA]).map(person => {
-                                                const speaking = person.id === 'lucia' ? luciaSpeaking : person.id === 'sofia' ? sofiaSpeaking : false;
-                                                const muted = person.id === 'diego';
-                                                return (
-                                                    <div
-                                                        key={person.id}
-                                                        className={`demo-call-tile flex min-w-0 flex-1 flex-col items-center justify-center gap-2 rounded-card border p-4 ${speaking ? 'border-accent' : 'border-hairline'}`}
-                                                    >
-                                                        <span className="relative">
-                                                            {speaking && (
-                                                                <motion.span
-                                                                    className="absolute inset-0 rounded-full border-2 border-accent"
-                                                                    animate={reduceMotion
-                                                                        ? { scale: 1.06, opacity: 0.6 }
-                                                                        : { scale: [1, 1.22, 1], opacity: [0.65, 0, 0.65] }}
-                                                                    transition={reduceMotion
-                                                                        ? { duration: 0 }
-                                                                        : { duration: 1.5, repeat: Infinity, ease: 'easeOut' }}
-                                                                />
-                                                            )}
-                                                            <Avatar person={person} size="h-24 w-24 text-[20px]" ring={speaking} />
-                                                        </span>
-                                                        <span className="truncate text-[13px] text-ink">
-                                                            {person.name}
-                                                            {person.you && <span className="text-ink-muted"> · Tú</span>}
-                                                        </span>
-                                                        <span className={`flex items-center gap-1 text-[12px] ${muted ? 'font-semibold text-[#ea580c]' : 'text-ink-muted'}`}>
-                                                            {muted ? <MicOff className="h-3 w-3" strokeWidth={2.4} /> : <Mic className="h-3 w-3" strokeWidth={2.4} />}
-                                                            {speaking ? 'hablando' : muted ? 'silenciado' : 'activo'}
-                                                        </span>
-                                                    </div>
-                                                );
-                                            })}
-                                        </div>
-
-                                        <footer className="flex items-center justify-center gap-2 px-4 py-3">
-                                            <span className="demo-call-glass flex h-11 overflow-hidden rounded-pill border border-hairline">
-                                                <span className="flex w-12 items-center justify-center text-ink">
-                                                    <Mic className="h-[17px] w-[17px]" strokeWidth={2.3} />
-                                                </span>
-                                                <span className="flex w-7 items-center justify-center border-l border-hairline text-ink-muted">
-                                                    <ChevronUp className="h-3.5 w-3.5" strokeWidth={2.5} />
-                                                </span>
-                                            </span>
-                                            <span className="demo-call-glass flex h-11 w-12 items-center justify-center rounded-pill border border-hairline text-ink">
-                                                <MonitorUp className="h-[17px] w-[17px]" strokeWidth={2.3} />
-                                            </span>
-                                            <span className="demo-call-glass flex h-11 w-11 items-center justify-center rounded-pill border border-hairline text-ink">
-                                                <Smile className="h-[18px] w-[18px]" strokeWidth={2.2} />
-                                            </span>
-                                            <span className="demo-call-glass flex h-11 w-11 items-center justify-center rounded-pill border border-hairline text-ink">
-                                                <Hand className="h-[17px] w-[17px]" strokeWidth={2.2} />
-                                            </span>
-                                            <span className={`flex h-11 items-center justify-center gap-1.5 rounded-pill bg-[#B91C1C] px-4 text-[13px] font-semibold text-white ${leavePressed && inRoomCall ? 'scale-95' : ''}`}>
-                                                <LogOut className="h-[15px] w-[15px]" strokeWidth={2.4} />
-                                                {inPrivateCall ? 'Colgar' : 'Abandonar'}
-                                            </span>
-                                        </footer>
-                                    </motion.div>
-                                ) : (
-                                    <motion.div
-                                        key={selected}
-                                        initial={{ opacity: 0, y: 8 }}
-                                        animate={{ opacity: 1, y: 0 }}
-                                        exit={{ opacity: 0, y: -6 }}
-                                        transition={{ duration: .22, ease: [0.23, 1, 0.32, 1] }}
-                                        className="demo-call-stage relative flex min-h-0 flex-1 flex-col overflow-hidden"
+                                        <MemberRow person={MATIAS} status="Tú" />
+                                        <MemberRow person={LUCIA} status={launchLive ? 'En la sala' : 'En línea'} present={launchLive} />
+                                        <MemberRow person={DIEGO} status="En línea" />
+                                    </RoomRow>
+                                    <RoomRow
+                                        selected={selected === 'proposal' && !inCall}
+                                        icon={Target}
+                                        name="Propuesta comercial"
+                                        line="2 integrantes"
+                                        live={false}
                                     >
-                                        <div
-                                            className="pointer-events-none absolute inset-0 bg-cover bg-no-repeat"
-                                            style={{ backgroundImage: selected === 'launch' ? AURORA : FOREST }}
+                                        <MemberRow person={MATIAS} status="Tú" />
+                                        <MemberRow
+                                            person={SOFIA}
+                                            status="En línea"
+                                            callHighlight={between(elapsed, HOVER_CALL, PRIVATE_AT + 500)}
                                         />
-                                        <div className="relative z-10 flex min-h-full flex-1 flex-col items-center justify-center px-8 py-12 text-center">
-                                            <span className="demo-call-glass flex h-16 w-16 items-center justify-center rounded-[22px] border border-hairline text-ink">
-                                                {selected === 'launch'
-                                                    ? <Sparkles className="h-7 w-7" strokeWidth={2.1} />
-                                                    : <Target className="h-7 w-7" strokeWidth={2.1} />}
+                                    </RoomRow>
+                                </ul>
+
+                                <div className="mt-5">
+                                    <p className="px-2.5 text-[13px] font-semibold text-ink">Reuniones programadas</p>
+                                    <p className="mt-1 px-2.5 text-[12px] leading-relaxed text-ink-muted">
+                                        Una llamada aislada, sin dar acceso a tus pizarras.
+                                    </p>
+                                    <div className="mt-2 flex min-h-[56px] items-center gap-3 rounded-medium px-2.5 py-2">
+                                        <span className="flex h-10 w-10 items-center justify-center rounded-[14px] bg-surface-2 text-ink">
+                                            <CalendarClock className="h-[18px] w-[18px]" strokeWidth={2.2} />
+                                        </span>
+                                        <span className="min-w-0">
+                                            <span className="block truncate text-[14px] font-semibold text-ink">Revisión con cliente</span>
+                                            <span className="mt-0.5 block text-[12px] text-ink-muted">Hoy · 16:30</span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </aside>
+
+                            <div className="mb-3 mr-3 mt-2 flex min-h-0 min-w-0 flex-1 overflow-hidden rounded-[16px] bg-canvas">
+                                <AnimatePresence mode="wait" initial={false}>
+                                    {inCall ? (
+                                        <motion.div
+                                            key={inPrivateCall ? 'private' : 'room'}
+                                            initial={{ opacity: 0, y: 8 }}
+                                            animate={{ opacity: 1, y: 0 }}
+                                            exit={{ opacity: 0, y: -6 }}
+                                            transition={{ duration: .22, ease: [0.23, 1, 0.32, 1] }}
+                                            className="demo-call-stage flex min-h-0 flex-1 flex-col overflow-hidden bg-cover bg-no-repeat"
+                                            style={{ backgroundImage: inPrivateCall ? FOREST : AURORA }}
+                                        >
+                                            <header className="flex items-start gap-3 px-4 py-3">
+                                                <span className="min-w-0 flex-1">
+                                                    <span className="block truncate text-[15px] font-semibold text-ink">{stageTitle}</span>
+                                                    <span className="block text-[12px] text-ink-muted">{stageKind} · {duration}</span>
+                                                </span>
+                                                <span className="demo-call-glass flex h-9 w-9 items-center justify-center rounded-pill border border-hairline">
+                                                    <MoreVertical className="h-4 w-4" strokeWidth={2.3} />
+                                                </span>
+                                                <span className="demo-call-glass flex h-9 w-9 items-center justify-center rounded-pill border border-hairline">
+                                                    <MessageCircle className="h-4 w-4" strokeWidth={2.3} />
+                                                </span>
+                                                <span className="demo-call-glass flex h-9 w-9 items-center justify-center rounded-pill border border-hairline">
+                                                    <Expand className="h-4 w-4" strokeWidth={2.3} />
+                                                </span>
+                                            </header>
+
+                                            <div className="flex min-h-0 flex-1 items-stretch gap-3 p-4">
+                                                {(inPrivateCall ? [MATIAS, SOFIA] : [MATIAS, LUCIA]).map(person => {
+                                                    const speaking = person.id === 'lucia' ? luciaSpeaking : person.id === 'sofia' ? sofiaSpeaking : false;
+                                                    const muted = person.id === 'diego';
+                                                    return (
+                                                        <div
+                                                            key={person.id}
+                                                            className={`demo-call-tile flex min-w-0 flex-1 flex-col items-center justify-center gap-2 rounded-card border p-4 ${speaking ? 'border-accent' : 'border-hairline'}`}
+                                                        >
+                                                            <span className="relative">
+                                                                {speaking && (
+                                                                    <motion.span
+                                                                        className="absolute inset-0 rounded-full border-2 border-accent"
+                                                                        animate={reduceMotion
+                                                                            ? { scale: 1.06, opacity: 0.6 }
+                                                                            : { scale: [1, 1.22, 1], opacity: [0.65, 0, 0.65] }}
+                                                                        transition={reduceMotion
+                                                                            ? { duration: 0 }
+                                                                            : { duration: 1.5, repeat: Infinity, ease: 'easeOut' }}
+                                                                    />
+                                                                )}
+                                                                <Avatar person={person} size="h-24 w-24 text-[20px]" ring={speaking} />
+                                                            </span>
+                                                            <span className="truncate text-[13px] text-ink">
+                                                                {person.name}
+                                                                {person.you && <span className="text-ink-muted"> · Tú</span>}
+                                                            </span>
+                                                            <span className={`flex items-center gap-1 text-[12px] ${muted ? 'font-semibold text-[#ea580c]' : 'text-ink-muted'}`}>
+                                                                {muted ? <MicOff className="h-3 w-3" strokeWidth={2.4} /> : <Mic className="h-3 w-3" strokeWidth={2.4} />}
+                                                                {speaking ? 'hablando' : muted ? 'silenciado' : 'activo'}
+                                                            </span>
+                                                        </div>
+                                                    );
+                                                })}
+                                            </div>
+
+                                            <footer className="flex items-center justify-center gap-2 px-4 py-3">
+                                                <span className="demo-call-glass flex h-11 overflow-hidden rounded-pill border border-hairline">
+                                                    <span className="flex w-12 items-center justify-center text-ink">
+                                                        <Mic className="h-[17px] w-[17px]" strokeWidth={2.3} />
+                                                    </span>
+                                                    <span className="flex w-7 items-center justify-center border-l border-hairline text-ink-muted">
+                                                        <ChevronUp className="h-3.5 w-3.5" strokeWidth={2.5} />
+                                                    </span>
+                                                </span>
+                                                <span className="demo-call-glass flex h-11 w-12 items-center justify-center rounded-pill border border-hairline text-ink">
+                                                    <MonitorUp className="h-[17px] w-[17px]" strokeWidth={2.3} />
+                                                </span>
+                                                <span className="demo-call-glass flex h-11 w-11 items-center justify-center rounded-pill border border-hairline text-ink">
+                                                    <Smile className="h-[18px] w-[18px]" strokeWidth={2.2} />
+                                                </span>
+                                                <span className="demo-call-glass flex h-11 w-11 items-center justify-center rounded-pill border border-hairline text-ink">
+                                                    <Hand className="h-[17px] w-[17px]" strokeWidth={2.2} />
+                                                </span>
+                                                <span className={`flex h-11 items-center justify-center gap-1.5 rounded-pill bg-[#B91C1C] px-4 text-[13px] font-semibold text-white ${leavePressed && inRoomCall ? 'scale-95' : ''}`}>
+                                                    <LogOut className="h-[15px] w-[15px]" strokeWidth={2.4} />
+                                                    {inPrivateCall ? 'Colgar' : 'Abandonar'}
+                                                </span>
+                                            </footer>
+                                        </motion.div>
+                                    ) : (
+                                        <motion.div
+                                            key={selected}
+                                            initial={{ opacity: 0, y: 8 }}
+                                            animate={{ opacity: 1, y: 0 }}
+                                            exit={{ opacity: 0, y: -6 }}
+                                            transition={{ duration: .22, ease: [0.23, 1, 0.32, 1] }}
+                                            className="demo-call-stage relative flex min-h-0 flex-1 flex-col overflow-hidden"
+                                        >
+                                            <div
+                                                className="pointer-events-none absolute inset-0 bg-cover bg-no-repeat"
+                                                style={{ backgroundImage: selected === 'launch' ? AURORA : FOREST }}
+                                            />
+                                            <div className="relative z-10 flex min-h-full flex-1 flex-col items-center justify-center px-8 py-12 text-center">
+                                                <span className="demo-call-glass flex h-16 w-16 items-center justify-center rounded-[22px] border border-hairline text-ink">
+                                                    {selected === 'launch'
+                                                        ? <Sparkles className="h-7 w-7" strokeWidth={2.1} />
+                                                        : <Target className="h-7 w-7" strokeWidth={2.1} />}
+                                                </span>
+                                                <h2 className="mt-5 text-[32px] font-semibold tracking-[-0.031em] text-ink">
+                                                    {selected === 'launch' ? 'Plan de lanzamiento' : 'Propuesta comercial'}
+                                                </h2>
+                                                <p className={`mt-2 text-[14px] ${selected === 'launch' && launchLive ? 'text-accent' : 'text-ink-muted'}`}>
+                                                    {selected === 'launch'
+                                                        ? (launchLive ? 'Lucía está dentro.' : 'Nadie está conectado actualmente.')
+                                                        : 'Nadie está conectado actualmente.'}
+                                                </p>
+                                                <div className="mt-6 flex flex-wrap items-center justify-center gap-2">
+                                                    <span className={`flex h-11 items-center gap-2 rounded-pill bg-white px-5 text-[13px] font-semibold text-black ${joinPressed && selected === 'launch' ? 'scale-95' : ''}`}>
+                                                        <Mic className="h-4 w-4" strokeWidth={2.3} />
+                                                        {selected === 'launch' && launchLive ? 'Unirse a la sala' : 'Entrar a la sala'}
+                                                    </span>
+                                                    <span className="demo-call-glass flex h-11 items-center gap-2 rounded-pill border border-hairline px-4 text-[13px] font-semibold text-ink">
+                                                        <ExternalLink className="h-[15px] w-[15px]" strokeWidth={2.3} />
+                                                        Abrir la pizarra
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </motion.div>
+                                    )}
+                                </AnimatePresence>
+                            </div>
+                        </div>
+
+                        <AnimatePresence>
+                            {showExpress && (
+                                <motion.div
+                                    key="express-modal-backdrop"
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1 }}
+                                    exit={{ opacity: 0 }}
+                                    transition={{ duration: .25 }}
+                                    className={`absolute inset-0 z-[80] flex items-start justify-center pt-[210px] ${compact ? '' : 'bg-black/70'}`}
+                                >
+                                    <motion.div
+                                        initial={{ opacity: 0, y: 10, scale: .97 }}
+                                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                                        exit={{ opacity: 0, y: 8, scale: .97 }}
+                                        transition={{ duration: .3, ease: [0.16, 1, 0.3, 1] }}
+                                        className="relative w-[440px] rounded-large border border-hairline bg-canvas p-7 shadow-soft-lift"
+                                    >
+                                        <span className="absolute right-5 top-5 flex h-8 w-8 items-center justify-center rounded-pill bg-surface-2 text-ink-muted">
+                                            <X className="h-4 w-4" strokeWidth={2} />
+                                        </span>
+                                        <div className="flex items-start gap-3 pr-8">
+                                            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-medium bg-surface-2 text-ink">
+                                                <Link2 className="h-[18px] w-[18px]" strokeWidth={2.1} />
                                             </span>
-                                            <h2 className="mt-5 text-[32px] font-semibold tracking-[-0.031em] text-ink">
-                                                {selected === 'launch' ? 'Plan de lanzamiento' : 'Propuesta comercial'}
-                                            </h2>
-                                            <p className={`mt-2 text-[14px] ${selected === 'launch' && launchLive ? 'text-accent' : 'text-ink-muted'}`}>
-                                                {selected === 'launch'
-                                                    ? (launchLive ? 'Lucía está dentro.' : 'Nadie está conectado actualmente.')
-                                                    : 'Nadie está conectado actualmente.'}
-                                            </p>
-                                            <div className="mt-6 flex flex-wrap items-center justify-center gap-2">
-                                                <span className={`flex h-11 items-center gap-2 rounded-pill bg-white px-5 text-[13px] font-semibold text-black ${joinPressed && selected === 'launch' ? 'scale-95' : ''}`}>
-                                                    <Mic className="h-4 w-4" strokeWidth={2.3} />
-                                                    {selected === 'launch' && launchLive ? 'Unirse a la sala' : 'Entrar a la sala'}
-                                                </span>
-                                                <span className="demo-call-glass flex h-11 items-center gap-2 rounded-pill border border-hairline px-4 text-[13px] font-semibold text-ink">
-                                                    <ExternalLink className="h-[15px] w-[15px]" strokeWidth={2.3} />
-                                                    Abrir la pizarra
-                                                </span>
+                                            <div>
+                                                <h3 className="text-[17px] font-semibold text-ink">Tu enlace está listo</h3>
+                                                <p className="mt-1 text-[12px] leading-relaxed text-ink-muted">
+                                                    Cualquier persona con el enlace puede entrar como invitada, sin ver tu pizarra.
+                                                </p>
                                             </div>
                                         </div>
-                                    </motion.div>
-                                )}
-                            </AnimatePresence>
-                        </div>
-                    </div>
 
-                    <AnimatePresence>
-                        {showExpress && (
-                            <motion.div
-                                key="express-modal-backdrop"
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: 1 }}
-                                exit={{ opacity: 0 }}
-                                transition={{ duration: .25 }}
-                                className="absolute inset-0 z-[80] flex items-start justify-center bg-black/70 pt-[210px]"
-                            >
-                                <motion.div
-                                    initial={{ opacity: 0, y: 10, scale: .97 }}
-                                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                                    exit={{ opacity: 0, y: 8, scale: .97 }}
-                                    transition={{ duration: .3, ease: [0.16, 1, 0.3, 1] }}
-                                    className="relative w-[440px] rounded-large border border-hairline bg-canvas p-7 shadow-soft-lift"
-                                >
-                                    <span className="absolute right-5 top-5 flex h-8 w-8 items-center justify-center rounded-pill bg-surface-2 text-ink-muted">
-                                        <X className="h-4 w-4" strokeWidth={2} />
-                                    </span>
-                                    <div className="flex items-start gap-3 pr-8">
-                                        <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-medium bg-surface-2 text-ink">
-                                            <Link2 className="h-[18px] w-[18px]" strokeWidth={2.1} />
-                                        </span>
-                                        <div>
-                                            <h3 className="text-[17px] font-semibold text-ink">Tu enlace está listo</h3>
-                                            <p className="mt-1 text-[12px] leading-relaxed text-ink-muted">
-                                                Cualquier persona con el enlace puede entrar como invitada, sin ver tu pizarra.
+                                        <p className="mt-5 text-[11px] font-semibold text-ink-muted">Enlace para invitados</p>
+                                        <div className="mt-1.5 flex items-center gap-2">
+                                            <span className="flex-1 truncate rounded-medium border border-hairline bg-surface-1 px-3 py-2.5 text-[12px] text-ink">
+                                                992db-8b2b-4c13-a4a7-dabd0e751d9d
+                                            </span>
+                                            <span className="flex shrink-0 items-center gap-1.5 rounded-medium bg-surface-2 px-3 py-2.5 text-[12px] font-semibold text-ink">
+                                                <Copy className="h-3.5 w-3.5" strokeWidth={2} /> Copiar
+                                            </span>
+                                        </div>
+
+                                        <div className="mt-3 rounded-medium bg-surface-1 p-3">
+                                            <p className="text-[12px] font-semibold text-ink">Acceso limitado a esta llamada</p>
+                                            <p className="mt-1 text-[11px] leading-relaxed text-ink-muted">
+                                                Los invitados no pueden abrir pizarras, archivos, historial ni otras salas de Zenth.
                                             </p>
                                         </div>
-                                    </div>
 
-                                    <p className="mt-5 text-[11px] font-semibold text-ink-muted">Enlace para invitados</p>
-                                    <div className="mt-1.5 flex items-center gap-2">
-                                        <span className="flex-1 truncate rounded-medium border border-hairline bg-surface-1 px-3 py-2.5 text-[12px] text-ink">
-                                            992db-8b2b-4c13-a4a7-dabd0e751d9d
+                                        <span className="mt-4 flex h-11 items-center justify-center gap-2 rounded-pill bg-ink text-[13px] font-semibold text-canvas">
+                                            Preparar audio y entrar <ArrowRight className="h-4 w-4" strokeWidth={2.2} />
                                         </span>
-                                        <span className="flex shrink-0 items-center gap-1.5 rounded-medium bg-surface-2 px-3 py-2.5 text-[12px] font-semibold text-ink">
-                                            <Copy className="h-3.5 w-3.5" strokeWidth={2} /> Copiar
-                                        </span>
-                                    </div>
-
-                                    <div className="mt-3 rounded-medium bg-surface-1 p-3">
-                                        <p className="text-[12px] font-semibold text-ink">Acceso limitado a esta llamada</p>
-                                        <p className="mt-1 text-[11px] leading-relaxed text-ink-muted">
-                                            Los invitados no pueden abrir pizarras, archivos, historial ni otras salas de Zenth.
-                                        </p>
-                                    </div>
-
-                                    <span className="mt-4 flex h-11 items-center justify-center gap-2 rounded-pill bg-white text-[13px] font-semibold text-black">
-                                        Preparar audio y entrar <ArrowRight className="h-4 w-4" strokeWidth={2.2} />
-                                    </span>
+                                    </motion.div>
                                 </motion.div>
-                            </motion.div>
-                        )}
-                    </AnimatePresence>
+                            )}
+                        </AnimatePresence>
 
-                    <AnimatePresence>
-                        {cursor && (
-                            <motion.span
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: 1, left: cursor.x, top: cursor.y, scale: cursor.click ? .86 : 1 }}
-                                exit={{ opacity: 0 }}
-                                transition={{ duration: .55, ease: [0.16, 1, 0.3, 1] }}
-                                className="pointer-events-none absolute z-[90] text-white drop-shadow-[0_2px_3px_rgba(0,0,0,.75)]"
-                            >
-                                <MousePointer2 className="h-6 w-6 fill-white text-black" strokeWidth={1.2} />
-                                {cursor.click && (
-                                    <motion.span
-                                        key={`${cursor.x}-${cursor.y}-${elapsed.toFixed(0)}`}
-                                        initial={{ opacity: .8, scale: .3 }}
-                                        animate={{ opacity: 0, scale: 1.35 }}
-                                        transition={{ duration: .52 }}
-                                        className="absolute -left-2 -top-2 h-9 w-9 rounded-full border-2 border-white/80"
-                                    />
-                                )}
-                            </motion.span>
-                        )}
-                    </AnimatePresence>
+                        <AnimatePresence>
+                            {cursor && (
+                                <motion.span
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1, left: cursor.x, top: cursor.y, scale: cursor.click ? .86 : 1 }}
+                                    exit={{ opacity: 0 }}
+                                    transition={{ duration: .55, ease: [0.16, 1, 0.3, 1] }}
+                                    className="pointer-events-none absolute z-[90] text-white drop-shadow-[0_2px_3px_rgba(0,0,0,.75)]"
+                                >
+                                    <MousePointer2 className="h-6 w-6 fill-white text-black" strokeWidth={1.2} style={CURSOR_ZOOM_STYLE} />
+                                    {cursor.click && (
+                                        <motion.span
+                                            key={`${cursor.x}-${cursor.y}-${elapsed.toFixed(0)}`}
+                                            initial={{ opacity: .8, scale: .3 }}
+                                            animate={{ opacity: 0, scale: 1.35 }}
+                                            transition={{ duration: .52 }}
+                                            className="absolute -left-2 -top-2 h-9 w-9 rounded-full border-2 border-white/80"
+                                        />
+                                    )}
+                                </motion.span>
+                            )}
+                        </AnimatePresence>
+                    </div>
                 </div>
             </div>
+
+            {compact && (
+                <div className="mt-4 px-1">
+                    <p className="t-caption min-h-[2.75rem] text-center text-ink-muted">{captionAt(elapsed)}</p>
+                    <div role="group" aria-label="Capítulos de la demostración" className="mt-2 flex flex-wrap justify-center gap-1">
+                        {ACTS.map((act, index) => (
+                            <button
+                                key={act.id}
+                                type="button"
+                                aria-current={index === actIndex ? 'true' : undefined}
+                                onClick={() => goToAct(index)}
+                                className={`fr-tab relative !px-3 !text-[13px] ${index === actIndex ? 'is-selected' : ''}`}
+                            >
+                                {act.label}
+                                {index === actIndex && !reduceMotion && (
+                                    <span
+                                        className="absolute inset-x-3 bottom-1 h-[2px] origin-left rounded-full bg-accent"
+                                        style={{ transform: `scaleX(${actProgress(elapsed, CYCLE)})` }}
+                                    />
+                                )}
+                            </button>
+                        ))}
+                    </div>
+                </div>
+            )}
         </div>
     );
 };

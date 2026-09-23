@@ -80,7 +80,6 @@ export const atajosArticles: DocArticle[] = [
       table(
         ['Otros atajos útiles', 'Dónde'],
         ['`Ctrl` + `Shift` + `F`, `Ctrl` + `F`, `Ctrl` + `S`…', 'En el editor de notas: ver [Atajos del editor de notas](/docs/atajos/atajos-del-editor-de-notas).'],
-        ['`Ctrl` + `Z`, `Ctrl` + `Y`, `Ctrl` + `S`', 'En las tablas de Zenth.'],
       ),
     ],
   },
@@ -88,11 +87,11 @@ export const atajosArticles: DocArticle[] = [
   {
     slug: 'atajos-del-editor-de-notas',
     category: 'atajos',
-    title: 'Atajos del editor de notas y las tablas',
-    summary: 'Formato, bloques, Markdown al escribir, buscar y reemplazar, modo concentración y los atajos de las tablas de Zenth.',
-    keywords: ['atajos editor', 'notas', 'negrita', 'cursiva', 'títulos', 'listas', 'markdown', 'buscar y reemplazar', 'modo concentración', 'tablas', 'tachado', 'código', 'enlace', 'duplicar bloque'],
+    title: 'Atajos del editor de notas',
+    summary: 'Formato, bloques, Markdown al escribir, buscar y reemplazar, modo concentración.',
+    keywords: ['atajos editor', 'notas', 'negrita', 'cursiva', 'títulos', 'listas', 'markdown', 'buscar y reemplazar', 'modo concentración', 'tachado', 'código', 'enlace', 'duplicar bloque'],
     updated: UPDATED,
-    related: ['biblioteca/notas', 'biblioteca/tablas-y-hojas-de-calculo', 'atajos/atajos-de-la-aplicacion'],
+    related: ['biblioteca/notas', 'atajos/atajos-de-la-aplicacion'],
     blocks: [
       p('Dentro del editor de notas, `Ctrl` + `/` (`⌘` + `/` en Mac) abre esta misma lista sin salir de la nota. En macOS, `Ctrl` se muestra como `⌘`.'),
 
@@ -147,17 +146,6 @@ export const atajosArticles: DocArticle[] = [
         [['Ctrl', 'Z'], 'Deshacer'],
         [['Ctrl', 'Y'], 'Rehacer'],
         [['Esc'], 'Guardar y salir'],
-      ),
-
-      h2('Tablas de Zenth'),
-      keys(
-        [['Ctrl', 'S'], 'Guardar y salir'],
-        [['Ctrl', 'Z'], 'Deshacer'],
-        [['Ctrl', 'Y'], 'Rehacer'],
-        [['Ctrl', 'B'], 'Negrita'],
-        [['Ctrl', 'I'], 'Cursiva'],
-        [['Ctrl', 'U'], 'Subrayado'],
-        [['Ctrl', 'C'], 'Copiar la selección'],
       ),
     ],
   },

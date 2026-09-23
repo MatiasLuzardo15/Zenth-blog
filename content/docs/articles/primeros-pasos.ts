@@ -217,7 +217,7 @@ export const primerosPasosArticles: DocArticle[] = [
         'Los resultados se agrupan en **Pizarras**, **Tareas**, **Notas** y **Drive**. Los que empiezan por lo que escribiste salen primero.',
         'Muévete con las flechas y pulsa `Enter` para abrir el resultado. `Esc` cierra el buscador.',
       ),
-      p('En Notas caben las notas, los lienzos, las tablas, los audios y los adjuntos. Si tienes Google Drive conectado, el buscador también recorre tus archivos de Drive (verás un aviso mientras termina de buscar).'),
+      p('En Notas caben las notas, los lienzos, los audios y los adjuntos. Si tienes Google Drive conectado, el buscador también recorre tus archivos de Drive (verás un aviso mientras termina de buscar).'),
       note('Dentro de una pizarra hay además un buscador propio, **Buscar tareas en esta pizarra**, que solo mira las tarjetas de ese tablero.'),
 
       h2('El centro de notificaciones'),

@@ -50,14 +50,14 @@ function App() {
   // Dynamic SEO management
   const getSEO = () => {
     const baseUrl = 'https://www.zenth.space';
-    let title = 'Zenth: Agenda, Pizarras, Biblioteca, Llamadas y Enfoque';
+    let title = 'Zenth: Agenda, Pizarras, Biblioteca, Reuniones y Enfoque';
     let description = 'Planifica tu tiempo, organiza proyectos, habla con tu equipo y protege tu enfoque con Zenth.';
     let url = `${baseUrl}${location.pathname}`;
     let image = `${baseUrl}/favicon.png`;
 
     if (location.pathname === '/') {
       title = 'Zenth: Tu agenda, tus proyectos y tu atención en un mismo ritmo';
-      description = 'Agenda visual, pizarras compartidas, Biblioteca con Google Drive, Llamadas, reuniones rápidas, Enfoque global y progreso personal en una sola aplicación.';
+      description = 'Agenda visual, pizarras compartidas, Biblioteca con notas, lienzos y Google Drive, Reuniones con invitados, Enfoque global y progreso personal en una sola aplicación.';
     } else if (location.pathname === '/blog') {
       title = 'Blog: Productividad y Neurociencia | Zenth Space';
       description = 'Novedades de Zenth y artículos sobre atención, hábitos, colaboración y bienestar. Organiza tu día con planificación visual y calma.';
@@ -76,10 +76,10 @@ function App() {
       description = 'Cómo protegemos tus datos y tu privacidad en Zenth. Sin venta de datos, sin rastreadores invasivos.';
     } else if (location.pathname === '/terms') {
       title = 'Términos y Condiciones de Uso | Zenth';
-      description = 'Las reglas de uso de Zenth: tu cuenta, tu contenido, la colaboración, las salas de voz y las integraciones. Claro y sin letra pequeña.';
+      description = 'Las reglas de uso de Zenth: tu cuenta, tu contenido, la colaboración, las reuniones y las integraciones. Claro y sin letra pequeña.';
     } else if (location.pathname === '/faq') {
       title = 'Preguntas Frecuentes | Zenth Space';
-      description = 'Todo lo que necesitas saber sobre Agenda, Pizarras, Biblioteca, Llamadas, reuniones rápidas, Enfoque, Google Drive, Calendar y Mi ritmo.';
+      description = 'Todo lo que necesitas saber sobre Agenda, Pizarras, Biblioteca, Reuniones, Enfoque, Progreso, Google Drive y Calendar.';
     } else if (location.pathname.startsWith('/docs')) {
       const [, , categoryId, slug] = location.pathname.split('/');
       const article = getArticle(categoryId, slug);

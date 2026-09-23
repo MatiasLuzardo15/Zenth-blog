@@ -11,7 +11,7 @@ const FAQS: FAQEntry[] = [
     {
         question: '¿Qué es Zenth exactamente?',
         answer:
-            'Un espacio de productividad con cuatro áreas principales: Agenda para planificar el tiempo, Pizarras para organizar proyectos y colaborar, Biblioteca para tus notas y documentos de Google Drive, y Mi ritmo para observar actividad, constancia y bienestar. Enfoque funciona como un temporizador global que puedes abrir desde cualquier pantalla.',
+            'Un espacio de productividad con cuatro áreas principales: Agenda para planificar el tiempo, Pizarras para organizar proyectos y colaborar, Biblioteca para tus notas, lienzos y documentos de Google Drive, y Reuniones para hablar con tu equipo o con invitados. Progreso reúne tus niveles y logros, Estadísticas te muestra cómo usas tu tiempo, y Enfoque funciona como un temporizador global que puedes abrir desde cualquier pantalla.',
     },
     {
         question: '¿Es gratuito?',
@@ -35,42 +35,47 @@ const FAQS: FAQEntry[] = [
     {
         question: '¿Cuáles son las secciones actuales?',
         answer:
-            'Agenda, Pizarras, Biblioteca y Mi ritmo. Enfoque ya no ocupa una sección de navegación: se abre desde el icono de la cabecera y sigue funcionando mientras recorres la aplicación.',
+            'En la barra principal: Agenda, Pizarras, Biblioteca y Reuniones. En el menú de tu avatar (y en el móvil, dentro de Más) están Progreso, Actividad y ánimo, Estadísticas y la Papelera. Enfoque no ocupa una sección: se abre desde el icono de la cabecera y sigue funcionando mientras recorres la aplicación.',
     },
     {
         question: '¿Puedo compartir una pizarra con otras personas?',
         answer:
-            'Sí. Cada pizarra nace privada y puedes invitar por correo o mediante un enlace. Los cambios, la presencia y la actividad aparecen en tiempo real. También hay comentarios, menciones, responsables múltiples, adjuntos privados, checklists, automatizaciones, plantillas, votos, aprobaciones, sala del equipo y llamadas privadas.',
+            'Sí. Cada pizarra nace privada y puedes invitar por correo o mediante un enlace que puedes revocar. Los cambios, la presencia y la actividad aparecen en tiempo real. También hay comentarios, menciones, responsables múltiples, adjuntos privados, checklists, automatizaciones, plantillas, votos, aprobaciones, sala del equipo y llamadas privadas.',
+    },
+    {
+        question: '¿Puedo compartir una nota o dibujar con otras personas?',
+        answer:
+            'Sí. Las notas y los lienzos se comparten por correo con permiso de ver, editar o, en las notas, sugerir cambios que tú revisas. Ves quién está dentro y qué hace en cada momento. Lo que te comparten aparece en Biblioteca › Compartidos conmigo y puedes guardarlo en tu propia Biblioteca.',
     },
     {
         question: '¿Qué son las reuniones rápidas?',
         answer:
-            'Son llamadas aisladas para clientes, candidatos o colaboradores que no necesitan entrar a tu espacio de trabajo. Desde Llamadas puedes crear un enlace para más tarde, iniciar una reunión al instante o programarla en Agenda. La otra persona entra con su nombre, sin registrarse.',
+            'Son llamadas aisladas para clientes, candidatos o colaboradores que no necesitan entrar a tu espacio de trabajo. Desde Reuniones puedes crear un enlace para más tarde, iniciar una reunión al instante o programarla en Agenda. La otra persona entra con su nombre, sin registrarse, y tú decides quién pasa de la sala de espera.',
     },
     {
         question: '¿Qué diferencia hay entre una sala de pizarra y una reunión rápida?',
         answer:
-            'La sala de una pizarra pertenece a sus integrantes y aparece en Llamadas junto a tus demás salas. Una reunión rápida no está vinculada a ninguna pizarra: quien recibe el enlace solo obtiene acceso a esa conversación, no a tus tareas, archivos, historial ni otras salas. El enlace deja de funcionar cuando el anfitrión cierra la reunión.',
+            'La sala de una pizarra pertenece a sus integrantes y aparece en Reuniones junto a tus demás salas; su chat se guarda con la pizarra. Una reunión rápida no está vinculada a ninguna pizarra: quien recibe el enlace solo obtiene acceso a esa conversación, no a tus tareas, archivos, historial ni otras salas, y su chat desaparece al terminar. El enlace deja de funcionar cuando el anfitrión cierra la reunión.',
     },
     {
         question: '¿Zenth tiene cámara o graba las llamadas?',
         answer:
-            'No. Las llamadas ofrecen voz, selección de dispositivos, pantalla compartida, reacciones y mano levantada. No hay cámara personal ni grabación de audio, pantalla o vídeo.',
+            'No. Las llamadas ofrecen voz, selección de dispositivos, pantalla compartida, reacciones, mano levantada y chat. No hay cámara personal ni grabación de audio, pantalla o vídeo.',
     },
     {
         question: '¿Qué puede hacer cada rol?',
         answer:
-            'El Administrador gestiona la pizarra, sus miembros y su contenido. El Miembro crea y edita tarjetas y listas, pero no administra personas ni permisos. El Observador solo lee. El propietario siempre es administrador, puede transferir la propiedad y es quien puede eliminar la pizarra.',
+            'El Administrador gestiona la pizarra, sus miembros y su contenido. El Miembro crea y edita tarjetas y listas, pero no administra personas ni permisos. El Observador solo lee (y puede comentar y votar si un administrador lo permite). El propietario siempre es administrador, puede transferir la propiedad y es quien puede eliminar la pizarra.',
     },
     {
         question: '¿Qué significa la visibilidad «con enlace»?',
         answer:
-            'Es independiente de los miembros. Una pizarra privada solo la ven sus integrantes. Si activas «con enlace», cualquiera que tenga esa dirección puede verla en modo solo lectura, sin cuenta. Puedes volver a privada cuando quieras.',
+            'Es independiente de los miembros. Una pizarra privada solo la ven sus integrantes. Si activas «con enlace», cualquiera que tenga esa dirección puede verla en modo solo lectura, sin cuenta: ve el tablero, las descripciones, las etiquetas y el progreso de las checklists, pero no los adjuntos, los miembros asignados, los documentos vinculados ni las tareas completadas. Puedes volver a privada cuando quieras.',
     },
     {
         question: '¿Qué puedo guardar en Biblioteca?',
         answer:
-            'Notas nativas de Zenth y, al conectar Google Drive, documentos, hojas, presentaciones, formularios, carpetas, archivos subidos y grabaciones de voz. Biblioteca también muestra Mi unidad, recientes, destacados y archivos compartidos contigo.',
+            'Notas y lienzos de Zenth y, al conectar Google Drive, documentos, hojas, presentaciones, formularios, carpetas, archivos subidos y grabaciones de voz. Biblioteca también muestra Mi unidad, recientes, destacados y archivos compartidos contigo.',
     },
     {
         question: '¿Qué acceso necesita Google Drive?',
@@ -90,37 +95,52 @@ const FAQS: FAQEntry[] = [
     {
         question: '¿Puedo conectar mi Google Calendar?',
         answer:
-            'Sí, con permiso de solo lectura. Eliges qué calendarios ver y sus eventos aparecen en Agenda. La sincronización se actualiza cada cinco minutos mientras el permiso está activo y puedes pausarla. Nada llega a una pizarra hasta que usas explícitamente «Llevar a pizarra».',
+            'Sí, con permiso de solo lectura. Eliges qué calendarios ver y sus eventos aparecen en Agenda. La sincronización se actualiza cada cinco minutos mientras el permiso está activo y puedes pausarla. Nada llega a una pizarra hasta que usas explícitamente «Llevar eventos a una pizarra».',
     },
     {
         question: '¿Puedo añadir invitados y un enlace a una reunión desde Agenda?',
         answer:
-            'Sí. Al editar un evento o tarea de tipo reunión puedes elegir Zenth, Google Meet, Zoom, Teams u otro enlace, y añadir direcciones de correo como invitados. Zenth conserva el estado de esas invitaciones dentro del evento.',
+            'Sí. Al editar un evento o tarea de tipo reunión puedes elegir Zenth, Google Meet, Zoom, Teams u otro enlace, y añadir direcciones de correo como invitados. Reciben la invitación al guardar y otro correo a la hora del evento; no necesitan una cuenta para responder, y tú ves quién aceptó.',
     },
     {
         question: '¿Cómo funciona Enfoque ahora?',
         answer:
-            'Abres el panel desde la cabecera, eliges 15, 25, 45 o 60 minutos, una duración propia o el modo sin duración, y puedes vincular una tarea. El temporizador continúa aunque cambies de pantalla. Incluye descansos, objetivo diario, historial editable, sonidos ambientales, mezclas guardadas y música.',
+            'Abres el panel desde la cabecera, eliges 15, 25, 45 o 60 minutos, una duración propia o el modo sin duración, y puedes vincular una tarea. El temporizador continúa aunque cambies de pantalla. Incluye descansos, nota rápida, objetivo diario, historial editable, sonidos ambientales, mezclas guardadas y música.',
     },
     {
         question: '¿Para qué sirven XP, niveles y logros?',
         answer:
-            'Cada tarea suma 10 XP y una gran meta, 50. Hay 20 niveles inspirados en constelaciones; cada uno exige XP, mejor racha, tareas completadas y minutos de enfoque. Además hay 24 logros de ejecución, constancia, enfoque y recorrido. Los niveles alcanzados son permanentes.',
+            'Cada tarea suma 10 XP y una gran meta, 50. Hay 20 niveles inspirados en constelaciones; cada uno exige XP, mejor racha, tareas completadas y minutos de enfoque. Además hay 25 logros de ejecución, constancia, enfoque y recorrido. Los niveles alcanzados son permanentes.',
+    },
+    {
+        question: '¿Qué mide Estadísticas y quién la ve?',
+        answer:
+            'Cuánto tiempo pasas en cada sección de Zenth (contando solo con la pestaña visible), cómo van tu enfoque y tus tareas, y cómo cambian respecto al período anterior. Puedes exportar el informe a Excel, CSV o PDF. Solo tú lo ves: ni siquiera los miembros de tus pizarras acceden a esos datos.',
     },
     {
         question: "¿Cómo funciona el asistente 'Zen'?",
         answer:
-            'Zen usa Google Gemini solo cuando se lo pides. Puede interpretar una frase para completar una tarea, sugerir una fecha, dividir trabajo en micro-pasos y mejorar, resumir o expandir el texto seleccionado de una nota. No analiza silenciosamente todo tu contenido.',
+            'Zen usa Google Gemini solo cuando se lo pides, dentro del editor de tareas: puede interpretar una frase para completar una tarea, sugerir la mejor fecha y hora, y dividir el trabajo en micro-pasos. Solo recibe el texto de esa solicitud; no analiza silenciosamente el resto de tu contenido.',
     },
     {
         question: '¿Puedo recuperar algo que borré por error?',
         answer:
-            'Las tareas y notas nativas van a la papelera de Zenth y pueden restaurarse. Los archivos administrados mediante Google Drive van a la papelera de Drive, por lo que su recuperación se hace desde Google. Vaciar cualquiera de las dos papeleras es una acción permanente.',
+            'Las tareas, notas y lienzos van a la papelera de Zenth y pueden restaurarse. Los archivos de Google Drive que envías a su papelera aparecen en la pestaña Drive de la Papelera, desde donde también puedes restaurarlos. Vaciar la papelera de Zenth es una acción permanente; y «Eliminar todas las tareas», en Ajustes, se salta la papelera.',
+    },
+    {
+        question: '¿Puedo usar varias cuentas en el mismo dispositivo?',
+        answer:
+            'Sí. Desde el menú de tu avatar puedes añadir otra cuenta sin cerrar la actual y cambiar entre ellas en un clic. Cada cuenta conserva sus datos, ajustes e integraciones por separado. Si hay una llamada, una sesión de Enfoque o cambios sin guardar, Zenth te avisa antes de cambiar.',
+    },
+    {
+        question: '¿Hay atajos de teclado?',
+        answer:
+            'Sí: Ctrl+K busca en todo Zenth, Alt+1 a Alt+7 cambian de sección, D/S/M cambian la vista de Agenda, y el editor de notas tiene atajos de formato y bloques. Ctrl+Shift+/ abre el catálogo completo dentro de la aplicación, y en la documentación están todos.',
     },
     {
         question: '¿Puedo cambiar el aspecto de la aplicación?',
         answer:
-            'Puedes usar el tema del sistema, Claro, Oscuro o Zen; activar el modo compacto; cambiar el ancho del contenido y elegir formato de 12 o 24 horas. El azul es el acento estable de la interfaz, mientras que etiquetas, listas y estados conservan sus propios colores.',
+            'Puedes usar el tema del sistema, Claro, Oscuro o Zen; activar el modo compacto; cambiar el ancho del contenido y elegir formato de 12 o 24 horas. También personalizas tu avatar con degradados, ilustraciones o una foto. El azul es el acento estable de la interfaz, mientras que etiquetas, listas y estados conservan sus propios colores.',
     },
     {
         question: '¿Por qué Zenth puede resultar útil para personas con TDAH?',
@@ -131,6 +151,11 @@ const FAQS: FAQEntry[] = [
         question: '¿Cómo puedo cambiar mi dirección de correo?',
         answer:
             'Desde Ajustes → Cuenta → Cambiar correo. Recibirás un enlace de confirmación en la dirección nueva y el cambio solo se aplicará cuando lo confirmes.',
+    },
+    {
+        question: '¿Cómo elimino mi cuenta o mis datos?',
+        answer:
+            'Puedes borrar contenido desde la Papelera y desconectar Google Drive y Calendar desde Ajustes. Para eliminar tu cuenta y tus datos, escríbeme desde el correo de tu cuenta: hoy no hay un botón para hacerlo dentro de la aplicación. Los detalles están en la política de privacidad.',
     },
     {
         question: '¿Puedo usarlo en el teléfono?',

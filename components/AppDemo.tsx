@@ -24,6 +24,9 @@ import {
     PRESS_AT, RETURN_TODAY_AT, SWAP_AT, TASK_OPEN_AT, TODAY_TASK, TYPE_END,
     TYPE_START, VIEWS_END_AT, VIEWS_START_AT, WEEK_CLICK_AT, WEEK_HOVER_AT, typewriter,
 } from './demo/timeline';
+import {
+    ACTS, CURSOR_ZOOM_STYLE, FRAME_FADE_STYLE, PHONE_ASPECT, PHONE_MAX_W, actIndexAt, actProgress, captionAt, headerVisibleAt, shotAt,
+} from './demo/phoneDirector';
 
 const NAV = [
     { label: 'Agenda', icon: Calendar },
@@ -33,9 +36,11 @@ const NAV = [
 ];
 
 /**
- * Punto horizontal que sigue la cámara en pantallas estrechas. Los cambios se
- * adelantan unos milisegundos al gesto que se va a mostrar: así la cámara ya
- * está quieta cuando aparece el panel, la tarjeta arrastrada o el checkbox.
+ * Punto horizontal que sigue la cámara en anchos intermedios (tabletas), donde
+ * la maqueta sólo pierde una parte por los lados. En teléfonos manda
+ * `demo/phoneDirector.ts`. Los cambios se adelantan unos milisegundos al gesto
+ * que se va a mostrar: así la cámara ya está quieta cuando aparece el panel,
+ * la tarjeta arrastrada o el checkbox.
  */
 const boardCameraFocus = (elapsed: number) => {
     const lead = 650;
@@ -61,16 +66,26 @@ const AppDemo: React.FC = () => {
     const reduceMotion = useReducedMotion();
     const wrapRef = useRef<HTMLDivElement>(null);
     const frameRef = useRef<HTMLDivElement>(null);
-    const [box, setBox] = useState({ scale: 1, width: DESIGN_W });
+    const [box, setBox] = useState({ scale: 1, width: DESIGN_W, compact: false });
     const [elapsed, setElapsed] = useState(0);
     const [inView, setInView] = useState(true);
+    const originRef = useRef(0);
+    const elapsedRef = useRef(0);
+
+    const apply = (ms: number) => {
+        elapsedRef.current = ms;
+        setElapsed(ms);
+    };
 
     useLayoutEffect(() => {
         const node = frameRef.current;
         if (!node) return;
         const apply = () => {
             const width = node.clientWidth;
-            setBox({ scale: Math.max(width / DESIGN_W, MIN_SCALE), width });
+            // El modo móvil no lleva tarjeta (ni su padding): se decide con el contenedor
+            // exterior, que no cambia al alternar, para no oscilar cerca del umbral.
+            const compact = (wrapRef.current?.clientWidth ?? width) < PHONE_MAX_W;
+            setBox({ scale: Math.max(width / DESIGN_W, MIN_SCALE), width, compact });
         };
         apply();
         if (typeof ResizeObserver === 'undefined') {
@@ -92,16 +107,32 @@ const AppDemo: React.FC = () => {
 
     useEffect(() => {
         if (reduceMotion) {
-            setElapsed(COMPLETES_AT + 800);
+            if (elapsedRef.current === 0) apply(COMPLETES_AT + 800);
             return;
         }
         if (!inView) return;
-        const startedAt = performance.now();
-        const id = window.setInterval(() => setElapsed((performance.now() - startedAt) % CYCLE), 60);
+        originRef.current = performance.now() - elapsedRef.current;
+        const id = window.setInterval(() => apply((performance.now() - originRef.current) % CYCLE), 60);
         return () => window.clearInterval(id);
     }, [reduceMotion, inView]);
 
-    const { scale, width: frameWidth } = box;
+    /** Capítulos de la versión móvil: saltar al inicio de un acto (o a su fotograma fijo). */
+    const goToAct = (index: number) => {
+        const act = ACTS[index];
+        if (reduceMotion) return apply(act.poster);
+        originRef.current = performance.now() - act.from;
+        apply(act.from);
+    };
+
+    const { scale, width: frameWidth, compact } = box;
+    const shot = shotAt(elapsed);
+    const camScale = frameWidth / shot.w;
+    /** Planos sobre un panel: la vista de fondo se apaga para que no asome cortada. */
+    const isolationStyle: React.CSSProperties | undefined = compact ? {
+        opacity: shot.isolate ? 0 : 1,
+        transition: reduceMotion ? undefined : 'opacity 300ms ease',
+    } : undefined;
+    const actIndex = actIndexAt(elapsed);
     const overflowX = Math.max(0, DESIGN_W * scale - frameWidth);
     const boardActive = elapsed >= BOARD_AT && elapsed < RETURN_TODAY_AT;
     const focusActive = elapsed >= FOCUS_VIEW_AT && elapsed < FOCUS_END;
@@ -152,7 +183,7 @@ const AppDemo: React.FC = () => {
                         ? 'details'
                         : 'none';
 
-    /** En móvil, la cámara sigue la zona donde está ocurriendo la acción. */
+    /** En anchos intermedios, la cámara sigue la zona donde está ocurriendo la acción. */
     const cropFocus = callViewActive || lobbyActive
         ? .5
         : meetingPanelActive
@@ -193,272 +224,312 @@ const AppDemo: React.FC = () => {
         || (elapsed >= MEETING_ADD_HOVER - 300 && elapsed < LOBBY_JOIN_CLICK_AT + 400);
 
     return (
-        <div
-            ref={wrapRef}
-            className="fr-card fr-elevated relative overflow-hidden p-1.5 sm:p-2"
-            role="img"
-            aria-label="Demostración de Zenth: organiza una tarea en Agenda, trabaja con una pizarra e inicia Enfoque sin abandonar su contexto."
-        >
+        <div ref={wrapRef}>
             <div
-                ref={frameRef}
-                className="relative w-full overflow-hidden rounded-large bg-canvas"
-                style={{ height: `${DESIGN_H * scale}px` }}
-                aria-hidden="true"
+                className={compact ? 'relative' : 'fr-card fr-elevated relative overflow-hidden p-1.5 sm:p-2'}
+                role="img"
+                aria-label="Demostración de Zenth: organiza una tarea en Agenda, trabaja con una pizarra e inicia Enfoque sin abandonar su contexto."
             >
                 <div
-                    className="absolute left-0 top-0 origin-top-left"
+                    ref={frameRef}
+                    className={compact ? 'relative w-full overflow-hidden' : 'relative w-full overflow-hidden rounded-large bg-canvas'}
                     style={{
-                        width: `${DESIGN_W}px`,
-                        height: `${DESIGN_H}px`,
-                        transform: `translateX(${-overflowX * cropFocus}px) scale(${scale})`,
-                        transition: reduceMotion ? undefined : 'transform 720ms cubic-bezier(0.65, 0, 0.35, 1)',
+                        height: `${compact ? frameWidth * PHONE_ASPECT : DESIGN_H * scale}px`,
+                        ...(compact ? FRAME_FADE_STYLE : undefined),
                     }}
+                    aria-hidden="true"
                 >
-                    <div className="flex h-[72px] items-center justify-between bg-canvas px-6">
-                        <div className="flex items-center gap-2.5">
-                            <img src="/blog/favicon2.png" alt="" className="h-7 w-7 rounded-[7px] object-contain" />
-                            <div className="leading-tight">
-                                <p className="text-[12px] text-ink-muted">Buenas tardes,</p>
-                                <p className="text-[13px] font-semibold text-ink">Matías</p>
+                    <div
+                        className="absolute left-0 top-0 origin-top-left"
+                        style={{
+                            width: `${DESIGN_W}px`,
+                            height: `${DESIGN_H}px`,
+                            transform: compact
+                                ? `translate(${-shot.x * camScale}px, ${-shot.y * camScale}px) scale(${camScale})`
+                                : `translateX(${-overflowX * cropFocus}px) scale(${scale})`,
+                            transition: reduceMotion ? undefined : `transform ${compact ? 900 : 720}ms cubic-bezier(0.65, 0, 0.35, 1)`,
+                            '--demo-k': compact ? Math.max(1, 0.67 / camScale) : 1,
+                        } as React.CSSProperties}
+                    >
+                        <div
+                            className="flex h-[72px] items-center justify-between bg-canvas px-6"
+                            style={compact ? {
+                                opacity: headerVisibleAt(elapsed) ? 1 : 0,
+                                transition: reduceMotion ? undefined : 'opacity 600ms ease',
+                            } : undefined}
+                        >
+                            <div className="flex items-center gap-2.5">
+                                <img src="/blog/favicon2.png" alt="" className="h-7 w-7 rounded-[7px] object-contain" />
+                                <div className="leading-tight">
+                                    <p className="text-[12px] text-ink-muted">Buenas tardes,</p>
+                                    <p className="text-[13px] font-semibold text-ink">Matías</p>
+                                </div>
+                            </div>
+
+                            <nav className="flex items-center gap-1 rounded-pill bg-surface-1 p-1">
+                                {NAV.map(({ label, icon: Icon }, index) => {
+                                    const active = callViewActive ? index === 3 : boardActive ? index === 1 : index === 0;
+                                    return (
+                                        <motion.span
+                                            layout
+                                            key={label}
+                                            className={`relative flex items-center gap-2 rounded-pill px-4 py-2 text-[13px] ${active ? 'font-semibold text-ink' : 'text-ink-muted'}`}
+                                        >
+                                            {active && <motion.span layoutId="demo-nav-active" className="absolute inset-0 rounded-pill bg-canvas shadow-card-resting" transition={{ duration: .45, ease: [0.16, 1, 0.3, 1] }} />}
+                                            <span className="relative">
+                                                <Icon className="h-4 w-4" strokeWidth={1.9} />
+                                                {label === 'Reuniones' && callViewActive && (
+                                                    <span className="absolute -right-0.5 -top-0.5 h-1.5 w-1.5 rounded-full bg-accent" />
+                                                )}
+                                            </span>
+                                            <span className="relative">{label}</span>
+                                        </motion.span>
+                                    );
+                                })}
+                            </nav>
+
+                            <div className="flex items-center gap-1 rounded-pill bg-surface-1 p-1">
+                                <span className="flex h-9 w-9 items-center justify-center text-ink-muted">
+                                    <Search className="h-4 w-4" strokeWidth={1.9} />
+                                </span>
+                                <span className={`flex h-9 items-center justify-center gap-1.5 rounded-pill ${focusRunning ? 'px-2.5 text-accent' : 'w-9 text-ink-muted'}`}>
+                                    <Timer className="h-4 w-4" strokeWidth={focusRunning ? 2.2 : 1.9} />
+                                    {focusRunning && <span className="text-[13px] font-semibold tabular-nums">{focusClock}</span>}
+                                </span>
+                                <span className="flex h-9 w-9 items-center justify-center text-ink-muted">
+                                    <Bell className="h-4 w-4" strokeWidth={1.9} />
+                                </span>
+                                <span className="relative flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-grad-violet to-grad-magenta text-[12px] font-semibold text-white">
+                                    M
+                                    <span className="absolute -bottom-0.5 -right-0.5 flex h-3.5 w-3.5 items-center justify-center rounded-full border-2 border-surface-1 bg-accent">
+                                        <Flame className="h-2 w-2 text-white" fill="currentColor" strokeWidth={0} />
+                                    </span>
+                                </span>
+                                <ChevronUp className="mx-1 h-4 w-4 text-ink-muted" strokeWidth={1.9} />
                             </div>
                         </div>
 
-                        <nav className="flex items-center gap-1 rounded-pill bg-surface-1 p-1">
-                            {NAV.map(({ label, icon: Icon }, index) => {
-                                const active = callViewActive ? index === 3 : boardActive ? index === 1 : index === 0;
-                                return (
-                                    <motion.span
-                                        layout
-                                        key={label}
-                                        className={`relative flex items-center gap-2 rounded-pill px-4 py-2 text-[13px] ${active ? 'font-semibold text-ink' : 'text-ink-muted'}`}
+                        <div className="relative h-[728px] overflow-visible">
+                            <AnimatePresence mode="wait" initial={false}>
+                                {callViewActive ? (
+                                    <motion.div
+                                        key="call-view"
+                                        initial={{ opacity: 0, scale: .98 }}
+                                        animate={{ opacity: 1, scale: 1 }}
+                                        exit={{ opacity: 0 }}
+                                        transition={{ duration: .5, ease: [0.16, 1, 0.3, 1] }}
+                                        className="absolute inset-0"
                                     >
-                                        {active && <motion.span layoutId="demo-nav-active" className="absolute inset-0 rounded-pill bg-canvas shadow-card-resting" transition={{ duration: .45, ease: [0.16, 1, 0.3, 1] }} />}
-                                        <span className="relative">
-                                            <Icon className="h-4 w-4" strokeWidth={1.9} />
-                                            {label === 'Reuniones' && callViewActive && (
-                                                <span className="absolute -right-0.5 -top-0.5 h-1.5 w-1.5 rounded-full bg-accent" />
-                                            )}
-                                        </span>
-                                        <span className="relative">{label}</span>
-                                    </motion.span>
-                                );
-                            })}
-                        </nav>
-
-                        <div className="flex items-center gap-1 rounded-pill bg-surface-1 p-1">
-                            <span className="flex h-9 w-9 items-center justify-center text-ink-muted">
-                                <Search className="h-4 w-4" strokeWidth={1.9} />
-                            </span>
-                            <span className={`flex h-9 items-center justify-center gap-1.5 rounded-pill ${focusRunning ? 'px-2.5 text-accent' : 'w-9 text-ink-muted'}`}>
-                                <Timer className="h-4 w-4" strokeWidth={focusRunning ? 2.2 : 1.9} />
-                                {focusRunning && <span className="text-[13px] font-semibold tabular-nums">{focusClock}</span>}
-                            </span>
-                            <span className="flex h-9 w-9 items-center justify-center text-ink-muted">
-                                <Bell className="h-4 w-4" strokeWidth={1.9} />
-                            </span>
-                            <span className="relative flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-grad-violet to-grad-magenta text-[12px] font-semibold text-white">
-                                M
-                                <span className="absolute -bottom-0.5 -right-0.5 flex h-3.5 w-3.5 items-center justify-center rounded-full border-2 border-surface-1 bg-accent">
-                                    <Flame className="h-2 w-2 text-white" fill="currentColor" strokeWidth={0} />
-                                </span>
-                            </span>
-                            <ChevronUp className="mx-1 h-4 w-4 text-ink-muted" strokeWidth={1.9} />
-                        </div>
-                    </div>
-
-                    <div className="relative h-[728px] overflow-visible">
-                        <AnimatePresence mode="wait" initial={false}>
-                            {callViewActive ? (
-                                <motion.div
-                                    key="call-view"
-                                    initial={{ opacity: 0, scale: .98 }}
-                                    animate={{ opacity: 1, scale: 1 }}
-                                    exit={{ opacity: 0 }}
-                                    transition={{ duration: .5, ease: [0.16, 1, 0.3, 1] }}
-                                    className="absolute inset-0"
-                                >
-                                    <MeetingCallView elapsed={elapsed} startedAt={CALL_VIEW_AT} guestJoined={guestJoined} />
-                                </motion.div>
-                            ) : boardActive ? (
-                                <motion.div
-                                    key="board-view"
-                                    initial={{ opacity: 0, x: 36 }}
-                                    animate={{ opacity: 1, x: 0 }}
-                                    exit={{ opacity: 0, x: -24 }}
-                                    transition={{ duration: .55, ease: [0.16, 1, 0.3, 1] }}
-                                    className="absolute inset-0"
-                                >
-                                    <BoardView elapsed={elapsed} />
-                                </motion.div>
-                            ) : (
-                                <motion.div
-                                    key="today-view"
-                                    initial={{ opacity: 0, x: -24 }}
-                                    animate={{ opacity: 1, x: 0 }}
-                                    exit={{ opacity: 0, x: -36 }}
-                                    transition={{ duration: .55, ease: [0.16, 1, 0.3, 1] }}
-                                    className="absolute inset-0"
-                                >
-                                    <TodayView
-                                        typed={typed}
-                                        isTyping={isTyping}
-                                        isPressing={isPressing}
-                                        added={added}
-                                        completed={completed}
-                                        panelOpen={panel !== 'none'}
-                                        focusTaskVisible={returningToday}
-                                        focusTaskSelected={panel === 'task'}
-                                        viewMode={agendaView}
-                                        viewHover={hoveredAgendaView}
-                                    />
-                                </motion.div>
-                            )}
-                        </AnimatePresence>
-
-                        <AnimatePresence>
-                            {focusActive && (
-                                <motion.div
-                                    key="focus-panel"
-                                    exit={{ opacity: 0, y: -8, scale: .97 }}
-                                    transition={{ duration: .28, ease: [0.16, 1, 0.3, 1] }}
-                                    className="absolute right-6 top-4 z-[75]"
-                                >
-                                    <FocusView elapsed={elapsed} />
-                                </motion.div>
-                            )}
-                        </AnimatePresence>
-
-                        <AnimatePresence>
-                            {panel !== 'none' && (
-                                <motion.div
-                                    key="event-backdrop"
-                                    initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-                                    transition={{ duration: .28 }}
-                                    className={`absolute left-0 right-0 bg-black/60 -top-[72px] bottom-0`}
-                                />
-                            )}
-                        </AnimatePresence>
-
-                        <AnimatePresence>
-                            {panel !== 'none' && (
-                                <motion.aside
-                                    key="event-panel"
-                                    initial={{ x: 440 }} animate={{ x: 0 }} exit={{ x: 440 }}
-                                    transition={{ duration: .42, ease: [0.16, 1, 0.3, 1] }}
-                                    className={`absolute right-0 w-[430px] border-l border-hairline bg-canvas -top-[72px] h-[800px]`}
-                                >
-                                    {panel === 'task' ? (
-                                        <div className="absolute -left-[154px] top-[132px] flex flex-col items-end gap-3">
-                                            <span className="flex h-9 w-9 items-center justify-center rounded-medium bg-surface-2 text-ink"><AlignLeft className="h-4 w-4" strokeWidth={1.9} /></span>
-                                            <motion.span
-                                                animate={elapsed >= FOCUS_ACTION_AT ? { scale: .94 } : { scale: 1 }}
-                                                transition={{ duration: .16 }}
-                                                className="flex h-11 w-[138px] items-center justify-center gap-2 rounded-medium bg-surface-2 px-3 text-[10px] font-bold uppercase tracking-[0.04em] text-ink shadow-card-resting"
-                                            >
-                                                Iniciar enfoque <Target className="h-4 w-4" strokeWidth={2} />
-                                            </motion.span>
-                                            <span className="flex h-9 w-9 items-center justify-center rounded-medium bg-semantics-error text-white"><Trash2 className="h-4 w-4" strokeWidth={1.9} /></span>
+                                        <MeetingCallView elapsed={elapsed} startedAt={CALL_VIEW_AT} guestJoined={guestJoined} bare={compact} />
+                                    </motion.div>
+                                ) : boardActive ? (
+                                    <motion.div
+                                        key="board-view"
+                                        initial={{ opacity: 0, x: 36 }}
+                                        animate={{ opacity: 1, x: 0 }}
+                                        exit={{ opacity: 0, x: -24 }}
+                                        transition={{ duration: .55, ease: [0.16, 1, 0.3, 1] }}
+                                        className="absolute inset-0"
+                                    >
+                                        <BoardView elapsed={elapsed} isolationStyle={isolationStyle} bare={compact} />
+                                    </motion.div>
+                                ) : (
+                                    <motion.div
+                                        key="today-view"
+                                        initial={{ opacity: 0, x: -24 }}
+                                        animate={{ opacity: 1, x: 0 }}
+                                        exit={{ opacity: 0, x: -36 }}
+                                        transition={{ duration: .55, ease: [0.16, 1, 0.3, 1] }}
+                                        className="absolute inset-0"
+                                    >
+                                        <div className="h-full" style={isolationStyle}>
+                                            <TodayView
+                                                typed={typed}
+                                                isTyping={isTyping}
+                                                isPressing={isPressing}
+                                                added={added}
+                                                completed={completed}
+                                                panelOpen={panel !== 'none'}
+                                                focusTaskVisible={returningToday}
+                                                focusTaskSelected={panel === 'task'}
+                                                viewMode={agendaView}
+                                                viewHover={hoveredAgendaView}
+                                            />
                                         </div>
-                                    ) : (
-                                        <div className="absolute -left-[52px] top-4 flex flex-col gap-2">
-                                            {[
-                                                { icon: X, active: false, danger: false },
-                                                { icon: AlignLeft, active: false, danger: false },
-                                                { icon: Pencil, active: panel === 'edit', danger: false },
-                                                { icon: Target, active: false, danger: false },
-                                                { icon: Trash2, active: false, danger: true },
-                                            ].map(({ icon: Icon, active, danger }, index) => (
-                                                <span key={index} className={`flex h-9 w-9 items-center justify-center rounded-medium ${danger ? 'bg-semantics-error text-white' : active ? 'bg-ink text-canvas' : 'bg-surface-2 text-ink'}`}>
-                                                    <Icon className="h-4 w-4" strokeWidth={1.9} />
-                                                </span>
-                                            ))}
-                                        </div>
-                                    )}
+                                    </motion.div>
+                                )}
+                            </AnimatePresence>
 
-                                    <AnimatePresence mode="wait">
-                                        <motion.div key={panel === 'meeting' ? `meeting-${meetingPanelView}` : panel} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} transition={{ duration: .25 }} className="h-full">
-                                            {panel === 'details' ? <DetailsPanel />
-                                                : panel === 'edit' ? <EditPanel />
-                                                : panel === 'meeting' ? (
-                                                    meetingPanelView === 'edit'
-                                                        ? <MeetingEditPanel title={MEETING_TITLE} stage={meetingStage} serviceMenuOpen={serviceMenuOpen} />
-                                                        : <MeetingPreparingPanel title={MEETING_TITLE} date="1 de septiembre de 2026" time="9:00 AM" />
-                                                )
-                                                : <FocusTaskPanel />}
-                                        </motion.div>
-                                    </AnimatePresence>
-                                </motion.aside>
-                            )}
-                        </AnimatePresence>
+                            <AnimatePresence>
+                                {focusActive && (
+                                    <motion.div
+                                        key="focus-panel"
+                                        exit={{ opacity: 0, y: -8, scale: .97 }}
+                                        transition={{ duration: .28, ease: [0.16, 1, 0.3, 1] }}
+                                        className="absolute right-6 top-4 z-[75]"
+                                    >
+                                        <FocusView elapsed={elapsed} />
+                                    </motion.div>
+                                )}
+                            </AnimatePresence>
 
-                        <AnimatePresence>
-                            {lobbyActive && (
-                                <motion.div
-                                    key="lobby-backdrop"
-                                    initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-                                    transition={{ duration: .25 }}
-                                    className="absolute -top-[72px] bottom-0 left-0 right-0 z-[80] flex items-start justify-center bg-black/70 pt-[242px]"
-                                >
-                                    <LobbyDialog title="Llamar a Reunión de Zenth" joinPressed={lobbyJoinPressed} />
-                                </motion.div>
-                            )}
-                        </AnimatePresence>
-                    </div>
-
-                    <AnimatePresence>
-                        {showJourneyCursor && (
-                            <motion.span
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: 1, left: journeyCursor.x, top: journeyCursor.y, scale: journeyCursor.click ? .86 : 1 }}
-                                exit={{ opacity: 0 }}
-                                transition={{ duration: .55, ease: [0.16, 1, 0.3, 1] }}
-                                className="pointer-events-none absolute z-[90] text-white drop-shadow-[0_2px_3px_rgba(0,0,0,.75)]"
-                            >
-                                <MousePointer2 className="h-6 w-6 fill-white text-black" strokeWidth={1.2} />
-                                {journeyCursor.click && (
-                                    <motion.span
-                                        key={`${journeyCursor.x}-${journeyCursor.y}`}
-                                        initial={{ opacity: .8, scale: .3 }}
-                                        animate={{ opacity: 0, scale: 1.35 }}
-                                        transition={{ duration: .52 }}
-                                        className="absolute -left-2 -top-2 h-9 w-9 rounded-full border-2 border-white/80"
+                            <AnimatePresence>
+                                {panel !== 'none' && (
+                                    <motion.div
+                                        key="event-backdrop"
+                                        initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+                                        transition={{ duration: .28 }}
+                                        className={`absolute left-0 right-0 -top-[72px] bottom-0 ${compact ? '' : 'bg-black/60'}`}
                                     />
                                 )}
-                            </motion.span>
-                        )}
-                    </AnimatePresence>
+                            </AnimatePresence>
+
+                            <AnimatePresence>
+                                {panel !== 'none' && (
+                                    <motion.aside
+                                        key="event-panel"
+                                        initial={{ x: 440 }} animate={{ x: 0 }} exit={{ x: 440 }}
+                                        transition={{ duration: .42, ease: [0.16, 1, 0.3, 1] }}
+                                        className={`absolute right-0 w-[430px] border-l border-hairline bg-canvas -top-[72px] h-[800px]`}
+                                    >
+                                        {panel === 'task' ? (
+                                            <div className="absolute -left-[154px] top-[132px] flex flex-col items-end gap-3">
+                                                <span className="flex h-9 w-9 items-center justify-center rounded-medium bg-surface-2 text-ink"><AlignLeft className="h-4 w-4" strokeWidth={1.9} /></span>
+                                                <motion.span
+                                                    animate={elapsed >= FOCUS_ACTION_AT ? { scale: .94 } : { scale: 1 }}
+                                                    transition={{ duration: .16 }}
+                                                    className="flex h-11 w-[138px] items-center justify-center gap-2 rounded-medium bg-surface-2 px-3 text-[10px] font-bold uppercase tracking-[0.04em] text-ink shadow-card-resting"
+                                                >
+                                                    Iniciar enfoque <Target className="h-4 w-4" strokeWidth={2} />
+                                                </motion.span>
+                                                <span className="flex h-9 w-9 items-center justify-center rounded-medium bg-semantics-error text-white"><Trash2 className="h-4 w-4" strokeWidth={1.9} /></span>
+                                            </div>
+                                        ) : (
+                                            <div className="absolute -left-[52px] top-4 flex flex-col gap-2">
+                                                {[
+                                                    { icon: X, active: false, danger: false },
+                                                    { icon: AlignLeft, active: false, danger: false },
+                                                    { icon: Pencil, active: panel === 'edit', danger: false },
+                                                    { icon: Target, active: false, danger: false },
+                                                    { icon: Trash2, active: false, danger: true },
+                                                ].map(({ icon: Icon, active, danger }, index) => (
+                                                    <span key={index} className={`flex h-9 w-9 items-center justify-center rounded-medium ${danger ? 'bg-semantics-error text-white' : active ? 'bg-ink text-canvas' : 'bg-surface-2 text-ink'}`}>
+                                                        <Icon className="h-4 w-4" strokeWidth={1.9} />
+                                                    </span>
+                                                ))}
+                                            </div>
+                                        )}
+
+                                        <AnimatePresence mode="wait">
+                                            <motion.div key={panel === 'meeting' ? `meeting-${meetingPanelView}` : panel} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} transition={{ duration: .25 }} className="h-full">
+                                                {panel === 'details' ? <DetailsPanel />
+                                                    : panel === 'edit' ? <EditPanel />
+                                                    : panel === 'meeting' ? (
+                                                        meetingPanelView === 'edit'
+                                                            ? <MeetingEditPanel title={MEETING_TITLE} stage={meetingStage} serviceMenuOpen={serviceMenuOpen} />
+                                                            : <MeetingPreparingPanel title={MEETING_TITLE} date="1 de septiembre de 2026" time="9:00 AM" />
+                                                    )
+                                                    : <FocusTaskPanel />}
+                                            </motion.div>
+                                        </AnimatePresence>
+                                    </motion.aside>
+                                )}
+                            </AnimatePresence>
+
+                            <AnimatePresence>
+                                {lobbyActive && (
+                                    <motion.div
+                                        key="lobby-backdrop"
+                                        initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+                                        transition={{ duration: .25 }}
+                                        className={`absolute -top-[72px] bottom-0 left-0 right-0 z-[80] flex items-start justify-center pt-[242px] ${compact ? '' : 'bg-black/70'}`}
+                                    >
+                                        <LobbyDialog title="Llamar a Reunión de Zenth" joinPressed={lobbyJoinPressed} />
+                                    </motion.div>
+                                )}
+                            </AnimatePresence>
+                        </div>
+
+                        <AnimatePresence>
+                            {showJourneyCursor && (
+                                <motion.span
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1, left: journeyCursor.x, top: journeyCursor.y, scale: journeyCursor.click ? .86 : 1 }}
+                                    exit={{ opacity: 0 }}
+                                    transition={{ duration: .55, ease: [0.16, 1, 0.3, 1] }}
+                                    className="pointer-events-none absolute z-[90] text-white drop-shadow-[0_2px_3px_rgba(0,0,0,.75)]"
+                                >
+                                    <MousePointer2 className="h-6 w-6 fill-white text-black" strokeWidth={1.2} style={CURSOR_ZOOM_STYLE} />
+                                    {journeyCursor.click && (
+                                        <motion.span
+                                            key={`${journeyCursor.x}-${journeyCursor.y}`}
+                                            initial={{ opacity: .8, scale: .3 }}
+                                            animate={{ opacity: 0, scale: 1.35 }}
+                                            transition={{ duration: .52 }}
+                                            className="absolute -left-2 -top-2 h-9 w-9 rounded-full border-2 border-white/80"
+                                        />
+                                    )}
+                                </motion.span>
+                            )}
+                        </AnimatePresence>
+                    </div>
                 </div>
+
+                <AnimatePresence>
+                    {celebrating && (
+                        <motion.span
+                            key="xp-badge"
+                            initial={{ opacity: 0, y: 10, scale: .9 }}
+                            animate={{ opacity: 1, y: 0, scale: 1 }}
+                            exit={{ opacity: 0, y: -10, scale: .95 }}
+                            transition={{ duration: .3, ease: [0.16, 1, 0.3, 1] }}
+                            className="pointer-events-none absolute bottom-4 right-4 rounded-pill bg-accent px-3 py-1.5 text-[11px] font-semibold text-white shadow-soft-lift sm:bottom-6 sm:right-6 sm:px-4 sm:py-2 sm:text-[13px]"
+                        >
+                            +50 XP
+                        </motion.span>
+                    )}
+                </AnimatePresence>
+
+                <AnimatePresence>
+                    {showLinkToast && (
+                        <motion.span
+                            key="link-toast"
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -10 }}
+                            transition={{ duration: .3, ease: [0.16, 1, 0.3, 1] }}
+                            className="pointer-events-none absolute bottom-4 right-4 flex items-center gap-2 rounded-pill bg-ink px-3 py-1.5 text-[11px] font-semibold text-canvas shadow-soft-lift sm:bottom-6 sm:right-6 sm:px-4 sm:py-2 sm:text-[13px]"
+                        >
+                            <Check className="h-3.5 w-3.5" strokeWidth={2.4} /> Enlace de llamada creado
+                        </motion.span>
+                    )}
+                </AnimatePresence>
             </div>
 
-            <AnimatePresence>
-                {celebrating && (
-                    <motion.span
-                        key="xp-badge"
-                        initial={{ opacity: 0, y: 10, scale: .9 }}
-                        animate={{ opacity: 1, y: 0, scale: 1 }}
-                        exit={{ opacity: 0, y: -10, scale: .95 }}
-                        transition={{ duration: .3, ease: [0.16, 1, 0.3, 1] }}
-                        className="pointer-events-none absolute bottom-4 right-4 rounded-pill bg-accent px-3 py-1.5 text-[11px] font-semibold text-white shadow-soft-lift sm:bottom-6 sm:right-6 sm:px-4 sm:py-2 sm:text-[13px]"
-                    >
-                        +50 XP
-                    </motion.span>
-                )}
-            </AnimatePresence>
-
-            <AnimatePresence>
-                {showLinkToast && (
-                    <motion.span
-                        key="link-toast"
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -10 }}
-                        transition={{ duration: .3, ease: [0.16, 1, 0.3, 1] }}
-                        className="pointer-events-none absolute bottom-4 right-4 flex items-center gap-2 rounded-pill bg-ink px-3 py-1.5 text-[11px] font-semibold text-canvas shadow-soft-lift sm:bottom-6 sm:right-6 sm:px-4 sm:py-2 sm:text-[13px]"
-                    >
-                        <Check className="h-3.5 w-3.5" strokeWidth={2.4} /> Enlace de llamada creado
-                    </motion.span>
-                )}
-            </AnimatePresence>
+            {compact && (
+                <div className="mt-4 px-1">
+                    <p className="t-caption min-h-[2.75rem] text-center text-ink-muted">{captionAt(elapsed)}</p>
+                    <div role="group" aria-label="Capítulos de la demostración" className="mt-2 flex flex-wrap justify-center gap-1">
+                        {ACTS.map((act, index) => (
+                            <button
+                                key={act.id}
+                                type="button"
+                                aria-current={index === actIndex ? 'true' : undefined}
+                                onClick={() => goToAct(index)}
+                                className={`fr-tab relative !px-3 !text-[13px] ${index === actIndex ? 'is-selected' : ''}`}
+                            >
+                                {act.label}
+                                {index === actIndex && !reduceMotion && (
+                                    <span
+                                        className="absolute inset-x-3 bottom-1 h-[2px] origin-left rounded-full bg-accent"
+                                        style={{ transform: `scaleX(${actProgress(elapsed, CYCLE)})` }}
+                                    />
+                                )}
+                            </button>
+                        ))}
+                    </div>
+                </div>
+            )}
         </div>
     );
 };

@@ -1,4 +1,11 @@
 {
+    "redirects": [
+        {
+            "source": "/guide",
+            "destination": "/docs",
+            "permanent": true
+        }
+    ],
     "rewrites": [
         {
             "source": "/app",

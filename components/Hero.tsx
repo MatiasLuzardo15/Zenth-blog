@@ -5,11 +5,11 @@ import AppDemo from './AppDemo';
 const SIGNALS = [
   { icon: CalendarDays, label: 'Agenda visual' },
   { icon: Users, label: 'Pizarras compartidas' },
-  { icon: LibraryBig, label: 'Biblioteca' },
+  { icon: LibraryBig, label: 'Biblioteca y lienzos' },
   { icon: HardDrive, label: 'Google Drive y Workspace' },
   { icon: CircleDashed, label: 'Enfoque desde cualquier pantalla' },
-  { icon: PhoneCall, label: 'Llamadas y reuniones rápidas' },
-  { icon: Orbit, label: 'Mi ritmo' },
+  { icon: PhoneCall, label: 'Reuniones con invitados' },
+  { icon: Orbit, label: 'Progreso' },
 ];
 
 const Hero: React.FC = () => {
@@ -37,8 +37,8 @@ const Hero: React.FC = () => {
           </h1>
 
           <p className="t-body-lg mt-8 max-w-xl text-ink-muted">
-            Zenth reúne una agenda visual, pizarras para tus proyectos, una Biblioteca conectada con
-            Google Drive, llamadas y un temporizador de enfoque que te acompaña por toda la aplicación.
+            Zenth reúne una agenda visual, pizarras para tus proyectos, una Biblioteca de notas y
+            lienzos conectada con Google Drive, reuniones y un temporizador de enfoque que te acompaña por toda la aplicación.
           </p>
 
           <div className="mt-10 flex flex-wrap justify-center gap-3">

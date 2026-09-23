@@ -225,43 +225,6 @@ export const bibliotecaArticles: DocArticle[] = [
   },
 
   {
-    slug: 'tablas-y-hojas-de-calculo',
-    category: 'biblioteca',
-    title: 'Tablas y hojas de cálculo',
-    summary: 'Tablas con fórmulas en español e inglés dentro de Zenth, y hojas de cálculo de Google Sheets para todo lo demás.',
-    keywords: ['tabla', 'hoja', 'excel', 'spreadsheet', 'fórmulas', 'suma', 'buscarv', 'sheets', 'celdas', 'csv', 'funciones'],
-    updated: UPDATED,
-    related: ['atajos/atajos-del-editor-de-notas', 'integraciones/google-drive'],
-    blocks: [
-      p('Hay dos tipos de hoja en Zenth, y conviene no confundirlos.'),
-
-      h2('Tablas de Zenth'),
-      p('Las **tablas** son hojas de cálculo nativas: viven en Zenth, se abren en su propio editor y calculan fórmulas al instante. Si ya tenías tablas creadas, siguen ahí y las encuentras con el filtro **Hojas**.'),
-      list(
-        '**Fórmulas** que empiezan por `=`, por ejemplo `=SUMA(A1:A10)`. Funcionan tanto los nombres en español como en inglés (`SUMA` o `SUM`, `BUSCARV` o `VLOOKUP`, `SI` o `IF`).',
-        '**Catálogo de funciones:** un panel con buscador («Buscar SUMA, BUSCARV, IF, VLOOKUP…») para descubrir y usar cualquier función.',
-        '**Formato:** negrita, cursiva, subrayado, color del texto y de relleno, alineación y formato numérico (porcentaje, moneda…).',
-        '**Filas y columnas:** insertar, eliminar, ordenar; las referencias de las fórmulas se ajustan solas.',
-        '**Etiquetar**, **descargar como CSV**, deshacer y rehacer, y **eliminar** la tabla.',
-      ),
-      keys(
-        [['Ctrl', 'S'], 'Guardar y salir'],
-        [['Ctrl', 'Z'], 'Deshacer'],
-        [['Ctrl', 'Y'], 'Rehacer'],
-        [['Ctrl', 'B'], 'Negrita'],
-        [['Ctrl', 'I'], 'Cursiva'],
-        [['Ctrl', 'U'], 'Subrayado'],
-        [['Ctrl', 'C'], 'Copiar la selección'],
-      ),
-      p('El cálculo lo hace un motor de fórmulas de código abierto (HyperFormula).'),
-
-      h2('Hojas de Google'),
-      p('Al elegir **Nuevo › Hoja de cálculo** se crea un archivo de **Google Sheets** en tu Drive. Puedes editarlo dentro de Zenth (insertar y eliminar filas y columnas, negrita, alineación…) o abrirlo en Google para usar todas sus funciones. Ver [Google Drive y Workspace](/docs/integraciones/google-drive).'),
-      tip('Si necesitas colaboración simultánea completa, comentarios o gráficos avanzados, usa **Abrir en Google**.'),
-    ],
-  },
-
-  {
     slug: 'archivos-pdf-y-notas-de-voz',
     category: 'biblioteca',
     title: 'Archivos, PDF y notas de voz',

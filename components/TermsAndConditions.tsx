@@ -47,7 +47,7 @@ const TermsAndConditions: React.FC<TermsAndConditionsProps> = ({ onBack }) => {
 
                 <p className="t-eyebrow">Legal</p>
                 <h1 className="t-display-xl mt-4 text-ink">Términos y condiciones.</h1>
-                <p className="t-micro mt-6 text-ink-muted">Última actualización: 8 de agosto de 2026</p>
+                <p className="t-micro mt-6 text-ink-muted">Última actualización: 23 de septiembre de 2026</p>
 
                 <div className="fr-card-featured mt-10">
                     <p className="t-caption text-ink">En una frase</p>
@@ -75,11 +75,12 @@ const TermsAndConditions: React.FC<TermsAndConditionsProps> = ({ onBack }) => {
 
                 <Section n={2} title="Qué ofrece Zenth">
                     <List items={[
-                        <><B>Agenda:</B> tareas, eventos y reuniones en vistas de día, semana y mes.</>,
+                        <><B>Agenda:</B> tareas, eventos y reuniones en vistas de día, semana, mes y año.</>,
                         <><B>Pizarras:</B> proyectos, listas, bandeja de captura, colaboración, actividad y permisos.</>,
-                        <><B>Biblioteca:</B> notas nativas y acceso opcional a Google Drive y Workspace.</>,
+                        <><B>Biblioteca:</B> notas y lienzos nativos y acceso opcional a Google Drive y Workspace.</>,
+                        <><B>Reuniones:</B> salas de voz de las pizarras, llamadas privadas y reuniones rápidas con invitados, con voz, pantalla compartida y chat.</>,
                         <><B>Enfoque:</B> temporizador o cronómetro global, descansos, sonido, objetivo e historial.</>,
-                        <><B>Mi ritmo:</B> actividad, rachas, 20 niveles, 24 logros y registro de ánimo.</>,
+                        <><B>Progreso y estadísticas:</B> XP, rachas, 20 niveles, 25 logros, registro de ánimo y estadísticas de tu tiempo en la aplicación.</>,
                         <><B>Integraciones:</B> Google Drive, Docs, Sheets, Slides, Forms, Calendar, Gemini, notificaciones, correo y voz mediante terceros.</>,
                     ]} />
                     <P>
@@ -94,6 +95,8 @@ const TermsAndConditions: React.FC<TermsAndConditionsProps> = ({ onBack }) => {
                         <>Eres responsable de la actividad de tu cuenta y de cerrar sesión en dispositivos compartidos.</>,
                         <>Si no tienes edad o capacidad legal para aceptar estos Términos en tu país, necesitas la autorización de tu representante legal.</>,
                         <>Avísanos sin demora si sospechas un acceso no autorizado.</>,
+                        <>Puedes tener varias cuentas abiertas en un mismo dispositivo. Cada una es una identidad independiente y eres responsable de cada una de ellas.</>,
+                        <>Al crear tu cuenta, o al entrar por primera vez con Google, debes aceptar estos Términos y la Política de Privacidad. Guardamos la fecha de esa aceptación.</>,
                     ]} />
                 </Section>
 
@@ -121,11 +124,29 @@ const TermsAndConditions: React.FC<TermsAndConditionsProps> = ({ onBack }) => {
                         Quien invita a otra persona decide el acceso que concede. Los enlaces de invitación y
                         los enlaces públicos pueden reenviarse: revócalos cuando ya no sean necesarios. Al
                         activar «con enlace», aceptas que cualquiera que obtenga la dirección pueda ver esa
-                        pizarra sin iniciar sesión.
+                        pizarra sin iniciar sesión. Esa vista es de solo lectura: muestra el tablero, las
+                        descripciones, las etiquetas, el progreso de las checklists y el número de
+                        comentarios, y no muestra adjuntos, miembros asignados, documentos vinculados ni
+                        tareas completadas.
                     </P>
                 </Section>
 
-                <Section n={6} title="Google Drive y Workspace">
+                <Section n={6} title="Notas y lienzos compartidos">
+                    <P>
+                        Puedes compartir notas y lienzos con otras personas con permiso de <B>ver</B>,{' '}
+                        <B>sugerir</B> (solo en notas) o <B>editar</B>. Con permiso de edición, otras
+                        personas pueden modificar el contenido de ese documento: concede el acceso con
+                        criterio y revisa siempre el destinatario y el permiso.
+                    </P>
+                    <List items={[
+                        <>Como propietario conservas el control del acceso y puedes retirarlo cuando quieras; al hacerlo, la otra persona deja de verlo.</>,
+                        <>Quien recibe un documento puede guardarlo en su Biblioteca. Quitarlo de su Biblioteca no borra el original.</>,
+                        <>Al vincular una nota o un lienzo a una tarea de una pizarra eliges si los miembros de esa pizarra pueden leerlo, editarlo o si permanece privado.</>,
+                        <>Las personas con acceso ven quién está en el documento y qué hace (por ejemplo, escribiendo o mirando).</>,
+                    ]} />
+                </Section>
+
+                <Section n={7} title="Google Drive y Workspace">
                     <P>
                         Al conectar Google Drive autorizas a Zenth a operar sobre los archivos que tu cuenta
                         puede utilizar. Las acciones realizadas en Biblioteca afectan los elementos reales de
@@ -139,7 +160,7 @@ const TermsAndConditions: React.FC<TermsAndConditionsProps> = ({ onBack }) => {
                     ]} />
                 </Section>
 
-                <Section n={7} title="Google Calendar">
+                <Section n={8} title="Google Calendar">
                     <P>
                         Calendar se conecta con permiso de solo lectura. Zenth importa eventos a Agenda y solo
                         los lleva a una pizarra cuando tú lo eliges. La sincronización depende de una autorización
@@ -148,20 +169,35 @@ const TermsAndConditions: React.FC<TermsAndConditionsProps> = ({ onBack }) => {
                     </P>
                 </Section>
 
-                <Section n={8} title="Zen y contenido generado por IA">
+                <Section n={9} title="Zen y contenido generado por IA">
                     <P>
-                        Zen utiliza Google Gemini para interpretar tareas o transformar texto cuando pulsas una
-                        acción. Sus resultados pueden ser incompletos, imprecisos o inadecuados. Debes revisar
+                        Zen utiliza Google Gemini para interpretar una frase, proponer una fecha y hora o dividir
+                        una tarea en pasos cuando pulsas una acción en el editor de tareas. Sus resultados pueden
+                        ser incompletos, imprecisos o inadecuados. Debes revisar
                         fechas, prioridades, redacción y cualquier decisión antes de guardar o utilizar la
                         respuesta. Zen no presta asesoramiento médico, legal, financiero ni profesional.
                     </P>
                 </Section>
 
-                <Section n={9} title="Voz, pantalla y límites técnicos">
+                <Section n={10} title="Reuniones, voz, pantalla y límites técnicos">
                     <P>
-                        Las salas y llamadas están vinculadas a los permisos de las pizarras y usan LiveKit.
-                        Zenth no graba audio ni pantalla, pero las demás personas pueden usar herramientas externas:
-                        no compartas información sensible sin confiar en quienes participan.
+                        Las salas y las llamadas privadas están vinculadas a los permisos de las pizarras. Las
+                        reuniones rápidas permiten entrar a personas sin cuenta mediante un enlace. Todas usan
+                        LiveKit. Zenth no graba audio ni pantalla ni ofrece cámara, pero las demás personas pueden
+                        usar herramientas externas: no compartas información sensible sin confiar en quienes
+                        participan.
+                    </P>
+                    <P>
+                        Quien crea una reunión rápida es su <B>anfitrión</B>. Puede exigir aprobación para entrar,
+                        permitir o no el micrófono y la pantalla compartida de los invitados, silenciarlos, quitar
+                        a una persona (que no podrá volver a entrar con ese navegador), cerrar las nuevas entradas
+                        y cerrar la reunión para todos. Es responsable de compartir el enlace solo con quien
+                        corresponde y de cómo usa esos controles. Quien entra como invitado participa con el nombre
+                        que escribe y no debe hacerse pasar por otra persona.
+                    </P>
+                    <P>
+                        El chat de una sala de pizarra se guarda con la pizarra y puede ser leído por sus
+                        integrantes; el de las llamadas privadas y las reuniones rápidas no se guarda.
                     </P>
                     <P>
                         La voz está sujeta a capacidad simultánea, minutos mensuales, disponibilidad del proveedor
@@ -170,7 +206,7 @@ const TermsAndConditions: React.FC<TermsAndConditionsProps> = ({ onBack }) => {
                     </P>
                 </Section>
 
-                <Section n={10} title="Uso aceptable">
+                <Section n={11} title="Uso aceptable">
                     <P>No puedes utilizar Zenth para:</P>
                     <List items={[
                         <>Realizar actividades ilegales, fraudulentas, abusivas, amenazantes o que vulneren derechos de terceros.</>,
@@ -181,7 +217,7 @@ const TermsAndConditions: React.FC<TermsAndConditionsProps> = ({ onBack }) => {
                     ]} />
                 </Section>
 
-                <Section n={11} title="Servicio gratuito y contribuciones">
+                <Section n={12} title="Servicio gratuito y contribuciones">
                     <P>
                         Zenth se ofrece actualmente sin plan de pago ni publicidad. Las contribuciones mediante
                         PayPal son voluntarias, no compran funciones, prioridad ni propiedad sobre el proyecto y
@@ -190,7 +226,7 @@ const TermsAndConditions: React.FC<TermsAndConditionsProps> = ({ onBack }) => {
                     </P>
                 </Section>
 
-                <Section n={12} title="Disponibilidad y copias">
+                <Section n={13} title="Disponibilidad y copias">
                     <P>
                         Trabajamos para mantener Zenth disponible, pero no garantizamos funcionamiento continuo ni
                         ausencia total de errores. Puede haber mantenimiento, fallos de red o interrupciones de
@@ -203,16 +239,21 @@ const TermsAndConditions: React.FC<TermsAndConditionsProps> = ({ onBack }) => {
                     </P>
                 </Section>
 
-                <Section n={13} title="Propiedad intelectual">
+                <Section n={14} title="Propiedad intelectual y componentes de terceros">
                     <P>
                         La marca Zenth, su diseño, código, textos y recursos propios pertenecen a su creador o a
                         sus licenciantes. Los nombres y marcas de Google, PayPal, LiveKit, Supabase y demás
                         terceros pertenecen a sus respectivos titulares. Estos Términos no transfieren derechos
                         de propiedad sobre el Servicio.
                     </P>
+                    <P>
+                        Zenth incorpora software de terceros con sus propias licencias, entre ellos{' '}
+                        <B>Excalidraw</B> (MIT) para los lienzos. Sus avisos de licencia se conservan y se
+                        distribuyen con el proyecto.
+                    </P>
                 </Section>
 
-                <Section n={14} title="Suspensión y finalización">
+                <Section n={15} title="Suspensión y finalización">
                     <P>
                         Podemos limitar o suspender una cuenta cuando sea razonablemente necesario para investigar
                         un riesgo de seguridad, cumplir la ley, proteger a otras personas o responder a un
@@ -226,7 +267,7 @@ const TermsAndConditions: React.FC<TermsAndConditionsProps> = ({ onBack }) => {
                     </P>
                 </Section>
 
-                <Section n={15} title="Responsabilidad">
+                <Section n={16} title="Responsabilidad">
                     <P>
                         Zenth es una herramienta de organización, no un servicio de emergencia ni un sustituto
                         de asesoramiento profesional. En la máxima medida permitida por la ley aplicable, no somos
@@ -237,7 +278,7 @@ const TermsAndConditions: React.FC<TermsAndConditionsProps> = ({ onBack }) => {
                     </P>
                 </Section>
 
-                <Section n={16} title="Cambios en el Servicio o en estos Términos">
+                <Section n={17} title="Cambios en el Servicio o en estos Términos">
                     <P>
                         Podemos modificar funciones y actualizar estos Términos para reflejar cambios técnicos,
                         operativos o legales. Si el cambio es relevante, lo comunicaremos con antelación razonable
@@ -245,7 +286,7 @@ const TermsAndConditions: React.FC<TermsAndConditionsProps> = ({ onBack }) => {
                     </P>
                 </Section>
 
-                <Section n={17} title="Ley y jurisdicción">
+                <Section n={18} title="Ley y jurisdicción">
                     <P>
                         Estos Términos se rigen por las leyes de la <B>República Oriental del Uruguay</B>, sin
                         perjuicio de los derechos imperativos que te correspondan por tu lugar de residencia.
@@ -254,7 +295,7 @@ const TermsAndConditions: React.FC<TermsAndConditionsProps> = ({ onBack }) => {
                     </P>
                 </Section>
 
-                <Section n={18} title="Contacto">
+                <Section n={19} title="Contacto">
                     <div className="fr-card">
                         <p className="t-body text-ink-muted">Responsable: Matías Luzardo · Uruguay</p>
                         <p className="t-body mt-2 text-ink-muted">Correo: <a href="mailto:matiasluzardevv@gmail.com" className="fr-link">matiasluzardevv@gmail.com</a></p>

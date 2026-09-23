@@ -57,7 +57,7 @@ export const DOC_CATEGORIES: DocCategory[] = [
   {
     id: 'atajos',
     title: 'Atajos de teclado',
-    description: 'Todos los atajos de la aplicación, del editor de notas y de las tablas.',
+    description: 'Todos los atajos de la aplicación y del editor de notas.',
     icon: Keyboard,
   },
   {

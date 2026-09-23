@@ -27,7 +27,7 @@ export const privacidadArticles: DocArticle[] = [
       table(
         ['Qué', 'Ejemplos', 'Quién lo ve'],
         ['Tu cuenta y perfil', 'Correo, identificador, nombre, avatar. Tu contraseña la gestiona el sistema de autenticación y Zenth no puede leerla.', 'Tú. Los miembros de tus pizarras ven tu nombre y avatar.'],
-        ['Tu organización', 'Tareas, eventos y reuniones, repeticiones, recordatorios, etiquetas, pasos, adjuntos, notas, lienzos, tablas, sesiones de enfoque, objetivos, estadísticas, rachas, niveles, logros y registros de ánimo.', 'Solo tú, salvo lo que compartas.'],
+        ['Tu organización', 'Tareas, eventos y reuniones, repeticiones, recordatorios, etiquetas, pasos, adjuntos, notas, lienzos, sesiones de enfoque, objetivos, estadísticas, rachas, niveles, logros y registros de ánimo.', 'Solo tú, salvo lo que compartas.'],
         ['Tiempo en la app', 'Por cada tramo con la pestaña visible: día, hora de inicio y fin, sección y, en Pizarras, la pizarra abierta. Alimenta la sección Estadísticas.', 'Solo tú.'],
         ['Colaboración', 'Pizarras, listas, miembros, roles, invitaciones, comentarios, menciones, asignaciones, votos, aprobaciones, actividad y presencia. También los colaboradores, permisos y sugerencias de notas y lienzos compartidos.', 'Las personas con acceso a esa pizarra, nota o lienzo.'],
         ['Reuniones', 'Quién participa, cuándo entra y sale, y cuánto dura. Para invitados: el nombre que escriben y el estado de su admisión. El **chat de las salas de pizarra**.', 'Los participantes; el chat de una sala, los miembros de la pizarra.'],
@@ -132,7 +132,6 @@ export const privacidadArticles: DocArticle[] = [
       table(
         ['Qué', 'Cómo'],
         ['Notas', 'Copiar como Markdown o texto; descargar `.md`, `.html` o PDF; imprimir. Ver [Notas](/docs/biblioteca/notas).'],
-        ['Tablas', 'Descargar como CSV.'],
         ['Estadísticas', 'Exportar a Excel, CSV o PDF. Ver [Estadísticas](/docs/progreso/estadisticas).'],
         ['Archivos de Drive', 'Descargar o exportar (Word, Excel, PowerPoint, PDF…) desde el diálogo del archivo.'],
       ),

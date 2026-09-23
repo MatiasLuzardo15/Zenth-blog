@@ -11,6 +11,8 @@ interface MeetingCallViewProps {
     elapsed: number;
     startedAt: number;
     guestJoined: boolean;
+    /** Sin el fondo propio de la vista: en móvil la interfaz flota sobre la página. */
+    bare?: boolean;
 }
 
 const formatDuration = (ms: number) => {
@@ -31,12 +33,12 @@ const ROOMS = [
  * izquierda el directorio (con la reunión marcada «Estás dentro») y a la
  * derecha la llamada, sin fondo personalizado. Un invitado se suma después.
  */
-export const MeetingCallView: React.FC<MeetingCallViewProps> = ({ elapsed, startedAt, guestJoined }) => {
+export const MeetingCallView: React.FC<MeetingCallViewProps> = ({ elapsed, startedAt, guestJoined, bare = false }) => {
     const duration = formatDuration(elapsed - startedAt);
     const justJoined = guestJoined && elapsed < GUEST_JOIN_AT + 2600;
 
     return (
-        <div className="flex h-full bg-[#f6f7fb] dark:bg-black">
+        <div className={`flex h-full ${bare ? '' : 'bg-[#f6f7fb] dark:bg-black'}`}>
             <aside className="flex w-[312px] shrink-0 flex-col px-4 pb-6 pt-6">
                 <div className="grid grid-cols-3 gap-2">
                     {[

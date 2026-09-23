@@ -47,7 +47,7 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = ({ onBack }) => {
 
                 <p className="t-eyebrow">Legal</p>
                 <h1 className="t-display-xl mt-4 text-ink">Política de privacidad.</h1>
-                <p className="t-micro mt-6 text-ink-muted">Última actualización: 8 de agosto de 2026</p>
+                <p className="t-micro mt-6 text-ink-muted">Última actualización: 23 de septiembre de 2026</p>
 
                 <div className="fr-card-featured mt-10">
                     <p className="t-caption text-ink">En una frase</p>
@@ -73,11 +73,12 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = ({ onBack }) => {
                 <Section n={2} title="Información que tratamos">
                     <List items={[
                         <><B>Cuenta y perfil.</B> Correo electrónico, identificador de usuario, nombre, avatar y portada. La autenticación y la contraseña son gestionadas por Supabase; Zenth no puede consultar tu contraseña en texto legible.</>,
-                        <><B>Organización personal.</B> Tareas, eventos, reuniones, repeticiones, recordatorios, etiquetas, pasos, adjuntos, notas, carpetas nativas, sesiones de enfoque, objetivos, estadísticas, rachas, niveles, logros y registros de ánimo.</>,
-                        <><B>Colaboración.</B> Pizarras, listas, miembros, roles, invitaciones, comentarios, menciones, asignaciones, votos, aprobaciones, actividad y presencia compartida.</>,
+                        <><B>Organización personal.</B> Tareas, eventos, reuniones, repeticiones, recordatorios, etiquetas, pasos, adjuntos, notas, lienzos, carpetas nativas, sesiones de enfoque, objetivos, estadísticas, rachas, niveles, logros y registros de ánimo.</>,
+                        <><B>Tiempo en la aplicación.</B> Para la sección Estadísticas, por cada tramo de uso con la pestaña visible guardamos el día, la hora de inicio y de fin, la sección de Zenth y, dentro de Pizarras, la pizarra abierta. Solo tú puedes leer estos datos: ningún otro usuario, ni siquiera los miembros de tus pizarras, accede a ellos. No usamos herramientas de analítica de terceros.</>,
+                        <><B>Colaboración.</B> Pizarras, listas, miembros, roles, invitaciones, comentarios, menciones, asignaciones, votos, aprobaciones, actividad y presencia compartida. En las notas y lienzos compartidos, también los colaboradores, sus permisos, las invitaciones, las sugerencias y la presencia dentro del documento.</>,
                         <><B>Archivos nativos.</B> Imágenes de tareas y notas, y archivos o grabaciones heredados que hayas almacenado directamente en Zenth.</>,
                         <><B>Preferencias.</B> Tema, densidad, ancho, formato horario, relación entre Agenda y Pizarras, opciones de Enfoque, sonido, notificaciones e integraciones.</>,
-                        <><B>Datos técnicos.</B> Sesión, almacenamiento local del navegador, información necesaria para seguridad y funcionamiento y, si activas notificaciones, el token de entrega del dispositivo.</>,
+                        <><B>Datos técnicos.</B> Sesión, almacenamiento local del navegador (incluida la lista de cuentas abiertas en tu dispositivo), información necesaria para seguridad y funcionamiento, la fecha en que aceptaste los Términos y, si activas notificaciones, el token de entrega del dispositivo.</>,
                     ]} />
                 </Section>
 
@@ -104,15 +105,18 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = ({ onBack }) => {
                 <Section n={4} title="Google Calendar y Zen AI">
                     <List items={[
                         <><B>Google Calendar.</B> Solicita permiso de solo lectura. El token permanece en memoria y caduca; la lista de calendarios y las preferencias se guardan localmente en tu navegador. Los eventos de los calendarios elegidos se importan como filas de Agenda para poder mostrarlos y, si tú lo decides, vincularlos con una pizarra. Desconectar detiene el acceso futuro, pero no elimina automáticamente elementos ya importados.</>,
-                        <><B>Zen AI.</B> Cuando pulsas una acción de inteligencia artificial, se envía a Google Gemini únicamente el texto necesario para esa solicitud: la frase de una tarea o el fragmento seleccionado de una nota. Zen no analiza toda tu cuenta en segundo plano.</>,
+                        <><B>Zen AI.</B> Cuando pulsas una acción de inteligencia artificial en el editor de tareas (completar una tarea desde una frase, proponer una fecha y hora o dividirla en pasos), se envía a Google Gemini únicamente el texto de esa solicitud —la frase o el título de la tarea— y la fecha de hoy. Zen no analiza toda tu cuenta en segundo plano ni lee tus notas, pizarras o archivos.</>,
                     ]} />
                 </Section>
 
                 <Section n={5} title="Voz, pantalla y comunicaciones">
                     <List items={[
-                        <><B>Salas y llamadas.</B> El audio y la pantalla compartida se transmiten en tiempo real mediante LiveKit. Zenth no ofrece grabación de llamadas ni almacena su contenido.</>,
+                        <><B>Salas y llamadas.</B> El audio y la pantalla compartida se transmiten en tiempo real mediante LiveKit. Zenth no graba el audio ni la pantalla, no almacena su contenido y no ofrece cámara personal.</>,
+                        <><B>Chat.</B> El chat de una sala de pizarra (mensajes y reacciones) se guarda con la pizarra y lo leen sus integrantes; quien escribe puede borrar sus propios mensajes. El chat de las llamadas privadas y de las reuniones rápidas no se guarda: existe solo mientras esa conversación está abierta.</>,
+                        <><B>Invitados de reuniones rápidas.</B> Quien entra con un enlace no crea una cuenta: usa una identidad temporal y el nombre que escribe. Guardamos ese nombre, el estado de su solicitud de admisión (pendiente, admitido, rechazado o bloqueado) y sus momentos de entrada y salida para autorizar el acceso, mostrar la presencia y aplicar los controles del anfitrión y los límites técnicos.</>,
                         <><B>Metadatos operativos.</B> Se registra quién participa, en qué pizarra o llamada, los momentos de entrada y salida, la duración y datos de presencia necesarios para autorizar el acceso, mostrar el estado y aplicar límites técnicos.</>,
                         <><B>Correo y push.</B> Podemos usar tu correo y tokens de notificación para confirmaciones de cuenta, seguridad, invitaciones y las categorías de avisos que hayas activado. Puedes cambiar las preferencias no esenciales desde Ajustes.</>,
+                        <><B>Personas que invitas.</B> Si invitas a alguien a una pizarra, a un evento, a una nota o a un lienzo, tratamos su dirección de correo para enviarle la invitación, mostrarte su estado (por enviar, pendiente, aceptada o rechazada) y asociarla a su cuenta si se registra con esa dirección. Quien recibe un evento puede responder sin tener cuenta.</>,
                     ]} />
                 </Section>
 
@@ -133,9 +137,11 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = ({ onBack }) => {
 
                 <Section n={7} title="Qué ven otras personas">
                     <List items={[
-                        <><B>Pizarras compartidas.</B> Sus miembros ven tu nombre, avatar, rol, aportes y presencia relacionada con esa pizarra. No obtienen acceso a tu Agenda privada, otras pizarras, Biblioteca personal, ánimo ni estadísticas.</>,
+                        <><B>Pizarras compartidas.</B> Sus miembros ven tu nombre, avatar, rol, aportes y presencia relacionada con esa pizarra. No obtienen acceso a tu Agenda privada, otras pizarras, Biblioteca personal, ánimo, estadísticas ni tiempo de uso.</>,
                         <><B>Enfoque.</B> Si habilitas esta opción, los miembros pueden ver que estás en una sesión y hasta qué hora; no ven la tarea asociada.</>,
-                        <><B>Enlaces públicos.</B> Si cambias una pizarra a «con enlace», cualquiera que tenga la dirección puede verla sin iniciar sesión. Es de solo lectura, afecta únicamente esa pizarra y puede revocarse.</>,
+                        <><B>Enlaces públicos.</B> Si cambias una pizarra a «con enlace», cualquiera que tenga la dirección puede verla sin iniciar sesión. Es de solo lectura, afecta únicamente esa pizarra y puede revocarse. Se ven el tablero, las descripciones, las etiquetas, el progreso de las checklists y el número de comentarios; no se muestran adjuntos, miembros asignados, documentos vinculados, tareas completadas ni datos de personas.</>,
+                        <><B>Notas y lienzos compartidos.</B> Quienes tengan acceso ven el contenido según el permiso que les concedas (ver, sugerir o editar) y la presencia de las demás personas dentro de ese documento, por ejemplo si están escribiendo o mirando.</>,
+                        <><B>Reuniones.</B> Los participantes de una conversación ven a las demás personas de esa conversación. Quien entra como invitado no accede a tus pizarras, tareas, archivos, historial ni otras salas.</>,
                         <><B>Drive.</B> Compartir un archivo de Google aplica los permisos reales de Drive. Revisa destinatario y rol antes de confirmar.</>,
                     ]} />
                 </Section>
@@ -157,8 +163,10 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = ({ onBack }) => {
                 <Section n={9} title="Conservación y eliminación">
                     <List items={[
                         <><B>Cuenta activa.</B> Conservamos los datos necesarios mientras mantengas la cuenta o hasta que elimines contenido.</>,
-                        <><B>Papelera de Zenth.</B> Las tareas y notas eliminadas pueden restaurarse hasta que vacíes la papelera. Los elementos de Google usan la papelera de Drive.</>,
+                        <><B>Papelera de Zenth.</B> Las tareas, notas y lienzos eliminados pueden restaurarse hasta que vacíes la papelera. Los elementos de Google usan la papelera de Drive, que también puedes consultar desde Zenth.</>,
+                        <><B>Sesiones en tu dispositivo.</B> La lista de cuentas abiertas vive en tu navegador. Cerrar una sesión o quitar una cuenta del dispositivo elimina esa sesión guardada; tus datos siguen en tu cuenta.</>,
                         <><B>Conexiones.</B> La conexión cifrada de Drive se elimina al desconectarla; el token temporal de Calendar se pierde al caducar o cerrar la sesión. Los archivos guardados en Google no se borran por desconectar Zenth.</>,
+                        <><B>Estadísticas.</B> La sección Estadísticas muestra hasta los últimos 180 días de tiempo de uso.</>,
                         <><B>Cuenta y derechos.</B> Puedes solicitar la eliminación de tu cuenta y datos escribiendo al correo de contacto. Determinados registros podrán conservarse durante el plazo estrictamente necesario para seguridad, obligaciones legales o resolución de controversias.</>,
                     ]} />
                 </Section>

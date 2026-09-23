@@ -9,7 +9,7 @@ export const integracionesArticles: DocArticle[] = [
     category: 'integraciones',
     title: 'Google Drive y Workspace',
     summary: 'Conecta tu Drive para ver, crear, editar, subir, mover y compartir tus archivos de Google desde la Biblioteca, sin duplicarlos.',
-    keywords: ['google drive', 'drive', 'workspace', 'docs', 'sheets', 'slides', 'forms', 'documentos', 'conectar', 'desconectar', 'picker', 'permisos', 'archivos', 'subir', 'compartir', 'exportar'],
+    keywords: ['google drive', 'drive', 'workspace', 'docs', 'sheets', 'hojas de cálculo', 'hoja de cálculo', 'excel', 'spreadsheet', 'slides', 'forms', 'documentos', 'conectar', 'desconectar', 'picker', 'permisos', 'archivos', 'subir', 'compartir', 'exportar'],
     updated: UPDATED,
     related: ['biblioteca/explorar-la-biblioteca', 'biblioteca/archivos-pdf-y-notas-de-voz', 'privacidad/que-datos-guarda-zenth'],
     blocks: [
