@@ -51,7 +51,7 @@ const FEATURE_DETAILS: Record<string, FeatureDetail> = {
   voice: {
     id: 'voice',
     title: 'Sala del equipo y llamadas privadas',
-    shortDesc: 'Voz y pantalla compartida dentro de la propia pizarra.',
+    shortDesc: 'Voz, cámara opcional y pantalla compartida dentro de la propia pizarra.',
     icon: Mic,
     docsPath: '/docs/reuniones/salas-de-pizarra-y-llamadas-privadas',
   },

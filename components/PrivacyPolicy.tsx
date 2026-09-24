@@ -109,9 +109,9 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = ({ onBack }) => {
                     ]} />
                 </Section>
 
-                <Section n={5} title="Voz, pantalla y comunicaciones">
+                <Section n={5} title="Voz, cámara, pantalla y comunicaciones">
                     <List items={[
-                        <><B>Salas y llamadas.</B> El audio y la pantalla compartida se transmiten en tiempo real mediante LiveKit. Zenth no graba el audio ni la pantalla, no almacena su contenido y no ofrece cámara personal.</>,
+                        <><B>Salas y llamadas.</B> El audio, la cámara y la pantalla compartida se transmiten en tiempo real mediante LiveKit. La cámara es opcional: siempre empieza apagada y solo la enciende quien aparece en ella. Zenth no graba el audio, la cámara ni la pantalla y no almacena su contenido.</>,
                         <><B>Chat.</B> El chat de una sala de pizarra (mensajes y reacciones) se guarda con la pizarra y lo leen sus integrantes; quien escribe puede borrar sus propios mensajes. El chat de las llamadas privadas y de las reuniones rápidas no se guarda: existe solo mientras esa conversación está abierta.</>,
                         <><B>Invitados de reuniones rápidas.</B> Quien entra con un enlace no crea una cuenta: usa una identidad temporal y el nombre que escribe. Guardamos ese nombre, el estado de su solicitud de admisión (pendiente, admitido, rechazado o bloqueado) y sus momentos de entrada y salida para autorizar el acceso, mostrar la presencia y aplicar los controles del anfitrión y los límites técnicos.</>,
                         <><B>Metadatos operativos.</B> Se registra quién participa, en qué pizarra o llamada, los momentos de entrada y salida, la duración y datos de presencia necesarios para autorizar el acceso, mostrar el estado y aplicar límites técnicos.</>,
@@ -151,7 +151,7 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = ({ onBack }) => {
                     <List items={[
                         <><B>Supabase:</B> base de datos, autenticación, funciones y almacenamiento nativo.</>,
                         <><B>Google:</B> Drive, Docs, Sheets, Slides, Forms, Calendar, Gemini y Firebase Cloud Messaging.</>,
-                        <><B>LiveKit:</B> transmisión de voz y pantalla.</>,
+                        <><B>LiveKit:</B> transmisión de voz, cámara y pantalla.</>,
                         <><B>Vercel:</B> alojamiento y entrega de la aplicación y del sitio.</>,
                         <><B>Proveedor SMTP:</B> entrega de correos transaccionales y avisos elegidos.</>,
                         <><B>PayPal:</B> procesa las contribuciones voluntarias cuando decides abrir su página; Zenth no recibe datos completos de pago.</>,

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Mic, Phone, ScreenShare, Headphones, Link2, ArrowUpRight } from 'lucide-react';
+import { Mic, Phone, Video, Headphones, Link2, ArrowUpRight } from 'lucide-react';
 import CallsDemo from './demo/CallsDemo';
 
 interface VoiceSectionProps {
@@ -18,9 +18,9 @@ const POINTS = [
     text: 'Llama uno a uno a cualquiera con quien compartas pizarra, directo desde su cara en Reuniones.',
   },
   {
-    icon: ScreenShare,
-    title: 'Pantalla compartida',
-    text: 'Enseña la tarjeta o la tabla que están revisando en ese momento.',
+    icon: Video,
+    title: 'Cámara y pantalla',
+    text: 'Enciende la cámara cuando quieras que te vean, o enseña la tarjeta o la tabla que están revisando.',
   },
   {
     icon: Headphones,
@@ -49,7 +49,7 @@ const VoiceSection: React.FC<VoiceSectionProps> = ({ onSelectPost }) => {
             <h2 className="t-display-md mt-4 text-ink">Tu pizarra ahora habla.</h2>
             <p className="t-body-lg mt-5 max-w-lg text-ink-muted">
               Cada pizarra compartida tiene su sala del equipo: una sala de voz siempre abierta
-              para sus integrantes, con llamadas privadas y pantalla compartida. Y si la otra
+              para sus integrantes, con llamadas privadas, cámara opcional y pantalla compartida. Y si la otra
               persona no pertenece a tu pizarra, puedes crear una reunión rápida con un enlace
               aislado.
             </p>

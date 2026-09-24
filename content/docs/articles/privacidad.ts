@@ -19,7 +19,7 @@ export const privacidadArticles: DocArticle[] = [
       list(
         'Zenth usa tus datos **para prestar el servicio que eliges**. No los vende, no los cede para publicidad y no muestra anuncios.',
         '**No usa rastreadores publicitarios** ni herramientas de analítica de terceros.',
-        '**No graba** el audio ni la pantalla de tus llamadas, y no hay cámara.',
+        '**No graba** el audio, la cámara ni la pantalla de tus llamadas. La cámara es opcional y solo la enciendes tú.',
         'Las integraciones con Google (Drive, Calendar y Zen) son **opcionales, revocables** y solo actúan cuando usas sus funciones.',
       ),
 
@@ -47,7 +47,7 @@ export const privacidadArticles: DocArticle[] = [
         ['Proveedor', 'Para qué'],
         ['Supabase', 'Base de datos, autenticación, funciones y almacenamiento.'],
         ['Google', 'Drive, Docs, Sheets, Slides, Forms, Calendar, Gemini y Firebase Cloud Messaging (notificaciones push).'],
-        ['LiveKit', 'Transmisión de voz y pantalla.'],
+        ['LiveKit', 'Transmisión de voz, cámara y pantalla.'],
         ['Vercel', 'Alojamiento y entrega de la aplicación y del sitio.'],
         ['Proveedor de correo', 'Correos de cuenta y los avisos que actives.'],
         ['PayPal', 'Contribuciones voluntarias, si decides abrir su página. Zenth no recibe datos de pago.'],

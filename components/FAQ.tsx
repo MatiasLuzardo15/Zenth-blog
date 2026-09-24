@@ -60,7 +60,7 @@ const FAQS: FAQEntry[] = [
     {
         question: '¿Zenth tiene cámara o graba las llamadas?',
         answer:
-            'No. Las llamadas ofrecen voz, selección de dispositivos, pantalla compartida, reacciones, mano levantada y chat. No hay cámara personal ni grabación de audio, pantalla o vídeo.',
+            'Tiene cámara opcional, pero no graba. Las llamadas ofrecen voz, cámara, selección de dispositivos, pantalla compartida, reacciones, mano levantada y chat. Siempre entras con la cámara apagada y solo la enciendes tú; en una reunión rápida, el anfitrión decide si los invitados pueden usarla. No se graba el audio, la cámara ni la pantalla.',
     },
     {
         question: '¿Qué puede hacer cada rol?',

@@ -9,11 +9,11 @@ export const reunionesArticles: DocArticle[] = [
     category: 'reuniones',
     title: 'La sección Reuniones',
     summary: 'Un solo lugar para las salas de tus pizarras, las llamadas privadas y las reuniones con invitados. La conversación sigue mientras navegas.',
-    keywords: ['reuniones', 'llamadas', 'salas', 'directorio', 'voz', 'nueva reunión', 'panel', 'minimizar', 'pantalla completa', 'llamada en curso'],
+    keywords: ['reuniones', 'llamadas', 'salas', 'directorio', 'voz', 'cámara', 'vídeo', 'videollamada', 'nueva reunión', 'panel', 'minimizar', 'pantalla completa', 'llamada en curso'],
     updated: UPDATED,
     related: ['reuniones/salas-de-pizarra-y-llamadas-privadas', 'reuniones/reuniones-rapidas-e-invitados', 'reuniones/durante-una-llamada'],
     blocks: [
-      p('**Reuniones** (`Alt` + `4`) reúne, sin cambiar de sección ni de pizarra, todas las formas de hablar dentro de Zenth. Antes se llamaba «Llamadas». Está pensada como una herramienta más de colaboración, no como una plataforma de videoconferencia: **hay voz y pantalla compartida, pero no cámara ni grabación**.'),
+      p('**Reuniones** (`Alt` + `4`) reúne, sin cambiar de sección ni de pizarra, todas las formas de hablar dentro de Zenth. Antes se llamaba «Llamadas». Está pensada como una herramienta más de colaboración, no como una plataforma de videoconferencia: **hay voz, cámara opcional y pantalla compartida, pero no grabación**. La cámara siempre empieza apagada y solo la enciendes tú.'),
 
       h2('Qué hay en la sección'),
       table(
@@ -39,7 +39,7 @@ export const reunionesArticles: DocArticle[] = [
 
       h2('En el móvil'),
       p('En el móvil, **Reuniones** está dentro de **Más**, junto a Progreso, Actividad y ánimo y la Papelera. Un punto en el icono indica que tienes una llamada en curso.'),
-      tip('Las llamadas necesitan HTTPS para usar el micrófono y compartir pantalla. En zenth.space ya lo es; si Zenth te avisa de que las llamadas «todavía no están listas» o «habilitadas», es una cuestión del servicio, no de tu equipo.'),
+      tip('Las llamadas necesitan HTTPS para usar el micrófono, la cámara y compartir pantalla. En zenth.space ya lo es; si Zenth te avisa de que las llamadas «todavía no están listas» o «habilitadas», es una cuestión del servicio, no de tu equipo.'),
     ],
   },
 
@@ -135,8 +135,8 @@ export const reunionesArticles: DocArticle[] = [
     slug: 'controles-del-anfitrion',
     category: 'reuniones',
     title: 'Controles del anfitrión',
-    summary: 'Admite o rechaza invitados, decide si pueden usar micrófono o compartir pantalla, silencia a todos, expulsa a alguien o cierra la reunión.',
-    keywords: ['anfitrión', 'host', 'admitir', 'rechazar', 'silenciar', 'expulsar', 'quitar', 'bloquear', 'cerrar reunión', 'finalizar para todos', 'permisos de invitados', 'sala de espera', 'nuevas entradas'],
+    summary: 'Admite o rechaza invitados, decide si pueden usar micrófono y cámara o compartir pantalla, silencia a todos, expulsa a alguien o cierra la reunión.',
+    keywords: ['anfitrión', 'host', 'admitir', 'rechazar', 'silenciar', 'expulsar', 'quitar', 'bloquear', 'cerrar reunión', 'finalizar para todos', 'permisos de invitados', 'cámara de invitados', 'sala de espera', 'nuevas entradas'],
     updated: UPDATED,
     related: ['reuniones/reuniones-rapidas-e-invitados', 'reuniones/durante-una-llamada'],
     blocks: [
@@ -152,7 +152,7 @@ export const reunionesArticles: DocArticle[] = [
 
       h2('Permisos de los invitados'),
       list(
-        '**Usar el micrófono:** si lo desactivas, los invitados no pueden hablar y ven «El anfitrión desactivó los micrófonos de invitados».',
+        '**Usar micrófono y cámara:** van juntos. Si lo desactivas, los invitados no pueden hablar ni encender la cámara; a quien la tuviera encendida se le apaga al momento, y todos ven «El anfitrión desactivó el micrófono y la cámara de los invitados».',
         '**Compartir pantalla:** lo mismo para la pantalla compartida.',
       ),
       p('Estos ajustes se guardan y los hace cumplir el servidor, no solo la interfaz.'),
@@ -178,8 +178,8 @@ export const reunionesArticles: DocArticle[] = [
     slug: 'durante-una-llamada',
     category: 'reuniones',
     title: 'Durante una llamada',
-    summary: 'Micrófono, pantalla compartida, reacciones, mano levantada, chat con emojis, atajos de teclado y qué pasa si te quedas solo.',
-    keywords: ['micrófono', 'silenciar', 'pantalla compartida', 'reacciones', 'mano levantada', 'chat', 'emojis', 'atajos de llamada', 'salir', 'colgar', 'sigues ahí', 'estás solo'],
+    summary: 'Micrófono, cámara, pantalla compartida, reacciones, mano levantada, chat con emojis, atajos de teclado y qué pasa si te quedas solo.',
+    keywords: ['micrófono', 'silenciar', 'cámara', 'vídeo', 'encender cámara', 'elegir cámara', 'pantalla compartida', 'reacciones', 'mano levantada', 'chat', 'emojis', 'atajos de llamada', 'salir', 'colgar', 'sigues ahí', 'estás solo'],
     updated: UPDATED,
     related: ['reuniones/audio-y-dispositivos', 'atajos/atajos-de-la-aplicacion', 'reuniones/controles-del-anfitrion'],
     blocks: [
@@ -188,6 +188,7 @@ export const reunionesArticles: DocArticle[] = [
         ['Control', 'Qué hace'],
         ['Micrófono', 'Silencia o activa tu micrófono.'],
         ['Configuración de audio', 'Elige micrófono y salida, y ajusta el tratamiento del sonido. Ver [Audio y dispositivos](/docs/reuniones/audio-y-dispositivos).'],
+        ['Cámara', 'Enciende o apaga tu cámara. Encendida, el botón se ve relleno. Si tienes más de una cámara, la flecha de al lado te deja elegir cuál usar.'],
         ['Compartir pantalla', 'Comparte tu pantalla. Solo una persona puede compartir a la vez; si otra ya lo hace, Zenth lo indica.'],
         ['Reacciones', 'Envía una reacción que todos ven un momento en pantalla.'],
         ['Levantar la mano', 'Avisa de que quieres hablar. Vuelve a pulsar para bajarla.'],
@@ -197,12 +198,23 @@ export const reunionesArticles: DocArticle[] = [
       ),
       keys(
         [['M'], 'Silenciar o activar el micrófono'],
+        [['V'], 'Encender o apagar la cámara'],
         [['C'], 'Abrir o cerrar el chat'],
         [['Q'], 'Abandonar la llamada o la sala'],
         [['Enter'], 'Aceptar una llamada entrante'],
         [['Esc'], 'Rechazar una llamada entrante'],
       ),
-      p('Estos atajos funcionan mientras tienes una llamada en curso y no estás escribiendo en un campo.'),
+      p('Estos atajos funcionan mientras tienes una llamada en curso y no estás escribiendo en un campo. Con un **lienzo** abierto, **V** y **Q** son del lienzo (seleccionar y fijar la herramienta): ahí la cámara y la salida se usan con sus botones.'),
+
+      h2('La cámara'),
+      list(
+        'Siempre **entras con la cámara apagada**, también si recargas la página a mitad de la llamada. Solo se enciende cuando pulsas su botón o la tecla **V**.',
+        'Tu propia imagen se ve **en espejo**, como en cualquier videollamada; los demás te ven al derecho.',
+        'En cuanto alguien enciende la cámara, las fichas de la llamada pasan a formato **16:9**. Quien no tiene cámara sigue viéndose con su foto o sus iniciales en el centro. Sin ninguna cámara encendida, la llamada se ve como una llamada de voz.',
+        'Puedes navegar por Zenth con la cámara encendida: sigue transmitiendo aunque minimices u ocultes la llamada. Para dejar de enviar imagen, apágala.',
+        'Si la cámara no está disponible, Zenth te lo dice con un aviso junto a su botón y una marca en el propio botón. Ver [La cámara no funciona](/docs/ayuda/la-camara-no-funciona).',
+      ),
+      note('Si tu conexión es lenta, Zenth baja la calidad de las cámaras que ves en pequeño y pausa las que no están en pantalla. La voz no se resiente.'),
 
       h2('Pantalla compartida'),
       p('Comparte una ventana, una pestaña o toda la pantalla desde el selector de tu navegador. Puedes cancelarlo sin que se rompa la llamada, y si lo detienes desde el propio navegador, Zenth se entera y deja de publicar. Quien la recibe puede verla ampliada.'),
@@ -251,6 +263,7 @@ export const reunionesArticles: DocArticle[] = [
         'Durante la llamada, el botón de **Configuración de audio** abre un panel para elegir micrófono y salida.',
         'Si desconectas los auriculares en plena llamada, Zenth cambia solo al dispositivo predeterminado y te avisa. Si **conectas** unos nuevos, te **pregunta**: nunca cambia sin tu permiso.',
         'También puedes configurar el audio fuera de una llamada, en **Ajustes › Audio**, con prueba de micrófono y de salida.',
+        'La **cámara** se elige desde la flecha junto a su botón, dentro de la llamada. Zenth recuerda la que elegiste para la próxima vez.',
       ),
       note('En Firefox y Safari (y en iOS) el navegador no permite elegir la salida de audio: verás «Predeterminada del sistema» en lugar de un selector.'),
 
@@ -266,6 +279,7 @@ export const reunionesArticles: DocArticle[] = [
 
       h2('Si el micrófono está bloqueado o no aparece'),
       p('Zenth detecta cuando el navegador bloquea el micrófono o no encuentra ninguno, y abre una ventana de ayuda paso a paso, al estilo de las videollamadas habituales. Cuando arreglas el permiso desde el candado del navegador, la ventana se cierra sola y el nivel empieza a moverse. Las soluciones están en [El micrófono no funciona](/docs/ayuda/el-microfono-no-funciona).'),
+      p('Lo mismo pasa **ya dentro de la llamada**: si pulsas activar el micrófono y el navegador no lo permite, se abre esa misma ventana por encima de la conversación, y el botón del micrófono queda con una **marca naranja** mientras el problema siga. Al permitirlo desde el candado, la ventana se cierra sola y el micrófono se enciende; también puedes pulsar **Ya lo activé**.'),
     ],
   },
 
@@ -273,15 +287,15 @@ export const reunionesArticles: DocArticle[] = [
     slug: 'limites-y-privacidad-de-las-llamadas',
     category: 'reuniones',
     title: 'Límites y privacidad de las llamadas',
-    summary: 'Sin cámara y sin grabación, con acceso mínimo para cada persona y topes que bloquean entradas nuevas, nunca conversaciones en curso.',
+    summary: 'Cámara opcional y sin grabación, con acceso mínimo para cada persona y topes que bloquean entradas nuevas, nunca conversaciones en curso.',
     keywords: ['cámara', 'grabación', 'privacidad', 'límites', 'minutos', 'plazas', 'sin plazas', 'livekit', 'seguridad', 'https', 'topes', 'cupo'],
     updated: UPDATED,
     related: ['privacidad/que-datos-guarda-zenth', 'reuniones/reuniones-rapidas-e-invitados'],
     blocks: [
       h2('Lo que Zenth no hace'),
       list(
-        '**No hay cámara personal.** No es un olvido: el servidor solo emite tokens para micrófono y pantalla, así que aunque alguien modificara la aplicación, el servidor rechazaría el vídeo personal.',
-        '**No se graba** el audio ni la pantalla. Lo efímero de la llamada (quién habla, la calidad, las pistas) solo existe en memoria mientras dura.',
+        '**No enciende tu cámara por ti.** Siempre entras con ella apagada y solo la enciendes tú. Qué puede publicar cada persona (micrófono, cámara, pantalla) lo decide el servidor al darle acceso, no la aplicación: la cámara de un invitado depende del permiso que le dé el anfitrión.',
+        '**No se graba** el audio, la cámara ni la pantalla. Lo efímero de la llamada (quién habla, la calidad, las pistas) solo existe en memoria mientras dura.',
         'Ninguna otra persona obtiene más acceso del que necesita: un invitado solo entra a **esa** conversación.',
       ),
       warn('Zenth no graba, pero **quien participa puede hacerlo con herramientas externas**. No compartas información sensible si no confías en quienes están en la llamada.', 'Una precaución'),
@@ -289,7 +303,7 @@ export const reunionesArticles: DocArticle[] = [
       h2('Qué se guarda'),
       table(
         ['Dato', 'Se guarda…'],
-        ['Audio y pantalla compartida', 'No.'],
+        ['Audio, cámara y pantalla compartida', 'No.'],
         ['Chat de una sala de pizarra (y sus reacciones)', 'Sí, con la pizarra.'],
         ['Chat de llamadas privadas y reuniones rápidas', 'No: desaparece al terminar.'],
         ['Quién participa, cuándo entra y sale, y cuánto dura', 'Sí: son metadatos necesarios para autorizar el acceso, mostrar presencia y aplicar límites.'],
@@ -308,7 +322,7 @@ export const reunionesArticles: DocArticle[] = [
 
       h2('Requisitos técnicos'),
       list(
-        'Necesitas **HTTPS** para usar el micrófono y compartir pantalla (todo el sitio ya lo usa).',
+        'Necesitas **HTTPS** para usar el micrófono, la cámara y compartir pantalla (todo el sitio ya lo usa).',
         'Chrome y Edge admiten todas las funciones. Firefox y Safari de escritorio no permiten elegir la salida de audio. Safari en iOS no puede compartir pantalla.',
       ),
     ],

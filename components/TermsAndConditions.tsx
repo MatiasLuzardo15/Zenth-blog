@@ -78,7 +78,7 @@ const TermsAndConditions: React.FC<TermsAndConditionsProps> = ({ onBack }) => {
                         <><B>Agenda:</B> tareas, eventos y reuniones en vistas de día, semana, mes y año.</>,
                         <><B>Pizarras:</B> proyectos, listas, bandeja de captura, colaboración, actividad y permisos.</>,
                         <><B>Biblioteca:</B> notas y lienzos nativos y acceso opcional a Google Drive y Workspace.</>,
-                        <><B>Reuniones:</B> salas de voz de las pizarras, llamadas privadas y reuniones rápidas con invitados, con voz, pantalla compartida y chat.</>,
+                        <><B>Reuniones:</B> salas de voz de las pizarras, llamadas privadas y reuniones rápidas con invitados, con voz, cámara opcional, pantalla compartida y chat.</>,
                         <><B>Enfoque:</B> temporizador o cronómetro global, descansos, sonido, objetivo e historial.</>,
                         <><B>Progreso y estadísticas:</B> XP, rachas, 20 niveles, 25 logros, registro de ánimo y estadísticas de tu tiempo en la aplicación.</>,
                         <><B>Integraciones:</B> Google Drive, Docs, Sheets, Slides, Forms, Calendar, Gemini, notificaciones, correo y voz mediante terceros.</>,
@@ -179,17 +179,17 @@ const TermsAndConditions: React.FC<TermsAndConditionsProps> = ({ onBack }) => {
                     </P>
                 </Section>
 
-                <Section n={10} title="Reuniones, voz, pantalla y límites técnicos">
+                <Section n={10} title="Reuniones, voz, cámara, pantalla y límites técnicos">
                     <P>
                         Las salas y las llamadas privadas están vinculadas a los permisos de las pizarras. Las
                         reuniones rápidas permiten entrar a personas sin cuenta mediante un enlace. Todas usan
-                        LiveKit. Zenth no graba audio ni pantalla ni ofrece cámara, pero las demás personas pueden
-                        usar herramientas externas: no compartas información sensible sin confiar en quienes
-                        participan.
+                        LiveKit. La cámara es opcional y solo la enciende quien aparece en ella. Zenth no graba
+                        audio, cámara ni pantalla, pero las demás personas pueden usar herramientas externas: no
+                        compartas información sensible sin confiar en quienes participan.
                     </P>
                     <P>
                         Quien crea una reunión rápida es su <B>anfitrión</B>. Puede exigir aprobación para entrar,
-                        permitir o no el micrófono y la pantalla compartida de los invitados, silenciarlos, quitar
+                        permitir o no a los invitados el micrófono y la cámara o la pantalla compartida, silenciarlos, quitar
                         a una persona (que no podrá volver a entrar con ese navegador), cerrar las nuevas entradas
                         y cerrar la reunión para todos. Es responsable de compartir el enlace solo con quien
                         corresponde y de cómo usa esos controles. Quien entra como invitado participa con el nombre

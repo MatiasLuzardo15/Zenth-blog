@@ -176,7 +176,7 @@ export const agendaArticles: DocArticle[] = [
         ['Otro enlace', 'Cualquier otra videoconferencia.'],
       ),
       p('También puedes añadir una **ubicación física** si la reunión es presencial. Si cambias entre Zenth y otro servicio, el enlace anterior se limpia para no mezclarlos.'),
-      note('Las reuniones de Zenth no tienen cámara ni grabación: son voz y pantalla compartida. Ver [Reuniones rápidas e invitados](/docs/reuniones/reuniones-rapidas-e-invitados).'),
+      note('Las reuniones de Zenth tienen voz, cámara opcional y pantalla compartida, y no se graban. Ver [Reuniones rápidas e invitados](/docs/reuniones/reuniones-rapidas-e-invitados).'),
 
       h2('Invitar por correo'),
       steps(

@@ -55,7 +55,53 @@ export const ayudaArticles: DocArticle[] = [
 
       h2('Compartir pantalla no funciona'),
       note('En **iPhone y iPad** el navegador no permite compartir pantalla. La voz sí funciona. En otros navegadores, si cancelaste el selector, vuelve a pulsar **Compartir pantalla**. Solo una persona puede compartir a la vez.'),
+      h2('Si pasa con la llamada en curso'),
+      p('La misma ventana de ayuda se abre **dentro de la llamada**, por encima de la conversación, cuando intentas activar el micrófono y el navegador no lo permite. El botón del micrófono queda con una **marca naranja** mientras dure el problema; si cierras la ventana, vuelve a pulsar el micrófono para reabrirla. En cuanto permites el micrófono desde el candado, la ventana se cierra sola y el micrófono se enciende, sin salir ni volver a entrar.'),
       p('Si nada de esto funciona, prueba con otro navegador (Chrome y Edge admiten todas las funciones) y escríbeme si persiste.'),
+    ],
+  },
+
+  {
+    slug: 'la-camara-no-funciona',
+    category: 'ayuda',
+    title: 'La cámara no funciona',
+    summary: 'Qué significa cada aviso que aparece sobre el botón de la cámara durante una llamada y cómo resolverlo sin salir de la conversación.',
+    keywords: ['cámara', 'webcam', 'vídeo', 'no se encontró una cámara', 'no me ven', 'permiso', 'bloqueada', 'en uso', 'se desconectó', 'videollamada'],
+    updated: UPDATED,
+    related: ['reuniones/durante-una-llamada', 'ayuda/el-microfono-no-funciona'],
+    blocks: [
+      p('Cuando la cámara no se puede encender, Zenth no interrumpe la llamada: aparece un **aviso justo encima del botón de la cámara** y el botón queda con una **marca naranja** mientras el problema siga. Puedes cerrar el aviso con la **X**; la marca desaparece sola cuando se resuelve.'),
+      tip('La voz no depende de la cámara. Mientras lo arreglas, sigues hablando y escuchando con normalidad.'),
+
+      h2('«No se encontró una cámara»'),
+      list(
+        'Conecta una cámara o comprueba que la del portátil no esté desactivada (algunos equipos tienen un interruptor o una tapa).',
+        'En cuanto el equipo la detecta, la marca del botón desaparece sola. Pulsa el botón de la cámara (o **V**) para encenderla.',
+      ),
+
+      h2('«Zenth no puede usar la cámara»'),
+      p('El navegador tiene bloqueado el permiso de la cámara para Zenth.'),
+      steps(
+        'Haz clic en el **icono de información de la página**, junto a la dirección (a la izquierda de zenth.space).',
+        'Activa el **permiso de la cámara** para el sitio.',
+        'Vuelve a pulsar el botón de la cámara. En la mayoría de navegadores la marca desaparece sola en cuanto concedes el permiso.',
+      ),
+
+      h2('«La cámara está en uso»'),
+      list(
+        'Otra aplicación o pestaña la está usando, como otra videollamada. Ciérrala.',
+        'Pulsa **Volver a intentar** en el aviso, o el botón de la cámara.',
+      ),
+
+      h2('«La cámara se desconectó»'),
+      p('Pasa si desconectas una cámara USB con la llamada en curso. Zenth apaga la cámara y **no salta sola a otra**: aparecer de pronto por una cámara distinta no es algo que deba decidir la aplicación. Vuelve a conectarla, o elige otra con la flecha junto al botón, y enciéndela de nuevo.'),
+
+      h2('No veo el botón de la cámara'),
+      list(
+        'Si eres **invitado** en una reunión rápida, el anfitrión puede haber desactivado **Usar micrófono y cámara** para los invitados.',
+        'Si no aparece en ninguna llamada, puede que el servicio de llamadas aún no tenga la cámara habilitada. Escríbeme si persiste.',
+      ),
+      note('Con un **lienzo** abierto, la tecla **V** es la herramienta de selección del lienzo y no enciende la cámara. Usa el botón.'),
     ],
   },
 

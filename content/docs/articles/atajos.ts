@@ -61,6 +61,7 @@ export const atajosArticles: DocArticle[] = [
       p('Solo funcionan mientras tienes una llamada en curso o una llamada entrante:'),
       keys(
         [['M'], 'Silenciar o activar el micrófono'],
+        [['V'], 'Encender o apagar la cámara'],
         [['C'], 'Abrir o cerrar el chat'],
         [['Q'], 'Abandonar la llamada o la sala'],
         [['Enter'], 'Aceptar una llamada entrante'],

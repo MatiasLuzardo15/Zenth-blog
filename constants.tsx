@@ -34,6 +34,8 @@ La conversación continúa mientras navegas por Agenda, Pizarras, Biblioteca o M
 
 Zenth ofrece voz, selección de dispositivos, pantalla compartida, reacciones y mano levantada. **No hay cámara personal ni grabación**: la comunicación acompaña al trabajo, no pretende convertirse en otra plataforma de videoconferencias.
 
+> **Actualización, 23 de septiembre de 2026:** las llamadas ya tienen **cámara opcional**. Siempre entras con ella apagada y solo la enciendes tú, con su botón o con la tecla **V**; en una reunión rápida, el anfitrión decide si los invitados pueden usarla. Sigue sin haber grabación. Más en [Durante una llamada](/docs/reuniones/durante-una-llamada).
+
 ## Reuniones dentro de Agenda
 
 Al editar una reunión en Agenda puedes elegir **Zenth, Google Meet, Zoom, Teams u otro enlace**. También puedes añadir invitados por correo y consultar el estado de sus invitaciones desde el evento. Así la convocatoria y el trabajo posterior no quedan repartidos en dos herramientas.
