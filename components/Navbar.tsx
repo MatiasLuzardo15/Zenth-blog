@@ -83,7 +83,7 @@ const Navbar: React.FC<NavbarProps> = ({ isDarkMode, toggleTheme, currentPage, o
             <span className="font-display text-[19px] text-ink">Zenth</span>
             {currentPage === 'docs' && (
               <span
-                className="-ml-0.5 text-[22px] italic leading-none text-ink-muted"
+                className="-ml-0.5 text-[24px] italic leading-none text-ink-muted"
                 style={{ fontFamily: "'Shadows Into Light', cursive" }}
               >
                 Documents
