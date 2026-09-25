@@ -81,6 +81,14 @@ const Navbar: React.FC<NavbarProps> = ({ isDarkMode, toggleTheme, currentPage, o
           >
             <img src="/blog/favicon2.png" alt="" className="h-7 w-7 rounded-small object-contain" />
             <span className="font-display text-[19px] text-ink">Zenth</span>
+            {currentPage === 'docs' && (
+              <span
+                className="-ml-0.5 text-[22px] italic leading-none text-ink-muted"
+                style={{ fontFamily: "'Shadows Into Light', cursive" }}
+              >
+                Documents
+              </span>
+            )}
           </button>
 
           {/* Enlaces de escritorio */}
