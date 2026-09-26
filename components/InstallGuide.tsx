@@ -1,5 +1,5 @@
 import React from 'react';
-import { MoreVertical, Share, Smartphone, Monitor, Bell, WifiOff } from 'lucide-react';
+import { MoreVertical, Share, Monitor, MonitorDown, Bell, WifiOff } from 'lucide-react';
 
 const AppleLogo = () => (
   <svg className="h-5 w-5 fill-current text-ink" viewBox="0 0 384 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -13,91 +13,102 @@ const AndroidLogo = () => (
   </svg>
 );
 
-const PERKS = [
-  { icon: WifiOff, title: 'No ocupa espacio', text: 'Se instala desde el navegador. Sin tienda de aplicaciones, sin descarga de cientos de megas.' },
-  { icon: Bell, title: 'Recordatorios push', text: 'Con la app instalada puedes recibir avisos aunque Zenth no esté abierta.' },
-  { icon: Monitor, title: 'La misma app en todas partes', text: 'Móvil, tablet y escritorio comparten cuenta y datos en tiempo real.' },
+const DesktopLogo = () => <Monitor className="h-5 w-5 text-ink" strokeWidth={1.75} aria-hidden="true" />;
+
+const PLATFORMS: {
+  name: string;
+  browser: string;
+  logo: React.FC;
+  steps: React.ReactNode[];
+  note?: string;
+}[] = [
+  {
+    name: 'iPhone y iPad',
+    browser: 'Safari',
+    logo: AppleLogo,
+    steps: [
+      <>Toca <Share className="inline h-4 w-4 -translate-y-px" strokeWidth={1.75} /> Compartir</>,
+      'Elige «Añadir a pantalla de inicio»',
+    ],
+    note: 'En iOS los recordatorios push solo funcionan con la app instalada, no desde Safari.',
+  },
+  {
+    name: 'Android',
+    browser: 'Chrome',
+    logo: AndroidLogo,
+    steps: [
+      <>Abre el menú <MoreVertical className="inline h-4 w-4 -translate-y-px" strokeWidth={1.75} /></>,
+      'Pulsa «Instalar aplicación»',
+    ],
+  },
+  {
+    name: 'Escritorio',
+    browser: 'Chrome o Edge',
+    logo: DesktopLogo,
+    steps: [
+      <>Busca <MonitorDown className="inline h-4 w-4 -translate-y-px" strokeWidth={1.75} /> en la barra de direcciones</>,
+      'Pulsa «Instalar»',
+    ],
+    note: 'En Safari para Mac: Archivo › Añadir al Dock.',
+  },
 ];
 
+const PERKS = [
+  { icon: WifiOff, text: 'No ocupa espacio' },
+  { icon: Bell, text: 'Avisos aunque Zenth esté cerrada' },
+  { icon: Monitor, text: 'La misma cuenta en móvil y escritorio' },
+];
+
+/**
+ * Instalación. A propósito no usa el molde de texto a la izquierda y tarjeta a
+ * la derecha de «Cómo se siente», que va justo antes: título centrado, los
+ * tres sistemas en columnas iguales separadas por líneas finas y las ventajas
+ * en una sola línea. Se lee como una guía práctica.
+ */
 const InstallGuide: React.FC = () => {
   return (
     <section id="install" className="scroll-mt-20 py-24 lg:py-32">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <div className="grid gap-12 lg:grid-cols-[1fr_1.1fr] lg:gap-20">
-          <div>
-            <p className="t-eyebrow">Instalación</p>
-            <h2 className="t-display-lg mt-4 text-ink">
-              Sin tiendas.
-              <br />
-              Sin descargas.
-            </h2>
-            <p className="t-body-lg mt-6 max-w-md text-ink-muted">
-              Zenth es una aplicación web progresiva: se añade a tu pantalla de inicio desde el
-              navegador, abre en su propia ventana y conserva la misma cuenta en móvil y escritorio.
-            </p>
-
-            <ul className="mt-10 space-y-6">
-              {PERKS.map(({ icon: Icon, title, text }) => (
-                <li key={title} className="flex gap-4">
-                  <Icon className="mt-0.5 h-5 w-5 shrink-0 text-ink" strokeWidth={1.75} />
-                  <div>
-                    <p className="t-caption text-ink">{title}</p>
-                    <p className="t-body mt-1 text-ink-muted">{text}</p>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-1">
-            <div className="fr-card">
-              <div className="flex items-center gap-3">
-                <AppleLogo />
-                <h3 className="t-headline text-ink">iPhone y iPad</h3>
-                <span className="t-micro ml-auto text-ink-muted">Safari</span>
-              </div>
-              <ol className="mt-6 space-y-3">
-                <li className="flex items-center gap-3">
-                  <span className="t-micro flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-canvas tabular-nums text-ink-muted">1</span>
-                  <span className="t-body flex items-center gap-2 text-ink-muted">
-                    Toca <Share className="h-4 w-4" strokeWidth={1.75} /> Compartir
-                  </span>
-                </li>
-                <li className="flex items-center gap-3">
-                  <span className="t-micro flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-canvas tabular-nums text-ink-muted">2</span>
-                  <span className="t-body text-ink-muted">Elige «Añadir a pantalla de inicio»</span>
-                </li>
-              </ol>
-              <p className="t-micro mt-5 border-t border-hairline-soft pt-4 text-ink-muted">
-                En iOS los recordatorios push solo funcionan con la app instalada, no desde Safari.
-              </p>
-            </div>
-
-            <div className="fr-card">
-              <div className="flex items-center gap-3">
-                <AndroidLogo />
-                <h3 className="t-headline text-ink">Android</h3>
-                <span className="t-micro ml-auto text-ink-muted">Chrome</span>
-              </div>
-              <ol className="mt-6 space-y-3">
-                <li className="flex items-center gap-3">
-                  <span className="t-micro flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-canvas tabular-nums text-ink-muted">1</span>
-                  <span className="t-body flex items-center gap-2 text-ink-muted">
-                    Abre el menú <MoreVertical className="h-4 w-4" strokeWidth={1.75} />
-                  </span>
-                </li>
-                <li className="flex items-center gap-3">
-                  <span className="t-micro flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-canvas tabular-nums text-ink-muted">2</span>
-                  <span className="t-body text-ink-muted">Pulsa «Instalar aplicación»</span>
-                </li>
-              </ol>
-              <p className="t-micro mt-5 flex items-center gap-2 border-t border-hairline-soft pt-4 text-ink-muted">
-                <Smartphone className="h-3.5 w-3.5" strokeWidth={1.75} />
-                En escritorio, busca el icono de instalar en la barra de direcciones.
-              </p>
-            </div>
-          </div>
+        <div className="mx-auto max-w-2xl text-center">
+          <p className="t-eyebrow">Instalación</p>
+          <h2 className="t-display-lg mt-4 text-ink">Sin tiendas. Sin descargas.</h2>
+          <p className="t-body-lg mx-auto mt-6 max-w-xl text-ink-muted">
+            Zenth es una aplicación web progresiva: se añade a tu pantalla de inicio desde el navegador,
+            abre en su propia ventana y conserva la misma cuenta en móvil y escritorio.
+          </p>
         </div>
+
+        <div className="mt-14 grid divide-y divide-hairline border-y border-hairline md:grid-cols-3 md:divide-x md:divide-y-0 lg:mt-16">
+          {PLATFORMS.map(({ name, browser, logo: Logo, steps, note }) => (
+            <div key={name} className="py-8 md:px-8 md:py-10 md:first:pl-0 md:last:pr-0">
+              <div className="flex items-center gap-3">
+                <Logo />
+                <h3 className="t-headline text-ink">{name}</h3>
+                <span className="t-micro ml-auto text-ink-muted">{browser}</span>
+              </div>
+              <ol className="mt-6 space-y-3">
+                {steps.map((step, index) => (
+                  <li key={index} className="flex items-start gap-3">
+                    <span className="t-micro mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-surface-1 tabular-nums text-ink-muted">
+                      {index + 1}
+                    </span>
+                    <span className="t-body text-ink-muted">{step}</span>
+                  </li>
+                ))}
+              </ol>
+              {note && <p className="t-micro mt-6 text-ink-muted">{note}</p>}
+            </div>
+          ))}
+        </div>
+
+        <ul className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-x-10">
+          {PERKS.map(({ icon: Icon, text }) => (
+            <li key={text} className="t-body flex items-center gap-2.5 text-ink-muted">
+              <Icon className="h-[18px] w-[18px] shrink-0 text-ink" strokeWidth={1.75} />
+              {text}
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
   );
