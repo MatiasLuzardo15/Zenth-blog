@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { ArrowLeft, ArrowUpRight, Check, Share2 } from 'lucide-react';
-import { BlogPost } from '../types';
+import { ArrowLeft, ArrowUpRight, Check, Clock, Share2 } from 'lucide-react';
+import { BlogPost, isComingSoon } from '../types';
 import BlogCover, { hasCover } from './BlogCover';
+import ComingSoonBadge from './ComingSoonBadge';
 
 interface BlogPostDetailProps {
     post: BlogPost;
@@ -249,6 +250,8 @@ const BlogPostDetail: React.FC<BlogPostDetailProps> = ({ post, onBack }) => {
                 <meta name="twitter:title" content={post.title} />
                 <meta name="twitter:description" content={post.excerpt} />
                 <meta name="twitter:image" content={ogImageUrl} />
+                {/* Un adelanto no es un artículo publicado: fuera de los buscadores hasta que salga. */}
+                {isComingSoon(post) && <meta name="robots" content="noindex" />}
             </Helmet>
 
             <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
@@ -271,7 +274,7 @@ const BlogPostDetail: React.FC<BlogPostDetailProps> = ({ post, onBack }) => {
                     <div className="t-micro flex flex-wrap items-center gap-2 text-ink-muted">
                         <span>{post.category}</span>
                         <span aria-hidden="true">·</span>
-                        <span>{post.date}</span>
+                        {isComingSoon(post) ? <ComingSoonBadge /> : <span>{post.date}</span>}
                         <span aria-hidden="true">·</span>
                         <span>{post.readTime || '5 min lectura'}</span>
                         <span aria-hidden="true">·</span>
@@ -280,6 +283,16 @@ const BlogPostDetail: React.FC<BlogPostDetailProps> = ({ post, onBack }) => {
 
                     <h1 className="t-display-lg mt-5 text-ink">{post.title}</h1>
                     <p className="t-subhead mt-6 text-ink-muted">{post.excerpt}</p>
+                    {isComingSoon(post) && (
+                        <p className="fr-card mt-8 flex gap-3 t-body text-ink-muted">
+                            <Clock className="mt-0.5 h-5 w-5 shrink-0 text-accent" strokeWidth={2} aria-hidden="true" />
+                            <span>
+                                <strong className="text-ink">En desarrollo.</strong> Esto todavía no está disponible para
+                                todas las cuentas: lo estamos probando y lo abriremos cuando esté listo. Aquí te
+                                contamos cómo va a funcionar.
+                            </span>
+                        </p>
+                    )}
                 </header>
 
                 {hasCover(post) && (

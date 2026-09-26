@@ -4,7 +4,8 @@ import { COVER_H, COVER_SCENES, COVER_W } from './BlogCoverScenes';
 
 /**
  * Portada de un artículo: una escena de la interfaz de Zenth (ver
- * `BlogCoverScenes.tsx`) sobre un degradado pastel. Ocupa todo su contenedor
+ * `BlogCoverScenes.tsx`) sobre un degradado pastel, o sin fondo si la escena
+ * no trae colores. Ocupa todo su contenedor
  * (que debe ser `relative` y tener tamaño) y recorta como una foto de portada.
  *
  * `imageUrl` sigue existiendo para las vistas previas al compartir (Open Graph),
@@ -55,16 +56,19 @@ const BlogCover: React.FC<{ post: BlogPost }> = ({ post }) => {
   }
 
   const { Scene, tones } = entry;
-  const scale = box.w && box.h ? Math.max(box.w / COVER_W, box.h / COVER_H) : 0;
+  // Con fondo, la escena cubre el marco y se recorta como una foto; sin fondo no
+  // hay nada que tape los bordes, así que entra entera.
+  const fit = tones ? Math.max : Math.min;
+  const scale = box.w && box.h ? fit(box.w / COVER_W, box.h / COVER_H) : 0;
 
   return (
     <div
       ref={ref}
       aria-hidden="true"
       className="absolute inset-0 overflow-hidden"
-      style={{
+      style={tones ? {
         backgroundImage: `radial-gradient(circle at 18% 12%, rgba(255,255,255,0.4), transparent 55%), linear-gradient(135deg, ${tones[0]} 0%, ${tones[1]} 100%)`,
-      }}
+      } : undefined}
     >
       {near && scale > 0 && (
         <div className="absolute inset-0 transition-transform duration-700 group-hover:scale-[1.03]">

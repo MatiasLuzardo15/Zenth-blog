@@ -1,4 +1,4 @@
-import { h2, list, note, p, path, steps, table, tip, warn } from '../blocks';
+import { flow, h2, list, note, p, path, steps, table, tip, warn } from '../blocks';
 import type { DocArticle } from '../types';
 
 const UPDATED = '2026-09-23';
@@ -125,6 +125,72 @@ export const integracionesArticles: DocArticle[] = [
       ),
       note('Hay un límite de ritmo: si haces muchas solicitudes seguidas, Zenth te pide que esperes un momento.'),
       p('Más detalle en la [Política de privacidad](/privacy).'),
+    ],
+  },
+
+  {
+    slug: 'zenth-mcp',
+    category: 'integraciones',
+    title: 'Zenth MCP (próximamente)',
+    summary: 'Conecta Claude o Codex a tu cuenta para consultar y organizar tu agenda, tus pizarras y tu Biblioteca desde la conversación. En desarrollo: aún no está abierto a todas las cuentas.',
+    keywords: ['mcp', 'model context protocol', 'claude', 'claude code', 'codex', 'chatgpt', 'openai', 'anthropic', 'ia', 'inteligencia artificial', 'asistente', 'conector', 'conectar', 'aplicaciones conectadas', 'oauth', 'permisos', 'revocar', 'desconectar'],
+    updated: '2026-09-26',
+    related: ['integraciones/zen-asistente', 'cuenta/papelera', 'privacidad/que-datos-guarda-zenth'],
+    blocks: [
+      warn('Zenth MCP **está en desarrollo**: lo estamos probando y todavía no está disponible para todas las cuentas. Esta página cuenta cómo va a funcionar; cuando se abra, aquí estarán los pasos para conectarlo.', 'En desarrollo'),
+      p('**MCP** (Model Context Protocol) es un estándar abierto con el que los asistentes de IA se conectan a otras aplicaciones. Con Zenth MCP, **Claude** (en la web, la app de escritorio y Claude Code) y **Codex** pueden consultar y actualizar tu espacio mientras conversas con ellos: le pides algo con tus palabras y el asistente lo hace en tu cuenta.'),
+
+      h2('Cómo funciona un pedido'),
+      p('El asistente no entra a la app ni ve tu pantalla: usa un conjunto cerrado de herramientas de Zenth, y cada una pasa por los mismos controles que usa la app.'),
+      flow(
+        'Un pedido de principio a fin. Si algo no está permitido, el pedido se detiene en el paso de la base de datos y no cambia nada.',
+        { icon: 'person', label: 'Tú', detail: '«Anótame llamar al banco mañana a las 9:30».' },
+        { icon: 'assistant', label: 'Tu asistente', detail: 'Elige la herramienta: crear una tarea.' },
+        { icon: 'zenth', label: 'Zenth MCP', detail: 'Comprueba que la conexión es tuya y sigue activa.' },
+        { icon: 'database', label: 'Base de datos', detail: 'Aplica las mismas reglas que la app.' },
+        { icon: 'agenda', label: 'Tu agenda', detail: 'La tarea aparece en Zenth y el asistente te lo confirma.' },
+      ),
+
+      h2('Qué puede hacer un asistente conectado'),
+      table(
+        ['Área', 'Qué le puedes pedir'],
+        ['Agenda', 'Ver tu día o varios días seguidos, con tareas, eventos y reuniones. Buscar pendientes y atrasadas.'],
+        ['Tareas', 'Crear tareas (también repetitivas, con fecha de fin), cambiar título, fecha, hora, prioridad o etiquetas, sumar notas al final, activar el aviso por correo, completarlas o reabrirlas.'],
+        ['Papelera', 'Mandar una tarea a la papelera, ver lo que hay y restaurarla.'],
+        ['Pizarras', 'Ver tus pizarras y sus listas, crear tarjetas y moverlas de lista, en las pizarras donde puedes editar.'],
+        ['Biblioteca', 'Buscar y leer tus notas, crear un documento nuevo (en una carpeta, si quieres) y sumar texto al final de uno existente.'],
+        ['Lienzos', 'Crear un lienzo con un diagrama (cajas, decisiones y flechas), sumarle partes y leer lo que tiene.'],
+        ['Progreso', 'Consultar tu nivel, tu racha y un resumen de lo que hiciste.'],
+      ),
+      p('En una tarea repetitiva, los cambios afectan solo a esa ocurrencia. Para cambiar la serie entera, usa la app.'),
+
+      h2('Lo que un asistente no puede hacer'),
+      list(
+        '**Borrar de forma definitiva.** Como mucho manda una tarea a la papelera, y tú la recuperas cuando quieras. Ver [Papelera](/docs/cuenta/papelera).',
+        '**Compartir o cambiar permisos.** No invita personas a tus pizarras ni a tus notas, no crea enlaces públicos y no cambia roles.',
+        '**Reemplazar lo que escribiste.** En notas y tareas solo **agrega** al final; nunca sobrescribe el contenido.',
+        '**Editar eventos de Google Calendar.** Los eventos importados se cambian en Google, y Zenth los sincroniza solo.',
+      ),
+      note('Borrar y compartir **no dependen del asistente**: la base de datos de Zenth rechaza esas acciones cuando llegan desde una aplicación conectada, aunque alguien lo intente por fuera de las herramientas de Zenth MCP. Tú, desde la app, sigues pudiendo hacer todo lo de siempre.', 'Protegido en el servidor'),
+
+      h2('Cómo se conecta'),
+      steps(
+        'En tu asistente, agrega Zenth como conector o servidor MCP y elige **Conectar**.',
+        'Se abre una pantalla de Zenth con la aplicación que pide acceso, a dónde vuelve, los permisos que pide y la cuenta con la que vas a autorizarla. Si usas varias cuentas, elige la correcta.',
+        'Pulsa **Permitir**. Vuelves a tu asistente y la conexión queda lista; se renueva sola.',
+      ),
+      tip('Nunca tienes que copiar tu contraseña ni una clave en el asistente. Si alguien te pide un token de Zenth para conectarlo, no lo compartas.'),
+
+      h2('Ver y desconectar aplicaciones'),
+      path('Ajustes', 'Integraciones', 'Aplicaciones conectadas'),
+      p('Ahí ves cada asistente que autorizaste y qué permisos tiene. **Desconectar** le quita el acceso. Aunque el asistente siga mostrando Zenth en su lista, ya no puede entrar: para volver a usarlo tendrá que pedirte permiso de nuevo.'),
+
+      h2('Límites mientras está en desarrollo'),
+      list(
+        'Las tareas completadas desde un asistente **todavía no suman XP**.',
+        'Si tienes una nota o un lienzo abiertos mientras el asistente les agrega algo, lo nuevo aparece **al guardar o al volver a abrirlos**.',
+        'Un diagrama nuevo se dibuja en el lienzo **la primera vez que lo abres** en Zenth.',
+      ),
     ],
   },
 ];

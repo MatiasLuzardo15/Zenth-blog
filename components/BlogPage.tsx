@@ -3,6 +3,8 @@ import { ArrowLeft, ArrowUpRight } from 'lucide-react';
 import { BLOG_POSTS } from '../constants';
 import ArticleCard from './ArticleCard';
 import BlogCover from './BlogCover';
+import ComingSoonBadge from './ComingSoonBadge';
+import { isComingSoon } from '../types';
 
 interface BlogPageProps {
   onBack: () => void;
@@ -76,12 +78,12 @@ const BlogPage: React.FC<BlogPageProps> = ({ onBack, onSelectPost }) => {
               <div className="t-micro flex items-center gap-2 text-ink-muted">
                 <span>{featured.category}</span>
                 <span aria-hidden="true">·</span>
-                <span>{featured.date}</span>
+                {isComingSoon(featured) ? <ComingSoonBadge /> : <span>{featured.date}</span>}
               </div>
               <h2 className="t-display-md mt-4 text-ink">{featured.title}</h2>
               <p className="t-body-lg mt-4 text-ink-muted">{featured.excerpt}</p>
               <span className="t-caption mt-8 inline-flex items-center gap-1.5 text-ink">
-                Leer artículo
+                {isComingSoon(featured) ? 'Ver el adelanto' : 'Leer artículo'}
                 <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </span>
             </div>

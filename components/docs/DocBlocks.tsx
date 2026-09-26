@@ -1,8 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ChevronRight, Info, Lightbulb, Link2, TriangleAlert } from 'lucide-react';
+import {
+  Bot, CalendarCheck, ChevronRight, Database, Info, Lightbulb, Link2, TriangleAlert, User,
+} from 'lucide-react';
 import { sectionsOf } from '../../content/docs';
 import type { DocArticle, DocBlock } from '../../content/docs';
+import type { DocFlowIcon } from '../../content/docs/types';
 
 const INLINE_PATTERN = /(\*\*[^*]+\*\*|`[^`]+`|\[[^\]]+\]\([^)]+\))/g;
 const LINK_PATTERN = /^\[([^\]]+)\]\(([^)]+)\)$/;
@@ -55,6 +58,58 @@ const CALLOUTS = {
   note: { icon: Info, label: 'Nota', tone: 'text-accent' },
   warning: { icon: TriangleAlert, label: 'Importante', tone: 'text-semantics-warning' },
 } as const;
+
+const FLOW_ICONS: Record<Exclude<DocFlowIcon, 'zenth'>, React.ComponentType<{ className?: string; strokeWidth?: number }>> = {
+  person: User,
+  assistant: Bot,
+  database: Database,
+  agenda: CalendarCheck,
+};
+
+/**
+ * Tramo punteado entre un paso y el siguiente. Fluye como las líneas de
+ * `McpConnectionArt` (`.zenth-mcp-flow`, quieta con «reducir movimiento»):
+ * horizontal desde `sm`, vertical debajo. Las medidas salen del icono de 44 px.
+ */
+const FlowLine: React.FC = () => (
+  <>
+    <svg aria-hidden="true" className="absolute left-[calc(50%+30px)] top-[20px] hidden h-1 w-[calc(100%-60px)] overflow-visible sm:block">
+      <line x1="0" y1="2" x2="100%" y2="2" stroke="var(--fr-ink-muted)" strokeWidth={3} className="zenth-mcp-flow" />
+    </svg>
+    <svg aria-hidden="true" className="absolute left-[20px] top-[50px] h-[calc(100%-20px)] w-1 overflow-visible sm:hidden">
+      <line x1="2" y1="0" x2="2" y2="100%" stroke="var(--fr-ink-muted)" strokeWidth={3} className="zenth-mcp-flow" />
+    </svg>
+  </>
+);
+
+const FlowDiagram: React.FC<{ block: Extract<DocBlock, { type: 'flow' }> }> = ({ block }) => (
+  <figure className="fr-card mt-6 !p-5 sm:!p-6">
+    <ol className="flex flex-col gap-9 sm:flex-row sm:gap-0">
+      {block.nodes.map((node, index) => {
+        const Icon = node.icon === 'zenth' ? null : FLOW_ICONS[node.icon];
+        return (
+          <li key={index} className="relative flex gap-4 sm:flex-1 sm:flex-col sm:items-center sm:gap-3 sm:px-2 sm:text-center">
+            {index < block.nodes.length - 1 && <FlowLine />}
+            <span className="relative flex h-11 w-11 shrink-0 items-center justify-center rounded-[14px] border border-hairline bg-surface-1 text-ink">
+              {Icon ? (
+                <Icon className="h-5 w-5" strokeWidth={1.75} />
+              ) : (
+                <img src="/blog/favicon2.png" alt="" className="h-6 w-6 rounded-[6px] object-contain" />
+              )}
+            </span>
+            <div className="min-w-0 pt-0.5 sm:pt-0">
+              <p className="t-caption text-ink">{node.label}</p>
+              {node.detail && <p className="t-body-sm mt-1 text-ink-muted"><Inline text={node.detail} /></p>}
+            </div>
+          </li>
+        );
+      })}
+    </ol>
+    <figcaption className="t-micro mt-6 border-t border-hairline-soft pt-4 text-ink-muted">
+      <Inline text={block.caption} />
+    </figcaption>
+  </figure>
+);
 
 const Block: React.FC<{ block: DocBlock; sectionId?: string | null }> = ({ block, sectionId }) => {
   switch (block.type) {
@@ -177,6 +232,9 @@ const Block: React.FC<{ block: DocBlock; sectionId?: string | null }> = ({ block
           </table>
         </div>
       );
+
+    case 'flow':
+      return <FlowDiagram block={block} />;
   }
 };
 

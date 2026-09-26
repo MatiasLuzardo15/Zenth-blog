@@ -34,6 +34,8 @@ export const blockText = (block: DocBlock): string => {
       return block.steps.join(' ');
     case 'table':
       return [...block.head, ...block.rows.flat()].map(stripInline).join(' ');
+    case 'flow':
+      return [block.caption, ...block.nodes.flatMap(node => [node.label, node.detail ?? ''])].map(stripInline).join(' ');
   }
 };
 

@@ -1,4 +1,4 @@
-import type { DocBlock } from './types';
+import type { DocBlock, DocFlowNode } from './types';
 
 /** Constructores para que los artículos se lean como texto y no como objetos. */
 export const h2 = (text: string): DocBlock => ({ type: 'h2', text });
@@ -15,3 +15,4 @@ export const keys = (...rows: [string[], string][]): DocBlock => ({
 });
 export const path = (...stepsList: string[]): DocBlock => ({ type: 'path', steps: stepsList });
 export const table = (head: string[], ...rows: string[][]): DocBlock => ({ type: 'table', head, rows });
+export const flow = (caption: string, ...nodes: DocFlowNode[]): DocBlock => ({ type: 'flow', caption, nodes });

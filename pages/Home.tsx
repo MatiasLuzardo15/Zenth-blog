@@ -4,6 +4,7 @@ import Hero from '../components/Hero';
 import InteractiveDemo from '../components/InteractiveDemo';
 import Features from '../components/Features';
 import VoiceSection from '../components/VoiceSection';
+import McpSection from '../components/McpSection';
 import Testimonials from '../components/Testimonials';
 import InstallGuide from '../components/InstallGuide';
 import BlogList from '../components/BlogList';
@@ -30,6 +31,7 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
         <>
             <div id="hero"><Hero /></div>
             <Features onNavigate={onNavigate} />
+            <McpSection onSelectPost={handlePostSelect} />
             <VoiceSection onSelectPost={handlePostSelect} />
             <InteractiveDemo />
             <Testimonials />

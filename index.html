@@ -213,6 +213,35 @@
       --fr-on-primary: #000000;
     }
 
+    /* Bloque invertido: dentro, el tema contrario (negro en claro, blanco en
+       oscuro). Todo lo que usa los tokens se invierte solo; sirve para que una
+       sección destaque y se separe de las vecinas. */
+    .fr-inverse {
+      --fr-canvas: #090909;
+      --fr-surface-1: #141414;
+      --fr-surface-2: #1c1c1c;
+      --fr-hairline: #262626;
+      --fr-hairline-soft: #1a1a1a;
+      --fr-ink: #ffffff;
+      --fr-ink-muted: #999999;
+      --fr-primary: #ffffff;
+      --fr-on-primary: #000000;
+      background-color: var(--fr-canvas);
+      color: var(--fr-ink);
+    }
+
+    html.dark .fr-inverse {
+      --fr-canvas: #ffffff;
+      --fr-surface-1: #f4f4f5;
+      --fr-surface-2: #e9e9eb;
+      --fr-hairline: #e2e2e4;
+      --fr-hairline-soft: #efeff1;
+      --fr-ink: #000000;
+      --fr-ink-muted: #6b6b6b;
+      --fr-primary: #000000;
+      --fr-on-primary: #ffffff;
+    }
+
     html {
       scroll-behavior: smooth;
       background-color: var(--fr-canvas);
@@ -548,6 +577,44 @@
 
       .zenth-marquee li {
         scroll-snap-align: start;
+      }
+    }
+
+    /* Zenth MCP (McpConnectionArt): puntos que viajan entre los asistentes y
+       Zenth. La vía de pedidos avanza hacia Zenth; la de respuestas, al revés.
+       El anillo del centro late despacio. Con «reducir movimiento», quieto. */
+    .zenth-mcp-flow {
+      stroke-dasharray: 0 14;
+      stroke-linecap: round;
+      animation: zenth-mcp-flow 1.1s linear infinite;
+    }
+
+    .zenth-mcp-flow-back {
+      animation-direction: reverse;
+      animation-delay: -0.55s;
+    }
+
+    @keyframes zenth-mcp-flow {
+      to { stroke-dashoffset: -14; }
+    }
+
+    .zenth-mcp-pulse {
+      animation: zenth-mcp-pulse 2.6s ease-out infinite;
+    }
+
+    @keyframes zenth-mcp-pulse {
+      from { transform: scale(1); opacity: 0.5; }
+      to { transform: scale(1.45); opacity: 0; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .zenth-mcp-flow,
+      .zenth-mcp-pulse {
+        animation: none;
+      }
+
+      .zenth-mcp-pulse {
+        opacity: 0;
       }
     }
 

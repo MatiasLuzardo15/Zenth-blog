@@ -2,6 +2,63 @@ import { BlogPost } from './types';
 
 export const BLOG_POSTS: BlogPost[] = [
   {
+    id: '21',
+    title: 'Zenth MCP: tu asistente de IA, conectado a tu agenda, tus pizarras y tu Biblioteca',
+    excerpt: 'Muy pronto vas a poder pedirle a Claude o a Codex que revise tu día, cree tareas, mueva tarjetas o escriba un documento en Zenth. Con tu permiso, y sin que pueda borrar nada para siempre.',
+    content: `
+Cada vez más trabajo empieza en una conversación con un asistente de IA: le pides que resuma algo, que arme un plan o que ordene una lista. El problema aparece después, cuando ese plan tiene que llegar a tu agenda y lo terminas copiando a mano. **Zenth MCP** quita ese paso.
+
+## Qué es MCP
+
+**MCP** (Model Context Protocol) es un estándar abierto que usan asistentes como **Claude** y **Codex** para conectarse con otras aplicaciones. Con Zenth conectado, el asistente puede consultar y actualizar tu espacio mientras conversas con él, en lugar de darte un texto para copiar.
+
+## Qué vas a poder pedirle
+
+Todo con tus palabras, sin comandos:
+
+- **Agenda y tareas:** «¿qué tengo hoy?», «¿qué me quedó pendiente?», «anótame llamar al banco mañana a las 9:30 y avísame por correo», «gimnasio lunes y jueves a las 18:00 hasta fin de año». También cambiar la hora de una tarea, agregarle una nota, ponerle etiquetas, completarla o mandarla a la papelera.
+- **Pizarras:** «¿qué hay en la lista Alto?», «crea una tarjeta en Pendientes del tablero Equipo», «mueve esa tarjeta a Completado».
+- **Biblioteca:** buscar tus notas, leer una, **escribir un documento nuevo** o sumarle una sección al final de uno existente.
+- **Lienzos:** pedirle un diagrama («el flujo de onboarding de un cliente») y encontrarlo dibujado en un lienzo de Excalidraw la primera vez que lo abras.
+- **Tu progreso:** nivel, racha y un resumen de lo que hiciste.
+
+## Conectar, con un botón
+
+No vas a tener que copiar contraseñas ni claves. Desde tu asistente eliges **Conectar**, y se abre una pantalla de Zenth que te muestra **qué aplicación pide acceso, a dónde vuelve, qué permisos pide y con qué cuenta** lo estás autorizando. Si todo coincide, pulsas **Permitir** y listo: la conexión se renueva sola.
+
+## Lo que la IA no puede hacer
+
+Conectar un asistente no significa entregarle las llaves de todo. En Zenth, una aplicación conectada:
+
+- **No borra nada de forma definitiva.** Puede mandar una tarea a la papelera, y tú la recuperas cuando quieras.
+- **No comparte ni cambia permisos.** No invita a nadie a tus pizarras ni a tus notas, ni las hace públicas.
+- **No reemplaza lo que escribiste.** En una nota solo puede **agregar** al final.
+- **No toca los eventos que vienen de Google Calendar.** Esos se cambian en Google.
+
+Borrar y compartir, además, no dependen de que el asistente «se porte bien»: la base de datos de Zenth **rechaza** esas acciones cuando llegan desde una aplicación conectada, aunque alguien lo intente por fuera de las herramientas.
+
+## Tú tienes el control
+
+En **Ajustes › Integraciones › Aplicaciones conectadas** vas a ver cada asistente que autorizaste y qué permisos tiene. **Desconectar** le quita el acceso.
+
+## En qué punto estamos
+
+Zenth MCP funciona hoy con **Claude** (en la web, en la app de escritorio y en Claude Code) y con **Codex**, y lo estamos probando antes de abrirlo a todas las cuentas. Algunos detalles que ya sabemos:
+
+- Las tareas que completes desde un asistente todavía **no suman XP**.
+- Si tienes una nota o un lienzo abiertos mientras el asistente les agrega algo, lo nuevo aparece al guardar o al volver a abrirlos.
+- Las series repetitivas se crean desde el asistente, pero para cambiar una serie entera sigue estando la app.
+
+Cuando esté disponible para todos, lo vas a encontrar en la [documentación de Zenth MCP](/docs/integraciones/zenth-mcp) con los pasos para conectarlo.
+`,
+    author: 'Matías Zenth',
+    date: '26 Sep, 2026',
+    imageUrl: '/blog/appview.png',
+    category: 'Integraciones',
+    readTime: '5 min lectura',
+    status: 'soon',
+  },
+  {
     id: '20',
     title: 'Llamadas en Zenth: reuniones rápidas y salas sin accesos de más',
     excerpt: 'Crea un enlace para invitar a alguien sin cuenta, entra a las salas de tus pizarras desde Llamadas y sigue trabajando mientras hablas.',

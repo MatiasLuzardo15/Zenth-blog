@@ -20,7 +20,18 @@ export type DocBlock =
   | { type: 'keys'; rows: { keys: string[]; label: string }[] }
   /** Ruta dentro de la app: «Ajustes › Integraciones › Google Drive». */
   | { type: 'path'; steps: string[] }
-  | { type: 'table'; head: string[]; rows: string[][] };
+  | { type: 'table'; head: string[]; rows: string[][] }
+  /** Diagrama de un flujo: pasos unidos por una línea punteada, de izquierda a derecha. */
+  | { type: 'flow'; caption: string; nodes: DocFlowNode[] };
+
+/** Iconos disponibles para los pasos de un diagrama (ver `DocBlocks.tsx`). */
+export type DocFlowIcon = 'person' | 'assistant' | 'zenth' | 'database' | 'agenda';
+
+export interface DocFlowNode {
+  icon: DocFlowIcon;
+  label: string;
+  detail?: string;
+}
 
 export interface DocArticle {
   /** Único dentro de su categoría; forma parte de la URL. */

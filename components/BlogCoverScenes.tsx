@@ -5,6 +5,7 @@ import {
   Plus, Quote, Search, Smile, Sparkles, Strikethrough, Target, Timer, Underline, UserPlus,
 } from 'lucide-react';
 import { FocusView } from './demo/FocusView';
+import McpConnectionArt from './McpConnectionArt';
 import {
   BOARD_LISTS, CARD_ASSIGNEE, FOCUS_RUNNING_AT, FOCUS_TASK, MOMENTS, NEW_CARD_NOTES,
 } from './demo/timeline';
@@ -848,16 +849,26 @@ const SceneZen: React.FC = () => (
   </>
 );
 
+/** 21 · Zenth MCP: la ilustración de las líneas punteadas, sola y sin fondo. */
+const SceneMcp: React.FC = () => (
+  <S x={20} y={66}>
+    <div className="w-[600px]">
+      <McpConnectionArt fixed />
+    </div>
+  </S>
+);
+
 /* ── Catálogo ───────────────────────────────────────────────────────────── */
 
 export interface CoverScene {
   Scene: React.FC;
-  /** Los dos extremos del degradado de fondo. */
-  tones: [string, string];
+  /** Los dos extremos del degradado de fondo. Sin ellos, la escena va sin fondo. */
+  tones?: [string, string];
 }
 
 /** Una escena por artículo, por id. */
 export const COVER_SCENES: Record<string, CoverScene> = {
+  '21': { Scene: SceneMcp },
   '20': { Scene: SceneLink, tones: ['#90CAF9', '#B39DDB'] },
   '19': { Scene: SceneOverview, tones: ['#B39DDB', '#81D4FA'] },
   '18': { Scene: SceneRoom, tones: ['#80CBC4', '#B39DDB'] },

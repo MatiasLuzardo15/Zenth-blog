@@ -1,7 +1,8 @@
 import React from 'react';
 import { ArrowUpRight } from 'lucide-react';
-import { BlogPost } from '../types';
+import { BlogPost, isComingSoon } from '../types';
 import BlogCover from './BlogCover';
+import ComingSoonBadge from './ComingSoonBadge';
 
 interface ArticleCardProps {
   post: BlogPost;
@@ -31,7 +32,7 @@ const ArticleCard: React.FC<ArticleCardProps> = ({ post, onClick }) => {
 
       <div className="flex flex-1 flex-col p-4 pt-5">
         <div className="t-micro flex items-center gap-2 text-ink-muted">
-          <span>{post.date}</span>
+          {isComingSoon(post) ? <ComingSoonBadge /> : <span>{post.date}</span>}
           {post.readTime && (
             <>
               <span aria-hidden="true">·</span>
@@ -45,7 +46,7 @@ const ArticleCard: React.FC<ArticleCardProps> = ({ post, onClick }) => {
         <p className="t-body mt-3 line-clamp-3 flex-1 text-ink-muted">{post.excerpt}</p>
 
         <span className="t-caption mt-6 inline-flex items-center gap-1.5 text-ink-muted transition-colors group-hover:text-ink">
-          Leer artículo
+          {isComingSoon(post) ? 'Ver el adelanto' : 'Leer artículo'}
           <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
         </span>
       </div>
