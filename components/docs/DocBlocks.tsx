@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import {
-  Bot, CalendarCheck, ChevronRight, Database, Info, Lightbulb, Link2, TriangleAlert, User,
+  ArrowDown, Ban, Bot, CalendarCheck, ChevronRight, CircleCheck, Database, Filter, Info, Lightbulb,
+  Link2, TriangleAlert, User, Workflow, Zap,
 } from 'lucide-react';
 import { sectionsOf } from '../../content/docs';
 import type { DocArticle, DocBlock } from '../../content/docs';
@@ -108,6 +109,152 @@ const FlowDiagram: React.FC<{ block: Extract<DocBlock, { type: 'flow' }> }> = ({
     <figcaption className="t-micro mt-6 border-t border-hairline-soft pt-4 text-ink-muted">
       <Inline text={block.caption} />
     </figcaption>
+  </figure>
+);
+
+const Caption: React.FC<{ text: string }> = ({ text }) => (
+  <figcaption className="t-micro mt-6 border-t border-hairline-soft pt-4 text-ink-muted">
+    <Inline text={text} />
+  </figcaption>
+);
+
+const RULE_PARTS = [
+  { label: 'Cuando', hint: 'lo que dispara la regla', icon: Zap },
+  { label: 'Si', hint: 'lo que debe cumplir la tarjeta', icon: Filter },
+  { label: 'Entonces', hint: 'lo que hace Zenth, en orden', icon: Workflow },
+] as const;
+
+/**
+ * Una regla como la ve el editor de la app: tres pasos numerados, de arriba
+ * abajo, unidos por una línea. Cada paso muestra su ejemplo en fichas.
+ */
+const RuleDiagram: React.FC<{ block: Extract<DocBlock, { type: 'rule' }> }> = ({ block }) => {
+  const { rule } = block;
+  const contents = [
+    [rule.whenScope ? `${rule.when} ${rule.whenScope}` : rule.when],
+    rule.conditions,
+    rule.actions,
+  ];
+  return (
+    <figure className="fr-card mt-6 !p-5 sm:!p-6">
+      <ol>
+        {RULE_PARTS.map((part, index) => {
+          const Icon = part.icon;
+          const last = index === RULE_PARTS.length - 1;
+          const items = contents[index];
+          return (
+            <li key={part.label} className="flex gap-4">
+              <div className="flex w-7 shrink-0 flex-col items-center" aria-hidden="true">
+                <span className="t-micro flex h-7 w-7 items-center justify-center rounded-full bg-ink tabular-nums text-canvas">{index + 1}</span>
+                {!last && <span className="mt-1.5 w-px flex-1 bg-hairline" />}
+              </div>
+              <div className={`min-w-0 flex-1 ${last ? '' : 'pb-6'}`}>
+                <p className="flex flex-wrap items-center gap-x-2 gap-y-0.5 pt-1">
+                  <Icon className="h-4 w-4 text-ink-muted" strokeWidth={1.75} aria-hidden="true" />
+                  <span className="t-caption text-ink">{part.label}</span>
+                  <span className="t-micro text-ink-muted">· {part.hint}</span>
+                </p>
+                <ul className="mt-3 flex flex-wrap gap-2">
+                  {items.length === 0 ? (
+                    <li className="t-body-sm rounded-small border border-dashed border-hairline px-3 py-1.5 text-ink-muted">Sin condiciones: actúa siempre</li>
+                  ) : items.map((item, itemIndex) => (
+                    <li key={item} className="t-body-sm flex items-center gap-2 rounded-small border border-hairline bg-canvas px-3 py-1.5 text-ink">
+                      {index === 2 && items.length > 1 && (
+                        <span className="t-micro tabular-nums text-ink-muted">{itemIndex + 1}</span>
+                      )}
+                      <span><Inline text={item} /></span>
+                    </li>
+                  ))}
+                  {index === 1 && items.length > 1 && (
+                    <li className="t-micro self-center text-ink-muted">todas deben cumplirse</li>
+                  )}
+                </ul>
+              </div>
+            </li>
+          );
+        })}
+      </ol>
+      <Caption text={block.caption} />
+    </figure>
+  );
+};
+
+/** Una pizarra en miniatura con la tarjeta en una de sus listas. */
+const MiniBoard: React.FC<{ lists: string[]; card: string; at: string; completed?: boolean; highlight?: boolean }> = ({
+  lists, card, at, completed = false, highlight = false,
+}) => (
+  <div className="grid gap-2" style={{ gridTemplateColumns: `repeat(${lists.length}, minmax(0, 1fr))` }}>
+    {lists.map(list => (
+      <div key={list} className="min-w-0 rounded-large border border-hairline-soft bg-canvas p-1.5 sm:p-2">
+        <p className="t-micro truncate px-1 pb-2 font-medium text-ink-muted">{list}</p>
+        {list === at ? (
+          <div className={`flex items-start gap-2 rounded-small border bg-surface-2 px-2 py-2 sm:px-2.5 ${highlight ? 'border-accent' : 'border-hairline'}`}>
+            <CircleCheck className={`mt-0.5 hidden h-3.5 w-3.5 shrink-0 sm:block ${completed ? 'text-ink' : 'text-ink-muted'}`} strokeWidth={2} aria-hidden="true" />
+            <span className={`t-micro min-w-0 text-ink ${completed ? 'line-through decoration-ink-muted' : ''}`}>{card}</span>
+          </div>
+        ) : (
+          <div className="h-10 rounded-small border border-dashed border-hairline-soft" />
+        )}
+      </div>
+    ))}
+  </div>
+);
+
+/** Antes y después, una pizarra encima de la otra: lo que haces tú y lo que hace la regla. */
+const BoardMoveDiagram: React.FC<{ block: Extract<DocBlock, { type: 'boardMove' }> }> = ({ block }) => {
+  const { move } = block;
+  return (
+    <figure className="fr-card mt-6 !p-5 sm:!p-6">
+      <p className="t-caption mb-3 flex items-center gap-2 text-ink">
+        <span className="t-micro flex h-6 w-6 items-center justify-center rounded-full bg-surface-2 text-ink"><User className="h-3.5 w-3.5" strokeWidth={2} aria-hidden="true" /></span>
+        {move.trigger}
+      </p>
+      <MiniBoard lists={move.lists} card={move.card} at={move.from} completed={move.completed} />
+      <div className="my-3 flex items-center gap-2 text-ink-muted" aria-hidden="true">
+        <span className="h-px flex-1 bg-hairline-soft" />
+        <ArrowDown className="h-4 w-4" strokeWidth={1.75} />
+        <span className="h-px flex-1 bg-hairline-soft" />
+      </div>
+      <p className="t-caption mb-3 flex items-center gap-2 text-ink">
+        <span className="t-micro flex h-6 w-6 items-center justify-center rounded-full bg-ink text-canvas"><Bot className="h-3.5 w-3.5" strokeWidth={2} aria-hidden="true" /></span>
+        {move.result}
+      </p>
+      <MiniBoard lists={move.lists} card={move.card} at={move.to} completed={move.completed} highlight />
+      <Caption text={block.caption} />
+    </figure>
+  );
+};
+
+const CHAIN_ICONS = { person: User, rule: Bot, stop: Ban } as const;
+
+/** Una cadena de reglas: cada nivel, un paso más a la derecha, hasta que se corta. */
+const ChainDiagram: React.FC<{ block: Extract<DocBlock, { type: 'chain' }> }> = ({ block }) => (
+  <figure className="fr-card mt-6 !p-5 sm:!p-6">
+    <ol className="space-y-3">
+      {block.steps.map((step, index) => {
+        const Icon = CHAIN_ICONS[step.kind];
+        const stop = step.kind === 'stop';
+        return (
+          <li key={index} className="flex items-start gap-3" style={{ paddingLeft: `${Math.min(step.depth, 4) * 1.25}rem` }}>
+            <span className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-[12px] border ${
+              stop ? 'border-semantics-warning text-semantics-warning' : 'border-hairline bg-surface-1 text-ink'
+            }`}>
+              <Icon className="h-[18px] w-[18px]" strokeWidth={1.75} aria-hidden="true" />
+            </span>
+            <div className="min-w-0 pt-1">
+              <p className="t-caption flex flex-wrap items-center gap-2 text-ink">
+                <span><Inline text={step.label} /></span>
+                {step.kind === 'rule' && (
+                  <span className="t-micro rounded-pill bg-surface-2 px-2 py-0.5 text-ink-muted">Nivel {step.depth}</span>
+                )}
+              </p>
+              {step.detail && <p className="t-body-sm mt-0.5 text-ink-muted"><Inline text={step.detail} /></p>}
+            </div>
+          </li>
+        );
+      })}
+    </ol>
+    <Caption text={block.caption} />
   </figure>
 );
 
@@ -235,6 +382,15 @@ const Block: React.FC<{ block: DocBlock; sectionId?: string | null }> = ({ block
 
     case 'flow':
       return <FlowDiagram block={block} />;
+
+    case 'rule':
+      return <RuleDiagram block={block} />;
+
+    case 'boardMove':
+      return <BoardMoveDiagram block={block} />;
+
+    case 'chain':
+      return <ChainDiagram block={block} />;
   }
 };
 

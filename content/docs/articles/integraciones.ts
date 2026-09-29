@@ -133,9 +133,9 @@ export const integracionesArticles: DocArticle[] = [
     category: 'integraciones',
     title: 'Zenth MCP (próximamente)',
     summary: 'Conecta Claude o Codex a tu cuenta para consultar y organizar tu agenda, tus pizarras y tu Biblioteca desde la conversación. En desarrollo: aún no está abierto a todas las cuentas.',
-    keywords: ['mcp', 'model context protocol', 'claude', 'claude code', 'codex', 'chatgpt', 'openai', 'anthropic', 'ia', 'inteligencia artificial', 'asistente', 'conector', 'conectar', 'aplicaciones conectadas', 'oauth', 'permisos', 'revocar', 'desconectar', 'notas', 'secciones', 'tablas', 'etiquetas', 'proponer cambios', 'sugerencias', 'historial'],
+    keywords: ['mcp', 'model context protocol', 'claude', 'claude code', 'codex', 'chatgpt', 'openai', 'anthropic', 'ia', 'inteligencia artificial', 'asistente', 'conector', 'conectar', 'aplicaciones conectadas', 'oauth', 'permisos', 'revocar', 'desconectar', 'notas', 'secciones', 'tablas', 'etiquetas', 'proponer cambios', 'sugerencias', 'historial', 'automatizaciones', 'reglas'],
     updated: '2026-09-29',
-    related: ['biblioteca/revisar-sugerencias', 'biblioteca/historial-de-versiones', 'integraciones/zen-asistente', 'cuenta/papelera'],
+    related: ['biblioteca/revisar-sugerencias', 'biblioteca/historial-de-versiones', 'pizarras/automatizaciones', 'integraciones/zen-asistente', 'cuenta/papelera'],
     blocks: [
       warn('Zenth MCP **está en desarrollo**: lo estamos probando y todavía no está disponible para todas las cuentas. Esta página cuenta cómo va a funcionar; cuando se abra, aquí estarán los pasos para conectarlo.', 'En desarrollo'),
       p('**MCP** (Model Context Protocol) es un estándar abierto con el que los asistentes de IA se conectan a otras aplicaciones. Con Zenth MCP, **Claude** (en la web, la app de escritorio y Claude Code) y **Codex** pueden consultar y actualizar tu espacio mientras conversas con ellos: le pides algo con tus palabras y el asistente lo hace en tu cuenta.'),
@@ -158,6 +158,7 @@ export const integracionesArticles: DocArticle[] = [
         ['Tareas', 'Crear tareas (también repetitivas, con fecha de fin), cambiar título, fecha, hora, prioridad o etiquetas, sumar notas al final, activar el aviso por correo, completarlas o reabrirlas.'],
         ['Papelera', 'Mandar una tarea a la papelera, ver lo que hay y restaurarla.'],
         ['Pizarras', 'Ver tus pizarras y sus listas (las tarjetas tachadas aparecen en su lista; las archivadas, solo si lo pides), crear tarjetas y moverlas de lista, en las pizarras donde puedes editar. Mover una tarjeta a **Completado** la completa y la archiva.'],
+        ['Automatizaciones', 'Ver las reglas de una pizarra con qué hizo cada una la última vez, crear reglas nuevas y activarlas o desactivarlas, en las pizarras que administras.'],
         ['Biblioteca', 'Buscar notas por texto, carpeta o etiqueta, y leer una nota entera o solo una de sus secciones.'],
         ['Escribir notas', 'Crear un documento nuevo (en una carpeta y con etiquetas, si quieres) y sumar texto al final de una nota o debajo de una sección concreta. Con títulos, listas, tablas, bloques destacados y resaltado.'],
         ['Proponer cambios', 'Corregir, resumir o reescribir una nota o una sección, como una sugerencia que tú revisas cambio por cambio.'],
@@ -176,9 +177,26 @@ export const integracionesArticles: DocArticle[] = [
       ),
       p('Si tienes la nota abierta mientras el asistente le agrega algo, **lo ves aparecer en el momento**, sin recargar.'),
 
+      h2('Automatizar tus pizarras'),
+      p('El asistente puede crear [automatizaciones](/docs/pizarras/automatizaciones) con tus palabras: entiende la misma regla «Cuando → Si → Entonces» que el editor de la app y busca listas, etiquetas y personas por su nombre («yo» eres tú). Algunos pedidos que funcionan bien:'),
+      list(
+        '«En la pizarra **Producto**, cuando se complete una tarjeta, muévela a **Finalizadas**».',
+        '«Cuando una tarjeta entre en **En curso** y no tenga responsable, asígnasela a quien la movió».',
+        '«Cuando alguien ponga la etiqueta **Urgente**, llévala arriba de **Alta** y avisa a los responsables».',
+        '«¿Qué automatizaciones tiene **Producto** y cuál falló?». Responde con cada regla en una frase y cómo terminó su última ejecución.',
+        '«Desactiva la regla **Fecha para mañana**».',
+      ),
+      list(
+        'Las reglas que crea el asistente **quedan activas al momento** y actúan sobre las tarjetas de todo el equipo. Un buen asistente te confirmará la regla antes de crearla.',
+        'Solo funciona en las pizarras que **administras**; en las demás, el asistente te dirá que no tienes permiso.',
+        'Si pides una lista, etiqueta o persona que no existe, te responde con las opciones que sí hay.',
+        'Los comentarios y checklists que cree la regla aparecen **a tu nombre**, porque la guardaste tú.',
+        'Borrar una regla solo se puede desde la app.',
+      ),
+
       h2('Lo que un asistente no puede hacer'),
       list(
-        '**Borrar de forma definitiva.** Como mucho manda una tarea a la papelera, y tú la recuperas cuando quieras. Ver [Papelera](/docs/cuenta/papelera).',
+        '**Borrar de forma definitiva.** Como mucho manda una tarea a la papelera, y tú la recuperas cuando quieras. Ver [Papelera](/docs/cuenta/papelera). Tampoco borra automatizaciones: puede desactivarlas, y borrarlas lo decides tú desde la app.',
         '**Compartir o cambiar permisos.** No invita personas a tus pizarras ni a tus notas, no crea enlaces públicos y no cambia roles.',
         '**Cambiar lo que escribiste sin tu visto bueno.** En notas y tareas solo **agrega**. Para corregir o reescribir, **propone** los cambios como sugerencia y tú decides cada uno. Además, antes de cada cambio que hace, Zenth guarda una versión en el [historial de la nota](/docs/biblioteca/historial-de-versiones).',
         '**Revisar sus propias propuestas ni restaurar versiones.** Aceptar o rechazar cambios y volver a una versión anterior lo decides siempre tú, desde la app.',

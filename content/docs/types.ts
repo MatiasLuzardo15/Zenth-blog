@@ -22,7 +22,45 @@ export type DocBlock =
   | { type: 'path'; steps: string[] }
   | { type: 'table'; head: string[]; rows: string[][] }
   /** Diagrama de un flujo: pasos unidos por una línea punteada, de izquierda a derecha. */
-  | { type: 'flow'; caption: string; nodes: DocFlowNode[] };
+  | { type: 'flow'; caption: string; nodes: DocFlowNode[] }
+  /** Anatomía de una regla: Cuando → Si → Entonces, con un ejemplo real en cada paso. */
+  | { type: 'rule'; caption: string; rule: DocRuleExample }
+  /** Una pizarra antes y después de que actúe una regla. */
+  | { type: 'boardMove'; caption: string; move: DocBoardMove }
+  /** Una cadena de reglas, nivel por nivel, hasta que se detiene. */
+  | { type: 'chain'; caption: string; steps: DocChainStep[] };
+
+export interface DocRuleExample {
+  /** El evento: «Se completa una tarjeta». */
+  when: string;
+  /** Lo que lo acota, si algo: «en cualquier lista». */
+  whenScope?: string;
+  /** Condiciones; vacío = «sin condiciones». */
+  conditions: string[];
+  /** Acciones, en orden. */
+  actions: string[];
+}
+
+export interface DocBoardMove {
+  lists: string[];
+  card: string;
+  from: string;
+  to: string;
+  /** Lo que hace la persona: «Completas la tarjeta». */
+  trigger: string;
+  /** Lo que hace la regla: «La regla la lleva a Finalizadas». */
+  result: string;
+  /** La tarjeta está completada: se dibuja tachada. */
+  completed?: boolean;
+}
+
+export interface DocChainStep {
+  kind: 'person' | 'rule' | 'stop';
+  label: string;
+  detail?: string;
+  /** 0 = el cambio de la persona; 1, 2, 3… = nivel de la cadena. */
+  depth: number;
+}
 
 /** Iconos disponibles para los pasos de un diagrama (ver `DocBlocks.tsx`). */
 export type DocFlowIcon = 'person' | 'assistant' | 'zenth' | 'database' | 'agenda';

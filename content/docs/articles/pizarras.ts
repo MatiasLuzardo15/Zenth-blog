@@ -1,4 +1,4 @@
-import { h2, h3, list, note, p, path, steps, table, tip, warn } from '../blocks';
+import { boardMove, chain, h2, h3, list, note, p, path, rule, steps, table, tip, warn } from '../blocks';
 import type { DocArticle } from '../types';
 
 const UPDATED = '2026-09-23';
@@ -240,7 +240,7 @@ export const pizarrasArticles: DocArticle[] = [
     summary: 'Filtros y carga de trabajo, etiquetas compartidas, actividad, notificaciones, seguimiento y preferencias de una pizarra compartida.',
     keywords: ['filtros', 'filtrar', 'palabra clave', 'vencidas', 'sin fecha', 'coincidencia', 'carga', 'etiquetas', 'actividad', 'seguimiento', 'preferencias', 'observadores', 'notificaciones de pizarra', 'más opciones'],
     updated: '2026-09-29',
-    related: ['pizarras/automatizaciones-y-plantillas', 'pizarras/colaborar-en-tarjetas', 'enfoque/enfoque-y-equipo'],
+    related: ['pizarras/automatizaciones', 'pizarras/colaborar-en-tarjetas', 'enfoque/enfoque-y-equipo'],
     blocks: [
       p('En la cabecera de una pizarra compartida, **Más opciones de la pizarra** abre el panel **Colaboración**. Reúne todo lo que es del equipo y no de una tarjeta concreta.'),
 
@@ -273,6 +273,9 @@ export const pizarrasArticles: DocArticle[] = [
       h2('Actividad'),
       p('El registro de la pizarra: quién hizo qué, cuándo y sobre qué tarjeta. Pulsa un evento para abrir la tarjeta. Si lo generó una automatización, aparece «Zenth» como autor.'),
 
+      h2('Automatizaciones'),
+      p('Reglas que actúan solas cuando cambia una tarjeta: mover lo terminado, asignar, etiquetar, avisar… Se abren en una ventana propia desde **Colaboración › Automatizaciones**. Todo sobre cómo crearlas y cómo se ejecutan está en [Automatizaciones: reglas que trabajan solas](/docs/pizarras/automatizaciones).'),
+
       h2('Notificaciones de la pizarra'),
       p('Los avisos que esta pizarra te ha generado (asignaciones, comentarios, menciones…), con **Marcar todo como leído**. Se suman al [centro de notificaciones](/docs/primeros-pasos/busqueda-y-notificaciones) general.'),
 
@@ -296,24 +299,172 @@ export const pizarrasArticles: DocArticle[] = [
   },
 
   {
+    slug: 'automatizaciones',
+    category: 'pizarras',
+    title: 'Automatizaciones: reglas que trabajan solas',
+    summary: 'Cómo crear reglas «Cuando → Si → Entonces» que mueven, completan, asignan, etiquetan o avisan por ti, cómo se ejecutan y cómo revisar qué hizo cada una.',
+    keywords: [
+      'automatización', 'automatizaciones', 'reglas', 'regla', 'butler', 'trello', 'cuando', 'si', 'entonces',
+      'disparador', 'condición', 'acción', 'mover al completar', 'finalizadas', 'archivar', 'asignar', 'etiqueta',
+      'checklist', 'comentar', 'avisar', 'historial', 'encadenar', 'bot',
+    ],
+    updated: '2026-09-29',
+    related: ['pizarras/menu-de-colaboracion', 'pizarras/tarjetas-y-bandeja-rapida', 'integraciones/zenth-mcp'],
+    blocks: [
+      p('Una **automatización** es una regla de la pizarra: **cuando** pasa algo con una tarjeta, **si** la tarjeta cumple unas condiciones, **entonces** Zenth hace una o varias cosas por ti. Sirve para que el tablero se ordene solo: llevar lo terminado a «Finalizadas», asignar a quien empieza una tarjeta, poner fechas, avisar al equipo…'),
+      rule(
+        'Una regla se lee de izquierda a derecha, igual que en el editor: **cuando** pasa algo, **si** la tarjeta cumple todas las condiciones, **entonces** Zenth hace las acciones en orden. Si alguna condición no se cumple, la regla no hace nada.',
+        {
+          when: 'Se completa una tarjeta',
+          whenScope: 'en cualquier lista',
+          conditions: ['No tiene responsable', 'Tiene la etiqueta **Urgente**'],
+          actions: ['Moverla a **Finalizadas**, arriba', 'Avisar a la pizarra'],
+        },
+      ),
+
+      h2('Dónde están'),
+      path('Pizarra', 'Más opciones de la pizarra', 'Colaboración', 'Automatizaciones'),
+      p('Se abre una ventana con las reglas de la pizarra a la izquierda y el editor a la derecha. En el móvil ocupa toda la pantalla y muestra una cosa a la vez. El enlace **Cómo funciona** de esa ventana trae aquí.'),
+      note('Solo quien **administra** la pizarra crea, edita, activa o borra reglas. Los demás miembros pueden abrir la ventana para ver qué reglas hay y qué hicieron.'),
+
+      h2('Crear una regla'),
+      steps(
+        'Pulsa **Nueva regla**, o elige una de las plantillas del panel de inicio para partir de algo hecho.',
+        '**Cuando**: elige el evento que la dispara y, si quieres, acótalo a una lista, una etiqueta o una persona.',
+        '**Si** (opcional): añade condiciones. Tienen que cumplirse **todas** para que la regla actúe.',
+        '**Entonces**: añade una o más acciones. Se aplican en el orden de la lista; usa las flechas para reordenarlas.',
+        'Revisa la **vista previa**: la regla entera escrita en una frase, por ejemplo «Cuando se completa una tarjeta: moverla a Finalizadas».',
+        'Ponle un nombre (si lo dejas vacío, Zenth usa la frase de la regla) y pulsa **Crear regla**. Queda activa al instante.',
+      ),
+      p('Si falta algo —una lista sin elegir, un mensaje vacío— el editor te lo dice antes de guardar. La base de datos vuelve a comprobarlo al guardar, así que una regla nunca queda a medias.'),
+
+      h2('Cuando: lo que dispara una regla'),
+      table(
+        ['Evento', 'Ocurre cuando…', 'Se puede acotar a'],
+        ['Se crea una tarjeta', 'Alguien crea una tarjeta en la pizarra.', 'Una lista'],
+        ['Una tarjeta entra en una lista', 'Una tarjeta pasa a otra lista (arrastrándola, desde el editor o desde otra regla).', 'La lista de destino'],
+        ['Se completa una tarjeta', 'Alguien marca la tarjeta como completada.', 'Una lista'],
+        ['Se reabre una tarjeta', 'Una tarjeta completada vuelve a estar pendiente.', 'Una lista'],
+        ['Se asigna a alguien', 'Se añade un responsable a la tarjeta.', 'Una persona'],
+        ['Se añade una etiqueta', 'La tarjeta recibe una etiqueta compartida.', 'Una etiqueta'],
+        ['Se marca el último paso de la checklist', 'Se completa el último paso pendiente de las checklists de la tarjeta.', '—'],
+      ),
+      note('El evento ocurre venga de donde venga el cambio: la app en el ordenador o el móvil, Agenda, otra regla o tu asistente conectado por [Zenth MCP](/docs/integraciones/zenth-mcp).'),
+
+      h2('Si: condiciones'),
+      p('Las condiciones miran cómo quedó la tarjeta **después** del cambio. Son opcionales y puedes combinar hasta diez.'),
+      table(
+        ['Condición', 'Se cumple si la tarjeta…'],
+        ['Está en la lista / No está en la lista', 'Está (o no) en la lista elegida.'],
+        ['Tiene la etiqueta / No tiene la etiqueta', 'Tiene (o no) esa etiqueta compartida.'],
+        ['Está asignada a', 'Tiene a esa persona entre sus responsables.'],
+        ['No tiene responsable', 'No tiene a nadie asignado.'],
+        ['Tiene fecha / No tiene fecha', 'Tiene (o no) una fecha.'],
+        ['Está vencida', 'Tiene una fecha anterior a hoy y no está completada. «Hoy» es el de la zona horaria de quien hizo el cambio.'],
+        ['Está completada / No está completada', 'Está (o no) marcada como completada.'],
+      ),
+
+      h2('Entonces: acciones'),
+      table(
+        ['Acción', 'Qué hace'],
+        ['Moverla a la lista', 'La lleva a otra lista, **al final** o **arriba**. No puede llevarla a Completadas: para eso está «Archivarla».'],
+        ['Completarla / Reabrirla', 'La marca como completada o la devuelve a pendiente. Completada, se queda tachada en su lista.'],
+        ['Archivarla', 'La completa (si no lo estaba) y la saca de su lista hacia el [historial de completadas](/docs/agenda/historial-de-completadas).'],
+        ['Asignarla a', 'Añade a un miembro concreto como responsable.'],
+        ['Asignarla a quien hizo el cambio', 'Añade como responsable a la persona que movió, creó o cambió la tarjeta.'],
+        ['Quitar a los responsables', 'Deja la tarjeta sin nadie asignado.'],
+        ['Añadir / Quitar la etiqueta', 'Pone o quita una etiqueta compartida.'],
+        ['Ponerle fecha', 'Le pone la fecha de hoy o de dentro de N días (hasta 365).'],
+        ['Quitarle la fecha', 'La deja sin fecha.'],
+        ['Añadir una checklist', 'Crea una checklist con título y hasta 20 pasos.'],
+        ['Comentar', 'Publica un comentario en la tarjeta.'],
+        ['Avisar a la pizarra / a los responsables', 'Manda un aviso con tu mensaje a todos los miembros o solo a los responsables. Quien hizo el cambio no se avisa a sí mismo.'],
+      ),
+
+      h2('Ejemplos'),
+      boardMove(
+        'La regla «Cuando se completa una tarjeta: moverla a Finalizadas» en acción. Tú solo marcas la tarjeta; la regla la lleva a su sitio en el mismo instante, y llega tachada hasta que la archives.',
+        {
+          lists: ['Alta', 'En curso', 'Finalizadas'],
+          card: 'Revisar contraste',
+          from: 'En curso',
+          to: 'Finalizadas',
+          trigger: 'Completas la tarjeta en En curso',
+          result: 'La regla la lleva a Finalizadas',
+          completed: true,
+        },
+      ),
+      table(
+        ['Quieres…', 'Regla'],
+        ['Que lo terminado se junte en un sitio', 'Cuando se completa una tarjeta → moverla a Finalizadas.'],
+        ['Que quien empieza algo quede como responsable', 'Cuando una tarjeta entra en En curso, si no tiene responsable → asignarla a quien hizo el cambio.'],
+        ['Cerrar tarjetas por sus pasos', 'Cuando se marca el último paso de la checklist → completarla.'],
+        ['Priorizar lo urgente', 'Cuando se añade la etiqueta Urgente → moverla a Alta (arriba) y avisar a los responsables.'],
+        ['Preparar cada tarjeta nueva', 'Cuando se crea una tarjeta en Ideas → añadir la checklist «Antes de empezar» y ponerle fecha dentro de 7 días.'],
+        ['Limpiar sin pensar', 'Cuando se completa una tarjeta en Finalizadas → archivarla.'],
+      ),
+
+      h2('Cómo se ejecutan'),
+      list(
+        '**Al instante y en el servidor.** La regla corre en la base de datos justo después del cambio, aunque tengas la app cerrada o el cambio venga de otra persona.',
+        '**En orden.** Si varias reglas escuchan el mismo evento, corren en el orden en que se crearon, y cada una ve la tarjeta como la dejó la anterior.',
+        '**Encadenadas, sin bucles.** Lo que hace una regla puede disparar otra (mover a En curso dispara «entra en En curso»), hasta tres niveles. Una regla no vuelve a dispararse dentro de su propia cadena, así que dos reglas que se mueven la tarjeta entre sí se detienen solas.',
+        '**Sin deshacer tu cambio.** Si una acción falla —por ejemplo, porque la etiqueta ya no existe— esa acción se salta y queda anotada en el historial; tu cambio y el resto de acciones siguen adelante.',
+        '**Con freno.** Una pizarra ejecuta como mucho 120 reglas por minuto. Si se supera, las reglas se pausan ese minuto y el historial lo muestra como «En pausa».',
+      ),
+      chain(
+        'Dos reglas que se mueven la tarjeta entre sí. La cadena no queda dando vueltas: cuando le toca otra vez a una regla que ya actuó, se detiene y la tarjeta se queda donde está.',
+        { kind: 'person', label: 'Mueves «Diseño» a **Alta**', depth: 0 },
+        { kind: 'rule', label: '«Alta a En curso» la mueve a **En curso**', detail: 'Se dispara porque la tarjeta entró en Alta.', depth: 1 },
+        { kind: 'rule', label: '«En curso a Alta» la devuelve a **Alta**', detail: 'Se dispara porque la tarjeta entró en En curso.', depth: 2 },
+        { kind: 'stop', label: '«Alta a En curso» ya no se repite', detail: 'Ya actuó en esta cadena: la tarjeta se queda en Alta y todo termina.', depth: 3 },
+      ),
+      warn('Una regla activa actúa sobre las tarjetas de **todo el equipo**, no solo las tuyas. Antes de activar una que mueva, archive o quite responsables, piensa en qué tarjetas la van a disparar.', 'Piénsalo antes de activarla'),
+
+      h2('Historial y avisos'),
+      p('Al abrir una regla, la pestaña **Historial** muestra cada vez que se ejecutó durante los últimos 30 días: sobre qué tarjeta (pulsa para abrirla), cuándo y cómo terminó.'),
+      table(
+        ['Estado', 'Significa'],
+        ['Hecho', 'Todas las acciones se aplicaron.'],
+        ['Con errores', 'Algunas acciones no se pudieron aplicar; el historial dice cuáles y por qué.'],
+        ['Falló', 'No se pudo aplicar ninguna acción.'],
+        ['En pausa', 'La pizarra superó el límite de ejecuciones de ese minuto.'],
+      ),
+      p('En la lista de reglas, una marca naranja avisa si la última ejecución falló o si la regla **usa algo que ya no existe** (una lista, etiqueta o persona borrada). Lo que hacen las reglas también aparece en la **Actividad** de la pizarra, y sus avisos llegan por correo bajo la categoría **Automatizaciones**, que puedes apagar en [Notificaciones](/docs/cuenta/notificaciones).'),
+
+      h2('Editar, pausar y borrar'),
+      list(
+        'Pulsa una regla para abrirla y cambiarla; **Guardar** aplica los cambios y **Descartar** los deshace.',
+        'El interruptor de cada regla la **activa o desactiva** sin perderla. Una regla desactivada no hace nada.',
+        '**Duplicar** crea una copia para hacer una variante sin tocar la original.',
+        'El icono de papelera la **borra**, después de confirmarlo.',
+      ),
+      note('Los comentarios, checklists y avisos que crea una regla aparecen **a nombre de quien la guardó por última vez**. Si editas una regla, pasa a estar a tu nombre; activarla o desactivarla no cambia su autor.'),
+
+      h2('Desde tu asistente'),
+      p('Con [Zenth MCP](/docs/integraciones/zenth-mcp), un asistente como Claude puede **listar** las reglas de una pizarra, **crear** reglas nuevas (quedan activas al momento) y **activarlas o desactivarlas**. Borrar una regla solo se puede desde la app.'),
+
+      h2('Límites'),
+      list(
+        'Hasta 10 condiciones y 10 acciones por regla.',
+        'El nombre admite 80 caracteres; los comentarios, 2000; los avisos, 300.',
+        'Las fechas se ponen entre hoy y dentro de 365 días; una checklist lleva hasta 20 pasos.',
+        'Por ahora las reglas responden a cambios en las tarjetas. Las reglas programadas —«cada lunes», «cuando una tarjeta vence mañana»— todavía no están disponibles.',
+      ),
+      tip('Empieza por una regla pequeña, mira su historial un par de días y luego sumale condiciones. Es más fácil entender qué hace una regla simple que corregir una enorme.'),
+    ],
+  },
+
+  {
     slug: 'automatizaciones-y-plantillas',
     category: 'pizarras',
-    title: 'Automatizaciones y plantillas',
-    summary: 'Reglas rápidas que actúan cuando una tarjeta se crea, se mueve o se completa, y plantillas de tarjeta, lista o pizarra para no repetir trabajo.',
-    keywords: ['automatización', 'reglas', 'plantilla', 'plantillas', 'bot', 'avisar al completar', 'fecha para mañana', 'reutilizar'],
-    updated: UPDATED,
-    related: ['pizarras/menu-de-colaboracion', 'pizarras/colaborar-en-tarjetas'],
+    title: 'Plantillas de tarjeta, lista y pizarra',
+    summary: 'Guarda tarjetas, listas o pizarras enteras como plantilla para no repetir el mismo trabajo cada vez.',
+    keywords: ['plantilla', 'plantillas', 'reutilizar', 'modelo', 'duplicar', 'tarjeta modelo', 'lista modelo', 'pizarra modelo'],
+    updated: '2026-09-29',
+    related: ['pizarras/automatizaciones', 'pizarras/menu-de-colaboracion', 'pizarras/colaborar-en-tarjetas'],
     blocks: [
-      h2('Automatizaciones'),
-      p('Una automatización es una regla de la pizarra: cuando ocurre algo con una tarjeta, Zenth hace algo por ti. Están en **Más opciones de la pizarra › Automatizaciones**. Lo que las dispara puede ser que una tarjeta se **cree**, se **mueva** a otra lista, se **complete** o se **asigne**.'),
-      p('Para empezar hay tres reglas rápidas:'),
-      table(
-        ['Regla', 'Qué hace'],
-        ['Avisar al completar', 'Cuando se completa una tarjeta, avisa a la pizarra.'],
-        ['Avisar al iniciar trabajo', 'Avisa a la pizarra cuando una tarjeta entra en la lista de trabajo en curso (la que se llame «En curso», «Progreso» o similar; si no hay, la segunda lista).'],
-        ['Nueva tarjeta vence mañana', 'A cada tarjeta nueva le pone fecha de mañana.'],
-      ),
-      p('Cada regla se puede activar o desactivar. Lo que hacen las automatizaciones aparece en la **Actividad** con «Zenth» como autor, y por correo llegan bajo la categoría **Automatizaciones**, que puedes apagar en [Notificaciones](/docs/cuenta/notificaciones).'),
+      note('Las automatizaciones tienen ahora su propia guía: [Automatizaciones: reglas que trabajan solas](/docs/pizarras/automatizaciones).'),
 
       h2('Plantillas'),
       p('Guarda un proceso que se repite para no montarlo cada vez. Hay tres tipos:'),

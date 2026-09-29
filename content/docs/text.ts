@@ -36,6 +36,15 @@ export const blockText = (block: DocBlock): string => {
       return [...block.head, ...block.rows.flat()].map(stripInline).join(' ');
     case 'flow':
       return [block.caption, ...block.nodes.flatMap(node => [node.label, node.detail ?? ''])].map(stripInline).join(' ');
+    case 'rule':
+      return [
+        block.caption, 'Cuando', block.rule.when, block.rule.whenScope ?? '',
+        'Si', ...block.rule.conditions, 'Entonces', ...block.rule.actions,
+      ].map(stripInline).join(' ');
+    case 'boardMove':
+      return [block.caption, block.move.trigger, block.move.result, block.move.card, ...block.move.lists].map(stripInline).join(' ');
+    case 'chain':
+      return [block.caption, ...block.steps.flatMap(step => [step.label, step.detail ?? ''])].map(stripInline).join(' ');
   }
 };
 
