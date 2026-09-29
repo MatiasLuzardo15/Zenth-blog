@@ -66,9 +66,9 @@ export const bibliotecaArticles: DocArticle[] = [
     category: 'biblioteca',
     title: 'Notas: el editor de Zenth',
     summary: 'Escribe con bloques (menú «/»), formato, tablas, imágenes, buscar y reemplazar, modo concentración, índice y exportación a Markdown, HTML o PDF.',
-    keywords: ['nota', 'editor', 'markdown', 'bloques', 'slash', 'formato', 'imágenes', 'tabla', 'exportar', 'pdf', 'índice', 'concentración', 'buscar y reemplazar', 'autoguardado', 'portada', 'etiquetas'],
-    updated: UPDATED,
-    related: ['atajos/atajos-del-editor-de-notas', 'biblioteca/compartir-notas-y-lienzos', 'agenda/detalle-de-una-tarea'],
+    keywords: ['nota', 'editor', 'markdown', 'bloques', 'slash', 'formato', 'imágenes', 'tabla', 'exportar', 'pdf', 'índice', 'concentración', 'buscar y reemplazar', 'autoguardado', 'portada', 'etiquetas', 'historial', 'versiones'],
+    updated: '2026-09-29',
+    related: ['atajos/atajos-del-editor-de-notas', 'biblioteca/historial-de-versiones', 'biblioteca/compartir-notas-y-lienzos', 'agenda/detalle-de-una-tarea'],
     blocks: [
       p('Las notas de Zenth usan un editor de bloques pensado para pensar por escrito: empiezas a escribir y le das forma sobre la marcha, sin salir del teclado.'),
 
@@ -115,11 +115,13 @@ export const bibliotecaArticles: DocArticle[] = [
         '**Modo concentración** (`Ctrl` + `Shift` + `F`): oculta lo que sobra para escribir sin ruido.',
         '**Ancho del texto:** alterna entre columna de lectura y ancho completo.',
       ),
+      p('En pantallas anchas, una barra al pie muestra los caracteres, los títulos y el ancho del texto. En el móvil no aparece, para dejarle más alto a la escritura.'),
 
       h2('Etiquetas, compartir y exportar'),
       list(
         '**Etiquetar la nota** para agruparla con tus tareas.',
         '**Compartir** con otras personas: ver [Compartir notas y lienzos](/docs/biblioteca/compartir-notas-y-lienzos).',
+        '**Historial de versiones:** ve y restaura estados anteriores de la nota. Ver [Historial de versiones](/docs/biblioteca/historial-de-versiones).',
         '**Exportar:** copiar como Markdown o como texto; descargar como `.md`, `.html` o PDF; o imprimir.',
         '**Mover a la papelera:** la nota se puede recuperar. Ver [Papelera](/docs/cuenta/papelera).',
       ),
@@ -171,8 +173,8 @@ export const bibliotecaArticles: DocArticle[] = [
     title: 'Compartir notas y lienzos',
     summary: 'Invita por correo con permiso de ver, sugerir o editar, trabaja en la misma nota en vivo, revisa sugerencias y guarda lo que te comparten.',
     keywords: ['compartir nota', 'colaborar', 'sugerencias', 'permisos', 'puede editar', 'puede ver', 'compartidos conmigo', 'presencia', 'tiempo real', 'invitar', 'guardar en mi biblioteca', 'modo sugerencia'],
-    updated: UPDATED,
-    related: ['biblioteca/notas', 'biblioteca/lienzos', 'privacidad/quien-ve-que'],
+    updated: '2026-09-29',
+    related: ['biblioteca/revisar-sugerencias', 'biblioteca/historial-de-versiones', 'biblioteca/notas', 'privacidad/quien-ve-que'],
     blocks: [
       p('Una nota o un lienzo son tuyos hasta que los compartes. Al compartirlos, otras personas pueden verlos o trabajar en ellos contigo, sin copias ni versiones cruzadas.'),
 
@@ -194,7 +196,7 @@ export const bibliotecaArticles: DocArticle[] = [
       h2('Trabajar a la vez'),
       list(
         '**Presencia:** ves los avatares de quienes están en la nota o el lienzo y qué hacen («Está escribiendo», «Está sugiriendo», «Está viendo la nota», «Está dibujando»).',
-        '**Cambios en vivo:** lo que escribe cada persona llega a las demás sin recargar.',
+        '**Cambios en vivo:** lo que escribe cada persona llega a las demás sin recargar. También lo que agrega un asistente conectado con [Zenth MCP](/docs/integraciones/zenth-mcp) y lo que escribes en otra pestaña con la misma nota abierta.',
       ),
 
       h2('Modos: edición, sugerencias y visualización'),
@@ -207,8 +209,8 @@ export const bibliotecaArticles: DocArticle[] = [
       ),
       steps(
         'Quien tiene permiso de sugerir cambia al modo **Sugerencias**, edita y pulsa **Enviar sugerencia**.',
-        'Quien puede editar ve un panel con las propuestas.',
-        'Elige **Aplicar** o **Descartar** en cada una. Zenth confirma «Sugerencia aplicada» o «Sugerencia descartada».',
+        'Quien puede editar ve la sugerencia en el panel de la derecha, separada en cambios.',
+        'Acepta o rechaza cada cambio por separado, o todos juntos. Ver [Revisar sugerencias](/docs/biblioteca/revisar-sugerencias).',
       ),
 
       h2('Cuando alguien comparte algo contigo'),
@@ -221,6 +223,109 @@ export const bibliotecaArticles: DocArticle[] = [
       h2('Compartir con una pizarra'),
       p('Además de personas, una nota o lienzo puede darse a los **miembros de una pizarra** al vincularlo a una tarjeta: elige entre **Solo yo**, **La pizarra puede leer** o **La pizarra puede editar**. Ver [Vincular documentos a tareas](/docs/biblioteca/vincular-documentos-a-tareas).'),
       warn('Compartir con permiso de edición deja que otras personas cambien tu texto. Revisa el destinatario y el permiso antes de confirmar.', 'Antes de dar permiso de edición'),
+    ],
+  },
+
+  {
+    slug: 'revisar-sugerencias',
+    category: 'biblioteca',
+    title: 'Revisar sugerencias',
+    summary: 'Revisa las propuestas de otras personas y de tu asistente de IA como en Google Docs: cada cambio en su lugar, con lo anterior tachado, y decide uno por uno.',
+    keywords: ['sugerencias', 'revisar', 'propuesta', 'aceptar', 'rechazar', 'aplicar', 'descartar', 'cambios', 'control de cambios', 'google docs', 'ia', 'asistente', 'mcp', 'conflicto', 'tachado'],
+    updated: '2026-09-29',
+    related: ['biblioteca/compartir-notas-y-lienzos', 'biblioteca/historial-de-versiones', 'integraciones/zenth-mcp'],
+    blocks: [
+      p('Una **sugerencia** es una propuesta de cambios sobre una nota que no toca el texto hasta que alguien la acepta. Puede venir de una persona con permiso de **sugerir**, que escribió en el modo Sugerencias, o de tu asistente de IA conectado con [Zenth MCP](/docs/integraciones/zenth-mcp). Las del asistente llevan la marca **IA**.'),
+
+      h2('El panel de sugerencias'),
+      list(
+        'En escritorio, las sugerencias aparecen en una **columna a la derecha** del texto, que se abre sola cuando hay alguna. El botón con el contador, en la cabecera de la nota, la muestra u oculta.',
+        'En el móvil, el mismo botón abre una **hoja desde abajo**.',
+        'Cada sugerencia muestra quién la hizo, la fecha y su **resumen completo**, sin cortar.',
+        'Debajo, la sugerencia está separada en **cambios**: cada uno es una tarjeta que dice qué hace (**Reemplaza**, **Agrega**, **Quita** o **Cambia el título**) y muestra el texto entero.',
+        'Cuando un párrafo se reemplaza por otro, la tarjeta lo muestra en una sola línea: las palabras que se van, **tachadas**, y las que llegan, **marcadas**.',
+      ),
+
+      h2('Ver un cambio en su lugar'),
+      steps(
+        'Pulsa la tarjeta de un cambio.',
+        'La nota pasa a **modo revisión**, de solo lectura: salta al lugar del cambio y lo destaca.',
+        'En el texto, lo anterior aparece **tachado** y lo nuevo **marcado**. En un párrafo de solo texto, la marca es palabra por palabra.',
+        'Pulsa otras tarjetas para recorrer los cambios. **Terminar revisión** vuelve a la edición normal.',
+      ),
+
+      h2('Aceptar o rechazar'),
+      table(
+        ['Acción', 'Qué hace'],
+        ['Aceptar este cambio', 'Aplica solo ese cambio a la nota. Los demás siguen pendientes.'],
+        ['Rechazar este cambio', 'Lo descarta. Queda recordado: no vuelve a aparecer al recargar.'],
+        ['Aceptar todo', 'Aplica todos los cambios que se pueden aplicar, de una vez.'],
+        ['Rechazar todo', 'Descarta la sugerencia completa.'],
+      ),
+      p('Cuando a una sugerencia no le quedan cambios pendientes, **se cierra sola**. Antes de aplicar cambios, Zenth guarda una versión de la nota en el [historial](/docs/biblioteca/historial-de-versiones), así que siempre puedes volver atrás.'),
+      note('Si alguien editó la nota **en esa misma parte** después de que se hizo la propuesta, la tarjeta lo avisa y ese cambio **solo se puede rechazar**: aplicarlo pisaría lo que se escribió después. Los cambios en otras partes de la nota se aplican sin problema.', 'Cuando la nota cambió después'),
+      p('Aceptar y rechazar es para el **propietario** y las personas con permiso de **edición**. Quien solo puede sugerir o ver, ve las sugerencias pero no las decide.'),
+      tip('Si le pides a tu asistente que corrija o reescriba una nota, no la cambia: deja una sugerencia con la marca **IA** para que la revises aquí.'),
+    ],
+  },
+
+  {
+    slug: 'historial-de-versiones',
+    category: 'biblioteca',
+    title: 'Historial de versiones',
+    summary: 'Vuelve a cualquier estado anterior de una nota. Zenth guarda versiones mientras escribes y siempre antes de que la cambie la IA; puedes ponerles nombre y restaurarlas.',
+    keywords: ['historial', 'versiones', 'versión anterior', 'restaurar', 'deshacer', 'recuperar', 'volver atrás', 'nombre de versión', 'copia', 'respaldo', 'google docs', 'ia'],
+    updated: '2026-09-29',
+    related: ['biblioteca/notas', 'biblioteca/revisar-sugerencias', 'cuenta/papelera'],
+    blocks: [
+      p('El **historial de versiones** guarda estados anteriores de tus notas para que puedas verlos y volver a cualquiera. Funciona como en Google Docs: la nota actual va arriba y, debajo, las versiones anteriores.'),
+
+      h2('Abrir el historial'),
+      steps(
+        'Abre una nota.',
+        'Pulsa el botón **Historial** de la cabecera. En escritorio se abre una columna a la derecha; en el móvil, una hoja desde abajo.',
+        'Arriba está la **Versión actual** y, debajo, las anteriores agrupadas por **Hoy**, **Ayer** y fecha, con la hora, quién escribió y su nombre si tiene.',
+      ),
+
+      h2('Cuándo se guarda una versión'),
+      list(
+        'Mientras escribes, **como máximo una cada 10 minutos**.',
+        'Cuando **otra persona** empieza a editar la nota.',
+        'Siempre **antes de un cambio de la IA**: si un asistente conectado agrega algo, la versión de antes queda guardada.',
+        'Siempre **antes de aplicar sugerencias** y **antes de restaurar** otra versión.',
+        'Cuando tú **le pones nombre** a la versión actual.',
+      ),
+      p('Las versiones guardadas por un motivo especial lo dicen: «Antes de un cambio de la IA», «Antes de aplicar sugerencias» o «Antes de restaurar». Una nota vacía no genera versiones.'),
+
+      h2('Ver y restaurar una versión'),
+      steps(
+        'Pulsa una versión de la lista.',
+        'La nota pasa a solo lectura y marca en su lugar **lo que cambiaría si la restauras**: lo que se iría, **tachado**; lo que volvería, **marcado**. La cabecera dice qué versión estás viendo.',
+        'Pulsa **Restaurar** y confirma. Si solo querías mirar, pulsa **Volver a la actual**.',
+      ),
+      note('Restaurar **no borra nada**: antes de restaurar, Zenth guarda la versión que tenías como «Antes de restaurar». Si te arrepientes, restaura esa.', 'Siempre puedes deshacerlo'),
+
+      h2('Ponerle nombre'),
+      p('Pulsa **Ponerle nombre** en la versión actual, o en una anterior mientras la ves, y escribe algo como «Antes de la reunión con el cliente». Las versiones con nombre se ven en negrita y **nunca se borran**.'),
+
+      h2('Cuánto tiempo se conservan'),
+      p('Como en Google Docs, el historial no tiene un tope de cantidad: con el tiempo, Zenth va juntando las versiones viejas para no ocupar espacio de más.'),
+      table(
+        ['Antigüedad', 'Qué se conserva'],
+        ['Última semana', 'Todas las versiones.'],
+        ['De 7 a 90 días', 'La última versión de cada día.'],
+        ['Más de 90 días', 'La última versión de cada semana.'],
+        ['Con nombre', 'Siempre, sin importar la antigüedad.'],
+      ),
+      p('Si eliminas una nota de forma definitiva desde la [Papelera](/docs/cuenta/papelera), su historial se elimina con ella.'),
+
+      h2('Quién puede verlo'),
+      list(
+        'El **propietario** y las personas con permiso de **edición** ven el historial y restauran versiones.',
+        'Quien solo puede **ver** o **sugerir** no ve el historial: una versión anterior puede tener texto que se quitó a propósito antes de compartir.',
+        'Un asistente de IA conectado **no puede** restaurar versiones ni ponerles nombre. Eso lo decides siempre tú.',
+      ),
+      tip('Por ahora el historial es para **notas**. Los lienzos todavía no lo tienen.'),
     ],
   },
 
