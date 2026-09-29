@@ -57,7 +57,7 @@ export const ayudaArticles: DocArticle[] = [
       note('En **iPhone y iPad** se puede compartir pantalla desde **iOS y iPadOS 27**: si no ves el botón, actualiza el sistema. En versiones anteriores el navegador no lo permite, aunque la voz sí funciona. En otros navegadores, si cancelaste el selector, vuelve a pulsar **Compartir pantalla**. Solo una persona puede compartir a la vez.'),
       h2('Si pasa con la llamada en curso'),
       p('La misma ventana de ayuda se abre **dentro de la llamada**, por encima de la conversación, cuando intentas activar el micrófono y el navegador no lo permite. El botón del micrófono queda con una **marca naranja** mientras dure el problema; si cierras la ventana, vuelve a pulsar el micrófono para reabrirla. En cuanto permites el micrófono desde el candado, la ventana se cierra sola y el micrófono se enciende, sin salir ni volver a entrar.'),
-      p('Si nada de esto funciona, prueba con otro navegador (Chrome y Edge admiten todas las funciones) y escríbeme si persiste.'),
+      p('Si nada de esto funciona, prueba con otro navegador (Chrome y Edge admiten todas las funciones) y escríbenos si persiste.'),
     ],
   },
 
@@ -99,7 +99,7 @@ export const ayudaArticles: DocArticle[] = [
       h2('No veo el botón de la cámara'),
       list(
         'Si eres **invitado** en una reunión rápida, el anfitrión puede haber desactivado **Usar micrófono y cámara** para los invitados.',
-        'Si no aparece en ninguna llamada, puede que el servicio de llamadas aún no tenga la cámara habilitada. Escríbeme si persiste.',
+        'Si no aparece en ninguna llamada, puede que el servicio de llamadas aún no tenga la cámara habilitada. Escríbenos si persiste.',
       ),
       note('Con un **lienzo** abierto, la tecla **V** es la herramienta de selección del lienzo y no enciende la cámara. Usa el botón.'),
     ],
@@ -152,7 +152,7 @@ export const ayudaArticles: DocArticle[] = [
 
       h2('6. Enfoque en marcha'),
       p('Si activaste **Silenciar avisos no urgentes** en Ajustes › Enfoque, los avisos de progreso y logros esperan al final de la sesión. Los errores llegan igual.'),
-      tip('Si has revisado todo y sigue sin llegar, cuéntame qué canal esperabas, en qué dispositivo y con qué navegador, y lo miro.'),
+      tip('Si has revisado todo y sigue sin llegar, cuéntanos qué canal esperabas, en qué dispositivo y con qué navegador, y lo revisaremos.'),
     ],
   },
 
@@ -268,7 +268,7 @@ export const ayudaArticles: DocArticle[] = [
 
       h2('El enlace del correo no funciona'),
       p('Los enlaces de confirmación y de restablecimiento de contraseña caducan. Pide uno nuevo desde la pantalla de inicio de sesión. Si el navegador no abre la aplicación, copia el enlace y pégalo en la barra de direcciones.'),
-      tip('Si sigues sin poder entrar, escríbeme a **zenth.soporte@gmail.com** desde la dirección con la que te registraste e indícame qué mensaje ves exactamente.'),
+      tip('Si sigues sin poder entrar, escríbenos a **zenth.soporte@gmail.com** desde la dirección con la que te registraste e indícanos qué mensaje ves exactamente.'),
     ],
   },
 ];

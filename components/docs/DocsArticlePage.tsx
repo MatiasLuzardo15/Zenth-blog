@@ -103,12 +103,12 @@ const ArticleView: React.FC<{ article: DocArticle; category: DocCategory }> = ({
           <div>
             <h2 className="t-headline text-ink">¿Algo no coincide con lo que ves?</h2>
             <p className="t-body mt-2 max-w-md text-ink-muted">
-              La documentación sigue a Zenth de cerca, pero puede quedarse atrás. Cuéntamelo y lo corrijo.
+              La documentación sigue a Zenth de cerca, pero puede quedarse atrás. Cuéntanoslo y lo corregiremos.
             </p>
           </div>
           <a href={feedbackHref} target="_blank" rel="noopener noreferrer" className="fr-btn fr-btn-primary shrink-0">
             <Mail className="h-4 w-4" />
-            Avisarme
+            Avisarnos
             <ArrowUpRight className="h-4 w-4" />
           </a>
         </aside>

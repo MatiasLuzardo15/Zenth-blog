@@ -116,7 +116,7 @@ const DocsHome: React.FC = () => {
           <div>
             <h2 className="t-headline text-ink">¿Una duda rápida?</h2>
             <p className="t-body mt-2 text-ink-muted">
-              Las preguntas frecuentes responden lo que más me escriben, en una o dos frases.
+              Las preguntas frecuentes responden lo que más nos escriben, en una o dos frases.
             </p>
           </div>
           <Link to="/faq" className="fr-btn fr-btn-secondary">
@@ -128,8 +128,8 @@ const DocsHome: React.FC = () => {
           <div>
             <h2 className="t-headline text-ink">¿Falta algo?</h2>
             <p className="t-body mt-2 text-ink-muted">
-              Si no encuentras una respuesta o algo no coincide con lo que ves en la app, escríbeme.
-              Contesto yo, no un formulario.
+              Si no encuentras una respuesta o algo no coincide con lo que ves en la app, escríbenos.
+              Te responderemos por correo.
             </p>
           </div>
           <a
@@ -139,7 +139,7 @@ const DocsHome: React.FC = () => {
             className="fr-btn fr-btn-primary"
           >
             <Mail className="h-4 w-4" />
-            Escribirme
+            Escribirnos
             <ArrowUpRight className="h-4 w-4" />
           </a>
         </div>

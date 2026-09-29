@@ -183,7 +183,7 @@ const DocsSearch: React.FC<DocsSearchProps> = ({ open, initialQuery = '', onClos
               <p className="t-body-lg text-ink">Nada por «{query.trim()}».</p>
               <p className="t-body mx-auto mt-2 max-w-sm text-ink-muted">
                 Prueba con menos palabras o con otro nombre (por ejemplo «reunión» en vez de «llamada»).
-                Si falta algo en la documentación, cuéntamelo.
+                Si falta algo en la documentación, cuéntanoslo.
               </p>
               <a
                 href="https://mail.google.com/mail/?view=cm&fs=1&to=zenth.soporte@gmail.com&su=Falta%20en%20la%20documentaci%C3%B3n"
@@ -191,7 +191,7 @@ const DocsSearch: React.FC<DocsSearchProps> = ({ open, initialQuery = '', onClos
                 rel="noopener noreferrer"
                 className="fr-btn fr-btn-secondary mt-6"
               >
-                Escribirme
+                Escribirnos
                 <ArrowUpRight className="h-4 w-4" />
               </a>
             </div>

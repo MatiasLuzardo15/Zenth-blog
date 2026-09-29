@@ -155,7 +155,7 @@ const FAQS: FAQEntry[] = [
     {
         question: '¿Cómo elimino mi cuenta o mis datos?',
         answer:
-            'Puedes borrar contenido desde la Papelera y desconectar Google Drive y Calendar desde Ajustes. Para eliminar tu cuenta y tus datos, escríbeme desde el correo de tu cuenta: hoy no hay un botón para hacerlo dentro de la aplicación. Los detalles están en la política de privacidad.',
+            'Puedes borrar contenido desde la Papelera y desconectar Google Drive y Calendar desde Ajustes. Para eliminar tu cuenta y tus datos, escríbenos desde el correo de tu cuenta: hoy no hay un botón para hacerlo dentro de la aplicación. Los detalles están en la política de privacidad.',
     },
     {
         question: '¿Puedo usarlo en el teléfono?',
@@ -214,7 +214,7 @@ const FAQ = ({ onBack, onGoToDocs }: { onBack: () => void; onGoToDocs: () => voi
                 <p className="t-eyebrow">Soporte</p>
                 <h1 className="t-display-xl mt-4 text-ink">Preguntas frecuentes.</h1>
                 <p className="t-body-lg mt-6 max-w-xl text-ink-muted">
-                    Lo que más me preguntan por correo, respondido sin rodeos.
+                    Lo que más nos preguntan por correo, respondido sin rodeos.
                 </p>
 
                 <div className="mt-16 border-t border-hairline-soft">
@@ -240,7 +240,7 @@ const FAQ = ({ onBack, onGoToDocs }: { onBack: () => void; onGoToDocs: () => voi
                     <div>
                         <h2 className="t-headline text-ink">¿Sigues con dudas?</h2>
                         <p className="t-body mt-2 text-ink-muted">
-                            Escríbeme directamente. Contesto yo, no un formulario.
+                            Escríbenos directamente. Te responderemos por correo.
                         </p>
                     </div>
                     <a

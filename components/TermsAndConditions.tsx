@@ -69,7 +69,7 @@ const TermsAndConditions: React.FC<TermsAndConditionsProps> = ({ onBack }) => {
                 <Section n={1} title="Quién presta el Servicio">
                     <P>
                         Zenth es un proyecto independiente desarrollado y operado por <B>Matías Luzardo</B>,
-                        Uruguay. Puedes escribir a <a href="mailto:zenth.soporte@gmail.com" className="fr-link">zenth.soporte@gmail.com</a>.
+                        Uruguay. Puedes escribirnos a <a href="https://mail.google.com/mail/?view=cm&fs=1&to=zenth.soporte@gmail.com" target="_blank" rel="noopener noreferrer" className="fr-link">zenth.soporte@gmail.com</a>.
                     </P>
                 </Section>
 
@@ -298,7 +298,7 @@ const TermsAndConditions: React.FC<TermsAndConditionsProps> = ({ onBack }) => {
                 <Section n={19} title="Contacto">
                     <div className="fr-card">
                         <p className="t-body text-ink-muted">Responsable: Matías Luzardo · Uruguay</p>
-                        <p className="t-body mt-2 text-ink-muted">Correo: <a href="mailto:zenth.soporte@gmail.com" className="fr-link">zenth.soporte@gmail.com</a></p>
+                        <p className="t-body mt-2 text-ink-muted">Correo: <a href="https://mail.google.com/mail/?view=cm&fs=1&to=zenth.soporte@gmail.com" target="_blank" rel="noopener noreferrer" className="fr-link">zenth.soporte@gmail.com</a></p>
                         <p className="t-body mt-2 text-ink-muted">Web: <a href="https://zenth.space" className="fr-link">zenth.space</a></p>
                     </div>
                 </Section>

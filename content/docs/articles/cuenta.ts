@@ -192,7 +192,7 @@ export const cuentaArticles: DocArticle[] = [
       p('Ese botón elimina **tareas**, no tu cuenta. Tus notas, lienzos, ajustes y el resto de tus datos no se tocan.'),
 
       h2('Eliminar tu cuenta'),
-      p('Hoy no hay un botón para eliminar la cuenta dentro de la aplicación. Para eliminarla junto con tus datos, escribe a **zenth.soporte@gmail.com** desde el correo de tu cuenta. Antes, desconecta las integraciones que quieras revocar: los archivos de Google seguirán en tu Drive hasta que tú los elimines allí. Los detalles están en [Eliminar y exportar tus datos](/docs/privacidad/eliminar-y-exportar-tus-datos) y en la [Política de privacidad](/privacy).'),
+      p('Hoy no hay un botón para eliminar la cuenta dentro de la aplicación. Para eliminarla junto con tus datos, escríbenos a **zenth.soporte@gmail.com** desde el correo de tu cuenta. Antes, desconecta las integraciones que quieras revocar: los archivos de Google seguirán en tu Drive hasta que tú los elimines allí. Los detalles están en [Eliminar y exportar tus datos](/docs/privacidad/eliminar-y-exportar-tus-datos) y en la [Política de privacidad](/privacy).'),
     ],
   },
 

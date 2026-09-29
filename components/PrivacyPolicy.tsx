@@ -65,8 +65,8 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = ({ onBack }) => {
                         las comunicaciones operativas relacionadas con el Servicio.
                     </P>
                     <P>
-                        Para ejercer derechos o consultar cualquier tratamiento, escribe a{' '}
-                        <a href="mailto:zenth.soporte@gmail.com" className="fr-link">zenth.soporte@gmail.com</a>.
+                        Para ejercer derechos o consultar cualquier tratamiento, escríbenos a{' '}
+                        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=zenth.soporte@gmail.com" target="_blank" rel="noopener noreferrer" className="fr-link">zenth.soporte@gmail.com</a>.
                     </P>
                 </Section>
 
@@ -203,7 +203,7 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = ({ onBack }) => {
                     </P>
                     <div className="fr-card">
                         <p className="t-body text-ink-muted">Responsable: Matías Luzardo · Uruguay</p>
-                        <p className="t-body mt-2 text-ink-muted">Correo: <a href="mailto:zenth.soporte@gmail.com" className="fr-link">zenth.soporte@gmail.com</a></p>
+                        <p className="t-body mt-2 text-ink-muted">Correo: <a href="https://mail.google.com/mail/?view=cm&fs=1&to=zenth.soporte@gmail.com" target="_blank" rel="noopener noreferrer" className="fr-link">zenth.soporte@gmail.com</a></p>
                         <p className="t-body mt-2 text-ink-muted">Web: <a href="https://zenth.space" className="fr-link">zenth.space</a></p>
                     </div>
                 </Section>

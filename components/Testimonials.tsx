@@ -48,8 +48,8 @@ const Testimonials: React.FC = () => {
     <section id="reviews" className="scroll-mt-20 py-24 lg:py-32">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl">
-          <p className="t-eyebrow">Lo que me escriben</p>
-          <h2 className="t-display-lg mt-4 text-ink">Mensajes que llegan a mi bandeja.</h2>
+          <p className="t-eyebrow">Lo que nos escriben</p>
+          <h2 className="t-display-lg mt-4 text-ink">Mensajes que recibimos.</h2>
         </div>
 
         <div className="mt-14 grid gap-4 md:grid-cols-3">

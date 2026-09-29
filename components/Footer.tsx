@@ -91,7 +91,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
         <div className="mt-16 flex flex-col gap-2 border-t border-hairline-soft pt-8 sm:flex-row sm:items-center sm:justify-between">
           <p className="t-micro text-ink-muted">&copy; {new Date().getFullYear()} Zenth</p>
           <p className="t-micro text-ink-muted">
-            Escríbeme a{' '}
+            Escríbenos a{' '}
             <a
               href="https://mail.google.com/mail/?view=cm&fs=1&to=zenth.soporte@gmail.com"
               target="_blank"
