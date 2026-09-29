@@ -386,8 +386,6 @@ Olvídate de procesos de subida tediosos. En las Notas Zen, las imágenes fluyen
 - **Drag & Drop:** Arrastra archivos desde tu escritorio.
 - **Redimensionamiento Vivo:** Haz clic en cualquier imagen para ajustar su tamaño (de 25% a 100%) y maquetar tu nota como si fuera un artículo de revista.
 
----
-
 ## 4. El vínculo con tus tareas: "Expandir a nota"
 Esta es la función que lo cambia todo. ¿Tienes una tarea que se está volviendo compleja? Con un solo clic, puedes **Expandirla a una nota**. 
 
@@ -442,8 +440,6 @@ Puedes seguir el tema del sistema o elegir Claro, Oscuro y Zen (este último con
 ### 6. Vista Panorámica de tu Vida (Pixel View)
 ¿Cómo fue tu año? Con nuestra vista de Pixel View, cada día es un punto de color en tu lienzo anual. Identifica patrones, celebra meses de alta energía y planifica tu futuro con una perspectiva que las listas tradicionales no pueden ofrecer.
 
----
-
 ## Y todo lo que ha llegado después:
 
 *   **Agenda y Pizarras:** planifica el tiempo sin mezclarlo por defecto con cada proyecto.
@@ -486,8 +482,6 @@ Para alcanzar un nivel no basta con acumular experiencia. La aplicación comprue
 
 El cuarto es el que cierra la puerta a los atajos: los minutos de enfoque solo se consiguen dejando correr el reloj. Puedes fabricar cien tareas falsas en una tarde, pero no puedes fabricar cien horas.
 
----
-
 ## El mapa completo de constelaciones
 
 | Nivel | Nombre | XP | Racha | Tareas | Enfoque |
@@ -514,8 +508,6 @@ El cuarto es el que cierra la puerta a los atajos: los minutos de enfoque solo s
 | 20 | Centauro | 190.000 | 1.825 días | 5.200 | 550 h |
 
 Los primeros diez niveles construyen el primer año. Los siguientes diez estiran el recorrido hasta cinco años: no están pensados para completarse rápido, sino para que Zenth siga teniendo horizonte cuando la organización ya forma parte de tu vida.
-
----
 
 ## Los niveles son permanentes
 
@@ -556,8 +548,6 @@ En Zenth, creemos que la productividad no es solo tachar tareas, sino también e
 
 Es una representación visual de tu año, donde cada día es un pequeño círculo (un "píxel") de color. Al final del año, tendrás un mosaico vibrante que cuenta la historia de tus emociones, permitiéndote identificar patrones: ¿Eres más productivo cuando estás "Bien"? ¿Hay meses del año donde tu energía tiende a ser más "Baja"?
 
----
-
 ## Los Colores de tu Bienestar
 
 El sistema utiliza una paleta de colores suaves y armoniosos para categorizar cómo te sientes:
@@ -568,8 +558,6 @@ El sistema utiliza una paleta de colores suaves y armoniosos para categorizar c�
 *   **🔵 Bajo (#80D4FF):** Energía baja, cansancio o falta de motivación.
 *   **🔴 Mal (#FFAAA5):** Días difíciles o de mucho estrés.
 *   **⚪ Sin Registro (#E5E5E7):** Días en los que aún no has marcado tu estado.
-
----
 
 ## Características Principales
 
@@ -585,8 +573,6 @@ Tus estados de ánimo se guardan de forma segura en tu cuenta. Esto significa qu
 
 ### 4. Balance mensual
 Dentro de **Mi ritmo**, el balance resume qué estado apareció con más frecuencia y cuántos días registraste. Es una lectura descriptiva, no un diagnóstico ni una puntuación de rendimiento.
-
----
 
 ## Cómo Sacarle el Máximo Provecho
 
@@ -619,8 +605,6 @@ En Zenth, creemos que ese modelo está roto. Una lista de tareas no sirve de nad
 
 La mayoría de nosotros hemos caído en la trampa: forzarnos a trabajar al 100% incluso en días en los que hemos dormido mal, estamos lidiando con problemas personales o simplemente nos sentimos "sin batería". Ignorar nuestras emociones no nos hace más eficientes; nos lleva directo al **burnout** (agotamiento extremo).
 
----
-
 ## La Solución Zenth: La Intersección de Tareas y Emociones
 
 Zenth integra un registro sencillo de **bienestar emocional** junto al flujo de trabajo. No diagnostica ni interpreta tu salud: te ayuda a conservar un historial para tu propia reflexión.
@@ -633,8 +617,6 @@ Al final del mes, tu calendario de estados de ánimo te cuenta una historia que 
 
 ### 3. Ajuste de Carga Basado en la Energía
 Zenth no puede prevenir ni tratar el burnout, pero una organización flexible puede ayudarte a ajustar expectativas. En un día de mucha energía quizá avances una gran meta; en uno bajo puedes reprogramar tareas en Agenda sin recibir castigos ni perder el nivel alcanzado.
-
----
 
 ## Cómo Prevenir el Burnout con Zenth
 
@@ -671,16 +653,12 @@ Estar ocupado es fácil. Responder correos, organizar carpetas o cambiar colores
 
 Zenth responde con dos herramientas conectadas: las **grandes metas** y **Enfoque**.
 
----
-
 ## Las Grandes Metas (Big Goals): El 80/20 de tu día
 
 En Zenth, no todas las tareas son iguales. Cuando creas una tarea, tienes la opción de marcarla como una **Gran Meta**.
 
 - **¿Qué es una Gran Meta?** Es esa tarea que, si la terminas hoy, hará que el resto del día haya valido la pena. Es el proyecto de escritura, el diseño de la nueva web o la planificación financiera de tu negocio.
 - **La recompensa:** Completar una tarea normal te da 10 XP. Una Gran Meta te otorga **50 XP**. Zenth no solo te anima a hacer lo importante, sino que premia tu valentía por enfrentarte a lo difícil.
-
----
 
 ## Enfoque: una capa que te acompaña
 
@@ -697,8 +675,6 @@ Puedes mezclar sonidos ambientales, guardar combinaciones, elegir música y term
 
 ### 4. El camino de constelaciones
 Los niveles superiores exigen decenas o cientos de horas de enfoque acumulado. El recorrido llega hasta Centauro, nivel 20, con una meta de 550 horas: no se puede completar inflando una lista en una tarde.
-
----
 
 ## Cómo aplicar el Método de la Gran Meta hoy mismo
 
@@ -770,8 +746,6 @@ El TDAH se relaciona con diferencias complejas en atención, función ejecutiva 
 *   **Feedback inmediato:** el sonido opcional y la animación confirman que la acción terminó.
 *   **XP, niveles y logros:** convierten semanas de actividad en un recorrido visible, sin afirmar que una puntuación mida tu valor o tu salud.
 
----
-
 ## 2. La Ceguera al Tiempo (Time Blindness)
 
 "Lo haré en 5 minutos" se convierte en 3 horas. Para muchas personas neurodivergentes, el tiempo es un concepto abstracto y resbaladizo. O es "ahora" o es "nunca". Los calendarios rígidos suelen generar ansiedad porque, al fallar en la primera tarea del día, se siente que todo el día está arruinado.
@@ -779,8 +753,6 @@ El TDAH se relaciona con diferencias complejas en atención, función ejecutiva 
 **La Solución Zenth:**
 *   **Bloques Flexibles:** En lugar de horas exactas, usamos "Mañana", "Tarde" y "Noche". Esto da estructura sin la rigidez que provoca culpa.
 *   **Enfoque visible:** el temporizador global mantiene una sola misión a la vista y puede funcionar con duración definida o como cronómetro.
-
----
 
 ## 3. Parálisis por Elección y Sobreestimulación
 
@@ -819,8 +791,6 @@ Mucha gente se siente "quemada" no por la cantidad de trabajo, sino por la fragm
 La investigación de Gloria Mark sobre trabajo interrumpido muestra que volver al contexto puede llevar tiempo y aumentar el estrés. La cifra popular de 23 minutos corresponde a observaciones concretas y no es una regla universal para cada interrupción.
 
 Imagina esto repetido 50 veces al día. El resultado es un cerebro agotado, incapaz de procesar información compleja y propenso a errores.
-
----
 
 ## Cómo Zenth protege tu Reserva Cognitiva
 
@@ -895,8 +865,6 @@ Muchas personas ignoran el hábito de registrar sus emociones porque sienten que
 La frase popularizada por **Daniel Siegel** resume una idea sencilla: poner palabras a una experiencia puede crear distancia y facilitar la reflexión. Estudios de etiquetado afectivo han observado cambios en la respuesta cerebral bajo condiciones experimentales, pero eso no convierte un selector de color en terapia ni garantiza un efecto clínico.
 
 Cuando Zenth pregunta «¿Cómo estuvo tu día?» y eliges un estado, estás creando un registro breve para tu propia observación.
-
----
 
 ## Beneficios Cognitivos del Registro
 
@@ -990,26 +958,26 @@ Cada respuesta es una propuesta que conviene revisar antes de guardar, especialm
 
 ## Funciones principales de Inteligencia Artificial ("Zen")
 
-### 1. Entrada Mágica (Magic Input) ✨
-En lugar de rellenar cada campo a mano, puedes usar el botón **"Pedir a Zen ✨"** dentro del editor de tareas.
+### 1. Entrada Mágica (Magic Input)
+En lugar de rellenar cada campo a mano, puedes usar el botón **"Pedir a Zen"** dentro del editor de tareas.
 
 **Ejemplo:** Puedes escribir algo como: *"Cena con Ana el viernes a las 9pm con prioridad alta"*
 La IA extraerá automáticamente: el título, la fecha correcta, la hora y el nivel de prioridad, configurando la tarea por ti en un solo paso.
 
-### 2. Auto-Agendado (Smart Schedule) 📅
+### 2. Auto-Agendado (Smart Schedule)
 Si tienes una tarea pero no sabes cuándo hacerla, Zen puede ayudarte. 
 
 Al escribir el título de una tarea, verás un chip llamado **"Auto-Agendar"**. La IA analiza el texto de la tarea (por ejemplo, si dice "mañana" o "lunes") y la fecha actual para sugerirte el mejor día y hora para realizarla de forma lógica, optimizando tu carga de trabajo diaria.
 
-### 3. Sugerencia de Micro-pasos (Task Breakdown) 📝
+### 3. Sugerencia de Micro-pasos (Task Breakdown)
 Para evitar que las tareas grandes te abrumen, Zen actúa como un coach de productividad. 
 
 Al usar la opción **"Sugerir Pasos"**, la IA desglosa tu tarea principal en 3 a 5 micro-pasos inmediatos y concretos. Estos pasos se añaden como una lista de control (sub-tareas) para que sepas exactamente por dónde empezar con verbos de acción.
 
-### 4. Categorización Inteligente 🤖
+### 4. Categorización Inteligente
 Aunque es una lógica más híbrida, el sistema sincroniza automáticamente el momento del día (**Mañana, Tarde, Noche**) según la hora de inicio que elijas o que la IA te sugiera, ayudándote a visualizar tu carga de trabajo de forma balanceada sin intervención manual.
 
-### 5. Zen AI dentro de Biblioteca ✍️
+### 5. Zen AI dentro de Biblioteca
 La IA no se queda en las tareas. Dentro de una nota nativa de Biblioteca, selecciona un fragmento y pulsa **Zen AI** para:
 
 - **Mejorar la redacción:** reescribe un párrafo confuso con un tono más claro.
@@ -1017,8 +985,6 @@ La IA no se queda en las tareas. Dentro de una nota nativa de Biblioteca, selecc
 - **Expandir:** toma una frase corta y la desarrolla con más profundidad.
 
 Nada de esto ocurre solo: la IA actúa sobre el texto necesario para la opción que pulsaste. No recorre silenciosamente toda tu cuenta ni tus archivos de Google Drive.
-
----
 
 ## ¿Cómo activar estas funciones?
 

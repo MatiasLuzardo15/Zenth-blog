@@ -336,7 +336,7 @@ export const pizarrasArticles: DocArticle[] = [
         'Revisa la **vista previa**: la regla entera escrita en una frase, por ejemplo «Cuando se completa una tarjeta: moverla a Finalizadas».',
         'Ponle un nombre (si lo dejas vacío, Zenth usa la frase de la regla) y pulsa **Crear regla**. Queda activa al instante.',
       ),
-      p('Si falta algo —una lista sin elegir, un mensaje vacío— el editor te lo dice antes de guardar. La base de datos vuelve a comprobarlo al guardar, así que una regla nunca queda a medias.'),
+      p('Si falta algo, como una lista sin elegir o un mensaje vacío, el editor te lo dice antes de guardar. La base de datos vuelve a comprobarlo al guardar, así que una regla nunca queda a medias.'),
 
       h2('Cuando: lo que dispara una regla'),
       table(
@@ -347,7 +347,7 @@ export const pizarrasArticles: DocArticle[] = [
         ['Se reabre una tarjeta', 'Una tarjeta completada vuelve a estar pendiente.', 'Una lista'],
         ['Se asigna a alguien', 'Se añade un responsable a la tarjeta.', 'Una persona'],
         ['Se añade una etiqueta', 'La tarjeta recibe una etiqueta compartida.', 'Una etiqueta'],
-        ['Se marca el último paso de la checklist', 'Se completa el último paso pendiente de las checklists de la tarjeta.', '—'],
+        ['Se marca el último paso de la checklist', 'Se completa el último paso pendiente de las checklists de la tarjeta.', 'No admite filtros'],
       ),
       note('El evento ocurre venga de donde venga el cambio: la app en el ordenador o el móvil, Agenda, otra regla o tu asistente conectado por [Zenth MCP](/docs/integraciones/zenth-mcp).'),
 
@@ -409,7 +409,7 @@ export const pizarrasArticles: DocArticle[] = [
         '**Al instante y en el servidor.** La regla corre en la base de datos justo después del cambio, aunque tengas la app cerrada o el cambio venga de otra persona.',
         '**En orden.** Si varias reglas escuchan el mismo evento, corren en el orden en que se crearon, y cada una ve la tarjeta como la dejó la anterior.',
         '**Encadenadas, sin bucles.** Lo que hace una regla puede disparar otra (mover a En curso dispara «entra en En curso»), hasta tres niveles. Una regla no vuelve a dispararse dentro de su propia cadena, así que dos reglas que se mueven la tarjeta entre sí se detienen solas.',
-        '**Sin deshacer tu cambio.** Si una acción falla —por ejemplo, porque la etiqueta ya no existe— esa acción se salta y queda anotada en el historial; tu cambio y el resto de acciones siguen adelante.',
+        '**Sin deshacer tu cambio.** Si una acción falla, por ejemplo porque la etiqueta ya no existe, esa acción se salta y queda anotada en el historial; tu cambio y el resto de acciones siguen adelante.',
         '**Con freno.** Una pizarra ejecuta como mucho 120 reglas por minuto. Si se supera, las reglas se pausan ese minuto y el historial lo muestra como «En pausa».',
       ),
       chain(
@@ -449,7 +449,7 @@ export const pizarrasArticles: DocArticle[] = [
         'Hasta 10 condiciones y 10 acciones por regla.',
         'El nombre admite 80 caracteres; los comentarios, 2000; los avisos, 300.',
         'Las fechas se ponen entre hoy y dentro de 365 días; una checklist lleva hasta 20 pasos.',
-        'Por ahora las reglas responden a cambios en las tarjetas. Las reglas programadas —«cada lunes», «cuando una tarjeta vence mañana»— todavía no están disponibles.',
+        'Por ahora las reglas responden a cambios en las tarjetas. Las reglas programadas, como «cada lunes» o «cuando una tarjeta vence mañana», todavía no están disponibles.',
       ),
       tip('Empieza por una regla pequeña, mira su historial un par de días y luego sumale condiciones. Es más fácil entender qué hace una regla simple que corregir una enorme.'),
     ],
