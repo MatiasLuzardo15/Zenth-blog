@@ -1,7 +1,7 @@
 import { h2, list, note, p, steps, table, tip, warn } from '../blocks';
 import type { DocArticle } from '../types';
 
-const UPDATED = '2026-09-23';
+const UPDATED = '2026-09-29';
 
 export const privacidadArticles: DocArticle[] = [
   {
@@ -9,7 +9,7 @@ export const privacidadArticles: DocArticle[] = [
     category: 'privacidad',
     title: 'Qué datos guarda Zenth, en lenguaje claro',
     summary: 'Un repaso sin jerga de la información que guarda Zenth, para qué, y lo que nunca hace: no vende datos, no muestra publicidad y no graba tus llamadas.',
-    keywords: ['datos', 'privacidad', 'qué guarda', 'información', 'tiempo en la app', 'chat', 'invitados', 'rastreadores', 'publicidad', 'venta de datos', 'cookies', 'proveedores', 'supabase', 'livekit', 'gemini'],
+    keywords: ['datos', 'privacidad', 'qué guarda', 'información', 'tiempo en la app', 'chat', 'invitados', 'rastreadores', 'publicidad', 'venta de datos', 'cookies', 'proveedores', 'supabase', 'livekit', 'gemini', 'mcp', 'aplicaciones conectadas'],
     updated: UPDATED,
     related: ['privacidad/quien-ve-que', 'privacidad/eliminar-y-exportar-tus-datos', 'reuniones/limites-y-privacidad-de-las-llamadas'],
     blocks: [
@@ -32,7 +32,7 @@ export const privacidadArticles: DocArticle[] = [
         ['Colaboración', 'Pizarras, listas, miembros, roles, invitaciones, comentarios, menciones, asignaciones, votos, aprobaciones, actividad y presencia. También los colaboradores, permisos y sugerencias de notas y lienzos compartidos.', 'Las personas con acceso a esa pizarra, nota o lienzo.'],
         ['Reuniones', 'Quién participa, cuándo entra y sale, y cuánto dura. Para invitados: el nombre que escriben y el estado de su admisión. El **chat de las salas de pizarra**.', 'Los participantes; el chat de una sala, los miembros de la pizarra.'],
         ['Preferencias', 'Tema, densidad, formato de hora, opciones de Enfoque, sonido, notificaciones e integraciones. También la fecha en que aceptaste los términos.', 'Solo tú.'],
-        ['Datos técnicos', 'Sesión, almacenamiento local del navegador, la lista de cuentas abiertas en tu dispositivo y, si activas push, el token de entrega del dispositivo.', 'Solo tú.'],
+        ['Datos técnicos', 'Sesión, almacenamiento local del navegador, la lista de cuentas abiertas en tu dispositivo, el token de entrega push si lo activas y las aplicaciones externas que autorizaste.', 'Solo tú.'],
       ),
 
       h2('Con Google'),
@@ -42,18 +42,22 @@ export const privacidadArticles: DocArticle[] = [
         '**Zen:** cuando pulsas una acción, se envía a Google Gemini únicamente el texto de esa solicitud (la frase o el título de una tarea) y la fecha de hoy.',
       ),
 
+      h2('Aplicaciones conectadas'),
+      p('Si Zenth MCP está disponible para tu cuenta y autorizas un asistente, este puede consultar datos a los que tienes acceso, incluso contenido compartido contigo y eventos importados de Calendar, y crear o modificar contenido mediante las herramientas permitidas. El proveedor del asistente puede tratar los datos que reciba conforme a su propia política. Puedes desconectarlo en **Ajustes › Integraciones › Aplicaciones conectadas**; lo que ya recibió no se borra por desconectarlo. Ver [Zenth MCP](/docs/integraciones/zenth-mcp).'),
+
       h2('A quién recurre Zenth para funcionar'),
       table(
-        ['Proveedor', 'Para qué'],
-        ['Supabase', 'Base de datos, autenticación, funciones y almacenamiento.'],
-        ['Google', 'Drive, Docs, Sheets, Slides, Forms, Calendar, Gemini y Firebase Cloud Messaging (notificaciones push).'],
-        ['LiveKit', 'Transmisión de voz, cámara y pantalla.'],
-        ['Vercel', 'Alojamiento y entrega de la aplicación y del sitio.'],
-        ['Proveedor de correo', 'Correos de cuenta y los avisos que actives.'],
-        ['PayPal', 'Contribuciones voluntarias, si decides abrir su página. Zenth no recibe datos de pago.'],
-        ['Google Fonts', 'Tipografías del sitio.'],
+        ['Proveedor', 'Para qué', 'Ubicación confirmada'],
+        ['Supabase', 'Base de datos, autenticación, funciones y almacenamiento.', 'Región principal del proyecto: Oregón, Estados Unidos (us-west-2). Las funciones de borde pueden ejecutarse en otras regiones.'],
+        ['Google', 'Drive, Docs, Sheets, Slides, Forms, Calendar, Gemini y Firebase Cloud Messaging (notificaciones push).', 'Drive depende de la cuenta de cada usuario; Firebase Cloud Messaging utiliza infraestructura global. No hay una región única confirmada para todos los servicios.'],
+        ['LiveKit', 'Transmisión de voz, cámara y pantalla.', 'Región de datos del proyecto: Estados Unidos. La conexión de una llamada puede pasar por otras regiones.'],
+        ['Vercel', 'Entrega de los archivos estáticos de la aplicación y del sitio. El despliegue actual de Zenth no incluye funciones de Vercel.', 'Vercel informa que sus instalaciones principales de procesamiento están en Estados Unidos; su red de entrega es global y puede tratar datos en otros países.'],
+        ['Resend', 'Correos de cuenta, invitaciones y los avisos que actives.', 'Datos almacenados en Estados Unidos, según el proveedor.'],
+        ['Aplicaciones que autorices', 'Reciben los datos que solicites mediante las herramientas de Zenth.', 'Depende de la aplicación que conectes.'],
+        ['PayPal', 'Contribuciones voluntarias, si decides abrir su página. Zenth no recibe datos de pago.', 'Pendiente de verificar.'],
+        ['Google Fonts', 'Tipografías del sitio.', 'Pendiente de verificar.'],
       ),
-      p('Pueden procesar datos en países distintos al tuyo, conforme a sus propios términos.'),
+      p('Estas ubicaciones describen la región principal o de almacenamiento confirmada, no todas las posibles ubicaciones de procesamiento, registros, copias o subencargados. Puedes consultar el detalle en la [Política de privacidad](/privacy).'),
       tip('¿Quién ve qué, exactamente? Lo detallamos en [Quién ve qué](/docs/privacidad/quien-ve-que). ¿Cómo borrar lo tuyo? En [Eliminar y exportar tus datos](/docs/privacidad/eliminar-y-exportar-tus-datos).'),
     ],
   },
@@ -101,6 +105,9 @@ export const privacidadArticles: DocArticle[] = [
 
       h2('Google Drive'),
       p('Compartir un archivo de Google aplica los **permisos reales de Drive**. Revisa siempre destinatario y rol antes de confirmar.'),
+
+      h2('Aplicaciones conectadas'),
+      p('Si autorizas un asistente mediante Zenth MCP, puede recibir los datos que devuelvan sus herramientas según los permisos que aceptaste. Esto puede incluir información compartida contigo por otras personas. Puedes quitarle el acceso en Ajustes › Integraciones › Aplicaciones conectadas.'),
     ],
   },
 
@@ -124,8 +131,9 @@ export const privacidadArticles: DocArticle[] = [
       list(
         '**Drive:** desconectar intenta revocar el permiso y elimina de Zenth la conexión y las referencias asociadas. Tus archivos **permanecen en tu Drive**.',
         '**Calendar:** desconectar detiene el acceso futuro. Los eventos ya importados a Agenda no se borran solos.',
+        '**Aplicaciones conectadas:** desconectar impide nuevos accesos a Zenth. Consulta al proveedor de la aplicación sobre los datos que ya recibió.',
       ),
-      p('También puedes retirar los permisos desde la configuración de seguridad de tu cuenta de Google.'),
+      p('Los permisos de Drive y Calendar también puedes retirarlos desde la configuración de seguridad de tu cuenta de Google.'),
 
       h2('Sacar copias de lo tuyo'),
       p('Hoy no hay un botón que exporte toda la cuenta de una vez, pero sí puedes descargar por partes:'),

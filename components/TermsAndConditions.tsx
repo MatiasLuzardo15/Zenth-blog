@@ -47,7 +47,7 @@ const TermsAndConditions: React.FC<TermsAndConditionsProps> = ({ onBack }) => {
 
                 <p className="t-eyebrow">Legal</p>
                 <h1 className="t-display-xl mt-4 text-ink">Términos y condiciones.</h1>
-                <p className="t-micro mt-6 text-ink-muted">Última actualización: 23 de septiembre de 2026</p>
+                <p className="t-micro mt-6 text-ink-muted">Última actualización: 29 de septiembre de 2026</p>
 
                 <div className="fr-card-featured mt-10">
                     <p className="t-caption text-ink">En una frase</p>
@@ -69,7 +69,7 @@ const TermsAndConditions: React.FC<TermsAndConditionsProps> = ({ onBack }) => {
                 <Section n={1} title="Quién presta el Servicio">
                     <P>
                         Zenth es un proyecto independiente desarrollado y operado por <B>Matías Luzardo</B>,
-                        Uruguay. Puedes escribirnos a <a href="https://mail.google.com/mail/?view=cm&fs=1&to=zenth.soporte@gmail.com" target="_blank" rel="noopener noreferrer" className="fr-link">zenth.soporte@gmail.com</a>.
+                        Florida, Uruguay. Puedes escribirnos a <a href="https://mail.google.com/mail/?view=cm&fs=1&to=zenth.soporte@gmail.com" target="_blank" rel="noopener noreferrer" className="fr-link">zenth.soporte@gmail.com</a>.
                     </P>
                 </Section>
 
@@ -81,7 +81,7 @@ const TermsAndConditions: React.FC<TermsAndConditionsProps> = ({ onBack }) => {
                         <><B>Reuniones:</B> salas de voz de las pizarras, llamadas privadas y reuniones rápidas con invitados, con voz, cámara opcional, pantalla compartida y chat.</>,
                         <><B>Enfoque:</B> temporizador o cronómetro global, descansos, sonido, objetivo e historial.</>,
                         <><B>Progreso y estadísticas:</B> XP, rachas, 20 niveles, 25 logros, registro de ánimo y estadísticas de tu tiempo en la aplicación.</>,
-                        <><B>Integraciones:</B> Google Drive, Docs, Sheets, Slides, Forms, Calendar, Gemini, notificaciones, correo y voz mediante terceros.</>,
+                        <><B>Integraciones:</B> Google Drive, Docs, Sheets, Slides, Forms, Calendar, Gemini, notificaciones, correo, voz y, para las cuentas habilitadas, aplicaciones externas conectadas mediante Zenth MCP.</>,
                     ]} />
                     <P>
                         Las funciones pueden evolucionar, cambiar de ubicación o recibir límites técnicos para
@@ -169,13 +169,26 @@ const TermsAndConditions: React.FC<TermsAndConditionsProps> = ({ onBack }) => {
                     </P>
                 </Section>
 
-                <Section n={9} title="Zen y contenido generado por IA">
+                <Section n={9} title="Zen y aplicaciones conectadas">
                     <P>
                         Zen utiliza Google Gemini para interpretar una frase, proponer una fecha y hora o dividir
                         una tarea en pasos cuando pulsas una acción en el editor de tareas. Sus resultados pueden
                         ser incompletos, imprecisos o inadecuados. Debes revisar
                         fechas, prioridades, redacción y cualquier decisión antes de guardar o utilizar la
                         respuesta. Zen no presta asesoramiento médico, legal, financiero ni profesional.
+                    </P>
+                    <P>
+                        Si Zenth MCP está disponible para tu cuenta, puedes autorizar una aplicación externa,
+                        como un asistente, desde una pantalla que muestra su nombre y los permisos solicitados.
+                        Con esos permisos, la aplicación puede consultar información a la que tienes acceso,
+                        incluida la que otras personas compartieron contigo, y crear o modificar contenido
+                        mediante las herramientas de Zenth. No puede borrar definitivamente ni cambiar permisos
+                        de compartición mediante esa conexión. Revisa las acciones del asistente y las condiciones
+                        y la política de privacidad de su proveedor antes de autorizarlo.
+                    </P>
+                    <P>
+                        Puedes quitarle el acceso en Ajustes › Integraciones › Aplicaciones conectadas.
+                        Desconectarla impide nuevos accesos a Zenth, pero no elimina los datos que ya recibió.
                     </P>
                 </Section>
 
@@ -297,7 +310,7 @@ const TermsAndConditions: React.FC<TermsAndConditionsProps> = ({ onBack }) => {
 
                 <Section n={19} title="Contacto">
                     <div className="fr-card">
-                        <p className="t-body text-ink-muted">Responsable: Matías Luzardo · Uruguay</p>
+                        <p className="t-body text-ink-muted">Responsable: Matías Luzardo · Florida, Uruguay</p>
                         <p className="t-body mt-2 text-ink-muted">Correo: <a href="https://mail.google.com/mail/?view=cm&fs=1&to=zenth.soporte@gmail.com" target="_blank" rel="noopener noreferrer" className="fr-link">zenth.soporte@gmail.com</a></p>
                         <p className="t-body mt-2 text-ink-muted">Web: <a href="https://zenth.space" className="fr-link">zenth.space</a></p>
                     </div>

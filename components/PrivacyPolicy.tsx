@@ -47,7 +47,7 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = ({ onBack }) => {
 
                 <p className="t-eyebrow">Legal</p>
                 <h1 className="t-display-xl mt-4 text-ink">Política de privacidad.</h1>
-                <p className="t-micro mt-6 text-ink-muted">Última actualización: 23 de septiembre de 2026</p>
+                <p className="t-micro mt-6 text-ink-muted">Última actualización: 29 de septiembre de 2026</p>
 
                 <div className="fr-card-featured mt-10">
                     <p className="t-caption text-ink">En una frase</p>
@@ -59,8 +59,9 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = ({ onBack }) => {
                 </div>
 
                 <Section n={1} title="Responsable y alcance">
+                    {/* Florida, Uruguay es la localidad confirmada. No publicar un domicilio particular; consultar a la URCDP qué domicilio alternativo admite el artículo 13. */}
                     <P>
-                        El responsable de Zenth es <B>Matías Luzardo</B>, Uruguay. Esta política se aplica a
+                        El responsable de Zenth es <B>Matías Luzardo</B>, Florida, Uruguay. Esta política se aplica a
                         la aplicación web y PWA disponible en <B>zenth.space</B>, a este sitio informativo y a
                         las comunicaciones operativas relacionadas con el Servicio.
                     </P>
@@ -78,7 +79,7 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = ({ onBack }) => {
                         <><B>Colaboración.</B> Pizarras, listas, miembros, roles, invitaciones, comentarios, menciones, asignaciones, votos, aprobaciones, actividad y presencia compartida. En las notas y lienzos compartidos, también los colaboradores, sus permisos, las invitaciones, las sugerencias y la presencia dentro del documento.</>,
                         <><B>Archivos nativos.</B> Imágenes de tareas y notas, y archivos o grabaciones heredados que hayas almacenado directamente en Zenth.</>,
                         <><B>Preferencias.</B> Tema, densidad, ancho, formato horario, relación entre Agenda y Pizarras, opciones de Enfoque, sonido, notificaciones e integraciones.</>,
-                        <><B>Datos técnicos.</B> Sesión, almacenamiento local del navegador (incluida la lista de cuentas abiertas en tu dispositivo), información necesaria para seguridad y funcionamiento, la fecha en que aceptaste los Términos y, si activas notificaciones, el token de entrega del dispositivo.</>,
+                        <><B>Datos técnicos.</B> Sesión, almacenamiento local del navegador (incluida la lista de cuentas abiertas en tu dispositivo), información necesaria para seguridad y funcionamiento, la fecha en que aceptaste los Términos y, si activas notificaciones, el token de entrega del dispositivo. Si autorizas una aplicación externa, guardamos qué aplicación conectaste, los permisos concedidos y la fecha de autorización.</>,
                     ]} />
                 </Section>
 
@@ -102,10 +103,11 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = ({ onBack }) => {
                     </P>
                 </Section>
 
-                <Section n={4} title="Google Calendar y Zen AI">
+                <Section n={4} title="Google Calendar, Zen AI y aplicaciones conectadas">
                     <List items={[
                         <><B>Google Calendar.</B> Solicita permiso de solo lectura. El token permanece en memoria y caduca; la lista de calendarios y las preferencias se guardan localmente en tu navegador. Los eventos de los calendarios elegidos se importan como filas de Agenda para poder mostrarlos y, si tú lo decides, vincularlos con una pizarra. Desconectar detiene el acceso futuro, pero no elimina automáticamente elementos ya importados.</>,
                         <><B>Zen AI.</B> Cuando pulsas una acción de inteligencia artificial en el editor de tareas (completar una tarea desde una frase, proponer una fecha y hora o dividirla en pasos), se envía a Google Gemini únicamente el texto de esa solicitud (la frase o el título de la tarea) y la fecha de hoy. Zen no analiza toda tu cuenta en segundo plano ni lee tus notas, pizarras o archivos.</>,
+                        <><B>Aplicaciones conectadas.</B> Si esta función está disponible para tu cuenta y autorizas un asistente mediante la pantalla de permisos de Zenth, puede consultar datos a los que ya tienes acceso, incluidos contenidos compartidos contigo y eventos importados de Google Calendar, y crear o modificar contenido mediante las herramientas permitidas. Los datos devueltos al asistente pueden ser tratados por su proveedor conforme a sus propias condiciones y política de privacidad. La autorización es opcional y puedes revocarla en Ajustes › Integraciones › Aplicaciones conectadas; la revocación impide nuevos accesos, pero no borra datos que la aplicación ya haya recibido.</>,
                     ]} />
                 </Section>
 
@@ -126,12 +128,13 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = ({ onBack }) => {
                         <><B>Colaborar:</B> aplicar roles, compartir contenido y mostrar autoría, actividad o presencia a las personas de una pizarra.</>,
                         <><B>Proteger Zenth:</B> prevenir accesos indebidos, investigar fallos y hacer cumplir los límites del Servicio.</>,
                         <><B>Comunicar:</B> enviar mensajes necesarios para la cuenta y los avisos opcionales que hayas configurado.</>,
-                        <><B>Integraciones opcionales:</B> tratar datos de Google, IA, voz o notificaciones sobre la base de tu solicitud y del consentimiento que puedes retirar.</>,
+                        <><B>Integraciones opcionales:</B> tratar datos de Google, IA, voz, notificaciones o aplicaciones conectadas cuando las solicitas y autorizas.</>,
                     ]} />
                     <P>
                         El tratamiento se basa, según el caso, en la ejecución del Servicio que solicitas,
-                        tu consentimiento para funciones opcionales, el cumplimiento de obligaciones legales
-                        y el interés legítimo de mantener el Servicio seguro y operativo.
+                        tu consentimiento libre, previo e informado para funciones opcionales, la necesidad de
+                        cumplir la relación contractual contigo y las obligaciones legales aplicables. Tratamos
+                        los datos necesarios para proteger y operar el Servicio dentro de esas finalidades.
                     </P>
                 </Section>
 
@@ -143,17 +146,20 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = ({ onBack }) => {
                         <><B>Notas y lienzos compartidos.</B> Quienes tengan acceso ven el contenido según el permiso que les concedas (ver, sugerir o editar) y la presencia de las demás personas dentro de ese documento, por ejemplo si están escribiendo o mirando.</>,
                         <><B>Reuniones.</B> Los participantes de una conversación ven a las demás personas de esa conversación. Quien entra como invitado no accede a tus pizarras, tareas, archivos, historial ni otras salas.</>,
                         <><B>Drive.</B> Compartir un archivo de Google aplica los permisos reales de Drive. Revisa destinatario y rol antes de confirmar.</>,
+                        <><B>Aplicaciones conectadas.</B> Una aplicación que autorices puede recibir la información que devuelvan las herramientas de Zenth conforme a los permisos mostrados antes de conectarla. Revisa también las prácticas de privacidad de esa aplicación.</>,
                     ]} />
                 </Section>
 
                 <Section n={8} title="Proveedores y transferencias">
-                    <P>Zenth utiliza proveedores para operar. Pueden procesar datos en países distintos al tuyo conforme a sus propios términos y salvaguardas:</P>
+                    {/* Pendiente: documentar los destinos no específicos y, para cada transferencia, el rol, plazo, base y operaciones del proveedor conforme a la Resolución URCDP 70/023. */}
+                    <P>Zenth utiliza proveedores que pueden tratar datos fuera de Uruguay. Las ubicaciones indicadas son las confirmadas para la región principal de nuestros proyectos o por la documentación del proveedor; algunas funciones, redes de entrega, registros y subencargados pueden operar en otros lugares:</P>
                     <List items={[
-                        <><B>Supabase:</B> base de datos, autenticación, funciones y almacenamiento nativo.</>,
-                        <><B>Google:</B> Drive, Docs, Sheets, Slides, Forms, Calendar, Gemini y Firebase Cloud Messaging.</>,
-                        <><B>LiveKit:</B> transmisión de voz, cámara y pantalla.</>,
-                        <><B>Vercel:</B> alojamiento y entrega de la aplicación y del sitio.</>,
-                        <><B>Proveedor SMTP:</B> entrega de correos transaccionales y avisos elegidos.</>,
+                        <><B>Supabase:</B> base de datos, autenticación, funciones y almacenamiento nativo. La región principal del proyecto es Oregón, Estados Unidos (<B>us-west-2</B>); las funciones de borde pueden ejecutarse en otras regiones.</>,
+                        <><B>Google:</B> Drive, Docs, Sheets, Slides, Forms, Calendar, Gemini y Firebase Cloud Messaging. Los archivos conectados permanecen en la cuenta de Google de cada usuario; Firebase Cloud Messaging utiliza infraestructura global de Google. No hay una única región confirmada para todos estos servicios.</>,
+                        <><B>LiveKit:</B> transmisión de voz, cámara y pantalla. La región de datos configurada para el proyecto es <B>Estados Unidos</B>; la conexión de una llamada puede pasar por otras regiones de su red.</>,
+                        <><B>Vercel:</B> alojamiento y entrega de la aplicación y del sitio mediante una red global. El despliegue actual de Zenth contiene archivos estáticos, sin funciones de Vercel. Vercel informa que sus instalaciones principales de procesamiento están en <B>Estados Unidos</B>, aunque puede tratar datos en otros países donde opere con sus subencargados.</>,
+                        <><B>Resend:</B> entrega de correos de cuenta, invitaciones y avisos elegidos mediante SMTP. Según el proveedor, los datos almacenados se encuentran en <B>Estados Unidos</B>.</>,
+                        <><B>Aplicaciones externas que autorices:</B> reciben los datos que solicites mediante las herramientas de Zenth y los tratan bajo sus propias condiciones; Zenth no decide qué asistente conectas.</>,
                         <><B>PayPal:</B> procesa las contribuciones voluntarias cuando decides abrir su página; Zenth no recibe datos completos de pago.</>,
                         <><B>Google Fonts:</B> sirve las tipografías del sitio y recibe la solicitud técnica de tu navegador.</>,
                     ]} />
@@ -166,6 +172,7 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = ({ onBack }) => {
                         <><B>Papelera de Zenth.</B> Las tareas, notas y lienzos eliminados pueden restaurarse hasta que vacíes la papelera. Los elementos de Google usan la papelera de Drive, que también puedes consultar desde Zenth.</>,
                         <><B>Sesiones en tu dispositivo.</B> La lista de cuentas abiertas vive en tu navegador. Cerrar una sesión o quitar una cuenta del dispositivo elimina esa sesión guardada; tus datos siguen en tu cuenta.</>,
                         <><B>Conexiones.</B> La conexión cifrada de Drive se elimina al desconectarla; el token temporal de Calendar se pierde al caducar o cerrar la sesión. Los archivos guardados en Google no se borran por desconectar Zenth.</>,
+                        <><B>Aplicaciones conectadas.</B> Conservamos el registro de las autorizaciones mientras la conexión siga activa. Puedes quitar el acceso desde Ajustes; los datos que la aplicación ya recibió quedan sujetos a las prácticas de su proveedor.</>,
                         <><B>Estadísticas.</B> La sección Estadísticas muestra hasta los últimos 180 días de tiempo de uso.</>,
                         <><B>Cuenta y derechos.</B> Puedes solicitar la eliminación de tu cuenta y datos escribiendo al correo de contacto. Determinados registros podrán conservarse durante el plazo estrictamente necesario para seguridad, obligaciones legales o resolución de controversias.</>,
                     ]} />
@@ -202,7 +209,7 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = ({ onBack }) => {
                         fecha de esta página.
                     </P>
                     <div className="fr-card">
-                        <p className="t-body text-ink-muted">Responsable: Matías Luzardo · Uruguay</p>
+                        <p className="t-body text-ink-muted">Responsable: Matías Luzardo · Florida, Uruguay</p>
                         <p className="t-body mt-2 text-ink-muted">Correo: <a href="https://mail.google.com/mail/?view=cm&fs=1&to=zenth.soporte@gmail.com" target="_blank" rel="noopener noreferrer" className="fr-link">zenth.soporte@gmail.com</a></p>
                         <p className="t-body mt-2 text-ink-muted">Web: <a href="https://zenth.space" className="fr-link">zenth.space</a></p>
                     </div>
