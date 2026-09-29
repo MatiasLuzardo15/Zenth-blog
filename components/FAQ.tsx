@@ -244,7 +244,7 @@ const FAQ = ({ onBack, onGoToDocs }: { onBack: () => void; onGoToDocs: () => voi
                         </p>
                     </div>
                     <a
-                        href="https://mail.google.com/mail/?view=cm&fs=1&to=matiasluzardevv@gmail.com"
+                        href="https://mail.google.com/mail/?view=cm&fs=1&to=zenth.soporte@gmail.com"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="fr-btn fr-btn-secondary shrink-0"

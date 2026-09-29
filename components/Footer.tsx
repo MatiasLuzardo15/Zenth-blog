@@ -48,7 +48,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
             </p>
             <div className="mt-6 flex gap-2">
               <a
-                href="https://mail.google.com/mail/?view=cm&fs=1&to=matiasluzardevv@gmail.com"
+                href="https://mail.google.com/mail/?view=cm&fs=1&to=zenth.soporte@gmail.com"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="fr-btn fr-btn-icon"
@@ -93,12 +93,12 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
           <p className="t-micro text-ink-muted">
             Escríbeme a{' '}
             <a
-              href="https://mail.google.com/mail/?view=cm&fs=1&to=matiasluzardevv@gmail.com"
+              href="https://mail.google.com/mail/?view=cm&fs=1&to=zenth.soporte@gmail.com"
               target="_blank"
               rel="noopener noreferrer"
               className="fr-link"
             >
-              matiasluzardevv@gmail.com
+              zenth.soporte@gmail.com
             </a>
           </p>
         </div>

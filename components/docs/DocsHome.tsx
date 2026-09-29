@@ -133,7 +133,7 @@ const DocsHome: React.FC = () => {
             </p>
           </div>
           <a
-            href="https://mail.google.com/mail/?view=cm&fs=1&to=matiasluzardevv@gmail.com&su=Documentaci%C3%B3n%20de%20Zenth"
+            href="https://mail.google.com/mail/?view=cm&fs=1&to=zenth.soporte@gmail.com&su=Documentaci%C3%B3n%20de%20Zenth"
             target="_blank"
             rel="noopener noreferrer"
             className="fr-btn fr-btn-primary"

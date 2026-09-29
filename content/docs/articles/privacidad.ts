@@ -137,7 +137,7 @@ export const privacidadArticles: DocArticle[] = [
       ),
 
       h2('Eliminar tu cuenta o ejercer tus derechos'),
-      p('Puedes pedir el **acceso, la rectificación, la supresión** de tus datos y la eliminación de tu cuenta escribiendo a **matiasluzardevv@gmail.com**, desde el correo de tu cuenta. Es gratuito, y podemos pedirte información razonable para verificar tu identidad. Algunos registros pueden conservarse el tiempo estrictamente necesario por seguridad, obligaciones legales o resolución de controversias.'),
+      p('Puedes pedir el **acceso, la rectificación, la supresión** de tus datos y la eliminación de tu cuenta escribiendo a **zenth.soporte@gmail.com**, desde el correo de tu cuenta. Es gratuito, y podemos pedirte información razonable para verificar tu identidad. Algunos registros pueden conservarse el tiempo estrictamente necesario por seguridad, obligaciones legales o resolución de controversias.'),
       note('La ley uruguaya Nº 18.331 reconoce derechos de información, acceso, actualización, rectificación, inclusión, supresión y oposición. También puedes acudir a la Unidad Reguladora y de Control de Datos Personales de Uruguay. Todo está en la [Política de privacidad](/privacy).'),
       warn('Eliminar la cuenta es definitivo. Antes, descarga lo que quieras conservar y desconecta las integraciones que quieras revocar.', 'Antes de pedirlo'),
     ],

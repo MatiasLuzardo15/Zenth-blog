@@ -186,7 +186,7 @@ const DocsSearch: React.FC<DocsSearchProps> = ({ open, initialQuery = '', onClos
                 Si falta algo en la documentación, cuéntamelo.
               </p>
               <a
-                href="https://mail.google.com/mail/?view=cm&fs=1&to=matiasluzardevv@gmail.com&su=Falta%20en%20la%20documentaci%C3%B3n"
+                href="https://mail.google.com/mail/?view=cm&fs=1&to=zenth.soporte@gmail.com&su=Falta%20en%20la%20documentaci%C3%B3n"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="fr-btn fr-btn-secondary mt-6"

@@ -268,7 +268,7 @@ export const ayudaArticles: DocArticle[] = [
 
       h2('El enlace del correo no funciona'),
       p('Los enlaces de confirmación y de restablecimiento de contraseña caducan. Pide uno nuevo desde la pantalla de inicio de sesión. Si el navegador no abre la aplicación, copia el enlace y pégalo en la barra de direcciones.'),
-      tip('Si sigues sin poder entrar, escríbeme a **matiasluzardevv@gmail.com** desde la dirección con la que te registraste e indícame qué mensaje ves exactamente.'),
+      tip('Si sigues sin poder entrar, escríbeme a **zenth.soporte@gmail.com** desde la dirección con la que te registraste e indícame qué mensaje ves exactamente.'),
     ],
   },
 ];

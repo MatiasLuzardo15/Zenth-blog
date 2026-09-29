@@ -27,7 +27,7 @@ const ArticleView: React.FC<{ article: DocArticle; category: DocCategory }> = ({
     .map(getArticleByKey)
     .filter((candidate): candidate is DocArticle => Boolean(candidate));
 
-  const feedbackHref = `https://mail.google.com/mail/?view=cm&fs=1&to=matiasluzardevv@gmail.com&su=${encodeURIComponent(`Documentación: ${article.title}`)}`;
+  const feedbackHref = `https://mail.google.com/mail/?view=cm&fs=1&to=zenth.soporte@gmail.com&su=${encodeURIComponent(`Documentación: ${article.title}`)}`;
 
   return (
     <div className="xl:grid xl:grid-cols-[minmax(0,1fr)_13rem] xl:gap-12">
