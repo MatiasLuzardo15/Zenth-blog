@@ -105,7 +105,7 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = ({ onBack }) => {
                 <Section n={4} title="Google Calendar y Zen AI">
                     <List items={[
                         <><B>Google Calendar.</B> Solicita permiso de solo lectura. El token permanece en memoria y caduca; la lista de calendarios y las preferencias se guardan localmente en tu navegador. Los eventos de los calendarios elegidos se importan como filas de Agenda para poder mostrarlos y, si tú lo decides, vincularlos con una pizarra. Desconectar detiene el acceso futuro, pero no elimina automáticamente elementos ya importados.</>,
-                        <><B>Zen AI.</B> Cuando pulsas una acción de inteligencia artificial en el editor de tareas (completar una tarea desde una frase, proponer una fecha y hora o dividirla en pasos), se envía a Google Gemini únicamente el texto de esa solicitud —la frase o el título de la tarea— y la fecha de hoy. Zen no analiza toda tu cuenta en segundo plano ni lee tus notas, pizarras o archivos.</>,
+                        <><B>Zen AI.</B> Cuando pulsas una acción de inteligencia artificial en el editor de tareas (completar una tarea desde una frase, proponer una fecha y hora o dividirla en pasos), se envía a Google Gemini únicamente el texto de esa solicitud (la frase o el título de la tarea) y la fecha de hoy. Zen no analiza toda tu cuenta en segundo plano ni lee tus notas, pizarras o archivos.</>,
                     ]} />
                 </Section>
 

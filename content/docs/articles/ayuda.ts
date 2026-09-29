@@ -212,7 +212,7 @@ export const ayudaArticles: DocArticle[] = [
       h2('Google Drive'),
       list(
         'En **Ajustes › Integraciones › Google Drive y Workspace**, un estado **Requiere atención** significa que hay que **Volver a conectar**. Púlsalo y acepta el permiso.',
-        'Tus archivos siguen en Drive. Lo que Zenth guarda —la conexión y referencias mínimas— se restablece al reconectar.',
+        'Tus archivos siguen en Drive. Lo que Zenth guarda (la conexión y referencias mínimas) se restablece al reconectar.',
         'Si tu cuenta es de un **Google Workspace** (trabajo o centro educativo), el administrador puede haber restringido aplicaciones de terceros. Habla con él si Google rechaza el permiso.',
       ),
 

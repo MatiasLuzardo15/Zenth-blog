@@ -177,11 +177,11 @@ Trabajar sobre la misma pizarra resuelve el *qué*, pero no siempre el *cómo*: 
 
 ## La sala está donde ya estabas
 
-En escritorio, la sala se descubre desde **Llamadas**, el panel global de la navegación. En móvil sigue estando en el desplegable **Equipo** —el de los avatares—. Cualquier integrante entra y sale libremente. No hay reuniones que programar ni enlaces que caducan para la sala de pizarra: el proyecto es el sitio; la sala vive ahí.
+En escritorio, la sala se descubre desde **Llamadas**, el panel global de la navegación. En móvil sigue estando en el desplegable **Equipo**, el de los avatares. Cualquier integrante entra y sale libremente. No hay reuniones que programar ni enlaces que caducan para la sala de pizarra: el proyecto es el sitio; la sala vive ahí.
 
 Desde Llamadas puedes **llamar en privado** a cualquiera con quien compartas pizarra. En móvil, la acción sigue disponible desde el desplegable Equipo. Le suena el aviso y, si acepta, ya están hablando.
 
-Y una vez dentro, la conversación no te ata a la pantalla: puedes seguir moviéndote por Zenth —Agenda, Pizarras, Biblioteca o Mi ritmo— y el audio continúa. Minimiza el panel o escóndelo del todo: la llamada sigue.
+Y una vez dentro, la conversación no te ata a la pantalla: puedes seguir moviéndote por Zenth (Agenda, Pizarras, Biblioteca o Mi ritmo) y el audio continúa. Minimiza el panel o escóndelo del todo: la llamada sigue.
 
 ## Antes de entrar: preparar audio
 
@@ -241,12 +241,12 @@ Cambiar una nunca cambia la otra.
 
 El **propietario** no es un cuarto rol: es quien creó la pizarra. Siempre es administrador, es el único que puede eliminarla y no puede ser expulsado. Si te vas del proyecto, puedes **transferir la propiedad** a otro administrador.
 
-Hay una regla que no se puede saltar: **una pizarra nunca puede quedarse sin administradores**. Y no está solo en la interfaz —donde bastaría con abrir las herramientas de desarrollo para saltársela— sino en la propia base de datos. Si eres el último administrador, la opción de abandonar la pizarra ni siquiera aparece.
+Hay una regla que no se puede saltar: **una pizarra nunca puede quedarse sin administradores**. Y no está solo en la interfaz, donde bastaría con abrir las herramientas de desarrollo para saltársela, sino en la propia base de datos. Si eres el último administrador, la opción de abandonar la pizarra ni siquiera aparece.
 
 ## Dos formas de invitar
 
 - **Por correo electrónico.** Escribes la dirección, eliges el rol y la persona recibe una invitación. Si aún no tiene cuenta en Zenth, la invitación la espera hasta que se registre.
-- **Por enlace.** Generas una dirección que puedes pegar donde quieras —un chat de grupo, un mensaje— y quien la abra entra con el rol que definiste. Puedes revocarla cuando quieras.
+- **Por enlace.** Generas una dirección que puedes pegar donde quieras (un chat de grupo, un mensaje) y quien la abra entra con el rol que definiste. Puedes revocarla cuando quieras.
 
 ## Visibilidad: privada, o pública de solo lectura
 
@@ -336,7 +336,7 @@ Zenth se conecta **únicamente con permiso de lectura**: puede ver tus eventos, 
 2. Acepta el permiso de lectura en la pantalla de Google.
 3. Elige **qué calendarios** quieres ver. Los que no marques no aparecen en ningún sitio: el calendario compartido de la oficina puede quedarse fuera sin problema.
 
-A partir de ahí la sincronización se mantiene sola y se actualiza cada cinco minutos. Puedes **pausarla** cuando quieras —útil en vacaciones— y reanudarla después.
+A partir de ahí la sincronización se mantiene sola y se actualiza cada cinco minutos. Puedes **pausarla** cuando quieras (útil en vacaciones) y reanudarla después.
 
 ## Los eventos no invaden tus pizarras
 
@@ -422,7 +422,7 @@ Las notas son la parte nativa de Biblioteca: el lugar donde una tarea breve pued
 Dividimos tu jornada en Mañana, Tarde y Noche. ¿Por qué? Porque tu energía no es la misma a las 8 AM que a las 8 PM. Zenth te ayuda a decidir qué batallas pelear en cada momento, reduciendo la fatiga de decisión y permitiéndote disfrutar de tu tiempo libre sin culpas.
 
 ### 2. Un sistema que reconoce la constancia
-Convertimos el "deber" en algo que se puede ver crecer. Cada tarea completada suma experiencia, y esa experiencia —junto a tu racha, tus tareas y tus minutos de enfoque— determina tu nivel.
+Convertimos el "deber" en algo que se puede ver crecer. Cada tarea completada suma experiencia, y esa experiencia, junto a tu racha, tus tareas y tus minutos de enfoque, determina tu nivel.
 
 - **Tareas diarias:** +10 XP por cada una.
 - **Grandes metas:** +50 XP por las que de verdad mueven la aguja.
@@ -435,9 +435,9 @@ No se trata de cuántos checks haces, sino de la calidad de tu atención. Zenth 
 Productividad sin salud mental es agotamiento. Con nuestro Mood Tracker, puedes registrar cómo te sientes cada día. Con el tiempo, descubrirás cómo tu estado de ánimo influye en tus logros, permitiéndote ser más compasivo contigo mismo en los días difíciles.
 
 ### 5. Una interfaz que no compite por tu atención
-Zenth es sobrio: fondo neutro, una sola tipografía, jerarquía marcada por el tamaño y no por diez colores distintos. El color aparece donde significa algo —tus etiquetas, tu estado de ánimo, la acción activa— y en ningún otro sitio.
+Zenth es sobrio: fondo neutro, una sola tipografía, jerarquía marcada por el tamaño y no por diez colores distintos. El color aparece donde significa algo (tus etiquetas, tu estado de ánimo, la acción activa) y en ningún otro sitio.
 
-Puedes seguir el tema del sistema o elegir Claro, Oscuro y Zen —este último con un fondo cálido—, activar el modo compacto y ajustar el ancho del área de trabajo. El azul es el acento estable de la interfaz; los colores libres quedan para etiquetas, listas y datos.
+Puedes seguir el tema del sistema o elegir Claro, Oscuro y Zen (este último con un fondo cálido), activar el modo compacto y ajustar el ancho del área de trabajo. El azul es el acento estable de la interfaz; los colores libres quedan para etiquetas, listas y datos.
 
 ### 6. Vista Panorámica de tu Vida (Pixel View)
 ¿Cómo fue tu año? Con nuestra vista de Pixel View, cada día es un punto de color en tu lienzo anual. Identifica patrones, celebra meses de alta energía y planifica tu futuro con una perspectiva que las listas tradicionales no pueden ofrecer.
@@ -492,7 +492,7 @@ El cuarto es el que cierra la puerta a los atajos: los minutos de enfoque solo s
 
 | Nivel | Nombre | XP | Racha | Tareas | Enfoque |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| 1 | Triángulo | 0 | — | — | — |
+| 1 | Triángulo | 0 | 0 días | 0 | 0 min |
 | 2 | Lira | 250 | 3 días | 15 | 75 min |
 | 3 | Casiopea | 750 | 7 días | 40 | 250 min |
 | 4 | Cruz del Sur | 1.750 | 14 días | 75 | 500 min |
@@ -626,7 +626,7 @@ La mayoría de nosotros hemos caído en la trampa: forzarnos a trabajar al 100% 
 Zenth integra un registro sencillo de **bienestar emocional** junto al flujo de trabajo. No diagnostica ni interpreta tu salud: te ayuda a conservar un historial para tu propia reflexión.
 
 ### 1. Un recordatorio opcional
-Zenth puede preguntarte cómo estuvo el día. Puedes ocultar ese recordatorio en Ajustes y registrar el ánimo cuando quieras desde **Mi ritmo**. Al elegir un estado —de Excelente a Mal— creas un punto de referencia para mirar más adelante.
+Zenth puede preguntarte cómo estuvo el día. Puedes ocultar ese recordatorio en Ajustes y registrar el ánimo cuando quieras desde **Mi ritmo**. Al elegir un estado, de Excelente a Mal, creas un punto de referencia para mirar más adelante.
 
 ### 2. El Espejo del Calendario de Píxeles
 Al final del mes, tu calendario de estados de ánimo te cuenta una historia que tus estadísticas de tareas no pueden. ¿Ves una mancha roja que coincide con una semana de mucho trabajo? Zenth te ayuda a ver que ese cansancio no es pereza, es una respuesta natural de tu cuerpo.
@@ -885,7 +885,7 @@ El diseño no es solo cómo se ve, es cómo funciona. Zenth está diseñado para
   },
   {
     id: '10',
-    title: 'Nombrar para observar: qué puede —y qué no puede— hacer un registro de ánimo',
+    title: 'Nombrar para observar: qué puede y qué no puede hacer un registro de ánimo',
     excerpt: 'Poner una palabra al día crea un historial útil para reconocer patrones. No es un diagnóstico ni una herramienta terapéutica.',
     content: `
 Muchas personas ignoran el hábito de registrar sus emociones porque sienten que es una pérdida de tiempo. Sin embargo, la ciencia nos dice lo contrario.

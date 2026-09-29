@@ -17,7 +17,7 @@ const FAQS: FAQEntry[] = [
         question: '¿Es gratuito?',
         answer: (
             <>
-                Sí. Todas las funciones —incluidas las pizarras compartidas y la sincronización— están
+                Sí. Todas las funciones, incluidas las pizarras compartidas y la sincronización, están
                 disponibles sin pagar. No hay plan de pago ni funciones bloqueadas. Si quieres ayudar
                 con el coste de los servidores, puedes{' '}
                 <a
@@ -90,7 +90,7 @@ const FAQS: FAQEntry[] = [
     {
         question: '¿Puedo editar documentos de Google dentro de Zenth?',
         answer:
-            'Sí, Zenth incluye editores integrados para documentos, hojas, presentaciones y formularios. Para funciones avanzadas de Google —como colaboración simultánea completa, comentarios o maquetación especializada— puedes usar «Abrir en Google».',
+            'Sí, Zenth incluye editores integrados para documentos, hojas, presentaciones y formularios. Para funciones avanzadas de Google, como colaboración simultánea completa, comentarios o maquetación especializada, puedes usar «Abrir en Google».',
     },
     {
         question: '¿Puedo conectar mi Google Calendar?',
@@ -160,7 +160,7 @@ const FAQS: FAQEntry[] = [
     {
         question: '¿Puedo usarlo en el teléfono?',
         answer:
-            'Sí. Zenth es una aplicación web progresiva: se instala desde el navegador y funciona como una app nativa, con su icono en la pantalla de inicio. En iOS los recordatorios push solo llegan si la instalas —Safari a secas no los soporta—; en Android y escritorio funcionan también desde el navegador.',
+            'Sí. Zenth es una aplicación web progresiva: se instala desde el navegador y funciona como una app nativa, con su icono en la pantalla de inicio. En iOS los recordatorios push solo llegan si la instalas (Safari a secas no los soporta); en Android y escritorio funcionan también desde el navegador.',
     },
 ];
 
