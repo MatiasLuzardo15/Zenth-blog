@@ -1,7 +1,7 @@
 import React from 'react';
 import { AnimatePresence, LayoutGroup, motion } from 'framer-motion';
 import {
-    AlignLeft, BookOpen, Check, Pencil, Target, Trash2, X, ChevronDown, ChevronRight, Columns3, Filter, GripVertical,
+    AlignLeft, Archive, BookOpen, Check, Pencil, Target, Trash2, X, ChevronDown, ChevronRight, Columns3, Filter, GripVertical,
     History, Inbox, Lock, MoreHorizontal, MousePointer2, Plus, UserPlus,
 } from 'lucide-react';
 import {
@@ -24,8 +24,15 @@ interface BoardViewProps {
 }
 
 const DRAG_MS = 1050;
-const ARCHIVE_CHECK_MS = 700;
-const ARCHIVE_EXIT_MS = 1350;
+/**
+ * Como en la app: marcar deja la tarjeta tachada en su lista, con el icono de
+ * archivar a la vista mientras el cursor está encima; solo el segundo clic la
+ * manda a Completado. Tiempos relativos a `archivesAt` (el clic en el círculo).
+ */
+const ARCHIVE_HOLD_MS = 550;
+const ARCHIVE_CLICK_MS = 950;
+const ARCHIVE_LEAVE_MS = 1000;
+const ARCHIVE_EXIT_MS = 1650;
 
 const initialOrder = ['porhacer', 'revision', 'listo', 'encurso'];
 const swappedOrder = ['revision', 'porhacer', 'listo', 'encurso'];
@@ -40,7 +47,8 @@ const TaskCard: React.FC<{
 }> = ({ card, elapsed, accent }) => {
     const dragging = Boolean(card.movesAt && between(elapsed, card.movesAt, card.movesAt + DRAG_MS));
     const checked = Boolean(card.archivesAt && elapsed >= card.archivesAt);
-    const archiving = Boolean(card.archivesAt && elapsed >= card.archivesAt + ARCHIVE_CHECK_MS);
+    const archivePressed = Boolean(card.archivesAt && between(elapsed, card.archivesAt + ARCHIVE_CLICK_MS, card.archivesAt + ARCHIVE_CLICK_MS + 280));
+    const archiving = Boolean(card.archivesAt && elapsed >= card.archivesAt + ARCHIVE_LEAVE_MS);
 
     return (
         <motion.div
@@ -74,6 +82,16 @@ const TaskCard: React.FC<{
                 <span className="min-w-0 flex-1 self-center">
                     <span className={`block text-[12px] font-semibold leading-tight text-ink transition-opacity duration-300 ${checked ? 'line-through opacity-55' : ''}`}>{card.title}</span>
                 </span>
+                {card.archivesAt && (
+                    <motion.span
+                        aria-hidden
+                        animate={{ opacity: checked ? 1 : 0, scale: archivePressed ? .8 : 1 }}
+                        transition={{ duration: .2 }}
+                        className="flex h-3.5 w-3.5 shrink-0 items-center justify-center text-ink-muted"
+                    >
+                        <Archive className="h-3.5 w-3.5" strokeWidth={1.9} />
+                    </motion.span>
+                )}
                 {card.id === 'n1' && elapsed >= CARD_ASSIGN_CLICK_AT + 200 && (
                     <motion.span
                         initial={{ scale: .4, opacity: 0 }}
@@ -107,6 +125,9 @@ const PANEL_TITLE = { x: 1000, y: 8 };
 const PANEL_ADD = { x: 1213, y: -36 };
 const CARD_TITLE = { x: 890, y: 165 };
 const ASSIGN_PILL = { x: 1161, y: 571 };
+/** Dentro de una tarjeta: el círculo de completar y el icono de archivar. */
+const CHECK_X = 20;
+const ARCHIVE_ICON_X = 186;
 
 const cursorState = (elapsed: number) => {
     const opens = [
@@ -139,12 +160,17 @@ const cursorState = (elapsed: number) => {
         const p = clamp((elapsed - SWAP_AT) / 850);
         return { x: COL_X[0] + 45 + (COL_X[1] - COL_X[0]) * p, y: 108, click: elapsed >= SWAP_AT };
     }
-    if (between(elapsed, ARCHIVE_AT - 350, ARCHIVE_AT + ARCHIVE_EXIT_MS)) {
-        return { x: COL_X[0] + 20, y: 163, click: between(elapsed, ARCHIVE_AT, ARCHIVE_AT + 360) };
-    }
-    if (between(elapsed, ARCHIVE2_AT - 350, ARCHIVE2_AT + ARCHIVE_EXIT_MS)) {
-        return { x: COL_X[3] + 20, y: 163, click: between(elapsed, ARCHIVE2_AT, ARCHIVE2_AT + 360) };
-    }
+    // Círculo → pausa con la tarjeta tachada → icono de archivar → clic.
+    const archive = (at: number, colX: number) => {
+        const p = clamp((elapsed - at - ARCHIVE_HOLD_MS) / (ARCHIVE_CLICK_MS - ARCHIVE_HOLD_MS - 100));
+        return {
+            x: colX + CHECK_X + (ARCHIVE_ICON_X - CHECK_X) * p,
+            y: 163,
+            click: between(elapsed, at, at + 360) || between(elapsed, at + ARCHIVE_CLICK_MS, at + ARCHIVE_CLICK_MS + 360),
+        };
+    };
+    if (between(elapsed, ARCHIVE_AT - 350, ARCHIVE_AT + ARCHIVE_EXIT_MS)) return archive(ARCHIVE_AT, COL_X[0]);
+    if (between(elapsed, ARCHIVE2_AT - 350, ARCHIVE2_AT + ARCHIVE_EXIT_MS)) return archive(ARCHIVE2_AT, COL_X[3]);
     if (between(elapsed, CARD_OPEN_AT - 650, CARD_OPEN_AT + 350)) {
         return { ...CARD_TITLE, click: elapsed >= CARD_OPEN_AT - 100 };
     }

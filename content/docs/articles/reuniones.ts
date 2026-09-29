@@ -180,7 +180,7 @@ export const reunionesArticles: DocArticle[] = [
     title: 'Durante una llamada',
     summary: 'Micrófono, cámara, pantalla compartida, reacciones, mano levantada, chat con emojis, atajos de teclado y qué pasa si te quedas solo.',
     keywords: ['micrófono', 'silenciar', 'cámara', 'vídeo', 'encender cámara', 'elegir cámara', 'pantalla compartida', 'reacciones', 'mano levantada', 'chat', 'emojis', 'atajos de llamada', 'salir', 'colgar', 'sigues ahí', 'estás solo'],
-    updated: UPDATED,
+    updated: '2026-09-29',
     related: ['reuniones/audio-y-dispositivos', 'atajos/atajos-de-la-aplicacion', 'reuniones/controles-del-anfitrion'],
     blocks: [
       h2('Los controles'),
@@ -218,7 +218,7 @@ export const reunionesArticles: DocArticle[] = [
 
       h2('Pantalla compartida'),
       p('Comparte una ventana, una pestaña o toda la pantalla desde el selector de tu navegador. Puedes cancelarlo sin que se rompa la llamada, y si lo detienes desde el propio navegador, Zenth se entera y deja de publicar. Quien la recibe puede verla ampliada.'),
-      note('En iPhone y iPad, el navegador no permite compartir pantalla. La voz sí funciona.'),
+      note('En iPhone y iPad se puede compartir pantalla desde **iOS y iPadOS 27**. En versiones anteriores el navegador no lo permite, pero la voz sí funciona.'),
 
       h2('El chat de la llamada'),
       list(
@@ -289,7 +289,7 @@ export const reunionesArticles: DocArticle[] = [
     title: 'Límites y privacidad de las llamadas',
     summary: 'Cámara opcional y sin grabación, con acceso mínimo para cada persona y topes que bloquean entradas nuevas, nunca conversaciones en curso.',
     keywords: ['cámara', 'grabación', 'privacidad', 'límites', 'minutos', 'plazas', 'sin plazas', 'livekit', 'seguridad', 'https', 'topes', 'cupo'],
-    updated: UPDATED,
+    updated: '2026-09-29',
     related: ['privacidad/que-datos-guarda-zenth', 'reuniones/reuniones-rapidas-e-invitados'],
     blocks: [
       h2('Lo que Zenth no hace'),
@@ -323,7 +323,7 @@ export const reunionesArticles: DocArticle[] = [
       h2('Requisitos técnicos'),
       list(
         'Necesitas **HTTPS** para usar el micrófono, la cámara y compartir pantalla (todo el sitio ya lo usa).',
-        'Chrome y Edge admiten todas las funciones. Firefox y Safari de escritorio no permiten elegir la salida de audio. Safari en iOS no puede compartir pantalla.',
+        'Chrome y Edge admiten todas las funciones. Firefox y Safari de escritorio no permiten elegir la salida de audio. Safari en iPhone y iPad comparte pantalla desde iOS y iPadOS 27; en versiones anteriores, no.',
       ),
     ],
   },

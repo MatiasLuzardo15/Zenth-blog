@@ -1,5 +1,5 @@
 import {
-  Rocket, CalendarDays, LayoutDashboard, LibraryBig, PhoneCall, CircleDashed, Orbit,
+  Footprints, CalendarDays, LayoutDashboard, LibraryBig, PhoneCall, CircleDashed, Orbit,
   UserCog, Keyboard, Puzzle, ShieldCheck, LifeBuoy,
 } from 'lucide-react';
 import type { DocCategory } from './types';
@@ -10,7 +10,7 @@ export const DOC_CATEGORIES: DocCategory[] = [
     id: 'primeros-pasos',
     title: 'Primeros pasos',
     description: 'Qué es Zenth, cómo crear tu cuenta, instalarlo y moverte por él.',
-    icon: Rocket,
+    icon: Footprints,
   },
   {
     id: 'agenda',

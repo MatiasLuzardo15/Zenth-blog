@@ -1,8 +1,8 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
-    CalendarDays, ChevronLeft, ChevronRight, Clock, Sparkles, FileText,
-    Layers, CalendarRange, History, PanelRight, Plus, Check, Target,
+    CalendarDays, ChevronLeft, ChevronRight, Clock3, FileText,
+    Layers3, CalendarRange, History, PanelRight, PanelRightOpen, Plus, Check, Target,
 } from 'lucide-react';
 import {
     WEEKDAYS, MONTH_CELLS, MOMENTS, FIRST_HOUR, LAST_HOUR, HOUR_H, GUTTER_W,
@@ -166,44 +166,61 @@ export const TodayView: React.FC<TodayViewProps> = ({
     return (
         <div className={`grid h-full gap-4 p-4 ${viewMode === 'day' ? 'grid-cols-[248px_1fr_284px]' : 'grid-cols-[248px_1fr]'}`}>
 
-            {/* Columna izquierda */}
-            <div className="flex flex-col gap-3 overflow-hidden">
-                <div className="flex items-center gap-1.5">
-                    <CalendarDays className="h-3.5 w-3.5 text-ink-muted" strokeWidth={1.9} />
-                    <span className="text-[12px] font-semibold text-ink">Julio…</span>
-                    <ChevronLeft className="h-3.5 w-3.5 text-ink-muted" strokeWidth={1.9} />
-                    <ChevronRight className="h-3.5 w-3.5 text-ink-muted" strokeWidth={1.9} />
-                    <span className="ml-auto rounded-pill bg-surface-2 px-2.5 py-1 text-[11px] font-medium text-ink">
-                        Agenda
+            {/* Columna izquierda: réplica del DayRail de la app (components/DayRail.tsx).
+                Mismo orden, secciones separadas por líneas finas y `primary` (ink)
+                en progreso, captura y calendarios; el azul queda para el foco. */}
+            <div className="flex flex-col overflow-hidden">
+                <div className="flex items-center gap-1">
+                    <span className="flex h-7 w-7 items-center justify-center text-ink-muted">
+                        <ChevronLeft className="h-[13px] w-[13px]" strokeWidth={2.5} />
                     </span>
-                    <ChevronLeft className="h-3.5 w-3.5 text-ink-muted" strokeWidth={1.9} />
+                    <span className="flex h-7 w-7 items-center justify-center text-ink-muted">
+                        <ChevronRight className="h-[13px] w-[13px]" strokeWidth={2.5} />
+                    </span>
+                    <span className="rounded-[8px] border border-hairline bg-surface-2 px-2 py-1.5 text-[9.5px] font-bold leading-none text-ink">
+                        Hoy
+                    </span>
+                    <span className="ml-auto flex h-7 w-7 items-center justify-center text-ink-muted">
+                        <PanelRightOpen className="h-[15px] w-[15px]" strokeWidth={2.4} />
+                    </span>
                 </div>
 
-                <div className="grid grid-cols-7 gap-y-1.5 text-center">
-                    {WEEKDAYS.map((d, i) => (
-                        <span key={i} className="text-[10px] text-ink-muted">{d}</span>
-                    ))}
-                    {MONTH_CELLS.map((day, i) => (
-                        <span key={i} className="flex h-6 items-center justify-center">
-                            {day === 29 ? (
-                                <span className="relative flex h-6 w-6 items-center justify-center rounded-full bg-ink text-[11px] font-semibold text-canvas">
-                                    29
-                                    <span className="absolute -bottom-1 h-[3px] w-[3px] rounded-full bg-accent" />
-                                </span>
-                            ) : (
-                                <span className="text-[11px] text-ink-muted">{day ?? ''}</span>
-                            )}
-                        </span>
-                    ))}
-                </div>
-
-                <div className="pt-1">
-                    <div className="flex items-center gap-1.5">
-                        <Sparkles className="h-3.5 w-3.5 text-accent" strokeWidth={1.9} />
-                        <span className="text-[12px] font-semibold text-ink">Progreso del día</span>
+                {/* Calendario del mes: el mes en curso no lleva título, como en la app. */}
+                <section className="border-b border-hairline-soft pb-2 pt-1">
+                    <div className="mb-1 grid grid-cols-7">
+                        {WEEKDAYS.map((d, i) => (
+                            <span key={i} className="py-1 text-center text-[9px] font-bold leading-none text-ink-muted opacity-60">{d}</span>
+                        ))}
                     </div>
-                    <div className="mt-2 flex items-baseline justify-between">
-                        <span className="text-[11px] tabular-nums text-ink-muted">
+                    <div className="grid grid-cols-7">
+                        {MONTH_CELLS.map((day, i) => {
+                            if (day === null) return <span key={i} />;
+                            const selected = day === 29;
+                            const hasTasks = i % 7 < 4 || day === 24;
+                            return (
+                                <span key={i} className="relative flex h-[28px] flex-col items-center justify-center">
+                                    {selected && <span className="absolute inset-x-0.5 inset-y-0 rounded-[10px] bg-ink" />}
+                                    <span className={`relative text-[11px] leading-none ${selected ? 'font-bold text-canvas' : 'font-semibold text-ink-muted'}`}>
+                                        {day}
+                                    </span>
+                                    <span
+                                        className={`relative mt-1 h-1 w-1 rounded-full ${hasTasks ? (selected ? 'bg-canvas opacity-70' : 'bg-ink opacity-60') : ''}`}
+                                    />
+                                </span>
+                            );
+                        })}
+                    </div>
+                    <div className="mt-1 flex items-center gap-2.5 px-2 py-1.5 text-[10.5px] font-semibold text-ink-muted">
+                        <CalendarRange className="h-3.5 w-3.5" strokeWidth={2.3} />
+                        <span className="flex-1">Abrir planificador anual</span>
+                        <ChevronRight className="h-3 w-3" />
+                    </div>
+                </section>
+
+                <section className="border-b border-hairline-soft py-2">
+                    <p className="mb-2 px-1 text-[9px] font-bold uppercase tracking-[0.14em] text-ink-muted">Progreso del día</p>
+                    <div className="mb-2 flex items-baseline justify-between px-1">
+                        <span className="text-[11px] font-semibold tabular-nums text-ink-muted">
                             {doneTasks} de {totalTasks} tareas
                         </span>
                         <motion.span
@@ -211,112 +228,96 @@ export const TodayView: React.FC<TodayViewProps> = ({
                             initial={{ scale: 1 }}
                             animate={{ scale: [1, 1.12, 1] }}
                             transition={{ duration: 0.35 }}
-                            className="text-[11px] font-semibold tabular-nums text-ink"
+                            className="text-[11px] font-black tabular-nums text-ink"
                         >
                             {progress}%
                         </motion.span>
                     </div>
-                    <div className="mt-1.5 h-[5px] overflow-hidden rounded-pill bg-surface-2">
+                    <div className="h-[5px] overflow-hidden rounded-pill bg-surface-2">
                         <motion.div
-                            className="h-full rounded-pill bg-accent"
+                            className="h-full rounded-pill bg-ink"
                             animate={{ width: `${progress}%` }}
                             transition={{ duration: 0.55, ease: 'easeOut' }}
                         />
                     </div>
-                </div>
+                </section>
 
-                <div>
-                    <div className="flex items-center gap-1.5">
-                        <Clock className="h-3.5 w-3.5 text-ink-muted" strokeWidth={1.9} />
-                        <span className="text-[10px] font-semibold uppercase tracking-[0.14em] text-ink-muted">
-                            Próximo
-                        </span>
+                <section className="border-b border-hairline-soft py-2">
+                    <div className="mb-2 flex items-center gap-2 px-1">
+                        <Clock3 className="h-[13px] w-[13px] text-ink-muted" strokeWidth={2.3} />
+                        <span className="text-[9px] font-bold uppercase tracking-[0.14em] text-ink-muted">Próximo</span>
                     </div>
-                    <div className="mt-2 flex items-center gap-2 rounded-medium bg-surface-1 px-3 py-2.5">
-                        <span className="h-2 w-2 shrink-0 rounded-full bg-accent" />
+                    <div className="flex items-start gap-2.5 rounded-[13px] border border-hairline bg-surface-1 px-3 py-2.5">
+                        <span className="mt-1 h-2.5 w-2.5 shrink-0 rounded-full bg-[#81D4FA]" />
                         <span className="min-w-0 flex-1">
-                            <span className="block truncate text-[12px] font-semibold text-ink">
-                                Meet de 4Geeks
-                            </span>
-                            <span className="mt-0.5 block text-[10px] text-ink-muted">6:30 PM · 30m · Tarde</span>
+                            <span className="block text-[13px] font-bold leading-snug text-ink">Meet de 4Geeks</span>
+                            <span className="mt-1 block text-[9.5px] text-ink-muted">6:30 PM · 30m · Tarde</span>
                         </span>
-                        <ChevronRight className="h-3.5 w-3.5 shrink-0 text-ink-muted" strokeWidth={1.9} />
+                        <ChevronRight className="mt-0.5 h-[13px] w-[13px] shrink-0 text-ink-muted" />
                     </div>
-                </div>
+                </section>
 
                 {/* Captura rápida: el campo que se escribe solo */}
-                <div>
-                    <div className="flex items-center gap-1.5">
-                        <Plus className="h-3.5 w-3.5 text-ink-muted" strokeWidth={2.2} />
-                        <span className="text-[10px] font-semibold uppercase tracking-[0.14em] text-ink-muted">
-                            Captura rápida
-                        </span>
+                <section className="border-b border-hairline-soft py-2">
+                    <div className="mb-2 flex items-center gap-2 px-1">
+                        <Plus className="h-[13px] w-[13px] text-ink-muted" strokeWidth={2.3} />
+                        <span className="text-[9px] font-bold uppercase tracking-[0.14em] text-ink-muted">Captura rápida</span>
                     </div>
                     <div
-                        className="mt-2 flex items-center gap-2 rounded-medium bg-surface-1 p-1.5 pl-3"
-                        style={isTyping ? { boxShadow: '0 0 0 1px rgba(0,153,255,0.45)' } : undefined}
+                        className="flex items-center gap-1.5 rounded-[12px] border bg-surface-1 p-1.5 transition-colors"
+                        style={{ borderColor: isTyping ? 'color-mix(in srgb, var(--fr-ink) 45%, transparent)' : 'var(--fr-hairline)' }}
                     >
-                        <span className="flex min-w-0 flex-1 items-center">
-                            <span className="truncate text-[12px] text-ink">
+                        <span className="flex min-w-0 flex-1 items-center px-1.5">
+                            <span className="truncate text-[13px] text-ink">
                                 {typed || <span className="text-ink-muted">Añadir una tarea…</span>}
                             </span>
                             {isTyping && (
                                 <motion.span
                                     animate={{ opacity: [1, 0, 1] }}
                                     transition={{ duration: 0.85, repeat: Infinity }}
-                                    className="ml-px inline-block h-3.5 w-px bg-accent"
+                                    className="ml-px inline-block h-3.5 w-px bg-ink"
                                 />
                             )}
                         </span>
                         <motion.span
-                            animate={isPressing ? { scale: 0.85 } : { scale: 1 }}
+                            animate={{ scale: isPressing ? 0.85 : 1, opacity: typed ? 1 : 0.3 }}
                             transition={{ duration: 0.14 }}
-                            className="flex h-7 w-7 shrink-0 items-center justify-center rounded-[8px] bg-accent text-white"
+                            className="flex h-7 w-7 shrink-0 items-center justify-center rounded-[8px] bg-ink text-canvas"
                         >
-                            <Plus className="h-4 w-4" strokeWidth={2.6} />
+                            <Plus className="h-[13px] w-[13px]" strokeWidth={2.6} />
                         </motion.span>
                     </div>
-                    <p className="mt-1.5 text-[10px] text-ink-muted">
+                    <p className="mt-1.5 px-1 text-[8.5px] text-ink-muted">
                         Se agenda automáticamente en el momento adecuado.
                     </p>
-                </div>
+                </section>
 
-                <div>
-                    <div className="flex items-center gap-1.5">
-                        <FileText className="h-3.5 w-3.5 text-ink-muted" strokeWidth={1.9} />
-                        <span className="text-[10px] font-semibold uppercase tracking-[0.14em] text-ink-muted">
-                            Nota del día
-                        </span>
+                <section className="border-b border-hairline-soft py-2">
+                    <div className="mb-2 flex items-center gap-2 px-1">
+                        <FileText className="h-[13px] w-[13px] text-ink-muted" strokeWidth={2.2} />
+                        <span className="text-[9px] font-bold uppercase tracking-[0.14em] text-ink-muted">Nota del día</span>
                     </div>
-                    <div className="mt-2 h-[62px] rounded-medium bg-surface-1 px-3 py-2.5">
-                        <span className="text-[11px] leading-relaxed text-ink-muted">
+                    <div className="h-[76px] rounded-[12px] border border-hairline bg-surface-1 px-3 py-2.5">
+                        <span className="text-[13px] leading-relaxed text-ink-muted">
                             Ideas, contexto o recordatorios para este día…
                         </span>
                     </div>
-                    <p className="mt-1.5 text-[10px] text-ink-muted">Se guarda también como nota en Zenth.</p>
-                </div>
+                    <p className="mt-1.5 px-1 text-[8.5px] text-ink-muted">Se guarda también como nota en Zenth.</p>
+                </section>
 
-                <div className="mt-auto">
-                    <div className="flex items-center gap-1.5">
-                        <Layers className="h-3.5 w-3.5 text-ink-muted" strokeWidth={1.9} />
-                        <span className="text-[10px] font-semibold uppercase tracking-[0.14em] text-ink-muted">
-                            Calendarios
+                <section className="pt-2">
+                    <div className="mb-1 flex items-center gap-2 px-1">
+                        <Layers3 className="h-[13px] w-[13px] text-ink-muted" strokeWidth={2.2} />
+                        <span className="text-[9px] font-bold uppercase tracking-[0.14em] text-ink-muted">Calendarios</span>
+                    </div>
+                    <div className="flex items-center gap-2.5 px-2 py-2">
+                        <span className="h-2.5 w-2.5 shrink-0 rounded-[3px] bg-accent" />
+                        <span className="flex-1 truncate text-[13px] font-semibold text-ink">Zenth</span>
+                        <span className="relative h-4 w-7 shrink-0 rounded-full bg-ink">
+                            <span className="absolute top-0.5 h-3 w-3 translate-x-3.5 rounded-full bg-canvas" />
                         </span>
                     </div>
-                    <div className="mt-2 flex items-center gap-2">
-                        <span className="h-2.5 w-2.5 rounded-[3px] bg-accent" />
-                        <span className="flex-1 text-[12px] text-ink">Zenth</span>
-                        <span className="flex h-[18px] w-8 items-center rounded-pill bg-accent px-0.5">
-                            <span className="ml-auto h-3.5 w-3.5 rounded-full bg-white" />
-                        </span>
-                    </div>
-
-                    <div className="mt-3 flex items-center gap-2">
-                        <CalendarRange className="h-3.5 w-3.5 text-ink-muted" strokeWidth={1.9} />
-                        <span className="flex-1 text-[12px] text-ink">Abrir planificador anual</span>
-                        <ChevronRight className="h-3.5 w-3.5 text-ink-muted" strokeWidth={1.9} />
-                    </div>
-                </div>
+                </section>
             </div>
 
             {/* Columna central: el calendario del día */}

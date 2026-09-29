@@ -1,15 +1,29 @@
 import React from 'react';
-import { ArrowUpRight, Users, LibraryBig, CircleDashed, CalendarDays, Orbit, HardDrive, PhoneCall } from 'lucide-react';
+import {
+  ArrowUpRight, Users, LibraryBig, CircleDashed, CalendarDays, Orbit, HardDrive, PhoneCall, CalendarSync, Workflow,
+  History, FileAudio, Headphones, Headset, Sparkles, HeartPulse, BarChart3, UserCog, MonitorSmartphone,
+} from 'lucide-react';
 import AppDemo from './AppDemo';
 
 const SIGNALS = [
   { icon: CalendarDays, label: 'Agenda visual' },
+  { icon: CalendarSync, label: 'Google Calendar' },
   { icon: Users, label: 'Pizarras compartidas' },
+  { icon: Workflow, label: 'Automatizaciones y plantillas' },
   { icon: LibraryBig, label: 'Biblioteca y lienzos' },
+  { icon: History, label: 'Historial de versiones' },
   { icon: HardDrive, label: 'Google Drive y Workspace' },
+  { icon: FileAudio, label: 'Notas de voz y PDF' },
   { icon: CircleDashed, label: 'Enfoque desde cualquier pantalla' },
+  { icon: Headphones, label: 'Sonidos para enfocarte' },
+  { icon: Headset, label: 'Sala del equipo y llamadas' },
   { icon: PhoneCall, label: 'Reuniones con invitados' },
-  { icon: Orbit, label: 'Progreso' },
+  { icon: Sparkles, label: 'Zen, el asistente' },
+  { icon: Orbit, label: 'Progreso y logros' },
+  { icon: HeartPulse, label: 'Registro de ánimo' },
+  { icon: BarChart3, label: 'Estadísticas' },
+  { icon: UserCog, label: 'Varias cuentas' },
+  { icon: MonitorSmartphone, label: 'Instalable en móvil y escritorio' },
 ];
 
 const Hero: React.FC = () => {
@@ -22,23 +36,41 @@ const Hero: React.FC = () => {
   };
 
   return (
-    <section className="relative overflow-hidden pt-28 pb-16 lg:pt-40 lg:pb-24">
+    <section className="relative overflow-hidden pt-24 pb-16 lg:pb-24">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <div className="mx-auto flex max-w-4xl flex-col items-center text-center">
-          <span className="fr-btn fr-btn-translucent pointer-events-none mb-6">
-            <span className="h-1.5 w-1.5 rounded-full bg-accent" />
-            Productividad consciente
-          </span>
+        {/* Cinta de herramientas: la pista lleva la lista dos veces (la copia va
+            oculta a lectores de pantalla) para que el bucle no tenga salto. Ver
+            `.zenth-marquee` en index.html; aquí el desvanecido de los bordes es más ancho. */}
+        <div
+          className="zenth-marquee mx-auto mb-10 max-w-4xl"
+          style={{
+            WebkitMaskImage: 'linear-gradient(to right, transparent, #000 15%, #000 85%, transparent)',
+            maskImage: 'linear-gradient(to right, transparent, #000 15%, #000 85%, transparent)',
+          }}
+        >
+          <div className="zenth-marquee-track" style={{ animationDuration: '70s' }}>
+            {[0, 1].map(copy => (
+              <ul key={copy} className="flex shrink-0 gap-7 pr-7" aria-hidden={copy === 1 ? true : undefined}>
+                {SIGNALS.map(({ icon: Icon, label }) => (
+                  <li key={label} className="flex shrink-0 items-center gap-2 whitespace-nowrap text-ink-muted">
+                    <Icon className="h-4 w-4" strokeWidth={1.75} />
+                    <span className="t-caption">{label}</span>
+                  </li>
+                ))}
+              </ul>
+            ))}
+          </div>
+        </div>
 
+        <div className="mx-auto flex max-w-4xl flex-col items-center text-center">
           <h1 className="t-display-xxl text-ink">
-            Tu tiempo, tus proyectos
+            Tu día empieza y&nbsp;termina
             <br />
-            y tu atención, en calma.
+            en una sola app.
           </h1>
 
           <p className="t-body-lg mt-8 max-w-xl text-ink-muted">
-            Zenth reúne una agenda visual, pizarras para tus proyectos, una Biblioteca de notas y
-            lienzos conectada con Google Drive, reuniones y un temporizador de enfoque que te acompaña por toda la aplicación.
+            Tu agenda, tus proyectos, tus notas y tu enfoque en un solo lugar, conectados con Google Drive.
           </p>
 
           <div className="mt-10 flex flex-wrap justify-center gap-3">
@@ -50,15 +82,6 @@ const Hero: React.FC = () => {
               Ver qué incluye
             </button>
           </div>
-
-          <ul className="mt-10 flex max-w-3xl flex-wrap justify-center gap-x-6 gap-y-3">
-            {SIGNALS.map(({ icon: Icon, label }) => (
-              <li key={label} className="flex items-center gap-2 text-ink-muted">
-                <Icon className="h-4 w-4" strokeWidth={1.75} />
-                <span className="t-caption">{label}</span>
-              </li>
-            ))}
-          </ul>
         </div>
 
         {/* Demo del producto: DOM real animado en bucle, no una captura. */}

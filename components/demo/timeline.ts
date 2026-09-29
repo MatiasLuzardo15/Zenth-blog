@@ -73,8 +73,11 @@ export const DRAG1_AT = 47400;
 export const DRAG2_AT = 49400;
 export const DRAG3_AT = 51400;
 export const SWAP_AT = 53700;
-export const ARCHIVE_AT = 56200;
-export const ARCHIVE2_AT = 58500;
+// Completar deja la tarjeta tachada; archivarla es un segundo clic (ver
+// BoardView). Cada archivado ocupa ARCHIVE_EXIT_MS y debe terminar antes de
+// que el cursor salga hacia CARD_OPEN_AT.
+export const ARCHIVE_AT = 55500;
+export const ARCHIVE2_AT = 57550;
 export const CARD_OPEN_AT = 59900;
 export const CARD_ASSIGN_HOVER = 62200;
 export const CARD_ASSIGN_CLICK_AT = 62800;

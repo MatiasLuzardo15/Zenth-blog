@@ -243,15 +243,22 @@ export const agendaArticles: DocArticle[] = [
     category: 'agenda',
     title: 'Historial de tareas completadas',
     summary: 'Las tareas terminadas salen de la vista pero no desaparecen: búscalas y devuélvelas al tablero desde el historial de un día o de una pizarra.',
-    keywords: ['completadas', 'historial', 'archivadas', 'restaurar', 'terminadas', 'hechas', 'devolver'],
-    updated: UPDATED,
-    related: ['pizarras/crear-y-organizar-pizarras', 'cuenta/papelera'],
+    keywords: ['completadas', 'historial', 'archivadas', 'archivar', 'tachada', 'restaurar', 'terminadas', 'hechas', 'devolver'],
+    updated: '2026-09-29',
+    related: ['pizarras/tarjetas-y-bandeja-rapida', 'pizarras/crear-y-organizar-pizarras', 'cuenta/papelera'],
     blocks: [
-      p('Antes las tareas completadas se acumulaban en una columna del tablero. Ahora, al terminarlas, pasan a un **historial** y las listas quedan limpias. En su lugar verás una tarjeta llamada **Completadas · Ver historial**, con un contador.'),
+      p('Las tareas terminadas no se acumulan en una columna del tablero: van a un **historial** y las listas quedan limpias. En su lugar verás una tarjeta llamada **Completadas · Ver historial**, con un contador.'),
+
+      h2('Cuándo llega una tarea al historial'),
+      list(
+        '**En una pizarra**, completar una tarjeta la deja **tachada en su lista**. Llega al historial cuando la **archivas** con el icono que aparece al pasar el cursor, o si la sueltas sobre Completadas. Ver [Completar y archivar](/docs/pizarras/tarjetas-y-bandeja-rapida).',
+        '**En la bandeja rápida** de una pizarra, completar archiva directamente.',
+        '**En Agenda**, el historial del día reúne las tareas que completaste ese día.',
+      ),
 
       h2('Dónde está'),
       list(
-        '**En una pizarra:** la tarjeta Completadas, al final de las listas, abre el historial de esa pizarra.',
+        '**En una pizarra:** la tarjeta Completadas, al final de las listas, abre el historial de esa pizarra con sus tarjetas **archivadas**.',
         '**En Agenda:** el panel de momentos del día (en móvil, la hoja Momentos) tiene la misma tarjeta y abre el historial de ese día, donde aparecen como **Archivadas** las tareas que completaste durante él.',
       ),
 
@@ -259,7 +266,7 @@ export const agendaArticles: DocArticle[] = [
       list(
         '**Buscar** por título, categoría o palabras de las notas: «Buscar tareas, categorías o notas…».',
         'Recorrerlas **agrupadas por mes** (en una pizarra) o por día.',
-        '**Restaurar** una tarea para devolverla al tablero. Zenth confirma con «Tarea devuelta al tablero».',
+        '**Restaurar** una tarea para devolverla al tablero: vuelve **abierta** a la lista donde estaba. Zenth confirma con «Tarea devuelta al tablero».',
       ),
       note('Una pizarra pública **no muestra** el historial: las completadas son cosa de los miembros. Ver [Pizarra pública con enlace](/docs/pizarras/pizarra-publica-con-enlace).'),
       p('Completar no es lo mismo que borrar. Las tareas borradas van a la [papelera](/docs/cuenta/papelera).'),

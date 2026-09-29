@@ -10,7 +10,7 @@ export const ayudaArticles: DocArticle[] = [
     title: 'El micrófono no funciona o no se oye',
     summary: 'Qué hacer cuando Zenth dice que no puede usar el micrófono, no encuentra ninguno o está ocupado, y cómo entrar solo para escuchar mientras tanto.',
     keywords: ['micrófono', 'no se oye', 'permiso bloqueado', 'no encuentra micrófono', 'auriculares', 'sonido', 'altavoces', 'no me escuchan', 'audio', 'bloqueado', 'candado', 'salida de audio'],
-    updated: UPDATED,
+    updated: '2026-09-29',
     related: ['reuniones/audio-y-dispositivos', 'reuniones/durante-una-llamada'],
     blocks: [
       p('Si el audio falla, Zenth lo detecta y abre solo una **ventana de ayuda** con los pasos que corresponden. Estas son las tres causas habituales y qué hacer en cada una.'),
@@ -54,7 +54,7 @@ export const ayudaArticles: DocArticle[] = [
       ),
 
       h2('Compartir pantalla no funciona'),
-      note('En **iPhone y iPad** el navegador no permite compartir pantalla. La voz sí funciona. En otros navegadores, si cancelaste el selector, vuelve a pulsar **Compartir pantalla**. Solo una persona puede compartir a la vez.'),
+      note('En **iPhone y iPad** se puede compartir pantalla desde **iOS y iPadOS 27**: si no ves el botón, actualiza el sistema. En versiones anteriores el navegador no lo permite, aunque la voz sí funciona. En otros navegadores, si cancelaste el selector, vuelve a pulsar **Compartir pantalla**. Solo una persona puede compartir a la vez.'),
       h2('Si pasa con la llamada en curso'),
       p('La misma ventana de ayuda se abre **dentro de la llamada**, por encima de la conversación, cuando intentas activar el micrófono y el navegador no lo permite. El botón del micrófono queda con una **marca naranja** mientras dure el problema; si cierras la ventana, vuelve a pulsar el micrófono para reabrirla. En cuanto permites el micrófono desde el candado, la ventana se cierra sola y el micrófono se enciende, sin salir ni volver a entrar.'),
       p('Si nada de esto funciona, prueba con otro navegador (Chrome y Edge admiten todas las funciones) y escríbeme si persiste.'),

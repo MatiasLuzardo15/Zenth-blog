@@ -1,4 +1,4 @@
-import { h2, list, note, p, path, steps, table, tip, warn } from '../blocks';
+import { h2, h3, list, note, p, path, steps, table, tip, warn } from '../blocks';
 import type { DocArticle } from '../types';
 
 const UPDATED = '2026-09-23';
@@ -60,9 +60,9 @@ export const pizarrasArticles: DocArticle[] = [
     slug: 'tarjetas-y-bandeja-rapida',
     category: 'pizarras',
     title: 'Tarjetas y bandeja rápida',
-    summary: 'Captura ideas sin clasificar en la bandeja, conviértelas en tarjetas, muévelas entre listas y decide si aparecen en Agenda.',
-    keywords: ['tarjeta', 'bandeja', 'inbox', 'captura', 'arrastrar', 'mover', 'completar', 'buscar en pizarra', 'lista', 'tareas'],
-    updated: UPDATED,
+    summary: 'Captura ideas sin clasificar en la bandeja, conviértelas en tarjetas, muévelas entre listas, archiva las que terminas y decide si aparecen en Agenda.',
+    keywords: ['tarjeta', 'bandeja', 'inbox', 'captura', 'arrastrar', 'mover', 'completar', 'tachada', 'archivar', 'archivadas', 'buscar en pizarra', 'filtrar', 'lista', 'tareas'],
+    updated: '2026-09-29',
     related: ['agenda/crear-tareas-eventos-y-reuniones', 'agenda/historial-de-completadas', 'pizarras/colaborar-en-tarjetas'],
     blocks: [
       p('Una **tarjeta** es una tarea dentro de una pizarra. Usa el mismo editor que en Agenda (fecha, hora, duración, repetición, etiquetas, pasos, imágenes, documentos), con dos añadidos: vive en una lista y puede compartirse con el equipo.'),
@@ -81,7 +81,22 @@ export const pizarrasArticles: DocArticle[] = [
         'Desde la bandeja rápida, para capturar primero y clasificar después.',
         'Tocando el botón **+** de la barra inferior en el móvil.',
       ),
-      p('Si tienes permiso de edición puedes además **arrastrar** las tarjetas entre listas para mover el trabajo. Una tarjeta completada sale del tablero y va al [historial de completadas](/docs/agenda/historial-de-completadas).'),
+      p('Si tienes permiso de edición puedes además **arrastrar** las tarjetas entre listas para mover el trabajo.'),
+
+      h2('Completar y archivar'),
+      p('Al completar una tarjeta, se queda **tachada en su lista**, en el mismo sitio. Así el equipo ve lo que se acaba de cerrar antes de que desaparezca.'),
+      steps(
+        'Marca el círculo de la tarjeta: queda tachada.',
+        'Pasa el cursor por encima y pulsa el icono de **Archivar** que aparece a la derecha. En el móvil el icono está siempre a la vista.',
+        'La tarjeta sale de la lista y va a **Completadas**, el [historial de completadas](/docs/agenda/historial-de-completadas) de la pizarra.',
+      ),
+      list(
+        'Si vuelves a marcar el círculo de una tachada, se reabre y sigue en su lista.',
+        'Una tachada que **arrastras a otra lista** sigue tachada.',
+        'Si sueltas una tarjeta sobre **Completadas**, se completa y se archiva de una vez.',
+        'En la **bandeja rápida** no hay listas: lo que completas ahí se archiva directamente.',
+      ),
+      note('Mientras no la archives, una tarjeta tachada sigue contando en los filtros de la pizarra. Las archivadas ya no cuentan en ningún filtro.'),
 
       h2('¿Aparece en Agenda?'),
       p('Por defecto, las tarjetas de una pizarra viven solo en su tablero. Si quieres que las **tareas nuevas de una pizarra** aparezcan también en Agenda, activa **Ajustes › Productividad › Añadir tareas de pizarras a Agenda**. Solo afecta a las tarjetas que crees a partir de ese momento.'),
@@ -90,8 +105,8 @@ export const pizarrasArticles: DocArticle[] = [
       h2('Buscar dentro de la pizarra'),
       p('La cabecera de la pizarra tiene un buscador propio: **Buscar tareas en esta pizarra…**. Filtra las tarjetas del tablero sin salir de él. Para buscar en todo Zenth usa el [buscador global](/docs/primeros-pasos/busqueda-y-notificaciones).'),
 
-      h2('Mi trabajo, filtrado'),
-      p('En una pizarra compartida puedes filtrar por persona para ver solo **Mis tarjetas**, las que están **Sin responsable** o las de un compañero concreto. Ver [Menú de colaboración](/docs/pizarras/menu-de-colaboracion).'),
+      h2('Filtrar la pizarra'),
+      p('En una pizarra compartida, el botón de **filtro** de la cabecera deja ver solo lo que buscas: por palabra clave, por persona (**Asignadas a mí**, **Sin responsable** o un compañero concreto), por estado, por vencimiento o por etiqueta. Todo está explicado en [Menú de colaboración](/docs/pizarras/menu-de-colaboracion).'),
     ],
   },
 
@@ -223,19 +238,34 @@ export const pizarrasArticles: DocArticle[] = [
     category: 'pizarras',
     title: 'El menú de colaboración de la pizarra',
     summary: 'Filtros y carga de trabajo, etiquetas compartidas, actividad, notificaciones, seguimiento y preferencias de una pizarra compartida.',
-    keywords: ['filtros', 'carga', 'etiquetas', 'actividad', 'seguimiento', 'preferencias', 'observadores', 'notificaciones de pizarra', 'más opciones'],
-    updated: UPDATED,
+    keywords: ['filtros', 'filtrar', 'palabra clave', 'vencidas', 'sin fecha', 'coincidencia', 'carga', 'etiquetas', 'actividad', 'seguimiento', 'preferencias', 'observadores', 'notificaciones de pizarra', 'más opciones'],
+    updated: '2026-09-29',
     related: ['pizarras/automatizaciones-y-plantillas', 'pizarras/colaborar-en-tarjetas', 'enfoque/enfoque-y-equipo'],
     blocks: [
       p('En la cabecera de una pizarra compartida, **Más opciones de la pizarra** abre el panel **Colaboración**. Reúne todo lo que es del equipo y no de una tarjeta concreta.'),
 
       h2('Filtros y carga'),
-      p('Filtra el tablero por equipo:'),
-      list(
-        '**Todas las tarjetas**, **Mis tarjetas** o **Sin responsable**.',
-        'O por una **persona** concreta, con el número de tarjetas que tiene asignadas al lado: así ves quién está más cargado antes de repartir.',
+      p('El panel **Filtrar** está en el botón de filtro de la cabecera y también en **Colaboración › Filtros y carga**. Puedes marcar varias opciones a la vez y el panel no se cierra al hacerlo: ves cambiar el tablero mientras ajustas.'),
+      table(
+        ['Grupo', 'Opciones'],
+        ['Palabra clave', 'Busca en títulos, notas, etiquetas y nombres de personas, sin importar tildes.'],
+        ['Miembros', '**Sin responsable**, **Asignadas a mí** y cada persona de la pizarra.'],
+        ['Estado', '**Completadas** (las tachadas que siguen en su lista) y **Sin completar**.'],
+        ['Vencimiento', '**Sin fecha**, **Vencidas** (fecha anterior a hoy y sin completar) y **Para hoy**.'],
+        ['Etiquetas', '**Sin etiquetas** y cada etiqueta compartida de la pizarra.'],
       ),
-      p('Cuando hay un filtro activo, el botón lo indica («Filtro activo»).'),
+      p('Cada opción muestra **cuántas tarjetas la cumplen**. Si una está en 0, se ve atenuada, y así sabes antes de marcarla que no dejaría nada. Los números de Miembros son también la **carga de trabajo**: ves quién tiene más tarjetas antes de repartir.'),
+
+      h3('Cualquiera o Todas'),
+      list(
+        '**Cualquiera:** basta con uno de los miembros o una de las etiquetas que marcaste.',
+        '**Todas:** la tarjeta debe tener todos los miembros y todas las etiquetas marcados.',
+        'Entre grupos distintos siempre se suman las condiciones: «Ana» y «Vencidas» muestra las tarjetas de Ana que están vencidas.',
+      ),
+
+      h3('Cuando nada coincide'),
+      p('El panel indica cuántos filtros hay activos y tiene un botón **Limpiar**. Si la combinación no deja ninguna tarjeta, la pizarra lo dice («Ninguna tarjeta coincide con los filtros») y ofrece **Limpiar filtros**. El botón de la cabecera se marca mientras haya un filtro activo, y los filtros vuelven a empezar al cambiar de pizarra.'),
+      note('Las tarjetas **archivadas** ya salieron de la pizarra, así que ningún filtro ni recuento las tiene en cuenta. Viven en el [historial de completadas](/docs/agenda/historial-de-completadas).'),
 
       h2('Etiquetas compartidas'),
       p('El vocabulario común de la pizarra. Crea una etiqueta con nombre y color y podrá usarla cualquier miembro en las tarjetas.'),

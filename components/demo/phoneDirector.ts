@@ -65,7 +65,7 @@ export const SHOTS: Shot[] = [
      * otra, en vez de abrirse a un plano general donde no se lee nada. El primer
      * arrastre cruza el tablero y la cámara viaja con él; el tercero necesita tres.
      */
-    framed(NEW3_CARD + 300, ...BOARD_COLS_0_1, BOARD_Y, 'Arrástralas entre listas y completa las que terminas.'),
+    framed(NEW3_CARD + 300, ...BOARD_COLS_0_1, BOARD_Y, 'Arrástralas entre listas; completa y archiva las que terminas.'),
     framed(DRAG1_AT - 200, ...BOARD_COLS_2_3, BOARD_Y),
     framed(DRAG1_AT + 1100, ...BOARD_COLS_0_1, BOARD_Y),
     framed(DRAG3_AT - LEAD, ...BOARD_COLS_0_2, BOARD_Y),

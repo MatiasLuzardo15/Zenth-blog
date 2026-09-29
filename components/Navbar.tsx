@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
-import { Menu, X, Moon, Sun, ArrowUpRight } from 'lucide-react';
+import { Menu, X, Moon, Sun, ArrowUpRight, ChevronDown } from 'lucide-react';
+import DocsMenu from './docs/DocsMenu';
 
 interface NavbarProps {
   isDarkMode: boolean;
@@ -37,6 +39,52 @@ const NAV_LINKS: { name: string; page: NavPage; id?: string }[] = [
 const Navbar: React.FC<NavbarProps> = ({ isDarkMode, toggleTheme, currentPage, onNavigate }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [docsMenuOpen, setDocsMenuOpen] = useState(false);
+  const docsMenuTimer = useRef<number>();
+  const docsTriggerRef = useRef<HTMLButtonElement>(null);
+  const location = useLocation();
+
+  // Tras elegir un enlace o pulsar Escape, el menú ignora durante un instante
+  // los intentos de abrirse: al cambiar de página el navegador repite el
+  // «mouseenter» sobre el panel que se está cerrando, y Escape devuelve el foco
+  // al botón, que también lo abriría.
+  const docsMenuQuietUntil = useRef(0);
+
+  // El índice de la documentación se abre al pasar el cursor y se cierra con
+  // un pequeño margen, para que cruzar el hueco hasta el panel no lo cierre.
+  const openDocsMenu = () => {
+    if (performance.now() < docsMenuQuietUntil.current) return;
+    window.clearTimeout(docsMenuTimer.current);
+    setDocsMenuOpen(true);
+  };
+  const closeDocsMenu = (delay = 140) => {
+    window.clearTimeout(docsMenuTimer.current);
+    docsMenuTimer.current = window.setTimeout(() => setDocsMenuOpen(false), delay);
+  };
+  const dismissDocsMenu = () => {
+    docsMenuQuietUntil.current = performance.now() + 500;
+    closeDocsMenu(0);
+  };
+
+  useEffect(() => () => window.clearTimeout(docsMenuTimer.current), []);
+
+  useEffect(() => {
+    closeDocsMenu(0);
+  }, [location.pathname]);
+
+  // Escape cierra el índice aunque se haya abierto con el cursor y el foco
+  // esté en otra parte. Si el foco estaba dentro, vuelve al botón.
+  useEffect(() => {
+    if (!docsMenuOpen) return;
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key !== 'Escape') return;
+      const focusInside = docsTriggerRef.current?.parentElement?.contains(document.activeElement);
+      dismissDocsMenu();
+      if (focusInside) docsTriggerRef.current?.focus();
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [docsMenuOpen]);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 12);
@@ -83,7 +131,7 @@ const Navbar: React.FC<NavbarProps> = ({ isDarkMode, toggleTheme, currentPage, o
             <span className="font-display text-[19px] text-ink">Zenth</span>
             {currentPage === 'docs' && (
               <span
-                className="-ml-0.5 text-[24px] italic leading-none text-ink-muted"
+                className="-ml-0.5 hidden text-[24px] italic leading-none text-ink-muted lg:inline"
                 style={{ fontFamily: "'Shadows Into Light', cursive" }}
               >
                 Documents
@@ -93,12 +141,56 @@ const Navbar: React.FC<NavbarProps> = ({ isDarkMode, toggleTheme, currentPage, o
 
           {/* Enlaces de escritorio */}
           <div className="hidden items-center gap-1 md:flex lg:justify-self-center">
-            {NAV_LINKS.map(link => (
+            {NAV_LINKS.map(link => link.page === 'docs' ? (
+              <div
+                key={link.name}
+                onMouseEnter={openDocsMenu}
+                onMouseLeave={() => closeDocsMenu()}
+                onFocus={openDocsMenu}
+                onBlur={event => {
+                  if (!event.currentTarget.contains(event.relatedTarget as Node | null)) closeDocsMenu(0);
+                }}
+              >
+                <button
+                  ref={docsTriggerRef}
+                  onClick={() => {
+                    dismissDocsMenu();
+                    handleNavClick(link.page, link.id);
+                  }}
+                  aria-current={isActive(link) ? 'page' : undefined}
+                  aria-expanded={docsMenuOpen}
+                  aria-controls="docs-menu"
+                  className={`fr-tab inline-flex items-center gap-1 whitespace-nowrap max-lg:!px-3 ${isActive(link) || docsMenuOpen ? 'is-selected' : ''}`}
+                >
+                  {link.name}
+                  <ChevronDown
+                    className={`h-3.5 w-3.5 transition-transform duration-200 ${docsMenuOpen ? 'rotate-180' : ''}`}
+                    aria-hidden="true"
+                  />
+                </button>
+
+                <AnimatePresence>
+                  {docsMenuOpen && (
+                    // Centrado respecto a la barra (que ocupa todo el ancho). El
+                    // padding superior es el puente entre el botón y el panel.
+                    <motion.div
+                      id="docs-menu"
+                      initial={{ opacity: 0, y: -6 }}
+                      animate={{ opacity: 1, y: 0, transition: { duration: 0.22, ease: [0.16, 1, 0.3, 1] } }}
+                      exit={{ opacity: 0, y: -4, transition: { duration: 0.14, ease: [0.4, 0, 1, 1] } }}
+                      className="absolute inset-x-0 top-full mx-auto w-[min(860px,calc(100vw-32px))] pt-2"
+                    >
+                      <DocsMenu onNavigate={dismissDocsMenu} />
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            ) : (
               <button
                 key={link.name}
                 onClick={() => handleNavClick(link.page, link.id)}
                 aria-current={isActive(link) ? 'page' : undefined}
-                className={`fr-tab whitespace-nowrap ${isActive(link) ? 'is-selected' : ''}`}
+                className={`fr-tab whitespace-nowrap max-lg:!px-3 ${isActive(link) ? 'is-selected' : ''}`}
               >
                 {link.name}
               </button>

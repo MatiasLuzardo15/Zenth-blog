@@ -157,7 +157,7 @@ export const integracionesArticles: DocArticle[] = [
         ['Agenda', 'Ver tu día o varios días seguidos, con tareas, eventos y reuniones. Buscar pendientes y atrasadas.'],
         ['Tareas', 'Crear tareas (también repetitivas, con fecha de fin), cambiar título, fecha, hora, prioridad o etiquetas, sumar notas al final, activar el aviso por correo, completarlas o reabrirlas.'],
         ['Papelera', 'Mandar una tarea a la papelera, ver lo que hay y restaurarla.'],
-        ['Pizarras', 'Ver tus pizarras y sus listas, crear tarjetas y moverlas de lista, en las pizarras donde puedes editar.'],
+        ['Pizarras', 'Ver tus pizarras y sus listas (las tarjetas tachadas aparecen en su lista; las archivadas, solo si lo pides), crear tarjetas y moverlas de lista, en las pizarras donde puedes editar. Mover una tarjeta a **Completado** la completa y la archiva.'],
         ['Biblioteca', 'Buscar notas por texto, carpeta o etiqueta, y leer una nota entera o solo una de sus secciones.'],
         ['Escribir notas', 'Crear un documento nuevo (en una carpeta y con etiquetas, si quieres) y sumar texto al final de una nota o debajo de una sección concreta. Con títulos, listas, tablas, bloques destacados y resaltado.'],
         ['Proponer cambios', 'Corregir, resumir o reescribir una nota o una sección, como una sugerencia que tú revisas cambio por cambio.'],
