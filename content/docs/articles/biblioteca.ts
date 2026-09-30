@@ -83,9 +83,9 @@ export const bibliotecaArticles: DocArticle[] = [
     slug: 'notas',
     category: 'biblioteca',
     title: 'Notas: el editor de Zenth',
-    summary: 'Escribe con bloques (menú «/»), formato, tablas, imágenes, buscar y reemplazar, modo concentración, índice y exportación a Markdown, HTML o PDF.',
-    keywords: ['nota', 'editor', 'markdown', 'bloques', 'slash', 'formato', 'imágenes', 'tabla', 'exportar', 'pdf', 'índice', 'concentración', 'buscar y reemplazar', 'autoguardado', 'portada', 'etiquetas', 'historial', 'versiones'],
-    updated: '2026-09-29',
+    summary: 'Escribe y pega documentos con su estructura; crea, copia y clasifica bloques de código, y navega notas largas con el índice.',
+    keywords: ['nota', 'editor', 'markdown', 'bloques', 'slash', 'formato', 'imágenes', 'tabla', 'exportar', 'pdf', 'índice', 'concentración', 'buscar y reemplazar', 'autoguardado', 'portada', 'etiquetas', 'historial', 'versiones', 'pegar desde ChatGPT', 'código', 'copiar código', 'buscar lenguaje', 'lenguajes'],
+    updated: '2026-09-30',
     related: ['atajos/atajos-del-editor-de-notas', 'biblioteca/historial-de-versiones', 'biblioteca/compartir-notas-y-lienzos', 'agenda/detalle-de-una-tarea'],
     blocks: [
       p('Las notas de Zenth usan un editor de bloques pensado para pensar por escrito: empiezas a escribir y le das forma sobre la marcha, sin salir del teclado.'),
@@ -107,7 +107,7 @@ export const bibliotecaArticles: DocArticle[] = [
       ),
 
       h2('Formato al seleccionar'),
-      p('Al seleccionar texto aparece una barra flotante con **negrita, cursiva, subrayado, tachado, código, resaltado, cita y enlace**. La barra de herramientas ofrece además tipografías (Inter, DM Sans, Sora, Lora, Playfair Display, JetBrains Mono, Patrick Hand, Gaegu y DynaPuff), tamaños (Normal, Grande, Enorme) y alineación.'),
+      p('Al seleccionar texto aparece una barra flotante con **negrita, cursiva, subrayado, tachado, bloque de código, resaltado, cita y enlace**. La barra de herramientas ofrece además tipografías (Inter, DM Sans, Sora, Lora, Playfair Display, JetBrains Mono, Patrick Hand, Gaegu y DynaPuff), tamaños (Normal, Grande, Enorme) y alineación.'),
 
       h2('Markdown mientras escribes'),
       p('Si conoces Markdown, no hace falta abrir ningún menú:'),
@@ -121,7 +121,13 @@ export const bibliotecaArticles: DocArticle[] = [
         ['`---`', 'Un separador'],
         ['`**texto**`', 'Negrita'],
       ),
-      p('Al pegar texto de fuera, Zenth limpia el formato externo y conserva la estructura (títulos y listas).'),
+      h2('Pegar desde ChatGPT y otros documentos'),
+      p('Cuando pegas contenido con formato con `Ctrl` + `V`, Zenth intenta conservar su estructura: títulos, listas y subtareas, citas, tablas, enlaces, imágenes, bloques de código, fórmulas y notas al pie. También convierte el Markdown que pegas como texto. Como cada aplicación copia información distinta, puede que tengas que retocar algún detalle después de pegar.'),
+      p('En los bloques de código, Zenth intenta reconocer el lenguaje cuando encuentra señales claras en el contenido. Abre **Lenguaje** para buscarlo y elegirlo. **Detectar automáticamente** vuelve a intentarlo; **Texto sin formato** muestra el código sin resaltado. En fragmentos cortos o ambiguos, puedes indicar el lenguaje manualmente.'),
+
+      h2('Bloques de código'),
+      p('Al seleccionar varias líneas, usa el botón **Código** o `Ctrl` + `E` para convertirlas en un bloque. Zenth conserva los saltos de línea y la sangría. En la barra del bloque, pulsa el selector que muestra el lenguaje actual para buscar por nombre o abreviatura, elegir otro o volver a **Detectar automáticamente**. El botón **Copiar código**, junto al selector, copia el bloque. Los bloques Mermaid también pueden abrir una vista previa del diagrama.'),
+      tip('Para escribir código dentro de una frase, sigue usando el formato en línea de Markdown con acentos graves; el botón Código crea un bloque.'),
 
       h2('Imágenes'),
       p('Pega una imagen con `Ctrl` + `V` o arrástrala al editor. Pulsa una imagen para ajustar su tamaño o quitarla.'),
@@ -129,7 +135,7 @@ export const bibliotecaArticles: DocArticle[] = [
       h2('Moverte dentro de una nota larga'),
       list(
         '**Buscar y reemplazar** con `Ctrl` + `F`: `Enter` va a la siguiente coincidencia, `Shift` + `Enter` a la anterior.',
-        '**Índice de la nota:** un panel con los títulos para saltar de sección. En el móvil es un navegador lateral que muestra el porcentaje y el título actual.',
+        '**Índice de la nota:** en escritorio aparece como una guía estrecha en el borde derecho. Pasa el cursor, enfócala con el teclado o púlsala para desplegar los títulos; selecciona uno para saltar a esa sección. La flecha señala el título activo. En el móvil es un navegador lateral que muestra el porcentaje y el título actual.',
         '**Modo concentración** (`Ctrl` + `Shift` + `F`): oculta lo que sobra para escribir sin ruido.',
         '**Ancho del texto:** alterna entre columna de lectura y ancho completo.',
       ),
