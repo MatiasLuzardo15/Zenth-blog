@@ -1,7 +1,7 @@
 import React from 'react';
 import {
-  AlignLeft, BookOpen, Check, ChevronDown, Clock, FileSpreadsheet, FileText, GripVertical,
-  HardDrive, LayoutGrid, Layers, List, MoreHorizontal, PenTool, Plus, Search, Star, Trash2, UserPlus, Users,
+  AlignLeft, BookOpen, Check, ChevronDown, ChevronRight, Clock, Database, FileSpreadsheet, FileText, GripVertical,
+  HardDrive, Home, LayoutGrid, List, MoreHorizontal, PenTool, Plus, Search, Star, Trash2, UserPlus, Users,
 } from 'lucide-react';
 import { TodayView } from './demo/TodayView';
 import { FocusView } from './demo/FocusView';
@@ -140,20 +140,21 @@ export const BoardShot: React.FC = () => (
 
 /* ── Biblioteca + Google Drive ──────────────────────────────────────────── */
 
-const LIBRARY_PLACES = [
-  { icon: Layers, label: 'Resumen', active: true },
-  { icon: FileText, label: 'Archivos Zenth' },
-  { icon: Users, label: 'Compartidos conmigo' },
+/** El lateral real: vistas que cruzan los lugares arriba, lugares en árbol debajo. */
+const LIBRARY_VIEWS = [
+  { icon: Home, label: 'Todo', active: true },
   { icon: Clock, label: 'Recientes' },
-  { icon: Trash2, label: 'Papelera' },
-];
-
-const LIBRARY_DRIVE = [
-  { icon: HardDrive, label: 'Mi unidad' },
+  { icon: Users, label: 'Compartidos conmigo' },
   { icon: Star, label: 'Destacados' },
 ];
 
-const LIBRARY_FILTERS = ['Todo', 'Notas', 'Lienzos', 'Documentos', 'Hojas'];
+const LIBRARY_LOCATIONS = [
+  { icon: Database, label: 'Archivos Zenth' },
+  { icon: HardDrive, label: 'Google Drive' },
+];
+
+/** La fila de tipos; el resto vive en «Más». */
+const LIBRARY_FILTERS = ['Todo', 'Notas', 'Lienzos', 'Documentos', 'Hojas', 'PDFs'];
 
 const LIBRARY_ROWS = [
   { icon: FileText, tone: '#FFE082', name: 'Notas de la reunión', meta: 'Nota · Zenth' },
@@ -174,7 +175,7 @@ export const LibraryShot: React.FC = () => (
     <Pane className="flex min-h-[480px] transition-transform duration-500 group-hover:-translate-y-2">
       <div className="hidden w-[150px] shrink-0 border-r border-hairline-soft p-3 sm:block lg:hidden">
         <ul className="space-y-0.5">
-          {LIBRARY_PLACES.map(({ icon: Icon, label, active }) => (
+          {LIBRARY_VIEWS.map(({ icon: Icon, label, active }) => (
             <li
               key={label}
               className={`flex items-center gap-2 rounded-medium px-2 py-1.5 text-[11px] ${active ? 'bg-surface-1 font-semibold text-ink' : 'text-ink-muted'}`}
@@ -184,15 +185,20 @@ export const LibraryShot: React.FC = () => (
             </li>
           ))}
         </ul>
-        <p className="mt-4 px-2 text-[9px] font-semibold uppercase tracking-[0.14em] text-ink-muted">Google Drive</p>
+        <p className="mt-4 px-2 text-[9px] font-semibold uppercase tracking-[0.14em] text-ink-muted">Ubicaciones</p>
         <ul className="mt-1.5 space-y-0.5">
-          {LIBRARY_DRIVE.map(({ icon: Icon, label }) => (
-            <li key={label} className="flex items-center gap-2 rounded-medium px-2 py-1.5 text-[11px] text-ink-muted">
+          {LIBRARY_LOCATIONS.map(({ icon: Icon, label }) => (
+            <li key={label} className="flex items-center gap-1.5 rounded-medium py-1.5 pl-0.5 pr-2 text-[11px] text-ink-muted">
+              <ChevronRight className="h-3 w-3 shrink-0" strokeWidth={2} />
               <Icon className="h-3.5 w-3.5 shrink-0" strokeWidth={1.9} />
               <span className="truncate">{label}</span>
             </li>
           ))}
         </ul>
+        <p className="mt-4 flex items-center gap-2 border-t border-hairline-soft px-2 pt-3 text-[11px] text-ink-muted">
+          <Trash2 className="h-3.5 w-3.5 shrink-0" strokeWidth={1.9} />
+          Papelera
+        </p>
       </div>
 
       <div className="min-w-0 flex-1 p-4 sm:p-5">
@@ -214,11 +220,14 @@ export const LibraryShot: React.FC = () => (
           {LIBRARY_FILTERS.map((filter, i) => (
             <span
               key={filter}
-              className={`rounded-pill px-2.5 py-1.5 text-[10px] font-semibold ${i === 0 ? 'bg-surface-2 text-ink' : 'bg-surface-1 text-ink-muted'}`}
+              className={`rounded-pill px-2.5 py-1.5 text-[10px] font-semibold ${i === 0 ? 'bg-ink text-canvas' : 'bg-surface-1 text-ink-muted'}`}
             >
               {filter}
             </span>
           ))}
+          <span className="flex items-center gap-1 rounded-pill bg-surface-1 px-2.5 py-1.5 text-[10px] font-semibold text-ink-muted">
+            Más <ChevronDown className="h-3 w-3" strokeWidth={2.2} />
+          </span>
         </div>
 
         <ul className="mt-3">

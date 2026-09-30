@@ -75,7 +75,7 @@ const FAQS: FAQEntry[] = [
     {
         question: '¿Qué puedo guardar en Biblioteca?',
         answer:
-            'Notas y lienzos de Zenth y, al conectar Google Drive, documentos, hojas, presentaciones, formularios, carpetas, archivos subidos y grabaciones de voz. Biblioteca también muestra Mi unidad, recientes, destacados y archivos compartidos contigo.',
+            'Notas y lienzos de Zenth y, al conectar Google Drive, documentos, hojas, presentaciones, formularios, carpetas, archivos subidos y grabaciones de voz. En Biblioteca recorres tus carpetas de Drive junto a las de Zenth y tienes a mano lo reciente, lo destacado y todo lo que te compartieron.',
     },
     {
         question: '¿Qué acceso necesita Google Drive?',

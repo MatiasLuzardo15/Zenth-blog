@@ -10,7 +10,7 @@ export const integracionesArticles: DocArticle[] = [
     title: 'Google Drive y Workspace',
     summary: 'Conecta tu Drive para ver, crear, editar, subir, mover y compartir tus archivos de Google desde la Biblioteca, sin duplicarlos.',
     keywords: ['google drive', 'drive', 'workspace', 'docs', 'sheets', 'hojas de cálculo', 'hoja de cálculo', 'excel', 'spreadsheet', 'slides', 'forms', 'documentos', 'conectar', 'desconectar', 'picker', 'permisos', 'archivos', 'subir', 'compartir', 'exportar'],
-    updated: UPDATED,
+    updated: '2026-09-30',
     related: ['biblioteca/explorar-la-biblioteca', 'biblioteca/archivos-pdf-y-notas-de-voz', 'privacidad/que-datos-guarda-zenth'],
     blocks: [
       p('La conexión con **Google Drive** es opcional. Le da a la Biblioteca la infraestructura documental: Drive guarda tus documentos, hojas, presentaciones, formularios, carpetas y archivos, y Zenth te los muestra y te deja trabajar con ellos. Las notas y lienzos nativos de Zenth siguen siendo independientes.'),
@@ -27,7 +27,7 @@ export const integracionesArticles: DocArticle[] = [
       h2('Qué puedes hacer'),
       table(
         ['Acción', 'Cómo'],
-        ['Explorar', 'Mi unidad, Destacados y Compartidos conmigo, desde la Biblioteca.'],
+        ['Explorar', 'Tus carpetas de Drive en **Ubicaciones › Google Drive**, más Destacados y Compartidos conmigo, desde la Biblioteca.'],
         ['Crear', '**Nuevo** › Documento, Hoja de cálculo, Presentación, Formulario o Carpeta.'],
         ['Subir', 'Con **Nuevo › Subir archivo** o arrastrando archivos. Un panel muestra el progreso.'],
         ['Elegir uno existente', 'Con **Desde Google Drive** (Google Picker).'],
