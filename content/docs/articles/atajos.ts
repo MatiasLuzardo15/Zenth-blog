@@ -89,10 +89,10 @@ export const atajosArticles: DocArticle[] = [
     slug: 'atajos-del-editor-de-notas',
     category: 'atajos',
     title: 'Atajos del editor de notas',
-    summary: 'Formato, bloques de código, Markdown al escribir, buscar y reemplazar, modo concentración.',
-    keywords: ['atajos editor', 'notas', 'negrita', 'cursiva', 'títulos', 'listas', 'markdown', 'buscar y reemplazar', 'modo concentración', 'tachado', 'código', 'bloque de código', 'enlace', 'duplicar bloque'],
-    updated: '2026-09-30',
-    related: ['biblioteca/notas', 'atajos/atajos-de-la-aplicacion'],
+    summary: 'Formato, pegado, código, tablas, fórmulas, enlaces y comentarios: las teclas para trabajar dentro de una nota.',
+    keywords: ['atajos editor', 'notas', 'negrita', 'cursiva', 'títulos', 'listas', 'markdown', 'buscar y reemplazar', 'modo concentración', 'tachado', 'código', 'bloque de código', 'enlace', 'duplicar bloque', 'pegar sin formato', 'tabla', 'fórmula', 'latex', 'comentario', 'mención', 'menú contextual', 'clic derecho'],
+    updated: '2026-10-01',
+    related: ['biblioteca/notas', 'biblioteca/revisar-sugerencias', 'atajos/atajos-de-la-aplicacion'],
     blocks: [
       p('Dentro del editor de notas, `Ctrl` + `/` (`⌘` + `/` en Mac) abre esta misma lista sin salir de la nota. En macOS, `Ctrl` se muestra como `⌘`.'),
 
@@ -104,7 +104,7 @@ export const atajosArticles: DocArticle[] = [
         [['Ctrl', 'Shift', 'X'], 'Tachado'],
         [['Ctrl', 'E'], 'Alternar bloque de código; conserva líneas y sangría al convertir una selección'],
         [['Ctrl', 'Shift', 'H'], 'Resaltar'],
-        [['Ctrl', 'K'], 'Enlace'],
+        [['Ctrl', 'K'], 'Insertar o editar un enlace a una página o a un título de la misma nota'],
         [['Ctrl', '\\'], 'Quitar el formato'],
       ),
 
@@ -121,14 +121,36 @@ export const atajosArticles: DocArticle[] = [
         [['Ctrl', 'Shift', '↑'], 'Mover el bloque hacia arriba'],
         [['Ctrl', 'Shift', '↓'], 'Mover el bloque hacia abajo'],
         [['Ctrl', 'D'], 'Duplicar el bloque'],
-        [['Tab'], 'Aumentar sangría'],
-        [['Shift', 'Tab'], 'Reducir sangría'],
+        [['Tab'], 'En una lista, aumentar sangría; en una tabla, pasar a la celda siguiente y agregar una fila desde la última'],
+        [['Shift', 'Tab'], 'En una lista, reducir sangría; en una tabla, volver a la celda anterior'],
       ),
+
+      h2('Pegar y escribir código'),
+      keys(
+        [['Ctrl', 'V'], 'Pegar con formato; el Markdown de texto se convierte en bloques'],
+        [['Ctrl', 'Shift', 'V'], 'Pegar texto literal sin formato ni conversión de Markdown'],
+        [['Enter'], 'Dentro de un bloque de código, agregar una línea'],
+      ),
+      p('Dentro de un bloque de código, el pegado conserva el texto literal. Dos `Enter` seguidos al final del bloque te llevan a un párrafo nuevo.'),
+
+      h2('Fórmulas, enlaces y comentarios'),
+      keys(
+        [['Ctrl', 'Enter'], 'En el editor de fórmulas, guardar la fórmula'],
+        [['Tab'], 'En el campo LaTeX, saltar al siguiente espacio vacío de una estructura'],
+        [['Shift', 'Tab'], 'En el campo LaTeX, volver al espacio vacío anterior'],
+        [['↑', '↓'], 'En el buscador de enlaces o de lenguajes, recorrer las opciones'],
+        [['Enter'], 'En el selector de enlaces, elegir el destino activo; en un comentario, publicar'],
+        [['Shift', 'Enter'], 'En un comentario, agregar un salto de línea'],
+        [['@'], 'En un comentario, buscar una persona para mencionarla'],
+        [['Esc'], 'Cerrar el selector de enlace o lenguaje; con la lista de títulos abierta, volver primero a la búsqueda'],
+      ),
+      note('Con la lista de menciones abierta, las flechas recorren personas y `Enter` o `Tab` elige una; `Esc` cierra la lista. Los comentarios aparecen en las tarjetas de sugerencias de escritorio. Ver [Revisar sugerencias](/docs/biblioteca/revisar-sugerencias).'),
+      tip('En escritorio, `Shift` + clic derecho abre el menú del navegador en lugar del menú de Zenth.'),
 
       h2('Markdown al escribir'),
       table(
         ['Escribes', 'Obtienes'],
-        ['`#` y espacio', 'Un título'],
+        ['De `#` a `######` y espacio', 'Un título de nivel 1 a 6'],
         ['`-` y espacio', 'Una lista con viñetas'],
         ['`1.` y espacio', 'Una lista numerada'],
         ['`[]` y espacio', 'Una tarea con casilla'],
@@ -136,6 +158,7 @@ export const atajosArticles: DocArticle[] = [
         ['Tres acentos graves seguidos', 'Un bloque de código'],
         ['`---`', 'Un separador'],
         ['`**texto**`', 'Negrita'],
+        ['Un acento grave a cada lado del texto', 'Código dentro de una frase'],
       ),
 
       h2('La nota'),
@@ -148,6 +171,7 @@ export const atajosArticles: DocArticle[] = [
         [['Ctrl', 'Y'], 'Rehacer'],
         [['Esc'], 'Guardar y salir'],
       ),
+      note('Si hay un menú o panel abierto, `Esc` lo cierra primero. En modo Sugerencias, Zenth guarda la propuesta automáticamente; al salir intenta guardar los últimos cambios y, si falla, te deja reintentarlo.'),
     ],
   },
 ];

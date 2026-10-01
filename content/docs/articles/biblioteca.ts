@@ -83,9 +83,9 @@ export const bibliotecaArticles: DocArticle[] = [
     slug: 'notas',
     category: 'biblioteca',
     title: 'Notas: el editor de Zenth',
-    summary: 'Escribe y pega documentos con su estructura; crea, copia y clasifica bloques de código, y navega notas largas con el índice.',
-    keywords: ['nota', 'editor', 'markdown', 'bloques', 'slash', 'formato', 'imágenes', 'tabla', 'exportar', 'pdf', 'índice', 'concentración', 'buscar y reemplazar', 'autoguardado', 'portada', 'etiquetas', 'historial', 'versiones', 'pegar desde ChatGPT', 'código', 'copiar código', 'buscar lenguaje', 'lenguajes'],
-    updated: '2026-09-30',
+    summary: 'Escribe y pega documentos con formato, organiza imágenes y tablas, crea fórmulas y diagramas, y enlaza secciones dentro de tus notas.',
+    keywords: ['nota', 'editor', 'markdown', 'bloques', 'slash', 'formato', 'imágenes', 'tabla', 'exportar', 'pdf', 'índice', 'concentración', 'buscar y reemplazar', 'autoguardado', 'portada', 'etiquetas', 'historial', 'versiones', 'pegar desde ChatGPT', 'código', 'copiar código', 'buscar lenguaje', 'lenguajes', 'fórmula', 'latex', 'mermaid', 'diagrama', 'enlace interno', 'sección', 'clic derecho', 'menú contextual', 'texto alternativo', 'reemplazar imagen'],
+    updated: '2026-10-01',
     related: ['atajos/atajos-del-editor-de-notas', 'biblioteca/historial-de-versiones', 'biblioteca/compartir-notas-y-lienzos', 'agenda/detalle-de-una-tarea'],
     blocks: [
       p('Las notas de Zenth usan un editor de bloques pensado para pensar por escrito: empiezas a escribir y le das forma sobre la marcha, sin salir del teclado.'),
@@ -94,43 +94,89 @@ export const bibliotecaArticles: DocArticle[] = [
       steps(
         'En **Biblioteca**, pulsa **Nuevo › Nota** (o convierte una tarea con **Convertir en nota**).',
         'Escribe un título en «Título de la nota» y elige una **portada** (un emoji) si quieres.',
-        'Escribe en el cuerpo. Zenth **guarda solo** unos instantes después de que dejes de escribir; el indicador muestra **Guardando** y **Guardado**.',
+        'Escribe en el cuerpo. Zenth **guarda solo** unos instantes después de que dejes de escribir. La cabecera indica los cambios pendientes, el guardado en curso y su confirmación.',
         'Pulsa `Esc` para guardar y salir, o `Ctrl` + `S` para guardar sin salir.',
       ),
+      p('Si hay cambios pendientes, puedes pulsar el indicador para **Guardar ahora**. Si el guardado falla, aparece **No se guardó · Reintentar**: púlsalo para volver a intentarlo.'),
 
       h2('El menú de bloques «/»'),
-      p('Escribe `/` en una línea vacía para abrir el menú de bloques, y sigue escribiendo para filtrarlo.'),
+      p('Escribe `/` en una línea vacía para abrir el menú de bloques, y sigue escribiendo para filtrarlo. La barra también tiene **Tipo de bloque** para transformar el bloque actual e **Insertar** para agregar contenido.'),
       table(
         ['Grupo', 'Bloques'],
-        ['Formato', 'Texto, Título grande, mediano y chico, Lista, Lista numerada, Lista de tareas, Cita, Bloque de código.'],
-        ['Insertar', 'Bloque destacado, Bloque de atención (advertencia), Tabla (3 × 3; se agranda con `Tab`), Separador, Imagen, Enlace y Fecha de hoy.'],
+        ['Formato', 'Texto, títulos de nivel 1 a 6, Lista, Lista numerada, Lista de tareas, Cita y Bloque de código.'],
+        ['Insertar', 'Fórmula, Diagrama, Bloque destacado, Bloque de atención (advertencia), Tabla (3 × 3; se agranda con `Tab`), Separador, Imagen, Enlace y Fecha de hoy.'],
       ),
 
       h2('Formato al seleccionar'),
       p('Al seleccionar texto aparece una barra flotante con **negrita, cursiva, subrayado, tachado, bloque de código, resaltado, cita y enlace**. La barra de herramientas ofrece además tipografías (Inter, DM Sans, Sora, Lora, Playfair Display, JetBrains Mono, Patrick Hand, Gaegu y DynaPuff), tamaños (Normal, Grande, Enorme) y alineación.'),
+      p('En **Más acciones de formato** puedes alinear el texto, mover el bloque arriba o abajo, duplicarlo y quitar el formato. En pantallas pequeñas, la barra se desliza horizontalmente para llegar a todos sus controles.'),
 
       h2('Markdown mientras escribes'),
       p('Si conoces Markdown, no hace falta abrir ningún menú:'),
       table(
         ['Escribes', 'Obtienes'],
-        ['`#` y espacio', 'Un título'],
+        ['De `#` a `######` y espacio', 'Un título de nivel 1 a 6'],
         ['`-` y espacio', 'Una lista con viñetas'],
         ['`1.` y espacio', 'Una lista numerada'],
         ['`[]` y espacio', 'Una tarea con casilla'],
         ['`>` y espacio', 'Una cita'],
         ['`---`', 'Un separador'],
         ['`**texto**`', 'Negrita'],
+        ['Tres acentos graves seguidos', 'Un bloque de código'],
+        ['Un acento grave a cada lado del texto', 'Código dentro de una frase'],
       ),
       h2('Pegar desde ChatGPT y otros documentos'),
       p('Cuando pegas contenido con formato con `Ctrl` + `V`, Zenth intenta conservar su estructura: títulos, listas y subtareas, citas, tablas, enlaces, imágenes, bloques de código, fórmulas y notas al pie. También convierte el Markdown que pegas como texto. Como cada aplicación copia información distinta, puede que tengas que retocar algún detalle después de pegar.'),
+      tip('Usa `Ctrl` + `Shift` + `V` para **pegar sin formato** y conservar el texto literal, sin convertir el Markdown. Dentro de un bloque de código, el pegado también conserva el texto literal.'),
       p('En los bloques de código, Zenth intenta reconocer el lenguaje cuando encuentra señales claras en el contenido. Abre **Lenguaje** para buscarlo y elegirlo. **Detectar automáticamente** vuelve a intentarlo; **Texto sin formato** muestra el código sin resaltado. En fragmentos cortos o ambiguos, puedes indicar el lenguaje manualmente.'),
 
       h2('Bloques de código'),
-      p('Al seleccionar varias líneas, usa el botón **Código** o `Ctrl` + `E` para convertirlas en un bloque. Zenth conserva los saltos de línea y la sangría. En la barra del bloque, pulsa el selector que muestra el lenguaje actual para buscar por nombre o abreviatura, elegir otro o volver a **Detectar automáticamente**. El botón **Copiar código**, junto al selector, copia el bloque. Los bloques Mermaid también pueden abrir una vista previa del diagrama.'),
+      p('Al seleccionar varias líneas, usa el botón **Código** o `Ctrl` + `E` para convertirlas en un bloque. Zenth conserva los saltos de línea y la sangría. En la barra del bloque, pulsa el selector que muestra el lenguaje actual para buscar por nombre o abreviatura, elegir otro o volver a **Detectar automáticamente**. El botón **Copiar código**, junto al selector, copia el bloque.'),
+      p('Dentro del bloque, `Enter` agrega una línea; dos `Enter` seguidos al final te llevan a un párrafo nuevo. Puedes recorrer los resultados del selector de lenguaje con las flechas y cerrarlo con `Esc`.'),
       tip('Para escribir código dentro de una frase, sigue usando el formato en línea de Markdown con acentos graves; el botón Código crea un bloque.'),
 
+      h2('Fórmulas'),
+      steps(
+        'Elige **Insertar › Fórmula**, o busca «Fórmula» en el menú `/`.',
+        'Escribe la expresión en **Fórmula LaTeX**. Puedes insertar estructuras como **Fracción**, **Raíz**, **Potencia**, **Subíndice**, **Suma**, **Integral** o **Matriz**, y completar sus espacios.',
+        'Comprueba la **Vista previa**. Marca **En un bloque separado** si quieres una fórmula independiente; desmárcalo para incluirla en la línea.',
+        'Pulsa **Guardar fórmula** o `Ctrl` + `Enter`.',
+      ),
+      p('Para editar una fórmula, haz doble clic sobre ella o usa **Editar fórmula…** en el menú de clic derecho. En el campo LaTeX, `Tab` y `Shift` + `Tab` recorren los espacios vacíos de las estructuras insertadas.'),
+
+      h2('Diagramas Mermaid'),
+      steps(
+        'Elige **Insertar › Diagrama**, o busca «Diagrama» en el menú `/`. Se crea un bloque Mermaid con un ejemplo de flujo.',
+        'Edita el código del bloque. También puedes elegir el lenguaje **Mermaid** en un bloque de código existente.',
+        'Pulsa **Ver diagrama** en la barra del bloque o en su menú de clic derecho para abrir la vista previa.',
+      ),
+      p('En escritorio, el diagrama se abre en un diálogo; en el móvil, en una hoja. Si hay un error de sintaxis, la vista previa muestra el problema y, cuando puede identificarla, la línea: corrígelo en el bloque y vuelve a abrirla. Si no se pudo cargar la vista previa, ofrece **Reintentar**.'),
+
       h2('Imágenes'),
-      p('Pega una imagen con `Ctrl` + `V` o arrástrala al editor. Pulsa una imagen para ajustar su tamaño o quitarla.'),
+      p('Sube una imagen desde **Insertar › Imagen**, pégala con `Ctrl` + `V` o arrástrala al editor. Pulsa la imagen para abrir sus herramientas:'),
+      list(
+        '**Tamaño:** elige el 25, 50, 75 o 100 % del ancho del texto, o arrastra los tiradores para ajustarlo.',
+        '**Alineación:** izquierda, centro o derecha para imágenes fuera de listas y tablas.',
+        '**Mover:** en escritorio, arrastra el control de movimiento; en el móvil, usa **Subir la imagen** y **Bajar la imagen**. Para imágenes fuera de listas y tablas también sirven `Ctrl` + `Shift` + `↑` o `↓`.',
+        '**Texto alternativo:** escribe una descripción para las personas que usan lectores de pantalla.',
+        '**Ver en grande**, **Reemplazar la imagen** por otra de tu dispositivo conservando su tamaño, alineación y texto alternativo, o **Quitar la imagen**.',
+      ),
+
+      h2('Tablas'),
+      p('**Insertar › Tabla** crea una tabla editable de **3 × 3**. `Tab` avanza a la celda siguiente y, desde la última, agrega una fila; `Shift` + `Tab` vuelve a la anterior.'),
+      p('En escritorio, haz clic derecho en una celda: **Agregar fila o columna** permite insertar arriba, abajo, a la izquierda o a la derecha; **Eliminar fila, columna o tabla** quita la fila, la columna o la tabla entera. La fila de encabezados no permite insertar otra fila por encima.'),
+
+      h2('Enlaces a páginas y secciones'),
+      steps(
+        'Selecciona el texto que será el enlace y pulsa **Enlace** o `Ctrl` + `K`. Sin una selección, puedes escribir el **Texto del enlace**.',
+        'En **Buscar sección o pegar enlace**, pega una dirección web o escribe el nombre de un título de esta nota. **Títulos de este documento** muestra todos con su jerarquía.',
+        'Elige el destino o pulsa **Aplicar**. Las flechas recorren las opciones y `Enter` elige la activa.',
+      ),
+      p('Los enlaces internos te llevan al título dentro de la misma nota y siguen funcionando si lo renombras. Si eliminas el título, al editar el enlace Zenth avisa que la sección ya no existe y te permite elegir otra. En escritorio, el menú de clic derecho ofrece **Ir a la sección** o **Abrir enlace**, según el destino, además de editarlo o quitarlo.'),
+
+      h2('El menú de clic derecho'),
+      p('En escritorio, haz clic derecho en el texto o en un elemento para ver sus acciones. El menú se adapta: ofrece herramientas de imagen, lenguaje y copia de código, edición y copia de LaTeX, enlaces o filas y columnas de tabla. Sobre texto seleccionado también reúne formato, cortar, copiar y pegar; sobre un bloque, convertir, insertar, mover y duplicar.'),
+      tip('Con `Shift` + clic derecho abres el menú del navegador, útil para su corrector ortográfico. En pantallas compactas se conserva el menú del navegador y la selección táctil; usa la barra de Zenth para sus herramientas.'),
 
       h2('Moverte dentro de una nota larga'),
       list(
@@ -195,9 +241,9 @@ export const bibliotecaArticles: DocArticle[] = [
     slug: 'compartir-notas-y-lienzos',
     category: 'biblioteca',
     title: 'Compartir notas y lienzos',
-    summary: 'Invita por correo con permiso de ver, sugerir o editar, trabaja en la misma nota en vivo, revisa sugerencias y guarda lo que te comparten.',
-    keywords: ['compartir nota', 'colaborar', 'sugerencias', 'permisos', 'puede editar', 'puede ver', 'compartidos conmigo', 'presencia', 'tiempo real', 'invitar', 'guardar en mi biblioteca', 'modo sugerencia'],
-    updated: '2026-09-29',
+    summary: 'Invita con permiso de ver, sugerir o editar, trabaja en vivo y propone cambios que se guardan solos para su revisión.',
+    keywords: ['compartir nota', 'colaborar', 'sugerencias', 'permisos', 'puede editar', 'puede ver', 'compartidos conmigo', 'presencia', 'tiempo real', 'invitar', 'guardar en mi biblioteca', 'modo sugerencia', 'sugerencia guardada', 'comentarios', 'menciones', 'adjuntos'],
+    updated: '2026-10-01',
     related: ['biblioteca/revisar-sugerencias', 'biblioteca/historial-de-versiones', 'biblioteca/notas', 'privacidad/quien-ve-que'],
     blocks: [
       p('Una nota o un lienzo son tuyos hasta que los compartes. Al compartirlos, otras personas pueden verlos o trabajar en ellos contigo, sin copias ni versiones cruzadas.'),
@@ -232,10 +278,12 @@ export const bibliotecaArticles: DocArticle[] = [
         ['Visualización', 'Lee el documento final.'],
       ),
       steps(
-        'Quien tiene permiso de sugerir cambia al modo **Sugerencias**, edita y pulsa **Enviar sugerencia**.',
-        'Quien puede editar ve la sugerencia en el panel de la derecha, separada en cambios.',
+        'Quien puede sugerir o editar elige **Sugerencias**. Lo que agrega queda marcado y lo que propone quitar, tachado; la propuesta se guarda automáticamente.',
+        'La cabecera muestra **Guardando…** y **Sugerencia guardada**. Puedes seguir ajustando tu propuesta sin enviarla de nuevo.',
+        'Quien puede editar ve tarjetas junto a los cambios en escritorio; en el móvil, el botón de sugerencias abre la lista.',
         'Acepta o rechaza cada cambio por separado, o todos juntos. Ver [Revisar sugerencias](/docs/biblioteca/revisar-sugerencias).',
       ),
+      p('También puedes seleccionar texto y elegir **Sugerir un cambio aquí** desde la barra de selección o el menú de clic derecho de escritorio. Al salir o cambiar de modo, Zenth intenta guardar lo pendiente; si falla, ofrece reintentarlo o descartar esos últimos cambios.'),
 
       h2('Cuando alguien comparte algo contigo'),
       list(
@@ -254,20 +302,28 @@ export const bibliotecaArticles: DocArticle[] = [
     slug: 'revisar-sugerencias',
     category: 'biblioteca',
     title: 'Revisar sugerencias',
-    summary: 'Revisa las propuestas de otras personas y de tu asistente de IA como en Google Docs: cada cambio en su lugar, con lo anterior tachado, y decide uno por uno.',
-    keywords: ['sugerencias', 'revisar', 'propuesta', 'aceptar', 'rechazar', 'aplicar', 'descartar', 'cambios', 'control de cambios', 'google docs', 'ia', 'asistente', 'mcp', 'conflicto', 'tachado'],
-    updated: '2026-09-29',
+    summary: 'Propón cambios que se guardan solos, revísalos junto al texto y conversa sobre cada uno con comentarios, menciones y adjuntos.',
+    keywords: ['sugerencias', 'revisar', 'propuesta', 'aceptar', 'rechazar', 'aplicar', 'descartar', 'cambios', 'control de cambios', 'google docs', 'ia', 'asistente', 'mcp', 'conflicto', 'tachado', 'autoguardado', 'comentarios', 'menciones', 'adjuntos', 'hilo', 'tarjetas', 'sugerencia guardada'],
+    updated: '2026-10-01',
     related: ['biblioteca/compartir-notas-y-lienzos', 'biblioteca/historial-de-versiones', 'integraciones/zenth-mcp'],
     blocks: [
-      p('Una **sugerencia** es una propuesta de cambios sobre una nota que no toca el texto hasta que alguien la acepta. Puede venir de una persona con permiso de **sugerir**, que escribió en el modo Sugerencias, o de tu asistente de IA conectado con [Zenth MCP](/docs/integraciones/zenth-mcp). Las del asistente llevan la marca **IA**.'),
+      p('Una **sugerencia** es una propuesta de cambios sobre una nota que no toca el texto hasta que alguien la acepta. Puede venir de una persona con permiso de **sugerir** o **editar**, que escribió en el modo Sugerencias, o de tu asistente de IA conectado con [Zenth MCP](/docs/integraciones/zenth-mcp). Las del asistente llevan la marca **IA**.'),
+
+      h2('Proponer cambios'),
+      steps(
+        'Elige el modo **Sugerencias**, o selecciona un fragmento y pulsa **Sugerir un cambio aquí**.',
+        'Escribe, reemplaza o borra: el editor marca lo agregado y tacha lo que propones quitar. En escritorio, una tarjeta junto al texto resume cada cambio.',
+        'La propuesta se guarda sola. La cabecera muestra **Guardando…** y luego **Sugerencia guardada**; puedes seguir editándola.',
+      ),
+      p('Para retirar un cambio propio mientras sugieres, abre su tarjeta y pulsa **Descartar**. También puedes usar **Deshacer**. Si la propuesta no se pudo guardar al salir, Zenth ofrece **Reintentar** o descartar lo pendiente.'),
 
       h2('El panel de sugerencias'),
       list(
-        'En escritorio, las sugerencias aparecen en una **columna a la derecha** del texto, que se abre sola cuando hay alguna. El botón con el contador, en la cabecera de la nota, la muestra u oculta.',
-        'En el móvil, el mismo botón abre una **hoja desde abajo**.',
-        'Cada sugerencia muestra quién la hizo, la fecha y su **resumen completo**, sin cortar.',
-        'Debajo, la sugerencia está separada en **cambios**: cada uno es una tarjeta que dice qué hace (**Reemplaza**, **Agrega**, **Quita** o **Cambia el título**) y muestra el texto entero.',
-        'Cuando un párrafo se reemplaza por otro, la tarjeta lo muestra en una sola línea: las palabras que se van, **tachadas**, y las que llegan, **marcadas**.',
+        'En escritorio, las **tarjetas** aparecen en el margen derecho, a la altura del texto que cambian. El botón con el contador de la cabecera abre una revisión; **Terminar revisión** vuelve a la edición.',
+        'Cada tarjeta identifica al autor, cuándo hizo la propuesta y qué quiere agregar, quitar o reemplazar. Pulsa la tarjeta para ampliarla y ver el detalle.',
+        'La tarjeta abierta ofrece flechas de **Cambio anterior** y **Cambio siguiente**, con su posición en la lista. Las tarjetas cerradas muestran el número de comentarios cuando tienen un hilo.',
+        'En el móvil, el botón de sugerencias abre una **hoja desde abajo** con las propuestas y sus cambios. Elige uno para verlo en la nota.',
+        'El modo concentración oculta las tarjetas del margen para dejar espacio a la escritura.',
       ),
 
       h2('Ver un cambio en su lugar'),
@@ -289,6 +345,15 @@ export const bibliotecaArticles: DocArticle[] = [
       p('Cuando a una sugerencia no le quedan cambios pendientes, **se cierra sola**. Antes de aplicar cambios, Zenth guarda una versión de la nota en el [historial](/docs/biblioteca/historial-de-versiones), así que siempre puedes volver atrás.'),
       note('Si alguien editó la nota **en esa misma parte** después de que se hizo la propuesta, la tarjeta lo avisa y ese cambio **solo se puede rechazar**: aplicarlo pisaría lo que se escribió después. Los cambios en otras partes de la nota se aplican sin problema.', 'Cuando la nota cambió después'),
       p('Aceptar y rechazar es para el **propietario** y las personas con permiso de **edición**. Quien solo puede sugerir o ver, ve las sugerencias pero no las decide.'),
+
+      h2('Comentarios, menciones y adjuntos'),
+      p('En escritorio, abre una tarjeta para ver su hilo. Si aparece **Agregar un comentario…**, puedes conversar sobre ese cambio antes de decidirlo. Para comentar sobre un cambio propio, espera a que su sugerencia esté guardada.'),
+      steps(
+        'Escribe en **Agregar un comentario…**. Pulsa **Mencionar a alguien** o escribe `@` y elige una persona de la nota.',
+        'Usa **Adjuntar archivos** si necesitas acompañarlo con un documento o una imagen. Puedes agregar hasta **10 archivos**, de hasta **15 MB** cada uno.',
+        'Pulsa **Publicar el comentario** o `Enter`. `Shift` + `Enter` agrega un salto de línea. Si está abierta la lista de menciones, `Enter` elige primero a la persona.',
+      ),
+      p('El propietario y quienes pueden editar o sugerir pueden comentar; quienes solo pueden ver leen los hilos existentes. Puedes borrar tus propios comentarios; el propietario y los editores también pueden borrar los de otras personas. Los adjuntos del hilo se abren desde el comentario.'),
       tip('Si le pides a tu asistente que corrija o reescriba una nota, no la cambia: deja una sugerencia con la marca **IA** para que la revises aquí.'),
     ],
   },
