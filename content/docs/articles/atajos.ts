@@ -92,7 +92,7 @@ export const atajosArticles: DocArticle[] = [
     summary: 'Formato, copiar estilos, bloques, columnas, código, fórmulas y comentarios: las teclas para trabajar dentro de una nota.',
     keywords: ['atajos editor', 'notas', 'negrita', 'cursiva', 'títulos', 'listas', 'markdown', 'buscar y reemplazar', 'modo concentración', 'tachado', 'copiar formato', 'pegar formato', 'superíndice', 'subíndice', 'columnas', 'espacio para imagen', 'código', 'bloque de código', 'enlace', 'duplicar bloque', 'pegar sin formato', 'tabla', 'fórmula', 'latex', 'comentario', 'mención', 'menú contextual', 'clic derecho'],
     updated: '2026-10-02',
-    related: ['biblioteca/notas', 'biblioteca/revisar-sugerencias', 'atajos/atajos-de-la-aplicacion'],
+    related: ['biblioteca/notas', 'biblioteca/escribir-y-dar-formato-a-notas', 'biblioteca/tablas-y-columnas-en-notas', 'biblioteca/revisar-sugerencias', 'atajos/atajos-de-la-aplicacion'],
     blocks: [
       p('Dentro del editor de notas, `Ctrl` + `/` (`⌘` + `/` en Mac) abre esta misma lista sin salir de la nota. En macOS, `Ctrl` se muestra como `⌘`.'),
 

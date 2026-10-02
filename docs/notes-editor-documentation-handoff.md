@@ -72,3 +72,56 @@ Los cambios locales ajenos en `.claude/launch.json`,
 `.claude/settings.local.json` y `EntryCard.tsx` se conservaron. No se cambiaron
 dependencias, configuración del sitio ni código de la aplicación, y esta tarea
 no publicó la web.
+
+## Ampliación: guías de uso paso a paso
+
+El 2026-10-02 se añadieron seis guías a petición del usuario, con entre 800 y
+1.150 palabras aproximadamente por guía, procedimientos, ejemplos genéricos,
+ejercicios y soluciones a dudas habituales:
+
+- Escribir y dar formato a una nota.
+- Organizar una nota con bloques e índice.
+- Trabajar con tablas y columnas en notas.
+- Añadir imágenes y una portada a una nota.
+- Usar código, fórmulas y diagramas en notas.
+- Diseñar una nota y exportarla.
+
+Los artículos viven en `content/docs/articles/editor-notas.ts` y se incorporan
+al registro de Biblioteca desde `biblioteca.ts`, después de la guía general.
+La guía general ofrece un recorrido enlazado por las seis tareas. Plantillas y
+atajos incluyen enlaces hacia las guías pertinentes. Las seis rutas nuevas se
+añadieron a `public/sitemap.xml`.
+
+Se contrastaron las instrucciones con los controles del editor: selector de
+modo, barra de formato, menú de bloques, búsqueda/reemplazo, menús contextuales,
+herramientas de imagen, fórmulas y opciones de página. Se explican en particular
+el bloque actual que pasa a la primera columna, Tab dentro de listas antes que
+entre columnas, los controles estructurales disponibles en escritorio, el
+recorte centrado y la diferencia entre portada y hoja de presentación. Los
+ejemplos usan Juan y Ana; no se añadieron datos personales del usuario.
+
+Verificación de esta ampliación, independiente de los controles de la aplicación
+registrados en la revisión anterior:
+
+- TypeScript y compilación de zenth-blog: correctos; permanece el aviso de
+  chunks grandes.
+- Registro real validado en memoria con esbuild: 69 artículos sin claves
+  duplicadas; 129 enlaces internos y todos los relacionados con destino válido.
+  Los enlaces de sección apuntan a anclas existentes.
+- Las seis guías tienen fecha de revisión, ejercicio y ruta en el sitemap.
+  Se comprobaron seis consultas de búsqueda y sus destinos de sección.
+- Sitemap: 105 rutas únicas. Se detectaron dos omisiones anteriores, ajenas al
+  editor: `integraciones/zenth-mcp` y `ayuda/la-camara-no-funciona`. No se amplió
+  esta tarea para modificar esos artículos ni sus rutas.
+- Navegador local: acceso desde la guía principal a la guía de escritura en
+  escritorio; enlace a la sección de fórmulas; guía de tablas en 390 × 844 px,
+  sin desborde de página y con desplazamiento propio de la tabla; búsqueda
+  «pie de página» y Enter abren la sección exacta de la guía de exportación.
+- `git diff --check`: correcto.
+
+La ejecución inicial de esbuild y el arranque directo de Vite encontraron un
+bloqueo de lectura del sandbox; se completaron con la ejecución autorizada fuera
+de ese límite. No fue un fallo del producto. No se editó zenith-productivity ni
+se repitió su suite por esta ampliación de contenido. No se afirma un nuevo
+smoke autenticado o una exportación real de la aplicación. El servidor y la
+pestaña usados para verificar la documentación se cierran al terminar.

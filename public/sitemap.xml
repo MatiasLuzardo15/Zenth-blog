@@ -244,6 +244,42 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://www.zenth.space/docs/biblioteca/escribir-y-dar-formato-a-notas</loc>
+    <lastmod>2026-10-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.zenth.space/docs/biblioteca/organizar-notas-con-bloques</loc>
+    <lastmod>2026-10-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.zenth.space/docs/biblioteca/tablas-y-columnas-en-notas</loc>
+    <lastmod>2026-10-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.zenth.space/docs/biblioteca/imagenes-y-portadas-en-notas</loc>
+    <lastmod>2026-10-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.zenth.space/docs/biblioteca/codigo-formulas-y-diagramas-en-notas</loc>
+    <lastmod>2026-10-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.zenth.space/docs/biblioteca/disenar-y-exportar-notas</loc>
+    <lastmod>2026-10-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://www.zenth.space/docs/biblioteca/plantillas-de-notas</loc>
     <lastmod>2026-10-02</lastmod>
     <changefreq>monthly</changefreq>

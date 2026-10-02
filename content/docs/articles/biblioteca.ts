@@ -1,5 +1,6 @@
 import { h2, keys, list, note, p, path, steps, table, tip, warn } from '../blocks';
 import type { DocArticle } from '../types';
+import { editorNotasArticles } from './editor-notas';
 
 const UPDATED = '2026-09-23';
 
@@ -91,6 +92,17 @@ export const bibliotecaArticles: DocArticle[] = [
     related: ['biblioteca/plantillas-de-notas', 'atajos/atajos-del-editor-de-notas', 'biblioteca/historial-de-versiones', 'biblioteca/compartir-notas-y-lienzos', 'agenda/detalle-de-una-tarea'],
     blocks: [
       p('Las notas de Zenth usan un editor de bloques pensado para pensar por escrito: empiezas a escribir y le das forma sobre la marcha, sin salir del teclado.'),
+
+      h2('Guías paso a paso del editor'),
+      p('Si estás empezando, sigue las guías en este orden. Cada una explica dónde pulsar, qué resultado esperar y un ejercicio para practicar en una nota de prueba. Puedes también ir directamente a la tarea que necesitas:'),
+      list(
+        '[Escribir y dar formato a una nota](/docs/biblioteca/escribir-y-dar-formato-a-notas): selección, listas, tipografías, interlineado, copiar formato, pegado y búsqueda.',
+        '[Organizar una nota con bloques e índice](/docs/biblioteca/organizar-notas-con-bloques): títulos, índice automático, enlaces a secciones, destacados y movimiento de bloques.',
+        '[Trabajar con tablas y columnas](/docs/biblioteca/tablas-y-columnas-en-notas): celdas, filas, estilos, navegación y conversión de columnas a texto.',
+        '[Añadir imágenes y una portada](/docs/biblioteca/imagenes-y-portadas-en-notas): tamaño, recorte, texto alternativo, reemplazo y espacios para fotos.',
+        '[Usar código, fórmulas y diagramas](/docs/biblioteca/codigo-formulas-y-diagramas-en-notas): lenguajes, LaTeX, vista previa y corrección de errores.',
+        '[Diseñar una nota y exportarla](/docs/biblioteca/disenar-y-exportar-notas): fuente del documento, portada opcional, encabezado, pie, saltos y elección de formato.',
+      ),
 
       h2('Crear y guardar'),
       steps(
@@ -255,6 +267,8 @@ export const bibliotecaArticles: DocArticle[] = [
     ],
   },
 
+  ...editorNotasArticles,
+
   {
     slug: 'plantillas-de-notas',
     category: 'biblioteca',
@@ -315,6 +329,7 @@ export const bibliotecaArticles: DocArticle[] = [
 
       h2('Personalizar y reutilizar'),
       p('Puedes editar, mover o eliminar los bloques de la nota creada y conservar las secciones que te sirvan. La galería ofrece el catálogo de Zenth; por ahora no permite guardar una nota como plantilla personal ni elegir variantes de color de una misma plantilla. Los espacios de foto se completan con imágenes de tu dispositivo.'),
+      p('Para adaptar una plantilla paso a paso, sigue [Escribir y dar formato](/docs/biblioteca/escribir-y-dar-formato-a-notas), [Añadir imágenes y una portada](/docs/biblioteca/imagenes-y-portadas-en-notas) y [Diseñar y exportar](/docs/biblioteca/disenar-y-exportar-notas).'),
     ],
   },
 
