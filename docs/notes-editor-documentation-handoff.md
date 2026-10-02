@@ -125,3 +125,42 @@ de ese límite. No fue un fallo del producto. No se editó zenith-productivity n
 se repitió su suite por esta ampliación de contenido. No se afirma un nuevo
 smoke autenticado o una exportación real de la aplicación. El servidor y la
 pestaña usados para verificar la documentación se cierran al terminar.
+
+## Ejemplos visuales del editor
+
+El 2026-10-02 se incorporaron tres representaciones interactivas a las guías:
+
+- **Bloques e índice:** un informe ficticio muestra la jerarquía del índice y
+  permite elegir una entrada para ver el título, nivel y contenido de su sección.
+- **Tablas y columnas:** se comparan tres resultados desde un grupo original de
+  tres columnas. Reducir a dos coloca la tercera sección al final de la segunda;
+  convertir a texto conserva el orden. En móvil el ejemplo se apila.
+- **Imágenes:** un patrón geométrico SVG compara el archivo original de 3:2 con
+  vistas centradas de 16:9, 1:1 y 3:4 mediante `xMidYMid slice`. Original
+  recupera la vista completa. En móvil las dos figuras se apilan y las vistas
+  altas se muestran completas.
+
+El nuevo bloque `noteExample` tiene un contrato tipado en `content/docs/types.ts`,
+constructor en `blocks.ts`, texto indexable en `text.ts` y renderizado desde
+`DocBlocks.tsx` mediante `NoteExamples.tsx`. Los datos de los ejemplos permanecen
+en `editor-notas.ts`. Las interacciones usan estado local, botones nativos y un
+selector nativo; no guardan datos ni modifican las notas de la aplicación.
+Los botones exponen su selección y el destino con ARIA, los cambios de vista
+se anuncian y el SVG tiene una descripción. Se conservan los tokens del sitio.
+
+Verificación: TypeScript y build correctos; permanece el aviso existente de
+chunks grandes. El detector de Impeccable devolvió `[]` sobre los componentes.
+Se validaron 69 artículos y 129 enlaces internos con destinos y anclas válidos.
+Se comprobaron los controles con teclado, la comparación de distribuciones
+sin pérdida de contenido, las proporciones y la vuelta a Original, las vistas
+de escritorio y móvil sin desborde y `git diff --check`.
+
+La revisión final independiente de Impeccable devolvió la disposición `ship`,
+sin hallazgos materiales. Este handoff documenta la ampliación de tres guías
+existentes; los tokens y la estructura del sitio se conservan, sin decisiones
+nuevas del sistema de diseño global.
+
+Las capturas de las secciones son evidencia del sitio de documentación, no
+capturas del editor real. No se afirma un smoke autenticado de la aplicación.
+No se cambiaron dependencias ni código de zenith-productivity, y esta ampliación
+no publicó la web ni creó un commit.

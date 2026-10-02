@@ -1,4 +1,4 @@
-import { h2, h3, keys, list, note, p, steps, table, tip, warn } from '../blocks';
+import { h2, h3, keys, list, note, noteExample, p, steps, table, tip, warn } from '../blocks';
 import type { DocArticle } from '../types';
 
 const UPDATED = '2026-10-02';
@@ -155,6 +155,16 @@ export const editorNotasArticles: DocArticle[] = [
         'Renombra un título o añade una sección. El índice se actualiza a partir de los títulos de la nota; no necesitas escribir sus entradas a mano.',
       ),
       p('El bloque de índice reúne enlaces a los títulos y refleja su jerarquía. También se incluye en PDF y HTML con enlaces a las secciones. Para cambiar sus entradas, modifica los títulos originales.'),
+      noteExample('Ejemplo visual: pulsa una entrada del índice para ver su sección. «Qué vamos a medir» es un título de nivel 2, por eso aparece con sangría. Este ejemplo no modifica tus notas.', {
+        kind: 'outline',
+        title: 'Informe del taller',
+        sections: [
+          { title: 'Resumen', level: 1, text: 'Un taller de dos horas para preparar el próximo proyecto.' },
+          { title: 'Objetivos', level: 1, text: 'Acordar el alcance y repartir el trabajo.' },
+          { title: 'Qué vamos a medir', level: 2, text: 'Participación, acuerdos y tareas pendientes.' },
+          { title: 'Próximos pasos', level: 1, text: 'Juan prepara los materiales y Ana confirma el espacio.' },
+        ],
+      }),
       table(
         ['Índice automático en el cuerpo', 'Índice de la nota en el lateral'],
         ['Forma parte del documento y lo insertas tú.', 'Es una herramienta de navegación del editor.'],
@@ -272,6 +282,14 @@ export const editorNotasArticles: DocArticle[] = [
         'Para volver a un documento continuo, elige **Convertir columnas en texto**. El contenido se coloca en el cuerpo, en el orden de las columnas.',
       ),
       p('Puedes deshacer y rehacer estos cambios de estructura. Convertir en texto es una forma de retirar la distribución en columnas conservando lo escrito.'),
+      noteExample('Ejemplo visual: cada vista parte del grupo original de tres columnas. Compara el resultado de convertirlo en dos columnas o en texto continuo. Las secciones conservan su orden y su contenido; en móvil se apilan.', {
+        kind: 'columns',
+        sections: [
+          { title: 'Objetivo', text: 'Preparar un taller de dos horas para el equipo.' },
+          { title: 'Materiales', text: 'Cuaderno, marcadores y una pantalla para compartir.' },
+          { title: 'Riesgos', text: 'Confirmar el espacio y la conexión antes de empezar.' },
+        ],
+      }),
 
       h2('Límites y comportamiento al borrar'),
       list(
@@ -330,6 +348,10 @@ export const editorNotasArticles: DocArticle[] = [
         ['Vertical (3:4)', 'Para un retrato o una foto alta.'],
       ),
       p('El recorte se centra en la imagen. Conserva el archivo original y cambia cómo se muestra dentro del documento. Si queda fuera una cara, una etiqueta o un detalle importante, vuelve a **Original** o elige otra imagen; el control no permite desplazar el punto de recorte.'),
+      noteExample('Ejemplo visual de recorte centrado: compara el archivo completo con la vista de la nota. Los números permiten reconocer qué zonas quedan dentro del marco. Es una imagen geométrica de prueba.', {
+        kind: 'imageCrop',
+        alt: 'Imagen de prueba con tres zonas numeradas de izquierda a derecha: 1, 2 y 3, y marcas en los bordes superior e inferior.',
+      }),
 
       h2('Escribir texto alternativo'),
       steps(

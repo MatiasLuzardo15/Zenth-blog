@@ -28,7 +28,21 @@ export type DocBlock =
   /** Una pizarra antes y después de que actúe una regla. */
   | { type: 'boardMove'; caption: string; move: DocBoardMove }
   /** Una cadena de reglas, nivel por nivel, hasta que se detiene. */
-  | { type: 'chain'; caption: string; steps: DocChainStep[] };
+  | { type: 'chain'; caption: string; steps: DocChainStep[] }
+  /** Ejemplo explorable del editor, con contenido ficticio y estado local. */
+  | { type: 'noteExample'; caption: string; example: DocNoteExample };
+
+export type DocNoteExample =
+  | {
+      kind: 'outline';
+      title: string;
+      sections: { title: string; level: 1 | 2; text: string }[];
+    }
+  | {
+      kind: 'columns';
+      sections: { title: string; text: string }[];
+    }
+  | { kind: 'imageCrop'; alt: string };
 
 export interface DocRuleExample {
   /** El evento: «Se completa una tarjeta». */

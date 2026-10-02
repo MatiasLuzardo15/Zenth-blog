@@ -1,4 +1,4 @@
-import type { DocBlock, DocBoardMove, DocChainStep, DocFlowNode, DocRuleExample } from './types';
+import type { DocBlock, DocBoardMove, DocChainStep, DocFlowNode, DocNoteExample, DocRuleExample } from './types';
 
 /** Constructores para que los artículos se lean como texto y no como objetos. */
 export const h2 = (text: string): DocBlock => ({ type: 'h2', text });
@@ -19,3 +19,4 @@ export const flow = (caption: string, ...nodes: DocFlowNode[]): DocBlock => ({ t
 export const rule = (caption: string, example: DocRuleExample): DocBlock => ({ type: 'rule', caption, rule: example });
 export const boardMove = (caption: string, move: DocBoardMove): DocBlock => ({ type: 'boardMove', caption, move });
 export const chain = (caption: string, ...steps: DocChainStep[]): DocBlock => ({ type: 'chain', caption, steps });
+export const noteExample = (caption: string, example: DocNoteExample): DocBlock => ({ type: 'noteExample', caption, example });

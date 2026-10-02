@@ -45,6 +45,12 @@ export const blockText = (block: DocBlock): string => {
       return [block.caption, block.move.trigger, block.move.result, block.move.card, ...block.move.lists].map(stripInline).join(' ');
     case 'chain':
       return [block.caption, ...block.steps.flatMap(step => [step.label, step.detail ?? ''])].map(stripInline).join(' ');
+    case 'noteExample': {
+      const { example } = block;
+      if (example.kind === 'imageCrop') return stripInline(`${block.caption} ${example.alt}`);
+      return [block.caption, example.kind === 'outline' ? example.title : '',
+        ...example.sections.flatMap(section => [section.title, section.text])].map(stripInline).join(' ');
+    }
   }
 };
 

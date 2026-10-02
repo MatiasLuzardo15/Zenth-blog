@@ -7,6 +7,7 @@ import {
 import { sectionsOf } from '../../content/docs';
 import type { DocArticle, DocBlock } from '../../content/docs';
 import type { DocFlowIcon } from '../../content/docs/types';
+import { NoteExample } from './NoteExamples';
 
 const INLINE_PATTERN = /(\*\*[^*]+\*\*|`[^`]+`|\[[^\]]+\]\([^)]+\))/g;
 const LINK_PATTERN = /^\[([^\]]+)\]\(([^)]+)\)$/;
@@ -391,6 +392,14 @@ const Block: React.FC<{ block: DocBlock; sectionId?: string | null }> = ({ block
 
     case 'chain':
       return <ChainDiagram block={block} />;
+
+    case 'noteExample':
+      return (
+        <figure className="mt-8 min-w-0">
+          <NoteExample example={block.example} />
+          <Caption text={block.caption} />
+        </figure>
+      );
   }
 };
 
