@@ -191,7 +191,7 @@ const DocsSearch: React.FC<DocsSearchProps> = ({ open, initialQuery = '', onClos
                 rel="noopener noreferrer"
                 className="fr-btn fr-btn-secondary mt-6"
               >
-                Escribirnos
+                Escríbenos
                 <ArrowUpRight className="h-4 w-4" />
               </a>
             </div>

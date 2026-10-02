@@ -139,7 +139,7 @@ const DocsHome: React.FC = () => {
             className="fr-btn fr-btn-primary"
           >
             <Mail className="h-4 w-4" />
-            Escribirnos
+            Escríbenos
             <ArrowUpRight className="h-4 w-4" />
           </a>
         </div>
