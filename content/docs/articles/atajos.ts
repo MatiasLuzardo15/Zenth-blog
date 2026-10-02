@@ -89,9 +89,9 @@ export const atajosArticles: DocArticle[] = [
     slug: 'atajos-del-editor-de-notas',
     category: 'atajos',
     title: 'Atajos del editor de notas',
-    summary: 'Formato, pegado, código, tablas, fórmulas, enlaces y comentarios: las teclas para trabajar dentro de una nota.',
-    keywords: ['atajos editor', 'notas', 'negrita', 'cursiva', 'títulos', 'listas', 'markdown', 'buscar y reemplazar', 'modo concentración', 'tachado', 'código', 'bloque de código', 'enlace', 'duplicar bloque', 'pegar sin formato', 'tabla', 'fórmula', 'latex', 'comentario', 'mención', 'menú contextual', 'clic derecho'],
-    updated: '2026-10-01',
+    summary: 'Formato, copiar estilos, bloques, columnas, código, fórmulas y comentarios: las teclas para trabajar dentro de una nota.',
+    keywords: ['atajos editor', 'notas', 'negrita', 'cursiva', 'títulos', 'listas', 'markdown', 'buscar y reemplazar', 'modo concentración', 'tachado', 'copiar formato', 'pegar formato', 'superíndice', 'subíndice', 'columnas', 'espacio para imagen', 'código', 'bloque de código', 'enlace', 'duplicar bloque', 'pegar sin formato', 'tabla', 'fórmula', 'latex', 'comentario', 'mención', 'menú contextual', 'clic derecho'],
+    updated: '2026-10-02',
     related: ['biblioteca/notas', 'biblioteca/revisar-sugerencias', 'atajos/atajos-de-la-aplicacion'],
     blocks: [
       p('Dentro del editor de notas, `Ctrl` + `/` (`⌘` + `/` en Mac) abre esta misma lista sin salir de la nota. En macOS, `Ctrl` se muestra como `⌘`.'),
@@ -104,9 +104,14 @@ export const atajosArticles: DocArticle[] = [
         [['Ctrl', 'Shift', 'X'], 'Tachado'],
         [['Ctrl', 'E'], 'Alternar bloque de código; conserva líneas y sangría al convertir una selección'],
         [['Ctrl', 'Shift', 'H'], 'Resaltar'],
+        [['Ctrl', '.'], 'Superíndice'],
+        [['Ctrl', ','], 'Subíndice'],
+        [['Ctrl', 'Alt', 'C'], 'Copiar el formato del fragmento seleccionado'],
+        [['Ctrl', 'Alt', 'V'], 'Aplicar el formato copiado al texto seleccionado'],
         [['Ctrl', 'K'], 'Insertar o editar un enlace a una página o a un título de la misma nota'],
         [['Ctrl', '\\'], 'Quitar el formato'],
       ),
+      p('También puedes pulsar **Copiar formato** y seleccionar el destino con el ratón. Se desactiva después de aplicarlo; `Esc` cancela la herramienta. Está disponible en Edición.'),
 
       h2('Bloques'),
       keys(
@@ -121,9 +126,10 @@ export const atajosArticles: DocArticle[] = [
         [['Ctrl', 'Shift', '↑'], 'Mover el bloque hacia arriba'],
         [['Ctrl', 'Shift', '↓'], 'Mover el bloque hacia abajo'],
         [['Ctrl', 'D'], 'Duplicar el bloque'],
-        [['Tab'], 'En una lista, aumentar sangría; en una tabla, pasar a la celda siguiente y agregar una fila desde la última'],
-        [['Shift', 'Tab'], 'En una lista, reducir sangría; en una tabla, volver a la celda anterior'],
+        [['Tab'], 'En una lista, aumentar sangría; en una tabla, pasar a la celda siguiente y agregar una fila desde la última; en columnas, pasar a la siguiente'],
+        [['Shift', 'Tab'], 'En una lista, reducir sangría; en una tabla, volver a la celda anterior; en columnas, volver a la anterior'],
       ),
+      p('Busca **Índice automático**, **Dos columnas**, **Tres columnas**, **Espacio para imagen** o **Salto de página** con `/` para insertarlos desde el teclado. En un espacio para imagen enfocado, `Enter` o `Espacio` abre el selector.'),
 
       h2('Pegar y escribir código'),
       keys(
@@ -172,6 +178,7 @@ export const atajosArticles: DocArticle[] = [
         [['Esc'], 'Guardar y salir'],
       ),
       note('Si hay un menú o panel abierto, `Esc` lo cierra primero. En modo Sugerencias, Zenth guarda la propuesta automáticamente; al salir intenta guardar los últimos cambios y, si falla, te deja reintentarlo.'),
+      p('Alrededor de un grupo de columnas, Supr al final del párrafo anterior y Retroceso al inicio del posterior mantienen la separación de las columnas. Los cambios de estructura también admiten Deshacer y Rehacer.'),
     ],
   },
 ];

@@ -147,7 +147,7 @@ export const primerosPasosArticles: DocArticle[] = [
     title: 'Tu primer día: un recorrido de cinco minutos',
     summary: 'Crea una tarea, una pizarra, una nota y una sesión de enfoque, registra tu ánimo y personaliza Zenth. Un camino corto para ver cómo encaja todo.',
     keywords: ['empezar', 'tutorial', 'inicio rápido', 'primer uso', 'guía rápida', 'bienvenida', 'onboarding'],
-    updated: UPDATED,
+    updated: '2026-10-02',
     related: ['agenda/crear-tareas-eventos-y-reuniones', 'pizarras/crear-y-organizar-pizarras', 'biblioteca/notas', 'enfoque/usar-enfoque'],
     blocks: [
       p('No hace falta aprender Zenth entero para empezar. Este recorrido tarda unos minutos y pasa por lo esencial. Cada paso enlaza al artículo donde está explicado a fondo.'),
@@ -171,7 +171,7 @@ export const primerosPasosArticles: DocArticle[] = [
 
       h2('3. Escribe una nota'),
       steps(
-        'Ve a **Biblioteca** (`Alt` + `3`) y pulsa **Nuevo › Nota**.',
+        'Ve a **Biblioteca** (`Alt` + `3`) y pulsa **Nuevo › Nota › Nota en blanco**, o elige **A partir de una plantilla** para empezar con una estructura preparada.',
         'Escribe. Con `/` aparece el menú de bloques (títulos, listas, tablas, imágenes…).',
         'Pulsa `Esc` para guardar y salir.',
       ),

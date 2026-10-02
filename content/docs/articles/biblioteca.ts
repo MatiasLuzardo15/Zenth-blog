@@ -10,8 +10,8 @@ export const bibliotecaArticles: DocArticle[] = [
     title: 'Explorar la Biblioteca',
     summary: 'Un único explorador para tus notas y lienzos de Zenth y, si conectas Google, tu Drive: vistas, ubicaciones en árbol, filtros por tipo y búsqueda en todo o en un lugar.',
     keywords: ['biblioteca', 'entradas', 'explorador', 'notas', 'archivos', 'filtros', 'tipo', 'buscar', 'cuadrícula', 'lista', 'todo', 'recientes', 'destacados', 'compartidos', 'ubicaciones', 'carpetas', 'migas', 'nuevo', 'más'],
-    updated: '2026-09-30',
-    related: ['biblioteca/notas', 'biblioteca/lienzos', 'integraciones/google-drive'],
+    updated: '2026-10-02',
+    related: ['biblioteca/notas', 'biblioteca/plantillas-de-notas', 'biblioteca/lienzos', 'integraciones/google-drive'],
     blocks: [
       p('**Biblioteca** es donde viven tus notas, lienzos, archivos y, si conectas Google, tus documentos de Drive. Las notas y lienzos son de Zenth; los documentos, hojas, presentaciones y formularios de Google se guardan en tu Drive y Zenth los muestra y edita sin duplicarlos.'),
 
@@ -60,7 +60,8 @@ export const bibliotecaArticles: DocArticle[] = [
       p('El botón **Nuevo** ofrece:'),
       table(
         ['Opción', 'Qué crea', 'Necesita Drive'],
-        ['Nota', 'Una nota nativa de Zenth.', 'No'],
+        ['Nota › Nota en blanco', 'Una nota nativa de Zenth para empezar desde cero.', 'No'],
+        ['Nota › A partir de una plantilla', 'Abre la galería y crea una nota con una estructura preparada.', 'No'],
         ['Lienzo', 'Una pizarra de dibujo con Excalidraw.', 'No'],
         ['Documento, Hoja de cálculo, Presentación, Formulario', 'Un archivo nuevo de Google Docs, Sheets, Slides o Forms en tu Drive.', 'Sí'],
         ['Carpeta', 'Una carpeta real en tu Drive.', 'Sí'],
@@ -68,7 +69,8 @@ export const bibliotecaArticles: DocArticle[] = [
         ['Desde Google Drive', 'Elige un archivo existente con Google Picker.', 'Sí'],
         ['Nota de voz', 'Graba audio directamente en tu Drive.', 'Sí'],
       ),
-      p('Si no has conectado Drive, esas opciones te llevan a conectarlo. Ver [Google Drive y Workspace](/docs/integraciones/google-drive).'),
+      p('Las [plantillas de notas](/docs/biblioteca/plantillas-de-notas) incluyen reuniones, proyectos, currículums, cartas y planes de estudio. La galería indica dónde se guardará la nota antes de crearla.'),
+      p('Si no has conectado Drive, las opciones que lo necesitan te llevan a conectarlo. Ver [Google Drive y Workspace](/docs/integraciones/google-drive).'),
 
       h2('Acciones sobre un elemento'),
       p('Cada elemento tiene un menú con acciones como **Descargar**, **Mover a…** una carpeta y **Mover a papelera**. Los archivos y carpetas de Drive añaden renombrar, compartir y destacar. Lo que hagas con archivos de Google afecta al archivo real de tu Drive.'),
@@ -83,33 +85,53 @@ export const bibliotecaArticles: DocArticle[] = [
     slug: 'notas',
     category: 'biblioteca',
     title: 'Notas: el editor de Zenth',
-    summary: 'Escribe y pega documentos con formato, organiza imágenes y tablas, crea fórmulas y diagramas, y enlaza secciones dentro de tus notas.',
-    keywords: ['nota', 'editor', 'markdown', 'bloques', 'slash', 'formato', 'imágenes', 'tabla', 'exportar', 'pdf', 'índice', 'concentración', 'buscar y reemplazar', 'autoguardado', 'portada', 'etiquetas', 'historial', 'versiones', 'pegar desde ChatGPT', 'código', 'copiar código', 'buscar lenguaje', 'lenguajes', 'fórmula', 'latex', 'mermaid', 'diagrama', 'enlace interno', 'sección', 'clic derecho', 'menú contextual', 'texto alternativo', 'reemplazar imagen'],
-    updated: '2026-10-01',
-    related: ['atajos/atajos-del-editor-de-notas', 'biblioteca/historial-de-versiones', 'biblioteca/compartir-notas-y-lienzos', 'agenda/detalle-de-una-tarea'],
+    summary: 'Escribe desde cero o con una plantilla, organiza el documento con columnas e índice automático y elige su fuente, portada y diseño al exportar.',
+    keywords: ['nota', 'editor', 'markdown', 'bloques', 'slash', 'formato', 'imágenes', 'tabla', 'exportar', 'pdf', 'índice', 'índice automático', 'columnas', 'concentración', 'buscar y reemplazar', 'autoguardado', 'portada', 'diseño de la nota', 'fuente', 'tipografía', 'interlineado', 'copiar formato', 'superíndice', 'subíndice', 'plantillas', 'recorte', 'espacio para imagen', 'destacado', 'separador', 'salto de página', 'encabezado', 'pie de página', 'etiquetas', 'historial', 'versiones', 'pegar desde ChatGPT', 'código', 'copiar código', 'buscar lenguaje', 'lenguajes', 'fórmula', 'latex', 'mermaid', 'diagrama', 'enlace interno', 'sección', 'clic derecho', 'menú contextual', 'texto alternativo', 'reemplazar imagen'],
+    updated: '2026-10-02',
+    related: ['biblioteca/plantillas-de-notas', 'atajos/atajos-del-editor-de-notas', 'biblioteca/historial-de-versiones', 'biblioteca/compartir-notas-y-lienzos', 'agenda/detalle-de-una-tarea'],
     blocks: [
       p('Las notas de Zenth usan un editor de bloques pensado para pensar por escrito: empiezas a escribir y le das forma sobre la marcha, sin salir del teclado.'),
 
       h2('Crear y guardar'),
       steps(
-        'En **Biblioteca**, pulsa **Nuevo › Nota** (o convierte una tarea con **Convertir en nota**).',
-        'Escribe un título en «Título de la nota» y elige una **portada** (un emoji) si quieres.',
+        'En **Biblioteca**, pulsa **Nuevo › Nota › Nota en blanco**. También puedes elegir **A partir de una plantilla** o convertir una tarea con **Convertir en nota**.',
+        'Escribe un título en «Título de la nota». El emoji junto al título identifica la nota en la Biblioteca; la imagen de portada se elige por separado en **Diseño de la nota**.',
         'Escribe en el cuerpo. Zenth **guarda solo** unos instantes después de que dejes de escribir. La cabecera indica los cambios pendientes, el guardado en curso y su confirmación.',
         'Pulsa `Esc` para guardar y salir, o `Ctrl` + `S` para guardar sin salir.',
       ),
       p('Si hay cambios pendientes, puedes pulsar el indicador para **Guardar ahora**. Si el guardado falla, aparece **No se guardó · Reintentar**: púlsalo para volver a intentarlo.'),
+
+      h2('Empezar con una plantilla'),
+      p('**A partir de una plantilla** abre una galería con búsqueda, categorías, miniaturas y vista previa. Al pulsar **Usar plantilla**, nace una nota editable con sus secciones, tablas, columnas y, cuando corresponde, portada y fuente. Ver [Plantillas de notas](/docs/biblioteca/plantillas-de-notas).'),
+      p('Los textos de ayuda en campos vacíos son ejemplos: desaparecen al escribir y no entran en el texto exportado ni en el recuento de palabras.'),
+
+      h2('Diseño de la nota: fuente y portada'),
+      p('Si eres el propietario y estás en **Edición**, abre **Más opciones › Diseño de la nota**. Las elecciones se guardan con la nota y se muestran también a quienes la leen.'),
+      list(
+        '**Fuente de toda la nota:** aplica una familia al título y al cuerpo, incluidos títulos de sección, listas y tablas. Los fragmentos con fuente propia conservan esa elección. **Predeterminada** recupera la fuente habitual.',
+        '**Portada opcional:** pulsa **Agregar portada** para elegir una imagen de tu dispositivo. Aparece encima del título; puedes cambiarla o pulsar **Quitar** para dejar la nota sin portada, conservando su contenido.',
+      ),
+      p('El selector ofrece Inter, DM Sans, Sora, Lora, Playfair Display, JetBrains Mono, Patrick Hand, Gaegu y DynaPuff. Las opciones de **PDF e impresión** están en el mismo panel; se explican más abajo.'),
 
       h2('El menú de bloques «/»'),
       p('Escribe `/` en una línea vacía para abrir el menú de bloques, y sigue escribiendo para filtrarlo. La barra también tiene **Tipo de bloque** para transformar el bloque actual e **Insertar** para agregar contenido.'),
       table(
         ['Grupo', 'Bloques'],
         ['Formato', 'Texto, títulos de nivel 1 a 6, Lista, Lista numerada, Lista de tareas, Cita y Bloque de código.'],
-        ['Insertar', 'Fórmula, Diagrama, Bloque destacado, Bloque de atención (advertencia), Tabla (3 × 3; se agranda con `Tab`), Separador, Imagen, Enlace y Fecha de hoy.'],
+        ['Insertar', 'Fórmula, Diagrama, Bloque destacado, Bloque de atención, Tabla, Separador, Salto de página, Imagen, Espacio para imagen, Índice automático, Dos columnas, Tres columnas, Enlace y Fecha de hoy.'],
+        ['Plantillas', 'Notas de reunión, Registro de decisiones y Plan de proyecto, para insertar una estructura dentro de la nota abierta.'],
       ),
 
       h2('Formato al seleccionar'),
-      p('Al seleccionar texto aparece una barra flotante con **negrita, cursiva, subrayado, tachado, bloque de código, resaltado, cita y enlace**. La barra de herramientas ofrece además tipografías (Inter, DM Sans, Sora, Lora, Playfair Display, JetBrains Mono, Patrick Hand, Gaegu y DynaPuff), tamaños (Normal, Grande, Enorme) y alineación.'),
-      p('En **Más acciones de formato** puedes alinear el texto, mover el bloque arriba o abajo, duplicarlo y quitar el formato. En pantallas pequeñas, la barra se desliza horizontalmente para llegar a todos sus controles.'),
+      p('Al seleccionar texto aparece una barra flotante con **negrita, cursiva, subrayado, tachado, bloque de código, resaltado, cita y enlace**. La barra de herramientas ofrece además tipografías, tamaños (Pequeño, Normal, Grande, Enorme) y alineación. El selector **Tipografía y tamaño** cambia el fragmento seleccionado; **Fuente de toda la nota** cambia la base del documento.'),
+      p('En **Más acciones de formato** puedes alinear el texto, elegir el **Interlineado** (Compacto, Normal, Amplio o Doble), aplicar **Superíndice** o **Subíndice**, mover el bloque arriba o abajo, duplicarlo y quitar el formato. El interlineado se aplica a los bloques seleccionados. En pantallas pequeñas, la barra se desliza horizontalmente para llegar a todos sus controles.'),
+
+      h2('Copiar y pegar formato'),
+      steps(
+        'Selecciona un fragmento cuyo formato quieras reutilizar y pulsa **Copiar formato**, o `Ctrl` + `Alt` + `C`.',
+        'Selecciona el texto de destino: recibe el formato sin cambiar sus palabras. Con el teclado, selecciona el destino y pulsa `Ctrl` + `Alt` + `V`.',
+      ),
+      p('La herramienta se desactiva después de aplicarla. Puedes cancelarla con `Esc` o con **Cancelar copiar formato**. Está disponible en Edición.'),
 
       h2('Markdown mientras escribes'),
       p('Si conoces Markdown, no hace falta abrir ningún menú:'),
@@ -156,15 +178,36 @@ export const bibliotecaArticles: DocArticle[] = [
       p('Sube una imagen desde **Insertar › Imagen**, pégala con `Ctrl` + `V` o arrástrala al editor. Pulsa la imagen para abrir sus herramientas:'),
       list(
         '**Tamaño:** elige el 25, 50, 75 o 100 % del ancho del texto, o arrastra los tiradores para ajustarlo.',
+        '**Proporción de la imagen:** Original, Horizontal (16:9), Cuadrada (1:1) o Vertical (3:4). El recorte queda centrado y cambia cómo se muestra la imagen, conservando el archivo original.',
         '**Alineación:** izquierda, centro o derecha para imágenes fuera de listas y tablas.',
         '**Mover:** en escritorio, arrastra el control de movimiento; en el móvil, usa **Subir la imagen** y **Bajar la imagen**. Para imágenes fuera de listas y tablas también sirven `Ctrl` + `Shift` + `↑` o `↓`.',
         '**Texto alternativo:** escribe una descripción para las personas que usan lectores de pantalla.',
         '**Ver en grande**, **Reemplazar la imagen** por otra de tu dispositivo conservando su tamaño, alineación y texto alternativo, o **Quitar la imagen**.',
       ),
+      p('Con **Insertar › Espacio para imagen** puedes reservar el lugar de una foto. Pulsa **Elegir imagen** para completarlo desde tu dispositivo, también dentro de una columna. Si cancelas o la subida falla, el espacio permanece para otro intento. Los espacios sin imagen se omiten al exportar. Subir o reemplazar imágenes requiere ser el propietario en Edición.'),
 
       h2('Tablas'),
       p('**Insertar › Tabla** crea una tabla editable de **3 × 3**. `Tab` avanza a la celda siguiente y, desde la última, agrega una fila; `Shift` + `Tab` vuelve a la anterior.'),
       p('En escritorio, haz clic derecho en una celda: **Agregar fila o columna** permite insertar arriba, abajo, a la izquierda o a la derecha; **Eliminar fila, columna o tabla** quita la fila, la columna o la tabla entera. La fila de encabezados no permite insertar otra fila por encima.'),
+      p('El mismo menú ofrece **Estilo de tabla**: **Sin bordes**, **Cabecera de color** y **Filas alternadas**. Puedes combinar estas opciones para adaptar la tabla al documento.'),
+
+      h2('Columnas'),
+      p('Elige **Insertar › Dos columnas** o **Tres columnas**, o busca el comando con `/`. Son columnas de igual ancho para texto, títulos, listas e imágenes; en el móvil se apilan en orden de lectura.'),
+      list(
+        '`Tab` pasa a la columna siguiente y `Shift` + `Tab` a la anterior.',
+        'En escritorio, el clic derecho dentro del grupo permite cambiar entre dos y tres columnas o **Convertir columnas en texto**. Reducir el número conserva el contenido de las columnas retiradas.',
+        'Las columnas no admiten tablas ni otras columnas dentro. Al pegar esos elementos, Zenth conserva su contenido como texto y bloques compatibles.',
+      ),
+      p('Supr al final del párrafo anterior y Retroceso al inicio del párrafo posterior conservan la separación del grupo: no absorben contenido de las columnas. Puedes seguir borrando texto dentro de cada columna y usar Deshacer o Rehacer para los cambios de estructura.'),
+
+      h2('Destacados, separadores y saltos de página'),
+      p('**Insertar › Bloque destacado** y **Bloque de atención** crean un recuadro para texto importante. En escritorio, el clic derecho ofrece **Tono del bloque**: Información, Logro, Atención, Peligro, Nota, Idea o Franja de fondo. La franja muestra el fondo sin ícono; Información usa el color del texto para su ícono, también al exportar.'),
+      p('**Insertar › Separador** crea una línea. Con clic derecho, **Estilo del separador** permite elegir Línea fina, Línea de color, Línea gruesa o Puntos.'),
+      p('**Insertar › Salto de página** marca dónde empieza una hoja nueva en el PDF o al imprimir. En el editor se ve como una separación para seguir escribiendo.'),
+
+      h2('Índice automático dentro del documento'),
+      p('Elige **Insertar › Índice automático** para agregar al cuerpo una lista de enlaces a los títulos de nivel 1 a 6. Se actualiza al agregar, renombrar, mover o eliminar títulos. Sus enlaces también se generan en HTML, Markdown y PDF.'),
+      p('El índice insertado forma parte del documento, además de la guía lateral **Índice de la nota**, que sirve para navegar mientras escribes. En escritorio, el menú de clic derecho permite **Quitar índice** sin eliminar las secciones.'),
 
       h2('Enlaces a páginas y secciones'),
       steps(
@@ -187,6 +230,18 @@ export const bibliotecaArticles: DocArticle[] = [
       ),
       p('En pantallas anchas, una barra al pie muestra los caracteres, los títulos y el ancho del texto. En el móvil no aparece, para dejarle más alto a la escritura.'),
 
+      h2('PDF, HTML e impresión'),
+      p('En **Más opciones**, elige **Descargar PDF**, **Descargar .html** o **Imprimir**. La portada, la fuente elegida, las imágenes recortadas y los estilos de los bloques se incluyen en esas salidas. El PDF distribuye el contenido en páginas y continúa las columnas largas en hojas siguientes.'),
+      p('Antes de exportar o imprimir, el propietario puede ajustar **Más opciones › Diseño de la nota › PDF e impresión**:'),
+      table(
+        ['Opción', 'Qué cambia'],
+        ['Encabezado automático', 'Muestra u oculta el encabezado con título, fecha y Zenth.'],
+        ['Pie de página', 'Elige el texto del pie, hasta 120 caracteres. Déjalo vacío para quitarlo.'],
+        ['Números de página', 'Activa o desactiva la numeración.'],
+      ),
+      p('De forma predeterminada, el encabezado y los números están activos y el pie dice ZENTH. La portada aparece una sola vez, antes del título. Si la fuente elegida no puede cargarse, el PDF y la impresión continúan con una fuente de respaldo.'),
+      note('Markdown y texto plano conservan el contenido, pero no reproducen toda la tipografía o la distribución visual. Los ejemplos de campos vacíos y los espacios de imagen sin completar no se exportan. Para conservar el diseño, usa HTML, PDF o impresión.'),
+
       h2('Etiquetas, compartir y exportar'),
       list(
         '**Etiquetar la nota** para agruparla con tus tareas.',
@@ -197,6 +252,69 @@ export const bibliotecaArticles: DocArticle[] = [
       ),
       note('Si una nota nació de una tarea, mantiene su vínculo con ella. Puedes también **vincular** notas a tareas desde el editor de tareas: [Vincular documentos a tareas](/docs/biblioteca/vincular-documentos-a-tareas).'),
       p('La lista completa de atajos está dentro del editor con `Ctrl` + `/` y en [Atajos del editor de notas](/docs/atajos/atajos-del-editor-de-notas).'),
+    ],
+  },
+
+  {
+    slug: 'plantillas-de-notas',
+    category: 'biblioteca',
+    title: 'Plantillas de notas',
+    summary: 'Elige entre 35 estructuras para trabajo, proyectos, documentos, planificación, vida personal y estudio; completa sus ejemplos y adapta el diseño.',
+    keywords: ['plantillas', 'galería', 'nota', 'modelo', 'currículum', 'cv', 'carta', 'informe', 'reunión', 'propuesta', 'trabajo práctico', 'Cornell', 'portada', 'fuente', 'ejemplos', 'nombre', 'correo', 'perfil'],
+    updated: '2026-10-02',
+    related: ['biblioteca/notas', 'biblioteca/explorar-la-biblioteca', 'atajos/atajos-del-editor-de-notas'],
+    blocks: [
+      p('Una plantilla prepara la estructura de una nota: secciones, tablas, listas, destacados y, según el documento, columnas, espacios para fotos, portada o una fuente propia. Después puedes editarla como cualquier nota.'),
+
+      h2('Elegir y crear'),
+      steps(
+        'Abre **Biblioteca › Nuevo › Nota › A partir de una plantilla**.',
+        'Usa **Buscar plantillas** o filtra por Trabajo, Proyectos, Documentos, Planificación, Personal o Estudio. La búsqueda admite términos sin tildes, como «curriculum» o «reunion».',
+        'Pulsa el botón **Vista previa** de una tarjeta para revisar el documento completo, incluida su portada y fuente.',
+        'Pulsa **Usar plantilla** en la vista previa o pulsa directamente la tarjeta. La galería indica dónde se guardará la nota y luego abre el editor.',
+      ),
+      p('La fila inicial ofrece **En blanco** y plantillas sugeridas o usadas recientemente. También puedes volver a la Biblioteca sin crear nada.'),
+
+      h2('El catálogo'),
+      table(
+        ['Categoría', 'Plantillas'],
+        ['Trabajo', 'Informe, Notas de reunión, Reunión 1:1, Informe semanal, Retrospectiva, Informe de incidente y Onboarding.'],
+        ['Proyectos', 'Propuesta de proyecto, Plan de proyecto, Registro de decisiones, Requisitos de producto, Propuesta técnica, Hoja de ruta y Checklist de lanzamiento.'],
+        ['Documentos', 'Currículum, Currículum clásico, Carta formal, Carta informal, Boletín informativo y Folleto.'],
+        ['Planificación', 'Plan de evento, Planificación semanal, Revisión mensual, Objetivos trimestrales y Matriz de Eisenhower.'],
+        ['Personal', 'Receta, Ficha de mascota, Viaje, Diario, Seguimiento de hábitos y Lista de lectura.'],
+        ['Estudio', 'Trabajo práctico, Apuntes Cornell, Resumen de libro y Plan de examen.'],
+      ),
+
+      h2('Completar los ejemplos'),
+      p('Los campos vacíos muestran una guía de lo que puedes escribir, también en listas, citas y celdas de tabla. Al completar el campo, la guía desaparece. Esos ejemplos no son texto de la nota: no cuentan como palabras ni aparecen en el documento exportado.'),
+      p('Otros textos, como «Nombre del cliente», «Tu profesión» o los datos de una experiencia laboral, sí son contenido editable. Reemplázalos por la información que corresponda. En plantillas como Notas de reunión o Carta formal, la fecha del documento se calcula al crear la nota; las fechas de ejemplo de un CV se completan a mano.'),
+      p('Donde veas **Elegir imagen**, sube tu propia foto. Puedes conservar el espacio mientras preparas la nota o quitarlo desde el menú de clic derecho de escritorio; los espacios vacíos se omiten al exportar.'),
+
+      h2('Nombre y correo del creador'),
+      p('Al crear la nota, algunas plantillas completan campos con tu nombre de Ajustes y el correo de tu cuenta. Si falta un dato, se conserva un ejemplo para que lo completes.'),
+      table(
+        ['Plantilla', 'Campos que se completan'],
+        ['Currículum y Currículum clásico', 'Tu nombre como título y tu correo en la línea de contacto.'],
+        ['Carta formal', 'Nombre del remitente, correo y firma.'],
+        ['Carta informal', 'Nombre en la firma.'],
+        ['Informe', 'Nombre del autor.'],
+        ['Propuesta de proyecto', 'Nombre en Preparado por y contacto cuando hay correo.'],
+      ),
+      p('Las miniaturas y vistas previas de los dos currículums usan **Juan Pérez** y **correo@ejemplo.com** como ejemplos genéricos. Tus datos se completan cuando creas la nota. Destinatarios, clientes, teléfonos y direcciones siguen siendo campos para completar.'),
+      note('Los datos completados son texto editable. Cambiar el perfil después no modifica las notas que ya creaste.'),
+
+      h2('Portadas y fuentes de las plantillas'),
+      p('Informe, Propuesta de proyecto, Boletín informativo, Folleto, Plan de evento y Viaje traen una imagen de portada encima del título. Puedes cambiarla o quitarla en **Más opciones › Diseño de la nota**. El Trabajo práctico conserva una carátula dentro del cuerpo, antes de su índice.'),
+      p('Currículum clásico, Carta informal y Receta usan Lora; Diario usa Patrick Hand y Folleto usa Sora. Puedes elegir otra familia o **Predeterminada** en **Fuente de toda la nota**. Las plantillas también aprovechan estilos de tabla, separadores y destacados para ordenar el contenido.'),
+      tip('Para preparar el archivo final, revisa [Diseño de la nota](/docs/biblioteca/notas#diseno-de-la-nota-fuente-y-portada) y [PDF, HTML e impresión](/docs/biblioteca/notas#pdf-html-e-impresion).'),
+
+      h2('Insertar una estructura en una nota abierta'),
+      p('Dentro del editor, el menú `/` y **Insertar** ofrecen **Notas de reunión**, **Registro de decisiones** y **Plan de proyecto**. Agregan esos bloques en la nota actual, con un encabezado propio. Para crear una nota completa desde cualquiera de las 35 plantillas, usa la galería de la Biblioteca.'),
+      p('Insertar una estructura conserva la fuente y la portada de la nota abierta.'),
+
+      h2('Personalizar y reutilizar'),
+      p('Puedes editar, mover o eliminar los bloques de la nota creada y conservar las secciones que te sirvan. La galería ofrece el catálogo de Zenth; por ahora no permite guardar una nota como plantilla personal ni elegir variantes de color de una misma plantilla. Los espacios de foto se completan con imágenes de tu dispositivo.'),
     ],
   },
 
