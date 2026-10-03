@@ -36,7 +36,8 @@ La guía distingue el emoji de la imagen de portada, la fuente del fragmento de
 la fuente de toda la nota y el índice lateral del índice insertado en el cuerpo.
 Explica permisos del propietario para diseño y subidas, el recorte centrado,
 columnas de igual ancho sin tablas/anidación y las diferencias de exportación.
-Los CV de la galería se documentan con Juan Pérez y correo@ejemplo.com; los datos
+Todas las plantillas de la galería se documentan con ejemplos genéricos como
+Juan Pérez y correo@ejemplo.com; los datos
 del perfil se completan al crear una nota y quedan editables. Guardar como
 plantilla personal, variantes de color y fotos de stock siguen pendientes.
 

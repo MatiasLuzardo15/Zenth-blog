@@ -315,7 +315,7 @@ export const bibliotecaArticles: DocArticle[] = [
         ['Informe', 'Nombre del autor.'],
         ['Propuesta de proyecto', 'Nombre en Preparado por y contacto cuando hay correo.'],
       ),
-      p('Las miniaturas y vistas previas de los dos currículums usan **Juan Pérez** y **correo@ejemplo.com** como ejemplos genéricos. Tus datos se completan cuando creas la nota. Destinatarios, clientes, teléfonos y direcciones siguen siendo campos para completar.'),
+      p('Todas las miniaturas y vistas previas de la galería usan ejemplos genéricos, como **Juan Pérez** y **correo@ejemplo.com**. Tus datos se completan cuando creas la nota. Destinatarios, clientes, teléfonos y direcciones siguen siendo campos para completar.'),
       note('Los datos completados son texto editable. Cambiar el perfil después no modifica las notas que ya creaste.'),
 
       h2('Portadas y fuentes de las plantillas'),
