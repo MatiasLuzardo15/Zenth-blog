@@ -63,7 +63,7 @@ export const DOC_CATEGORIES: DocCategory[] = [
   {
     id: 'integraciones',
     title: 'Integraciones y Zen',
-    description: 'Google Drive, Google Calendar, el asistente Zen con IA y, pronto, Zenth MCP.',
+    description: 'Google Drive, Google Calendar, el asistente Zen con IA y Zenth MCP.',
     icon: Puzzle,
   },
   {

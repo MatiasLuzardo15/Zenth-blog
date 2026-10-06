@@ -43,9 +43,9 @@ const ArticleCard: React.FC<ArticleCardProps> = ({ post, onClick }) => {
 
         <h3 className="t-headline mt-3 text-ink">{post.title}</h3>
 
-        <p className="t-body mt-3 line-clamp-3 flex-1 text-ink-muted">{post.excerpt}</p>
+        <p className="t-body mt-3 line-clamp-3 text-ink-muted">{post.excerpt}</p>
 
-        <span className="t-caption mt-6 inline-flex items-center gap-1.5 text-ink-muted transition-colors group-hover:text-ink">
+        <span className="t-caption mt-auto inline-flex items-center gap-1.5 pt-6 text-ink-muted transition-colors group-hover:text-ink">
           {isComingSoon(post) ? 'Ver el adelanto' : 'Leer artículo'}
           <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
         </span>

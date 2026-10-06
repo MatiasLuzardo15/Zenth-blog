@@ -11,7 +11,7 @@ export const editorNotasArticles: DocArticle[] = [
     title: 'Escribir y dar formato a una nota',
     summary: 'Crea tu primera nota, distingue el formato del texto del formato de bloque y practica con listas, tipografías, pegado y búsqueda.',
     keywords: ['editor', 'tutorial', 'primer documento', 'seleccionar texto', 'negrita', 'cursiva', 'color', 'resaltado', 'interlineado', 'tipografía', 'copiar formato', 'pegar sin formato', 'buscar', 'reemplazar', 'guardar'],
-    updated: UPDATED,
+    updated: '2026-10-05',
     related: ['biblioteca/notas', 'biblioteca/organizar-notas-con-bloques', 'biblioteca/disenar-y-exportar-notas', 'atajos/atajos-del-editor-de-notas'],
     blocks: [
       p('En esta guía vas a preparar una nota llamada **Plan del taller**, con una introducción, una lista de materiales y una frase destacada. Puedes practicar en una nota en blanco; si prefieres una estructura preparada, empieza por [Plantillas de notas](/docs/biblioteca/plantillas-de-notas).'),
@@ -45,12 +45,12 @@ export const editorNotasArticles: DocArticle[] = [
       tip('Para escribir x², escribe «x2», selecciona solo el 2 y aplica **Superíndice**. Para H₂O, selecciona el 2 y aplica **Subíndice**. Las expresiones más complejas tienen su propio [editor de fórmulas](/docs/biblioteca/codigo-formulas-y-diagramas-en-notas#insertar-y-editar-una-formula).'),
 
       h2('Cambiar tamaño, fuente y espaciado'),
-      p('Selecciona el texto y abre **Tipografía y tamaño**. Puedes elegir **Pequeño**, **Normal**, **Grande** o **Enorme**, y una familia tipográfica. Esta elección pertenece al fragmento seleccionado.'),
+      p('Selecciona el texto y abre **Tipografía y tamaño**. Puedes elegir **Pequeño**, **Normal**, **Grande** o **Enorme**, y una familia tipográfica. Esta elección pertenece al fragmento seleccionado. Con el teclado, `Ctrl` + `Shift` + `.` agranda la letra un tamaño y `Ctrl` + `Shift` + `,` la achica.'),
       p('Si buscas una fuente uniforme para el documento, usa **Más opciones › Diseño de la nota › Fuente de toda la nota**. La cambia el propietario en Edición. Los fragmentos que ya tienen fuente propia conservan esa elección: cambiar la fuente base no borra sus excepciones.'),
       steps(
         'Para espaciar un párrafo, coloca el cursor dentro de él. Para varios párrafos, selecciona el texto que los recorre.',
         'Abre **Más acciones de formato › Interlineado** y elige **Compacto**, **Normal**, **Amplio** o **Doble**.',
-        'En el mismo menú, elige **Izquierda**, **Centro**, **Derecha** o **Justificado** para la alineación.',
+        'En el mismo menú, elige **Izquierda**, **Centro**, **Derecha** o **Justificado** para la alineación. También puedes usar `Ctrl` + `Shift` + `L`, `E`, `R` o `J`.',
       ),
       note('Un título grande tiene una función dentro del documento: aparece en el índice. Aumentar el tamaño de un párrafo solo cambia su aspecto. Para crear secciones, usa **Tipo de bloque › Título grande**, **Título mediano** o **Título chico**.'),
 
@@ -115,7 +115,7 @@ export const editorNotasArticles: DocArticle[] = [
     title: 'Organizar una nota con bloques e índice',
     summary: 'Construye secciones, añade un índice automático y enlaces internos, destaca avisos y mueve bloques sin rehacer el documento.',
     keywords: ['editor', 'tutorial', 'bloques', 'slash', 'títulos', 'encabezados', 'índice', 'tabla de contenidos', 'enlace interno', 'secciones', 'destacado', 'aviso', 'separador', 'duplicar', 'mover', 'concentración'],
-    updated: UPDATED,
+    updated: '2026-10-05',
     related: ['biblioteca/escribir-y-dar-formato-a-notas', 'biblioteca/tablas-y-columnas-en-notas', 'biblioteca/disenar-y-exportar-notas', 'biblioteca/plantillas-de-notas'],
     blocks: [
       p('Un bloque es una unidad del cuerpo de la nota: un párrafo, un título, una lista, una imagen o una tabla. Puedes cambiar su tipo o moverlo sin reconstruir el documento. En esta guía vas a organizar un informe breve con **Resumen**, **Objetivos** y **Próximos pasos**.'),
@@ -144,7 +144,7 @@ export const editorNotasArticles: DocArticle[] = [
         'Añade debajo el texto del resumen. Crea «Objetivos» y «Próximos pasos» con el mismo nivel.',
         'Dentro de «Objetivos», usa **Título mediano** para una subsección, por ejemplo «Qué vamos a medir». **Título chico** sirve para un apartado dentro de esa subsección.',
       ),
-      p('Hay seis niveles de títulos. Una estructura fácil de recorrer mantiene el mismo nivel para secciones equivalentes y baja de nivel cuando entra en un detalle. El título principal de la nota, en la cabecera, no sustituye los títulos del cuerpo.'),
+      p('Hay seis niveles de títulos, y `Ctrl` + `Alt` + `1` a `6` aplica cada uno sin abrir el menú; `Ctrl` + `Alt` + `0` devuelve el bloque a texto normal. Una estructura fácil de recorrer mantiene el mismo nivel para secciones equivalentes y baja de nivel cuando entra en un detalle. El título principal de la nota, en la cabecera, no sustituye los títulos del cuerpo.'),
       note('La negrita o un tamaño de letra grande no convierten un párrafo en sección. Si un texto no aparece en el índice, comprueba su **Tipo de bloque**.'),
 
       h2('Insertar el índice dentro del documento'),
@@ -204,10 +204,10 @@ export const editorNotasArticles: DocArticle[] = [
 
       h2('Recorrer una nota larga'),
       list(
-        'En escritorio, despliega **Índice de la nota** en el borde derecho y elige un título para saltar a su sección.',
+        'En escritorio, despliega **Índice de la nota** en el borde derecho, o pulsa `Ctrl` + `Alt` + `I`, y elige un título para saltar a su sección.',
         'En móvil, el navegador lateral muestra tu progreso y el título actual. **Más opciones › Índice de la nota** permite mostrarlo u ocultarlo.',
         'Usa `Ctrl` + `F` para buscar una palabra concreta, aunque no sea un título.',
-        'Activa **Modo concentración** con `Ctrl` + `Shift` + `F` para escribir con menos controles alrededor. El ancho de lectura y el ancho completo son opciones de vista; no definen el tamaño de la hoja exportada.',
+        'Activa **Modo concentración** con `Ctrl` + `Shift` + `F` para escribir con menos controles alrededor. El ancho de lectura y el ancho completo son opciones de vista; no definen el tamaño de la hoja exportada. Para ver la nota repartida en hojas A4 o Carta, usa la [vista de hojas](/docs/biblioteca/disenar-y-exportar-notas#ver-la-nota-en-hojas).',
       ),
 
       h2('Practica: un informe que se pueda recorrer'),
@@ -488,9 +488,9 @@ export const editorNotasArticles: DocArticle[] = [
     slug: 'disenar-y-exportar-notas',
     category: 'biblioteca',
     title: 'Diseñar una nota y exportarla',
-    summary: 'Elige la fuente del documento y una portada opcional, prepara encabezados, pie y saltos de página, y decide entre PDF, HTML, Markdown o texto.',
-    keywords: ['editor', 'tutorial', 'diseño de la nota', 'fuente', 'portada opcional', 'PDF', 'HTML', 'Markdown', 'imprimir', 'exportar', 'descargar', 'encabezado', 'pie de página', 'numeración', 'salto de página', 'fuente de respaldo'],
-    updated: UPDATED,
+    summary: 'Elige la fuente del documento y una portada opcional, revisa la nota en hojas A4 o Carta, prepara encabezados, pie y saltos de página, y decide entre PDF, HTML, Markdown o texto.',
+    keywords: ['editor', 'tutorial', 'diseño de la nota', 'fuente', 'portada opcional', 'PDF', 'HTML', 'Markdown', 'imprimir', 'exportar', 'descargar', 'encabezado', 'pie de página', 'numeración', 'salto de página', 'fuente de respaldo', 'vista de hojas', 'hojas', 'páginas', 'A4', 'carta', 'horizontal', 'vertical', 'orientación', 'tamaño de papel'],
+    updated: '2026-10-05',
     related: ['biblioteca/imagenes-y-portadas-en-notas', 'biblioteca/organizar-notas-con-bloques', 'biblioteca/tablas-y-columnas-en-notas', 'biblioteca/plantillas-de-notas'],
     blocks: [
       p('Antes de compartir un documento terminado, revisa su fuente, sus imágenes y el lugar donde empiezan las secciones. El diseño se guarda con la nota; descargar un archivo crea una salida de su contenido actual. En esta guía vas a preparar un informe breve para entregar.'),
@@ -525,7 +525,26 @@ export const editorNotasArticles: DocArticle[] = [
         'Continúa escribiendo la sección que debe empezar después del salto.',
         'Descarga el PDF o abre la vista de impresión para comprobar la separación.',
       ),
-      p('Un **Separador** es una línea visual dentro del contenido; un **Salto de página** indica una nueva hoja en una salida paginada. La altura del editor y el ancho de lectura no equivalen a las páginas del PDF. Los párrafos, imágenes y columnas largos pueden continuar en hojas siguientes.'),
+      p('Un **Separador** es una línea visual dentro del contenido; un **Salto de página** indica una nueva hoja en una salida paginada. En la vista habitual, la altura del editor y el ancho de lectura no equivalen a las páginas del PDF; para ver dónde corta cada hoja, usa la [vista de hojas](#ver-la-nota-en-hojas). Las imágenes y columnas largas pueden continuar en hojas siguientes.'),
+
+      h2('Ver la nota en hojas'),
+      p('La **vista de hojas** muestra la nota repartida en hojas de papel, con sus márgenes y un espacio entre una hoja y la siguiente, como en un procesador de textos. Sirve para preparar un documento que vas a entregar: ves en qué hoja cae cada sección mientras escribes. Disponible en escritorio.'),
+      steps(
+        'Abre la nota y, en la cabecera, pulsa **Vista de hojas** en el grupo de vista, junto a **Ancho completo** y **Modo concentración**.',
+        'Encima de la primera hoja, elige el tamaño: **A4** o **Carta**.',
+        'Elige la orientación: **Vertical** o **Horizontal**. La horizontal sirve para tablas anchas, cronogramas o presentaciones.',
+        'Escribe con normalidad. Al lado de los botones y en la barra al pie de la ventana ves cuántas hojas ocupa la nota.',
+        'Para volver a la vista habitual, pulsa otra vez **Vista de hojas**.',
+      ),
+      p('El contenido se acomoda solo mientras escribes. Un bloque que no cabe en lo que queda de una hoja pasa entero a la siguiente, y un título no queda solo al pie: pasa junto con el bloque que lo sigue. Los saltos de página empiezan una hoja nueva, igual que en el PDF.'),
+      table(
+        ['Lo que conviene saber', 'Detalle'],
+        ['Es una preferencia tuya', 'No se guarda con la nota ni cambia su contenido. Quien la abra la ve como la tenga configurada. Zenth la recuerda en este navegador para todas tus notas.'],
+        ['El PDF y la impresión usan tus hojas', 'Con la vista activa, **Descargar PDF**, **Imprimir** y **Descargar .html** usan el tamaño y la orientación elegidos. Sin ella, el PDF sale en A4 vertical y en la impresión decides el papel en el diálogo del navegador.'],
+        ['En ventanas estrechas', 'Si la hoja no entra a lo ancho, se muestra más chica sin cambiar dónde corta. **Ancho completo** queda desactivado mientras usas hojas.'],
+        ['Bloques muy largos', 'Los párrafos, listas y tablas no se dividen entre dos hojas. Un bloque más alto que una hoja empieza arriba de la suya y continúa en la siguiente.'],
+      ),
+      note('La vista de hojas muestra los cortes con la letra del editor, y el PDF usa una tipografía un poco más chica. Los cortes son muy parecidos, pero revisa el archivo descargado antes de entregarlo.'),
 
       h2('Elegir el formato de salida'),
       table(
@@ -568,6 +587,7 @@ export const editorNotasArticles: DocArticle[] = [
         ['No aparece una imagen reservada', 'Completa el espacio para imagen antes de exportar.'],
         ['El PDF usa otra tipografía', 'La fuente elegida pudo no cargarse y se usó una de respaldo.'],
         ['El navegador no dejó copiar', 'Prueba la descarga .md para obtener el Markdown sin usar el portapapeles.'],
+        ['El PDF salió en otro tamaño u orientación', 'El papel lo toma de la vista de hojas. Actívala, elige el tamaño y la orientación, y vuelve a descargar.'],
       ),
       warn('Cambiar o eliminar contenido en la nota después de descargar no modifica los archivos que ya entregaste. Genera otra salida cuando actualices el documento.'),
 
@@ -577,6 +597,7 @@ export const editorNotasArticles: DocArticle[] = [
         'Elige una fuente base y decide si quieres portada; puedes entregar el informe sin ella.',
         'Escribe «Informe de ejemplo» en el pie y activa la numeración.',
         'Inserta un salto de página antes de la segunda sección.',
+        'Activa la **Vista de hojas** en A4 vertical y comprueba que la segunda sección empieza en una hoja nueva.',
         'Descarga PDF y HTML. Revisa los dos resultados y compara cómo presentan el mismo contenido.',
       ),
     ],

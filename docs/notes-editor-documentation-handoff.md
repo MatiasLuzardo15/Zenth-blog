@@ -165,3 +165,26 @@ Las capturas de las secciones son evidencia del sitio de documentación, no
 capturas del editor real. No se afirma un smoke autenticado de la aplicación.
 No se cambiaron dependencias ni código de zenith-productivity, y esta ampliación
 no publicó la web ni creó un commit.
+
+## Vista de hojas (2026-10-05)
+
+Se documenta la vista de hojas del editor de notas (zenith-productivity,
+`docs/architecture/work-items/notes-sheet-view-handoff.md`).
+
+- `editor-notas.ts`, guía **Diseñar una nota y exportarla**: sección nueva
+  «Ver la nota en hojas» (activar desde el grupo de vista, A4 o Carta, vertical
+  u horizontal, reparto mientras se escribe, títulos que no quedan solos al pie,
+  preferencia personal recordada en el navegador, PDF/impresión/HTML con el papel
+  elegido, escala en ventanas estrechas, bloques largos y diferencia de
+  tipografía con el PDF). Se ajustó el párrafo de saltos de página, se sumó una
+  fila de solución de problemas y un paso a la práctica. El resumen y las
+  palabras clave incluyen hojas, A4, Carta y orientación.
+- `editor-notas.ts`, guía **Organizar una nota con bloques**: la nota sobre el
+  ancho de lectura enlaza a la vista de hojas.
+- `biblioteca.ts`, artículo **Notas**: la vista de hojas en «Moverte dentro de
+  una nota larga», la barra al pie y el papel en «PDF, HTML e impresión».
+- `public/sitemap.xml`: `lastmod` de Notas y de Diseñar y exportar.
+
+Los cambios pendientes de atajos de teclado en `atajos.ts`, `biblioteca.ts`,
+`editor-notas.ts`, `ArticleCard.tsx` y el sitemap pertenecen a otra tarea y se
+conservaron. No se publicó la web ni se creó un commit.

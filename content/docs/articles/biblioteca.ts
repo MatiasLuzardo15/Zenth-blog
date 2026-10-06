@@ -87,8 +87,8 @@ export const bibliotecaArticles: DocArticle[] = [
     category: 'biblioteca',
     title: 'Notas: el editor de Zenth',
     summary: 'Escribe desde cero o con una plantilla, organiza el documento con columnas e índice automático y elige su fuente, portada y diseño al exportar.',
-    keywords: ['nota', 'editor', 'markdown', 'bloques', 'slash', 'formato', 'imágenes', 'tabla', 'exportar', 'pdf', 'índice', 'índice automático', 'columnas', 'concentración', 'buscar y reemplazar', 'autoguardado', 'portada', 'diseño de la nota', 'fuente', 'tipografía', 'interlineado', 'copiar formato', 'superíndice', 'subíndice', 'plantillas', 'recorte', 'espacio para imagen', 'destacado', 'separador', 'salto de página', 'encabezado', 'pie de página', 'etiquetas', 'historial', 'versiones', 'pegar desde ChatGPT', 'código', 'copiar código', 'buscar lenguaje', 'lenguajes', 'fórmula', 'latex', 'mermaid', 'diagrama', 'enlace interno', 'sección', 'clic derecho', 'menú contextual', 'texto alternativo', 'reemplazar imagen'],
-    updated: '2026-10-02',
+    keywords: ['nota', 'editor', 'markdown', 'bloques', 'slash', 'formato', 'imágenes', 'tabla', 'exportar', 'pdf', 'índice', 'índice automático', 'columnas', 'concentración', 'buscar y reemplazar', 'autoguardado', 'portada', 'diseño de la nota', 'fuente', 'tipografía', 'interlineado', 'copiar formato', 'superíndice', 'subíndice', 'plantillas', 'recorte', 'espacio para imagen', 'destacado', 'separador', 'salto de página', 'encabezado', 'pie de página', 'etiquetas', 'historial', 'versiones', 'pegar desde ChatGPT', 'código', 'copiar código', 'buscar lenguaje', 'lenguajes', 'fórmula', 'latex', 'mermaid', 'diagrama', 'enlace interno', 'sección', 'clic derecho', 'menú contextual', 'texto alternativo', 'reemplazar imagen', 'vista de hojas', 'hojas', 'A4', 'carta', 'horizontal'],
+    updated: '2026-10-05',
     related: ['biblioteca/plantillas-de-notas', 'atajos/atajos-del-editor-de-notas', 'biblioteca/historial-de-versiones', 'biblioteca/compartir-notas-y-lienzos', 'agenda/detalle-de-una-tarea'],
     blocks: [
       p('Las notas de Zenth usan un editor de bloques pensado para pensar por escrito: empiezas a escribir y le das forma sobre la marcha, sin salir del teclado.'),
@@ -239,11 +239,12 @@ export const bibliotecaArticles: DocArticle[] = [
         '**Índice de la nota:** en escritorio aparece como una guía estrecha en el borde derecho. Pasa el cursor, enfócala con el teclado o púlsala para desplegar los títulos; selecciona uno para saltar a esa sección. La flecha señala el título activo. En el móvil es un navegador lateral que muestra el porcentaje y el título actual.',
         '**Modo concentración** (`Ctrl` + `Shift` + `F`): oculta lo que sobra para escribir sin ruido.',
         '**Ancho del texto:** alterna entre columna de lectura y ancho completo.',
+        '**Vista de hojas:** en escritorio, reparte la nota en hojas A4 o Carta, en vertical u horizontal, para ver dónde corta cada página. Es una preferencia tuya: no cambia la nota. Ver [Ver la nota en hojas](/docs/biblioteca/disenar-y-exportar-notas#ver-la-nota-en-hojas).',
       ),
-      p('En pantallas anchas, una barra al pie muestra los caracteres, los títulos y el ancho del texto. En el móvil no aparece, para dejarle más alto a la escritura.'),
+      p('En pantallas anchas, una barra al pie muestra los caracteres, los títulos y el ancho del texto; con la vista de hojas, el formato y cuántas hojas ocupa la nota. En el móvil no aparece, para dejarle más alto a la escritura.'),
 
       h2('PDF, HTML e impresión'),
-      p('En **Más opciones**, elige **Descargar PDF**, **Descargar .html** o **Imprimir**. La portada, la fuente elegida, las imágenes recortadas y los estilos de los bloques se incluyen en esas salidas. El PDF distribuye el contenido en páginas y continúa las columnas largas en hojas siguientes.'),
+      p('En **Más opciones**, elige **Descargar PDF**, **Descargar .html** o **Imprimir**. La portada, la fuente elegida, las imágenes recortadas y los estilos de los bloques se incluyen en esas salidas. El PDF distribuye el contenido en páginas y continúa las columnas largas en hojas siguientes. Con la vista de hojas activa, el PDF, la impresión y el HTML usan su tamaño y orientación; sin ella, el PDF sale en A4 vertical.'),
       p('Antes de exportar o imprimir, el propietario puede ajustar **Más opciones › Diseño de la nota › PDF e impresión**:'),
       table(
         ['Opción', 'Qué cambia'],
@@ -497,7 +498,7 @@ export const bibliotecaArticles: DocArticle[] = [
     title: 'Historial de versiones',
     summary: 'Vuelve a cualquier estado anterior de una nota. Zenth guarda versiones mientras escribes y siempre antes de que la cambie la IA; puedes ponerles nombre y restaurarlas.',
     keywords: ['historial', 'versiones', 'versión anterior', 'restaurar', 'deshacer', 'recuperar', 'volver atrás', 'nombre de versión', 'copia', 'respaldo', 'google docs', 'ia'],
-    updated: '2026-09-29',
+    updated: '2026-10-05',
     related: ['biblioteca/notas', 'biblioteca/revisar-sugerencias', 'cuenta/papelera'],
     blocks: [
       p('El **historial de versiones** guarda estados anteriores de tus notas para que puedas verlos y volver a cualquiera. Funciona como en Google Docs: la nota actual va arriba y, debajo, las versiones anteriores.'),
@@ -505,7 +506,7 @@ export const bibliotecaArticles: DocArticle[] = [
       h2('Abrir el historial'),
       steps(
         'Abre una nota.',
-        'Pulsa el botón **Historial** de la cabecera. En escritorio se abre una columna a la derecha; en el móvil, una hoja desde abajo.',
+        'Pulsa el botón **Historial** de la cabecera, o `Ctrl` + `Alt` + `Shift` + `H` en escritorio. En escritorio se abre una columna a la derecha; en el móvil, una hoja desde abajo.',
         'Arriba está la **Versión actual** y, debajo, las anteriores agrupadas por **Hoy**, **Ayer** y fecha, con la hora, quién escribió y su nombre si tiene.',
       ),
 

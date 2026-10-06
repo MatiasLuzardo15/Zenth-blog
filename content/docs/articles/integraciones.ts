@@ -131,13 +131,12 @@ export const integracionesArticles: DocArticle[] = [
   {
     slug: 'zenth-mcp',
     category: 'integraciones',
-    title: 'Zenth MCP (próximamente)',
-    summary: 'Conecta Claude o Codex a tu cuenta para consultar y organizar tu agenda, tus pizarras y tu Biblioteca desde la conversación. En desarrollo: aún no está abierto a todas las cuentas.',
+    title: 'Zenth MCP',
+    summary: 'Conecta Claude o Codex a tu cuenta para consultar y organizar tu agenda, tus pizarras y tu Biblioteca desde la conversación.',
     keywords: ['mcp', 'model context protocol', 'claude', 'claude code', 'codex', 'chatgpt', 'openai', 'anthropic', 'ia', 'inteligencia artificial', 'asistente', 'conector', 'conectar', 'aplicaciones conectadas', 'oauth', 'permisos', 'revocar', 'desconectar', 'notas', 'secciones', 'tablas', 'etiquetas', 'proponer cambios', 'sugerencias', 'historial', 'automatizaciones', 'reglas'],
-    updated: '2026-09-29',
-    related: ['biblioteca/revisar-sugerencias', 'biblioteca/historial-de-versiones', 'pizarras/automatizaciones', 'integraciones/zen-asistente', 'cuenta/papelera'],
+    updated: '2026-10-05',
+    related: ['pizarras/acciones-de-listas', 'pizarras/vistas-de-pizarra', 'pizarras/automatizaciones', 'biblioteca/revisar-sugerencias', 'biblioteca/historial-de-versiones', 'integraciones/zen-asistente', 'cuenta/papelera'],
     blocks: [
-      warn('Zenth MCP **está en desarrollo**: lo estamos probando y todavía no está disponible para todas las cuentas. Esta página cuenta cómo va a funcionar; cuando se abra, aquí estarán los pasos para conectarlo.', 'En desarrollo'),
       p('**MCP** (Model Context Protocol) es un estándar abierto con el que los asistentes de IA se conectan a otras aplicaciones. Con Zenth MCP, **Claude** (en la web, la app de escritorio y Claude Code) y **Codex** pueden consultar y actualizar tu espacio mientras conversas con ellos: le pides algo con tus palabras y el asistente lo hace en tu cuenta.'),
 
       h2('Cómo funciona un pedido'),
@@ -157,7 +156,7 @@ export const integracionesArticles: DocArticle[] = [
         ['Agenda', 'Ver tu día o varios días seguidos, con tareas, eventos y reuniones. Buscar pendientes y atrasadas.'],
         ['Tareas', 'Crear tareas (también repetitivas, con fecha de fin), cambiar título, fecha, hora, prioridad o etiquetas, sumar notas al final, activar el aviso por correo, completarlas o reabrirlas.'],
         ['Papelera', 'Mandar una tarea a la papelera, ver lo que hay y restaurarla.'],
-        ['Pizarras', 'Ver tus pizarras y sus listas (las tarjetas tachadas aparecen en su lista; las archivadas, solo si lo pides), crear tarjetas y moverlas de lista, en las pizarras donde puedes editar. Mover una tarjeta a **Completado** la completa y la archiva.'],
+        ['Pizarras', 'Ver tus pizarras y sus listas en su orden, crear tarjetas y moverlas de lista donde puedes editar. Incluye fechas futuras y una pendiente por serie repetida; las archivadas aparecen solo si lo pides. Mover una tarjeta a **Completado** la completa y la archiva.'],
         ['Automatizaciones', 'Ver las reglas de una pizarra con qué hizo cada una la última vez, crear reglas nuevas y activarlas o desactivarlas, en las pizarras que administras.'],
         ['Biblioteca', 'Buscar notas por texto, carpeta o etiqueta, y leer una nota entera o solo una de sus secciones.'],
         ['Escribir notas', 'Crear un documento nuevo (en una carpeta y con etiquetas, si quieres) y sumar texto al final de una nota o debajo de una sección concreta. Con títulos, listas, tablas, bloques destacados y resaltado.'],
@@ -166,6 +165,18 @@ export const integracionesArticles: DocArticle[] = [
         ['Progreso', 'Consultar tu nivel, tu racha y un resumen de lo que hiciste.'],
       ),
       p('En una tarea repetitiva, los cambios afectan solo a esa ocurrencia. Para cambiar la serie entera, usa la app.'),
+
+      h2('Consultar y mover tarjetas de una pizarra'),
+      p('El asistente puede consultar una pizarra completa o una lista concreta, y mover una tarjeta a otra lista de esa pizarra indicando su posición, desde **1** para colocarla arriba. Las fechas futuras siguen visibles, y cada serie repetida aporta una sola tarjeta pendiente con el mismo criterio que el tablero.'),
+      list(
+        '«Muéstrame la lista **En curso** de **Producto**, con su límite de tarjetas».',
+        '«Crea **Revisar presupuesto** en **Por hacer** de **Producto**, con vencimiento el viernes».',
+        '«Mueve **Revisar presupuesto** a **En curso**, en la posición 1».',
+        '«Muéstrame también las tarjetas archivadas de **Producto**».',
+      ),
+      p('Si una lista tiene [límite de tarjetas abiertas](/docs/pizarras/acciones-de-listas#limite-de-tarjetas-abiertas), el asistente recibe el límite y el número de pendientes, y un aviso cuando lo supera. **Crear o mover sigue permitido**: por ejemplo, si una lista con límite 2 queda con 3 abiertas, la acción se guarda y la respuesta avisa del exceso. Las tarjetas tachadas no cuentan y una serie cuenta por la ocurrencia pendiente que muestra el tablero.'),
+      p('Completar una tarjeta sin repetición puede dejarla tachada en su lista hasta que la archives. Una ocurrencia repetida pasa directamente al historial y deja paso a la siguiente pendiente, también al completarla desde el asistente. Ver [Historial de tareas completadas](/docs/agenda/historial-de-completadas).'),
+      p('También puedes pedir una **fecha de inicio** al crear una tarjeta y después cambiarla o quitarla con el asistente. Por ejemplo: «Crea Revisar presupuesto en Por hacer de Producto, con inicio el lunes y vencimiento el viernes». El inicio debe ser anterior o igual al vencimiento; si pides fechas incompatibles, Zenth rechaza el cambio. Ver [Inicio y vencimiento](/docs/pizarras/tarjetas-y-bandeja-rapida#inicio-y-vencimiento).'),
 
       h2('Trabajar con tus notas'),
       p('El asistente lee y escribe tus notas con el mismo formato que el editor de Zenth: títulos, listas, tareas con casilla, citas, código, **tablas**, **bloques destacados** (de nota, consejo, advertencia o precaución) y texto **resaltado**. Algunos pedidos que funcionan bien:'),
@@ -216,7 +227,7 @@ export const integracionesArticles: DocArticle[] = [
       path('Ajustes', 'Integraciones', 'Aplicaciones conectadas'),
       p('Ahí ves cada asistente que autorizaste y qué permisos tiene. **Desconectar** le quita el acceso. Aunque el asistente siga mostrando Zenth en su lista, ya no puede entrar: para volver a usarlo tendrá que pedirte permiso de nuevo.'),
 
-      h2('Límites mientras está en desarrollo'),
+      h2('Límites'),
       list(
         'Las tareas completadas desde un asistente **todavía no suman XP**.',
         'Un diagrama nuevo se dibuja en el lienzo **la primera vez que lo abres** en Zenth.',

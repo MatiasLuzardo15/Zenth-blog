@@ -201,9 +201,9 @@ export const cuentaArticles: DocArticle[] = [
     category: 'cuenta',
     title: 'Papelera: recuperar lo que borraste',
     summary: 'Tareas y notas eliminadas van a la papelera hasta que la vacíes. Cómo restaurar, borrar para siempre y qué pasa con los archivos de Drive.',
-    keywords: ['papelera', 'restaurar', 'recuperar', 'borrar', 'eliminar para siempre', 'vaciar', 'trash', 'eliminado', 'drive'],
-    updated: UPDATED,
-    related: ['agenda/historial-de-completadas', 'pizarras/crear-y-organizar-pizarras', 'integraciones/google-drive'],
+    keywords: ['papelera', 'restaurar', 'recuperar', 'borrar', 'eliminar para siempre', 'vaciar', 'trash', 'eliminado', 'drive', 'solo esta tarea', 'serie repetida'],
+    updated: '2026-10-05',
+    related: ['agenda/historial-de-completadas', 'pizarras/vistas-de-pizarra', 'pizarras/crear-y-organizar-pizarras', 'integraciones/google-drive'],
     blocks: [
       p('Borrar deja de ser una decisión definitiva. Lo que eliminas va a la **Papelera**, donde queda hasta que la vacíes tú.'),
 
@@ -224,7 +224,7 @@ export const cuentaArticles: DocArticle[] = [
       list(
         '**Restaurar** devuelve un elemento a su sitio original con un clic.',
         '**Eliminar para siempre** (o vaciar) sí es permanente.',
-        'Al mandar una **tarea recurrente** a la papelera, Zenth detiene sus repeticiones futuras.',
+        'Al eliminar una **tarea recurrente**, eliges el alcance. **Solo esta tarea** retira esa ocurrencia y permite que la serie continúe. **Esta y las siguientes** retira lo programado desde ella; **Toda la serie** retira todas. Ver [Eliminar una ocurrencia o una serie](/docs/pizarras/vistas-de-pizarra#eliminar-una-ocurrencia-o-una-serie).',
       ),
       note('Zenth **no borra la papelera automáticamente**: los elementos se quedan hasta que tú los restaures o los elimines. Y **Eliminar todas las tareas**, en la zona de riesgo de Ajustes, se salta la papelera.'),
 
