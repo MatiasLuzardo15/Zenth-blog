@@ -251,7 +251,7 @@ export const agendaArticles: DocArticle[] = [
     title: 'Historial de tareas completadas',
     summary: 'Las tareas terminadas salen de la vista pero no desaparecen: búscalas y devuélvelas al tablero desde el historial de un día o de una pizarra.',
     keywords: ['completadas', 'historial', 'archivadas', 'archivar', 'tachada', 'restaurar', 'terminadas', 'hechas', 'devolver', 'repetidas', 'ocurrencia'],
-    updated: '2026-10-05',
+    updated: '2026-10-06',
     related: ['pizarras/tarjetas-y-bandeja-rapida', 'agenda/repeticion-y-recordatorios', 'pizarras/vistas-de-pizarra', 'cuenta/papelera'],
     blocks: [
       p('Las tarjetas archivadas se reúnen en un **historial**. En la pizarra verás una tarjeta llamada **Completadas · Ver historial**, con un contador, para consultarlas sin llenar las listas de trabajo.'),
@@ -277,7 +277,8 @@ export const agendaArticles: DocArticle[] = [
         '**Restaurar** una tarea para devolverla al tablero: vuelve **abierta** a la lista donde estaba. Zenth confirma con «Tarea devuelta al tablero».',
       ),
       note('Una pizarra pública **no muestra** el historial: las completadas son cosa de los miembros. Ver [Pizarra pública con enlace](/docs/pizarras/pizarra-publica-con-enlace).'),
-      p('Si restauras una ocurrencia repetida, vuelve a estar pendiente y deja de estar archivada. El tablero y la tabla mantienen una sola tarjeta visible por serie, elegida por su fecha. En el [calendario de la pizarra](/docs/pizarras/calendario-de-pizarra#series-repetidas-y-filtros), las series con una pendiente visible muestran sus ocurrencias por día, incluidas las terminadas tachadas.'),
+      p('Si restauras una ocurrencia repetida, vuelve a estar pendiente y deja de estar archivada. El tablero y la tabla mantienen una sola tarjeta visible por serie, elegida por su fecha. El [calendario de la pizarra](/docs/pizarras/calendario-de-pizarra#tarjetas-completadas-y-archivadas) permite consultar las archivadas tachadas en su día, incluso cuando la serie ya terminó.'),
+      note('En una [pizarra cerrada](/docs/pizarras/cerrar-y-reabrir-pizarras), puedes consultar su historial, pero devolver una tarjeta al tablero requiere que un propietario o administrador reabra primero la pizarra. Sus tarjetas quedan fuera de Agenda y de su historial del día hasta reabrirla.'),
       p('Completar no es lo mismo que borrar. Las tareas borradas van a la [papelera](/docs/cuenta/papelera).'),
     ],
   },

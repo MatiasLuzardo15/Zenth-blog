@@ -134,8 +134,8 @@ export const integracionesArticles: DocArticle[] = [
     title: 'Zenth MCP',
     summary: 'Conecta Claude o Codex a tu cuenta para consultar y organizar tu agenda, tus pizarras y tu Biblioteca desde la conversación.',
     keywords: ['mcp', 'model context protocol', 'claude', 'claude code', 'codex', 'chatgpt', 'openai', 'anthropic', 'ia', 'inteligencia artificial', 'asistente', 'conector', 'conectar', 'aplicaciones conectadas', 'oauth', 'permisos', 'revocar', 'desconectar', 'notas', 'secciones', 'tablas', 'etiquetas', 'proponer cambios', 'sugerencias', 'historial', 'automatizaciones', 'reglas'],
-    updated: '2026-10-05',
-    related: ['pizarras/acciones-de-listas', 'pizarras/vistas-de-pizarra', 'pizarras/automatizaciones', 'biblioteca/revisar-sugerencias', 'biblioteca/historial-de-versiones', 'integraciones/zen-asistente', 'cuenta/papelera'],
+    updated: '2026-10-06',
+    related: ['pizarras/cerrar-y-reabrir-pizarras', 'pizarras/acciones-de-listas', 'pizarras/vistas-de-pizarra', 'pizarras/automatizaciones', 'biblioteca/revisar-sugerencias', 'biblioteca/historial-de-versiones', 'integraciones/zen-asistente', 'cuenta/papelera'],
     blocks: [
       p('**MCP** (Model Context Protocol) es un estándar abierto con el que los asistentes de IA se conectan a otras aplicaciones. Con Zenth MCP, **Claude** (en la web, la app de escritorio y Claude Code) y **Codex** pueden consultar y actualizar tu espacio mientras conversas con ellos: le pides algo con tus palabras y el asistente lo hace en tu cuenta.'),
 
@@ -168,6 +168,7 @@ export const integracionesArticles: DocArticle[] = [
 
       h2('Consultar y mover tarjetas de una pizarra'),
       p('El asistente puede consultar una pizarra completa o una lista concreta, y mover una tarjeta a otra lista de esa pizarra indicando su posición, desde **1** para colocarla arriba. Las fechas futuras siguen visibles, y cada serie repetida aporta una sola tarjeta pendiente con el mismo criterio que el tablero.'),
+      note('El listado habitual omite las **pizarras cerradas**. Una consulta específica puede indicar que está cerrada, pero las herramientas de escritura rechazan cambios en ella y en sus tarjetas. Para volver a trabajar, un propietario o administrador debe [reabrirla desde Zenth](/docs/pizarras/cerrar-y-reabrir-pizarras#reabrir-una-pizarra).'),
       list(
         '«Muéstrame la lista **En curso** de **Producto**, con su límite de tarjetas».',
         '«Crea **Revisar presupuesto** en **Por hacer** de **Producto**, con vencimiento el viernes».',

@@ -8,10 +8,10 @@ export const pizarrasArticles: DocArticle[] = [
     slug: 'crear-y-organizar-pizarras',
     category: 'pizarras',
     title: 'Crear y organizar pizarras',
-    summary: 'Crea pizarras por proyecto, personaliza icono, color y diseño, organiza las listas y entiende qué pasa al salir o eliminar una.',
-    keywords: ['tablero', 'kanban', 'trello', 'proyecto', 'listas', 'columnas', 'nueva pizarra', 'icono', 'color', 'diseño', 'eliminar pizarra', 'salir', 'descripción'],
-    updated: '2026-10-05',
-    related: ['pizarras/acciones-de-listas', 'pizarras/vistas-de-pizarra', 'pizarras/calendario-de-pizarra', 'pizarras/compartir-una-pizarra', 'cuenta/papelera'],
+    summary: 'Crea pizarras por proyecto, marca tus favoritas, personaliza su diseño y conserva los proyectos terminados cerrando la pizarra.',
+    keywords: ['tablero', 'kanban', 'trello', 'proyecto', 'listas', 'columnas', 'nueva pizarra', 'icono', 'color', 'diseño', 'eliminar pizarra', 'salir', 'descripción', 'favoritas', 'estrella', 'cerrar pizarra'],
+    updated: '2026-10-06',
+    related: ['pizarras/cerrar-y-reabrir-pizarras', 'pizarras/acciones-de-listas', 'pizarras/vistas-de-pizarra', 'pizarras/calendario-de-pizarra', 'pizarras/compartir-una-pizarra', 'cuenta/papelera'],
     blocks: [
       p('Una **pizarra** es un tablero por proyecto: tiene sus propias listas, sus tarjetas y, si la compartes, sus miembros. Puedes tener tantas como necesites, y cada una empieza siendo privada.'),
 
@@ -22,6 +22,14 @@ export const pizarrasArticles: DocArticle[] = [
         'Ponle nombre, elige un icono y pulsa **Crear**.',
       ),
       p('Para cambiar de pizarra usa el mismo selector. Ahí también aparecen, en una sección aparte, las pizarras **compartidas conmigo** (con tu rol en cada una) y las **invitaciones** pendientes.'),
+
+      h2('Marcar tus favoritas'),
+      steps(
+        'Abre el selector de pizarras. En el móvil, pulsa el nombre de la pizarra.',
+        'Pulsa la **estrella** junto a una pizarra para marcarla como favorita.',
+        'La pizarra pasa a **Favoritas**, al principio del selector. Pulsa la estrella otra vez para quitarla.',
+      ),
+      p('Puedes marcar pizarras propias o compartidas, incluso si eres Observador. Las favoritas son **personales** y se guardan en tu cuenta: no cambian el orden de tus compañeros ni conceden permisos nuevos. Una pizarra cerrada conserva su estrella y vuelve a Favoritas cuando la reabres.'),
 
       h2('Personalizar una pizarra'),
       p('El menú de la pizarra activa (la sección «Esta pizarra» del selector) reúne todo lo que la define:'),
@@ -49,12 +57,66 @@ export const pizarrasArticles: DocArticle[] = [
       note('La **prioridad** de una tarjeta es, en realidad, la lista donde está. Por eso el campo «Prioridad» del editor muestra los nombres de tus listas.'),
       p('El menú **…** de cada lista permite además ordenar sus tarjetas, moverlas juntas, archivar las completadas, fijar un límite, copiar la lista o llevarla a otra pizarra. Los pasos y sus diferencias están en [Acciones de listas](/docs/pizarras/acciones-de-listas).'),
 
+      h2('Cerrar una pizarra'),
+      p('El propietario y los administradores pueden **Cerrar pizarra** para retirarla de la lista normal y conservar su contenido en solo lectura. Puedes reabrirla desde **Pizarras cerradas**. Ver [Cerrar y reabrir pizarras](/docs/pizarras/cerrar-y-reabrir-pizarras).'),
+
       h2('Salir de una pizarra o eliminarla'),
       list(
         '**Salir** (si no eres el propietario): dejas de ver la pizarra y sus tarjetas. Podrás volver si un administrador te invita otra vez. Un administrador solo puede salir si queda al menos otro.',
-        '**Eliminar** (solo el propietario): las tareas de la pizarra pasan a la [papelera](/docs/cuenta/papelera) y la pizarra desaparece para todos sus miembros. Antes de confirmar, Zenth te dice cuántas tareas y cuántos miembros tiene.',
+        '**Eliminar** (solo el propietario): las tareas de la pizarra pasan a la [papelera](/docs/cuenta/papelera) y la pizarra desaparece para todos sus miembros. Revisa la confirmación antes de eliminarla: cerrar permite conservarla entera.',
       ),
-      p('Siempre existe una **pizarra predeterminada** propia. Si eliminas la que lo era, Zenth designa otra de las tuyas o crea una nueva vacía.'),
+      p('Si eliminas tu **pizarra predeterminada**, Zenth designa otra pizarra propia abierta o crea una nueva vacía. Cerrar una pizarra conserva su contenido; no crea una sustituta por ese motivo.'),
+    ],
+  },
+
+  {
+    slug: 'cerrar-y-reabrir-pizarras',
+    category: 'pizarras',
+    title: 'Cerrar y reabrir pizarras',
+    summary: 'Retira una pizarra de la lista sin perder su contenido, consúltala en solo lectura y reábrela cuando la necesites.',
+    keywords: ['cerrar pizarra', 'pizarras cerradas', 'reabrir pizarra', 'archivar proyecto', 'solo lectura', 'conservar tablero', 'eliminar pizarra', 'pausar correos', 'pausar automatizaciones'],
+    updated: '2026-10-06',
+    related: ['pizarras/crear-y-organizar-pizarras', 'pizarras/compartir-una-pizarra', 'pizarras/automatizaciones', 'pizarras/pizarra-publica-con-enlace', 'cuenta/papelera'],
+    blocks: [
+      p('Cuando terminas un proyecto, **cerrar la pizarra** permite apartarla sin perder sus listas, tarjetas ni colaboración. Puedes volver a consultarla y reabrirla más adelante.'),
+
+      h2('Cerrar una pizarra'),
+      steps(
+        'Abre la pizarra que quieres cerrar.',
+        'En escritorio, abre su selector y busca la sección **Esta pizarra**. En móvil, abre el menú **…** de la cabecera y pulsa **Ajustes de la pizarra**.',
+        'Elige **Cerrar pizarra**. Solo el propietario y los administradores tienen esta acción.',
+      ),
+      p('La pizarra sale de las secciones habituales del selector y pasa a **Pizarras cerradas**. Si la estás viendo, aparece la franja **Esta pizarra está cerrada**.'),
+
+      h2('Consultar una pizarra cerrada'),
+      p('Abre el selector —el nombre de la pizarra en móvil— y elige su nombre en **Pizarras cerradas**. Sus miembros mantienen el acceso para leer el contenido.'),
+      list(
+        'Todos quedan en **solo lectura**, incluido el propietario: no se crean, editan, completan ni mueven tarjetas; tampoco se cambian listas, etiquetas, checklists, comentarios o reglas.',
+        'La gestión de miembros, las invitaciones y los ajustes esperan hasta reabrirla.',
+        'Puedes leer los avisos existentes y marcarlos como leídos. Si no eres propietario, puedes salir respetando la regla del último administrador.',
+        'Las favoritas personales se conservan. Cerrar no envía las tarjetas a la papelera.',
+      ),
+      p('Sus tarjetas dejan de aparecer en **Agenda** y en el historial del día mientras la pizarra esté cerrada. Puedes consultarlas en la propia pizarra y en su historial. Al reabrir, vuelven a Agenda las que tenían activada esa visibilidad.'),
+
+      h2('Reabrir una pizarra'),
+      steps(
+        'Busca la pizarra en **Pizarras cerradas**.',
+        'Pulsa el icono **Reabrir pizarra** junto a su nombre, o ábrela y pulsa **Reabrir** en la franja.',
+        'Vuelve a trabajar con sus listas y tarjetas: reaparece entre las abiertas, con los mismos permisos y favoritos.',
+      ),
+      p('Solo el propietario y los administradores pueden reabrir. Un Miembro u Observador puede consultar la pizarra y pedir a un administrador que la reabra.'),
+
+      h2('Correos, automatizaciones y enlace público'),
+      list(
+        'Los **correos de la pizarra** quedan pausados. Los pendientes pueden continuar al reabrir, según tus preferencias de correo.',
+        'Las **automatizaciones** se conservan y dejan de ejecutarse mientras esté cerrada. Al reabrir, las reglas activas vuelven a responder a nuevos cambios; las que habías desactivado siguen desactivadas.',
+        'El **enlace público** deja de mostrar el contenido. Si la pizarra tenía visibilidad Con enlace, al reabrir vuelve a estar disponible con esa visibilidad.',
+        'Tu asistente conectado por [Zenth MCP](/docs/integraciones/zenth-mcp) tampoco puede modificarla. Reábrela desde Zenth antes de pedir cambios.',
+      ),
+
+      h2('Eliminar una pizarra cerrada'),
+      p('Solo el propietario ve **Eliminar pizarra** junto al nombre en Pizarras cerradas. Pulsa el icono de papelera y revisa la confirmación; **Cancelar** conserva todo y **Eliminar** retira la pizarra para sus miembros.'),
+      note('La pizarra eliminada no se puede reabrir. Sus tarjetas van a la [papelera](/docs/cuenta/papelera), donde pueden recuperarse como tareas; la papelera no restaura la pizarra completa con sus listas y miembros.'),
     ],
   },
 
@@ -64,8 +126,8 @@ export const pizarrasArticles: DocArticle[] = [
     title: 'Tarjetas y bandeja rápida',
     summary: 'Captura ideas sin clasificar en la bandeja, conviértelas en tarjetas, muévelas entre listas, archiva las que terminas y decide si aparecen en Agenda.',
     keywords: ['tarjeta', 'bandeja', 'inbox', 'captura', 'arrastrar', 'mover', 'completar', 'tachada', 'archivar', 'archivadas', 'buscar en pizarra', 'filtrar', 'lista', 'tareas'],
-    updated: '2026-10-05',
-    related: ['pizarras/mover-y-duplicar-tarjetas', 'pizarras/acciones-de-listas', 'agenda/historial-de-completadas', 'pizarras/colaborar-en-tarjetas'],
+    updated: '2026-10-06',
+    related: ['pizarras/seleccionar-y-gestionar-tarjetas', 'pizarras/mover-y-duplicar-tarjetas', 'pizarras/acciones-de-listas', 'agenda/historial-de-completadas', 'pizarras/colaborar-en-tarjetas'],
     blocks: [
       p('Una **tarjeta** es una tarea dentro de una pizarra. Usa el mismo editor que en Agenda (fecha, hora, duración, repetición, etiquetas, pasos, imágenes, documentos), con dos añadidos: vive en una lista y puede compartirse con el equipo.'),
 
@@ -85,6 +147,7 @@ export const pizarrasArticles: DocArticle[] = [
       ),
       p('Si tienes permiso de edición puedes además **arrastrar** las tarjetas entre listas para mover el trabajo.'),
       p('Para elegir una posición exacta o cambiar de pizarra, abre el detalle y usa **Mover tarjeta**. **Duplicar tarjeta** crea una copia con el título y destino que elijas. Ver [Mover y duplicar tarjetas](/docs/pizarras/mover-y-duplicar-tarjetas).'),
+      p('En escritorio, el **clic derecho** sobre una tarjeta del tablero o una fila de la tabla reúne sus acciones. Para trabajar con varias a la vez, usa la selección y su barra inferior. Ver [Seleccionar y gestionar tarjetas](/docs/pizarras/seleccionar-y-gestionar-tarjetas).'),
 
       h2('Inicio y vencimiento'),
       p('El editor de la pizarra permite distinguir **Inicio**, el día en que empieza el trabajo, y **Vence**, el día en que debe terminar. Puedes poner solo una de las fechas o ambas. Quita el inicio con el botón **Quitar fecha de inicio** para volver a dejarlo sin inicio.'),
@@ -106,7 +169,7 @@ export const pizarrasArticles: DocArticle[] = [
         'En la **bandeja rápida** no hay listas: lo que completas ahí se archiva directamente.',
       ),
       note('Una tarjeta **repetida** pasa directamente al historial cuando la completas, y el tablero o la tabla muestran la siguiente ocurrencia pendiente según su fecha. No queda una copia tachada junto a ella en esas vistas. Esto también ocurre si la completas desde Agenda, una automatización o tu asistente. El calendario puede mostrar la ocurrencia terminada en su día. Ver [Fechas futuras y tareas repetidas](/docs/pizarras/vistas-de-pizarra#fechas-futuras-y-tareas-repetidas).'),
-      p('Mientras no la archives, una tarjeta sin repetición tachada sigue contando en los filtros de la pizarra. Las archivadas ya no cuentan en ningún filtro.'),
+      p('Mientras no la archives, una tarjeta sin repetición tachada sigue contando en los filtros de la pizarra. Las archivadas no cuentan en las listas ni en sus recuentos; el [calendario](/docs/pizarras/calendario-de-pizarra#tarjetas-completadas-y-archivadas) permite verlas tachadas en su fecha.'),
       p('Para retirar varias tachadas de una vez, abre el menú **…** de su lista y elige **Archivar completadas**. Las tarjetas pendientes siguen donde estaban.'),
 
       h2('Entrar a una reunión desde la tarjeta'),
@@ -116,6 +179,7 @@ export const pizarrasArticles: DocArticle[] = [
       h2('¿Aparece en Agenda?'),
       p('Por defecto, las tarjetas de una pizarra viven solo en su tablero. Si quieres que las **tareas nuevas de una pizarra** aparezcan también en Agenda, activa **Ajustes › Productividad › Añadir tareas de pizarras a Agenda**. Solo afecta a las tarjetas que crees a partir de ese momento.'),
       path('Ajustes', 'Productividad', 'Añadir tareas de pizarras a Agenda'),
+      p('Mientras una pizarra está **cerrada**, sus tarjetas se apartan de Agenda. Al reabrir, vuelven las que tenían activada esa visibilidad. El cierre no cambia el ajuste de cada tarjeta.'),
 
       h2('Buscar dentro de la pizarra'),
       p('La cabecera de la pizarra tiene un buscador propio: **Buscar tareas en esta pizarra…**. Filtra las tarjetas del tablero sin salir de él. Para buscar en todo Zenth usa el [buscador global](/docs/primeros-pasos/busqueda-y-notificaciones).'),
@@ -126,15 +190,62 @@ export const pizarrasArticles: DocArticle[] = [
   },
 
   {
+    slug: 'seleccionar-y-gestionar-tarjetas',
+    category: 'pizarras',
+    title: 'Seleccionar y gestionar tarjetas',
+    summary: 'Usa el clic derecho para actuar sobre una tarjeta y selecciona varias para moverlas, completarlas, asignar o etiquetar juntas.',
+    keywords: ['clic derecho', 'menú contextual', 'selección múltiple', 'seleccionar tarjetas', 'acciones en lote', 'ctrl clic', 'cmd clic', 'casillas', 'mover varias', 'asignar varias', 'etiquetar varias'],
+    updated: '2026-10-06',
+    related: ['pizarras/tarjetas-y-bandeja-rapida', 'pizarras/mover-y-duplicar-tarjetas', 'pizarras/acciones-de-listas', 'pizarras/vistas-de-pizarra', 'atajos/atajos-de-la-aplicacion'],
+    blocks: [
+      p('En escritorio puedes organizar tarjetas sin abrir su detalle una por una. El menú de clic derecho actúa sobre una tarjeta; la barra de selección trabaja con varias.'),
+
+      h2('El menú de clic derecho'),
+      p('En **Tablero** o **Tabla**, haz clic derecho sobre una tarjeta o fila. El menú ofrece las acciones que permiten tu rol y el estado de la pizarra:'),
+      list(
+        '**Abrir tarjeta**, **Editar**, **Completar** o **Marcar como pendiente**.',
+        '**Mover a la lista**, **Mover a otra pizarra…** y **Duplicar…**. Los dos últimos abren el diálogo de destino y posición.',
+        '**Etiquetas** y **Responsables** para marcar o quitar cada opción disponible.',
+        '**Iniciar focus**, **Copiar enlace** y **Seleccionar** o **Quitar de la selección**.',
+        '**Archivar**, disponible cuando está completada, y **Enviar a la papelera**.',
+      ),
+      p('En una pizarra cerrada o con permiso de solo lectura, se conservan las acciones de consulta y las personales, como copiar el enlace o iniciar Enfoque; se ocultan las que modificarían la tarjeta.'),
+
+      h2('Seleccionar varias tarjetas'),
+      steps(
+        'En el tablero, mantén `Ctrl` (`⌘` en Mac) y pulsa cada tarjeta que quieras incluir. También puedes elegir **Seleccionar** en su menú de clic derecho.',
+        'En la tabla, marca las **casillas** de las filas. La casilla de la cabecera selecciona todas las filas que se muestran.',
+        'Comprueba el número de seleccionadas en la barra inferior y elige una acción.',
+      ),
+      p('Volver a marcar una tarjeta la quita de la selección. La **×** de la barra o `Esc` la vacían. Si hay un menú abierto, el primer Esc cierra ese menú. Cambiar de pizarra o de vista limpia la selección; al buscar o filtrar, salen de ella las tarjetas que dejan de verse.'),
+
+      h2('Acciones de la barra inferior'),
+      table(
+        ['Acción', 'Qué hace con las seleccionadas'],
+        ['Mover', 'Las lleva a otra lista de la misma pizarra, debajo de las tarjetas que ya tiene. Las tachadas siguen completadas.'],
+        ['Completar', 'Completa las pendientes; las que ya estaban completadas no se vuelven a completar. Las ocurrencias repetidas pasan al historial.'],
+        ['Archivar', 'Retira las completadas de sus listas y las lleva al historial; deja las pendientes donde están.'],
+        ['Asignar', 'Añade el responsable elegido a las tarjetas que aún no lo tienen, sin quitar a los demás.'],
+        ['Etiqueta', 'Añade la etiqueta compartida elegida a las que aún no la tienen, sin duplicarla ni quitar otras.'],
+        ['Papelera', 'Envía las seleccionadas a la papelera. Si pertenecen a una serie, retira esas ocurrencias; no elimina toda la serie.'],
+      ),
+      p('Asignar y Etiqueta aparecen cuando están disponibles los miembros o etiquetas de la pizarra. Al terminar una acción, la selección se vacía y el aviso indica cuántas tarjetas cambiaron.'),
+      note('La barra trabaja con **las tarjetas seleccionadas que siguen visibles**. No equivale a **Mover todas** del menú de lista, que incluye también sus tarjetas futuras. Para cambiar de pizarra o duplicar una tarjeta, usa su menú o detalle.'),
+      p('Seleccionar y ejecutar acciones en lote requiere permiso de edición y una pizarra abierta. En móvil se mantiene la gestión por tarjeta y por lista.'),
+    ],
+  },
+
+  {
     slug: 'acciones-de-listas',
     category: 'pizarras',
     title: 'Acciones de listas: ordenar, mover, copiar y limitar',
     summary: 'Usa el menú de una lista para ordenar tarjetas, moverlas juntas, archivar las completadas, copiar el trabajo pendiente y avisar cuando hay demasiado en curso.',
     keywords: ['menú de lista', 'ordenar por', 'fecha más próxima', 'nombre', 'recientes', 'antiguas', 'mover todas', 'archivar completadas', 'copiar lista', 'mover lista', 'límite de tarjetas', 'WIP', 'trabajo en curso'],
-    updated: '2026-10-05',
+    updated: '2026-10-06',
     related: ['pizarras/crear-y-organizar-pizarras', 'pizarras/mover-y-duplicar-tarjetas', 'pizarras/vistas-de-pizarra', 'pizarras/automatizaciones-y-plantillas'],
     blocks: [
       p('El menú **…** de cada lista reúne las acciones que afectan a esa lista o a varias tarjetas a la vez. En el ordenador está en la cabecera de la columna; en el móvil, junto al nombre de la lista que tienes abierta. Administradores y Miembros pueden editar listas y tarjetas. Un Observador puede consultar el contenido, pero no ejecutar estas acciones.'),
+      note('Estas acciones requieren una pizarra abierta. Para cambiar solo algunas tarjetas visibles, usa [Seleccionar y gestionar tarjetas](/docs/pizarras/seleccionar-y-gestionar-tarjetas); para recuperar la edición de una cerrada, un administrador debe [reabrirla](/docs/pizarras/cerrar-y-reabrir-pizarras).'),
 
       h2('Ordenar las tarjetas'),
       steps(
@@ -185,10 +296,11 @@ export const pizarrasArticles: DocArticle[] = [
     title: 'Mover y duplicar tarjetas',
     summary: 'Elige pizarra, lista y posición desde el detalle de una tarjeta. Decide qué conservar al duplicarla y conoce qué contenido se copia.',
     keywords: ['mover tarjeta', 'duplicar tarjeta', 'copiar tarjeta', 'otra pizarra', 'posición', 'arriba', 'abajo', 'conservar', 'responsables', 'etiquetas', 'copia', 'conservar checklists', 'copiar pasos'],
-    updated: '2026-10-05',
+    updated: '2026-10-06',
     related: ['pizarras/tarjetas-y-bandeja-rapida', 'pizarras/acciones-de-listas', 'pizarras/colaborar-en-tarjetas', 'pizarras/automatizaciones-y-plantillas'],
     blocks: [
       p('Arrastrar sirve para cambiar una tarjeta de lista rápidamente. Desde su detalle puedes además elegir **en qué pizarra, en qué lista y en qué posición** colocarla, o crear una copia. Las dos acciones están disponibles en ordenador y móvil cuando tienes permiso para editar tarjetas.'),
+      p('En escritorio también puedes abrir estos diálogos desde el **clic derecho** de la tarjeta o de su fila en la tabla. La pizarra de origen debe estar abierta; los destinos disponibles son pizarras abiertas donde puedes editar. Si alguna está cerrada, primero debe [reabrirla un administrador](/docs/pizarras/cerrar-y-reabrir-pizarras).'),
 
       h2('Mover una tarjeta'),
       steps(
@@ -249,7 +361,7 @@ export const pizarrasArticles: DocArticle[] = [
     title: 'Vistas y espacio de la pizarra',
     summary: 'Elige entre tablero, tabla y calendario, ajusta el espacio de las columnas y entiende cómo se muestran las fechas y las tareas repetidas.',
     keywords: ['vista', 'horizontal', 'ajustar al espacio', 'columnas', 'ancho', 'redimensionar', 'contraer', 'plegar', 'expandir', 'girar', 'vertical', 'tabla', 'ordenar columnas', 'escritorio', 'móvil', 'fecha futura', 'vencimiento', 'próxima ocurrencia', 'tarea repetida'],
-    updated: '2026-10-05',
+    updated: '2026-10-06',
     related: ['pizarras/calendario-de-pizarra', 'pizarras/crear-y-organizar-pizarras', 'pizarras/acciones-de-listas', 'pizarras/tarjetas-y-bandeja-rapida', 'pizarras/menu-de-colaboracion'],
     blocks: [
       p('El tablero permite seguir el trabajo lista por lista. Puedes darle más espacio a una columna o contraer las que no necesitas mirar ahora. Estas opciones cambian cómo recorres la pizarra; sus tarjetas siguen en sus listas.'),
@@ -285,7 +397,7 @@ export const pizarrasArticles: DocArticle[] = [
 
       h2('Vista de calendario'),
       p('En escritorio, abre **Vista › Calendario** para recorrer las tarjetas por **Mes**, **Semana** o **Día**. Puedes crear una tarjeta en un hueco, arrastrarla a otra fecha u hora y ajustar su duración con permiso de edición. El color corresponde a su lista y la elección de vista es local.'),
-      p('El tablero y la tabla muestran una pendiente por serie; el calendario distribuye las ocurrencias de las series visibles en sus días, incluidas las terminadas. Los pasos de navegación, fechas y filtros están en [Calendario de la pizarra](/docs/pizarras/calendario-de-pizarra).'),
+      p('El tablero y la tabla muestran una pendiente por serie; el calendario distribuye sus ocurrencias por día y también permite consultar tarjetas completadas y archivadas. Los pasos de navegación, fechas y filtros están en [Calendario de la pizarra](/docs/pizarras/calendario-de-pizarra).'),
 
       h2('Fechas futuras y tareas repetidas'),
       p('Una fecha funciona como **vencimiento**: una tarjeta prevista para la semana próxima permanece en su lista, tanto en el tablero como en la tabla. No tienes que esperar a ese día para verla o moverla. Los filtros **Para hoy** y **Vencidas** siguen seleccionando únicamente las fechas que corresponden a esos criterios.'),
@@ -296,7 +408,7 @@ export const pizarrasArticles: DocArticle[] = [
         ['Ocurrencias atrasadas y ninguna para hoy', 'La atrasada de fecha más reciente.'],
         ['Solo ocurrencias futuras', 'La próxima, con la fecha más cercana.'],
       ),
-      p('Al completar una ocurrencia, pasa directamente al [historial de completadas](/docs/agenda/historial-de-completadas) y aparece la siguiente pendiente según ese orden. Si ya no queda una para hoy o atrasada, se muestra la próxima futura; si la serie terminó, no aparece otra. La completada no queda tachada junto a la siguiente en el tablero o la tabla. El calendario puede conservarla tachada en su día mientras la serie tenga una pendiente visible.'),
+      p('Al completar una ocurrencia, pasa directamente al [historial de completadas](/docs/agenda/historial-de-completadas) y aparece la siguiente pendiente según ese orden. Si ya no queda una para hoy o atrasada, se muestra la próxima futura; si la serie terminó, no aparece otra. La completada no queda tachada junto a la siguiente en el tablero o la tabla. El calendario puede conservarla tachada en su día, también como parte del historial archivado.'),
       p('Funciona igual al completar desde el tablero, la tabla, Agenda, una automatización o un asistente conectado. Para editar una ocurrencia o la serie, consulta [Repetición y recordatorios](/docs/agenda/repeticion-y-recordatorios).'),
 
       h2('Crear y editar una serie desde la pizarra'),
@@ -334,9 +446,9 @@ export const pizarrasArticles: DocArticle[] = [
     slug: 'calendario-de-pizarra',
     category: 'pizarras',
     title: 'Calendario de la pizarra',
-    summary: 'Organiza las tarjetas por mes, semana o día, crea en una fecha y ajusta vencimiento, hora y duración arrastrando. Cómo se muestran las series y los filtros.',
-    keywords: ['calendario de pizarra', 'vista calendario', 'mes', 'semana', 'día', 'hoy', 'elegir fecha', 'inicio', 'vence', 'vencimiento', 'sin fecha', 'arrastrar fecha', 'cambiar hora', 'duración', 'reprogramar', 'repeticiones'],
-    updated: '2026-10-05',
+    summary: 'Organiza las tarjetas por mes, semana o día, consulta lo completado y ajusta fechas, hora y duración. Cómo se muestran las series y los filtros.',
+    keywords: ['calendario de pizarra', 'vista calendario', 'mes', 'semana', 'día', 'hoy', 'elegir fecha', 'inicio', 'vence', 'vencimiento', 'sin fecha', 'arrastrar fecha', 'cambiar hora', 'duración', 'reprogramar', 'repeticiones', 'archivadas', 'completadas'],
+    updated: '2026-10-06',
     related: ['pizarras/vistas-de-pizarra', 'pizarras/tarjetas-y-bandeja-rapida', 'pizarras/menu-de-colaboracion', 'agenda/repeticion-y-recordatorios'],
     blocks: [
       p('El calendario organiza las **tarjetas de la pizarra que tienes abierta**. Usa las mismas rejillas de mes, semana y día que Agenda, con el color de la lista de cada tarjeta. No añade por su cuenta las tareas de otras pizarras ni de Agenda.'),
@@ -349,6 +461,7 @@ export const pizarrasArticles: DocArticle[] = [
         'Pulsa la fecha o el rango de la cabecera para **Elegir fecha** y saltar directamente a ella.',
       ),
       p('En el mes, pulsa el número de un día para abrir su vista de día. En la semana puedes hacerlo pulsando su cabecera. Para volver al tablero o la tabla, usa el botón **Vista** de la pizarra.'),
+      p('La vista **Día** muestra únicamente las tarjetas de la fecha elegida. En este calendario, `D`, `S` y `M` cambian de escala; `T` vuelve a hoy y las flechas avanzan o retroceden. Ver [Atajos de Pizarras](/docs/atajos/atajos-de-la-aplicacion#pizarras).'),
       p('El navegador recuerda la vista elegida por pizarra y la escala del calendario. Estas preferencias solo cambian tu forma de recorrer el trabajo; no cambian la vista de los demás miembros. En móvil se mantiene la navegación por listas.'),
 
       h2('En qué día aparece cada tarjeta'),
@@ -379,10 +492,15 @@ export const pizarrasArticles: DocArticle[] = [
       ),
       p('Si la tarjeta tiene inicio y vencimiento, moverla desplaza **ambas fechas** para conservar su intervalo. Por ejemplo, una tarjeta que empieza el 5 y vence el 8, al mover su vencimiento al 10 pasa a empezar el 7. Ajustar la duración horaria cambia cuánto ocupa el bloque, no ese intervalo entre fechas.'),
       p('Arrastrar una ocurrencia repetida cambia esa ocurrencia. Para ajustar varias o la regla de repetición, abre su editor y elige el alcance en **Guardar cambios recurrentes**. Ver [Crear y editar una serie](/docs/pizarras/vistas-de-pizarra#crear-y-editar-una-serie-desde-la-pizarra).'),
-      note('Crear, reprogramar y ajustar duración requieren permiso de edición. Un Observador puede recorrer el calendario y abrir detalles, pero no guardar esos cambios.'),
+      note('Crear, reprogramar y ajustar duración requieren permiso de edición y una pizarra abierta. Un Observador, o cualquier miembro de una pizarra cerrada, puede recorrer el calendario y abrir detalles sin guardar cambios.'),
+
+      h2('Tarjetas completadas y archivadas'),
+      p('Sin filtros activos, las tarjetas archivadas con fecha también aparecen **tachadas en su día**, aunque ya no estén en las listas del tablero. Esto incluye tarjetas sin repetición y ocurrencias de series que ya terminaron.'),
+      p('Conservan el color de la lista de la que salieron; si esa lista dejó de existir, usan el de Completado. El buscador de la pizarra puede acotar el historial que se muestra. Las archivadas sin fecha no ocupan un día ni aumentan el contador de tarjetas sin fecha de las listas.'),
+      tip('Para consultar lo terminado sin restringirlo a un período del calendario, abre el [historial de completadas](/docs/agenda/historial-de-completadas). Las tarjetas enviadas a la papelera no aparecen en el calendario.'),
 
       h2('Series repetidas y filtros'),
-      p('El tablero y la tabla muestran una pendiente por serie. En el calendario, una serie con una tarjeta pendiente visible se despliega en **sus distintas fechas**, incluidas las ocurrencias terminadas, que aparecen tachadas. Las enviadas a la papelera quedan fuera. Cuando no queda una pendiente visible de la serie, consulta lo terminado en el [historial de completadas](/docs/agenda/historial-de-completadas).'),
+      p('El tablero y la tabla muestran una pendiente por serie. En el calendario, una serie con una tarjeta pendiente visible se despliega en **sus distintas fechas**, incluidas las ocurrencias terminadas, que aparecen tachadas. El historial archivado descrito arriba permite consultar también lo terminado cuando ya no queda una pendiente visible de la serie.'),
       p('El buscador y los filtros de la pizarra siguen activos. En una serie, la tarjeta que representa al grupo en el tablero decide si la serie entra en el calendario. Una vez incluida, se muestran sus otras ocurrencias al recorrer sus fechas; no se filtra cada repetición por separado.'),
       p('Por ejemplo, **Para hoy** puede incluir una serie cuya tarjeta actual vence hoy. Al avanzar a mañana en el calendario también puedes ver su ocurrencia de mañana. Las tarjetas sueltas mantienen el resultado individual del filtro. Los filtros de vencimiento se calculan por **Vence**, aunque una tarjeta tenga también Inicio.'),
     ],
@@ -394,7 +512,7 @@ export const pizarrasArticles: DocArticle[] = [
     title: 'Compartir una pizarra: invitaciones y roles',
     summary: 'Invita por correo o con un enlace, elige el rol de cada persona y entiende quién puede hacer qué, incluido el propietario.',
     keywords: ['compartir', 'invitar', 'invitación', 'enlace', 'roles', 'administrador', 'miembro', 'observador', 'propietario', 'permisos', 'expulsar', 'transferir', 'equipo'],
-    updated: UPDATED,
+    updated: '2026-10-06',
     related: ['pizarras/pizarra-publica-con-enlace', 'pizarras/unirse-a-una-pizarra', 'pizarras/colaborar-en-tarjetas'],
     blocks: [
       p('Una pizarra pasa de ser «mi tablero» a ser «un espacio con miembros» cuando la compartes. En Zenth **los permisos son la pizarra**: no hay espacios de trabajo intermedios ni permisos por tarjeta.'),
@@ -417,11 +535,12 @@ export const pizarrasArticles: DocArticle[] = [
       h2('Los tres roles'),
       table(
         ['Rol', 'Qué puede hacer'],
-        ['Administrador', 'Gestiona la pizarra y sus miembros: edita el contenido, invita personas, cambia roles y ajustes, y expulsa miembros.'],
+        ['Administrador', 'Gestiona la pizarra y sus miembros: edita el contenido, invita personas, cambia roles y ajustes, expulsa miembros y puede cerrar o reabrir la pizarra.'],
         ['Miembro', 'Crea, edita y mueve tarjetas y listas, pero no administra la pizarra.'],
         ['Observador', 'Ve las tarjetas y las listas, sin modificarlas. Puede comentar y votar mientras un administrador lo permita (viene activado).'],
       ),
       p('Si entras como Observador, la interfaz **oculta** las acciones que no puedes ejecutar en lugar de dejarte fallar. Y aunque alguien tocara la interfaz, los permisos reales se aplican en el servidor.'),
+      note('Estos permisos de edición corresponden a una **pizarra abierta**. En una cerrada, todos sus miembros quedan en solo lectura, incluidos propietario y administradores. Tampoco se comenta ni se vota hasta reabrirla. Ver [Cerrar y reabrir pizarras](/docs/pizarras/cerrar-y-reabrir-pizarras).'),
 
       h2('El propietario'),
       p('El propietario es quien creó la pizarra. **Siempre es administrador** y no es un cuarto rol: solo él puede **eliminar la pizarra** o **transferir la propiedad** a otro administrador. El propietario no puede abandonar la pizarra sin transferirla antes.'),
@@ -445,11 +564,12 @@ export const pizarrasArticles: DocArticle[] = [
     title: 'Aceptar una invitación a una pizarra',
     summary: 'Qué ocurre cuando recibes una invitación por correo o por enlace, con y sin cuenta de Zenth, y por qué a veces un enlace deja de funcionar.',
     keywords: ['aceptar invitación', 'unirse', 'enlace de invitación', 'invitación caducada', 'me invitaron', 'join', 'entrar a una pizarra'],
-    updated: UPDATED,
+    updated: '2026-10-06',
     related: ['pizarras/compartir-una-pizarra', 'ayuda/un-enlace-no-funciona', 'primeros-pasos/crear-cuenta-e-iniciar-sesion'],
     blocks: [
       h2('Por correo'),
       p('El correo de invitación lleva a una pantalla, **Te invitaron a colaborar**, con quién te invita y con qué rol. Pulsa **Aceptar invitación** para entrar.'),
+      note('Si la pizarra fue cerrada después de invitarte, pide al propietario o a un administrador que la reabra antes de aceptar. Cerrar conserva las invitaciones, pero pausa la incorporación de nuevos miembros.'),
       list(
         'La invitación está ligada a la **dirección de correo** a la que se envió. Si no tienes cuenta, crea una con ese mismo correo; si ya la tienes, entra con ella.',
         'Si tu sesión es de otra dirección, Zenth te lo indica.',
@@ -471,10 +591,11 @@ export const pizarrasArticles: DocArticle[] = [
     title: 'Colaborar en tarjetas',
     summary: 'Responsables, etiquetas, checklists, votos, revisiones, comentarios con menciones e historial: todo lo que pasa dentro de una tarjeta compartida.',
     keywords: ['comentarios', 'menciones', 'responsables', 'asignar', 'tomar tarea', 'checklist', 'votar', 'aprobación', 'revisión', 'historial', 'seguir', 'adjuntos', 'etiquetas compartidas'],
-    updated: '2026-10-05',
+    updated: '2026-10-06',
     related: ['pizarras/mover-y-duplicar-tarjetas', 'pizarras/menu-de-colaboracion', 'pizarras/compartir-una-pizarra', 'agenda/detalle-de-una-tarea'],
     blocks: [
       p('Cuando una tarjeta vive en una pizarra compartida, su detalle incluye un panel de colaboración con cinco secciones que se pliegan y despliegan.'),
+      note('Si la pizarra está **cerrada**, puedes consultar la colaboración existente, pero no cambiar responsables, etiquetas o checklists, comentar, votar ni responder revisiones. Un propietario o administrador debe [reabrir la pizarra](/docs/pizarras/cerrar-y-reabrir-pizarras#reabrir-una-pizarra) para volver a editar.'),
 
       h2('Equipo: responsables y etiquetas'),
       list(
@@ -518,7 +639,7 @@ export const pizarrasArticles: DocArticle[] = [
     title: 'El menú de colaboración de la pizarra',
     summary: 'Filtros y carga de trabajo, etiquetas compartidas, actividad, notificaciones, seguimiento y preferencias de una pizarra compartida.',
     keywords: ['filtros', 'filtrar', 'palabra clave', 'vencidas', 'sin fecha', 'próximos 7 días', 'próxima semana', 'coincidencia', 'carga', 'etiquetas', 'actividad', 'seguimiento', 'preferencias', 'observadores', 'notificaciones de pizarra', 'más opciones'],
-    updated: '2026-10-05',
+    updated: '2026-10-06',
     related: ['pizarras/calendario-de-pizarra', 'pizarras/automatizaciones', 'pizarras/colaborar-en-tarjetas', 'enfoque/enfoque-y-equipo'],
     blocks: [
       p('En la cabecera de una pizarra compartida, **Más opciones de la pizarra** abre el panel **Colaboración**. Reúne todo lo que es del equipo y no de una tarjeta concreta.'),
@@ -546,10 +667,11 @@ export const pizarrasArticles: DocArticle[] = [
 
       h3('Cuando nada coincide'),
       p('El panel indica cuántos filtros hay activos y tiene un botón **Limpiar**. Si la combinación no deja ninguna tarjeta, la pizarra lo dice («Ninguna tarjeta coincide con los filtros») y ofrece **Limpiar filtros**. El botón de la cabecera se marca mientras haya un filtro activo, y los filtros vuelven a empezar al cambiar de pizarra.'),
-      note('Las tarjetas **archivadas** ya salieron de la pizarra, así que ningún filtro ni recuento las tiene en cuenta. Viven en el [historial de completadas](/docs/agenda/historial-de-completadas).'),
+      note('Las tarjetas **archivadas** quedan fuera de las listas y de los recuentos de filtros. Puedes consultarlas en el [historial de completadas](/docs/agenda/historial-de-completadas) o tachadas en su fecha en el [calendario de la pizarra](/docs/pizarras/calendario-de-pizarra#tarjetas-completadas-y-archivadas).'),
 
       h2('Etiquetas compartidas'),
       p('El vocabulario común de la pizarra. Crea una etiqueta con nombre y color y podrá usarla cualquier miembro en las tarjetas.'),
+      note('En una **pizarra cerrada** puedes consultar etiquetas, actividad y avisos existentes, pero la gestión de etiquetas, seguimiento, plantillas, reglas y preferencias espera hasta [reabrir](/docs/pizarras/cerrar-y-reabrir-pizarras). Puedes seguir marcando tus avisos como leídos.'),
 
       h2('Actividad'),
       p('El registro de la pizarra: quién hizo qué, cuándo y sobre qué tarjeta. Pulsa un evento para abrir la tarjeta. Si lo generó una automatización, aparece «Zenth» como autor.'),
@@ -589,7 +711,7 @@ export const pizarrasArticles: DocArticle[] = [
       'disparador', 'condición', 'acción', 'mover al completar', 'finalizadas', 'archivar', 'asignar', 'etiqueta',
       'checklist', 'comentar', 'avisar', 'historial', 'encadenar', 'bot',
     ],
-    updated: '2026-10-05',
+    updated: '2026-10-06',
     related: ['pizarras/menu-de-colaboracion', 'pizarras/tarjetas-y-bandeja-rapida', 'integraciones/zenth-mcp'],
     blocks: [
       p('Una **automatización** es una regla de la pizarra: **cuando** pasa algo con una tarjeta, **si** la tarjeta cumple unas condiciones, **entonces** Zenth hace una o varias cosas por ti. Sirve para que el tablero se ordene solo: llevar lo terminado a «Finalizadas», asignar a quien empieza una tarjeta, poner fechas, avisar al equipo…'),
@@ -721,6 +843,7 @@ export const pizarrasArticles: DocArticle[] = [
         'El icono de papelera la **borra**, después de confirmarlo.',
       ),
       note('Los comentarios, checklists y avisos que crea una regla aparecen **a nombre de quien la guardó por última vez**. Si editas una regla, pasa a estar a tu nombre; activarla o desactivarla no cambia su autor.'),
+      p('Al [cerrar la pizarra](/docs/pizarras/cerrar-y-reabrir-pizarras), sus reglas se conservan, pero quedan pausadas junto con sus correos y no se pueden editar. Reabrir permite que las reglas activas vuelvan a responder a nuevos cambios; no activa las que ya habías desactivado.'),
 
       h2('Desde tu asistente'),
       p('Con [Zenth MCP](/docs/integraciones/zenth-mcp), un asistente como Claude puede **listar** las reglas de una pizarra, **crear** reglas nuevas (quedan activas al momento) y **activarlas o desactivarlas**. Borrar una regla solo se puede desde la app.'),
@@ -742,7 +865,7 @@ export const pizarrasArticles: DocArticle[] = [
     title: 'Plantillas de tarjeta, lista y pizarra',
     summary: 'Guarda tarjetas, listas o pizarras enteras como plantilla para no repetir el mismo trabajo cada vez.',
     keywords: ['plantilla', 'plantillas', 'reutilizar', 'modelo', 'duplicar', 'tarjeta modelo', 'lista modelo', 'pizarra modelo'],
-    updated: '2026-10-05',
+    updated: '2026-10-06',
     related: ['pizarras/acciones-de-listas', 'pizarras/mover-y-duplicar-tarjetas', 'pizarras/automatizaciones', 'pizarras/colaborar-en-tarjetas'],
     blocks: [
       note('Las automatizaciones tienen ahora su propia guía: [Automatizaciones: reglas que trabajan solas](/docs/pizarras/automatizaciones).'),
@@ -757,6 +880,7 @@ export const pizarrasArticles: DocArticle[] = [
         ['Pizarra', 'El nombre, el icono y las listas de la pizarra actual, para montar otra igual.'],
       ),
       p('En **Plantillas** ves las que tienes y pulsas **Usar** para aplicarlas: «Plantilla aplicada».'),
+      p('Para crear, usar o eliminar plantillas de una pizarra cerrada, primero debe [reabrirla un propietario o administrador](/docs/pizarras/cerrar-y-reabrir-pizarras).'),
       tip('Si cada semana montas la misma pizarra de proyecto, guarda una plantilla de **Pizarra**: es más rápido que duplicar a mano y no arrastra contenido que no quieres.'),
     ],
   },
@@ -767,7 +891,7 @@ export const pizarrasArticles: DocArticle[] = [
     title: 'Pizarra pública con enlace',
     summary: 'Comparte una pizarra en solo lectura con cualquiera que tenga el enlace, sin cuenta. Qué se ve y qué no, y cómo volver a hacerla privada.',
     keywords: ['público', 'visibilidad', 'con enlace', 'solo lectura', 'compartir sin cuenta', 'privada', 'enlace público', 'orden de tarjetas', 'tareas repetidas', 'próxima ocurrencia'],
-    updated: '2026-10-05',
+    updated: '2026-10-06',
     related: ['pizarras/vistas-de-pizarra', 'pizarras/compartir-una-pizarra', 'privacidad/quien-ve-que'],
     blocks: [
       p('La **visibilidad** es independiente de los miembros. Una pizarra puede ser:'),
@@ -803,6 +927,7 @@ export const pizarrasArticles: DocArticle[] = [
       h2('Acceso al enlace'),
       warn('Al activar «con enlace» aceptas que **cualquiera que obtenga la dirección** pueda ver esa pizarra. Solo afecta a esa pizarra y puedes revocarlo cuando quieras. No pongas ahí nada que no quieras que se vea.', 'Piénsalo antes de activarlo'),
       p('Quien abre el enlace puede ver un botón para acceder a Zenth, o abrir Zenth si ya tiene sesión. Si la pizarra vuelve a ser privada o el enlace deja de existir, ve «Pizarra no disponible».'),
+      p('Una [pizarra cerrada](/docs/pizarras/cerrar-y-reabrir-pizarras) también deja de mostrar contenido por su enlace público. Cerrar conserva su visibilidad: si estaba Con enlace, al reabrir vuelve a estar disponible. Para revocar ese acceso de forma independiente, cambia la visibilidad a **Privada** cuando esté abierta.'),
     ],
   },
 ];

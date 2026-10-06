@@ -259,3 +259,111 @@ Se leyó `20261005020000_task_start_date.sql` para contrastar la regla de fechas
 no se aplicaron migraciones ni se hicieron cambios de datos. Se mantienen
 los cambios ajenos y no se publica el blog. Las funciones se presentan con
 instrucciones habituales, sin avisos de estado.
+
+## Cuarta revisión: cierre y cambios paralelos — 2026-10-06
+
+La revisión comenzó con la app en `16e9788` (`add functions40`) y los cambios
+locales de cierre. Durante el trabajo se incorporó `239d7fc` (`add functions41`),
+que confirma el cierre y el ajuste de la vista Día. Se contrastaron también
+los cambios locales posteriores de `CompletedHistory`, `pages/Todo.tsx` y
+`src/app/composition/calendar-tasks`: exclusión de tarjetas de pizarras cerradas
+de Agenda y del historial del día, consulta de su historial en solo lectura y
+comprobación del estado del destino al trasladar una tarjeta. Estos cambios
+de la aplicación se preservaron; esta revisión solo edita Zenth Blog.
+
+Los MCP de descubrimiento e indexación del grafo no están disponibles en esta
+sesión. Se usaron el historial y los diffs de Git, búsquedas acotadas y lectura
+de los archivos pertinentes. Se revisaron los contratos públicos de Boards,
+su estado y repositorio, los permisos, los selectores de escritorio y móvil,
+el menú contextual, la barra de selección, la tabla, los atajos y el flujo de
+datos del calendario. Para el cierre se contrastaron la migración, los RPC,
+las herramientas MCP y los transportes de correo.
+
+Cambios paralelos encontrados y documentados:
+
+- Favoritos personales persistidos en la cuenta, para pizarras propias o
+  compartidas, disponibles también para Observadores. El cierre conserva la
+  estrella y la sección de favoritas vuelve a incluir la pizarra al reabrir.
+- Menú de clic derecho en tarjetas y filas de tabla, respetando los permisos.
+- Selección de escritorio mediante Ctrl/⌘ + clic o casillas de tabla; barra
+  para mover, completar, archivar, asignar, etiquetar o enviar a la papelera.
+  Se documentan el alcance de cada acción, las ocurrencias repetidas y cuándo
+  se limpia o reduce la selección. No se equipara con Mover todas de una lista.
+- Atajos para vistas, filtros y selección; navegación del calendario con
+  Día/Semana/Mes, hoy y flechas.
+- Tarjetas archivadas con fecha en el calendario, incluidas las de series
+  terminadas, y vista Día limitada a la fecha elegida.
+- Agenda e historial del día omiten las tarjetas de pizarras cerradas hasta
+  reabrir; su historial de pizarra sigue disponible en solo lectura.
+
+Se añadieron dos guías en `content/docs/articles/pizarras.ts`:
+`cerrar-y-reabrir-pizarras` y `seleccionar-y-gestionar-tarjetas`. Se revisaron
+las quince guías de Pizarras y cinco referencias de otros temas: Historial de
+completadas, Notificaciones, Papelera, Zenth MCP y Atajos de la aplicación.
+Son veinte guías nuevas o actualizadas, fechadas 2026-10-06. Se conservaron las
+rutas y anclas existentes, incluida `salir-de-una-pizarra-o-eliminarla`.
+
+El cierre se describe en escritorio y móvil, con permisos de propietario y
+administradores, consulta en solo lectura, invitaciones pausadas, favoritos
+conservados, correo y reglas pausados, enlace público no disponible y escritura
+MCP bloqueada. La reapertura conserva permisos y visibilidad; eliminar no
+permite recuperar la pizarra completa desde la papelera.
+
+También se actualizaron la descripción de la categoría y el sitemap: dos
+rutas nuevas, fechas de las guías y sus índices. La comprobación integral
+encontró una omisión anterior de `/docs/ayuda/la-camara-no-funciona`; se añadió
+con su fecha original, 2026-09-23, sin editar esa guía.
+
+### Hallazgo pendiente en la aplicación
+
+Por lectura de código, `pages/Todo.tsx:1311` calcula `hasNoFilterResults`
+solo con `filteredVisibleTasks`. La rama de render en `pages/Todo.tsx:2224`
+muestra ese estado vacío antes de llegar al calendario. Sin embargo,
+`calendarRows` en `pages/Todo.tsx:1470` incorpora también las archivadas cuando
+no hay filtros o el estado incluye completadas. Al filtrar Completadas en
+una pizarra que solo contiene archivadas, la interfaz puede mostrar
+«Ninguna tarjeta coincide con los filtros» y ocultar un calendario con contenido.
+Además, la incorporación de archivadas no aplica las otras facetas del filtro.
+
+La documentación describe su consulta sin filtros y no promete que el filtro
+Completadas cubra este caso. Queda una solicitud de integración para el trabajo
+de la app: calcular el estado vacío a partir de los elementos de la vista activa
+y definir/aplicar los filtros del historial. Esta revisión no cambia ese código.
+Es un hallazgo estático, sin reproducción autenticada.
+
+### Verificación de esta revisión
+
+- Blog: `npx --no-install tsc --noEmit` y `npm run build` correctos; continúa
+  el aviso existente de chunks superiores a 500 kB.
+- Registro real cargado con esbuild: 75 artículos sin claves duplicadas,
+  veinte guías con fechas verificadas, 187 enlaces internos y sus anclas
+  válidos, y relacionados existentes.
+- Diez búsquedas llevan a destinos válidos para favoritas, cierre, reapertura,
+  selección, clic derecho, acciones en lote, archivadas, atajos, correos y MCP.
+- Sitemap: XML válido, 113 rutas sin duplicados; todos los artículos están
+  incluidos y las fechas de las veinte guías coinciden.
+- Navegador sobre la compilación local: guía de cierre en escritorio 1280 ×
+  800 px; búsqueda «acciones en lote» y apertura de su resultado en el ancla
+  correspondiente; tabla de acciones y guía de cierre en móvil 390 × 844 px.
+  No hay desborde horizontal de página. La tabla tiene desplazamiento propio
+  (480 px dentro de 346 px). No se observaron errores de consola.
+- `git diff --check`: correcto en Zenth Blog.
+
+La evidencia del registro y las búsquedas se conserva en la caché ignorada
+`node_modules/.cache/boards-docs-20261006/report.json`. No se añadieron tests que
+dupliquen el texto editorial ni se modificó la configuración del sitio.
+
+El primer intento de iniciar la previsualización con npm perdió los argumentos
+de host/puerto en PowerShell. Ejecutar directamente Vite sirvió la compilación
+en el puerto 3237. Fue un problema de arranque del entorno, no de producto.
+Los primeros intentos de esbuild requirieron resolver permisos del sandbox;
+la ejecución autorizada pasó. Se cierran servidor y pestaña temporales.
+
+Esta tarea no volvió a ejecutar los checks de la aplicación ni pruebas SQL,
+no aplicó migraciones, no redeplegó funciones ni realizó un smoke autenticado,
+de SMTP o realtime. La validación previa del cierre está registrada en
+`zenith-productivity/docs/architecture/work-items/board-closure-handoff.md` y
+no se atribuye a esta revisión editorial. La baseline de seguridad y los
+cambios locales de la app, incluidos los que aparecieron durante esta revisión,
+quedaron intactos. No se tocaron `.claude/settings.local.json` ni `.env.local`.
+No se hizo commit, push ni publicación del blog.

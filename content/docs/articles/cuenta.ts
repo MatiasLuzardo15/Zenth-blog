@@ -67,7 +67,7 @@ export const cuentaArticles: DocArticle[] = [
     title: 'Notificaciones: dentro de Zenth, push y correo',
     summary: 'Elige qué avisos recibes y por qué canal: en la app, en el dispositivo (push) o por correo, con anticipación y aviso de racha.',
     keywords: ['notificaciones', 'avisos', 'recordatorios', 'push', 'correo', 'email', 'anticipación', 'racha', 'ánimo', 'permiso', 'campana', 'centro de notificaciones', 'silenciar'],
-    updated: UPDATED,
+    updated: '2026-10-06',
     related: ['ayuda/los-avisos-no-llegan', 'primeros-pasos/instalar-la-app', 'agenda/repeticion-y-recordatorios'],
     blocks: [
       p('Zenth puede avisarte por **tres canales independientes**. Todos se configuran en **Ajustes › Notificaciones** y puedes usar los que quieras.'),
@@ -106,6 +106,8 @@ export const cuentaArticles: DocArticle[] = [
         '**Aviso de racha:** un correo solo cuando tu racha vence esta noche o llevas días sin entrar, a la hora que elijas. Si tu racha ya está asegurada, no se envía nada.',
       ),
       note('Hay correos que **no** se pueden apagar porque no son avisos, sino parte del servicio: confirmación de cuenta, seguridad, restablecimiento de contraseña e invitaciones que otra persona te envía.'),
+
+      p('Los correos asociados a una [pizarra cerrada](/docs/pizarras/cerrar-y-reabrir-pizarras) quedan pausados mientras esté cerrada. Los pendientes pueden continuar al reabrir, según tus preferencias. Puedes seguir leyendo y marcando los avisos que ya recibiste dentro de Zenth.'),
 
       h2('Mientras enfocas'),
       p('**Silenciar avisos no urgentes** (Ajustes › Enfoque) hace que los avisos de progreso y logros esperen al final de la sesión. Los errores llegan igual. Ver [Historial, objetivo y constancia](/docs/enfoque/historial-objetivo-y-constancia).'),
@@ -202,7 +204,7 @@ export const cuentaArticles: DocArticle[] = [
     title: 'Papelera: recuperar lo que borraste',
     summary: 'Tareas y notas eliminadas van a la papelera hasta que la vacíes. Cómo restaurar, borrar para siempre y qué pasa con los archivos de Drive.',
     keywords: ['papelera', 'restaurar', 'recuperar', 'borrar', 'eliminar para siempre', 'vaciar', 'trash', 'eliminado', 'drive', 'solo esta tarea', 'serie repetida'],
-    updated: '2026-10-05',
+    updated: '2026-10-06',
     related: ['agenda/historial-de-completadas', 'pizarras/vistas-de-pizarra', 'pizarras/crear-y-organizar-pizarras', 'integraciones/google-drive'],
     blocks: [
       p('Borrar deja de ser una decisión definitiva. Lo que eliminas va a la **Papelera**, donde queda hasta que la vacíes tú.'),
@@ -229,6 +231,7 @@ export const cuentaArticles: DocArticle[] = [
       note('Zenth **no borra la papelera automáticamente**: los elementos se quedan hasta que tú los restaures o los elimines. Y **Eliminar todas las tareas**, en la zona de riesgo de Ajustes, se salta la papelera.'),
 
       h2('Qué no pasa por la papelera'),
+      p('**Cerrar una pizarra** conserva el tablero y sus tarjetas en solo lectura; no envía nada a la papelera. **Eliminarla** sí retira la pizarra y envía sus tarjetas a la papelera de Tareas. Restaurarlas recupera tareas, no la pizarra completa con sus listas y miembros. Ver [Cerrar y reabrir pizarras](/docs/pizarras/cerrar-y-reabrir-pizarras).'),
       list(
         'Las tareas **completadas** no están en la papelera: están en el [historial de completadas](/docs/agenda/historial-de-completadas).',
         'Lo que borras **dentro de Google** (fuera de Zenth) sigue las reglas de Google Drive.',
