@@ -21,7 +21,7 @@ export const DOC_CATEGORIES: DocCategory[] = [
   {
     id: 'pizarras',
     title: 'Pizarras y colaboración',
-    description: 'Organiza proyectos con listas, tarjetas, favoritos, miembros y automatizaciones; conserva los terminados cerrando la pizarra.',
+    description: 'Organiza proyectos con listas, tarjetas, campos personalizados, favoritos, miembros y automatizaciones; conserva los terminados cerrando la pizarra.',
     icon: LayoutDashboard,
   },
   {

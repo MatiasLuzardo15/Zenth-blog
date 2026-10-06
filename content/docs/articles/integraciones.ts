@@ -1,4 +1,4 @@
-import { flow, h2, list, note, p, path, steps, table, tip, warn } from '../blocks';
+import { flow, h2, h3, list, note, p, path, steps, table, tip, warn } from '../blocks';
 import type { DocArticle } from '../types';
 
 const UPDATED = '2026-09-23';
@@ -133,9 +133,9 @@ export const integracionesArticles: DocArticle[] = [
     category: 'integraciones',
     title: 'Zenth MCP',
     summary: 'Conecta Claude o Codex a tu cuenta para consultar y organizar tu agenda, tus pizarras y tu Biblioteca desde la conversación.',
-    keywords: ['mcp', 'model context protocol', 'claude', 'claude code', 'codex', 'chatgpt', 'openai', 'anthropic', 'ia', 'inteligencia artificial', 'asistente', 'conector', 'conectar', 'aplicaciones conectadas', 'oauth', 'permisos', 'revocar', 'desconectar', 'notas', 'secciones', 'tablas', 'etiquetas', 'proponer cambios', 'sugerencias', 'historial', 'automatizaciones', 'reglas'],
+    keywords: ['mcp', 'model context protocol', 'claude', 'claude code', 'codex', 'chatgpt', 'openai', 'anthropic', 'ia', 'inteligencia artificial', 'asistente', 'conector', 'conectar', 'aplicaciones conectadas', 'oauth', 'permisos', 'revocar', 'desconectar', 'notas', 'secciones', 'tablas', 'etiquetas', 'campos personalizados', 'campos', 'crear tarjeta con campos', 'editar campos', 'proponer cambios', 'sugerencias', 'historial', 'automatizaciones', 'reglas'],
     updated: '2026-10-06',
-    related: ['pizarras/cerrar-y-reabrir-pizarras', 'pizarras/acciones-de-listas', 'pizarras/vistas-de-pizarra', 'pizarras/automatizaciones', 'biblioteca/revisar-sugerencias', 'biblioteca/historial-de-versiones', 'integraciones/zen-asistente', 'cuenta/papelera'],
+    related: ['pizarras/campos-personalizados', 'pizarras/cerrar-y-reabrir-pizarras', 'pizarras/acciones-de-listas', 'pizarras/vistas-de-pizarra', 'pizarras/automatizaciones', 'biblioteca/revisar-sugerencias', 'biblioteca/historial-de-versiones', 'integraciones/zen-asistente', 'cuenta/papelera'],
     blocks: [
       p('**MCP** (Model Context Protocol) es un estándar abierto con el que los asistentes de IA se conectan a otras aplicaciones. Con Zenth MCP, **Claude** (en la web, la app de escritorio y Claude Code) y **Codex** pueden consultar y actualizar tu espacio mientras conversas con ellos: le pides algo con tus palabras y el asistente lo hace en tu cuenta.'),
 
@@ -156,7 +156,7 @@ export const integracionesArticles: DocArticle[] = [
         ['Agenda', 'Ver tu día o varios días seguidos, con tareas, eventos y reuniones. Buscar pendientes y atrasadas.'],
         ['Tareas', 'Crear tareas (también repetitivas, con fecha de fin), cambiar título, fecha, hora, prioridad o etiquetas, sumar notas al final, activar el aviso por correo, completarlas o reabrirlas.'],
         ['Papelera', 'Mandar una tarea a la papelera, ver lo que hay y restaurarla.'],
-        ['Pizarras', 'Ver tus pizarras y sus listas en su orden, crear tarjetas y moverlas de lista donde puedes editar. Incluye fechas futuras y una pendiente por serie repetida; las archivadas aparecen solo si lo pides. Mover una tarjeta a **Completado** la completa y la archiva.'],
+        ['Pizarras', 'Ver tus pizarras y sus listas en su orden, consultar campos personalizados, crear tarjetas y rellenar sus campos o moverlas de lista donde puedes editar. Incluye fechas futuras y una pendiente por serie repetida; las archivadas aparecen solo si lo pides. Mover una tarjeta a **Completado** la completa y la archiva.'],
         ['Automatizaciones', 'Ver las reglas de una pizarra con qué hizo cada una la última vez, crear reglas nuevas y activarlas o desactivarlas, en las pizarras que administras.'],
         ['Biblioteca', 'Buscar notas por texto, carpeta o etiqueta, y leer una nota entera o solo una de sus secciones.'],
         ['Escribir notas', 'Crear un documento nuevo (en una carpeta y con etiquetas, si quieres) y sumar texto al final de una nota o debajo de una sección concreta. Con títulos, listas, tablas, bloques destacados y resaltado.'],
@@ -178,6 +178,19 @@ export const integracionesArticles: DocArticle[] = [
       p('Si una lista tiene [límite de tarjetas abiertas](/docs/pizarras/acciones-de-listas#limite-de-tarjetas-abiertas), el asistente recibe el límite y el número de pendientes, y un aviso cuando lo supera. **Crear o mover sigue permitido**: por ejemplo, si una lista con límite 2 queda con 3 abiertas, la acción se guarda y la respuesta avisa del exceso. Las tarjetas tachadas no cuentan y una serie cuenta por la ocurrencia pendiente que muestra el tablero.'),
       p('Completar una tarjeta sin repetición puede dejarla tachada en su lista hasta que la archives. Una ocurrencia repetida pasa directamente al historial y deja paso a la siguiente pendiente, también al completarla desde el asistente. Ver [Historial de tareas completadas](/docs/agenda/historial-de-completadas).'),
       p('También puedes pedir una **fecha de inicio** al crear una tarjeta y después cambiarla o quitarla con el asistente. Por ejemplo: «Crea Revisar presupuesto en Por hacer de Producto, con inicio el lunes y vencimiento el viernes». El inicio debe ser anterior o igual al vencimiento; si pides fechas incompatibles, Zenth rechaza el cambio. Ver [Inicio y vencimiento](/docs/pizarras/tarjetas-y-bandeja-rapida#inicio-y-vencimiento).'),
+
+      h2('Campos personalizados de las tarjetas'),
+      p('Al consultar una pizarra, el asistente recibe sus **campos personalizados** y los valores rellenados de cada tarjeta. Las opciones de desplegable llegan por su nombre, y los números en cero y las casillas en No conservan su valor.'),
+      list(
+        '«Muéstrame los campos de la pizarra **Producto** y los valores de sus tarjetas».',
+        '«Crea **Preparar lanzamiento** en **Por hacer** de **Producto**, con Cliente = Acme, Estimación = 3, Estado = Listo y Aprobado = No».',
+        '«En **Preparar lanzamiento**, pon Entrega = 13 de octubre de 2026».',
+        '«Quita el valor de Cliente en **Preparar lanzamiento**».',
+      ),
+      p('Los campos deben existir en esa pizarra. El asistente usa sus nombres y, en un desplegable, el nombre de una de sus opciones; no distingue mayúsculas. Si un nombre no existe o es ambiguo, Zenth devuelve un error con los nombres u opciones disponibles. La gestión de definiciones se hace desde [Preferencias › Campos](/docs/pizarras/campos-personalizados#crear-un-campo).'),
+      p('Para rellenar campos necesitas permiso de edición y la pizarra debe estar abierta. El valor debe corresponder al tipo: texto de una línea de hasta 500 caracteres, número, opción válida, Sí/No o una fecha válida. Ver [Los cinco tipos](/docs/pizarras/campos-personalizados#los-cinco-tipos).'),
+      h3('Si usas las herramientas directamente'),
+      p('**ver_tablero** devuelve las definiciones y los valores; **crear_tarjeta** y **editar_tarea** aceptan el objeto opcional `campos`, con un valor por nombre. Por ejemplo, `{"Cliente":"Acme"}` como valor de campos. Envía `null` para borrar un valor; una casilla usa `true` o `false` y una fecha usa `AAAA-MM-DD`. El texto vacío no borra: usa `null`.'),
 
       h2('Trabajar con tus notas'),
       p('El asistente lee y escribe tus notas con el mismo formato que el editor de Zenth: títulos, listas, tareas con casilla, citas, código, **tablas**, **bloques destacados** (de nota, consejo, advertencia o precaución) y texto **resaltado**. Algunos pedidos que funcionan bien:'),

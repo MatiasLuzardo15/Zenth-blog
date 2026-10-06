@@ -1,8 +1,9 @@
 # Documentación de Pizarras
 
-Revisión: 2026-10-05. Se contrastaron las guías de Zenth Blog con el código
+Revisión: 2026-10-06. Se contrastaron las guías de Zenth Blog con el código
 actual de `zenith-productivity`, incluidos los cambios locales de tabla,
-calendario, inicio y vencimiento, checklists, repetición, pizarra pública y MCP. Esta tarea modifica
+calendario, inicio y vencimiento, checklists, repetición, cierre, campos personalizados,
+pizarra pública y MCP. Esta tarea modifica
 documentación; no modifica la aplicación.
 
 ## Fuentes y estado
@@ -367,3 +368,143 @@ no se atribuye a esta revisión editorial. La baseline de seguridad y los
 cambios locales de la app, incluidos los que aparecieron durante esta revisión,
 quedaron intactos. No se tocaron `.claude/settings.local.json` ni `.env.local`.
 No se hizo commit, push ni publicación del blog.
+
+## Quinta revisión: campos personalizados — 2026-10-06
+
+Se documentaron las dos entregas de campos personalizados a partir del código
+local de `zenith-productivity` (HEAD `3ab3965` en la revisión) y de
+`docs/architecture/work-items/board-custom-fields-handoff.md`. Se contrastaron
+los gestores de escritorio y móvil, `TaskCustomFieldsBlock`,
+`BoardFieldFilters`, `BoardCollaborationHub`, `boardTaskQuery`, `boardTable`,
+la composición de copias, las plantillas y las herramientas MCP. Las herramientas
+del grafo siguen sin estar disponibles; se hicieron búsquedas y lecturas acotadas.
+
+Se añadió `/docs/pizarras/campos-personalizados` en
+`content/docs/articles/pizarras.ts`. La guía cubre:
+
+- Texto de una línea hasta 500 caracteres, Número, Desplegable, Casilla y Fecha.
+- Creación y gestión desde Colaboración › Preferencias › Campos, para propietario
+  y administradores; valores editables por Miembros y de consulta para Observadores.
+- Guardado automático en el detalle, vaciado de valores y diferencia entre
+  cero, No y Sin valor; consulta en solo lectura al cerrar una pizarra.
+- Mostrar en la tarjeta, orden de campos, edición de opciones y colores, tipo
+  fijo después de crear y eliminación con pérdida de valores.
+- Filtros por tipo, Con valor / Sin valor, recuentos y Cualquiera / Todas.
+  Próximos 7 días empieza mañana y termina a los siete días; fechas vencidas
+  y próximas excluyen las completadas con fecha.
+- Columnas de consulta en tabla y orden por tipo, con vacíos al final en ambos
+  sentidos y empates en el orden del tablero.
+- Valores conservados al duplicar tarjetas o copiar listas en la misma
+  pizarra; borrados al mover a otra, y omitidos al duplicar en otra.
+- Plantillas de pizarra con definiciones independientes, incluidos opciones,
+  colores, orden y Mostrar en la tarjeta. No incluyen tarjetas ni valores;
+  las plantillas de tarjeta y lista tampoco incorporan valores personalizados.
+- MCP por nombres de campos y opciones, y exclusión del enlace público.
+
+También se actualizaron Crear y organizar, Cerrar y reabrir, Tarjetas y bandeja,
+Acciones de listas, Mover y duplicar, Vistas, Calendario, Compartir, Menú de
+colaboración, Plantillas, Pizarra pública y Zenth MCP: una guía nueva y doce
+actualizadas, todas con fecha 2026-10-06. La guía MCP incluye ejemplos de pedidos,
+`ver_tablero`, `crear_tarjeta`, `editar_tarea`, el argumento `campos`, `null` para
+borrar y validación de nombres y tipos. La categoría Pizarras y el sitemap
+incorporan la función; la nueva ruta se descubre por la navegación y el buscador
+existentes, sin cambiar sus componentes ni sus contratos.
+
+Se aclara que Fecha personalizada no modifica Inicio ni Vence ni la visibilidad
+en Agenda, y que Mostrar en la tarjeta no hace públicos los campos. Las plantillas
+antiguas mantienen su comportamiento; para incluir campos se guarda otro modelo.
+No se añadieron avisos de estado en las guías, siguiendo el criterio editorial
+registrado en las revisiones anteriores.
+
+### Estado del hallazgo de calendario
+
+El aviso vacío descrito en la cuarta revisión está corregido en el código local:
+`showNoFilterResults` no oculta un calendario que todavía tiene elementos.
+La otra parte del hallazgo sigue siendo una limitación del comportamiento:
+las archivadas con fecha se incorporan sin las otras facetas al no haber filtros
+o al solicitar Completadas. Se documentó esa excepción en Calendario y Menú de
+colaboración; no se promete que Campos filtre esas archivadas. Las pruebas de la
+aplicación pertenecen al handoff de campos; esta tarea no volvió a ejecutarlas.
+
+### Verificación de esta revisión
+
+- `npx --no-install tsc --noEmit`: correcto.
+- `npm run build`: correcto; mantiene el aviso existente de chunks mayores
+  de 500 kB.
+- Registro real con esbuild: 76 artículos sin claves duplicadas, trece guías
+  con fecha verificada, 205 enlaces internos con rutas y anclas válidas, y
+  relacionados existentes.
+- Doce búsquedas con destinos válidos para crear, mostrar, rellenar, filtrar,
+  ordenar, copiar, reutilizar y consultar campos con MCP. Campos personalizados
+  devuelve la nueva guía como primer resultado.
+- Sitemap leído como XML: 114 rutas sin duplicados; todos los artículos están
+  incluidos y las fechas del alcance coinciden.
+- Compilación local revisada con Chrome en escritorio 1280 × 800 y móvil
+  390 × 844, en temas claro y oscuro. Se comprobaron la guía nueva, sus tablas
+  y filtros, el enlace a la sección MCP y su ejemplo, la plantilla de pizarra
+  y la búsqueda seguida de Enter hasta la guía. Nueve comprobaciones de diseño
+  sin desborde horizontal de página ni excepciones de ejecución. Las tablas
+  móviles desplazan su contenido (480 px dentro de 356 px).
+- `git diff --check`: correcto.
+
+Evidencia local ignorada en
+`node_modules/.cache/custom-fields-docs-20261006/{report.json,browser-report.json,shots/}`.
+El primer chequeo de tipos detectó un import de `h3` omitido en esta edición;
+se corrigió y la repetición pasó. El navegador integrado falló al arrancar
+(`CreateProcessWithLogonW`, 1056). Chrome y el servidor necesitaron ejecutarse
+fuera del sandbox para compartir localhost; además se corrigió un selector del
+script de comprobación, que buscaba un id en un subtítulo sin ancla. Los intentos
+de arranque y ese selector no son fallos del producto ni evidencia visual válida.
+La evidencia indicada corresponde a la ejecución final. Se cierra el servidor
+temporal y Chrome usa un perfil aislado que se termina al concluir.
+
+Solo se editaron los artículos, la descripción de categoría, el sitemap y este
+handoff. No se añadieron dependencias ni tests que reproduzcan el texto editorial.
+No se modificó la app ni se ejecutaron nuevamente sus checks, smoke autenticado,
+pruebas SQL o cambios remotos. La aplicación aún requiere aplicar en remoto
+`20261006030000_board_custom_fields.sql` y redeplegar MCP, según su handoff;
+esta revisión no confirma su disponibilidad en producción. No se tocaron
+`.claude/settings.local.json` ni `.env.local`. Sin commit, push ni publicación.
+
+## Sexta revisión: rediseño de la interfaz de campos — 2026-10-06
+
+La guía `/docs/pizarras/campos-personalizados` se contrastó con el rediseño de
+la interfaz de campos en `zenith-productivity`, descrito en la sección
+«Rediseño de la interfaz» de `board-custom-fields-handoff.md`. Se actualizaron
+estos puntos:
+
+- Crear:
+  - el tipo se elige entre cinco tarjetas;
+  - Enter pasa a la siguiente opción, que recibe un color distinto;
+  - el color se cambia desde la muestra de la opción;
+  - «Mostrar en la tarjeta» es un interruptor;
+  - el botón es **Crear campo**;
+  - un Desplegable exige al menos una opción y que todas tengan nombre.
+- Rellenar: filas con icono, nombre y valor, y «Vacío» en los vacíos. La × solo
+  borra fechas; en ordenador aparece al pasar el ratón. La casilla se marca y se
+  desmarca, sin un estado vacío distinto.
+- Marcas en la tarjeta: nombre y valor («Estimación 2,5», «Entrega 20 oct»).
+  Una casilla solo aparece marcada.
+- Filtros: el número usa `>` (inicial), `=` y `<`. **Sin marcar** incluye las
+  casillas que nadie ha tocado, por el cambio de la app descrito abajo.
+- Tabla: icono de tipo en la cabecera y casilla como icono.
+- Gestionar: resumen de cada campo y botón **Guardar**. Una tabla nueva cubre
+  ordenar, volver y eliminar en ordenador (asa, flechas, Escape, **Eliminar**)
+  y en móvil (**Ordenar**/**Listo**, **Eliminar campo**). Se explica cómo quitar
+  una opción con su × o con Retroceso. Se añadieron palabras de búsqueda.
+
+Cambio de la app asociado: `boardTaskQuery.ts` hace que **Sin marcar**
+(`checked: false`) reúna el No guardado y las casillas sin valor, y su recuento
+también. Antes, una casilla nunca tocada se veía «No» pero el filtro no la
+encontraba. La prueba de `customFieldQuery.test.ts` se actualizó.
+
+Verificación:
+
+- Blog: `npx --no-install tsc --noEmit` y `npm run build` correctos;
+  `git diff --check` correcto.
+- Servidor de desarrollo del blog: la guía carga y el ancla
+  `#renombrar-ordenar-o-eliminar-campos` existe. Se encontraron los textos
+  nuevos (Crear campo, Ordenar, Sin marcar) y no hay desborde horizontal.
+- No hubo captura visual: el panel del navegador no pintaba con la ventana
+  oculta. No se tocaron otras guías, el sitemap (fecha sin cambios,
+  2026-10-06) ni la configuración. Sin commit, push ni publicación.

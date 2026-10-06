@@ -11,7 +11,7 @@ export const pizarrasArticles: DocArticle[] = [
     summary: 'Crea pizarras por proyecto, marca tus favoritas, personaliza su diseño y conserva los proyectos terminados cerrando la pizarra.',
     keywords: ['tablero', 'kanban', 'trello', 'proyecto', 'listas', 'columnas', 'nueva pizarra', 'icono', 'color', 'diseño', 'eliminar pizarra', 'salir', 'descripción', 'favoritas', 'estrella', 'cerrar pizarra'],
     updated: '2026-10-06',
-    related: ['pizarras/cerrar-y-reabrir-pizarras', 'pizarras/acciones-de-listas', 'pizarras/vistas-de-pizarra', 'pizarras/calendario-de-pizarra', 'pizarras/compartir-una-pizarra', 'cuenta/papelera'],
+    related: ['pizarras/campos-personalizados', 'pizarras/cerrar-y-reabrir-pizarras', 'pizarras/acciones-de-listas', 'pizarras/vistas-de-pizarra', 'pizarras/calendario-de-pizarra', 'pizarras/compartir-una-pizarra', 'cuenta/papelera'],
     blocks: [
       p('Una **pizarra** es un tablero por proyecto: tiene sus propias listas, sus tarjetas y, si la compartes, sus miembros. Puedes tener tantas como necesites, y cada una empieza siendo privada.'),
 
@@ -43,6 +43,7 @@ export const pizarrasArticles: DocArticle[] = [
       ),
       p('Renombrar, cambiar icono y cambiar ajustes de la pizarra requieren ser administrador. Cualquier rol puede elegir el diseño de columnas: un Administrador o Miembro lo guarda en la pizarra; un Observador lo cambia solo para sí. El ancho y el plegado de las columnas son preferencias locales. Ver [Vistas y espacio de la pizarra](/docs/pizarras/vistas-de-pizarra).'),
       p('En escritorio, **Vista** permite también cambiar a **Tabla** o **Calendario**. El calendario organiza las tarjetas de esta pizarra por mes, semana o día; la elección de vista se recuerda en tu navegador y no cambia la del equipo. Ver [Calendario de la pizarra](/docs/pizarras/calendario-de-pizarra).'),
+      p('Para añadir información propia del proyecto, abre **Colaboración › Preferencias › Campos**. Puedes definir texto, números, opciones, casillas y fechas para sus tarjetas. Ver [Campos personalizados](/docs/pizarras/campos-personalizados).'),
 
       h2('Listas'),
       p('Cada pizarra tiene sus propias listas (columnas). Si tienes permiso para editarlas:'),
@@ -91,7 +92,7 @@ export const pizarrasArticles: DocArticle[] = [
       h2('Consultar una pizarra cerrada'),
       p('Abre el selector —el nombre de la pizarra en móvil— y elige su nombre en **Pizarras cerradas**. Sus miembros mantienen el acceso para leer el contenido.'),
       list(
-        'Todos quedan en **solo lectura**, incluido el propietario: no se crean, editan, completan ni mueven tarjetas; tampoco se cambian listas, etiquetas, checklists, comentarios o reglas.',
+        'Todos quedan en **solo lectura**, incluido el propietario: no se crean, editan, completan ni mueven tarjetas; tampoco se cambian listas, etiquetas, campos personalizados, checklists, comentarios o reglas.',
         'La gestión de miembros, las invitaciones y los ajustes esperan hasta reabrirla.',
         'Puedes leer los avisos existentes y marcarlos como leídos. Si no eres propietario, puedes salir respetando la regla del último administrador.',
         'Las favoritas personales se conservan. Cerrar no envía las tarjetas a la papelera.',
@@ -125,9 +126,9 @@ export const pizarrasArticles: DocArticle[] = [
     category: 'pizarras',
     title: 'Tarjetas y bandeja rápida',
     summary: 'Captura ideas sin clasificar en la bandeja, conviértelas en tarjetas, muévelas entre listas, archiva las que terminas y decide si aparecen en Agenda.',
-    keywords: ['tarjeta', 'bandeja', 'inbox', 'captura', 'arrastrar', 'mover', 'completar', 'tachada', 'archivar', 'archivadas', 'buscar en pizarra', 'filtrar', 'lista', 'tareas'],
+    keywords: ['tarjeta', 'bandeja', 'inbox', 'captura', 'arrastrar', 'mover', 'completar', 'tachada', 'archivar', 'archivadas', 'buscar en pizarra', 'filtrar', 'lista', 'tareas', 'campos personalizados'],
     updated: '2026-10-06',
-    related: ['pizarras/seleccionar-y-gestionar-tarjetas', 'pizarras/mover-y-duplicar-tarjetas', 'pizarras/acciones-de-listas', 'agenda/historial-de-completadas', 'pizarras/colaborar-en-tarjetas'],
+    related: ['pizarras/campos-personalizados', 'pizarras/seleccionar-y-gestionar-tarjetas', 'pizarras/mover-y-duplicar-tarjetas', 'pizarras/acciones-de-listas', 'agenda/historial-de-completadas', 'pizarras/colaborar-en-tarjetas'],
     blocks: [
       p('Una **tarjeta** es una tarea dentro de una pizarra. Usa el mismo editor que en Agenda (fecha, hora, duración, repetición, etiquetas, pasos, imágenes, documentos), con dos añadidos: vive en una lista y puede compartirse con el equipo.'),
 
@@ -148,6 +149,9 @@ export const pizarrasArticles: DocArticle[] = [
       p('Si tienes permiso de edición puedes además **arrastrar** las tarjetas entre listas para mover el trabajo.'),
       p('Para elegir una posición exacta o cambiar de pizarra, abre el detalle y usa **Mover tarjeta**. **Duplicar tarjeta** crea una copia con el título y destino que elijas. Ver [Mover y duplicar tarjetas](/docs/pizarras/mover-y-duplicar-tarjetas).'),
       p('En escritorio, el **clic derecho** sobre una tarjeta del tablero o una fila de la tabla reúne sus acciones. Para trabajar con varias a la vez, usa la selección y su barra inferior. Ver [Seleccionar y gestionar tarjetas](/docs/pizarras/seleccionar-y-gestionar-tarjetas).'),
+
+      h2('Campos de la tarjeta'),
+      p('Si la pizarra tiene campos personalizados, abre el detalle de una tarjeta y busca **Campos**. Sus valores se guardan automáticamente al rellenarlos, también en el móvil. Puedes ver los que tengan activado **Mostrar en la tarjeta** en la cara frontal. Ver [Campos personalizados](/docs/pizarras/campos-personalizados).'),
 
       h2('Inicio y vencimiento'),
       p('El editor de la pizarra permite distinguir **Inicio**, el día en que empieza el trabajo, y **Vence**, el día en que debe terminar. Puedes poner solo una de las fechas o ambas. Quita el inicio con el botón **Quitar fecha de inicio** para volver a dejarlo sin inicio.'),
@@ -185,7 +189,116 @@ export const pizarrasArticles: DocArticle[] = [
       p('La cabecera de la pizarra tiene un buscador propio: **Buscar tareas en esta pizarra…**. Filtra las tarjetas del tablero sin salir de él. Para buscar en todo Zenth usa el [buscador global](/docs/primeros-pasos/busqueda-y-notificaciones).'),
 
       h2('Filtrar la pizarra'),
-      p('En una pizarra compartida, el botón de **filtro** de la cabecera deja ver solo lo que buscas: por palabra clave, por persona (**Asignadas a mí**, **Sin responsable** o un compañero concreto), por estado, por vencimiento o por etiqueta. Todo está explicado en [Menú de colaboración](/docs/pizarras/menu-de-colaboracion).'),
+      p('El botón de **filtro** de la cabecera deja ver solo lo que buscas: por palabra clave, por persona (**Asignadas a mí**, **Sin responsable** o un compañero concreto), por estado, por vencimiento, por etiqueta o por los campos personalizados de la pizarra. Todo está explicado en [Menú de colaboración](/docs/pizarras/menu-de-colaboracion).'),
+    ],
+  },
+
+  {
+    slug: 'campos-personalizados',
+    category: 'pizarras',
+    title: 'Campos personalizados en las pizarras',
+    summary: 'Añade datos propios a tus tarjetas, muéstralos en el tablero y úsalos para filtrar, ordenar y reutilizar el trabajo.',
+    keywords: ['campos', 'campos personalizados', 'campo de tarjeta', 'propiedades', 'cliente', 'estimación', 'texto', 'número', 'desplegable', 'opciones', 'casilla', 'fecha', 'mostrar en la tarjeta', 'con valor', 'sin valor', 'filtrar campos', 'ordenar campos', 'reordenar campos', 'eliminar campo', 'color de opción', 'sin marcar', 'copiar campos', 'plantillas', 'móvil'],
+    updated: '2026-10-06',
+    related: ['pizarras/tarjetas-y-bandeja-rapida', 'pizarras/menu-de-colaboracion', 'pizarras/vistas-de-pizarra', 'pizarras/mover-y-duplicar-tarjetas', 'pizarras/automatizaciones-y-plantillas', 'integraciones/zenth-mcp'],
+    blocks: [
+      p('Los **campos personalizados** guardan la información que necesita cada proyecto: Cliente, Estimación, Estado de aprobación o Entrega al cliente, por ejemplo. Cada pizarra define sus propios campos y cada tarjeta puede tener un valor para cada uno.'),
+
+      h2('Crear un campo'),
+      steps(
+        'Abre la pizarra y su menú **Colaboración**. En escritorio, usa **Más opciones de la pizarra**; en móvil, abre **…** en la cabecera y elige **Colaboración**.',
+        'Entra en **Preferencias › Campos** y pulsa **Añadir campo**.',
+        'Escribe un **Nombre** y elige el **Tipo** entre las cinco tarjetas; debajo verás para qué sirve cada uno.',
+        'Si es Desplegable, pulsa **Añadir opción** y escribe su nombre. Pulsa Enter para pasar a la siguiente. Cada opción recibe un color distinto; toca su muestra de color para cambiarlo.',
+        'Decide con el interruptor si quieres **Mostrar en la tarjeta** y pulsa **Crear campo**.',
+      ),
+      path('Colaboración', 'Preferencias', 'Campos'),
+      p('Un Desplegable necesita al menos una opción, y todas deben tener nombre: hasta entonces, el botón para crear o guardar no se activa y la ventana indica qué falta.'),
+      p('Solo el **propietario y los administradores** pueden crear o gestionar campos. Un Miembro puede rellenarlos en las tarjetas, y un Observador puede consultar los valores. En una [pizarra cerrada](/docs/pizarras/cerrar-y-reabrir-pizarras), todos los valores quedan en solo lectura.'),
+
+      h2('Los cinco tipos'),
+      table(
+        ['Tipo', 'Qué guarda', 'Ejemplo'],
+        ['Texto', 'Una sola línea, hasta 500 caracteres.', 'Cliente: Acme'],
+        ['Número', 'Un número, también con decimales o cero.', 'Estimación: 3,5'],
+        ['Desplegable', 'Una de las opciones que define el administrador, con su color.', 'Estado: Listo'],
+        ['Casilla', 'Marcada o sin marcar.', 'Aprobado: Sí'],
+        ['Fecha', 'Una fecha elegida en el calendario.', 'Entrega al cliente: 13 de octubre'],
+      ),
+      note('Una Fecha personalizada es información adicional: **no cambia Inicio ni Vence** y no coloca la tarjeta por sí sola en el calendario o en Agenda. La visibilidad en Agenda sigue dependiendo de [Añadir tareas de pizarras a Agenda](/docs/pizarras/tarjetas-y-bandeja-rapida#aparece-en-agenda).'),
+
+      h2('Rellenar o borrar un valor'),
+      steps(
+        'Abre el detalle de la tarjeta y busca la sección **Campos**. Cada campo ocupa una fila con su icono de tipo, su nombre y su valor; los vacíos muestran **Vacío**.',
+        'Pulsa el valor para escribir el texto o número, elige una opción, marca la casilla o selecciona una fecha.',
+        'El cambio se **guarda automáticamente**. En texto y número, también puedes pulsar Enter o salir del campo para guardar lo escrito.',
+      ),
+      p('Puedes hacerlo en ordenador y móvil si tienes permiso de edición. Para borrar, vacía el texto o número, elige **Sin valor** en un desplegable o pulsa el botón **×** junto a una fecha (en ordenador aparece al pasar el ratón por encima).'),
+      p('El número **0** es un valor. Una casilla se marca y se desmarca al pulsarla: una casilla que nadie ha tocado se ve igual que una sin marcar.'),
+      p('En solo lectura se muestran los campos con valor y se omiten los vacíos.'),
+
+      h2('Mostrar en la tarjeta'),
+      p('En **Preferencias › Campos**, el administrador puede activar **Mostrar en la tarjeta** para que ese dato aparezca como una marca en la cara frontal cuando está rellenado. Desactivar esa opción conserva el valor en el detalle y en la tabla.'),
+      p('Las marcas muestran el nombre del campo y su valor, por ejemplo **Estimación 2,5** o **Entrega 20 oct**. Los desplegables usan el color de la opción, y una casilla solo aparece cuando está marcada.'),
+
+      h2('Filtrar por campos'),
+      steps(
+        'Abre el botón de **filtro** de la cabecera de la pizarra.',
+        'Busca el grupo **Campos** y despliega el nombre del campo que quieres usar.',
+        'Marca una condición o introduce el texto o número que buscas.',
+      ),
+      table(
+        ['Tipo', 'Condiciones'],
+        ['Cualquier campo', '**Con valor** o **Sin valor**.'],
+        ['Texto', '**Contiene** el texto que escribas, sin distinguir mayúsculas ni tildes.'],
+        ['Número', 'Elige **>** (mayor que, la opción inicial), **=** (igual a) o **<** (menor que) y escribe el número.'],
+        ['Desplegable', 'Una o varias de sus opciones, cada una con su color.'],
+        ['Casilla', '**Marcada** o **Sin marcar**; Sin marcar incluye las que nadie ha tocado.'],
+        ['Fecha', '**Vencida**, **Próximos 7 días** o **Sin fecha**, usando la fecha de ese campo.'],
+      ),
+      p('En una Fecha personalizada, Vencida reúne tarjetas sin completar con una fecha anterior a hoy. Próximos 7 días va **desde mañana hasta dentro de siete días**, incluidos ambos extremos, y también excluye las completadas con fecha. Sin fecha selecciona las que no tienen valor en ese campo.'),
+      p('El ajuste **Cualquiera / Todas** se aplica a las condiciones del grupo Campos: con Cualquiera basta con una; con Todas la tarjeta debe cumplirlas todas. Por ejemplo, Estado = Listo y Estimación mayor que 5 reúne las que cumplen ambas con Todas, o cualquiera de las dos con Cualquiera. Los otros grupos, como Miembros o Etiquetas, se combinan con Campos exigiendo también sus condiciones.'),
+      tip('Para reunir dos opciones de un mismo desplegable, usa **Cualquiera**: cada tarjeta solo puede tener una opción seleccionada.'),
+      p('Las condiciones con opciones muestran recuentos. La tabla y el calendario usan los mismos filtros de la pizarra. Las **archivadas** quedan fuera de esos recuentos; consulta cómo se muestran aparte en [Tarjetas completadas y archivadas](/docs/pizarras/calendario-de-pizarra#tarjetas-completadas-y-archivadas). Si se elimina un campo o una opción, su condición desaparece del filtro.'),
+
+      h2('Ver y ordenar los campos en la tabla'),
+      p('En escritorio, abre **Vista › Tabla**. Cada campo tiene su propia columna, con el icono de su tipo y en el orden definido en Campos. Las casillas se muestran como un icono marcado o vacío. Sus valores son de consulta: abre la tarjeta para editarlos. Pulsa la cabecera para ordenar y vuelve a pulsarla para invertir el sentido.'),
+      table(
+        ['Tipo', 'Orden inicial'],
+        ['Texto', 'Alfabético.'],
+        ['Número', 'De menor a mayor.'],
+        ['Fecha', 'De la más antigua a la más reciente.'],
+        ['Desplegable', 'Según el orden de sus opciones.'],
+        ['Casilla', 'Sí antes que No.'],
+      ),
+      p('Los **vacíos siempre quedan al final**, en ambos sentidos. Si dos valores empatan, mantienen el orden del tablero. Ordenar la tabla cambia tu consulta; no mueve las tarjetas para el equipo. Si se elimina el campo por el que ordenabas, la tabla vuelve al orden de listas y tarjetas.'),
+
+      h2('Renombrar, ordenar o eliminar campos'),
+      p('Vuelve a **Preferencias › Campos**. Cada campo muestra su tipo y un resumen, como «Desplegable · 3 opciones» u «Oculto en la tarjeta». Pulsa uno para cambiar su nombre, sus opciones y colores o Mostrar en la tarjeta, y guarda con **Guardar**. El **tipo se elige al crearlo y no se puede cambiar** después.'),
+      p('Para quitar una opción, pulsa su **×** o borra su nombre y pulsa Retroceso otra vez.'),
+      table(
+        ['Para', 'En ordenador', 'En el móvil'],
+        ['Cambiar el orden', 'Arrastra el asa de la izquierda, o selecciónala con el teclado y usa las flechas ↑ y ↓.', 'Pulsa **Ordenar**, usa las flechas de cada campo y termina con **Listo**.'],
+        ['Volver a la lista', 'Flecha atrás o Escape.', 'Flecha atrás.'],
+        ['Eliminar un campo', 'Ábrelo y pulsa **Eliminar**, abajo a la izquierda.', 'Ábrelo y pulsa **Eliminar campo**, al final.'],
+      ),
+      warn('Eliminar un campo pide confirmación y **borra sus valores en todas las tarjetas**. No se puede deshacer. Quitar una opción de un desplegable también deja sin valor las tarjetas que la tenían seleccionada.', 'Antes de eliminar'),
+
+      h2('Copias y cambios de pizarra'),
+      table(
+        ['Acción', 'Qué ocurre con los campos'],
+        ['Mover a otra lista de la misma pizarra', 'Los valores se conservan.'],
+        ['Duplicar una tarjeta en la misma pizarra', 'Sus valores se copian automáticamente.'],
+        ['Copiar una lista', 'Las tarjetas pendientes que se copian conservan sus valores.'],
+        ['Mover una tarjeta o lista a otra pizarra', 'Se borran los valores de las tarjetas trasladadas.'],
+        ['Duplicar una tarjeta en otra pizarra', 'La copia empieza sin valores personalizados. La original los conserva.'],
+      ),
+      p('Los campos pertenecen a cada pizarra. Tener un campo con el mismo nombre en el destino **no transfiere** sus valores. Ver [Mover y duplicar tarjetas](/docs/pizarras/mover-y-duplicar-tarjetas).'),
+
+      h2('Plantillas y asistente'),
+      p('Una **plantilla de pizarra** guarda las definiciones de los campos: nombres, tipos, opciones y colores, orden y Mostrar en la tarjeta. Al usarla, la nueva pizarra recibe campos independientes. No guarda tarjetas ni sus valores; las plantillas de tarjeta y lista tampoco guardan esos valores. Ver [Campos en las plantillas de pizarra](/docs/pizarras/automatizaciones-y-plantillas#campos-en-las-plantillas-de-pizarra).'),
+      p('Con [Zenth MCP](/docs/integraciones/zenth-mcp#campos-personalizados-de-las-tarjetas), tu asistente puede consultar y rellenar los campos existentes usando sus nombres. Por ejemplo: «En Preparar lanzamiento, pon Cliente = Acme y Estimación = 3».'),
+      note('Los campos y sus valores **no se muestran en el enlace público** de la pizarra. Mostrar en la tarjeta controla su presentación para los miembros; no cambia lo que recibe quien abre el enlace público.'),
     ],
   },
 
@@ -276,7 +389,7 @@ export const pizarrasArticles: DocArticle[] = [
 
       h2('Copiar una lista'),
       p('Pulsa **Copiar lista** para crear una lista justo al lado de la original, con **(copia)** en el nombre. Conserva el color y el límite, y copia en el mismo orden las tarjetas pendientes que representa el tablero. No incluye las tachadas ni las archivadas, ni duplica toda la serie de una tarea repetida.'),
-      p('Las tarjetas nuevas llevan título, nota con sus casillas, inicio, vencimiento y documentos vinculados. También copian automáticamente sus **checklists**, con los mismos títulos y pasos en el mismo orden. Todos los pasos empiezan **sin marcar**, sin responsable ni fecha propia.'),
+      p('Las tarjetas nuevas llevan título, nota con sus casillas, inicio, vencimiento y documentos vinculados. Conservan los **valores de los campos personalizados**, porque la copia queda en la misma pizarra. También copian automáticamente sus **checklists**, con los mismos títulos y pasos en el mismo orden. Todos los pasos empiezan **sin marcar**, sin responsable ni fecha propia.'),
       p('Empiezan sin repetición y no copian imágenes, comentarios, historial ni la sala de reunión de la original. Esta copia conjunta tampoco conserva responsables de la tarjeta ni etiquetas compartidas. Para elegir esos dos datos o desactivar la copia de checklists al copiar una tarjeta concreta, usa [Duplicar tarjeta](/docs/pizarras/mover-y-duplicar-tarjetas).'),
 
       h2('Mover la lista a otra pizarra'),
@@ -286,6 +399,7 @@ export const pizarrasArticles: DocArticle[] = [
         'Abre esa pizarra para continuar trabajando con la lista.',
       ),
       p('Solo aparecen destinos en los que puedes editar tanto listas como tarjetas. Se traslada la lista con su color, límite y tarjetas sin archivar, incluidas las tachadas y las de fecha futura. La lista desaparece del origen; las tarjetas que ya estaban archivadas permanecen en el historial de la pizarra de origen.'),
+      note('Al cambiar de pizarra, las tarjetas trasladadas pierden sus **valores de campos personalizados**. Los campos pertenecen a la pizarra de origen; no se transfieren aunque el destino tenga campos con el mismo nombre. Ver [Copias y cambios de pizarra](/docs/pizarras/campos-personalizados#copias-y-cambios-de-pizarra).'),
       note('Copiar crea trabajo nuevo y mantiene la lista original. Mover cambia dónde vive el trabajo. Si lo que quieres es guardar un modelo para usarlo muchas veces, consulta [Plantillas de tarjeta, lista y pizarra](/docs/pizarras/automatizaciones-y-plantillas).'),
     ],
   },
@@ -311,6 +425,7 @@ export const pizarrasArticles: DocArticle[] = [
       ),
       p('Puedes quedarte en la misma pizarra o elegir otra en la que tengas permiso de edición. Si eliges su lista y posición actuales, no hay un cambio que aplicar y el botón se desactiva. Al moverla a otra pizarra, se cierra su detalle en la de origen.'),
       p('Una tarjeta tachada se mueve manteniendo su estado completado. Si mueves una que ya estaba archivada a una lista de trabajo, vuelve abierta. Mover cambia la ubicación de la tarjeta original; no crea otra.'),
+      note('Mover entre listas de la misma pizarra conserva los **campos personalizados**. Al llevar la tarjeta a otra pizarra se borran sus valores, incluso si allí hay campos con el mismo nombre. Ver [Copias y cambios de pizarra](/docs/pizarras/campos-personalizados#copias-y-cambios-de-pizarra).'),
 
       h2('Duplicar una tarjeta'),
       steps(
@@ -330,6 +445,7 @@ export const pizarrasArticles: DocArticle[] = [
         ['Nota y casillas dentro de la nota', 'Se copian con su contenido.'],
         ['Inicio, vencimiento, hora, duración y documentos vinculados', 'Se conservan.'],
         ['Etiquetas compartidas y responsables', 'Puedes conservarlos solo dentro de la misma pizarra. Si eliges otra, no viajan.'],
+        ['Campos personalizados', 'Sus valores se copian automáticamente dentro de la misma pizarra. En otra pizarra, la copia empieza sin ellos.'],
         ['Checklists del panel de colaboración', 'Se conservan si dejas activada la opción Checklists, incluso en otra pizarra. Los pasos quedan sin marcar, sin responsable ni fecha propia.'],
         ['Imágenes', 'Permanecen en la original; no se copian sus archivos.'],
         ['Repetición y calendario externo', 'La copia no pertenece a la serie de la original ni queda enlazada a su calendario externo.'],
@@ -385,6 +501,7 @@ export const pizarrasArticles: DocArticle[] = [
 
       h2('Vista de tabla'),
       p('El botón **Vista** de la cabecera ofrece los diseños del tablero, **Tabla** y **Calendario**. La tabla está pensada para escritorio: presenta una fila por tarjeta de las listas visibles, con columnas **Tarjeta**, **Lista**, **Etiquetas**, **Responsables** y **Fecha**.'),
+      p('También añade una columna por cada **campo personalizado** de la pizarra, aunque no tenga activado Mostrar en la tarjeta. Los valores se consultan en la tabla y se editan abriendo el detalle. Puedes ordenar por la cabecera de un campo: los vacíos siempre quedan al final. Ver [Ver y ordenar los campos en la tabla](/docs/pizarras/campos-personalizados#ver-y-ordenar-los-campos-en-la-tabla).'),
       steps(
         'Abre **Vista › Tabla**.',
         'Pulsa una cabecera para ordenar sus filas. Pulsa de nuevo para invertir el sentido.',
@@ -473,6 +590,7 @@ export const pizarrasArticles: DocArticle[] = [
       ),
       p('La tarjeta conserva su lista: el calendario cambia su presentación, no su ubicación en el tablero. El color ayuda a reconocer esa lista. Las tarjetas sin clasificar de la bandeja rápida quedan fuera de esta vista; clasifícalas y ponles una fecha para verlas aquí.'),
       tip('Si esperabas ver una tarjeta, revisa su fecha, su lista y los filtros activos. Darle **Inicio** permite colocarla en el calendario aunque no tenga vencimiento. Ver [Inicio y vencimiento](/docs/pizarras/tarjetas-y-bandeja-rapida#inicio-y-vencimiento).'),
+      p('Un **campo personalizado de Fecha**, como «Entrega al cliente», guarda un dato adicional. No cambia Inicio ni Vence, ni coloca por sí solo la tarjeta en este calendario o en Agenda.'),
 
       h2('Crear una tarjeta desde el calendario'),
       list(
@@ -496,6 +614,7 @@ export const pizarrasArticles: DocArticle[] = [
 
       h2('Tarjetas completadas y archivadas'),
       p('Sin filtros activos, las tarjetas archivadas con fecha también aparecen **tachadas en su día**, aunque ya no estén en las listas del tablero. Esto incluye tarjetas sin repetición y ocurrencias de series que ya terminaron.'),
+      p('También pueden aparecer al activar **Completadas**. Las archivadas se incorporan aparte: los otros filtros, incluidos los de Campos, no se aplican a ellas. Los recuentos del panel de filtros siguen contando las tarjetas que permanecen en las listas.'),
       p('Conservan el color de la lista de la que salieron; si esa lista dejó de existir, usan el de Completado. El buscador de la pizarra puede acotar el historial que se muestra. Las archivadas sin fecha no ocupan un día ni aumentan el contador de tarjetas sin fecha de las listas.'),
       tip('Para consultar lo terminado sin restringirlo a un período del calendario, abre el [historial de completadas](/docs/agenda/historial-de-completadas). Las tarjetas enviadas a la papelera no aparecen en el calendario.'),
 
@@ -535,9 +654,9 @@ export const pizarrasArticles: DocArticle[] = [
       h2('Los tres roles'),
       table(
         ['Rol', 'Qué puede hacer'],
-        ['Administrador', 'Gestiona la pizarra y sus miembros: edita el contenido, invita personas, cambia roles y ajustes, expulsa miembros y puede cerrar o reabrir la pizarra.'],
-        ['Miembro', 'Crea, edita y mueve tarjetas y listas, pero no administra la pizarra.'],
-        ['Observador', 'Ve las tarjetas y las listas, sin modificarlas. Puede comentar y votar mientras un administrador lo permita (viene activado).'],
+        ['Administrador', 'Gestiona la pizarra y sus miembros: edita el contenido, define campos personalizados, invita personas, cambia roles y ajustes, expulsa miembros y puede cerrar o reabrir la pizarra.'],
+        ['Miembro', 'Crea, edita y mueve tarjetas y listas, y rellena los campos personalizados, pero no administra la pizarra ni define sus campos.'],
+        ['Observador', 'Ve las tarjetas, las listas y los valores de sus campos, sin modificarlos. Puede comentar y votar mientras un administrador lo permita (viene activado).'],
       ),
       p('Si entras como Observador, la interfaz **oculta** las acciones que no puedes ejecutar en lugar de dejarte fallar. Y aunque alguien tocara la interfaz, los permisos reales se aplican en el servidor.'),
       note('Estos permisos de edición corresponden a una **pizarra abierta**. En una cerrada, todos sus miembros quedan en solo lectura, incluidos propietario y administradores. Tampoco se comenta ni se vota hasta reabrirla. Ver [Cerrar y reabrir pizarras](/docs/pizarras/cerrar-y-reabrir-pizarras).'),
@@ -637,12 +756,12 @@ export const pizarrasArticles: DocArticle[] = [
     slug: 'menu-de-colaboracion',
     category: 'pizarras',
     title: 'El menú de colaboración de la pizarra',
-    summary: 'Filtros y carga de trabajo, etiquetas compartidas, actividad, notificaciones, seguimiento y preferencias de una pizarra compartida.',
-    keywords: ['filtros', 'filtrar', 'palabra clave', 'vencidas', 'sin fecha', 'próximos 7 días', 'próxima semana', 'coincidencia', 'carga', 'etiquetas', 'actividad', 'seguimiento', 'preferencias', 'observadores', 'notificaciones de pizarra', 'más opciones'],
+    summary: 'Filtros y carga de trabajo, etiquetas, campos personalizados, actividad, notificaciones, seguimiento y preferencias de la pizarra.',
+    keywords: ['filtros', 'filtrar', 'palabra clave', 'vencidas', 'sin fecha', 'próximos 7 días', 'próxima semana', 'coincidencia', 'carga', 'etiquetas', 'campos personalizados', 'con valor', 'sin valor', 'actividad', 'seguimiento', 'preferencias', 'observadores', 'notificaciones de pizarra', 'más opciones'],
     updated: '2026-10-06',
-    related: ['pizarras/calendario-de-pizarra', 'pizarras/automatizaciones', 'pizarras/colaborar-en-tarjetas', 'enfoque/enfoque-y-equipo'],
+    related: ['pizarras/campos-personalizados', 'pizarras/calendario-de-pizarra', 'pizarras/automatizaciones', 'pizarras/colaborar-en-tarjetas', 'enfoque/enfoque-y-equipo'],
     blocks: [
-      p('En la cabecera de una pizarra compartida, **Más opciones de la pizarra** abre el panel **Colaboración**. Reúne todo lo que es del equipo y no de una tarjeta concreta.'),
+      p('En la cabecera de la pizarra, **Más opciones de la pizarra** abre el panel **Colaboración**. En móvil, abre **…** y elige **Colaboración**. Reúne los ajustes y herramientas que corresponden a la pizarra completa.'),
 
       h2('Filtros y carga'),
       p('El panel **Filtrar** está en el botón de filtro de la cabecera y también en **Colaboración › Filtros y carga**. Puedes marcar varias opciones a la vez y el panel no se cierra al hacerlo: ves cambiar el tablero mientras ajustas.'),
@@ -653,6 +772,7 @@ export const pizarrasArticles: DocArticle[] = [
         ['Estado', '**Completadas** (las tachadas que siguen en su lista) y **Sin completar**.'],
         ['Vencimiento', '**Sin fecha**, **Vencidas** (fecha anterior a hoy y sin completar), **Para hoy** y **Próximos 7 días**.'],
         ['Etiquetas', '**Sin etiquetas** y cada etiqueta compartida de la pizarra.'],
+        ['Campos', 'Condiciones según cada campo personalizado: opciones, casillas, comparaciones de números, fechas, texto y Con valor / Sin valor. Ver [Filtrar por campos](/docs/pizarras/campos-personalizados#filtrar-por-campos).'],
       ),
       p('Cada opción muestra **cuántas tarjetas la cumplen**. Si una está en 0, se ve atenuada, y así sabes antes de marcarla que no dejaría nada. Los números de Miembros son también la **carga de trabajo**: ves quién tiene más tarjetas antes de repartir.'),
       p('**Próximos 7 días** reúne las pendientes que vencen desde mañana hasta dentro de siete días, incluidos ambos extremos. No incluye hoy ni las vencidas. Combínalo con **Para hoy** para ver desde hoy hasta una semana; las tarjetas completadas con fecha no entran en esos plazos. **Sin fecha** se refiere a no tener vencimiento, aunque la tarjeta tenga Inicio.'),
@@ -660,13 +780,14 @@ export const pizarrasArticles: DocArticle[] = [
 
       h3('Cualquiera o Todas'),
       list(
-        '**Cualquiera:** basta con uno de los miembros o una de las etiquetas que marcaste.',
-        '**Todas:** la tarjeta debe tener todos los miembros y todas las etiquetas marcados.',
+        '**Cualquiera:** dentro de cada grupo, basta con uno de los miembros, una de las etiquetas o una de las condiciones de Campos que marcaste.',
+        '**Todas:** dentro de cada grupo, la tarjeta debe tener todos los miembros, todas las etiquetas o cumplir todas las condiciones de Campos que marcaste.',
         'Entre grupos distintos siempre se suman las condiciones: «Ana» y «Vencidas» muestra las tarjetas de Ana que están vencidas.',
       ),
 
       h3('Cuando nada coincide'),
       p('El panel indica cuántos filtros hay activos y tiene un botón **Limpiar**. Si la combinación no deja ninguna tarjeta, la pizarra lo dice («Ninguna tarjeta coincide con los filtros») y ofrece **Limpiar filtros**. El botón de la cabecera se marca mientras haya un filtro activo, y los filtros vuelven a empezar al cambiar de pizarra.'),
+      p('En el calendario, ese aviso aparece solo si tampoco hay elementos que mostrar. Las archivadas con fecha pueden seguir visibles con Completadas, aunque los filtros de las listas no coincidan. Ver [Tarjetas completadas y archivadas](/docs/pizarras/calendario-de-pizarra#tarjetas-completadas-y-archivadas).'),
       note('Las tarjetas **archivadas** quedan fuera de las listas y de los recuentos de filtros. Puedes consultarlas en el [historial de completadas](/docs/agenda/historial-de-completadas) o tachadas en su fecha en el [calendario de la pizarra](/docs/pizarras/calendario-de-pizarra#tarjetas-completadas-y-archivadas).'),
 
       h2('Etiquetas compartidas'),
@@ -691,6 +812,7 @@ export const pizarrasArticles: DocArticle[] = [
 
       h2('Preferencias (solo administradores)'),
       list(
+        '**Campos:** crea, renombra, ordena y elimina campos personalizados, define opciones y decide qué valores se muestran en la cara frontal de las tarjetas. Ver [Campos personalizados](/docs/pizarras/campos-personalizados).',
         '**Observadores pueden comentar.**',
         '**Observadores pueden votar.**',
         '**Seguir al asignar automáticamente:** quien recibe una tarjeta pasa a seguirla.',
@@ -863,10 +985,10 @@ export const pizarrasArticles: DocArticle[] = [
     slug: 'automatizaciones-y-plantillas',
     category: 'pizarras',
     title: 'Plantillas de tarjeta, lista y pizarra',
-    summary: 'Guarda tarjetas, listas o pizarras enteras como plantilla para no repetir el mismo trabajo cada vez.',
-    keywords: ['plantilla', 'plantillas', 'reutilizar', 'modelo', 'duplicar', 'tarjeta modelo', 'lista modelo', 'pizarra modelo'],
+    summary: 'Guarda modelos de tarjeta y lista, o la estructura de una pizarra con sus campos personalizados, para reutilizarlos.',
+    keywords: ['plantilla', 'plantillas', 'reutilizar', 'modelo', 'duplicar', 'tarjeta modelo', 'lista modelo', 'pizarra modelo', 'campos personalizados'],
     updated: '2026-10-06',
-    related: ['pizarras/acciones-de-listas', 'pizarras/mover-y-duplicar-tarjetas', 'pizarras/automatizaciones', 'pizarras/colaborar-en-tarjetas'],
+    related: ['pizarras/campos-personalizados', 'pizarras/acciones-de-listas', 'pizarras/mover-y-duplicar-tarjetas', 'pizarras/automatizaciones', 'pizarras/colaborar-en-tarjetas'],
     blocks: [
       note('Las automatizaciones tienen ahora su propia guía: [Automatizaciones: reglas que trabajan solas](/docs/pizarras/automatizaciones).'),
 
@@ -877,10 +999,15 @@ export const pizarrasArticles: DocArticle[] = [
         ['Tipo', 'Guarda…'],
         ['Tarjeta', 'Una tarjeta modelo. También puedes guardar una tarjeta real desde su detalle, con **Guardar plantilla**.'],
         ['Lista', 'Una lista con su nombre y color.'],
-        ['Pizarra', 'El nombre, el icono y las listas de la pizarra actual, para montar otra igual.'],
+        ['Pizarra', 'El nombre, el icono, las listas y las definiciones de campos personalizados de la pizarra actual, para montar otra con esa estructura. No guarda sus tarjetas.'],
       ),
       p('En **Plantillas** ves las que tienes y pulsas **Usar** para aplicarlas: «Plantilla aplicada».'),
       p('Para crear, usar o eliminar plantillas de una pizarra cerrada, primero debe [reabrirla un propietario o administrador](/docs/pizarras/cerrar-y-reabrir-pizarras).'),
+
+      h2('Campos en las plantillas de pizarra'),
+      p('Al guardar una plantilla de **Pizarra**, se conservan los nombres y tipos de sus campos, las opciones con sus colores, el orden de los campos y **Mostrar en la tarjeta**. Al usarla se crean campos nuevos en la pizarra nueva: cambiar una definición allí no modifica la pizarra original ni la plantilla.'),
+      p('La plantilla conserva los campos tal como estaban al guardarla. Si después añades o cambias campos en el origen, guarda otra plantilla para reutilizar esa versión. Las plantillas antiguas siguen funcionando; para que incluyan campos, vuelve a guardar el modelo desde una pizarra que los tenga.'),
+      note('Las plantillas de pizarra guardan **definiciones**, no tarjetas ni valores. Las plantillas de tarjeta y lista tampoco guardan valores personalizados. Para conservar esos valores al copiar trabajo dentro de la misma pizarra, usa [Duplicar tarjeta o Copiar lista](/docs/pizarras/campos-personalizados#copias-y-cambios-de-pizarra).'),
       tip('Si cada semana montas la misma pizarra de proyecto, guarda una plantilla de **Pizarra**: es más rápido que duplicar a mano y no arrastra contenido que no quieres.'),
     ],
   },
@@ -917,7 +1044,8 @@ export const pizarrasArticles: DocArticle[] = [
         'El progreso de la checklist.',
         'El **número** de comentarios.',
       ),
-      p('**No** se muestran los adjuntos y las imágenes, los miembros asignados, los documentos vinculados, la ubicación, el enlace de videollamada, ni datos de personas. Los comentarios se cuentan, pero nunca se envían. Y tampoco aparecen las tareas **completadas**, porque su historial es de los miembros.'),
+      p('**No** se muestran los adjuntos y las imágenes, los miembros asignados, los documentos vinculados, la ubicación, el enlace de videollamada, los campos personalizados ni datos de personas. Los comentarios se cuentan, pero nunca se envían. Y tampoco aparecen las tareas **completadas**, porque su historial es de los miembros.'),
+      p('Activar **Mostrar en la tarjeta** en un [campo personalizado](/docs/pizarras/campos-personalizados) permite verlo en el tablero de los miembros. Sus definiciones y valores siguen fuera del enlace público.'),
 
       h2('Orden y tareas repetidas'),
       p('Las tarjetas respetan el orden guardado en la pizarra, incluido el que el equipo haya elegido al arrastrarlas. Las tarjetas pendientes con fecha futura también se ven: la fecha indica su vencimiento.'),
