@@ -10,8 +10,8 @@ export const integracionesArticles: DocArticle[] = [
     title: 'Google Drive y Workspace',
     summary: 'Conecta tu Drive para ver, crear, editar, subir, mover y compartir tus archivos de Google desde la Biblioteca, sin duplicarlos.',
     keywords: ['google drive', 'drive', 'workspace', 'docs', 'sheets', 'hojas de cálculo', 'hoja de cálculo', 'excel', 'spreadsheet', 'slides', 'forms', 'documentos', 'conectar', 'desconectar', 'picker', 'permisos', 'archivos', 'subir', 'compartir', 'exportar'],
-    updated: '2026-09-30',
-    related: ['biblioteca/explorar-la-biblioteca', 'biblioteca/archivos-pdf-y-notas-de-voz', 'privacidad/que-datos-guarda-zenth'],
+    updated: '2026-10-06',
+    related: ['biblioteca/explorar-la-biblioteca', 'biblioteca/archivos-pdf-y-notas-de-voz', 'biblioteca/leer-documentos-en-el-visor', 'privacidad/que-datos-guarda-zenth'],
     blocks: [
       p('La conexión con **Google Drive** es opcional. Le da a la Biblioteca la infraestructura documental: Drive guarda tus documentos, hojas, presentaciones, formularios, carpetas y archivos, y Zenth te los muestra y te deja trabajar con ellos. Las notas y lienzos nativos de Zenth siguen siendo independientes.'),
 
@@ -43,6 +43,7 @@ export const integracionesArticles: DocArticle[] = [
       h2('Editar dentro de Zenth o abrir en Google'),
       p('Los editores integrados cubren lo habitual (por ejemplo, en Documentos: estilos de párrafo, tipografía, tamaño, negrita, cursiva, subrayado, colores, listas, enlaces, alineación, interlineado y buscar y reemplazar; en Hojas: insertar y eliminar filas y columnas y dar formato). **No reproducen todas las funciones** de los editores nativos de Google. Cuando necesites colaboración simultánea completa, comentarios o maquetación especializada, usa **Abrir en Google**.'),
       p('Si un documento tiene una estructura avanzada que el editor integrado no puede mostrar bien, Zenth te lo dice y te ofrece abrirlo en Google.'),
+      p('Para solo leer, el modo **Ver** muestra el documento, la hoja o la presentación tal como es, con miniaturas, índice, zoom, búsqueda en el texto y más. Los PDF y los archivos de Word, Excel y PowerPoint guardados en Drive se leen igual. Ver [Leer documentos en el visor](/docs/biblioteca/leer-documentos-en-el-visor).'),
 
       h2('Dónde vive cada cosa'),
       list(

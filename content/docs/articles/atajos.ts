@@ -9,9 +9,9 @@ export const atajosArticles: DocArticle[] = [
     category: 'atajos',
     title: 'Atajos de la aplicación',
     summary: 'Buscar, cambiar de sección, crear, recorrer Agenda y Pizarras, trabajar en documentos y controlar Enfoque y las llamadas: los atajos de Zenth.',
-    keywords: ['atajos', 'teclado', 'shortcuts', 'teclas', 'alt', 'ctrl', 'comandos', 'navegación', 'buscar', 'rápido', 'hotkeys', 'mac', 'cmd', 'tablas', 'celdas', 'google docs', 'documentos'],
+    keywords: ['atajos', 'teclado', 'shortcuts', 'teclas', 'alt', 'ctrl', 'comandos', 'navegación', 'buscar', 'rápido', 'hotkeys', 'mac', 'cmd', 'tablas', 'celdas', 'google docs', 'documentos', 'pdf', 'visor', 'zoom'],
     updated: '2026-10-06',
-    related: ['pizarras/seleccionar-y-gestionar-tarjetas', 'pizarras/calendario-de-pizarra', 'atajos/atajos-del-editor-de-notas', 'primeros-pasos/busqueda-y-notificaciones', 'reuniones/durante-una-llamada'],
+    related: ['pizarras/seleccionar-y-gestionar-tarjetas', 'pizarras/calendario-de-pizarra', 'atajos/atajos-del-editor-de-notas', 'biblioteca/leer-documentos-en-el-visor', 'primeros-pasos/busqueda-y-notificaciones', 'reuniones/durante-una-llamada'],
     blocks: [
       p('Puedes navegar por Zenth sin apartar las manos del teclado. Las teclas se muestran para tu sistema: en Windows y Linux verás `Ctrl` y `Alt`; en macOS, `⌘` y `⌥`.'),
       tip('Pulsa `Ctrl` + `Shift` + `/` (`⌘` + `⇧` + `/` en Mac) en cualquier momento para abrir el **catálogo de atajos** dentro de la propia aplicación. También está en el menú de tu avatar, con el nombre «Atajos de teclado».'),
@@ -105,6 +105,19 @@ export const atajosArticles: DocArticle[] = [
         [['Enter'], 'Aceptar una llamada entrante'],
         [['Esc'], 'Rechazar una llamada entrante'],
       ),
+
+      h2('Visor de documentos'),
+      p('Con un PDF o la vista previa de un documento abiertos y el foco en el visor:'),
+      keys(
+        [['Ctrl', 'F'], 'Buscar en el documento'],
+        [['Enter'], 'Coincidencia siguiente, en el cuadro de búsqueda'],
+        [['Shift', 'Enter'], 'Coincidencia anterior'],
+        [['Ctrl', '+'], 'Acercar'],
+        [['Ctrl', '-'], 'Alejar'],
+        [['Ctrl', '0'], 'Ajustar al ancho'],
+        [['Esc'], 'Cerrar la búsqueda'],
+      ),
+      p('`Ctrl` + rueda del ratón acerca o aleja donde está el puntero. Ver [Leer documentos en el visor](/docs/biblioteca/leer-documentos-en-el-visor).'),
 
       h2('Buscador'),
       keys(

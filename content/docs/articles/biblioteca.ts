@@ -558,8 +558,8 @@ export const bibliotecaArticles: DocArticle[] = [
     title: 'Archivos, PDF y notas de voz',
     summary: 'Sube y consulta archivos, previsualiza PDFs sin salir de Zenth y graba notas de voz directamente en tu Drive.',
     keywords: ['archivos', 'subir', 'pdf', 'vista previa', 'audio', 'nota de voz', 'grabar', 'multimedia', 'imágenes', 'descargar', 'drive'],
-    updated: '2026-09-30',
-    related: ['integraciones/google-drive', 'biblioteca/explorar-la-biblioteca'],
+    updated: '2026-10-06',
+    related: ['biblioteca/leer-documentos-en-el-visor', 'integraciones/google-drive', 'biblioteca/explorar-la-biblioteca'],
     blocks: [
       h2('Subir archivos'),
       p('Con **Nuevo › Subir archivo** guardas archivos en tu Google Drive. Un panel de subidas muestra el progreso de cada archivo («% completado»), permite cancelarlos, minimizarlo y te avisa si alguno falla.'),
@@ -567,6 +567,7 @@ export const bibliotecaArticles: DocArticle[] = [
 
       h2('Vista previa de PDF e imágenes'),
       p('Los PDF y las imágenes se abren en un visor dentro de Zenth, sin descargarlos. Desde el visor puedes **descargar** el archivo o **moverlo a la papelera**.'),
+      p('Los PDF traen además una barra de herramientas para recorrerlos: miniaturas e índice, ir a una página, zoom, girar, buscar en el texto y copiarlo. Ver [Leer documentos en el visor](/docs/biblioteca/leer-documentos-en-el-visor).'),
 
       h2('Notas de voz'),
       steps(
@@ -583,6 +584,111 @@ export const bibliotecaArticles: DocArticle[] = [
         ['Documentos, hojas, presentaciones, formularios de Google', 'En tu Drive.'],
         ['Archivos que subes y notas de voz nuevas', 'En tu Drive.'],
         ['Archivos que ya estaban guardados en Zenth', 'En Zenth, visibles en Archivos Zenth.'],
+      ),
+    ],
+  },
+
+  {
+    slug: 'leer-documentos-en-el-visor',
+    category: 'biblioteca',
+    title: 'Leer documentos en el visor',
+    summary: 'Recorre PDFs y vistas previas de Drive con miniaturas, índice, ir a una página, zoom, girar, buscar en el texto, copiarlo y pantalla completa.',
+    keywords: ['visor', 'vista previa', 'pdf', 'leer', 'miniaturas', 'índice', 'marcadores', 'ir a página', 'número de página', 'zoom', 'acercar', 'alejar', 'ajustar al ancho', 'ajustar a la página', 'pellizcar', 'girar', 'rotar', 'buscar en el pdf', 'buscar en el documento', 'ctrl f', 'coincidencias', 'copiar texto', 'seleccionar texto', 'pantalla completa', 'presentación', 'word', 'powerpoint', 'excel', 'documento de google'],
+    updated: '2026-10-06',
+    related: ['biblioteca/archivos-pdf-y-notas-de-voz', 'integraciones/google-drive', 'atajos/atajos-de-la-aplicacion', 'biblioteca/explorar-la-biblioteca'],
+    blocks: [
+      p('Cuando abres un PDF o la vista previa de un documento, encima de las páginas aparece una barra de herramientas para moverte por él sin desplazarte página por página: miniaturas, índice, número de página, zoom, girar, búsqueda y pantalla completa. Además, el texto se puede seleccionar y copiar.'),
+
+      h2('Dónde aparece'),
+      table(
+        ['Qué abres', 'Desde dónde'],
+        ['PDF de tu Drive', '**Ubicaciones › Google Drive**, Recientes, Destacados o Compartidos conmigo.'],
+        ['Documentos, hojas y presentaciones de Google', 'Al abrirlos en modo **Ver**, la vista previa fiel del archivo.'],
+        ['Word, Excel, PowerPoint y OpenDocument guardados en Drive', 'Google los convierte para mostrarlos; se leen como un PDF.'],
+        ['PDF guardados en Zenth', '**Ubicaciones › Archivos Zenth** o **Más › Archivos**.'],
+      ),
+      p('Las imágenes, el audio y el video se abren con su propio visor, sin esta barra. Ninguna herramienta modifica el archivo: girar, acercar o buscar solo cambia cómo lo ves.'),
+
+      h2('La barra de herramientas'),
+      table(
+        ['Control', 'Para qué sirve'],
+        ['Mostrar páginas', 'Abre o cierra el panel lateral con las miniaturas y el índice.'],
+        ['Número de página', 'Muestra la página que estás leyendo, por ejemplo «3 de 8». Escribe otro número y pulsa Enter para ir a esa página.'],
+        ['Página anterior y siguiente', 'Las flechas junto al número saltan de a una página.'],
+        ['− y +', 'Alejan y acercan, de 25 % a 400 %.'],
+        ['Menú de zoom', '**Ajustar al ancho**, **Ajustar a la página** o un porcentaje fijo.'],
+        ['Girar a la derecha', 'Gira todas las páginas un cuarto de vuelta.'],
+        ['Buscar en el documento', 'Abre el cuadro de búsqueda.'],
+        ['Pantalla completa', 'Ocupa toda la pantalla; vuelve a pulsarlo o usa `Esc` para salir.'],
+      ),
+      note('En el teléfono la barra muestra lo esencial: el panel de páginas, el número de página, − y + y la búsqueda. El menú de zoom, girar y pantalla completa aparecen en pantallas más anchas. Pantalla completa no está disponible donde el navegador no la permite, como en iPhone.'),
+
+      h2('Miniaturas e índice'),
+      p('El panel lateral muestra una miniatura de cada página; la que estás leyendo va marcada en azul y el panel la mantiene a la vista mientras avanzas. Pulsa una miniatura para ir a esa página.'),
+      p('Si el documento trae marcadores, como los títulos de un informe exportado a PDF, el panel suma la pestaña **Índice** con los títulos y su sangría. Pulsa uno para ir directo a esa sección, no solo a su página. Si el documento no tiene marcadores, solo verás las miniaturas.'),
+      list(
+        'Con un visor amplio y un documento de varias páginas, el panel se abre solo. Si lo cierras, Zenth recuerda tu elección en ese navegador.',
+        'En una ventana angosta, como el visor de Archivos Zenth, empieza cerrado para dejar más lugar a la página.',
+        'En el teléfono, el panel aparece sobre el documento y se cierra al elegir una página o al tocar el documento.',
+      ),
+
+      h2('Ir a una página'),
+      steps(
+        'Pulsa el número de página en la barra.',
+        'Escribe la página a la que quieres ir. Si escribes un número mayor que el total, vas a la última.',
+        'Pulsa Enter. `Esc` deja el número como estaba, sin moverte.',
+      ),
+
+      h2('Acercar, alejar y ajustar'),
+      p('**Ajustar al ancho** es el modo con el que se abre un documento: cada página ocupa el ancho del visor, sin pasar de un ancho cómodo de lectura en monitores grandes. **Ajustar a la página** reduce cada página hasta que entra entera en la pantalla, útil para presentaciones. Con un porcentaje, el 100 % corresponde al tamaño real de la hoja.'),
+      p('Al acercar o alejar no pierdes el lugar: lo que estaba en el centro sigue en el centro. Si la página queda más ancha que el visor, desplázate también de lado a lado.'),
+      list(
+        'Con el teclado, usa `Ctrl` + `+` y `Ctrl` + `-`; `Ctrl` + `0` vuelve a **Ajustar al ancho**.',
+        'Con el ratón, mantén `Ctrl` y gira la rueda: el zoom se centra donde está el puntero. En el trackpad, pellizca (en Chrome, Edge y Firefox).',
+        'En una pantalla táctil, pellizca con dos dedos sobre el documento.',
+      ),
+      tip('La página se ve un instante algo borrosa mientras cambias el zoom y se vuelve nítida apenas sueltas. Es normal: Zenth vuelve a dibujarla al nuevo tamaño.'),
+
+      h2('Girar las páginas'),
+      p('**Girar a la derecha** gira el documento entero de a 90°. Sirve para un escaneo que quedó de costado o para ver una tabla apaisada. Pulsa cuatro veces para volver a la posición original. El giro no se guarda en el archivo ni se recuerda al volver a abrirlo.'),
+
+      h2('Buscar en el documento'),
+      steps(
+        'Pulsa **Buscar en el documento** o `Ctrl` + `F` con el visor abierto.',
+        'Escribe lo que buscas. El cuadro indica cuántas coincidencias hay, por ejemplo «2 de 9», y lleva a la primera desde la página que estás leyendo.',
+        'Pulsa Enter para ir a la siguiente y `Shift` + Enter para volver a la anterior. También puedes usar las flechas del cuadro.',
+        'Cierra con la X o con `Esc`. Las marcas desaparecen y el visor sigue abierto.',
+      ),
+      p('Todas las coincidencias se marcan en azul claro y la elegida, con un azul más intenso y un borde.'),
+      list(
+        'No distingue mayúsculas ni tildes: «metodologia» encuentra «Metodología».',
+        'Encuentra frases de varias palabras, aunque crucen una línea.',
+        'Une las palabras cortadas con guion al final de un renglón: «reconocimiento» encuentra «recono-» y «cimiento».',
+      ),
+      warn('La búsqueda y la selección necesitan que el PDF tenga texto. Un documento escaneado o una foto convertida en PDF es solo una imagen: se ve igual, pero no se puede buscar ni copiar. En ese caso el cuadro dice «Sin resultados».', 'Documentos escaneados'),
+
+      h2('Seleccionar y copiar texto'),
+      p('Arrastra sobre el texto de una página para seleccionarlo y cópialo con `Ctrl` + `C` o con el menú del navegador. En el teléfono, mantén pulsado sobre una palabra y ajusta la selección. Lo copiado es texto plano, sin el formato del documento.'),
+
+      h2('Atajos del visor'),
+      p('Funcionan mientras el visor tiene el foco, por ejemplo después de pulsar sobre el documento. Si hay una ventana abierta encima, sus atajos tienen prioridad.'),
+      keys(
+        [['Ctrl', 'F'], 'Buscar en el documento'],
+        [['Enter'], 'Coincidencia siguiente, en el cuadro de búsqueda'],
+        [['Shift', 'Enter'], 'Coincidencia anterior'],
+        [['Ctrl', '+'], 'Acercar'],
+        [['Ctrl', '-'], 'Alejar'],
+        [['Ctrl', '0'], 'Ajustar al ancho'],
+        [['Ctrl', 'Rueda'], 'Acercar o alejar donde está el puntero'],
+        [['Esc'], 'Cerrar la búsqueda o deshacer el número de página escrito'],
+      ),
+      p('Las flechas, `Re Pág`, `Av Pág`, `Inicio` y `Fin` desplazan el documento como en cualquier página.'),
+
+      h2('Lo que el visor todavía no hace'),
+      list(
+        'Los enlaces dentro del PDF se ven, pero todavía no se pueden pulsar.',
+        'No hay botón de imprimir: descarga el archivo desde la cabecera e imprímelo con tu lector habitual.',
+        'No permite anotar, resaltar ni firmar. Para eso, descarga el archivo o ábrelo en Google.',
       ),
     ],
   },
