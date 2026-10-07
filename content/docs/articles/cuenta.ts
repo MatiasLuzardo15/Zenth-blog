@@ -66,9 +66,9 @@ export const cuentaArticles: DocArticle[] = [
     category: 'cuenta',
     title: 'Notificaciones: dentro de Zenth, push y correo',
     summary: 'Elige qué avisos recibes y por qué canal: en la app, en el dispositivo (push) o por correo, con anticipación y aviso de racha.',
-    keywords: ['notificaciones', 'avisos', 'recordatorios', 'push', 'correo', 'email', 'anticipación', 'racha', 'ánimo', 'permiso', 'campana', 'centro de notificaciones', 'silenciar'],
+    keywords: ['botones', 'automatizaciones', 'notificaciones', 'avisos', 'recordatorios', 'push', 'correo', 'email', 'anticipación', 'racha', 'ánimo', 'permiso', 'campana', 'centro de notificaciones', 'silenciar'],
     updated: '2026-10-06',
-    related: ['ayuda/los-avisos-no-llegan', 'primeros-pasos/instalar-la-app', 'agenda/repeticion-y-recordatorios'],
+    related: ['pizarras/botones-de-automatizacion', 'ayuda/los-avisos-no-llegan', 'primeros-pasos/instalar-la-app', 'agenda/repeticion-y-recordatorios'],
     blocks: [
       p('Zenth puede avisarte por **tres canales independientes**. Todos se configuran en **Ajustes › Notificaciones** y puedes usar los que quieras.'),
       path('Ajustes', 'Notificaciones'),
@@ -98,7 +98,7 @@ export const cuentaArticles: DocArticle[] = [
         ['Comentarios', 'Conversaciones en tarjetas que sigues.'],
         ['Menciones', 'Cuando una persona te menciona directamente.'],
         ['Aprobaciones', 'Solicitudes y respuestas de revisión.'],
-        ['Automatizaciones', 'Avisos generados por reglas de pizarra.'],
+        ['Automatizaciones', 'Avisos generados por reglas y botones de las pizarras, incluidas las acciones «Avisar a la pizarra» y «Avisar a los responsables».'],
         ['Otra actividad', 'Cambios en tarjetas y pizarras que sigues.'],
       ),
       list(

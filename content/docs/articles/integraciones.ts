@@ -134,9 +134,9 @@ export const integracionesArticles: DocArticle[] = [
     category: 'integraciones',
     title: 'Zenth MCP',
     summary: 'Conecta Claude o Codex a tu cuenta para consultar y organizar tu agenda, tus pizarras y tu Biblioteca desde la conversación.',
-    keywords: ['mcp', 'model context protocol', 'claude', 'claude code', 'codex', 'chatgpt', 'openai', 'anthropic', 'ia', 'inteligencia artificial', 'asistente', 'conector', 'conectar', 'aplicaciones conectadas', 'oauth', 'permisos', 'revocar', 'desconectar', 'notas', 'secciones', 'tablas', 'etiquetas', 'campos personalizados', 'campos', 'crear tarjeta con campos', 'editar campos', 'proponer cambios', 'sugerencias', 'historial', 'automatizaciones', 'reglas'],
+    keywords: ['ejecutar_boton', 'botones', 'mcp', 'model context protocol', 'claude', 'claude code', 'codex', 'chatgpt', 'openai', 'anthropic', 'ia', 'inteligencia artificial', 'asistente', 'conector', 'conectar', 'aplicaciones conectadas', 'oauth', 'permisos', 'revocar', 'desconectar', 'notas', 'secciones', 'tablas', 'etiquetas', 'campos personalizados', 'campos', 'crear tarjeta con campos', 'editar campos', 'proponer cambios', 'sugerencias', 'historial', 'automatizaciones', 'reglas'],
     updated: '2026-10-06',
-    related: ['pizarras/campos-personalizados', 'pizarras/cerrar-y-reabrir-pizarras', 'pizarras/acciones-de-listas', 'pizarras/vistas-de-pizarra', 'pizarras/automatizaciones', 'biblioteca/revisar-sugerencias', 'biblioteca/historial-de-versiones', 'integraciones/zen-asistente', 'cuenta/papelera'],
+    related: ['pizarras/botones-de-automatizacion', 'pizarras/campos-personalizados', 'pizarras/cerrar-y-reabrir-pizarras', 'pizarras/acciones-de-listas', 'pizarras/vistas-de-pizarra', 'pizarras/automatizaciones', 'biblioteca/revisar-sugerencias', 'biblioteca/historial-de-versiones', 'integraciones/zen-asistente', 'cuenta/papelera'],
     blocks: [
       p('**MCP** (Model Context Protocol) es un estándar abierto con el que los asistentes de IA se conectan a otras aplicaciones. Con Zenth MCP, **Claude** (en la web, la app de escritorio y Claude Code) y **Codex** pueden consultar y actualizar tu espacio mientras conversas con ellos: le pides algo con tus palabras y el asistente lo hace en tu cuenta.'),
 
@@ -158,7 +158,7 @@ export const integracionesArticles: DocArticle[] = [
         ['Tareas', 'Crear tareas (también repetitivas, con fecha de fin), cambiar título, fecha, hora, prioridad o etiquetas, sumar notas al final, activar el aviso por correo, completarlas o reabrirlas.'],
         ['Papelera', 'Mandar una tarea a la papelera, ver lo que hay y restaurarla.'],
         ['Pizarras', 'Ver tus pizarras y sus listas en su orden, consultar campos personalizados, crear tarjetas y rellenar sus campos o moverlas de lista donde puedes editar. Incluye fechas futuras y una pendiente por serie repetida; las archivadas aparecen solo si lo pides. Mover una tarjeta a **Completado** la completa y la archiva.'],
-        ['Automatizaciones', 'Ver las reglas de una pizarra con qué hizo cada una la última vez, crear reglas nuevas y activarlas o desactivarlas, en las pizarras que administras.'],
+        ['Automatizaciones y botones', 'Consultar reglas y botones con su última ejecución; crear reglas y activar o desactivar automatizaciones si administras la pizarra. Ejecutar botones existentes donde puedes editar, con confirmación previa para los de pizarra.'],
         ['Biblioteca', 'Buscar notas por texto, carpeta o etiqueta, y leer una nota entera o solo una de sus secciones.'],
         ['Escribir notas', 'Crear un documento nuevo (en una carpeta y con etiquetas, si quieres) y sumar texto al final de una nota o debajo de una sección concreta. Con títulos, listas, tablas, bloques destacados y resaltado.'],
         ['Proponer cambios', 'Corregir, resumir o reescribir una nota o una sección, como una sugerencia que tú revisas cambio por cambio.'],
@@ -209,16 +209,28 @@ export const integracionesArticles: DocArticle[] = [
         '«En la pizarra **Producto**, cuando se complete una tarjeta, muévela a **Finalizadas**».',
         '«Cuando una tarjeta entre en **En curso** y no tenga responsable, asígnasela a quien la movió».',
         '«Cuando alguien ponga la etiqueta **Urgente**, llévala arriba de **Alta** y avisa a los responsables».',
-        '«¿Qué automatizaciones tiene **Producto** y cuál falló?». Responde con cada regla en una frase y cómo terminó su última ejecución.',
+        '«¿Qué automatizaciones tiene **Producto** y cuál falló?». Distingue reglas y botones, describe sus acciones en una frase y muestra cómo terminó su última ejecución.',
         '«Desactiva la regla **Fecha para mañana**».',
       ),
       list(
         'Las reglas que crea el asistente **quedan activas al momento** y actúan sobre las tarjetas de todo el equipo. Un buen asistente te confirmará la regla antes de crearla.',
-        'Solo funciona en las pizarras que **administras**; en las demás, el asistente te dirá que no tienes permiso.',
+        'Crear reglas y activar o desactivar reglas o botones requiere **administrar** la pizarra. Consultarlos solo requiere acceso; ejecutar un botón existente requiere permiso de edición.',
         'Si pides una lista, etiqueta o persona que no existe, te responde con las opciones que sí hay.',
         'Los comentarios y checklists que cree la regla aparecen **a tu nombre**, porque la guardaste tú.',
         'Borrar una regla solo se puede desde la app.',
       ),
+
+      h2('Ejecutar botones existentes'),
+      p('El asistente puede pulsar los [botones de tarjeta y de pizarra](/docs/pizarras/botones-de-automatizacion) que ya creaste en Zenth. Pídele primero qué hace el botón y cuáles son sus condiciones. Necesitas permiso de edición, la pizarra debe estar abierta y el botón activo.'),
+      list(
+        '«Muéstrame los botones de **Producto** y cómo terminó su última ejecución».',
+        '«Pulsa **Enviar a revisión** en **Producto** para la tarjeta con id …». Un botón de tarjeta necesita el id de una tarjeta activa de esa misma pizarra.',
+        '«Revisa **Cerrar sprint** en **Producto** y pídeme confirmación antes de pulsarlo». Un botón de pizarra puede procesar hasta **100 tarjetas** y el asistente debe pedirte confirmación explícita antes de ejecutarlo.',
+      ),
+      p('Un botón de pizarra usa sus propias condiciones; no se limita a las tarjetas que acabas de consultar ni a los filtros de la cabecera. La respuesta resume tarjetas coincidentes y afectadas, acciones correctas y fallidas, errores parciales, tarjetas sin aplicar y si se alcanzó un límite. Comparte con las reglas el tope de **120 ejecuciones por minuto**.'),
+      note('Crear o editar botones se hace desde **Colaboración › Automatizaciones › Botones** en la app. MCP puede consultar los existentes, ejecutarlos y activarlos o desactivarlos si administras la pizarra; no los crea ni los borra. Repetir una ejecución puede volver a añadir comentarios o checklists: revisa el resultado antes de reintentar.'),
+      h3('Si usas las herramientas directamente'),
+      p('**listar_automatizaciones** devuelve `tipo` (`rule`, `card_button` o `board_button`), `icono`, la descripción y la última ejecución. **ejecutar_boton** recibe `tablero` (nombre o id), `boton` (nombre o id) e `id` para una tarjeta; un botón de pizarra ignora `id`. Si hay varios botones con el mismo nombre, usa su identificador. **crear_automatizacion** continúa creando reglas, sin un argumento para crear botones.'),
 
       h2('Lo que un asistente no puede hacer'),
       list(
