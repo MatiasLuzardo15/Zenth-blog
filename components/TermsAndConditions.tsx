@@ -47,7 +47,7 @@ const TermsAndConditions: React.FC<TermsAndConditionsProps> = ({ onBack }) => {
 
                 <p className="t-eyebrow">Legal</p>
                 <h1 className="t-display-xl mt-4 text-ink">Términos y condiciones.</h1>
-                <p className="t-micro mt-6 text-ink-muted">Última actualización: 29 de septiembre de 2026</p>
+                <p className="t-micro mt-6 text-ink-muted">Última actualización: 7 de octubre de 2026</p>
 
                 <div className="fr-card-featured mt-10">
                     <p className="t-caption text-ink">En una frase</p>
@@ -243,7 +243,7 @@ const TermsAndConditions: React.FC<TermsAndConditionsProps> = ({ onBack }) => {
                     <P>
                         Trabajamos para mantener Zenth disponible, pero no garantizamos funcionamiento continuo ni
                         ausencia total de errores. Puede haber mantenimiento, fallos de red o interrupciones de
-                        Supabase, Google, LiveKit, Vercel u otros proveedores.
+                        Supabase, Cloudflare, Google, LiveKit, Vercel u otros proveedores.
                     </P>
                     <P>
                         Conserva copias de la información crítica. Para contenido de Google, utiliza también las
@@ -255,7 +255,7 @@ const TermsAndConditions: React.FC<TermsAndConditionsProps> = ({ onBack }) => {
                 <Section n={14} title="Propiedad intelectual y componentes de terceros">
                     <P>
                         La marca Zenth, su diseño, código, textos y recursos propios pertenecen a su creador o a
-                        sus licenciantes. Los nombres y marcas de Google, PayPal, LiveKit, Supabase y demás
+                        sus licenciantes. Los nombres y marcas de Google, PayPal, LiveKit, Supabase, Cloudflare y demás
                         terceros pertenecen a sus respectivos titulares. Estos Términos no transfieren derechos
                         de propiedad sobre el Servicio.
                     </P>

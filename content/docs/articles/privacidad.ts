@@ -9,8 +9,8 @@ export const privacidadArticles: DocArticle[] = [
     category: 'privacidad',
     title: 'Qué datos guarda Zenth, en lenguaje claro',
     summary: 'Un repaso sin jerga de la información que guarda Zenth, para qué, y lo que nunca hace: no vende datos, no muestra publicidad y no graba tus llamadas.',
-    keywords: ['datos', 'privacidad', 'qué guarda', 'información', 'tiempo en la app', 'chat', 'invitados', 'rastreadores', 'publicidad', 'venta de datos', 'cookies', 'proveedores', 'supabase', 'livekit', 'gemini', 'mcp', 'aplicaciones conectadas'],
-    updated: UPDATED,
+    keywords: ['datos', 'privacidad', 'qué guarda', 'información', 'tiempo en la app', 'chat', 'invitados', 'rastreadores', 'publicidad', 'venta de datos', 'cookies', 'proveedores', 'supabase', 'cloudflare', 'r2', 'livekit', 'gemini', 'mcp', 'aplicaciones conectadas'],
+    updated: '2026-10-07',
     related: ['privacidad/quien-ve-que', 'privacidad/eliminar-y-exportar-tus-datos', 'reuniones/limites-y-privacidad-de-las-llamadas'],
     blocks: [
       p('Esta guía resume, en lenguaje llano, qué información guarda Zenth. La versión completa y vinculante está en la [Política de privacidad](/privacy) y los [Términos y condiciones](/terms); si algo difiere, mandan esos textos.'),
@@ -48,7 +48,8 @@ export const privacidadArticles: DocArticle[] = [
       h2('A quién recurre Zenth para funcionar'),
       table(
         ['Proveedor', 'Para qué', 'Ubicación confirmada'],
-        ['Supabase', 'Base de datos, autenticación, funciones y almacenamiento.', 'Región principal del proyecto: Oregón, Estados Unidos (us-west-2). Las funciones de borde pueden ejecutarse en otras regiones.'],
+        ['Supabase', 'Base de datos, autenticación y funciones del servidor, incluida la que decide quién accede a cada archivo.', 'Región principal del proyecto: Oregón, Estados Unidos (us-west-2). Las funciones de borde pueden ejecutarse en otras regiones.'],
+        ['Cloudflare R2', 'Archivos guardados en Zenth: avatar, portada, imágenes de tareas y notas, y adjuntos de comentarios.', 'Ubicación preferente: este de Norteamérica. Cloudflare la trata como orientativa; no hay restricción de jurisdicción configurada.'],
         ['Google', 'Drive, Docs, Sheets, Slides, Forms, Calendar, Gemini y Firebase Cloud Messaging (notificaciones push).', 'Drive depende de la cuenta de cada usuario; Firebase Cloud Messaging utiliza infraestructura global. No hay una región única confirmada para todos los servicios.'],
         ['LiveKit', 'Transmisión de voz, cámara y pantalla.', 'Región de datos del proyecto: Estados Unidos. La conexión de una llamada puede pasar por otras regiones.'],
         ['Vercel', 'Entrega de los archivos estáticos de la aplicación y del sitio. El despliegue actual de Zenth no incluye funciones de Vercel.', 'Vercel informa que sus instalaciones principales de procesamiento están en Estados Unidos; su red de entrega es global y puede tratar datos en otros países.'],

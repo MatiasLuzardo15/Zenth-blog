@@ -47,7 +47,7 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = ({ onBack }) => {
 
                 <p className="t-eyebrow">Legal</p>
                 <h1 className="t-display-xl mt-4 text-ink">Política de privacidad.</h1>
-                <p className="t-micro mt-6 text-ink-muted">Última actualización: 29 de septiembre de 2026</p>
+                <p className="t-micro mt-6 text-ink-muted">Última actualización: 7 de octubre de 2026</p>
 
                 <div className="fr-card-featured mt-10">
                     <p className="t-caption text-ink">En una frase</p>
@@ -154,7 +154,8 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = ({ onBack }) => {
                     {/* Pendiente: documentar los destinos no específicos y, para cada transferencia, el rol, plazo, base y operaciones del proveedor conforme a la Resolución URCDP 70/023. */}
                     <P>Zenth utiliza proveedores que pueden tratar datos fuera de Uruguay. Las ubicaciones indicadas son las confirmadas para la región principal de nuestros proyectos o por la documentación del proveedor; algunas funciones, redes de entrega, registros y subencargados pueden operar en otros lugares:</P>
                     <List items={[
-                        <><B>Supabase:</B> base de datos, autenticación, funciones y almacenamiento nativo. La región principal del proyecto es Oregón, Estados Unidos (<B>us-west-2</B>); las funciones de borde pueden ejecutarse en otras regiones.</>,
+                        <><B>Supabase:</B> base de datos, autenticación y funciones del servidor, incluida la que comprueba quién puede acceder a cada archivo. La región principal del proyecto es Oregón, Estados Unidos (<B>us-west-2</B>); las funciones de borde pueden ejecutarse en otras regiones.</>,
+                        <><B>Cloudflare R2:</B> almacenamiento de los archivos nativos (avatar, portada, imágenes de tareas y notas, y adjuntos de comentarios). Zenth comprueba tus permisos antes de entregar enlaces temporales a cada archivo. El almacenamiento tiene como ubicación preferente el <B>este de Norteamérica</B>; Cloudflare trata esa preferencia como orientativa y no se ha configurado una restricción de jurisdicción.</>,
                         <><B>Google:</B> Drive, Docs, Sheets, Slides, Forms, Calendar, Gemini y Firebase Cloud Messaging. Los archivos conectados permanecen en la cuenta de Google de cada usuario; Firebase Cloud Messaging utiliza infraestructura global de Google. No hay una única región confirmada para todos estos servicios.</>,
                         <><B>LiveKit:</B> transmisión de voz, cámara y pantalla. La región de datos configurada para el proyecto es <B>Estados Unidos</B>; la conexión de una llamada puede pasar por otras regiones de su red.</>,
                         <><B>Vercel:</B> alojamiento y entrega de la aplicación y del sitio mediante una red global. El despliegue actual de Zenth contiene archivos estáticos, sin funciones de Vercel. Vercel informa que sus instalaciones principales de procesamiento están en <B>Estados Unidos</B>, aunque puede tratar datos en otros países donde opere con sus subencargados.</>,
@@ -181,7 +182,8 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = ({ onBack }) => {
                 <Section n={10} title="Seguridad">
                     <P>
                         Usamos conexiones cifradas, autenticación, políticas de acceso a nivel de base de
-                        datos, validaciones del servidor, tokens OAuth cifrados y permisos por pizarra.
+                        datos, validaciones del servidor, tokens OAuth cifrados, permisos por pizarra y
+                        enlaces temporales para acceder a los archivos.
                         Ningún sistema es infalible: protege tu cuenta, usa una contraseña única y avísanos
                         si detectas actividad sospechosa.
                     </P>
