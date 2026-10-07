@@ -48,9 +48,9 @@ export const reunionesArticles: DocArticle[] = [
     category: 'reuniones',
     title: 'Salas de pizarra y llamadas privadas',
     summary: 'Cada pizarra compartida tiene una sala de voz para su equipo. Entre integrantes también puedes llamarte en privado, uno a uno.',
-    keywords: ['sala', 'sala del equipo', 'llamada privada', 'llamar', 'timbre', 'pizarra', 'integrantes', 'voz', 'fondo de la llamada', 'chat de la sala'],
-    updated: UPDATED,
-    related: ['reuniones/durante-una-llamada', 'pizarras/compartir-una-pizarra', 'privacidad/quien-ve-que'],
+    keywords: ['sala', 'sala del equipo', 'llamada privada', 'llamar', 'timbre', 'pizarra', 'integrantes', 'voz', 'fondo de la llamada', 'chat de la sala', 'moderar', 'sacar de la sala'],
+    updated: '2026-10-06',
+    related: ['reuniones/durante-una-llamada', 'reuniones/el-menu-de-cada-persona', 'pizarras/compartir-una-pizarra', 'privacidad/quien-ve-que'],
     blocks: [
       h2('La sala de una pizarra'),
       p('Cada pizarra compartida tiene **su** sala de voz, abierta a sus integrantes. Cualquier miembro entra y sale libremente, cuando quiere.'),
@@ -71,6 +71,9 @@ export const reunionesArticles: DocArticle[] = [
 
       h2('Fondo de la sala'),
       p('Un administrador de la pizarra puede elegir el fondo de la sala entre ocho degradados: **Medianoche, Océano, Aurora, Atardecer, Bosque, Uva, Grafito y Rosa**. Queda guardado en la pizarra y lo ven todos los que entran, también quienes ya estaban dentro.'),
+
+      h2('Moderar la sala'),
+      p('Un administrador de la pizarra puede, desde la ficha de cualquier integrante (**clic derecho** o su botón **⋯**), **silenciarlo para todos**, **detener su pantalla** o **sacarlo de la llamada**. No puede hacerlo sobre sí mismo ni sobre el **dueño** de la pizarra. Sacar a alguien de la sala no lo saca de la pizarra: sigue siendo integrante y puede volver a entrar. Ver [El menú de cada persona](/docs/reuniones/el-menu-de-cada-persona).'),
 
       h2('Llamadas privadas'),
       p('Una llamada privada es **uno a uno**, entre dos personas que comparten al menos una pizarra.'),
@@ -136,9 +139,9 @@ export const reunionesArticles: DocArticle[] = [
     category: 'reuniones',
     title: 'Controles del anfitrión',
     summary: 'Admite o rechaza invitados, decide si pueden usar micrófono y cámara o compartir pantalla, silencia a todos, expulsa a alguien o cierra la reunión.',
-    keywords: ['anfitrión', 'host', 'admitir', 'rechazar', 'silenciar', 'expulsar', 'quitar', 'bloquear', 'cerrar reunión', 'finalizar para todos', 'permisos de invitados', 'cámara de invitados', 'sala de espera', 'nuevas entradas'],
-    updated: UPDATED,
-    related: ['reuniones/reuniones-rapidas-e-invitados', 'reuniones/durante-una-llamada'],
+    keywords: ['anfitrión', 'host', 'admitir', 'rechazar', 'silenciar', 'expulsar', 'quitar', 'bloquear', 'cerrar reunión', 'finalizar para todos', 'permisos de invitados', 'cámara de invitados', 'sala de espera', 'nuevas entradas', 'detener pantalla', 'sacar de la llamada'],
+    updated: '2026-10-06',
+    related: ['reuniones/reuniones-rapidas-e-invitados', 'reuniones/el-menu-de-cada-persona', 'reuniones/durante-una-llamada'],
     blocks: [
       p('Quien crea una reunión con invitados es su **anfitrión**. Durante la llamada, un panel de **Controles del anfitrión** (panel lateral en escritorio, hoja inferior en el móvil) reúne los ajustes para gestionar a los invitados. Todo se aplica en el servidor: no depende de que el invitado use una versión concreta de la pantalla.'),
 
@@ -162,6 +165,7 @@ export const reunionesArticles: DocArticle[] = [
         '**Silenciar a todos:** apaga los micrófonos de todos los invitados de una vez.',
         '**Quitar de la reunión:** expulsa a una persona. Zenth te pide confirmación, y esa persona **no podrá volver a entrar con ese navegador**.',
       ),
+      p('También puedes hacerlo invitado por invitado desde su ficha en la llamada (**clic derecho** o su botón **⋯**): **Silenciar para todos**, **Detener su pantalla** y **Sacar de la llamada**. Funcionan solo sobre invitados. Ver [El menú de cada persona](/docs/reuniones/el-menu-de-cada-persona).'),
 
       h2('Opciones de la llamada'),
       p('En **Más opciones** de la llamada tienes, además:'),
@@ -170,7 +174,7 @@ export const reunionesArticles: DocArticle[] = [
         '**Cambiar el fondo** de la llamada.',
         '**Finalizar para todos:** se desconecta a todo el mundo y el enlace deja de funcionar. Es distinto de salir tú.',
       ),
-      note('En una **sala de pizarra**, cambiar el fondo o finalizar para todos requiere ser **administrador de la pizarra**. En una llamada privada no existen: son dos personas iguales.'),
+      note('En una **sala de pizarra**, cambiar el fondo, finalizar para todos o moderar a alguien requiere ser **administrador de la pizarra**. En una llamada privada no existen: son dos personas iguales.'),
     ],
   },
 
@@ -180,8 +184,8 @@ export const reunionesArticles: DocArticle[] = [
     title: 'Durante una llamada',
     summary: 'Micrófono, cámara, pantalla compartida, reacciones, mano levantada, chat con emojis, atajos de teclado y qué pasa si te quedas solo.',
     keywords: ['micrófono', 'silenciar', 'cámara', 'vídeo', 'encender cámara', 'elegir cámara', 'pantalla compartida', 'reacciones', 'mano levantada', 'chat', 'emojis', 'atajos de llamada', 'salir', 'colgar', 'sigues ahí', 'estás solo'],
-    updated: '2026-09-29',
-    related: ['reuniones/audio-y-dispositivos', 'atajos/atajos-de-la-aplicacion', 'reuniones/controles-del-anfitrion'],
+    updated: '2026-10-06',
+    related: ['reuniones/el-menu-de-cada-persona', 'reuniones/audio-y-dispositivos', 'atajos/atajos-de-la-aplicacion', 'reuniones/controles-del-anfitrion'],
     blocks: [
       h2('Los controles'),
       table(
@@ -205,6 +209,7 @@ export const reunionesArticles: DocArticle[] = [
         [['Esc'], 'Rechazar una llamada entrante'],
       ),
       p('Estos atajos funcionan mientras tienes una llamada en curso y no estás escribiendo en un campo. Con un **lienzo** abierto, **V** y **Q** son del lienzo (seleccionar y fijar la herramienta): ahí la cámara y la salida se usan con sus botones.'),
+      tip('Cada persona tiene además su propio menú: **clic derecho** sobre su ficha, o su botón **⋯**, para bajarle el volumen, silenciarla solo para ti, ocultar su cámara o fijarla. Ver [El menú de cada persona](/docs/reuniones/el-menu-de-cada-persona).'),
 
       h2('La cámara'),
       list(
@@ -237,6 +242,51 @@ export const reunionesArticles: DocArticle[] = [
         'Si tienes Zenth abierto en dos pestañas y entras a una llamada, te ofrece **Usar esta pestaña** para no duplicar la conexión.',
         'Al perder la red, la llamada muestra «Reconectando…» y vuelve sola.',
       ),
+    ],
+  },
+
+  {
+    slug: 'el-menu-de-cada-persona',
+    category: 'reuniones',
+    title: 'El menú de cada persona',
+    summary: 'Clic derecho sobre alguien en la llamada para bajarle el volumen, silenciarlo solo para ti, ocultar su cámara o fijarlo. Quien organiza también puede silenciarlo, detener su pantalla o sacarlo.',
+    keywords: ['clic derecho', 'menú', 'volumen de usuario', 'volumen', 'silenciar para mí', 'ocultar vídeo', 'ocultar cámara', 'fijar', 'enfoque', 'silenciar para todos', 'detener pantalla', 'sacar de la llamada', 'expulsar', 'moderar', 'moderación', 'discord'],
+    updated: '2026-10-06',
+    related: ['reuniones/durante-una-llamada', 'reuniones/controles-del-anfitrion', 'reuniones/salas-de-pizarra-y-llamadas-privadas'],
+    blocks: [
+      p('Cada persona de la llamada tiene su propio menú, como en Discord. Ábrelo con **clic derecho** sobre su ficha o con el botón **⋯** de la esquina. Con ratón, ese botón aparece al pasar por encima; en pantallas táctiles se ve siempre. Con el teclado, **Tab** lleva al deslizador de volumen, las flechas lo mueven y **Esc** cierra el menú.'),
+
+      h2('Lo que cambia solo para ti'),
+      p('Estas opciones solo cambian lo que tú oyes y ves: nadie más se entera y la otra persona no recibe ningún aviso.'),
+      table(
+        ['Opción', 'Qué hace'],
+        ['Volumen de usuario', 'Sube o baja su voz entre 0 y 100 %. Zenth lo recuerda en este navegador para tu cuenta, así que en la próxima llamada se le sigue oyendo igual. Si estaba silenciada, mover el deslizador le devuelve la voz.'],
+        ['Silenciar para mí', 'Deja de oír su voz sin perder el volumen que tenía. El sonido de una pantalla que comparta se sigue oyendo.'],
+        ['Ocultar su vídeo', 'Deja de recibir su cámara: no solo la tapa, deja de descargarla, así que ahorra datos. Su ficha muestra su cara o sus iniciales. Dura hasta que termina la llamada, aunque apague y vuelva a encender la cámara.'],
+        ['Fijar en el Enfoque', 'La deja en el escenario aunque hable otra persona. Solo aparece con **tres personas o más** y alguna cámara encendida: con dos, el escenario ya es de la otra. **Dejar de fijar** vuelve a seguir a quien habla.'],
+      ),
+      p('Para que no parezca un fallo de su micrófono, la ficha de quien silenciaste lleva un **altavoz tachado**, y la de quien ocultaste un **ojo tachado**.'),
+      note('En Safari de iPhone y iPad no aparece el deslizador de volumen, porque ese navegador no deja cambiar el volumen de cada voz. **Silenciar para mí** sí funciona.'),
+
+      h2('En tu propia ficha'),
+      p('El menú de tu ficha tiene tus controles: **Silenciar mi micrófono** o **Activar mi micrófono** (`M`) y **Apagar mi cámara** o **Encender mi cámara** (`V`). No tiene volumen, porque tu propia voz no te suena.'),
+
+      h2('Moderar: lo que cambia para todos'),
+      p('Quien organiza la conversación ve al final del menú, en rojo, tres acciones que afectan a **toda la sala**:'),
+      table(
+        ['Acción', 'Qué hace'],
+        ['Silenciar para todos', 'Apaga su micrófono. Solo aparece si lo tiene abierto. Esa persona puede volver a activarlo cuando quiera: nadie puede abrirle el micrófono a otro.'],
+        ['Detener su pantalla', 'Corta la pantalla que está compartiendo, con su sonido. Solo aparece mientras comparte.'],
+        ['Sacar de la llamada', 'La desconecta. Zenth pide confirmación antes, y a esa persona le avisa: «Quien organiza te sacó de la llamada».'],
+      ),
+      p('Quién puede hacerlo depende del tipo de conversación:'),
+      table(
+        ['Conversación', 'Quién modera', 'Sobre quién'],
+        ['Sala de pizarra', 'Los **administradores** de la pizarra', 'Cualquier integrante, menos a sí mismos y al **dueño** de la pizarra. Quien sale de la sala sigue siendo integrante y puede volver a entrar.'],
+        ['Reunión con invitados', 'El **anfitrión**', 'Solo los invitados. Un invitado expulsado **no puede volver a entrar con ese navegador**.'],
+        ['Llamada privada', 'Nadie', 'Son dos personas iguales: si algo no va bien, se cuelga.'],
+      ),
+      note('Que un botón no aparezca no es lo que protege a nadie: **cada acción se vuelve a comprobar en el servidor**. Un editor o un observador de la pizarra no puede silenciar ni sacar a nadie aunque lo intente por otros medios.'),
     ],
   },
 
