@@ -9,9 +9,9 @@ export const atajosArticles: DocArticle[] = [
     category: 'atajos',
     title: 'Atajos de la aplicación',
     summary: 'Buscar, cambiar de sección, crear, recorrer Agenda y Pizarras, trabajar en documentos y controlar Enfoque y las llamadas: los atajos de Zenth.',
-    keywords: ['atajos', 'teclado', 'shortcuts', 'teclas', 'alt', 'ctrl', 'comandos', 'navegación', 'buscar', 'rápido', 'hotkeys', 'mac', 'cmd', 'tablas', 'celdas', 'google docs', 'documentos', 'pdf', 'visor', 'zoom'],
-    updated: '2026-10-06',
-    related: ['pizarras/seleccionar-y-gestionar-tarjetas', 'pizarras/calendario-de-pizarra', 'atajos/atajos-del-editor-de-notas', 'biblioteca/leer-documentos-en-el-visor', 'primeros-pasos/busqueda-y-notificaciones', 'reuniones/durante-una-llamada'],
+    keywords: ['atajos', 'teclado', 'shortcuts', 'teclas', 'alt', 'ctrl', 'comandos', 'navegación', 'buscar', 'rápido', 'hotkeys', 'mac', 'cmd', 'tablas', 'celdas', 'google docs', 'documentos', 'pdf', 'visor', 'zoom', 'walkie-talkie', 'pulsar para hablar', 'burbuja', '/tarea', 'menciones'],
+    updated: '2026-10-08',
+    related: ['pizarras/seleccionar-y-gestionar-tarjetas', 'pizarras/calendario-de-pizarra', 'atajos/atajos-del-editor-de-notas', 'biblioteca/leer-documentos-en-el-visor', 'primeros-pasos/busqueda-y-notificaciones', 'reuniones/durante-una-llamada', 'reuniones/tarjetas-y-tareas-en-el-chat-de-la-sala'],
     blocks: [
       p('Puedes navegar por Zenth sin apartar las manos del teclado. Las teclas se muestran para tu sistema: en Windows y Linux verás `Ctrl` y `Alt`; en macOS, `⌘` y `⌥`.'),
       tip('Pulsa `Ctrl` + `Shift` + `/` (`⌘` + `⇧` + `/` en Mac) en cualquier momento para abrir el **catálogo de atajos** dentro de la propia aplicación. También está en el menú de tu avatar, con el nombre «Atajos de teclado».'),
@@ -96,15 +96,24 @@ export const atajosArticles: DocArticle[] = [
       ),
 
       h2('Reuniones y llamadas'),
-      p('Solo funcionan mientras tienes una llamada en curso o una llamada entrante:'),
+      p('Solo funcionan mientras tienes una llamada en curso o una llamada entrante y no estás escribiendo en un campo:'),
       keys(
         [['M'], 'Silenciar o activar el micrófono'],
+        [['Shift', 'M'], 'Entrar o salir de la burbuja de audio'],
         [['V'], 'Encender o apagar la cámara'],
         [['C'], 'Abrir o cerrar el chat'],
         [['Q'], 'Abandonar la llamada o la sala'],
         [['Enter'], 'Aceptar una llamada entrante'],
         [['Esc'], 'Rechazar una llamada entrante'],
       ),
+      p('Si activas **Walkie-talkie**, mantén `Espacio` para hablar y suéltalo para cerrar el micrófono. Puedes elegir otra tecla en **Configuración de audio**. Esa tecla queda reservada mientras uses el modo. Ver [Audio y dispositivos](/docs/reuniones/audio-y-dispositivos#walkie-talkie-pulsar-para-hablar).'),
+      p('Dentro del campo del **chat**:'),
+      keys(
+        [['Enter'], 'Enviar el mensaje, las tarjetas adjuntas o el comando'],
+        [['Shift', 'Enter'], 'Añadir una línea sin enviar'],
+        [['Tab'], 'Completar la primera sugerencia de mención en /tarea, cuando aparece'],
+      ),
+      p('En una sala de pizarra, `/tarea Título @Nombre` crea una tarjeta y asigna responsables. Ver [Compartir tarjetas y crear tareas en el chat](/docs/reuniones/tarjetas-y-tareas-en-el-chat-de-la-sala).'),
 
       h2('Visor de documentos'),
       p('Con un PDF o la vista previa de un documento abiertos y el foco en el visor:'),

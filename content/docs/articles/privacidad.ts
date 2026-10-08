@@ -68,9 +68,9 @@ export const privacidadArticles: DocArticle[] = [
     category: 'privacidad',
     title: 'Quién ve qué',
     summary: 'De un vistazo: qué es solo tuyo, qué ven los miembros de una pizarra, qué ve quien tiene un enlace público y qué ven los invitados de una reunión.',
-    keywords: ['quién ve', 'visibilidad', 'privado', 'compartido', 'permisos', 'enlace público', 'invitados', 'presencia', 'miembros', 'seguridad', 'acceso lateral'],
-    updated: UPDATED,
-    related: ['pizarras/pizarra-publica-con-enlace', 'biblioteca/compartir-notas-y-lienzos', 'reuniones/reuniones-rapidas-e-invitados'],
+    keywords: ['quién ve', 'visibilidad', 'privado', 'compartido', 'permisos', 'enlace público', 'invitados', 'presencia', 'miembros', 'seguridad', 'acceso lateral', 'chat de la sala', 'tarjetas', 'otra pizarra'],
+    updated: '2026-10-08',
+    related: ['pizarras/pizarra-publica-con-enlace', 'biblioteca/compartir-notas-y-lienzos', 'reuniones/reuniones-rapidas-e-invitados', 'reuniones/tarjetas-y-tareas-en-el-chat-de-la-sala'],
     blocks: [
       p('La regla de Zenth es que **cada persona recibe solo el acceso que necesita** para lo que está haciendo, y que esa regla la aplica el servidor, no la pantalla: un botón oculto nunca es la única barrera.'),
 
@@ -103,6 +103,7 @@ export const privacidadArticles: DocArticle[] = [
         '**Reunión rápida:** quien tenga el enlace y sea admitido. Ven a los demás participantes de **esa** reunión y nada más de tu cuenta.',
       ),
       note('Un invitado **nunca** ve tus pizarras, tareas, archivos, historial ni otras salas.'),
+      p('Las fichas del **chat de una sala** solo resuelven tarjetas de la pizarra de esa sala, con tus permisos actuales. Pegar un enlace de otra pizarra no lo convierte en ficha ni concede acceso a los demás: cada persona necesita permiso para abrirlo. En llamadas privadas y reuniones con invitados, los enlaces de tarjetas permanecen como texto normal. Ver [Compartir tarjetas en el chat](/docs/reuniones/tarjetas-y-tareas-en-el-chat-de-la-sala#si-la-tarjeta-es-de-otra-pizarra).'),
 
       h2('Google Drive'),
       p('Compartir un archivo de Google aplica los **permisos reales de Drive**. Revisa siempre destinatario y rol antes de confirmar.'),

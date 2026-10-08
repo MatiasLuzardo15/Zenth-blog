@@ -127,9 +127,9 @@ export const pizarrasArticles: DocArticle[] = [
     category: 'pizarras',
     title: 'Tarjetas y bandeja rápida',
     summary: 'Captura ideas sin clasificar en la bandeja, conviértelas en tarjetas, muévelas entre listas, archiva las que terminas y decide si aparecen en Agenda.',
-    keywords: ['botones', 'tarjeta', 'bandeja', 'inbox', 'captura', 'arrastrar', 'mover', 'completar', 'tachada', 'archivar', 'archivadas', 'buscar en pizarra', 'filtrar', 'lista', 'tareas', 'campos personalizados'],
-    updated: '2026-10-06',
-    related: ['pizarras/botones-de-automatizacion', 'pizarras/campos-personalizados', 'pizarras/seleccionar-y-gestionar-tarjetas', 'pizarras/mover-y-duplicar-tarjetas', 'pizarras/acciones-de-listas', 'agenda/historial-de-completadas', 'pizarras/colaborar-en-tarjetas'],
+    keywords: ['botones', 'tarjeta', 'bandeja', 'inbox', 'captura', 'arrastrar', 'mover', 'completar', 'tachada', 'archivar', 'archivadas', 'buscar en pizarra', 'filtrar', 'lista', 'tareas', 'campos personalizados', '/tarea', 'chat de la sala'],
+    updated: '2026-10-08',
+    related: ['pizarras/botones-de-automatizacion', 'pizarras/campos-personalizados', 'pizarras/seleccionar-y-gestionar-tarjetas', 'pizarras/mover-y-duplicar-tarjetas', 'pizarras/acciones-de-listas', 'agenda/historial-de-completadas', 'pizarras/colaborar-en-tarjetas', 'reuniones/tarjetas-y-tareas-en-el-chat-de-la-sala'],
     blocks: [
       p('Una **tarjeta** es una tarea dentro de una pizarra. Usa el mismo editor que en Agenda (fecha, hora, duración, repetición, etiquetas, pasos, imágenes, documentos), con dos añadidos: vive en una lista y puede compartirse con el equipo.'),
 
@@ -146,6 +146,7 @@ export const pizarrasArticles: DocArticle[] = [
         'Directamente en una lista, con **Añadir tarea** al final de la columna.',
         'Desde la bandeja rápida, para capturar primero y clasificar después.',
         'Tocando el botón **+** de la barra inferior en el móvil.',
+        'Desde el **chat de la sala**, con `/tarea Título @Nombre`: crea una tarjeta sin fecha y sin clasificar en la pizarra de esa sala. Ver [Compartir tarjetas y crear tareas en el chat](/docs/reuniones/tarjetas-y-tareas-en-el-chat-de-la-sala#crear-una-tarea-con-tarea).',
       ),
       p('Si tienes permiso de edición puedes además **arrastrar** las tarjetas entre listas para mover el trabajo.'),
       p('Para elegir una posición exacta o cambiar de pizarra, abre el detalle y usa **Mover tarjeta**. **Duplicar tarjeta** crea una copia con el título y destino que elijas. Ver [Mover y duplicar tarjetas](/docs/pizarras/mover-y-duplicar-tarjetas).'),
@@ -636,9 +637,9 @@ export const pizarrasArticles: DocArticle[] = [
     category: 'pizarras',
     title: 'Compartir una pizarra: invitaciones y roles',
     summary: 'Invita por correo o con un enlace, elige el rol de cada persona y entiende quién puede hacer qué, incluido el propietario.',
-    keywords: ['botones', 'compartir', 'invitar', 'invitación', 'enlace', 'roles', 'administrador', 'miembro', 'observador', 'propietario', 'permisos', 'expulsar', 'transferir', 'equipo'],
-    updated: '2026-10-06',
-    related: ['pizarras/botones-de-automatizacion', 'pizarras/pizarra-publica-con-enlace', 'pizarras/unirse-a-una-pizarra', 'pizarras/colaborar-en-tarjetas'],
+    keywords: ['botones', 'compartir', 'invitar', 'invitación', 'enlace', 'roles', 'administrador', 'miembro', 'observador', 'propietario', 'permisos', 'expulsar', 'transferir', 'equipo', 'sala', 'unirse', 'en la sala', 'llamada', 'chat'],
+    updated: '2026-10-08',
+    related: ['pizarras/botones-de-automatizacion', 'pizarras/pizarra-publica-con-enlace', 'pizarras/unirse-a-una-pizarra', 'pizarras/colaborar-en-tarjetas', 'reuniones/salas-de-pizarra-y-llamadas-privadas'],
     blocks: [
       p('Una pizarra pasa de ser «mi tablero» a ser «un espacio con miembros» cuando la compartes. En Zenth **los permisos son la pizarra**: no hay espacios de trabajo intermedios ni permisos por tarjeta.'),
 
@@ -677,6 +678,10 @@ export const pizarrasArticles: DocArticle[] = [
         'Puedes ver quién tiene invitaciones pendientes y revocarlas.',
         'Si te eliminan de una pizarra durante una llamada, sales de su sala automáticamente.',
       ),
+
+      h2('Hablar con el equipo desde la pizarra'),
+      p('Cada pizarra compartida tiene una **sala de voz** para sus integrantes. En escritorio, cuando hay alguien dentro, la cabecera muestra sus iniciales y **Unirse** para preparar el audio sin cambiar de tablero. Si ya estás dentro, **En la sala** vuelve a mostrar la llamada. También puedes abrirla desde **Equipo de la pizarra → Sala del equipo** o desde **Reuniones**.'),
+      p('En el chat de esa sala puedes compartir tarjetas de la misma pizarra y, con permiso de edición, crear nuevas mediante **/tarea**. Ver [Salas de pizarra](/docs/reuniones/salas-de-pizarra-y-llamadas-privadas) y [Compartir tarjetas y crear tareas en el chat](/docs/reuniones/tarjetas-y-tareas-en-el-chat-de-la-sala).'),
 
       h2('Qué ven tus compañeros de ti'),
       p('Los miembros ven tu nombre, tu avatar, tu rol, tus aportes y tu presencia **dentro de esa pizarra**. No obtienen acceso a tu Agenda privada, a otras pizarras, a tu Biblioteca personal, a tu ánimo ni a tus estadísticas. Si activas la opción, pueden ver hasta qué hora estás enfocado, nunca en qué. Ver [Enfoque y equipo](/docs/enfoque/enfoque-y-equipo).'),
