@@ -1,5 +1,6 @@
 import React from 'react';
-import { Link, Navigate, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
+import NotFound from '../NotFound';
 import { ChevronRight } from 'lucide-react';
 import { articlesOf, docHref, getCategory } from '../../content/docs';
 
@@ -7,7 +8,7 @@ const DocsCategoryPage: React.FC = () => {
   const { category: categoryId } = useParams();
   const category = getCategory(categoryId);
 
-  if (!category) return <Navigate to="/docs" replace />;
+  if (!category) return <NotFound />;
 
   const Icon = category.icon;
   const articles = articlesOf(category.id);

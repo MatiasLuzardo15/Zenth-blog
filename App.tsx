@@ -12,6 +12,7 @@ import DocsHome from './components/docs/DocsHome';
 import DocsCategoryPage from './components/docs/DocsCategoryPage';
 import DocsArticlePage from './components/docs/DocsArticlePage';
 import Footer from './components/Footer';
+import NotFound from './components/NotFound';
 import { Helmet } from 'react-helmet-async';
 
 import { BLOG_POSTS } from './constants';
@@ -205,7 +206,7 @@ function App() {
           {/* El manual del usuario pasó a la documentación: los enlaces viejos siguen funcionando. */}
           <Route path="/guide" element={<Navigate to="/docs" replace />} />
           {/* Fallback route */}
-          <Route path="*" element={<Navigate to="/" replace />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
 
@@ -221,7 +222,7 @@ const BlogPostDetailWithParams = () => {
   const post = BLOG_POSTS.find(p => p.id === id);
 
   if (!post) {
-    return <Navigate to="/blog" replace />;
+    return <NotFound />;
   }
 
   return (

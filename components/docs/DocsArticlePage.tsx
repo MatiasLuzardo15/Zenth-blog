@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react';
-import { Link, Navigate, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
+import NotFound from '../NotFound';
 import { ArrowLeft, ArrowRight, ArrowUpRight, ChevronRight, Mail } from 'lucide-react';
 import {
   docHref,
@@ -128,7 +129,7 @@ const DocsArticlePage: React.FC = () => {
   const article = getArticle(categoryId, slug);
   const category = getCategory(categoryId);
 
-  if (!article || !category) return <Navigate to={category ? `/docs/${category.id}` : '/docs'} replace />;
+  if (!article || !category) return <NotFound />;
 
   return <ArticleView article={article} category={category} />;
 };

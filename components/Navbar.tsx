@@ -134,7 +134,7 @@ const Navbar: React.FC<NavbarProps> = ({ isDarkMode, toggleTheme, currentPage, o
                 className="-ml-0.5 hidden text-[24px] italic leading-none text-ink-muted lg:inline"
                 style={{ fontFamily: "'Shadows Into Light', cursive" }}
               >
-                Documents
+                Documentación
               </span>
             )}
           </button>

@@ -34,10 +34,6 @@
         {
             "source": "/firebase-messaging-sw.js",
             "destination": "https://zenth-task.vercel.app/firebase-messaging-sw.js"
-        },
-        {
-            "source": "/(.*)",
-            "destination": "/index.html"
         }
     ]
 }
