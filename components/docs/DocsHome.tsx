@@ -29,22 +29,21 @@ const DocsHome: React.FC = () => {
     <div className="pb-8">
       <header>
         <p className="t-eyebrow">Documentación</p>
-        <div className="mt-4 flex items-end gap-6 sm:gap-10">
-          <h1 className="t-display-xl text-ink">
-            Todo Zenth,
-            <br />
+        <h1 className="t-display-xl mt-4 text-ink">
+          Todo Zenth,{' '}
+          <span className="whitespace-nowrap">
             explicado.
-          </h1>
-          {/* De pie, a la derecha del título, con la guía en la mano. En el
-              teléfono el titular ocupa todo el ancho y no cabe a su lado. */}
-          <ZenCharacter
-            size={104}
-            pose="stand"
-            holding="book"
-            look="left"
-            className="mb-1 hidden shrink-0 sm:block"
-          />
-        </div>
+            {/* En móvil y tablet es más chico. Si la frase no cabe, baja con
+                «explicado» en vez de irse al borde. */}
+            <ZenCharacter
+              size={104}
+              pose="stand"
+              holding="book"
+              look="left"
+              className="ml-3 inline-block h-[3.2rem] w-12 align-bottom sm:ml-4 sm:h-[4.25rem] sm:w-16 lg:ml-8 lg:h-[6.875rem] lg:w-[6.5rem]"
+            />
+          </span>
+        </h1>
         <p className="t-body-lg mt-6 max-w-xl text-ink-muted">
           Guías paso a paso de cada sección de la aplicación. Busca por lo que quieres hacer: no hace
           falta saber cómo se llama la pantalla.

@@ -401,7 +401,7 @@ export const bibliotecaArticles: DocArticle[] = [
       h2('Trabajar a la vez'),
       list(
         '**Presencia:** ves los avatares de quienes están en la nota o el lienzo y qué hacen («Está escribiendo», «Está sugiriendo», «Está viendo la nota», «Está dibujando»).',
-        '**Cambios en vivo:** lo que escribe cada persona llega a las demás sin recargar. También lo que agrega un asistente conectado con [Zenth MCP](/docs/integraciones/zenth-mcp) y lo que escribes en otra pestaña con la misma nota abierta.',
+        '**Cambios en vivo:** lo que escribe cada persona llega a las demás sin recargar. También lo que agrega un asistente conectado con **Zenth MCP** y lo que escribes en otra pestaña con la misma nota abierta.',
       ),
 
       h2('Modos: edición, sugerencias y visualización'),
@@ -440,9 +440,9 @@ export const bibliotecaArticles: DocArticle[] = [
     summary: 'Propón cambios que se guardan solos, revísalos junto al texto y conversa sobre cada uno con comentarios, menciones y adjuntos.',
     keywords: ['sugerencias', 'revisar', 'propuesta', 'aceptar', 'rechazar', 'aplicar', 'descartar', 'cambios', 'control de cambios', 'google docs', 'ia', 'asistente', 'mcp', 'conflicto', 'tachado', 'autoguardado', 'comentarios', 'menciones', 'adjuntos', 'hilo', 'tarjetas', 'sugerencia guardada'],
     updated: '2026-10-01',
-    related: ['biblioteca/compartir-notas-y-lienzos', 'biblioteca/historial-de-versiones', 'integraciones/zenth-mcp'],
+    related: ['biblioteca/compartir-notas-y-lienzos', 'biblioteca/historial-de-versiones'],
     blocks: [
-      p('Una **sugerencia** es una propuesta de cambios sobre una nota que no toca el texto hasta que alguien la acepta. Puede venir de una persona con permiso de **sugerir** o **editar**, que escribió en el modo Sugerencias, o de tu asistente de IA conectado con [Zenth MCP](/docs/integraciones/zenth-mcp). Las del asistente llevan la marca **IA**.'),
+      p('Una **sugerencia** es una propuesta de cambios sobre una nota que no toca el texto hasta que alguien la acepta. Puede venir de una persona con permiso de **sugerir** o **editar**, que escribió en el modo Sugerencias, o de tu asistente de IA conectado con **Zenth MCP**. Las del asistente llevan la marca **IA**.'),
 
       h2('Proponer cambios'),
       steps(

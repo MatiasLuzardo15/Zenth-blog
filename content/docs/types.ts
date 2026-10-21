@@ -98,6 +98,8 @@ export interface DocArticle {
   updated: string;
   /** Otros artículos, como `categoria/slug`. */
   related?: string[];
+  /** Fuera de listados, búsqueda y URL pública. El texto se conserva. */
+  hidden?: boolean;
   blocks: DocBlock[];
 }
 

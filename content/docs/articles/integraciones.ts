@@ -134,6 +134,7 @@ export const integracionesArticles: DocArticle[] = [
     slug: 'zenth-mcp',
     category: 'integraciones',
     title: 'Zenth MCP',
+    hidden: true,
     summary: 'Conecta Claude o Codex a tu cuenta para consultar y organizar tu agenda, tus pizarras y tu Biblioteca desde la conversación.',
     keywords: ['ejecutar_boton', 'botones', 'mcp', 'model context protocol', 'claude', 'claude code', 'codex', 'chatgpt', 'openai', 'anthropic', 'ia', 'inteligencia artificial', 'asistente', 'conector', 'conectar', 'aplicaciones conectadas', 'oauth', 'permisos', 'revocar', 'desconectar', 'notas', 'secciones', 'tablas', 'etiquetas', 'campos personalizados', 'campos', 'crear tarjeta con campos', 'editar campos', 'proponer cambios', 'sugerencias', 'historial', 'automatizaciones', 'reglas'],
     updated: '2026-10-06',

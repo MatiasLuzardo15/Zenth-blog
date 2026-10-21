@@ -34,8 +34,10 @@ const ARTICLES_BY_CATEGORY: Record<string, DocArticle[]> = {
   ayuda: ayudaArticles,
 };
 
-/** Todos los artículos, en el orden de las categorías y luego el de cada archivo. */
-export const DOC_ARTICLES: DocArticle[] = DOC_CATEGORIES.flatMap(category => ARTICLES_BY_CATEGORY[category.id] ?? []);
+/** Artículos visibles, en el orden de las categorías y luego el de cada archivo. */
+export const DOC_ARTICLES: DocArticle[] = DOC_CATEGORIES.flatMap(
+  category => (ARTICLES_BY_CATEGORY[category.id] ?? []).filter(article => !article.hidden),
+);
 
 /**
  * Por dónde empezar. Es una lista curada y no un contador de visitas: no

@@ -113,7 +113,7 @@ export const pizarrasArticles: DocArticle[] = [
         'Los **correos de la pizarra** quedan pausados. Los pendientes pueden continuar al reabrir, según tus preferencias de correo.',
         'Las **automatizaciones** se conservan y dejan de ejecutarse mientras esté cerrada. Tampoco puedes pulsar [botones de tarjeta o de pizarra](/docs/pizarras/botones-de-automatizacion). Al reabrir, las reglas activas vuelven a responder a nuevos cambios y los botones activos vuelven a estar disponibles; los que habías desactivado siguen desactivados.',
         'El **enlace público** deja de mostrar el contenido. Si la pizarra tenía visibilidad Con enlace, al reabrir vuelve a estar disponible con esa visibilidad.',
-        'Tu asistente conectado por [Zenth MCP](/docs/integraciones/zenth-mcp) tampoco puede modificarla. Reábrela desde Zenth antes de pedir cambios.',
+        'Tu asistente conectado por **Zenth MCP** tampoco puede modificarla. Reábrela desde Zenth antes de pedir cambios.',
       ),
 
       h2('Eliminar una pizarra cerrada'),
@@ -206,7 +206,7 @@ export const pizarrasArticles: DocArticle[] = [
     summary: 'Añade datos propios a tus tarjetas, muéstralos en el tablero y úsalos para filtrar, ordenar y reutilizar el trabajo.',
     keywords: ['campos', 'campos personalizados', 'campo de tarjeta', 'propiedades', 'cliente', 'estimación', 'texto', 'número', 'desplegable', 'opciones', 'casilla', 'fecha', 'mostrar en la tarjeta', 'con valor', 'sin valor', 'filtrar campos', 'ordenar campos', 'reordenar campos', 'eliminar campo', 'color de opción', 'sin marcar', 'copiar campos', 'plantillas', 'móvil'],
     updated: '2026-10-20',
-    related: ['pizarras/tarjetas-y-bandeja-rapida', 'pizarras/menu-de-colaboracion', 'pizarras/vistas-de-pizarra', 'pizarras/mover-y-duplicar-tarjetas', 'pizarras/automatizaciones-y-plantillas', 'integraciones/zenth-mcp'],
+    related: ['pizarras/tarjetas-y-bandeja-rapida', 'pizarras/menu-de-colaboracion', 'pizarras/vistas-de-pizarra', 'pizarras/mover-y-duplicar-tarjetas', 'pizarras/automatizaciones-y-plantillas'],
     blocks: [
       p('Los **campos personalizados** guardan la información que necesita cada proyecto: Cliente, Estimación, Estado de aprobación o Entrega al cliente, por ejemplo. Cada pizarra define sus propios campos y cada tarjeta puede tener un valor para cada uno.'),
 
@@ -303,7 +303,7 @@ export const pizarrasArticles: DocArticle[] = [
 
       h2('Plantillas y asistente'),
       p('Una **plantilla de pizarra** guarda las definiciones de los campos: nombres, tipos, opciones y colores, orden y Mostrar en la tarjeta. Al usarla, la nueva pizarra recibe campos independientes. No guarda tarjetas ni sus valores; las plantillas de tarjeta y lista tampoco guardan esos valores. Ver [Campos en las plantillas de pizarra](/docs/pizarras/automatizaciones-y-plantillas#campos-en-las-plantillas-de-pizarra).'),
-      p('Con [Zenth MCP](/docs/integraciones/zenth-mcp#campos-personalizados-de-las-tarjetas), tu asistente puede consultar y rellenar los campos existentes usando sus nombres. Por ejemplo: «En Preparar lanzamiento, pon Cliente = Acme y Estimación = 3».'),
+      p('Con **Zenth MCP**, tu asistente puede consultar y rellenar los campos existentes usando sus nombres. Por ejemplo: «En Preparar lanzamiento, pon Cliente = Acme y Estimación = 3».'),
       note('Los campos y sus valores **no se muestran en el enlace público** de la pizarra. Mostrar en la tarjeta controla su presentación para los miembros; no cambia lo que recibe quien abre el enlace público.'),
     ],
   },
@@ -852,7 +852,7 @@ export const pizarrasArticles: DocArticle[] = [
       'checklist', 'comentar', 'avisar', 'historial', 'encadenar', 'bot', 'borrador',
     ],
     updated: '2026-10-20',
-    related: ['pizarras/botones-de-automatizacion', 'pizarras/menu-de-colaboracion', 'pizarras/tarjetas-y-bandeja-rapida', 'integraciones/zenth-mcp'],
+    related: ['pizarras/botones-de-automatizacion', 'pizarras/menu-de-colaboracion', 'pizarras/tarjetas-y-bandeja-rapida'],
     blocks: [
       p('Una **regla de automatización** actúa cuando pasa algo con una tarjeta: **cuando** ocurre un cambio, **si** la tarjeta cumple unas condiciones, **entonces** Zenth hace una o varias cosas por ti. Sirve para que el tablero se ordene solo: llevar lo terminado a «Finalizadas», asignar a quien empieza una tarjeta, poner fechas, avisar al equipo…'),
       note('También puedes guardar esas acciones en un **botón** y decidir cuándo ejecutarlas tú. Los botones no esperan un disparador: se pulsan sobre una tarjeta o desde la cabecera de la pizarra. Ver [Botones de tarjeta y de pizarra](/docs/pizarras/botones-de-automatizacion).'),
@@ -894,7 +894,7 @@ export const pizarrasArticles: DocArticle[] = [
         ['Se añade una etiqueta', 'La tarjeta recibe una etiqueta compartida.', 'Una etiqueta'],
         ['Se marca el último paso de la checklist', 'Se completa el último paso pendiente de las checklists de la tarjeta.', 'No admite filtros'],
       ),
-      note('El evento ocurre venga de donde venga el cambio: la app en el ordenador o el móvil, Agenda, otra regla o tu asistente conectado por [Zenth MCP](/docs/integraciones/zenth-mcp).'),
+      note('El evento ocurre venga de donde venga el cambio: la app en el ordenador o el móvil, Agenda, otra regla o tu asistente conectado por **Zenth MCP**.'),
 
       h2('Si: condiciones'),
       p('Las condiciones miran cómo quedó la tarjeta **después** del cambio. Son opcionales y puedes combinar hasta diez.'),
@@ -988,7 +988,7 @@ export const pizarrasArticles: DocArticle[] = [
       p('Al [cerrar la pizarra](/docs/pizarras/cerrar-y-reabrir-pizarras), sus reglas se conservan, pero quedan pausadas junto con sus correos y no se pueden editar. Reabrir permite que las reglas activas vuelvan a responder a nuevos cambios; no activa las que ya habías desactivado.'),
 
       h2('Desde tu asistente'),
-      p('Con [Zenth MCP](/docs/integraciones/zenth-mcp), un asistente puede **listar** reglas y botones, **crear** reglas nuevas (quedan activas al momento) y **activarlos o desactivarlos** si administras la pizarra. También puede pulsar los [botones existentes](/docs/pizarras/botones-de-automatizacion#desde-tu-asistente) con permiso de edición. Crear botones y borrar automatizaciones se hace desde la app.'),
+      p('Con **Zenth MCP**, un asistente puede **listar** reglas y botones, **crear** reglas nuevas (quedan activas al momento) y **activarlos o desactivarlos** si administras la pizarra. También puede pulsar los [botones existentes](/docs/pizarras/botones-de-automatizacion#desde-tu-asistente) con permiso de edición. Crear botones y borrar automatizaciones se hace desde la app.'),
 
       h2('Límites'),
       list(
@@ -1008,7 +1008,7 @@ export const pizarrasArticles: DocArticle[] = [
     summary: 'Guarda acciones para repetirlas con un clic sobre una tarjeta, una selección o todas las tarjetas que cumplen unas condiciones.',
     keywords: ['botón', 'botones', 'botón de tarjeta', 'botón de pizarra', 'botones de automatización', 'butler', 'trello', 'acciones manuales', 'enviar a revisión', 'cerrar sprint', 'selección múltiple', 'condiciones', 'icono', '100 tarjetas', '120 ejecuciones', 'errores parciales', '+N'],
     updated: '2026-10-20',
-    related: ['pizarras/automatizaciones', 'pizarras/seleccionar-y-gestionar-tarjetas', 'pizarras/colaborar-en-tarjetas', 'pizarras/cerrar-y-reabrir-pizarras', 'integraciones/zenth-mcp'],
+    related: ['pizarras/automatizaciones', 'pizarras/seleccionar-y-gestionar-tarjetas', 'pizarras/colaborar-en-tarjetas', 'pizarras/cerrar-y-reabrir-pizarras'],
     blocks: [
       p('Un **botón de automatización** guarda una lista de acciones habituales. Tú eliges cuándo aplicarlas: enviar una tarjeta a revisión, asignártela, añadir una etiqueta, comentar o archivar lo terminado. Las [reglas automáticas](/docs/pizarras/automatizaciones) reaccionan a un cambio; un botón actúa cuando lo pulsas.'),
 
@@ -1099,7 +1099,7 @@ export const pizarrasArticles: DocArticle[] = [
       ),
 
       h2('Desde tu asistente'),
-      p('Con [Zenth MCP](/docs/integraciones/zenth-mcp#ejecutar-botones-existentes), pide primero los botones de la pizarra y revisa sus acciones. Luego puedes pedir que pulse uno por su **nombre o identificador**. Para un botón de tarjeta necesita también el **id de la tarjeta** de esa pizarra.'),
+      p('Con **Zenth MCP**, pide primero los botones de la pizarra y revisa sus acciones. Luego puedes pedir que pulse uno por su **nombre o identificador**. Para un botón de tarjeta necesita también el **id de la tarjeta** de esa pizarra.'),
       list(
         '«Muéstrame los botones de **Producto**, qué hace cada uno y cómo terminó su última ejecución».',
         '«En **Producto**, pulsa **Enviar a revisión** sobre la tarjeta con id …».',

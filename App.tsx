@@ -15,7 +15,7 @@ import Footer from './components/Footer';
 import NotFound from './components/NotFound';
 import { Helmet } from 'react-helmet-async';
 
-import { BLOG_POSTS } from './constants';
+import { PUBLIC_BLOG_POSTS } from './constants';
 import { getArticle, getCategory } from './content/docs';
 
 function App() {
@@ -64,7 +64,7 @@ function App() {
       description = 'Novedades de Zenth y artículos sobre atención, hábitos, colaboración y bienestar. Organiza tu día con planificación visual y calma.';
     } else if (location.pathname.startsWith('/blog/')) {
       const postId = location.pathname.split('/').pop();
-      const post = BLOG_POSTS.find(p => p.id === postId);
+      const post = PUBLIC_BLOG_POSTS.find(p => p.id === postId);
       if (post) {
         title = `${post.title} | Blog Zenth`;
         description = post.excerpt;
@@ -219,7 +219,7 @@ function App() {
 const BlogPostDetailWithParams = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const post = BLOG_POSTS.find(p => p.id === id);
+  const post = PUBLIC_BLOG_POSTS.find(p => p.id === id);
 
   if (!post) {
     return <NotFound />;

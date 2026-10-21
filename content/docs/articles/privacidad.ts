@@ -44,7 +44,7 @@ export const privacidadArticles: DocArticle[] = [
       ),
 
       h2('Aplicaciones conectadas'),
-      p('Si Zenth MCP está disponible para tu cuenta y autorizas un asistente, este puede consultar datos a los que tienes acceso, incluso contenido compartido contigo y eventos importados de Calendar, y crear o modificar contenido mediante las herramientas permitidas. El proveedor del asistente puede tratar los datos que reciba conforme a su propia política. Puedes desconectarlo en **Ajustes › Integraciones › Aplicaciones conectadas**; lo que ya recibió no se borra por desconectarlo. Ver [Zenth MCP](/docs/integraciones/zenth-mcp).'),
+      p('Si Zenth MCP está disponible para tu cuenta y autorizas un asistente, este puede consultar datos a los que tienes acceso, incluso contenido compartido contigo y eventos importados de Calendar, y crear o modificar contenido mediante las herramientas permitidas. El proveedor del asistente puede tratar los datos que reciba conforme a su propia política. Puedes desconectarlo en **Ajustes › Integraciones › Aplicaciones conectadas**; lo que ya recibió no se borra por desconectarlo.'),
 
       h2('A quién recurre Zenth para funcionar'),
       table(

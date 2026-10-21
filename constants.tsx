@@ -56,7 +56,7 @@ Cuando esté disponible para todos, lo vas a encontrar en la [documentación de 
     imageUrl: '/blog/appview.png',
     category: 'Integraciones',
     readTime: '5 min lectura',
-    status: 'soon',
+    status: 'hidden',
   },
   {
     id: '20',
@@ -1003,3 +1003,6 @@ Zen está aquí para que dejes de preocuparte por *cómo* organizar y empieces a
     readTime: '5 min lectura'
   }
 ];
+
+/** Artículos que se listan y se pueden abrir. Los ocultos quedan en el archivo. */
+export const PUBLIC_BLOG_POSTS = BLOG_POSTS.filter(post => post.status !== 'hidden');

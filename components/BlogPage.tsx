@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import { ArrowLeft, ArrowUpRight } from 'lucide-react';
-import { BLOG_POSTS } from '../constants';
+import { PUBLIC_BLOG_POSTS } from '../constants';
 import ArticleCard from './ArticleCard';
 import BlogCover from './BlogCover';
 import ComingSoonBadge from './ComingSoonBadge';
@@ -17,12 +17,12 @@ const BlogPage: React.FC<BlogPageProps> = ({ onBack, onSelectPost }) => {
   const [category, setCategory] = useState(ALL);
 
   const categories = useMemo(
-    () => [ALL, ...Array.from(new Set(BLOG_POSTS.map(p => p.category)))],
+    () => [ALL, ...Array.from(new Set(PUBLIC_BLOG_POSTS.map(p => p.category)))],
     []
   );
 
   const posts = useMemo(
-    () => (category === ALL ? BLOG_POSTS : BLOG_POSTS.filter(p => p.category === category)),
+    () => (category === ALL ? PUBLIC_BLOG_POSTS : PUBLIC_BLOG_POSTS.filter(p => p.category === category)),
     [category]
   );
 

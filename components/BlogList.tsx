@@ -1,6 +1,6 @@
 import React from 'react';
 import { ArrowUpRight } from 'lucide-react';
-import { BLOG_POSTS } from '../constants';
+import { PUBLIC_BLOG_POSTS } from '../constants';
 import ArticleCard from './ArticleCard';
 
 interface BlogListProps {
@@ -10,7 +10,7 @@ interface BlogListProps {
 }
 
 const BlogList: React.FC<BlogListProps> = ({ onSelectPost, onSeeAll, limit }) => {
-  const postsToShow = limit ? BLOG_POSTS.slice(0, limit) : BLOG_POSTS;
+  const postsToShow = limit ? PUBLIC_BLOG_POSTS.slice(0, limit) : PUBLIC_BLOG_POSTS;
 
   return (
     <section id="blog" className="scroll-mt-20 py-24 lg:py-32">
