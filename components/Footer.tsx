@@ -11,7 +11,6 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
       title: 'Producto',
       links: [
         { label: 'Funciones', onClick: () => onNavigate('home', 'features') },
-        { label: 'Instalar', onClick: () => onNavigate('home', 'install') },
         { label: 'Abrir Zenth', onClick: () => { window.location.href = 'https://zenth.space/app'; } },
       ],
     },

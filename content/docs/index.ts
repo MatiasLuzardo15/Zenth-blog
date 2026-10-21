@@ -5,6 +5,7 @@ import { primerosPasosArticles } from './articles/primeros-pasos';
 import { agendaArticles } from './articles/agenda';
 import { pizarrasArticles } from './articles/pizarras';
 import { bibliotecaArticles } from './articles/biblioteca';
+import { sitiosArticles } from './articles/sitios';
 import { reunionesArticles } from './articles/reuniones';
 import { enfoqueArticles } from './articles/enfoque';
 import { progresoArticles } from './articles/progreso';
@@ -22,6 +23,7 @@ const ARTICLES_BY_CATEGORY: Record<string, DocArticle[]> = {
   agenda: agendaArticles,
   pizarras: pizarrasArticles,
   biblioteca: bibliotecaArticles,
+  sitios: sitiosArticles,
   reuniones: reunionesArticles,
   enfoque: enfoqueArticles,
   progreso: progresoArticles,
@@ -44,6 +46,7 @@ export const DOC_STARTING_POINTS = [
   'primeros-pasos/recorrido-de-cinco-minutos',
   'agenda/crear-tareas-eventos-y-reuniones',
   'pizarras/compartir-una-pizarra',
+  'sitios/que-son-los-sitios',
   'reuniones/reuniones-rapidas-e-invitados',
   'atajos/atajos-de-la-aplicacion',
 ];

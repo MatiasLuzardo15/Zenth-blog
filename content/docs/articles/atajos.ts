@@ -10,7 +10,7 @@ export const atajosArticles: DocArticle[] = [
     title: 'Atajos de la aplicación',
     summary: 'Buscar, cambiar de sección, crear, recorrer Agenda y Pizarras, trabajar en documentos y controlar Enfoque y las llamadas: los atajos de Zenth.',
     keywords: ['atajos', 'teclado', 'shortcuts', 'teclas', 'alt', 'ctrl', 'comandos', 'navegación', 'buscar', 'rápido', 'hotkeys', 'mac', 'cmd', 'tablas', 'celdas', 'google docs', 'documentos', 'pdf', 'visor', 'zoom', 'walkie-talkie', 'pulsar para hablar', 'burbuja', '/tarea', 'menciones'],
-    updated: '2026-10-08',
+    updated: '2026-10-20',
     related: ['pizarras/seleccionar-y-gestionar-tarjetas', 'pizarras/calendario-de-pizarra', 'atajos/atajos-del-editor-de-notas', 'biblioteca/leer-documentos-en-el-visor', 'primeros-pasos/busqueda-y-notificaciones', 'reuniones/durante-una-llamada', 'reuniones/tarjetas-y-tareas-en-el-chat-de-la-sala'],
     blocks: [
       p('Puedes navegar por Zenth sin apartar las manos del teclado. Las teclas se muestran para tu sistema: en Windows y Linux verás `Ctrl` y `Alt`; en macOS, `⌘` y `⌥`.'),
@@ -62,7 +62,7 @@ export const atajosArticles: DocArticle[] = [
         [['Ctrl', 'Clic'], 'Añadir o quitar una tarjeta del tablero a la selección (⌘ + clic en Mac)'],
         [['Esc'], 'Quitar la selección; con un menú abierto, cerrarlo primero'],
       ),
-      p('En el **calendario de la pizarra**, `D`, `S` y `M` cambian a Día, Semana y Mes; `T` va a hoy, y `←` y `→` recorren períodos. En la tabla, selecciona con las casillas de las filas o de su cabecera. Ver [Seleccionar y gestionar tarjetas](/docs/pizarras/seleccionar-y-gestionar-tarjetas).'),
+      p('En el **calendario de la pizarra**, `D`, `S` y `M` cambian a Día, Semana y Mes; `T` va a hoy, y `←` y `→` recorren períodos. En la tabla, selecciona con las casillas de las filas o de su cabecera. Justo después de completar o enviar a la papelera, `Ctrl` + `Z` deshace esa última operación si no estás escribiendo. Ver [Seleccionar y gestionar tarjetas](/docs/pizarras/seleccionar-y-gestionar-tarjetas).'),
 
       h2('Tablas'),
       p('Con una tabla de la Biblioteca abierta y el cursor en una celda:'),

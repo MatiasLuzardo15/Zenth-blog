@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowUpRight } from 'lucide-react';
 import McpDemo from './McpDemo';
+import { ZenPerch } from './ZenCharacter';
 
 interface McpSectionProps {
   onSelectPost: (id: string) => void;
@@ -31,7 +32,9 @@ const McpSection: React.FC<McpSectionProps> = ({ onSelectPost }) => {
   return (
     <section id="zenth-mcp" aria-labelledby="zenth-mcp-title" className="scroll-mt-20 pb-24 lg:pb-32">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <div className="fr-inverse rounded-[32px] px-5 py-10 sm:px-10 sm:py-14 lg:px-12 lg:py-20">
+        <div className="fr-inverse relative rounded-[32px] px-5 py-10 sm:px-10 sm:py-14 lg:px-12 lg:py-20">
+          {/* Zen llega con el enchufe en la mano: el cable se arrastra por el borde del bloque. */}
+          <ZenPerch size={64} pose="stand" holding="plug" look="right" className="right-[14%]" />
           <div className="mx-auto flex max-w-3xl flex-col items-center text-center">
             <span className="fr-btn fr-btn-translucent pointer-events-none">
               <span className="relative flex h-1.5 w-1.5">

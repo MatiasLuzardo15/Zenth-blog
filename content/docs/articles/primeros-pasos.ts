@@ -11,7 +11,7 @@ export const primerosPasosArticles: DocArticle[] = [
     summary: 'Un espacio de productividad con Agenda, Pizarras, Biblioteca, Reuniones, Enfoque y Progreso. Aquí ves qué hace cada sección y cómo se conectan.',
     keywords: ['introducción', 'secciones', 'navegación', 'menú', 'empezar', 'novedades', 'gratis', 'menú principal'],
     updated: UPDATED,
-    related: ['primeros-pasos/recorrido-de-cinco-minutos', 'primeros-pasos/crear-cuenta-e-iniciar-sesion', 'atajos/atajos-de-la-aplicacion'],
+    related: ['primeros-pasos/recorrido-de-cinco-minutos', 'primeros-pasos/crear-cuenta-e-iniciar-sesion', 'atajos/atajos-de-la-aplicacion', 'sitios/que-son-los-sitios'],
     blocks: [
       p('Zenth reúne en una sola aplicación web lo que normalmente vive en cuatro o cinco herramientas: la **agenda** donde decides cuándo cabe cada cosa, las **pizarras** donde organizas proyectos (solo o con un equipo), una **biblioteca** para tus notas y documentos, **reuniones** para hablar sin salir del trabajo y un **temporizador de enfoque** que te acompaña por toda la aplicación.'),
       p('Todo está pensado para que pasar de una cosa a otra no cueste: una tarea puede vivir en Agenda y en una pizarra a la vez, convertirse en una nota y terminar en una sesión de enfoque.'),
@@ -46,6 +46,7 @@ export const primerosPasosArticles: DocArticle[] = [
         'Las tareas de una pizarra pueden aparecer también en Agenda, y las de Agenda pertenecer a la pizarra activa. Tú decides si eso pasa, en Ajustes.',
         'Desde cualquier tarea puedes **expandirla a una nota**, vincular notas y archivos de Drive, o iniciar una sesión de Enfoque.',
         'Una reunión se puede programar desde Agenda, con invitados y el enlace de tu proveedor favorito.',
+        'Si Sitios está habilitado, una nota tuya puede publicarse como página web en `zenth.website`. Ver [Qué son los sitios](/docs/sitios/que-son-los-sitios).',
         'Completar tareas y sesiones de enfoque alimenta tu progreso: XP, racha, niveles y logros.',
       ),
 
@@ -53,7 +54,7 @@ export const primerosPasosArticles: DocArticle[] = [
       p('Todas las funciones están disponibles sin pagar y Zenth no muestra publicidad ni usa rastreadores publicitarios. Si quieres ayudar con el coste de los servidores, hay un aporte voluntario en **Ajustes › Apoyar**; no compra funciones ni prioridad.'),
 
       h2('Funciona en el navegador y se instala'),
-      p('Zenth es una aplicación web progresiva: la abres desde el navegador, o la instalas para tenerla como una app más. Cuenta y datos son los mismos en móvil y escritorio. Los pasos están en [Instalar Zenth](/docs/primeros-pasos/instalar-la-app).'),
+      p('Zenth se abre en el navegador, con la misma cuenta en el teléfono y en el computador. En el escritorio puedes instalarla para que abra en su propia ventana. En el teléfono, déjala en el navegador. Los pasos están en [Usar Zenth en el teléfono y en el escritorio](/docs/primeros-pasos/instalar-la-app).'),
       tip('Si es tu primera vez, Zenth te muestra un recorrido de siete pantallas breves. Puedes saltar a cualquier tema o entrar directamente a la aplicación.'),
     ],
   },
@@ -63,8 +64,8 @@ export const primerosPasosArticles: DocArticle[] = [
     category: 'primeros-pasos',
     title: 'Crear tu cuenta e iniciar sesión',
     summary: 'Regístrate con correo y contraseña o con Google, confirma tu correo, recupera el acceso si olvidas la contraseña y entiende la aceptación de términos.',
-    keywords: ['registro', 'registrarse', 'contraseña', 'olvidé', 'recuperar', 'google', 'login', 'entrar', 'confirmar correo', 'verificar', 'términos'],
-    updated: UPDATED,
+    keywords: ['registro', 'registrarse', 'contraseña', 'olvidé', 'recuperar', 'google', 'login', 'entrar', 'confirmar correo', 'verificar', 'términos', 'recuperá el acceso'],
+    updated: '2026-10-20',
     related: ['cuenta/correo-contrasena-y-sesion', 'cuenta/varias-cuentas', 'ayuda/no-puedo-entrar-a-mi-cuenta'],
     blocks: [
       p('Necesitas una cuenta para usar Zenth. Puedes crearla con un correo y una contraseña, o entrar con tu cuenta de Google. Solo hay que hacerlo una vez: la sesión queda abierta en ese dispositivo hasta que la cierres.'),
@@ -87,9 +88,9 @@ export const primerosPasosArticles: DocArticle[] = [
 
       h2('Olvidé mi contraseña'),
       steps(
-        'En la pantalla de inicio de sesión, pulsa **¿La olvidaste?**, junto al campo Contraseña.',
+        'En la pantalla de inicio de sesión, pulsa **¿La olvidaste?**, junto al campo Contraseña. Se abre **Recuperá el acceso.**, una pantalla propia.',
         'Escribe tu correo y pulsa **Enviar enlace**.',
-        'Abre el correo y sigue el enlace para elegir una contraseña nueva, que también debe tener 12 caracteres o más.',
+        'Abre el correo y sigue el enlace: te lleva a **Elegí una clave nueva.** La contraseña también debe tener 12 caracteres o más.',
       ),
       p('Si el correo no llega, revisa la carpeta de spam. Hay más pistas en [No puedo entrar a mi cuenta](/docs/ayuda/no-puedo-entrar-a-mi-cuenta).'),
 
@@ -104,40 +105,27 @@ export const primerosPasosArticles: DocArticle[] = [
   {
     slug: 'instalar-la-app',
     category: 'primeros-pasos',
-    title: 'Instalar Zenth en el móvil o en el escritorio',
-    summary: 'Zenth se añade a la pantalla de inicio desde el navegador, sin tiendas de aplicaciones. Pasos para iPhone, Android y escritorio.',
-    keywords: ['pwa', 'instalar', 'aplicación', 'app', 'pantalla de inicio', 'iphone', 'ios', 'android', 'safari', 'chrome', 'push', 'móvil'],
-    updated: UPDATED,
+    title: 'Usar Zenth en el teléfono y en el escritorio',
+    summary: 'En el teléfono, ábrelo en el navegador. En el computador puedes dejarlo así o instalarlo para que abra en su propia ventana.',
+    keywords: ['navegador', 'instalar', 'aplicación', 'app', 'escritorio', 'iphone', 'ios', 'android', 'safari', 'chrome', 'móvil', 'ventana propia'],
+    updated: '2026-10-20',
     related: ['cuenta/notificaciones', 'ayuda/los-avisos-no-llegan'],
     blocks: [
-      p('Zenth es una **aplicación web progresiva**: no se descarga de una tienda. La instalas desde el navegador, tiene su propio icono y se abre en su propia ventana, con la misma cuenta y los mismos datos que en cualquier otro dispositivo. No ocupa espacio como una app nativa.'),
+      p('Zenth se usa desde el navegador. La cuenta y los datos son los mismos en el teléfono y en el computador.'),
 
-      h2('iPhone y iPad (Safari)'),
+      h2('En el teléfono'),
       steps(
-        'Abre Zenth en **Safari**. Otros navegadores en iOS no ofrecen este paso.',
-        'Toca el botón **Compartir** de la barra de Safari.',
-        'Elige **Añadir a pantalla de inicio** y confirma.',
+        'Abre **zenth.space** en Safari o Chrome.',
+        'Entra con tu cuenta. Puedes dejar la pestaña o añadirla a marcadores.',
       ),
-      p('Zenth abrirá desde ese icono, sin la barra del navegador.'),
+      p('Si ya la habías añadido a la pantalla de inicio, puedes seguir usándola o quitar ese icono: tus datos siguen en la cuenta.'),
 
-      h2('Android (Chrome)'),
-      steps(
-        'Abre Zenth en Chrome.',
-        'Toca el menú **⋮** en la esquina superior derecha.',
-        'Elige **Instalar aplicación** (o **Añadir a pantalla de inicio**) y confirma con **Instalar**.',
-      ),
+      h2('En el computador'),
+      p('Puedes dejarla en el navegador. Si prefieres una ventana propia, en Chrome o Edge busca el **icono de instalar** en la barra de direcciones y sigue las instrucciones. Después puedes fijarla en la barra de tareas o en el dock.'),
+      p('En Safari para Mac: **Archivo › Añadir al Dock**.'),
 
-      h2('Ordenador'),
-      p('En Chrome o Edge, busca el **icono de instalar** en la barra de direcciones y sigue las instrucciones. La aplicación se abre en una ventana propia y puedes fijarla en la barra de tareas o en el dock.'),
-
-      h2('Para qué sirve instalarla'),
-      list(
-        '**Recordatorios push.** Con la app instalada puedes recibir avisos aunque Zenth no esté abierta. Se activan en Ajustes › Notificaciones.',
-        '**Abre más rápido**, sin barra del navegador.',
-        '**Misma cuenta en todas partes**: móvil, tablet y escritorio comparten datos en tiempo real.',
-      ),
-      note('**En iOS los recordatorios push solo funcionan con la app instalada**; desde Safari a secas no llegan. En Android y en escritorio también funcionan desde el navegador.', 'Importante en iPhone'),
-      p('Si ya instalaste Zenth y no llegan los avisos, revisa [Los avisos no llegan](/docs/ayuda/los-avisos-no-llegan).'),
+      h2('Avisos'),
+      p('En el escritorio y en Android, los avisos pueden llegar desde el navegador si los activas en Ajustes › Notificaciones. En el iPhone, Safari no entrega esos avisos del sistema. Si ya instalaste Zenth y no llegan, revisa [Los avisos no llegan](/docs/ayuda/los-avisos-no-llegan).'),
     ],
   },
 
@@ -148,7 +136,7 @@ export const primerosPasosArticles: DocArticle[] = [
     summary: 'Crea una tarea, una pizarra, una nota y una sesión de enfoque, registra tu ánimo y personaliza Zenth. Un camino corto para ver cómo encaja todo.',
     keywords: ['empezar', 'tutorial', 'inicio rápido', 'primer uso', 'guía rápida', 'bienvenida', 'onboarding'],
     updated: '2026-10-02',
-    related: ['agenda/crear-tareas-eventos-y-reuniones', 'pizarras/crear-y-organizar-pizarras', 'biblioteca/notas', 'enfoque/usar-enfoque'],
+    related: ['agenda/crear-tareas-eventos-y-reuniones', 'pizarras/crear-y-organizar-pizarras', 'biblioteca/notas', 'sitios/que-son-los-sitios', 'enfoque/usar-enfoque'],
     blocks: [
       p('No hace falta aprender Zenth entero para empezar. Este recorrido tarda unos minutos y pasa por lo esencial. Cada paso enlaza al artículo donde está explicado a fondo.'),
 
@@ -195,6 +183,7 @@ export const primerosPasosArticles: DocArticle[] = [
       h2('Y después'),
       list(
         'Invita a alguien a una pizarra: [Compartir una pizarra](/docs/pizarras/compartir-una-pizarra).',
+        'Publica una nota en la web: [Sitios](/docs/sitios/que-son-los-sitios).',
         'Conecta tu Google Drive para ver tus documentos en Biblioteca: [Google Drive y Workspace](/docs/integraciones/google-drive).',
         'Aprende los atajos de teclado: [Atajos de la aplicación](/docs/atajos/atajos-de-la-aplicacion).',
       ),

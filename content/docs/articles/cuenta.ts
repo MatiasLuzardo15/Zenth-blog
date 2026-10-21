@@ -10,8 +10,8 @@ export const cuentaArticles: DocArticle[] = [
     title: 'Ajustes: perfil, apariencia y rutina',
     summary: 'Todo lo que se configura en Ajustes: tu perfil y avatar, el tema, la densidad, el formato de hora, cómo se reparten las tareas y más.',
     keywords: ['ajustes', 'configuración', 'preferencias', 'perfil', 'nombre', 'avatar', 'tema', 'oscuro', 'claro', 'zen', 'compacto', 'ancho', 'formato de hora', '12 horas', '24 horas', 'apoyar', 'donar', 'paypal'],
-    updated: UPDATED,
-    related: ['cuenta/notificaciones', 'cuenta/varias-cuentas', 'enfoque/historial-objetivo-y-constancia'],
+    updated: '2026-10-20',
+    related: ['cuenta/notificaciones', 'cuenta/varias-cuentas', 'enfoque/historial-objetivo-y-constancia', 'sitios/paginas-y-ajustes'],
     blocks: [
       p('Abre **Ajustes** con `Alt` + `,`, desde el menú de tu avatar (escritorio) o tocando tu avatar arriba a la derecha (móvil). El panel tiene un **buscador** propio: escribe el nombre de un ajuste («compacto», «hora», «micrófono») y te lleva a su sección.'),
 
@@ -25,6 +25,7 @@ export const cuentaArticles: DocArticle[] = [
         ['Notificaciones', 'Avisos dentro de Zenth, push y correo. Ver [Notificaciones](/docs/cuenta/notificaciones).'],
         ['Audio', 'Micrófono y salida de tus llamadas, con prueba. Ver [Audio y dispositivos](/docs/reuniones/audio-y-dispositivos).'],
         ['Integraciones', 'Google Drive y Workspace, y Google Calendar. Ver [Integraciones y Zen](/docs/integraciones).'],
+        ['Sitios', 'Si está habilitado para tu cuenta: lista de sitios, páginas, apariencia, buscadores, visitas, despublicar y borrar. Ver [Sitios](/docs/sitios/que-son-los-sitios).'],
         ['Cuenta', 'Correo, política de privacidad, papelera, cuentas del dispositivo, cerrar sesión y zona de riesgo.'],
         ['Apoyar', 'Un aporte voluntario para sostener el proyecto.'],
       ),
@@ -172,7 +173,7 @@ export const cuentaArticles: DocArticle[] = [
     title: 'Correo, contraseña y cierre de sesión',
     summary: 'Cambia tu correo, recupera tu contraseña, cierra la sesión de este dispositivo y entiende qué hace cada opción de la zona de riesgo.',
     keywords: ['cambiar correo', 'email', 'contraseña', 'cerrar sesión', 'eliminar cuenta', 'borrar datos', 'zona de riesgo', 'eliminar todas las tareas', 'privacidad', 'seguridad', 'salir'],
-    updated: UPDATED,
+    updated: '2026-10-20',
     related: ['privacidad/eliminar-y-exportar-tus-datos', 'primeros-pasos/crear-cuenta-e-iniciar-sesion', 'ayuda/no-puedo-entrar-a-mi-cuenta'],
     blocks: [
       h2('Cambiar tu correo'),
@@ -184,7 +185,7 @@ export const cuentaArticles: DocArticle[] = [
       p('Mientras no confirmes, sigues entrando con el correo anterior. Si la dirección no es válida o es la misma que la actual, Zenth te lo indica. Zenth puede además enviarte un aviso cuando tu correo o tu contraseña cambian.'),
 
       h2('Contraseña'),
-      p('Para elegir una contraseña nueva, usa **¿La olvidaste?** en la pantalla de inicio de sesión: te enviamos un enlace para escoger una nueva. Las contraseñas nuevas deben tener **12 caracteres o más, con mayúscula, minúscula, número y símbolo**. Ver [Crear tu cuenta e iniciar sesión](/docs/primeros-pasos/crear-cuenta-e-iniciar-sesion).'),
+      p('Para elegir una contraseña nueva, usa **¿La olvidaste?** en la pantalla de inicio de sesión: se abre **Recuperá el acceso.** y te enviamos un enlace. Las contraseñas nuevas deben tener **12 caracteres o más, con mayúscula, minúscula, número y símbolo**. Ver [Crear tu cuenta e iniciar sesión](/docs/primeros-pasos/crear-cuenta-e-iniciar-sesion).'),
 
       h2('Cerrar sesión'),
       p('**Cerrar sesión** (menú del avatar o Ajustes › Cuenta) cierra la sesión **en este dispositivo**. No elimina ningún dato: todo sigue en la nube y vuelve cuando entres de nuevo. Con varias cuentas verás **Cerrar todas las cuentas**. Ver [Varias cuentas](/docs/cuenta/varias-cuentas).'),
@@ -204,8 +205,8 @@ export const cuentaArticles: DocArticle[] = [
     title: 'Papelera: recuperar lo que borraste',
     summary: 'Tareas y notas eliminadas van a la papelera hasta que la vacíes. Cómo restaurar, borrar para siempre y qué pasa con los archivos de Drive.',
     keywords: ['papelera', 'restaurar', 'recuperar', 'borrar', 'eliminar para siempre', 'vaciar', 'trash', 'eliminado', 'drive', 'solo esta tarea', 'serie repetida'],
-    updated: '2026-10-06',
-    related: ['agenda/historial-de-completadas', 'pizarras/vistas-de-pizarra', 'pizarras/crear-y-organizar-pizarras', 'integraciones/google-drive'],
+    updated: '2026-10-20',
+    related: ['agenda/historial-de-completadas', 'pizarras/vistas-de-pizarra', 'pizarras/crear-y-organizar-pizarras', 'integraciones/google-drive', 'sitios/publicar-una-nota'],
     blocks: [
       p('Borrar deja de ser una decisión definitiva. Lo que eliminas va a la **Papelera**, donde queda hasta que la vacíes tú.'),
 
@@ -235,6 +236,7 @@ export const cuentaArticles: DocArticle[] = [
       list(
         'Las tareas **completadas** no están en la papelera: están en el [historial de completadas](/docs/agenda/historial-de-completadas).',
         'Lo que borras **dentro de Google** (fuera de Zenth) sigue las reglas de Google Drive.',
+        'Si la nota era una página de un [sitio](/docs/sitios/publicar-una-nota), enviarla a la papelera **retira esa página** de la web. Restaurarla no la republica sola.',
       ),
     ],
   },

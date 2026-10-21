@@ -11,7 +11,7 @@ const FAQS: FAQEntry[] = [
     {
         question: '¿Qué es Zenth exactamente?',
         answer:
-            'Un espacio de productividad con cuatro áreas principales: Agenda para planificar el tiempo, Pizarras para organizar proyectos y colaborar, Biblioteca para tus notas, lienzos y documentos de Google Drive, y Reuniones para hablar con tu equipo o con invitados. Progreso reúne tus niveles y logros, Estadísticas te muestra cómo usas tu tiempo, y Enfoque funciona como un temporizador global que puedes abrir desde cualquier pantalla.',
+            'Un espacio de productividad con cuatro áreas principales: Agenda para planificar el tiempo, Pizarras para organizar proyectos y colaborar, Biblioteca para tus notas, lienzos y documentos de Google Drive, y Reuniones para hablar con tu equipo o con invitados. Si Sitios está habilitado, puedes publicar notas en tu dirección de zenth.website. Progreso reúne tus niveles y logros, Estadísticas te muestra cómo usas tu tiempo, y Enfoque funciona como un temporizador global que puedes abrir desde cualquier pantalla.',
     },
     {
         question: '¿Es gratuito?',
@@ -46,6 +46,11 @@ const FAQS: FAQEntry[] = [
         question: '¿Puedo compartir una nota o dibujar con otras personas?',
         answer:
             'Sí. Las notas y los lienzos se comparten por correo con permiso de ver, editar o, en las notas, sugerir cambios que tú revisas. Ves quién está dentro y qué hace en cada momento. Lo que te comparten aparece en Biblioteca › Compartidos conmigo y puedes guardarlo en tu propia Biblioteca.',
+    },
+    {
+        question: '¿Puedo publicar una nota como sitio web?',
+        answer:
+            'Sí, si Sitios está habilitado para tu cuenta. Desde una nota tuya, Publicar en la web genera una copia en tu-nombre.zenth.website. Quien abre el enlace ve esa copia, no entra a Zenth. Los cambios no salen hasta que vuelvas a publicar. Puedes despublicar cuando quieras. El detalle está en la documentación de Sitios.',
     },
     {
         question: '¿Qué son las reuniones rápidas?',
@@ -95,7 +100,7 @@ const FAQS: FAQEntry[] = [
     {
         question: '¿Puedo conectar mi Google Calendar?',
         answer:
-            'Sí, con permiso de solo lectura. Eliges qué calendarios ver y sus eventos aparecen en Agenda. La sincronización se actualiza cada cinco minutos mientras el permiso está activo y puedes pausarla. Nada llega a una pizarra hasta que usas explícitamente «Llevar eventos a una pizarra».',
+            'Sí, con permiso de solo lectura. Eliges qué calendarios ver y sus eventos aparecen en Agenda. La conexión viaja con tu cuenta: en otro dispositivo la encuentras igual. La sincronización se actualiza cada cinco minutos mientras el permiso está activo y puedes pausarla. Nada llega a una pizarra hasta que usas explícitamente «Llevar eventos a una pizarra».',
     },
     {
         question: '¿Puedo añadir invitados y un enlace a una reunión desde Agenda?',
@@ -160,7 +165,7 @@ const FAQS: FAQEntry[] = [
     {
         question: '¿Puedo usarlo en el teléfono?',
         answer:
-            'Sí. Zenth es una aplicación web progresiva: se instala desde el navegador y funciona como una app nativa, con su icono en la pantalla de inicio. En iOS los recordatorios push solo llegan si la instalas (Safari a secas no los soporta); en Android y escritorio funcionan también desde el navegador.',
+            'Sí. Ábrelo en el navegador del teléfono, con la misma cuenta que en el computador. En el escritorio puedes dejarlo en el navegador o instalarlo desde Chrome o Edge para que abra en su propia ventana.',
     },
 ];
 

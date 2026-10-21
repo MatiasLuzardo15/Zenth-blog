@@ -47,7 +47,7 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = ({ onBack }) => {
 
                 <p className="t-eyebrow">Legal</p>
                 <h1 className="t-display-xl mt-4 text-ink">Política de privacidad.</h1>
-                <p className="t-micro mt-6 text-ink-muted">Última actualización: 7 de octubre de 2026</p>
+                <p className="t-micro mt-6 text-ink-muted">Última actualización: 20 de octubre de 2026</p>
 
                 <div className="fr-card-featured mt-10">
                     <p className="t-caption text-ink">En una frase</p>
@@ -62,8 +62,9 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = ({ onBack }) => {
                     {/* Florida, Uruguay es la localidad confirmada. No publicar un domicilio particular; consultar a la URCDP qué domicilio alternativo admite el artículo 13. */}
                     <P>
                         El responsable de Zenth es <B>Matías Luzardo</B>, Florida, Uruguay. Esta política se aplica a
-                        la aplicación web y PWA disponible en <B>zenth.space</B>, a este sitio informativo y a
-                        las comunicaciones operativas relacionadas con el Servicio.
+                        la aplicación web y PWA disponible en <B>zenth.space</B>, a los sitios publicados en{' '}
+                        <B>zenth.website</B>, a este sitio informativo y a las comunicaciones operativas
+                        relacionadas con el Servicio.
                     </P>
                     <P>
                         Para ejercer derechos o consultar cualquier tratamiento, escríbenos a{' '}
@@ -75,6 +76,7 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = ({ onBack }) => {
                     <List items={[
                         <><B>Cuenta y perfil.</B> Correo electrónico, identificador de usuario, nombre, avatar y portada. La autenticación y la contraseña son gestionadas por Supabase; Zenth no puede consultar tu contraseña en texto legible.</>,
                         <><B>Organización personal.</B> Tareas, eventos, reuniones, repeticiones, recordatorios, etiquetas, pasos, adjuntos, notas, lienzos, carpetas nativas, sesiones de enfoque, objetivos, estadísticas, rachas, niveles, logros y registros de ánimo.</>,
+                        <><B>Sitios.</B> Si publicas notas en la web, guardamos el nombre del sitio, el subdominio, las páginas, la apariencia, las opciones de buscadores y una copia HTML de lo publicado. Las visitas se cuentan al servir cada página, sin cookies ni identificadores persistentes en el navegador del visitante.</>,
                         <><B>Tiempo en la aplicación.</B> Para la sección Estadísticas, por cada tramo de uso con la pestaña visible guardamos el día, la hora de inicio y de fin, la sección de Zenth y, dentro de Pizarras, la pizarra abierta. Solo tú puedes leer estos datos: ningún otro usuario, ni siquiera los miembros de tus pizarras, accede a ellos. No usamos herramientas de analítica de terceros.</>,
                         <><B>Colaboración.</B> Pizarras, listas, miembros, roles, invitaciones, comentarios, menciones, asignaciones, votos, aprobaciones, actividad y presencia compartida. En las notas y lienzos compartidos, también los colaboradores, sus permisos, las invitaciones, las sugerencias y la presencia dentro del documento.</>,
                         <><B>Archivos nativos.</B> Imágenes de tareas y notas, y archivos o grabaciones heredados que hayas almacenado directamente en Zenth.</>,
@@ -103,10 +105,10 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = ({ onBack }) => {
                     </P>
                 </Section>
 
-                <Section n={4} title="Google Calendar, Zen AI y aplicaciones conectadas">
+                <Section n={4} title="Google Calendar, Zen y aplicaciones conectadas">
                     <List items={[
-                        <><B>Google Calendar.</B> Solicita permiso de solo lectura. El token permanece en memoria y caduca; la lista de calendarios y las preferencias se guardan localmente en tu navegador. Los eventos de los calendarios elegidos se importan como filas de Agenda para poder mostrarlos y, si tú lo decides, vincularlos con una pizarra. Desconectar detiene el acceso futuro, pero no elimina automáticamente elementos ya importados.</>,
-                        <><B>Zen AI.</B> Cuando pulsas una acción de inteligencia artificial en el editor de tareas (completar una tarea desde una frase, proponer una fecha y hora o dividirla en pasos), se envía a Google Gemini únicamente el texto de esa solicitud (la frase o el título de la tarea) y la fecha de hoy. Zen no analiza toda tu cuenta en segundo plano ni lee tus notas, pizarras o archivos.</>,
+                        <><B>Google Calendar.</B> Solicita permiso de solo lectura. El permiso de Google caduca; la conexión, la lista de calendarios y las preferencias de sincronización se guardan con tu cuenta. Los eventos de los calendarios elegidos se importan como filas de Agenda para poder mostrarlos y, si tú lo decides, vincularlos con una pizarra. Desconectar detiene el acceso futuro en tus dispositivos, pero no elimina automáticamente elementos ya importados.</>,
+                        <><B>Zen.</B> Cuando pulsas una acción de inteligencia artificial en el editor de tareas (completar una tarea desde una frase, proponer una fecha y hora o dividirla en pasos), se envía a Google Gemini únicamente el texto de esa solicitud (la frase o el título de la tarea) y la fecha de hoy. Zen no analiza toda tu cuenta en segundo plano ni lee tus notas, pizarras o archivos.</>,
                         <><B>Aplicaciones conectadas.</B> Si esta función está disponible para tu cuenta y autorizas un asistente mediante la pantalla de permisos de Zenth, puede consultar datos a los que ya tienes acceso, incluidos contenidos compartidos contigo y eventos importados de Google Calendar, y crear o modificar contenido mediante las herramientas permitidas. Los datos devueltos al asistente pueden ser tratados por su proveedor conforme a sus propias condiciones y política de privacidad. La autorización es opcional y puedes revocarla en Ajustes › Integraciones › Aplicaciones conectadas; la revocación impide nuevos accesos, pero no borra datos que la aplicación ya haya recibido.</>,
                     ]} />
                 </Section>
@@ -143,6 +145,7 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = ({ onBack }) => {
                         <><B>Pizarras compartidas.</B> Sus miembros ven tu nombre, avatar, rol, aportes y presencia relacionada con esa pizarra. No obtienen acceso a tu Agenda privada, otras pizarras, Biblioteca personal, ánimo, estadísticas ni tiempo de uso.</>,
                         <><B>Enfoque.</B> Si habilitas esta opción, los miembros pueden ver que estás en una sesión y hasta qué hora; no ven la tarea asociada.</>,
                         <><B>Enlaces públicos.</B> Si cambias una pizarra a «con enlace», cualquiera que tenga la dirección puede verla sin iniciar sesión. Es de solo lectura, afecta únicamente esa pizarra y puede revocarse. Se ven el tablero, las descripciones, las etiquetas, el progreso de las checklists y el número de comentarios; no se muestran adjuntos, miembros asignados, documentos vinculados, tareas completadas ni datos de personas.</>,
+                        <><B>Sitios publicados.</B> Quien abre <B>tu-sitio.zenth.website</B> ve la copia HTML de las páginas que hayas publicado, sin iniciar sesión y sin acceder al resto de tu cuenta. No se publican colaboradores, sugerencias, comentarios ni historial. Puedes despublicar o borrar el sitio cuando quieras.</>,
                         <><B>Notas y lienzos compartidos.</B> Quienes tengan acceso ven el contenido según el permiso que les concedas (ver, sugerir o editar) y la presencia de las demás personas dentro de ese documento, por ejemplo si están escribiendo o mirando.</>,
                         <><B>Reuniones.</B> Los participantes de una conversación ven a las demás personas de esa conversación. Quien entra como invitado no accede a tus pizarras, tareas, archivos, historial ni otras salas.</>,
                         <><B>Drive.</B> Compartir un archivo de Google aplica los permisos reales de Drive. Revisa destinatario y rol antes de confirmar.</>,
@@ -156,6 +159,7 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = ({ onBack }) => {
                     <List items={[
                         <><B>Supabase:</B> base de datos, autenticación y funciones del servidor, incluida la que comprueba quién puede acceder a cada archivo. La región principal del proyecto es Oregón, Estados Unidos (<B>us-west-2</B>); las funciones de borde pueden ejecutarse en otras regiones.</>,
                         <><B>Cloudflare R2:</B> almacenamiento de los archivos nativos (avatar, portada, imágenes de tareas y notas, y adjuntos de comentarios). Zenth comprueba tus permisos antes de entregar enlaces temporales a cada archivo. El almacenamiento tiene como ubicación preferente el <B>este de Norteamérica</B>; Cloudflare trata esa preferencia como orientativa y no se ha configurado una restricción de jurisdicción.</>,
+                        <><B>Cloudflare (sitios publicados):</B> entrega las páginas en <B>zenth.website</B> y registra recuentos de visitas al servirlas, sin cookies. La red de Cloudflare es global.</>,
                         <><B>Google:</B> Drive, Docs, Sheets, Slides, Forms, Calendar, Gemini y Firebase Cloud Messaging. Los archivos conectados permanecen en la cuenta de Google de cada usuario; Firebase Cloud Messaging utiliza infraestructura global de Google. No hay una única región confirmada para todos estos servicios.</>,
                         <><B>LiveKit:</B> transmisión de voz, cámara y pantalla. La región de datos configurada para el proyecto es <B>Estados Unidos</B>; la conexión de una llamada puede pasar por otras regiones de su red.</>,
                         <><B>Vercel:</B> alojamiento y entrega de la aplicación y del sitio mediante una red global. El despliegue actual de Zenth contiene archivos estáticos, sin funciones de Vercel. Vercel informa que sus instalaciones principales de procesamiento están en <B>Estados Unidos</B>, aunque puede tratar datos en otros países donde opere con sus subencargados.</>,
@@ -170,9 +174,10 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = ({ onBack }) => {
                 <Section n={9} title="Conservación y eliminación">
                     <List items={[
                         <><B>Cuenta activa.</B> Conservamos los datos necesarios mientras mantengas la cuenta o hasta que elimines contenido.</>,
-                        <><B>Papelera de Zenth.</B> Las tareas, notas y lienzos eliminados pueden restaurarse hasta que vacíes la papelera. Los elementos de Google usan la papelera de Drive, que también puedes consultar desde Zenth.</>,
+                        <><B>Papelera de Zenth.</B> Las tareas, notas y lienzos eliminados pueden restaurarse hasta que vacíes la papelera. Los elementos de Google usan la papelera de Drive, que también puedes consultar desde Zenth. Si una nota era una página publicada, esa página deja de servirse en la web.</>,
+                        <><B>Sitios.</B> Despublicar o borrar un sitio retira las páginas de zenth.website. Las notas de origen permanecen en tu Biblioteca hasta que las elimines allí.</>,
                         <><B>Sesiones en tu dispositivo.</B> La lista de cuentas abiertas vive en tu navegador. Cerrar una sesión o quitar una cuenta del dispositivo elimina esa sesión guardada; tus datos siguen en tu cuenta.</>,
-                        <><B>Conexiones.</B> La conexión cifrada de Drive se elimina al desconectarla; el token temporal de Calendar se pierde al caducar o cerrar la sesión. Los archivos guardados en Google no se borran por desconectar Zenth.</>,
+                        <><B>Conexiones.</B> La conexión cifrada de Drive se elimina al desconectarla. Desconectar Calendar detiene el acceso futuro en tus dispositivos; el permiso de Google caduca y puede hacer falta volver a autorizar. Los archivos guardados en Google no se borran por desconectar Zenth.</>,
                         <><B>Aplicaciones conectadas.</B> Conservamos el registro de las autorizaciones mientras la conexión siga activa. Puedes quitar el acceso desde Ajustes; los datos que la aplicación ya recibió quedan sujetos a las prácticas de su proveedor.</>,
                         <><B>Estadísticas.</B> La sección Estadísticas muestra hasta los últimos 180 días de tiempo de uso.</>,
                         <><B>Cuenta y derechos.</B> Puedes solicitar la eliminación de tu cuenta y datos escribiendo al correo de contacto. Determinados registros podrán conservarse durante el plazo estrictamente necesario para seguridad, obligaciones legales o resolución de controversias.</>,

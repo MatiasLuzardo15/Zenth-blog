@@ -3,9 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import {
   ArrowUpRight, Users, LibraryBig, CircleDashed, CalendarDays, Orbit, HeartPulse,
   Sparkles, Trash2, Palette, LayoutDashboard, Mic, PhoneCall,
-  PenLine, BarChart3, UserCog, BookOpen,
+  PenLine, BarChart3, UserCog, BookOpen, Globe,
 } from 'lucide-react';
 import { AgendaFocusShot, BoardShot, LibraryShot } from './FeatureShots';
+import ZenCharacter from './ZenCharacter';
 
 interface FeatureDetail {
   id: string;
@@ -47,6 +48,13 @@ const FEATURE_DETAILS: Record<string, FeatureDetail> = {
     shortDesc: 'Escribe y dibuja con otras personas, en la misma nota y en vivo.',
     icon: PenLine,
     docsPath: '/docs/biblioteca/compartir-notas-y-lienzos',
+  },
+  sites: {
+    id: 'sites',
+    title: 'Sitios web',
+    shortDesc: 'Publica tus notas en tu dirección de zenth.website.',
+    icon: Globe,
+    docsPath: '/docs/sitios/que-son-los-sitios',
   },
   voice: {
     id: 'voice',
@@ -145,7 +153,7 @@ const FEATURE_DETAILS: Record<string, FeatureDetail> = {
  * Las tres funciones con «captura» propia (ver `FeatureShots.tsx`); el resto se
  * muestra como fila de tarjetas pequeñas, en este orden.
  */
-const SECONDARY_ORDER = ['boards', 'focus', 'calendar', 'progress', 'stats', 'mood', 'voice', 'calls', 'notes', 'accounts', 'ai', 'trash', 'appearance'];
+const SECONDARY_ORDER = ['boards', 'focus', 'calendar', 'progress', 'stats', 'mood', 'voice', 'calls', 'notes', 'sites', 'accounts', 'ai', 'trash', 'appearance'];
 
 /** Color de la insignia de cada función: la paleta pastel que ya usa el producto. */
 const TONE: Record<string, string> = {
@@ -161,6 +169,7 @@ const TONE: Record<string, string> = {
   voice: '#80CBC4',
   calls: '#90CAF9',
   notes: '#E6EE9C',
+  sites: '#B2DFDB',
   accounts: '#B0BEC5',
   ai: '#B39DDB',
   trash: '#BCAAA4',
@@ -235,12 +244,15 @@ const CompactCard: React.FC<{
   className?: string;
   /** Color del icono sobre la insignia: oscuro sobre los pasteles, claro sobre la tinta. */
   iconClass?: string;
-}> = ({ title, tone, icon: Icon, href, onGo, className = '', iconClass = 'text-black/75' }) => (
+  /** Ilustración en la esquina inferior derecha; el título le deja sitio. */
+  aside?: React.ReactNode;
+}> = ({ title, tone, icon: Icon, href, onGo, className = '', iconClass = 'text-black/75', aside }) => (
   <FeatureLink
     href={href}
     onGo={onGo}
-    className={`group flex min-h-[148px] flex-col items-start justify-between rounded-[20px] border border-hairline bg-canvas p-5 text-left transition-colors duration-300 hover:bg-surface-1 ${className}`}
+    className={`group relative flex min-h-[148px] flex-col items-start justify-between rounded-[20px] border border-hairline bg-canvas p-5 text-left transition-colors duration-300 hover:bg-surface-1 ${className}`}
   >
+    {aside}
     <span className="flex w-full items-start justify-between">
       <span className="flex h-10 w-10 items-center justify-center rounded-full" style={{ backgroundColor: tone }}>
         <Icon className={`h-5 w-5 ${iconClass}`} strokeWidth={1.9} />
@@ -250,7 +262,7 @@ const CompactCard: React.FC<{
         strokeWidth={2}
       />
     </span>
-    <span className="mt-6 text-[16px] font-semibold leading-[1.3] tracking-[-0.01em] text-ink">{title}</span>
+    <span className={`mt-6 text-[16px] font-semibold leading-[1.3] tracking-[-0.01em] text-ink ${aside ? 'pr-20' : ''}`}>{title}</span>
   </FeatureLink>
 );
 
@@ -268,13 +280,14 @@ const Features: React.FC<FeaturesProps> = ({ onNavigate }) => {
         <div className="max-w-3xl">
           <p className="t-eyebrow">Qué incluye</p>
           <h2 className="t-display-lg mt-4 text-ink">
-            Dieciséis herramientas
+            Diecisiete herramientas
             <br />
             que se hablan entre sí.
           </h2>
           <p className="t-body-lg mt-6 max-w-xl text-ink-muted">
             Una tarea puede vivir en Agenda y en una pizarra, convertirse en nota y terminar en una
-            sesión de enfoque. Biblioteca conecta el contenido de Zenth con tu Drive sin duplicarlo.
+            sesión de enfoque. Una nota puede publicarse como sitio en zenth.website. Biblioteca
+            conecta el contenido de Zenth con tu Drive sin duplicarlo.
           </p>
         </div>
 
@@ -318,6 +331,7 @@ const Features: React.FC<FeaturesProps> = ({ onNavigate }) => {
             href="/docs"
             onGo={() => navigate('/docs')}
             className="lg:col-span-2"
+            aside={<ZenCharacter size={60} pose="stand" holding="book" look="down" className="absolute bottom-0 right-6" />}
           />
         </div>
       </div>

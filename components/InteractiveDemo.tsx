@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Check, Flame, Timer, Target } from 'lucide-react';
+import { ZenPerch } from './ZenCharacter';
 
 const InteractiveDemo: React.FC = () => {
     const [checked, setChecked] = useState(false);
@@ -36,7 +37,9 @@ const InteractiveDemo: React.FC = () => {
                         </p>
                     </div>
 
-                    <div className="fr-card fr-elevated relative">
+                    <div className="fr-card fr-elevated relative mt-10 lg:mt-0">
+                        {/* Zen celebra encima de la tarjeta: la estrella es la XP que suma completar algo. */}
+                        <ZenPerch size={64} pose="stand" holding="star" mood="happy" className="right-8" />
                         <div className="flex items-center justify-between">
                             <span className="t-caption text-ink-muted">Agenda · Mañana</span>
                             <span className="fr-btn fr-btn-translucent pointer-events-none t-micro">

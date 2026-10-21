@@ -11,6 +11,7 @@ import {
   getCategory,
 } from '../../content/docs';
 import { formatDocDate } from '../../content/docs/text';
+import ZenCharacter from '../ZenCharacter';
 import { useDocs } from './DocsLayout';
 
 /** Búsquedas de ejemplo: enseñan que se puede preguntar por lo que se quiere hacer. */
@@ -28,11 +29,22 @@ const DocsHome: React.FC = () => {
     <div className="pb-8">
       <header>
         <p className="t-eyebrow">Documentación</p>
-        <h1 className="t-display-xl mt-4 text-ink">
-          Todo Zenth,
-          <br />
-          explicado.
-        </h1>
+        <div className="mt-4 flex items-end gap-6 sm:gap-10">
+          <h1 className="t-display-xl text-ink">
+            Todo Zenth,
+            <br />
+            explicado.
+          </h1>
+          {/* De pie, a la derecha del título, con la guía en la mano. En el
+              teléfono el titular ocupa todo el ancho y no cabe a su lado. */}
+          <ZenCharacter
+            size={104}
+            pose="stand"
+            holding="book"
+            look="left"
+            className="mb-1 hidden shrink-0 sm:block"
+          />
+        </div>
         <p className="t-body-lg mt-6 max-w-xl text-ink-muted">
           Guías paso a paso de cada sección de la aplicación. Busca por lo que quieres hacer: no hace
           falta saber cómo se llama la pantalla.

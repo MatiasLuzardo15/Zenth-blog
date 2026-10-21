@@ -1,5 +1,6 @@
 import React from 'react';
 import { Heart, ArrowUpRight, Share2 } from 'lucide-react';
+import { ZenPerch } from './ZenCharacter';
 
 const Support: React.FC = () => {
   const handleDonate = () => {
@@ -8,7 +9,9 @@ const Support: React.FC = () => {
 
   return (
     <section id="colaborar" className="scroll-mt-20 pb-24 lg:pb-32">
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div className="relative mx-auto mt-14 max-w-6xl px-4 sm:px-6 lg:px-8">
+        {/* Zen sentado en el borde, con las piernas colgando, ofrece un corazón: la donación. */}
+        <ZenPerch size={68} pose="sit" holding="heart" mood="happy" className="right-[calc(8%+1rem)]" />
         <div className="fr-spotlight fr-spotlight--orange">
           <div className="relative grid gap-10 lg:grid-cols-[1.3fr_1fr] lg:items-end">
             <div>

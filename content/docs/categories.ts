@@ -1,5 +1,5 @@
 import {
-  Footprints, CalendarDays, LayoutDashboard, LibraryBig, PhoneCall, CircleDashed, Orbit,
+  Footprints, CalendarDays, LayoutDashboard, LibraryBig, Globe, PhoneCall, CircleDashed, Orbit,
   UserCog, Keyboard, Puzzle, ShieldCheck, LifeBuoy,
 } from 'lucide-react';
 import type { DocCategory } from './types';
@@ -29,6 +29,12 @@ export const DOC_CATEGORIES: DocCategory[] = [
     title: 'Biblioteca',
     description: 'Notas, lienzos, archivos y documentos de Google en un mismo explorador.',
     icon: LibraryBig,
+  },
+  {
+    id: 'sitios',
+    title: 'Sitios',
+    description: 'Publica tus notas como páginas web en tu dirección de zenth.website.',
+    icon: Globe,
   },
   {
     id: 'reuniones',

@@ -139,7 +139,7 @@ export const ayudaArticles: DocArticle[] = [
 
       h2('4. En iPhone y iPad'),
       list(
-        'Los recordatorios push **solo llegan con Zenth instalada** en la pantalla de inicio. Desde Safari a secas no llegan. Ver [Instalar Zenth](/docs/primeros-pasos/instalar-la-app).',
+        'Los recordatorios push **solo llegan con Zenth instalada** en la pantalla de inicio. Desde Safari a secas no llegan. Ver [Usar Zenth en el teléfono y en el escritorio](/docs/primeros-pasos/instalar-la-app).',
         'Abre la app instalada, entra en Ajustes › Notificaciones y actívalos desde ahí.',
       ),
 
@@ -160,10 +160,10 @@ export const ayudaArticles: DocArticle[] = [
     slug: 'un-enlace-no-funciona',
     category: 'ayuda',
     title: 'Un enlace no funciona',
-    summary: 'Por qué puede fallar un enlace de invitación, de reunión, de pizarra pública o de evento, y qué hacer en cada caso.',
-    keywords: ['enlace', 'invitación caducada', 'enlace revocado', 'límite de usos', 'pizarra no disponible', 'reunión terminó', 'no puedo entrar', 'enlace no válido', 'invitado', 'sala de espera', 'no me admiten'],
-    updated: UPDATED,
-    related: ['pizarras/unirse-a-una-pizarra', 'reuniones/reuniones-rapidas-e-invitados', 'pizarras/pizarra-publica-con-enlace'],
+    summary: 'Por qué puede fallar un enlace de invitación, de reunión, de pizarra pública, de sitio o de evento, y qué hacer en cada caso.',
+    keywords: ['enlace', 'invitación caducada', 'enlace revocado', 'límite de usos', 'pizarra no disponible', 'reunión terminó', 'no puedo entrar', 'enlace no válido', 'invitado', 'sala de espera', 'no me admiten', 'sitio ya no está publicado', 'zenth.website'],
+    updated: '2026-10-20',
+    related: ['pizarras/unirse-a-una-pizarra', 'reuniones/reuniones-rapidas-e-invitados', 'pizarras/pizarra-publica-con-enlace', 'sitios/publicar-una-nota'],
     blocks: [
       p('Cada tipo de enlace de Zenth tiene sus propias razones para dejar de funcionar. Busca el tuyo:'),
 
@@ -195,6 +195,13 @@ export const ayudaArticles: DocArticle[] = [
 
       h2('Invitación a una nota o lienzo'),
       p('Los enlaces a notas y lienzos **no dan acceso por sí solos**: hace falta que el propietario te haya compartido el documento. Si te aparece sin acceso, pídele que lo comparta con tu correo. Ver [Compartir notas y lienzos](/docs/biblioteca/compartir-notas-y-lienzos).'),
+
+      h2('Sitio en zenth.website'),
+      list(
+        '**«Este sitio ya no está publicado»:** el dueño lo despublicó o retiró esa página. El enlace deja de mostrar contenido; las notas siguen en su cuenta.',
+        '**«Este sitio no existe»:** el subdominio nunca se publicó, o la dirección está mal copiada.',
+        'Si eres tú el dueño, vuelve a publicar desde la nota o desde **Ajustes › Sitios**. Ver [Publicar una nota](/docs/sitios/publicar-una-nota).',
+      ),
     ],
   },
 
@@ -204,7 +211,7 @@ export const ayudaArticles: DocArticle[] = [
     title: 'Google Drive o Calendar se desconectan',
     summary: 'Qué significa «Requiere atención» o «Reactivar sincronización», por qué caduca la conexión y cómo volver a conectar sin perder nada.',
     keywords: ['google', 'drive', 'calendar', 'desconectado', 'requiere atención', 'reactivar', 'volver a conectar', 'permiso caducado', 'reautorizar', 'ventana emergente', 'workspace', 'no sincroniza'],
-    updated: UPDATED,
+    updated: '2026-10-20',
     related: ['integraciones/google-drive', 'integraciones/google-calendar'],
     blocks: [
       p('Las conexiones con Google usan permisos que Google puede hacer caducar o que tú puedes revocar. Cuando eso pasa, Zenth te lo indica y pide que vuelvas a autorizar. **No pierdes archivos ni tareas**: solo hay que reconectar.'),
@@ -218,7 +225,7 @@ export const ayudaArticles: DocArticle[] = [
 
       h2('Google Calendar'),
       list(
-        'Google Calendar se conecta con una **autorización temporal**. Si caduca, verás **Vuelve a autorizar la cuenta** y el botón **Reactivar sincronización**.',
+        'Google Calendar se conecta con una **autorización temporal**. Si caduca, verás **Vuelve a autorizar la cuenta** y el botón **Reactivar sincronización**. La conexión viaja con tu cuenta: reconectar en un dispositivo la restablece en los demás.',
         'Si viste **Actualización de Agenda pausada**, alguien (tú) la pausó: pulsa **Reanudar**.',
         'Si un evento no aparece, comprueba que su calendario está activado en **Calendarios visibles en Agenda** y pulsa **Actualizar Agenda**.',
       ),
@@ -240,13 +247,13 @@ export const ayudaArticles: DocArticle[] = [
     title: 'No puedo entrar a mi cuenta',
     summary: 'Contraseña incorrecta, correo sin confirmar, cuenta creada con Google, sesión que caducó: cómo recuperar el acceso paso a paso.',
     keywords: ['no puedo entrar', 'contraseña', 'olvidé mi contraseña', 'correo no llega', 'confirmar correo', 'iniciar sesión', 'google', 'sesión caducada', 'cuenta bloqueada', 'reautenticar', 'no recibo el correo'],
-    updated: UPDATED,
+    updated: '2026-10-20',
     related: ['primeros-pasos/crear-cuenta-e-iniciar-sesion', 'cuenta/correo-contrasena-y-sesion', 'cuenta/varias-cuentas'],
     blocks: [
       h2('«El correo o la contraseña no coinciden»'),
       list(
         'Comprueba mayúsculas y minúsculas, y que no se haya colado un espacio. Con el ojo junto al campo puedes **mostrar la contraseña**.',
-        'Si no la recuerdas, pulsa **¿La olvidaste?** junto al campo Contraseña para recibir un enlace. Ver [Crear tu cuenta e iniciar sesión](/docs/primeros-pasos/crear-cuenta-e-iniciar-sesion).',
+        'Si no la recuerdas, pulsa **¿La olvidaste?** junto al campo Contraseña: se abre **Recuperá el acceso.** y te enviamos un enlace. Ver [Crear tu cuenta e iniciar sesión](/docs/primeros-pasos/crear-cuenta-e-iniciar-sesion).',
         'Las contraseñas **nuevas** deben tener 12 caracteres o más, con mayúscula, minúscula, número y símbolo.',
       ),
 

@@ -128,13 +128,14 @@ export const agendaArticles: DocArticle[] = [
     category: 'agenda',
     title: 'Repetición y recordatorios',
     summary: 'Crea rutinas diarias, semanales o mensuales, edita una sola repetición o toda la serie, y elige cómo quieres que Zenth te avise.',
-    keywords: ['recurrente', 'rutina', 'repetir', 'serie', 'hábito', 'diario', 'semanal', 'mensual', 'aviso', 'recordatorio', 'notificación', 'anticipación', 'pizarra', 'próxima ocurrencia'],
-    updated: '2026-10-05',
+    keywords: ['recurrente', 'rutina', 'repetir', 'serie', 'hábito', 'diario', 'semanal', 'mensual', 'aviso', 'recordatorio', 'notificación', 'anticipación', 'pizarra', 'próxima ocurrencia', 'sin fecha de fin'],
+    updated: '2026-10-20',
     related: ['pizarras/vistas-de-pizarra', 'agenda/historial-de-completadas', 'cuenta/notificaciones', 'ayuda/los-avisos-no-llegan', 'cuenta/papelera'],
     blocks: [
       h2('Tareas que se repiten'),
       p('En el editor, el selector **Repetición** alterna entre **No repetir**, **Diario**, **Semanal** y **Mensual**. Al elegir Semanal aparece una fila con los días (L M X J V S D) para marcar cuáles.'),
-      warn('Toda repetición necesita una **fecha de fin**. Bajo el selector aparece «Finalizar repetición» marcado como «Requerido»; hasta que elijas una fecha, no se puede guardar la tarea.', 'La fecha de fin es obligatoria'),
+      p('La fecha de fin es **opcional**. Puedes dejar **Sin fecha de fin** y la serie continúa; o elegir un día en **Finalizar repetición**. Esa fecha no puede quedar **antes** de la primera ocurrencia.'),
+      p('En una serie **semanal**, la primera ocurrencia es el primer día marcado que coincida con la fecha de inicio o que venga después: si marcas miércoles y viernes y empiezas un lunes, la serie arranca el miércoles.'),
 
       h2('Editar o borrar una tarea repetida'),
       p('Cuando editas una tarea que forma parte de una serie, Zenth te pregunta a qué parte se aplica el cambio:'),

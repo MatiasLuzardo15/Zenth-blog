@@ -1,9 +1,10 @@
 import React from 'react';
 import {
   ArrowUpRight, Users, LibraryBig, CircleDashed, CalendarDays, Orbit, HardDrive, PhoneCall, CalendarSync, Workflow,
-  History, FileAudio, Headphones, Headset, Sparkles, HeartPulse, BarChart3, UserCog, MonitorSmartphone,
+  History, FileAudio, Headphones, Headset, Sparkles, HeartPulse, BarChart3, UserCog, MonitorSmartphone, Globe,
 } from 'lucide-react';
 import AppDemo from './AppDemo';
+import ZenCharacter, { ZenPerch } from './ZenCharacter';
 
 const SIGNALS = [
   { icon: CalendarDays, label: 'Agenda visual' },
@@ -11,6 +12,7 @@ const SIGNALS = [
   { icon: Users, label: 'Pizarras compartidas' },
   { icon: Workflow, label: 'Automatizaciones y plantillas' },
   { icon: LibraryBig, label: 'Biblioteca y lienzos' },
+  { icon: Globe, label: 'Sitios en zenth.website' },
   { icon: History, label: 'Historial de versiones' },
   { icon: HardDrive, label: 'Google Drive y Workspace' },
   { icon: FileAudio, label: 'Notas de voz y PDF' },
@@ -23,7 +25,7 @@ const SIGNALS = [
   { icon: HeartPulse, label: 'Registro de ánimo' },
   { icon: BarChart3, label: 'Estadísticas' },
   { icon: UserCog, label: 'Varias cuentas' },
-  { icon: MonitorSmartphone, label: 'Instalable en móvil y escritorio' },
+  { icon: MonitorSmartphone, label: 'Teléfono y escritorio, misma cuenta' },
 ];
 
 const Hero: React.FC = () => {
@@ -42,7 +44,7 @@ const Hero: React.FC = () => {
             oculta a lectores de pantalla) para que el bucle no tenga salto. Ver
             `.zenth-marquee` en index.html; aquí el desvanecido de los bordes es más ancho. */}
         <div
-          className="zenth-marquee mx-auto mb-10 max-w-4xl"
+          className="zenth-marquee mx-auto mb-16 max-w-4xl sm:mb-20"
           style={{
             WebkitMaskImage: 'linear-gradient(to right, transparent, #000 15%, #000 85%, transparent)',
             maskImage: 'linear-gradient(to right, transparent, #000 15%, #000 85%, transparent)',
@@ -63,8 +65,32 @@ const Hero: React.FC = () => {
         </div>
 
         <div className="mx-auto flex max-w-4xl flex-col items-center text-center">
-          <h1 className="t-display-xxl text-ink">
-            Tu día empieza y&nbsp;termina
+          <h1 className="t-display-xxl text-ink pt-14">
+            Tu día{' '}
+            <span className="relative isolate inline-block">
+              {/* Zen sale por detrás de la «m» de «empieza»: las letras van
+                  delante, él queda derecho y el cuerpo se difumina hacia la
+                  palabra. Va en ems para crecer con el título. */}
+              <span
+                aria-hidden="true"
+                className="pointer-events-none absolute -z-10 [-webkit-mask-image:linear-gradient(to_top,transparent_0%,transparent_18%,#000_34%)] [mask-image:linear-gradient(to_top,transparent_0%,transparent_18%,#000_34%)] dark:[-webkit-mask-image:linear-gradient(to_top,transparent_0%,#000_32%)] dark:[mask-image:linear-gradient(to_top,transparent_0%,#000_32%)]"
+                style={{
+                  left: '50%',
+                  bottom: '0.62em',
+                  transform: 'translateX(calc(-50% - 0.78em))',
+                }}
+              >
+                <ZenCharacter
+                  size={64}
+                  wave="left"
+                  mood="happy"
+                  className="block"
+                  style={{ width: '1.12em', height: '1.12em' }}
+                />
+              </span>
+              empieza
+            </span>
+            {' '}y&nbsp;termina
             <br />
             en una sola app.
           </h1>
@@ -84,8 +110,11 @@ const Hero: React.FC = () => {
           </div>
         </div>
 
-        {/* Demo del producto: DOM real animado en bucle, no una captura. */}
-        <div className="mt-16 lg:mt-24">
+        {/* Demo del producto: DOM real animado en bucle, no una captura. Zen se
+            asoma por detrás de su borde superior (solo donde la demo es una
+            ventana; en móvil no hay borde del que asomarse). */}
+        <div className="relative mt-16 lg:mt-24">
+          <ZenPerch size={80} tilt={-6} look="left" className="right-[9%] hidden sm:block" />
           <AppDemo />
         </div>
       </div>

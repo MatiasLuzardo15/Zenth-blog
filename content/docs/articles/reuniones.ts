@@ -109,8 +109,8 @@ export const reunionesArticles: DocArticle[] = [
     category: 'reuniones',
     title: 'Compartir tarjetas y crear tareas en el chat',
     summary: 'Adjunta tarjetas antes de enviarlas, abre su detalle desde la conversación y usa /tarea con menciones para convertir los acuerdos en trabajo.',
-    keywords: ['chat de la sala', 'tarjetas', 'adjuntar', 'arrastrar', 'soltar', 'enviar', 'enlace de tarjeta', 'ficha', 'otra pizarra', 'tarea', '/tarea', 'comando', 'menciones', 'responsables', 'asignar', 'bandeja', 'widget'],
-    updated: '2026-10-08',
+    keywords: ['chat de la sala', 'tarjetas', 'adjuntar', 'arrastrar', 'soltar', 'enviar', 'enlace de tarjeta', 'ficha', 'otra pizarra', 'tarea', '/tarea', 'comando', 'menciones', 'responsables', 'asignar', 'bandeja', 'widget', 'mostrar a la sala', 'presentar', 'seguir'],
+    updated: '2026-10-20',
     related: ['reuniones/salas-de-pizarra-y-llamadas-privadas', 'reuniones/durante-una-llamada', 'pizarras/tarjetas-y-bandeja-rapida', 'pizarras/colaborar-en-tarjetas', 'privacidad/quien-ve-que'],
     blocks: [
       p('El chat de una **sala de pizarra** conecta la conversación con el trabajo de ese equipo: puedes compartir una tarjeta o crear una nueva sin dejar la llamada. En escritorio, abre **Chat** dentro del panel flotante para tenerlo junto al tablero. El historial se conserva con la sala.'),
@@ -150,7 +150,7 @@ export const reunionesArticles: DocArticle[] = [
         'Si quieres responsables, escribe `@` y parte de su nombre. Elige una sugerencia o pulsa `Tab` para completar la primera. Puedes mencionar a varias personas.',
         'Pulsa **Enviar** o `Enter`. Se crea la tarjeta y el chat publica **Nueva tarea**, con su ficha y tu nombre como autor.',
       ),
-      p('La tarea nace **en la pizarra de la sala**, aunque estés mirando otra pizarra o sección. Se crea sin fecha y sin clasificar, como una captura de la **bandeja rápida**. En pantallas pequeñas, la primera lista recoge las tarjetas sin clasificar. Su aparición en Agenda respeta tu ajuste **Añadir tareas de pizarras a Agenda**. Ver [Tarjetas y bandeja rápida](/docs/pizarras/tarjetas-y-bandeja-rapida).'),
+      p('La tarea nace **en la pizarra de la sala**, aunque estés mirando otra pizarra o sección. Se crea sin clasificar, como una captura de la **bandeja rápida**. Si tienes activado **Añadir tareas de pizarras a Agenda**, lleva **fecha de hoy**; si no, queda sin fecha. En pantallas pequeñas, la primera lista recoge las tarjetas sin clasificar. Ver [Tarjetas y bandeja rápida](/docs/pizarras/tarjetas-y-bandeja-rapida).'),
       p('Las menciones se convierten en responsables de la tarjeta; no forman parte de su título. El mensaje publicado contiene la ficha, en lugar del comando escrito.'),
 
       h2('Elegir responsables con menciones'),
@@ -161,6 +161,17 @@ export const reunionesArticles: DocArticle[] = [
         'Las menciones válidas sí se asignan. Si alguien deja de pertenecer a la pizarra antes de terminar o falla una asignación, el aviso te indica que revises los responsables.',
       ),
       tip('Elige la sugerencia del chat cuando haya nombres parecidos. Después puedes abrir la ficha y revisar o cambiar los responsables desde la tarjeta.'),
+
+      h2('Mostrar una tarjeta a la sala'),
+      p('En **escritorio**, si estás en la llamada de **esa** pizarra, el detalle de una tarjeta de la misma pizarra muestra **Mostrar a la sala**. Al pulsarlo, la cabecera de la llamada dice «Estás presentando una tarjeta · Dejar de presentar».'),
+      list(
+        'Los demás ven «Ana está presentando una tarjeta · **Seguir**». Nada cambia en su pantalla hasta que pulsan Seguir.',
+        'Quien sigue abre esa tarjeta y, si cambias a otra, la nueva. **Dejar de seguir** está en la cabecera y, con la tarjeta abierta, en el propio detalle.',
+        'Si quien sigue está editando o tiene un diálogo abierto, la cabecera avisa del cambio y espera a **Abrir**; no le pisa el trabajo a medias.',
+        'Solo una persona presenta a la vez. Si otra empieza, sustituye a la anterior; nadie pasa a seguirla sin pedirlo.',
+        'Cerrar la tarjeta, salir de la pizarra o de la llamada, o estrechar la ventana a móvil, termina la presentación. En llamadas privadas, con invitados o en el teléfono, el botón no aparece.',
+      ),
+      note('Presentar **no concede acceso**. Quien no puede abrir esa tarjeta ve el aviso y no se abre nada.'),
 
       h2('Si el comando no se completa'),
       table(
@@ -268,7 +279,7 @@ export const reunionesArticles: DocArticle[] = [
     title: 'Durante una llamada',
     summary: 'Micrófono, burbuja de audio, cámara, ventana flotante, pantalla compartida, turnos de palabra, chat y atajos de la llamada.',
     keywords: ['micrófono', 'silenciar', 'cámara', 'vídeo', 'encender cámara', 'elegir cámara', 'pantalla compartida', 'reacciones', 'mano levantada', 'chat', 'emojis', 'atajos de llamada', 'salir', 'colgar', 'sigues ahí', 'estás solo', 'burbuja', 'ensordecer', 'ventana flotante', 'picture in picture', 'pip', 'turnos', 'cola de manos', 'vuelvo enseguida'],
-    updated: '2026-10-08',
+    updated: '2026-10-20',
     related: ['reuniones/tarjetas-y-tareas-en-el-chat-de-la-sala', 'reuniones/el-menu-de-cada-persona', 'reuniones/audio-y-dispositivos', 'atajos/atajos-de-la-aplicacion', 'reuniones/controles-del-anfitrion'],
     blocks: [
       h2('Los controles'),

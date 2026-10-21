@@ -47,7 +47,7 @@ const TermsAndConditions: React.FC<TermsAndConditionsProps> = ({ onBack }) => {
 
                 <p className="t-eyebrow">Legal</p>
                 <h1 className="t-display-xl mt-4 text-ink">Términos y condiciones.</h1>
-                <p className="t-micro mt-6 text-ink-muted">Última actualización: 7 de octubre de 2026</p>
+                <p className="t-micro mt-6 text-ink-muted">Última actualización: 20 de octubre de 2026</p>
 
                 <div className="fr-card-featured mt-10">
                     <p className="t-caption text-ink">En una frase</p>
@@ -59,8 +59,8 @@ const TermsAndConditions: React.FC<TermsAndConditionsProps> = ({ onBack }) => {
 
                 <div className="mt-12 border-t border-hairline-soft pt-10">
                     <P>
-                        Estos Términos regulan el uso de Zenth, disponible en <B>zenth.space</B> y como
-                        aplicación web progresiva. Al crear una cuenta o utilizar el Servicio aceptas estos
+                        Estos Términos regulan el uso de Zenth, disponible en <B>zenth.space</B>, como
+                        aplicación web progresiva y, si publicas un sitio, en <B>zenth.website</B>. Al crear una cuenta o utilizar el Servicio aceptas estos
                         Términos y la <a href="/privacy" className="fr-link">Política de Privacidad</a>. Si
                         no estás de acuerdo, no utilices el Servicio.
                     </P>
@@ -78,6 +78,7 @@ const TermsAndConditions: React.FC<TermsAndConditionsProps> = ({ onBack }) => {
                         <><B>Agenda:</B> tareas, eventos y reuniones en vistas de día, semana, mes y año.</>,
                         <><B>Pizarras:</B> proyectos, listas, bandeja de captura, colaboración, actividad y permisos.</>,
                         <><B>Biblioteca:</B> notas y lienzos nativos y acceso opcional a Google Drive y Workspace.</>,
+                        <><B>Sitios:</B> publicación de notas propias como páginas web en un subdominio de zenth.website, cuando la función está habilitada para tu cuenta.</>,
                         <><B>Reuniones:</B> salas de voz de las pizarras, llamadas privadas y reuniones rápidas con invitados, con voz, cámara opcional, pantalla compartida y chat.</>,
                         <><B>Enfoque:</B> temporizador o cronómetro global, descansos, sonido, objetivo e historial.</>,
                         <><B>Progreso y estadísticas:</B> XP, rachas, 20 niveles, 25 logros, registro de ánimo y estadísticas de tu tiempo en la aplicación.</>,
@@ -143,6 +144,7 @@ const TermsAndConditions: React.FC<TermsAndConditionsProps> = ({ onBack }) => {
                         <>Quien recibe un documento puede guardarlo en su Biblioteca. Quitarlo de su Biblioteca no borra el original.</>,
                         <>Al vincular una nota o un lienzo a una tarea de una pizarra eliges si los miembros de esa pizarra pueden leerlo, editarlo o si permanece privado.</>,
                         <>Las personas con acceso ven quién está en el documento y qué hace (por ejemplo, escribiendo o mirando).</>,
+                        <>Si publicas un sitio, cualquiera que obtenga la dirección puede ver la copia publicada de esas páginas, sin iniciar sesión. Eres responsable de no publicar contenido al que no tengas derecho. Despublicar retira las páginas de la web; las notas siguen en tu cuenta.</>,
                     ]} />
                 </Section>
 
@@ -163,9 +165,10 @@ const TermsAndConditions: React.FC<TermsAndConditionsProps> = ({ onBack }) => {
                 <Section n={8} title="Google Calendar">
                     <P>
                         Calendar se conecta con permiso de solo lectura. Zenth importa eventos a Agenda y solo
-                        los lleva a una pizarra cuando tú lo eliges. La sincronización depende de una autorización
-                        temporal de Google; puede requerir que vuelvas a conectar. Desvincular la cuenta detiene
-                        futuras lecturas, pero no borra automáticamente los elementos ya importados.
+                        los lleva a una pizarra cuando tú lo eliges. La conexión y las preferencias de sincronización
+                        viajan con tu cuenta. El permiso de Google es temporal y puede requerir que vuelvas a conectar.
+                        Desvincular detiene futuras lecturas en tus dispositivos, pero no borra automáticamente los
+                        elementos ya importados.
                     </P>
                 </Section>
 

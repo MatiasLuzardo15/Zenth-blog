@@ -1,6 +1,7 @@
 import React from 'react';
 import { Mic, Phone, Video, Headphones, Link2, ArrowUpRight } from 'lucide-react';
 import CallsDemo from './demo/CallsDemo';
+import { ZenPerch } from './ZenCharacter';
 
 interface VoiceSectionProps {
   onSelectPost: (id: string) => void;
@@ -54,10 +55,14 @@ const VoiceSection: React.FC<VoiceSectionProps> = ({ onSelectPost }) => {
               aislado.
             </p>
           </div>
-          <button onClick={() => onSelectPost('18')} className="fr-btn fr-btn-primary shrink-0 lg:mt-1">
-            Leer el anuncio completo
-            <ArrowUpRight className="h-4 w-4" />
-          </button>
+          {/* Zen, con auriculares, saluda desde encima del botón como si acabara de entrar a la sala. */}
+          <div className="relative shrink-0 lg:mt-1">
+            <ZenPerch size={60} pose="stand" headset wave mood="happy" className="right-6 hidden lg:block" />
+            <button onClick={() => onSelectPost('18')} className="fr-btn fr-btn-primary w-full lg:w-auto">
+              Leer el anuncio completo
+              <ArrowUpRight className="h-4 w-4" />
+            </button>
+          </div>
         </div>
 
         <div className="mt-10 lg:mt-12">

@@ -12,7 +12,7 @@ export const bibliotecaArticles: DocArticle[] = [
     summary: 'Un único explorador para tus notas y lienzos de Zenth y, si conectas Google, tu Drive: vistas, ubicaciones en árbol, filtros por tipo y búsqueda en todo o en un lugar.',
     keywords: ['biblioteca', 'entradas', 'explorador', 'notas', 'archivos', 'filtros', 'tipo', 'buscar', 'cuadrícula', 'lista', 'todo', 'recientes', 'destacados', 'compartidos', 'ubicaciones', 'carpetas', 'migas', 'nuevo', 'más'],
     updated: '2026-10-02',
-    related: ['biblioteca/notas', 'biblioteca/plantillas-de-notas', 'biblioteca/lienzos', 'integraciones/google-drive'],
+    related: ['biblioteca/notas', 'biblioteca/plantillas-de-notas', 'biblioteca/lienzos', 'sitios/que-son-los-sitios', 'integraciones/google-drive'],
     blocks: [
       p('**Biblioteca** es donde viven tus notas, lienzos, archivos y, si conectas Google, tus documentos de Drive. Las notas y lienzos son de Zenth; los documentos, hojas, presentaciones y formularios de Google se guardan en tu Drive y Zenth los muestra y edita sin duplicarlos.'),
 
@@ -88,8 +88,8 @@ export const bibliotecaArticles: DocArticle[] = [
     title: 'Notas: el editor de Zenth',
     summary: 'Escribe desde cero o con una plantilla, organiza el documento con columnas e índice automático y elige su fuente, portada y diseño al exportar.',
     keywords: ['nota', 'editor', 'markdown', 'bloques', 'slash', 'formato', 'imágenes', 'tabla', 'exportar', 'pdf', 'índice', 'índice automático', 'columnas', 'concentración', 'buscar y reemplazar', 'autoguardado', 'portada', 'diseño de la nota', 'fuente', 'tipografía', 'interlineado', 'copiar formato', 'superíndice', 'subíndice', 'plantillas', 'recorte', 'espacio para imagen', 'destacado', 'separador', 'salto de página', 'encabezado', 'pie de página', 'etiquetas', 'historial', 'versiones', 'pegar desde ChatGPT', 'código', 'copiar código', 'buscar lenguaje', 'lenguajes', 'fórmula', 'latex', 'mermaid', 'diagrama', 'enlace interno', 'sección', 'clic derecho', 'menú contextual', 'texto alternativo', 'reemplazar imagen', 'vista de hojas', 'hojas', 'A4', 'carta', 'horizontal'],
-    updated: '2026-10-05',
-    related: ['biblioteca/plantillas-de-notas', 'atajos/atajos-del-editor-de-notas', 'biblioteca/historial-de-versiones', 'biblioteca/compartir-notas-y-lienzos', 'agenda/detalle-de-una-tarea'],
+    updated: '2026-10-20',
+    related: ['biblioteca/plantillas-de-notas', 'atajos/atajos-del-editor-de-notas', 'biblioteca/historial-de-versiones', 'biblioteca/compartir-notas-y-lienzos', 'sitios/publicar-una-nota', 'agenda/detalle-de-una-tarea'],
     blocks: [
       p('Las notas de Zenth usan un editor de bloques pensado para pensar por escrito: empiezas a escribir y le das forma sobre la marcha, sin salir del teclado.'),
 
@@ -259,6 +259,7 @@ export const bibliotecaArticles: DocArticle[] = [
       list(
         '**Etiquetar la nota** para agruparla con tus tareas.',
         '**Compartir** con otras personas: ver [Compartir notas y lienzos](/docs/biblioteca/compartir-notas-y-lienzos).',
+        '**Publicar en la web:** si Sitios está habilitado, convierte la nota en una página de `zenth.website`. Ver [Publicar una nota](/docs/sitios/publicar-una-nota).',
         '**Historial de versiones:** ve y restaura estados anteriores de la nota. Ver [Historial de versiones](/docs/biblioteca/historial-de-versiones).',
         '**Exportar:** copiar como Markdown o como texto; descargar como `.md`, `.html` o PDF; o imprimir.',
         '**Mover a la papelera:** la nota se puede recuperar. Ver [Papelera](/docs/cuenta/papelera).',

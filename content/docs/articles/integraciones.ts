@@ -61,9 +61,9 @@ export const integracionesArticles: DocArticle[] = [
     slug: 'google-calendar',
     category: 'integraciones',
     title: 'Google Calendar en Agenda',
-    summary: 'Trae los eventos de tus calendarios de Google a Agenda con un permiso de solo lectura: Zenth mira, nunca escribe.',
-    keywords: ['google calendar', 'calendario', 'eventos', 'sincronizar', 'solo lectura', 'importar', 'llevar a pizarra', 'pausar', 'desconectar', 'calendarios visibles'],
-    updated: UPDATED,
+    summary: 'Trae los eventos de tus calendarios de Google a Agenda con un permiso de solo lectura: Zenth mira, nunca escribe. La conexión viaja con tu cuenta.',
+    keywords: ['google calendar', 'calendario', 'eventos', 'sincronizar', 'solo lectura', 'importar', 'llevar a pizarra', 'pausar', 'desconectar', 'calendarios visibles', 'cuenta', 'servidor'],
+    updated: '2026-10-20',
     related: ['agenda/vistas-y-planificacion', 'agenda/detalle-de-una-tarea', 'ayuda/google-se-desconecta'],
     blocks: [
       p('Con **Google Calendar** conectado, tus eventos aparecen en Agenda junto a tus tareas, no en una pestaña aparte. Es una integración de **solo lectura**: Zenth mira tu calendario y **nunca escribe en él**.'),
@@ -83,13 +83,14 @@ export const integracionesArticles: DocArticle[] = [
         'Los eventos importados se muestran con la etiqueta «Importado desde Google Calendar». Puedes activar o desactivar cada calendario en **Calendarios visibles en Agenda**.',
         'La conexión es una autorización temporal de Google: a veces caduca y hay que **Reactivar sincronización**.',
       ),
+      p('La conexión y la elección de calendarios **viajan con tu cuenta**: las encuentras igual en otro dispositivo al entrar. El permiso de Google sigue siendo temporal y a veces hay que reautorizarlo.'),
 
       h2('Llevar eventos a una pizarra'),
       p('Ningún evento entra a una pizarra por su cuenta. Si quieres que los de un calendario aparezcan como tarjetas, usa **Llevar eventos a una pizarra**, elige el calendario y la pizarra de destino. Es una acción explícita y reversible: **Quitar de la pizarra** los retira.'),
 
       h2('Desconectar'),
       p('**Desconectar** detiene la sincronización futura. **No elimina automáticamente** los eventos que ya se importaron a tu Agenda.'),
-      note('Los detalles técnicos: el token de acceso permanece en memoria y caduca; la lista de calendarios y las preferencias se guardan localmente en tu navegador. Ver la [Política de privacidad](/privacy).'),
+      note('El permiso de Google caduca y Zenth lo vuelve a pedir cuando hace falta. La lista de calendarios y tus preferencias de sincronización se guardan **con tu cuenta**, no solo en este navegador. Ver la [Política de privacidad](/privacy).'),
     ],
   },
 
@@ -155,7 +156,7 @@ export const integracionesArticles: DocArticle[] = [
       table(
         ['Área', 'Qué le puedes pedir'],
         ['Agenda', 'Ver tu día o varios días seguidos, con tareas, eventos y reuniones. Buscar pendientes y atrasadas.'],
-        ['Tareas', 'Crear tareas (también repetitivas, con fecha de fin), cambiar título, fecha, hora, prioridad o etiquetas, sumar notas al final, activar el aviso por correo, completarlas o reabrirlas.'],
+        ['Tareas', 'Crear tareas (también repetitivas, con o sin fecha de fin), cambiar título, fecha, hora, prioridad o etiquetas, sumar notas al final, activar el aviso por correo, completarlas o reabrirlas.'],
         ['Papelera', 'Mandar una tarea a la papelera, ver lo que hay y restaurarla.'],
         ['Pizarras', 'Ver tus pizarras y sus listas en su orden, consultar campos personalizados, crear tarjetas y rellenar sus campos o moverlas de lista donde puedes editar. Incluye fechas futuras y una pendiente por serie repetida; las archivadas aparecen solo si lo pides. Mover una tarjeta a **Completado** la completa y la archiva.'],
         ['Automatizaciones y botones', 'Consultar reglas y botones con su última ejecución; crear reglas y activar o desactivar automatizaciones si administras la pizarra. Ejecutar botones existentes donde puedes editar, con confirmación previa para los de pizarra.'],

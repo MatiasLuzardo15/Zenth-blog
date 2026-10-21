@@ -15,25 +15,25 @@
   </url>
   <url>
     <loc>https://www.zenth.space/faq</loc>
-    <lastmod>2026-09-23</lastmod>
+    <lastmod>2026-10-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.zenth.space/docs</loc>
-    <lastmod>2026-10-06</lastmod>
+    <lastmod>2026-10-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.zenth.space/privacy</loc>
-    <lastmod>2026-09-23</lastmod>
+    <lastmod>2026-10-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
     <loc>https://www.zenth.space/terms</loc>
-    <lastmod>2026-09-23</lastmod>
+    <lastmod>2026-10-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.3</priority>
   </url>
@@ -41,19 +41,19 @@
   <!-- Documentación -->
   <url>
     <loc>https://www.zenth.space/docs/primeros-pasos</loc>
-    <lastmod>2026-10-02</lastmod>
+    <lastmod>2026-10-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.zenth.space/docs/agenda</loc>
-    <lastmod>2026-10-06</lastmod>
+    <lastmod>2026-10-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.zenth.space/docs/pizarras</loc>
-    <lastmod>2026-10-06</lastmod>
+    <lastmod>2026-10-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -64,8 +64,14 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://www.zenth.space/docs/sitios</loc>
+    <lastmod>2026-10-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://www.zenth.space/docs/reuniones</loc>
-    <lastmod>2026-10-06</lastmod>
+    <lastmod>2026-10-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -83,31 +89,31 @@
   </url>
   <url>
     <loc>https://www.zenth.space/docs/cuenta</loc>
-    <lastmod>2026-10-06</lastmod>
+    <lastmod>2026-10-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.zenth.space/docs/atajos</loc>
-    <lastmod>2026-10-06</lastmod>
+    <lastmod>2026-10-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.zenth.space/docs/integraciones</loc>
-    <lastmod>2026-10-06</lastmod>
+    <lastmod>2026-10-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.zenth.space/docs/privacidad</loc>
-    <lastmod>2026-09-23</lastmod>
+    <lastmod>2026-10-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.zenth.space/docs/ayuda</loc>
-    <lastmod>2026-09-23</lastmod>
+    <lastmod>2026-10-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -119,7 +125,7 @@
   </url>
   <url>
     <loc>https://www.zenth.space/docs/primeros-pasos/crear-cuenta-e-iniciar-sesion</loc>
-    <lastmod>2026-09-23</lastmod>
+    <lastmod>2026-10-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -155,7 +161,7 @@
   </url>
   <url>
     <loc>https://www.zenth.space/docs/agenda/repeticion-y-recordatorios</loc>
-    <lastmod>2026-10-05</lastmod>
+    <lastmod>2026-10-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -179,13 +185,13 @@
   </url>
   <url>
     <loc>https://www.zenth.space/docs/pizarras/crear-y-organizar-pizarras</loc>
-    <lastmod>2026-10-06</lastmod>
+    <lastmod>2026-10-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.zenth.space/docs/pizarras/tarjetas-y-bandeja-rapida</loc>
-    <lastmod>2026-10-06</lastmod>
+    <lastmod>2026-10-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -197,13 +203,13 @@
   </url>
   <url>
     <loc>https://www.zenth.space/docs/pizarras/mover-y-duplicar-tarjetas</loc>
-    <lastmod>2026-10-06</lastmod>
+    <lastmod>2026-10-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.zenth.space/docs/pizarras/vistas-de-pizarra</loc>
-    <lastmod>2026-10-06</lastmod>
+    <lastmod>2026-10-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -227,7 +233,7 @@
   </url>
   <url>
     <loc>https://www.zenth.space/docs/pizarras/colaborar-en-tarjetas</loc>
-    <lastmod>2026-10-06</lastmod>
+    <lastmod>2026-10-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -239,13 +245,13 @@
   </url>
   <url>
     <loc>https://www.zenth.space/docs/pizarras/automatizaciones</loc>
-    <lastmod>2026-10-06</lastmod>
+    <lastmod>2026-10-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.zenth.space/docs/pizarras/botones-de-automatizacion</loc>
-    <lastmod>2026-10-06</lastmod>
+    <lastmod>2026-10-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -358,6 +364,36 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://www.zenth.space/docs/sitios/que-son-los-sitios</loc>
+    <lastmod>2026-10-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.zenth.space/docs/sitios/publicar-una-nota</loc>
+    <lastmod>2026-10-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.zenth.space/docs/sitios/paginas-y-ajustes</loc>
+    <lastmod>2026-10-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.zenth.space/docs/sitios/modo-sitio</loc>
+    <lastmod>2026-10-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.zenth.space/docs/sitios/que-sale-al-publico</loc>
+    <lastmod>2026-10-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://www.zenth.space/docs/reuniones/la-seccion-reuniones</loc>
     <lastmod>2026-09-23</lastmod>
     <changefreq>monthly</changefreq>
@@ -366,6 +402,12 @@
   <url>
     <loc>https://www.zenth.space/docs/reuniones/salas-de-pizarra-y-llamadas-privadas</loc>
     <lastmod>2026-10-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.zenth.space/docs/reuniones/tarjetas-y-tareas-en-el-chat-de-la-sala</loc>
+    <lastmod>2026-10-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -383,7 +425,7 @@
   </url>
   <url>
     <loc>https://www.zenth.space/docs/reuniones/durante-una-llamada</loc>
-    <lastmod>2026-10-06</lastmod>
+    <lastmod>2026-10-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -467,7 +509,7 @@
   </url>
   <url>
     <loc>https://www.zenth.space/docs/cuenta/correo-contrasena-y-sesion</loc>
-    <lastmod>2026-09-23</lastmod>
+    <lastmod>2026-10-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -479,7 +521,7 @@
   </url>
   <url>
     <loc>https://www.zenth.space/docs/atajos/atajos-de-la-aplicacion</loc>
-    <lastmod>2026-10-06</lastmod>
+    <lastmod>2026-10-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -497,7 +539,7 @@
   </url>
   <url>
     <loc>https://www.zenth.space/docs/integraciones/google-calendar</loc>
-    <lastmod>2026-09-23</lastmod>
+    <lastmod>2026-10-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -515,7 +557,7 @@
   </url>
   <url>
     <loc>https://www.zenth.space/docs/privacidad/que-datos-guarda-zenth</loc>
-    <lastmod>2026-09-23</lastmod>
+    <lastmod>2026-10-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -527,7 +569,7 @@
   </url>
   <url>
     <loc>https://www.zenth.space/docs/privacidad/eliminar-y-exportar-tus-datos</loc>
-    <lastmod>2026-09-23</lastmod>
+    <lastmod>2026-10-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -551,13 +593,13 @@
   </url>
   <url>
     <loc>https://www.zenth.space/docs/ayuda/google-se-desconecta</loc>
-    <lastmod>2026-09-23</lastmod>
+    <lastmod>2026-10-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.zenth.space/docs/ayuda/no-puedo-entrar-a-mi-cuenta</loc>
-    <lastmod>2026-09-23</lastmod>
+    <lastmod>2026-10-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -691,13 +733,13 @@
   </url>
   <url>
     <loc>https://www.zenth.space/docs/pizarras/campos-personalizados</loc>
-    <lastmod>2026-10-06</lastmod>
+    <lastmod>2026-10-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.zenth.space/docs/pizarras/seleccionar-y-gestionar-tarjetas</loc>
-    <lastmod>2026-10-06</lastmod>
+    <lastmod>2026-10-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>

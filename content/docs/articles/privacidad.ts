@@ -10,8 +10,8 @@ export const privacidadArticles: DocArticle[] = [
     title: 'Qué datos guarda Zenth, en lenguaje claro',
     summary: 'Un repaso sin jerga de la información que guarda Zenth, para qué, y lo que nunca hace: no vende datos, no muestra publicidad y no graba tus llamadas.',
     keywords: ['datos', 'privacidad', 'qué guarda', 'información', 'tiempo en la app', 'chat', 'invitados', 'rastreadores', 'publicidad', 'venta de datos', 'cookies', 'proveedores', 'supabase', 'cloudflare', 'r2', 'livekit', 'gemini', 'mcp', 'aplicaciones conectadas'],
-    updated: '2026-10-07',
-    related: ['privacidad/quien-ve-que', 'privacidad/eliminar-y-exportar-tus-datos', 'reuniones/limites-y-privacidad-de-las-llamadas'],
+    updated: '2026-10-20',
+    related: ['privacidad/quien-ve-que', 'privacidad/eliminar-y-exportar-tus-datos', 'reuniones/limites-y-privacidad-de-las-llamadas', 'sitios/que-sale-al-publico'],
     blocks: [
       p('Esta guía resume, en lenguaje llano, qué información guarda Zenth. La versión completa y vinculante está en la [Política de privacidad](/privacy) y los [Términos y condiciones](/terms); si algo difiere, mandan esos textos.'),
 
@@ -28,6 +28,7 @@ export const privacidadArticles: DocArticle[] = [
         ['Qué', 'Ejemplos', 'Quién lo ve'],
         ['Tu cuenta y perfil', 'Correo, identificador, nombre, avatar. Tu contraseña la gestiona el sistema de autenticación y Zenth no puede leerla.', 'Tú. Los miembros de tus pizarras ven tu nombre y avatar.'],
         ['Tu organización', 'Tareas, eventos y reuniones, repeticiones, recordatorios, etiquetas, pasos, adjuntos, notas, lienzos, sesiones de enfoque, objetivos, estadísticas, rachas, niveles, logros y registros de ánimo.', 'Solo tú, salvo lo que compartas.'],
+        ['Sitios publicados', 'Nombre, subdominio, páginas, apariencia, opciones de buscadores y una copia HTML de las notas que publicas. Las visitas se cuentan al abrir cada página, sin cookies.', 'El contenido publicado lo ve quien tenga el enlace. Las visitas, solo tú.'],
         ['Tiempo en la app', 'Por cada tramo con la pestaña visible: día, hora de inicio y fin, sección y, en Pizarras, la pizarra abierta. Alimenta la sección Estadísticas.', 'Solo tú.'],
         ['Colaboración', 'Pizarras, listas, miembros, roles, invitaciones, comentarios, menciones, asignaciones, votos, aprobaciones, actividad y presencia. También los colaboradores, permisos y sugerencias de notas y lienzos compartidos.', 'Las personas con acceso a esa pizarra, nota o lienzo.'],
         ['Reuniones', 'Quién participa, cuándo entra y sale, y cuánto dura. Para invitados: el nombre que escriben y el estado de su admisión. El **chat de las salas de pizarra**.', 'Los participantes; el chat de una sala, los miembros de la pizarra.'],
@@ -38,8 +39,8 @@ export const privacidadArticles: DocArticle[] = [
       h2('Con Google'),
       list(
         '**Drive:** Zenth guarda la conexión cifrada y referencias mínimas. Tus archivos siguen en tu Drive; Zenth los transmite para mostrarlos o editarlos, pero no conserva una segunda copia permanente.',
-        '**Calendar:** permiso de solo lectura. El acceso permanece en memoria y caduca; la lista de calendarios y tus preferencias se guardan en tu navegador. Los eventos de los calendarios que eliges se importan a Agenda.',
-        '**Zen:** cuando pulsas una acción, se envía a Google Gemini únicamente el texto de esa solicitud (la frase o el título de una tarea) y la fecha de hoy.',
+        '**Calendar:** permiso de solo lectura. El acceso de Google caduca; la conexión, la lista de calendarios y tus preferencias se guardan **con tu cuenta**. Los eventos de los calendarios que eliges se importan a Agenda.',
+        '**Zen:** cuando pulsas Pedir a Zen, Auto-agendar o Sugerir pasos, se envía a Google Gemini únicamente el texto de esa solicitud y la fecha de hoy.',
       ),
 
       h2('Aplicaciones conectadas'),
@@ -50,7 +51,8 @@ export const privacidadArticles: DocArticle[] = [
         ['Proveedor', 'Para qué', 'Ubicación confirmada'],
         ['Supabase', 'Base de datos, autenticación y funciones del servidor, incluida la que decide quién accede a cada archivo.', 'Región principal del proyecto: Oregón, Estados Unidos (us-west-2). Las funciones de borde pueden ejecutarse en otras regiones.'],
         ['Cloudflare R2', 'Archivos guardados en Zenth: avatar, portada, imágenes de tareas y notas, y adjuntos de comentarios.', 'Ubicación preferente: este de Norteamérica. Cloudflare la trata como orientativa; no hay restricción de jurisdicción configurada.'],
-        ['Google', 'Drive, Docs, Sheets, Slides, Forms, Calendar, Gemini y Firebase Cloud Messaging (notificaciones push).', 'Drive depende de la cuenta de cada usuario; Firebase Cloud Messaging utiliza infraestructura global. No hay una región única confirmada para todos los servicios.'],
+        ['Cloudflare (sitios)', 'Entrega las páginas publicadas en `zenth.website` y cuenta las visitas al servirlas, sin cookies.', 'Red global de Cloudflare.'],
+        ['Google', 'Drive, Docs, Sheets, Slides, Forms, Calendar, Gemini (acciones de una tarea) y Firebase Cloud Messaging (notificaciones push).', 'Drive depende de la cuenta de cada usuario; Firebase Cloud Messaging utiliza infraestructura global. No hay una región única confirmada para todos los servicios.'],
         ['LiveKit', 'Transmisión de voz, cámara y pantalla.', 'Región de datos del proyecto: Estados Unidos. La conexión de una llamada puede pasar por otras regiones.'],
         ['Vercel', 'Entrega de los archivos estáticos de la aplicación y del sitio. El despliegue actual de Zenth no incluye funciones de Vercel.', 'Vercel informa que sus instalaciones principales de procesamiento están en Estados Unidos; su red de entrega es global y puede tratar datos en otros países.'],
         ['Resend', 'Correos de cuenta, invitaciones y los avisos que actives.', 'Datos almacenados en Estados Unidos, según el proveedor.'],
@@ -69,8 +71,8 @@ export const privacidadArticles: DocArticle[] = [
     title: 'Quién ve qué',
     summary: 'De un vistazo: qué es solo tuyo, qué ven los miembros de una pizarra, qué ve quien tiene un enlace público y qué ven los invitados de una reunión.',
     keywords: ['quién ve', 'visibilidad', 'privado', 'compartido', 'permisos', 'enlace público', 'invitados', 'presencia', 'miembros', 'seguridad', 'acceso lateral', 'chat de la sala', 'tarjetas', 'otra pizarra'],
-    updated: '2026-10-08',
-    related: ['pizarras/pizarra-publica-con-enlace', 'biblioteca/compartir-notas-y-lienzos', 'reuniones/reuniones-rapidas-e-invitados', 'reuniones/tarjetas-y-tareas-en-el-chat-de-la-sala'],
+    updated: '2026-10-20',
+    related: ['pizarras/pizarra-publica-con-enlace', 'biblioteca/compartir-notas-y-lienzos', 'sitios/que-sale-al-publico', 'reuniones/reuniones-rapidas-e-invitados', 'reuniones/tarjetas-y-tareas-en-el-chat-de-la-sala'],
     blocks: [
       p('La regla de Zenth es que **cada persona recibe solo el acceso que necesita** para lo que está haciendo, y que esa regla la aplica el servidor, no la pantalla: un botón oculto nunca es la única barrera.'),
 
@@ -105,6 +107,9 @@ export const privacidadArticles: DocArticle[] = [
       note('Un invitado **nunca** ve tus pizarras, tareas, archivos, historial ni otras salas.'),
       p('Las fichas del **chat de una sala** solo resuelven tarjetas de la pizarra de esa sala, con tus permisos actuales. Pegar un enlace de otra pizarra no lo convierte en ficha ni concede acceso a los demás: cada persona necesita permiso para abrirlo. En llamadas privadas y reuniones con invitados, los enlaces de tarjetas permanecen como texto normal. Ver [Compartir tarjetas en el chat](/docs/reuniones/tarjetas-y-tareas-en-el-chat-de-la-sala#si-la-tarjeta-es-de-otra-pizarra).'),
 
+      h2('Sitios publicados'),
+      p('Si publicas un sitio, **cualquiera con la dirección** ve la copia HTML de esas páginas, sin entrar a Zenth. No ve colaboradores, sugerencias, comentarios ni el resto de tu cuenta. Puedes despublicar cuando quieras. El detalle de qué sale y qué se omite está en [Qué sale al público](/docs/sitios/que-sale-al-publico).'),
+
       h2('Google Drive'),
       p('Compartir un archivo de Google aplica los **permisos reales de Drive**. Revisa siempre destinatario y rol antes de confirmar.'),
 
@@ -119,12 +124,13 @@ export const privacidadArticles: DocArticle[] = [
     title: 'Eliminar y exportar tus datos',
     summary: 'Cómo borrar contenido, desconectar integraciones, sacar copias de lo tuyo y pedir la eliminación de tu cuenta.',
     keywords: ['eliminar cuenta', 'borrar datos', 'exportar', 'descargar mis datos', 'derechos', 'supresión', 'acceso', 'ley 18.331', 'copia de seguridad', 'portabilidad', 'olvido'],
-    updated: UPDATED,
-    related: ['cuenta/correo-contrasena-y-sesion', 'cuenta/papelera', 'integraciones/google-drive'],
+    updated: '2026-10-20',
+    related: ['cuenta/correo-contrasena-y-sesion', 'cuenta/papelera', 'integraciones/google-drive', 'sitios/que-sale-al-publico'],
     blocks: [
       h2('Borrar contenido'),
       list(
-        'Las **tareas, notas y lienzos** que eliminas van a la [Papelera](/docs/cuenta/papelera) y se pueden restaurar hasta que la vacíes. Vaciarla es permanente.',
+        'Las **tareas, notas y lienzos** que eliminas van a la [Papelera](/docs/cuenta/papelera) y se pueden restaurar hasta que la vacíes. Vaciarla es permanente. Si la nota era una página publicada, esa página **deja de verse** en la web.',
+        '**Despublicar o borrar un sitio** (Ajustes › Sitios) retira las páginas de `zenth.website`. Las notas siguen en tu Biblioteca.',
         '**Eliminar todas las tareas** (Ajustes › Cuenta › Zona de riesgo) borra las tareas de Agenda y Pizarras **para siempre**, sin pasar por la papelera.',
         'Los archivos de **Google Drive** siguen las reglas de Drive: van a su papelera y se recuperan desde Google.',
       ),
@@ -132,7 +138,7 @@ export const privacidadArticles: DocArticle[] = [
       h2('Desconectar integraciones'),
       list(
         '**Drive:** desconectar intenta revocar el permiso y elimina de Zenth la conexión y las referencias asociadas. Tus archivos **permanecen en tu Drive**.',
-        '**Calendar:** desconectar detiene el acceso futuro. Los eventos ya importados a Agenda no se borran solos.',
+        '**Calendar:** desconectar detiene el acceso futuro en todos tus dispositivos. Los eventos ya importados a Agenda no se borran solos.',
         '**Aplicaciones conectadas:** desconectar impide nuevos accesos a Zenth. Consulta al proveedor de la aplicación sobre los datos que ya recibió.',
       ),
       p('Los permisos de Drive y Calendar también puedes retirarlos desde la configuración de seguridad de tu cuenta de Google.'),

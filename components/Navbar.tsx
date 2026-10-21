@@ -30,7 +30,6 @@ const mobileMenuItemVariants = {
 
 const NAV_LINKS: { name: string; page: NavPage; id?: string }[] = [
   { name: 'Funciones', page: 'home', id: 'features' },
-  { name: 'Instalar', page: 'home', id: 'install' },
   { name: 'Blog', page: 'blog' },
   { name: 'FAQ', page: 'faq' },
   { name: 'Documentación', page: 'docs' },
