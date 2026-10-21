@@ -17,12 +17,13 @@ const Support: React.FC = () => {
             <div>
               <span className="t-eyebrow !text-white/70">Proyecto independiente</span>
               <h2 className="t-display-md mt-4 max-w-lg">
-                Zenth se mantiene con donaciones, no con tus datos.
+                Sin inversores y sin vender tus datos.
               </h2>
               <p className="t-body-lg mt-5 max-w-lg text-white/85">
-                No hay inversores detrás ni un plan para vender tu información. Solo una persona
-                pagando servidores. Si la app te está sirviendo, una donación ayuda a que siga
-                funcionando; compartirla con alguien, también.
+                Zenth recién está comenzando y detrás del proyecto hay una sola persona, sin
+                financiación externa. Si la app te resulta útil, tu aporte significa mucho.
+                Ayuda a que Zenth siga creciendo y a que pueda dedicarle más tiempo para
+                mejorarla y desarrollar nuevas funciones.
               </p>
             </div>
 

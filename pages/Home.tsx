@@ -6,6 +6,7 @@ import Features from '../components/Features';
 import VoiceSection from '../components/VoiceSection';
 import BlogList from '../components/BlogList';
 import Support from '../components/Support';
+import ZenAiTeaser from '../components/ZenAiTeaser';
 
 interface HomeProps {
     onNavigate: (page: 'home' | 'blog' | 'privacy', targetId?: string) => void;
@@ -30,6 +31,7 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
             <Features onNavigate={onNavigate} />
             <VoiceSection onSelectPost={handlePostSelect} />
             <InteractiveDemo />
+            <ZenAiTeaser />
             <BlogList onSelectPost={handlePostSelect} onSeeAll={handleBlogClick} limit={3} />
             <Support />
         </>

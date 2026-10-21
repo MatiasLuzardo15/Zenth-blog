@@ -135,7 +135,7 @@ export const primerosPasosArticles: DocArticle[] = [
     title: 'Tu primer día: un recorrido de cinco minutos',
     summary: 'Crea una tarea, una pizarra, una nota y una sesión de enfoque, registra tu ánimo y personaliza Zenth. Un camino corto para ver cómo encaja todo.',
     keywords: ['empezar', 'tutorial', 'inicio rápido', 'primer uso', 'guía rápida', 'bienvenida', 'onboarding'],
-    updated: '2026-10-02',
+    updated: '2026-10-20',
     related: ['agenda/crear-tareas-eventos-y-reuniones', 'pizarras/crear-y-organizar-pizarras', 'biblioteca/notas', 'sitios/que-son-los-sitios', 'enfoque/usar-enfoque'],
     blocks: [
       p('No hace falta aprender Zenth entero para empezar. Este recorrido tarda unos minutos y pasa por lo esencial. Cada paso enlaza al artículo donde está explicado a fondo.'),
@@ -147,7 +147,7 @@ export const primerosPasosArticles: DocArticle[] = [
         'Escribe un título. Si no necesitas una hora exacta, colócala en **Mañana, Tarde o Noche**.',
         'Guarda. Cuando la completes, suma 10 XP.',
       ),
-      tip('Prueba a escribir una frase completa, como «Cita médica el lunes a las 10», y pulsa **Pedir a Zen**: rellena título, fecha, hora y prioridad por ti. Ver [Zen, el asistente](/docs/integraciones/zen-asistente).'),
+      tip('Prueba a escribir una frase completa, como «Cita médica el lunes a las 10», y pulsa **Pedir a Zen**. Por ahora solo te ayuda a agendarla. Ver [Zen, el asistente](/docs/integraciones/zen-asistente).'),
 
       h2('2. Crea una pizarra'),
       steps(

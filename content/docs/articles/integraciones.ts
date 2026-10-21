@@ -98,14 +98,16 @@ export const integracionesArticles: DocArticle[] = [
     slug: 'zen-asistente',
     category: 'integraciones',
     title: 'Zen, el asistente',
-    summary: 'IA de Google solo donde ahorra trabajo real: rellenar una tarea desde una frase, sugerir el mejor momento y dividirla en pasos. Nunca actúa sin que se lo pidas.',
-    keywords: ['zen', 'ia', 'inteligencia artificial', 'gemini', 'asistente', 'auto agendar', 'sugerir pasos', 'pedir a zen', 'lenguaje natural', 'micro pasos'],
-    updated: UPDATED,
+    summary: 'Hoy solo ayuda a agendar algunas tareas desde una frase, en el editor. Va a recibir una actualización; esta guía es lo que hace ahora.',
+    keywords: ['zen', 'ia', 'inteligencia artificial', 'gemini', 'asistente', 'auto agendar', 'sugerir pasos', 'pedir a zen', 'lenguaje natural', 'micro pasos', 'actualización'],
+    updated: '2026-10-20',
     related: ['agenda/crear-tareas-eventos-y-reuniones', 'privacidad/que-datos-guarda-zenth'],
     blocks: [
-      p('**Zen** es el asistente de Zenth. Usa **Google Gemini** para quitarte campos por rellenar, no para tomar decisiones por ti. Solo actúa cuando pulsas una acción, y solo en el editor de tareas.'),
+      p('**Zen** es el asistente de Zenth, y hoy su trabajo es pequeño. En el editor de tareas te ayuda a agendar algunas a partir de una frase: propone el título, el día y la hora, y tú decides si lo guardas. No revisa tu cuenta, no escribe en tus notas y no organiza el resto de Zenth.'),
+      p('Va a recibir una actualización. Hasta que llegue, esta página describe solo lo que ya puedes pedirle.'),
+      note('Cuando la actualización esté disponible, Zen va a servir para más que colocar una tarea en la agenda. Mientras tanto no actúa solo: pulsas la acción, revisas lo que propone y guardas si te sirve.', 'Una actualización en camino'),
 
-      h2('Qué puede hacer'),
+      h2('Qué puede hacer hoy'),
       table(
         ['Acción', 'Qué hace'],
         ['Pedir a Zen', 'Convierte una frase en una tarea. «Cena con Ana el viernes a las 9pm» rellena título, fecha, hora, prioridad y un icono.'],

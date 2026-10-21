@@ -73,7 +73,7 @@ export const agendaArticles: DocArticle[] = [
     title: 'Crear tareas, eventos y reuniones',
     summary: 'Todos los campos del editor: momento, fecha, hora, duración, pasos, etiquetas, documentos, imágenes, gran objetivo y aviso.',
     keywords: ['tarea', 'evento', 'nueva tarea', 'editor', 'gran objetivo', 'pasos', 'subtareas', 'etiquetas', 'duración', 'emoji', 'icono', 'avisar', 'crear', 'inicio', 'vencimiento'],
-    updated: '2026-10-05',
+    updated: '2026-10-20',
     related: ['pizarras/calendario-de-pizarra', 'agenda/repeticion-y-recordatorios', 'agenda/detalle-de-una-tarea', 'integraciones/zen-asistente'],
     blocks: [
       p('El mismo editor sirve para una tarea de una línea, un bloque con hora y duración, o una reunión con invitados. Solo rellenas lo que necesitas.'),
@@ -106,6 +106,7 @@ export const agendaArticles: DocArticle[] = [
       ),
 
       h2('Ayuda de Zen dentro del editor'),
+      p('Por ahora Zen solo ayuda a agendar algunas tareas, y va a recibir una actualización. El detalle de lo que ya puedes pedirle está en [Zen, el asistente](/docs/integraciones/zen-asistente).'),
       list(
         '**Pedir a Zen** convierte una frase en una tarea completa.',
         '**Auto-agendar** propone el mejor momento para la tarea a partir de su texto y de la fecha actual.',
